@@ -2,12 +2,10 @@ language: ruby
 rvm:
   - "1.9.3"
 #  - "2.1.5"
-  - jruby-18mode # JRuby in 1.8 mode
-  - jruby-19mode # JRuby in 1.9 mode
-  - rbx
-  - rbx-2
+#  - rbx
+#  - rbx-2
 install: gem install rest-client shoulda
 # uncomment this line if your project needs to run something other than `rake`:
 # script: bundle exec rspec spec
-script: cd ruby && rake test
+script: cd ruby && echo "y" | rake test
 

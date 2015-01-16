@@ -26,7 +26,7 @@
 # @ignore
 # ===================================================================================================
 require 'rubygems'
-require 'minitest/autorun'
+#require 'minitest/autorun'
 require 'test/unit'
 require 'shoulda'
 require 'yaml'

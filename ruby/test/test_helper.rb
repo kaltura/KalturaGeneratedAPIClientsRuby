@@ -26,7 +26,6 @@
 # @ignore
 # ===================================================================================================
 require 'rubygems'
-require 'minitest/autorun'
 require 'minitest/spec'
 
 require 'test/unit'

@@ -8,7 +8,7 @@
 # to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2011  Kaltura Inc.
+# Copyright (C) 2006-2015  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -218,6 +218,11 @@ module Kaltura
 		FEMALE = 2
 	end
 
+	class KalturaGroupUserStatus
+		ACTIVE = 0
+		DELETED = 1
+	end
+
 	class KalturaInheritanceType
 		INHERIT = 1
 		MANUAL = 2
@@ -420,6 +425,7 @@ module Kaltura
 		OPERATION_SYSTEM = 22
 		BROWSERS = 23
 		LIVE = 24
+		TOP_PLAYBACK_CONTEXT = 25
 		PARTNER_USAGE = 201
 	end
 
@@ -598,6 +604,13 @@ module Kaltura
 		MANUAL = 3
 	end
 
+	class KalturaStorageServePriority
+		KALTURA_ONLY = 1
+		KALTURA_FIRST = 2
+		EXTERNAL_FIRST = 3
+		EXTERNAL_ONLY = 4
+	end
+
 	class KalturaSyndicationFeedStatus
 		DELETED = -1
 		ACTIVE = 1
@@ -656,6 +669,7 @@ module Kaltura
 		CLIPPER = 18
 		KSR = 19
 		KUPLOAD = 20
+		WEBCASTING = 21
 	end
 
 	class KalturaUpdateMethodType
@@ -699,6 +713,11 @@ module Kaltura
 		BLOCKED = 0
 		ACTIVE = 1
 		DELETED = 2
+	end
+
+	class KalturaUserType
+		USER = 0
+		GROUP = 1
 	end
 
 	class KalturaWidgetSecurityType
@@ -793,8 +812,6 @@ module Kaltura
 		IMAGE = "document.Image"
 		PDF = "document.PDF"
 		SWF = "document.SWF"
-		TIMED_THUMB_ASSET = "thumbCuePoint.timedThumb"
-		WIDEVINE_FLAVOR = "widevine.WidevineFlavor"
 		FLAVOR = "1"
 		THUMBNAIL = "2"
 		LIVE = "3"
@@ -877,21 +894,19 @@ module Kaltura
 	class KalturaBatchJobType
 		PARSE_CAPTION_ASSET = "captionSearch.parseCaptionAsset"
 		DISTRIBUTION_DELETE = "contentDistribution.DistributionDelete"
-		CONVERT = "0"
 		DISTRIBUTION_DISABLE = "contentDistribution.DistributionDisable"
 		DISTRIBUTION_ENABLE = "contentDistribution.DistributionEnable"
 		DISTRIBUTION_FETCH_REPORT = "contentDistribution.DistributionFetchReport"
 		DISTRIBUTION_SUBMIT = "contentDistribution.DistributionSubmit"
+		CONVERT = "0"
 		DISTRIBUTION_SYNC = "contentDistribution.DistributionSync"
 		DISTRIBUTION_UPDATE = "contentDistribution.DistributionUpdate"
 		DROP_FOLDER_CONTENT_PROCESSOR = "dropFolder.DropFolderContentProcessor"
 		DROP_FOLDER_WATCHER = "dropFolder.DropFolderWatcher"
 		EVENT_NOTIFICATION_HANDLER = "eventNotification.EventNotificationHandler"
-		SCHEDULED_TASK = "scheduledTask.ScheduledTask"
 		INDEX_TAGS = "tagSearch.IndexTagsByPrivacyContext"
 		TAG_RESOLVE = "tagSearch.TagResolve"
 		VIRUS_SCAN = "virusScan.VirusScan"
-		WIDEVINE_REPOSITORY_SYNC = "widevine.WidevineRepositorySync"
 		IMPORT = "1"
 		DELETE = "2"
 		FLATTEN = "3"
@@ -1018,7 +1033,6 @@ module Kaltura
 	end
 
 	class KalturaConditionType
-		ABC_WATERMARK = "abcScreenersWatermarkAccessControl.abcWatermark"
 		EVENT_NOTIFICATION_FIELD = "eventNotification.BooleanField"
 		EVENT_NOTIFICATION_OBJECT_CHANGED = "eventNotification.ObjectChanged"
 		METADATA_FIELD_CHANGED = "metadata.FieldChanged"
@@ -1034,6 +1048,7 @@ module Kaltura
 		ASSET_PROPERTIES_COMPARE = "8"
 		USER_ROLE = "9"
 		GEO_DISTANCE = "10"
+		OR_OPERATOR = "11"
 	end
 
 	class KalturaContainerFormat
@@ -1205,8 +1220,6 @@ module Kaltura
 		EDGE_CAST_HTTP = "edgeCast.EDGE_CAST_HTTP"
 		EDGE_CAST_RTMP = "edgeCast.EDGE_CAST_RTMP"
 		KONTIKI_HTTP = "kontiki.KONTIKI_HTTP"
-		UPLYNK_HTTP = "uplynk.UPLYNK_HTTP"
-		UPLYNK_RTMP = "uplynk.UPLYNK_RTMP"
 		VELOCIX_HDS = "velocix.VELOCIX_HDS"
 		VELOCIX_HLS = "velocix.VELOCIX_HLS"
 		APPLE_HTTP = "1"
@@ -1244,6 +1257,7 @@ module Kaltura
 		VOD_PACKAGER_DASH = "68"
 		LIVE_HLS = "1001"
 		LIVE_HDS = "1002"
+		LIVE_DASH = "1003"
 		LIVE_RTMP = "1005"
 		LIVE_AKAMAI_HDS = "1013"
 	end
@@ -1397,6 +1411,13 @@ module Kaltura
 		NAME_DESC = "-name"
 		PLAYLIST_ID_DESC = "-playlistId"
 		TYPE_DESC = "-type"
+		UPDATED_AT_DESC = "-updatedAt"
+	end
+
+	class KalturaGroupUserOrderBy
+		CREATED_AT_ASC = "+createdAt"
+		UPDATED_AT_ASC = "+updatedAt"
+		CREATED_AT_DESC = "-createdAt"
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
@@ -1898,6 +1919,12 @@ module Kaltura
 	class KalturaLiveParamsOrderBy
 	end
 
+	class KalturaLiveReportOrderBy
+		AUDIENCE_DESC = "-audience"
+		EVENT_TIME_DESC = "-eventTime"
+		PLAYS_DESC = "-plays"
+	end
+
 	class KalturaLiveReportType
 		ENTRY_GEO_TIME_LINE = "ENTRY_GEO_TIME_LINE"
 		ENTRY_SYNDICATION_TOTAL = "ENTRY_SYNDICATION_TOTAL"
@@ -2075,7 +2102,6 @@ module Kaltura
 
 	class KalturaMediaParserType
 		MEDIAINFO = "0"
-		REMOTE_MEDIAINFO = "remoteMediaInfo.RemoteMediaInfo"
 		FFMPEG = "1"
 	end
 
@@ -2255,7 +2281,6 @@ module Kaltura
 	end
 
 	class KalturaRuleActionType
-		DRM_POLICY = "playReady.DRM_POLICY"
 		BLOCK = "1"
 		PREVIEW = "2"
 		LIMIT_FLAVORS = "3"
@@ -2280,7 +2305,6 @@ module Kaltura
 	end
 
 	class KalturaSourceType
-		LIMELIGHT_LIVE = "limeLight.LIVE_STREAM"
 		VELOCIX_LIVE = "velocix.VELOCIX_LIVE"
 		FILE = "1"
 		WEBCAM = "2"
@@ -4273,6 +4297,8 @@ module Kaltura
 		attr_accessor :multi_stream
 		attr_accessor :anamorphic_pixels
 		attr_accessor :is_avoid_forced_key_frames
+		attr_accessor :is_crop_imx
+		attr_accessor :optimization_policy
 		attr_accessor :max_frame_rate
 		attr_accessor :video_constant_bitrate
 		attr_accessor :video_bitrate_tolerance
@@ -4340,6 +4366,12 @@ module Kaltura
 		def is_avoid_forced_key_frames=(val)
 			@is_avoid_forced_key_frames = val.to_i
 		end
+		def is_crop_imx=(val)
+			@is_crop_imx = val.to_i
+		end
+		def optimization_policy=(val)
+			@optimization_policy = val.to_i
+		end
 		def max_frame_rate=(val)
 			@max_frame_rate = val.to_i
 		end
@@ -4404,22 +4436,58 @@ module Kaltura
 		end
 	end
 
+	class KalturaGroupUser < KalturaObjectBase
+		attr_accessor :user_id
+		attr_accessor :group_id
+		attr_accessor :status
+		attr_accessor :partner_id
+		# Creation date as Unix timestamp (In seconds)
+		# 	 
+		attr_accessor :created_at
+		# Last update date as Unix timestamp (In seconds)
+		# 	 
+		attr_accessor :updated_at
+
+		def status=(val)
+			@status = val.to_i
+		end
+		def partner_id=(val)
+			@partner_id = val.to_i
+		end
+		def created_at=(val)
+			@created_at = val.to_i
+		end
+		def updated_at=(val)
+			@updated_at = val.to_i
+		end
+	end
+
+	class KalturaGroupUserListResponse < KalturaObjectBase
+		attr_accessor :objects
+		attr_accessor :total_count
+
+		def total_count=(val)
+			@total_count = val.to_i
+		end
+	end
+
 	class KalturaObject < KalturaObjectBase
 
 	end
 
-	# An int representation to return an array of ints
+	class KalturaJobData < KalturaObjectBase
+
+	end
+
+	# A key (boolean) value pair representation to return an array of key-(boolean)value pairs (associative array)
 	#  
-	class KalturaIntegerValue < KalturaValue
+	class KalturaKeyBooleanValue < KalturaObjectBase
+		attr_accessor :key
 		attr_accessor :value
 
 		def value=(val)
-			@value = val.to_i
+			@value = to_b(val)
 		end
-	end
-
-	class KalturaJobData < KalturaObjectBase
-
 	end
 
 	# A representation of a live stream configuration
@@ -4440,6 +4508,16 @@ module Kaltura
 		attr_accessor :backup_publish_url
 		attr_accessor :port
 
+	end
+
+	# A representation of a live stream recording entry configuration
+	#  
+	class KalturaLiveEntryRecordingOptions < KalturaObjectBase
+		attr_accessor :should_copy_entitlement
+
+		def should_copy_entitlement=(val)
+			@should_copy_entitlement = val.to_i
+		end
 	end
 
 	class KalturaLiveEntry < KalturaMediaEntry
@@ -4479,6 +4557,7 @@ module Kaltura
 		# The time (unix timestamp in milliseconds) in which the entry broadcast started or 0 when the entry is off the air
 		# 	 
 		attr_accessor :current_broadcast_start_time
+		attr_accessor :recording_options
 
 		def record_status=(val)
 			@record_status = val.to_i
@@ -4623,6 +4702,7 @@ module Kaltura
 		attr_accessor :from_time
 		attr_accessor :to_time
 		attr_accessor :live
+		attr_accessor :order_by
 
 		def from_time=(val)
 			@from_time = val.to_i
@@ -4664,6 +4744,52 @@ module Kaltura
 		end
 		def timestamp=(val)
 			@timestamp = val.to_i
+		end
+	end
+
+	# Will hold data from the Kaltura Player components to be passed on to the live analytics system
+	#  
+	class KalturaLiveStatsEvent < KalturaObjectBase
+		attr_accessor :partner_id
+		attr_accessor :entry_id
+		attr_accessor :event_type
+		# a unique string generated by the client that will represent the client-side session: the primary component will pass it on to other components that sprout from it
+		# 	 
+		attr_accessor :session_id
+		# incremental sequence of the event
+		# 	 
+		attr_accessor :event_index
+		# buffer time in seconds from the last 10 seconds
+		# 	 
+		attr_accessor :buffer_time
+		# bitrate used in the last 10 seconds
+		# 	 
+		attr_accessor :bitrate
+		# the referrer of the client
+		# 	 
+		attr_accessor :referrer
+		attr_accessor :is_live
+		# delivery type used for this stream
+		# 	 
+		attr_accessor :delivery_type
+
+		def partner_id=(val)
+			@partner_id = val.to_i
+		end
+		def event_type=(val)
+			@event_type = val.to_i
+		end
+		def event_index=(val)
+			@event_index = val.to_i
+		end
+		def buffer_time=(val)
+			@buffer_time = val.to_i
+		end
+		def bitrate=(val)
+			@bitrate = val.to_i
+		end
+		def is_live=(val)
+			@is_live = to_b(val)
 		end
 	end
 
@@ -4857,6 +4983,8 @@ module Kaltura
 		attr_accessor :root_entry_id_equal
 		attr_accessor :root_entry_id_in
 		attr_accessor :parent_entry_id_equal
+		attr_accessor :entitled_users_edit_match_and
+		attr_accessor :entitled_users_publish_match_and
 		attr_accessor :tags_name_multi_like_or
 		attr_accessor :tags_admin_tags_multi_like_or
 		attr_accessor :tags_admin_tags_name_multi_like_or
@@ -5301,15 +5429,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaObjectListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaPlayerDeliveryType < KalturaObjectBase
 		attr_accessor :id
 		attr_accessor :label
@@ -5723,6 +5842,46 @@ module Kaltura
 		end
 	end
 
+	class KalturaReport < KalturaObjectBase
+		# Report id
+		# 	 
+		attr_accessor :id
+		# Partner id associated with the report
+		# 	 
+		attr_accessor :partner_id
+		# Report name
+		# 	 
+		attr_accessor :name
+		# Used to identify system reports in a friendly way
+		# 	 
+		attr_accessor :system_name
+		# Report description
+		# 	 
+		attr_accessor :description
+		# Report query
+		# 	 
+		attr_accessor :query
+		# Creation date as Unix timestamp (In seconds)
+		# 	 
+		attr_accessor :created_at
+		# Last update date as Unix timestamp (In seconds)
+		# 	 
+		attr_accessor :updated_at
+
+		def id=(val)
+			@id = val.to_i
+		end
+		def partner_id=(val)
+			@partner_id = val.to_i
+		end
+		def created_at=(val)
+			@created_at = val.to_i
+		end
+		def updated_at=(val)
+			@updated_at = val.to_i
+		end
+	end
+
 	class KalturaReportBaseTotal < KalturaObjectBase
 		attr_accessor :id
 		attr_accessor :data
@@ -5754,6 +5913,15 @@ module Kaltura
 		end
 		def to_date=(val)
 			@to_date = val.to_i
+		end
+	end
+
+	class KalturaReportListResponse < KalturaObjectBase
+		attr_accessor :objects
+		attr_accessor :total_count
+
+		def total_count=(val)
+			@total_count = val.to_i
 		end
 	end
 
@@ -6053,6 +6221,9 @@ module Kaltura
 		# Delivery profile ids
 		# 	 
 		attr_accessor :delivery_profile_ids
+		attr_accessor :private_key
+		attr_accessor :public_key
+		attr_accessor :pass_phrase
 
 		def id=(val)
 			@id = val.to_i
@@ -6456,6 +6627,7 @@ module Kaltura
 	class KalturaUser < KalturaObjectBase
 		attr_accessor :id
 		attr_accessor :partner_id
+		attr_accessor :type
 		attr_accessor :screen_name
 		attr_accessor :full_name
 		attr_accessor :email
@@ -6502,6 +6674,9 @@ module Kaltura
 		def partner_id=(val)
 			@partner_id = val.to_i
 		end
+		def type=(val)
+			@type = val.to_i
+		end
 		def date_of_birth=(val)
 			@date_of_birth = val.to_i
 		end
@@ -6544,6 +6719,21 @@ module Kaltura
 	end
 
 	class KalturaUserListResponse < KalturaObjectBase
+		attr_accessor :objects
+		attr_accessor :total_count
+
+		def total_count=(val)
+			@total_count = val.to_i
+		end
+	end
+
+	class KalturaUserLoginData < KalturaObjectBase
+		attr_accessor :id
+		attr_accessor :login_email
+
+	end
+
+	class KalturaUserLoginDataListResponse < KalturaObjectBase
 		attr_accessor :objects
 		attr_accessor :total_count
 
@@ -7498,6 +7688,16 @@ module Kaltura
 		end
 	end
 
+	# An int representation to return an array of ints
+	#  
+	class KalturaIntegerValue < KalturaValue
+		attr_accessor :value
+
+		def value=(val)
+			@value = val.to_i
+		end
+	end
+
 	class KalturaCompareCondition < KalturaCondition
 		# Value to evaluate against the field and operator
 		# 	 
@@ -7892,6 +8092,9 @@ module Kaltura
 		# Free text search on user id or screen name
 		# 	 
 		attr_accessor :free_text
+		# Return a list of categoryUser that related to the userId in this field by groups
+		# 	 
+		attr_accessor :related_groups_by_user_id
 
 		def category_direct_members=(val)
 			@category_direct_members = to_b(val)
@@ -7900,6 +8103,8 @@ module Kaltura
 
 	class KalturaUserBaseFilter < KalturaFilter
 		attr_accessor :partner_id_equal
+		attr_accessor :type_equal
+		attr_accessor :type_in
 		attr_accessor :screen_name_like
 		attr_accessor :screen_name_starts_with
 		attr_accessor :email_like
@@ -7916,6 +8121,9 @@ module Kaltura
 
 		def partner_id_equal=(val)
 			@partner_id_equal = val.to_i
+		end
+		def type_equal=(val)
+			@type_equal = val.to_i
 		end
 		def status_equal=(val)
 			@status_equal = val.to_i
@@ -8035,6 +8243,16 @@ module Kaltura
 		end
 	end
 
+	class KalturaEntryCuePointSearchFilter < KalturaSearchItem
+		attr_accessor :cue_points_free_text
+		attr_accessor :cue_point_type_in
+		attr_accessor :cue_point_sub_type_equal
+
+		def cue_point_sub_type_equal=(val)
+			@cue_point_sub_type_equal = val.to_i
+		end
+	end
+
 	class KalturaEntryIdentifier < KalturaObjectIdentifier
 		# Identifier of the object
 		# 	 
@@ -8108,6 +8326,35 @@ module Kaltura
 	class KalturaGoogleVideoSyndicationFeed < KalturaBaseSyndicationFeed
 		attr_accessor :adult_content
 
+	end
+
+	class KalturaGroupUserBaseFilter < KalturaFilter
+		attr_accessor :user_id_equal
+		attr_accessor :user_id_in
+		attr_accessor :group_id_equal
+		attr_accessor :group_id_in
+		attr_accessor :status_equal
+		attr_accessor :status_in
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :created_at_less_than_or_equal
+		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
+
+		def status_equal=(val)
+			@status_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
+		def updated_at_greater_than_or_equal=(val)
+			@updated_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
+		end
 	end
 
 	class KalturaITunesSyndicationFeed < KalturaBaseSyndicationFeed
@@ -8409,6 +8656,11 @@ module Kaltura
 		end
 	end
 
+	class KalturaOrCondition < KalturaCondition
+		attr_accessor :conditions
+
+	end
+
 	class KalturaPartnerBaseFilter < KalturaFilter
 		attr_accessor :id_equal
 		attr_accessor :id_in
@@ -8637,6 +8889,9 @@ module Kaltura
 		attr_accessor :server_url
 		attr_accessor :server_username
 		attr_accessor :server_password
+		attr_accessor :server_private_key
+		attr_accessor :server_public_key
+		attr_accessor :server_pass_phrase
 		attr_accessor :ftp_passive_mode
 		attr_accessor :src_file_sync_local_path
 		attr_accessor :src_file_sync_id
@@ -8865,13 +9120,6 @@ module Kaltura
 	end
 
 	class KalturaUrlTokenizerLimeLight < KalturaUrlTokenizer
-
-	end
-
-	class KalturaUrlTokenizerUplynk < KalturaUrlTokenizer
-		# accountId
-		# 	 
-		attr_accessor :account_id
 
 	end
 
@@ -9150,6 +9398,7 @@ module Kaltura
 		attr_accessor :application
 		attr_accessor :user_ids
 		attr_accessor :playback_context
+		attr_accessor :ancestor_playback_context
 
 	end
 
@@ -9248,6 +9497,10 @@ module Kaltura
 	class KalturaGeoTimeLiveStats < KalturaEntryLiveStats
 		attr_accessor :city
 		attr_accessor :country
+
+	end
+
+	class KalturaGroupUserFilter < KalturaGroupUserBaseFilter
 
 	end
 
@@ -11976,6 +12229,52 @@ module Kaltura
 		end
 	end
 
+	# Add & Manage GroupUser
+	#  
+	class KalturaGroupUserService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		# Add new GroupUser
+		# 	 
+		def add(group_user)
+			kparams = {}
+			client.add_param(kparams, 'groupUser', group_user);
+			client.queue_service_action_call('groupuser', 'add', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		# delete by userId and groupId
+		# 	 
+		def delete(user_id, group_id)
+			kparams = {}
+			client.add_param(kparams, 'userId', user_id);
+			client.add_param(kparams, 'groupId', group_id);
+			client.queue_service_action_call('groupuser', 'delete', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		# List all GroupUsers
+		# 	 
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter);
+			client.add_param(kparams, 'pager', pager);
+			client.queue_service_action_call('groupuser', 'list', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+	end
+
 	# Manage live channel segments
 	#  
 	class KalturaLiveChannelSegmentService < KalturaServiceBase
@@ -12262,74 +12561,18 @@ module Kaltura
 
 	# Stats Service
 	#  
-	class KalturaStatsService < KalturaServiceBase
+	class KalturaLiveStatsService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Will write to the event log a single line representing the event
-		# 	 client version - will help interprete the line structure. different client versions might have slightly different data/data formats in the line
-		# event_id - number is the row number in yuval's excel
-		# datetime - same format as MySql's datetime - can change and should reflect the time zone
-		# session id - can be some big random number or guid
-		# partner id
-		# entry id
-		# unique viewer
-		# widget id
-		# ui_conf id
-		# uid - the puser id as set by the ppartner
-		# current point - in milliseconds
-		# duration - milliseconds
-		# user ip
-		# process duration - in milliseconds
-		# control id
-		# seek
-		# new point
-		# referrer
-		# 	
-		# 	
 		# 	 KalturaStatsEvent $event
 		# 	 
 		def collect(event)
 			kparams = {}
 			client.add_param(kparams, 'event', event);
-			client.queue_service_action_call('stats', 'collect', kparams);
-			if (client.is_multirequest)
-				return nil;
-			end
-			return client.do_queue();
-		end
-
-		# Will collect the kmcEvent sent form the KMC client
-		# 	 // this will actually be an empty function because all events will be sent using GET and will anyway be logged in the apache log
-		# 	 
-		def kmc_collect(kmc_event)
-			kparams = {}
-			client.add_param(kparams, 'kmcEvent', kmc_event);
-			client.queue_service_action_call('stats', 'kmcCollect', kparams);
-			if (client.is_multirequest)
-				return nil;
-			end
-			return client.do_queue();
-		end
-
-		def report_kce_error(kaltura_ce_error)
-			kparams = {}
-			client.add_param(kparams, 'kalturaCEError', kaltura_ce_error);
-			client.queue_service_action_call('stats', 'reportKceError', kparams);
-			if (client.is_multirequest)
-				return nil;
-			end
-			return client.do_queue();
-		end
-
-		# Use this action to report errors to the kaltura server.
-		# 	 
-		def report_error(error_code, error_message)
-			kparams = {}
-			client.add_param(kparams, 'errorCode', error_code);
-			client.add_param(kparams, 'errorMessage', error_message);
-			client.queue_service_action_call('stats', 'reportError', kparams);
+			client.queue_service_action_call('livestats', 'collect', kparams);
 			if (client.is_multirequest)
 				return nil;
 			end
@@ -14096,6 +14339,83 @@ module Kaltura
 		end
 	end
 
+	# Stats Service
+	#  
+	class KalturaStatsService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		# Will write to the event log a single line representing the event
+		# 	 client version - will help interprete the line structure. different client versions might have slightly different data/data formats in the line
+		# event_id - number is the row number in yuval's excel
+		# datetime - same format as MySql's datetime - can change and should reflect the time zone
+		# session id - can be some big random number or guid
+		# partner id
+		# entry id
+		# unique viewer
+		# widget id
+		# ui_conf id
+		# uid - the puser id as set by the ppartner
+		# current point - in milliseconds
+		# duration - milliseconds
+		# user ip
+		# process duration - in milliseconds
+		# control id
+		# seek
+		# new point
+		# referrer
+		# 	
+		# 	
+		# 	 KalturaStatsEvent $event
+		# 	 
+		def collect(event)
+			kparams = {}
+			client.add_param(kparams, 'event', event);
+			client.queue_service_action_call('stats', 'collect', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		# Will collect the kmcEvent sent form the KMC client
+		# 	 // this will actually be an empty function because all events will be sent using GET and will anyway be logged in the apache log
+		# 	 
+		def kmc_collect(kmc_event)
+			kparams = {}
+			client.add_param(kparams, 'kmcEvent', kmc_event);
+			client.queue_service_action_call('stats', 'kmcCollect', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		def report_kce_error(kaltura_ce_error)
+			kparams = {}
+			client.add_param(kparams, 'kalturaCEError', kaltura_ce_error);
+			client.queue_service_action_call('stats', 'reportKceError', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		# Use this action to report errors to the kaltura server.
+		# 	 
+		def report_error(error_code, error_message)
+			kparams = {}
+			client.add_param(kparams, 'errorCode', error_code);
+			client.add_param(kparams, 'errorMessage', error_message);
+			client.queue_service_action_call('stats', 'reportError', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+	end
+
 	# Storage Profiles service
 	#  
 	class KalturaStorageProfileService < KalturaServiceBase
@@ -15427,6 +15747,13 @@ module Kaltura
 			end
 			return @flavor_params_service
 		end
+		attr_reader :group_user_service
+		def group_user_service
+			if (@group_user_service == nil)
+				@group_user_service = KalturaGroupUserService.new(self)
+			end
+			return @group_user_service
+		end
 		attr_reader :live_channel_segment_service
 		def live_channel_segment_service
 			if (@live_channel_segment_service == nil)
@@ -15448,12 +15775,12 @@ module Kaltura
 			end
 			return @live_reports_service
 		end
-		attr_reader :stats_service
-		def stats_service
-			if (@stats_service == nil)
-				@stats_service = KalturaStatsService.new(self)
+		attr_reader :live_stats_service
+		def live_stats_service
+			if (@live_stats_service == nil)
+				@live_stats_service = KalturaLiveStatsService.new(self)
 			end
-			return @stats_service
+			return @live_stats_service
 		end
 		attr_reader :live_stream_service
 		def live_stream_service
@@ -15552,6 +15879,13 @@ module Kaltura
 				@session_service = KalturaSessionService.new(self)
 			end
 			return @session_service
+		end
+		attr_reader :stats_service
+		def stats_service
+			if (@stats_service == nil)
+				@stats_service = KalturaStatsService.new(self)
+			end
+			return @stats_service
 		end
 		attr_reader :storage_profile_service
 		def storage_profile_service

@@ -1,11 +1,7 @@
 test:
     user_name: testUser
     partner_id: 101
-    #administrator_secret: YOUR_ADMIN_SECRET
-    #secret: YOUR_USER_SECRET
-    #service_url: http://www.kaltura.com
-    administrator_secret: e068809c752fb5f311217eb3da3bc74d
-    secret: 9c9f8d1cbb6bab63f3ac8450fcdb33f7
-    service_url: http://54.159.220.35/
-
+    administrator_secret: 0567e52a030ebc2ccb73b386aa1800e0
+    secret: 6aa758517fc892cf082185208a203116
+    service_url: http://54.159.220.35
     timeout: 120

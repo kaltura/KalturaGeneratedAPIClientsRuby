@@ -8,7 +8,7 @@
 # to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2011  Kaltura Inc.
+# Copyright (C) 2006-2015  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -43,6 +43,8 @@ module Kaltura
 		DISTRIBUTION_PROFILE = "contentDistributionEventNotifications.DistributionProfile"
 		ENTRY_DISTRIBUTION = "contentDistributionEventNotifications.EntryDistribution"
 		CUE_POINT = "cuePointEventNotifications.CuePoint"
+		DROP_FOLDER = "dropFolderEventNotifications.DropFolder"
+		DROP_FOLDER_FILE = "dropFolderEventNotifications.DropFolderFile"
 		METADATA = "metadataEventNotifications.Metadata"
 		ENTRY = "1"
 		CATEGORY = "2"

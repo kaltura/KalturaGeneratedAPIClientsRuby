@@ -8,7 +8,7 @@
 # to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2011  Kaltura Inc.
+# Copyright (C) 2006-2015  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -33,11 +33,7 @@ module Kaltura
 		READY = 1
 		DELETED = 2
 		HANDLED = 3
-	end
-
-	class KalturaThumbCuePointSubType
-		SLIDE = 1
-		CHAPTER = 2
+		PENDING = 4
 	end
 
 	class KalturaCuePointOrderBy
@@ -58,7 +54,6 @@ module Kaltura
 		ANNOTATION = "annotation.Annotation"
 		CODE = "codeCuePoint.Code"
 		EVENT = "eventCuePoint.Event"
-		THUMB = "thumbCuePoint.Thumb"
 	end
 
 	class KalturaCuePoint < KalturaObjectBase
@@ -191,6 +186,7 @@ module Kaltura
 	end
 
 	class KalturaCuePointFilter < KalturaCuePointBaseFilter
+		attr_accessor :free_text
 
 	end
 

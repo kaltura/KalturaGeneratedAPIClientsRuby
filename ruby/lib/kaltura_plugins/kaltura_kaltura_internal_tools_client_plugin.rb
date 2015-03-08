@@ -29,39 +29,65 @@ require 'kaltura_client.rb'
 
 module Kaltura
 
+	class KalturaInternalToolsSession < KalturaObjectBase
+		attr_accessor :partner_id
+		attr_accessor :valid_until
+		attr_accessor :partner_pattern
+		attr_accessor :type
+		attr_accessor :error
+		attr_accessor :rand
+		attr_accessor :user
+		attr_accessor :privileges
 
-	# Allows user to 'like' or 'unlike' and entry
+		def partner_id=(val)
+			@partner_id = val.to_i
+		end
+		def valid_until=(val)
+			@valid_until = val.to_i
+		end
+		def type=(val)
+			@type = val.to_i
+		end
+		def rand=(val)
+			@rand = val.to_i
+		end
+	end
+
+
+	# Internal Tools Service
 	#  
-	class KalturaLikeService < KalturaServiceBase
+	class KalturaKalturaInternalToolsSystemHelperService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
-		def like(entry_id)
+		# KS from Secure String
+		# 	 
+		def from_secure_string(str)
 			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id);
-			client.queue_service_action_call('like_like', 'like', kparams);
+			client.add_param(kparams, 'str', str);
+			client.queue_service_action_call('kalturainternaltools_kalturainternaltoolssystemhelper', 'fromSecureString', kparams);
 			if (client.is_multirequest)
 				return nil;
 			end
 			return client.do_queue();
 		end
 
-		def unlike(entry_id)
+		# from ip to country
+		# 	 
+		def iptocountry(remote_addr)
 			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id);
-			client.queue_service_action_call('like_like', 'unlike', kparams);
+			client.add_param(kparams, 'remote_addr', remote_addr);
+			client.queue_service_action_call('kalturainternaltools_kalturainternaltoolssystemhelper', 'iptocountry', kparams);
 			if (client.is_multirequest)
 				return nil;
 			end
 			return client.do_queue();
 		end
 
-		def check_like_exists(entry_id, user_id=KalturaNotImplemented)
+		def get_remote_address()
 			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id);
-			client.add_param(kparams, 'userId', user_id);
-			client.queue_service_action_call('like_like', 'checkLikeExists', kparams);
+			client.queue_service_action_call('kalturainternaltools_kalturainternaltoolssystemhelper', 'getRemoteAddress', kparams);
 			if (client.is_multirequest)
 				return nil;
 			end
@@ -70,12 +96,12 @@ module Kaltura
 	end
 
 	class KalturaClient < KalturaClientBase
-		attr_reader :like_service
-		def like_service
-			if (@like_service == nil)
-				@like_service = KalturaLikeService.new(self)
+		attr_reader :kaltura_internal_tools_system_helper_service
+		def kaltura_internal_tools_system_helper_service
+			if (@kaltura_internal_tools_system_helper_service == nil)
+				@kaltura_internal_tools_system_helper_service = KalturaKalturaInternalToolsSystemHelperService.new(self)
 			end
-			return @like_service
+			return @kaltura_internal_tools_system_helper_service
 		end
 	end
 

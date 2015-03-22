@@ -898,18 +898,19 @@ module Kaltura
 	end
 
 	class KalturaBatchJobType
+		CONVERT = "0"
 		PARSE_CAPTION_ASSET = "captionSearch.parseCaptionAsset"
 		DISTRIBUTION_DELETE = "contentDistribution.DistributionDelete"
 		DISTRIBUTION_DISABLE = "contentDistribution.DistributionDisable"
 		DISTRIBUTION_ENABLE = "contentDistribution.DistributionEnable"
 		DISTRIBUTION_FETCH_REPORT = "contentDistribution.DistributionFetchReport"
 		DISTRIBUTION_SUBMIT = "contentDistribution.DistributionSubmit"
-		CONVERT = "0"
 		DISTRIBUTION_SYNC = "contentDistribution.DistributionSync"
 		DISTRIBUTION_UPDATE = "contentDistribution.DistributionUpdate"
 		DROP_FOLDER_CONTENT_PROCESSOR = "dropFolder.DropFolderContentProcessor"
 		DROP_FOLDER_WATCHER = "dropFolder.DropFolderWatcher"
 		EVENT_NOTIFICATION_HANDLER = "eventNotification.EventNotificationHandler"
+		SCHEDULED_TASK = "scheduledTask.ScheduledTask"
 		INDEX_TAGS = "tagSearch.IndexTagsByPrivacyContext"
 		TAG_RESOLVE = "tagSearch.TagResolve"
 		VIRUS_SCAN = "virusScan.VirusScan"
@@ -4482,6 +4483,16 @@ module Kaltura
 
 	end
 
+	# An int representation to return an array of ints
+	#  
+	class KalturaIntegerValue < KalturaValue
+		attr_accessor :value
+
+		def value=(val)
+			@value = val.to_i
+		end
+	end
+
 	class KalturaJobData < KalturaObjectBase
 
 	end
@@ -5440,6 +5451,15 @@ module Kaltura
 	end
 
 	class KalturaModerationFlagListResponse < KalturaObjectBase
+		attr_accessor :objects
+		attr_accessor :total_count
+
+		def total_count=(val)
+			@total_count = val.to_i
+		end
+	end
+
+	class KalturaObjectListResponse < KalturaObjectBase
 		attr_accessor :objects
 		attr_accessor :total_count
 
@@ -7704,16 +7724,6 @@ module Kaltura
 		end
 		def duration=(val)
 			@duration = val.to_i
-		end
-	end
-
-	# An int representation to return an array of ints
-	#  
-	class KalturaIntegerValue < KalturaValue
-		attr_accessor :value
-
-		def value=(val)
-			@value = val.to_i
 		end
 	end
 

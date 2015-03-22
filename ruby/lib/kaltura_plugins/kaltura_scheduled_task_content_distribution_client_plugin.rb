@@ -27,24 +27,15 @@
 # ===================================================================================================
 require 'kaltura_client.rb'
 require File.dirname(__FILE__) + '/kaltura_scheduled_task_client_plugin.rb'
-require File.dirname(__FILE__) + '/kaltura_metadata_client_plugin.rb'
+require File.dirname(__FILE__) + '/kaltura_content_distribution_client_plugin.rb'
 
 module Kaltura
 
-	class KalturaExecuteMetadataXsltObjectTask < KalturaObjectTask
-		# Metadata profile id to lookup the metadata object
+	class KalturaDistributeObjectTask < KalturaObjectTask
+		# Distribution profile id
 		# 	 
-		attr_accessor :metadata_profile_id
-		# Metadata object type to lookup the metadata object
-		# 	 
-		attr_accessor :metadata_object_type
-		# The XSLT to execute
-		# 	 
-		attr_accessor :xslt
+		attr_accessor :distribution_profile_id
 
-		def metadata_profile_id=(val)
-			@metadata_profile_id = val.to_i
-		end
 	end
 
 

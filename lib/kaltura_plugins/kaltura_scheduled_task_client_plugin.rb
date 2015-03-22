@@ -8,7 +8,7 @@
 # to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2011  Kaltura Inc.
+# Copyright (C) 2006-2015  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -53,6 +53,7 @@ module Kaltura
 	end
 
 	class KalturaObjectTaskType
+		DISTRIBUTE = "scheduledTaskContentDistribution.Distribute"
 		DISPATCH_EVENT_NOTIFICATION = "scheduledTaskEventNotification.DispatchEventNotification"
 		EXECUTE_METADATA_XSLT = "scheduledTaskMetadata.ExecuteMetadataXslt"
 		DELETE_ENTRY = "1"
@@ -60,6 +61,7 @@ module Kaltura
 		DELETE_ENTRY_FLAVORS = "3"
 		CONVERT_ENTRY_FLAVORS = "4"
 		DELETE_LOCAL_CONTENT = "5"
+		STORAGE_EXPORT = "6"
 	end
 
 	class KalturaScheduledTaskProfileOrderBy
@@ -75,7 +77,11 @@ module Kaltura
 
 	class KalturaObjectTask < KalturaObjectBase
 		attr_accessor :type
+		attr_accessor :stop_processing_on_error
 
+		def stop_processing_on_error=(val)
+			@stop_processing_on_error = to_b(val)
+		end
 	end
 
 	class KalturaScheduledTaskProfile < KalturaObjectBase
@@ -236,6 +242,13 @@ module Kaltura
 		def last_execution_started_at_less_than_or_equal=(val)
 			@last_execution_started_at_less_than_or_equal = val.to_i
 		end
+	end
+
+	class KalturaStorageExportObjectTask < KalturaObjectTask
+		# Storage profile id
+		# 	 
+		attr_accessor :storage_id
+
 	end
 
 	class KalturaScheduledTaskProfileFilter < KalturaScheduledTaskProfileBaseFilter

@@ -76,15 +76,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaShortLinkListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaShortLinkBaseFilter < KalturaFilter
 		attr_accessor :id_equal
 		attr_accessor :id_in
@@ -130,6 +121,11 @@ module Kaltura
 		def status_equal=(val)
 			@status_equal = val.to_i
 		end
+	end
+
+	class KalturaShortLinkListResponse < KalturaListResponse
+		attr_accessor :objects
+
 	end
 
 	class KalturaShortLinkFilter < KalturaShortLinkBaseFilter

@@ -105,16 +105,12 @@ module Kaltura
 		end
 	end
 
-	class KalturaCuePointListResponse < KalturaObjectBase
+	class KalturaCuePointListResponse < KalturaListResponse
 		attr_accessor :objects
-		attr_accessor :total_count
 
-		def total_count=(val)
-			@total_count = val.to_i
-		end
 	end
 
-	class KalturaCuePointBaseFilter < KalturaFilter
+	class KalturaCuePointBaseFilter < KalturaRelatedFilter
 		attr_accessor :id_equal
 		attr_accessor :id_in
 		attr_accessor :cue_point_type_equal

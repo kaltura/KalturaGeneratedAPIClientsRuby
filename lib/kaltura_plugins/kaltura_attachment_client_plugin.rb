@@ -74,13 +74,9 @@ module Kaltura
 		end
 	end
 
-	class KalturaAttachmentAssetListResponse < KalturaObjectBase
+	class KalturaAttachmentAssetListResponse < KalturaListResponse
 		attr_accessor :objects
-		attr_accessor :total_count
 
-		def total_count=(val)
-			@total_count = val.to_i
-		end
 	end
 
 	class KalturaAttachmentAssetBaseFilter < KalturaAssetFilter

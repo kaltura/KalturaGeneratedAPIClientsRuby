@@ -177,15 +177,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaEventNotificationTemplateListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaEventFieldCondition < KalturaCondition
 		# The field to be evaluated at runtime
 		# 	 
@@ -255,6 +246,11 @@ module Kaltura
 		def updated_at_less_than_or_equal=(val)
 			@updated_at_less_than_or_equal = val.to_i
 		end
+	end
+
+	class KalturaEventNotificationTemplateListResponse < KalturaListResponse
+		attr_accessor :objects
+
 	end
 
 	class KalturaEventObjectChangedCondition < KalturaCondition

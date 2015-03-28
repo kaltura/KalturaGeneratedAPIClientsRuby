@@ -130,15 +130,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaScheduledTaskProfileListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaConvertEntryFlavorsObjectTask < KalturaObjectTask
 		# Comma separated list of flavor param ids to convert
 		# 	 
@@ -242,6 +233,11 @@ module Kaltura
 		def last_execution_started_at_less_than_or_equal=(val)
 			@last_execution_started_at_less_than_or_equal = val.to_i
 		end
+	end
+
+	class KalturaScheduledTaskProfileListResponse < KalturaListResponse
+		attr_accessor :objects
+
 	end
 
 	class KalturaStorageExportObjectTask < KalturaObjectTask

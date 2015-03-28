@@ -79,13 +79,9 @@ module Kaltura
 
 	end
 
-	class KalturaExternalMediaEntryListResponse < KalturaObjectBase
+	class KalturaExternalMediaEntryListResponse < KalturaListResponse
 		attr_accessor :objects
-		attr_accessor :total_count
 
-		def total_count=(val)
-			@total_count = val.to_i
-		end
 	end
 
 	class KalturaExternalMediaEntryBaseFilter < KalturaMediaEntryFilter

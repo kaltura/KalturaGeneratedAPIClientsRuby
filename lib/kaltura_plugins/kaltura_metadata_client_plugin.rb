@@ -114,15 +114,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaMetadataListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaMetadataProfile < KalturaObjectBase
 		attr_accessor :id
 		attr_accessor :partner_id
@@ -173,24 +164,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaMetadataProfileFieldListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
-	class KalturaMetadataProfileListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaImportMetadataJobData < KalturaJobData
 		attr_accessor :src_file_url
 		attr_accessor :dest_file_local_path
@@ -201,7 +174,130 @@ module Kaltura
 		end
 	end
 
-	class KalturaMetadataBaseFilter < KalturaFilter
+	class KalturaMetadataListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
+	class KalturaMetadataProfileBaseFilter < KalturaFilter
+		attr_accessor :id_equal
+		attr_accessor :partner_id_equal
+		attr_accessor :metadata_object_type_equal
+		attr_accessor :metadata_object_type_in
+		attr_accessor :version_equal
+		attr_accessor :name_equal
+		attr_accessor :system_name_equal
+		attr_accessor :system_name_in
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :created_at_less_than_or_equal
+		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
+		attr_accessor :status_equal
+		attr_accessor :status_in
+		attr_accessor :create_mode_equal
+		attr_accessor :create_mode_not_equal
+		attr_accessor :create_mode_in
+		attr_accessor :create_mode_not_in
+
+		def id_equal=(val)
+			@id_equal = val.to_i
+		end
+		def partner_id_equal=(val)
+			@partner_id_equal = val.to_i
+		end
+		def version_equal=(val)
+			@version_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
+		def updated_at_greater_than_or_equal=(val)
+			@updated_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
+		end
+		def status_equal=(val)
+			@status_equal = val.to_i
+		end
+		def create_mode_equal=(val)
+			@create_mode_equal = val.to_i
+		end
+		def create_mode_not_equal=(val)
+			@create_mode_not_equal = val.to_i
+		end
+	end
+
+	class KalturaMetadataProfileFieldListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
+	class KalturaMetadataProfileListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
+	class KalturaTransformMetadataJobData < KalturaJobData
+		attr_accessor :src_xsl_path
+		attr_accessor :src_version
+		attr_accessor :dest_version
+		attr_accessor :dest_xsd_path
+		attr_accessor :metadata_profile_id
+
+		def src_version=(val)
+			@src_version = val.to_i
+		end
+		def dest_version=(val)
+			@dest_version = val.to_i
+		end
+		def metadata_profile_id=(val)
+			@metadata_profile_id = val.to_i
+		end
+	end
+
+	class KalturaCompareMetadataCondition < KalturaCompareCondition
+		# May contain the full xpath to the field in three formats
+		# 	 1. Slashed xPath, e.g. /metadata/myElementName
+		# 	 2. Using local-name function, e.g. /[local-name()='metadata']/[local-name()='myElementName']
+		# 	 3. Using only the field name, e.g. myElementName, it will be searched as //myElementName
+		# 	 
+		attr_accessor :x_path
+		# Metadata profile id
+		# 	 
+		attr_accessor :profile_id
+		# Metadata profile system name
+		# 	 
+		attr_accessor :profile_system_name
+
+		def profile_id=(val)
+			@profile_id = val.to_i
+		end
+	end
+
+	class KalturaMatchMetadataCondition < KalturaMatchCondition
+		# May contain the full xpath to the field in three formats
+		# 	 1. Slashed xPath, e.g. /metadata/myElementName
+		# 	 2. Using local-name function, e.g. /[local-name()='metadata']/[local-name()='myElementName']
+		# 	 3. Using only the field name, e.g. myElementName, it will be searched as //myElementName
+		# 	 
+		attr_accessor :x_path
+		# Metadata profile id
+		# 	 
+		attr_accessor :profile_id
+		# Metadata profile system name
+		# 	 
+		attr_accessor :profile_system_name
+
+		def profile_id=(val)
+			@profile_id = val.to_i
+		end
+	end
+
+	class KalturaMetadataBaseFilter < KalturaRelatedFilter
 		attr_accessor :partner_id_equal
 		attr_accessor :metadata_profile_id_equal
 		attr_accessor :metadata_profile_version_equal
@@ -261,114 +357,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaMetadataProfileBaseFilter < KalturaFilter
-		attr_accessor :id_equal
-		attr_accessor :partner_id_equal
-		attr_accessor :metadata_object_type_equal
-		attr_accessor :metadata_object_type_in
-		attr_accessor :version_equal
-		attr_accessor :name_equal
-		attr_accessor :system_name_equal
-		attr_accessor :system_name_in
-		attr_accessor :created_at_greater_than_or_equal
-		attr_accessor :created_at_less_than_or_equal
-		attr_accessor :updated_at_greater_than_or_equal
-		attr_accessor :updated_at_less_than_or_equal
-		attr_accessor :status_equal
-		attr_accessor :status_in
-		attr_accessor :create_mode_equal
-		attr_accessor :create_mode_not_equal
-		attr_accessor :create_mode_in
-		attr_accessor :create_mode_not_in
-
-		def id_equal=(val)
-			@id_equal = val.to_i
-		end
-		def partner_id_equal=(val)
-			@partner_id_equal = val.to_i
-		end
-		def version_equal=(val)
-			@version_equal = val.to_i
-		end
-		def created_at_greater_than_or_equal=(val)
-			@created_at_greater_than_or_equal = val.to_i
-		end
-		def created_at_less_than_or_equal=(val)
-			@created_at_less_than_or_equal = val.to_i
-		end
-		def updated_at_greater_than_or_equal=(val)
-			@updated_at_greater_than_or_equal = val.to_i
-		end
-		def updated_at_less_than_or_equal=(val)
-			@updated_at_less_than_or_equal = val.to_i
-		end
-		def status_equal=(val)
-			@status_equal = val.to_i
-		end
-		def create_mode_equal=(val)
-			@create_mode_equal = val.to_i
-		end
-		def create_mode_not_equal=(val)
-			@create_mode_not_equal = val.to_i
-		end
-	end
-
-	class KalturaTransformMetadataJobData < KalturaJobData
-		attr_accessor :src_xsl_path
-		attr_accessor :src_version
-		attr_accessor :dest_version
-		attr_accessor :dest_xsd_path
-		attr_accessor :metadata_profile_id
-
-		def src_version=(val)
-			@src_version = val.to_i
-		end
-		def dest_version=(val)
-			@dest_version = val.to_i
-		end
-		def metadata_profile_id=(val)
-			@metadata_profile_id = val.to_i
-		end
-	end
-
-	class KalturaCompareMetadataCondition < KalturaCompareCondition
-		# May contain the full xpath to the field in three formats
-		# 	 1. Slashed xPath, e.g. /metadata/myElementName
-		# 	 2. Using local-name function, e.g. /[local-name()='metadata']/[local-name()='myElementName']
-		# 	 3. Using only the field name, e.g. myElementName, it will be searched as //myElementName
-		# 	 
-		attr_accessor :x_path
-		# Metadata profile id
-		# 	 
-		attr_accessor :profile_id
-		# Metadata profile system name
-		# 	 
-		attr_accessor :profile_system_name
-
-		def profile_id=(val)
-			@profile_id = val.to_i
-		end
-	end
-
-	class KalturaMatchMetadataCondition < KalturaMatchCondition
-		# May contain the full xpath to the field in three formats
-		# 	 1. Slashed xPath, e.g. /metadata/myElementName
-		# 	 2. Using local-name function, e.g. /[local-name()='metadata']/[local-name()='myElementName']
-		# 	 3. Using only the field name, e.g. myElementName, it will be searched as //myElementName
-		# 	 
-		attr_accessor :x_path
-		# Metadata profile id
-		# 	 
-		attr_accessor :profile_id
-		# Metadata profile system name
-		# 	 
-		attr_accessor :profile_system_name
-
-		def profile_id=(val)
-			@profile_id = val.to_i
-		end
-	end
-
 	class KalturaMetadataFieldChangedCondition < KalturaMatchCondition
 		# May contain the full xpath to the field in three formats
 		# 	 1. Slashed xPath, e.g. /metadata/myElementName
@@ -390,10 +378,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaMetadataFilter < KalturaMetadataBaseFilter
-
-	end
-
 	class KalturaMetadataProfileFilter < KalturaMetadataProfileBaseFilter
 
 	end
@@ -405,6 +389,10 @@ module Kaltura
 		def metadata_profile_id=(val)
 			@metadata_profile_id = val.to_i
 		end
+	end
+
+	class KalturaMetadataFilter < KalturaMetadataBaseFilter
+
 	end
 
 

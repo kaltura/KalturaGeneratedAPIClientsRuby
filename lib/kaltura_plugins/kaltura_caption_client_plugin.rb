@@ -92,15 +92,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaCaptionAssetListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaCaptionParams < KalturaAssetParams
 		# The language of the caption content
 		# 	 
@@ -126,13 +117,14 @@ module Kaltura
 		end
 	end
 
-	class KalturaCaptionParamsListResponse < KalturaObjectBase
+	class KalturaCaptionAssetListResponse < KalturaListResponse
 		attr_accessor :objects
-		attr_accessor :total_count
 
-		def total_count=(val)
-			@total_count = val.to_i
-		end
+	end
+
+	class KalturaCaptionParamsListResponse < KalturaListResponse
+		attr_accessor :objects
+
 	end
 
 	class KalturaCaptionAssetBaseFilter < KalturaAssetFilter

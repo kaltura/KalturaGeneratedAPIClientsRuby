@@ -55,15 +55,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaTagListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaIndexTagsByPrivacyContextJobData < KalturaJobData
 		attr_accessor :changed_category_id
 		attr_accessor :deleted_privacy_contexts
@@ -87,6 +78,11 @@ module Kaltura
 		def instance_count_in=(val)
 			@instance_count_in = val.to_i
 		end
+	end
+
+	class KalturaTagListResponse < KalturaListResponse
+		attr_accessor :objects
+
 	end
 
 

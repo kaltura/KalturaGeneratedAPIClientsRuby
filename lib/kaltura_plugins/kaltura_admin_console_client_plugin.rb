@@ -82,15 +82,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaTrackEntryListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaUiConfAdmin < KalturaUiConf
 		attr_accessor :is_public
 
@@ -99,13 +90,14 @@ module Kaltura
 		end
 	end
 
-	class KalturaUiConfAdminListResponse < KalturaObjectBase
+	class KalturaTrackEntryListResponse < KalturaListResponse
 		attr_accessor :objects
-		attr_accessor :total_count
 
-		def total_count=(val)
-			@total_count = val.to_i
-		end
+	end
+
+	class KalturaUiConfAdminListResponse < KalturaListResponse
+		attr_accessor :objects
+
 	end
 
 	class KalturaUiConfAdminBaseFilter < KalturaUiConfFilter

@@ -58,6 +58,78 @@ module Kaltura
 		VERSION_DESC = "-version"
 	end
 
+	class KalturaFileSync < KalturaObjectBase
+		attr_accessor :id
+		attr_accessor :partner_id
+		attr_accessor :file_object_type
+		attr_accessor :object_id
+		attr_accessor :version
+		attr_accessor :object_sub_type
+		attr_accessor :dc
+		attr_accessor :original
+		attr_accessor :created_at
+		attr_accessor :updated_at
+		attr_accessor :ready_at
+		attr_accessor :sync_time
+		attr_accessor :status
+		attr_accessor :file_type
+		attr_accessor :linked_id
+		attr_accessor :link_count
+		attr_accessor :file_root
+		attr_accessor :file_path
+		attr_accessor :file_size
+		attr_accessor :file_url
+		attr_accessor :file_content
+		attr_accessor :file_disc_size
+		attr_accessor :is_current_dc
+
+		def id=(val)
+			@id = val.to_i
+		end
+		def partner_id=(val)
+			@partner_id = val.to_i
+		end
+		def object_sub_type=(val)
+			@object_sub_type = val.to_i
+		end
+		def original=(val)
+			@original = val.to_i
+		end
+		def created_at=(val)
+			@created_at = val.to_i
+		end
+		def updated_at=(val)
+			@updated_at = val.to_i
+		end
+		def ready_at=(val)
+			@ready_at = val.to_i
+		end
+		def sync_time=(val)
+			@sync_time = val.to_i
+		end
+		def status=(val)
+			@status = val.to_i
+		end
+		def file_type=(val)
+			@file_type = val.to_i
+		end
+		def linked_id=(val)
+			@linked_id = val.to_i
+		end
+		def link_count=(val)
+			@link_count = val.to_i
+		end
+		def file_size=(val)
+			@file_size = val.to_f
+		end
+		def file_disc_size=(val)
+			@file_disc_size = val.to_f
+		end
+		def is_current_dc=(val)
+			@is_current_dc = to_b(val)
+		end
+	end
+
 	class KalturaFileSyncBaseFilter < KalturaFilter
 		attr_accessor :partner_id_equal
 		attr_accessor :file_object_type_equal
@@ -143,6 +215,11 @@ module Kaltura
 		def file_size_less_than_or_equal=(val)
 			@file_size_less_than_or_equal = val.to_f
 		end
+	end
+
+	class KalturaFileSyncListResponse < KalturaListResponse
+		attr_accessor :objects
+
 	end
 
 	class KalturaFileSyncFilter < KalturaFileSyncBaseFilter

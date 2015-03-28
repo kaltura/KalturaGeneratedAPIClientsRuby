@@ -357,24 +357,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaDropFolderFileListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
-	class KalturaDropFolderListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaDropFolderBaseFilter < KalturaFilter
 		attr_accessor :id_equal
 		attr_accessor :id_in
@@ -527,6 +509,16 @@ module Kaltura
 		def updated_at_less_than_or_equal=(val)
 			@updated_at_less_than_or_equal = val.to_i
 		end
+	end
+
+	class KalturaDropFolderFileListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
+	class KalturaDropFolderListResponse < KalturaListResponse
+		attr_accessor :objects
+
 	end
 
 	class KalturaRemoteDropFolder < KalturaDropFolder

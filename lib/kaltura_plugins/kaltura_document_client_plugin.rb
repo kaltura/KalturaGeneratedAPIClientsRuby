@@ -97,13 +97,9 @@ module Kaltura
 		end
 	end
 
-	class KalturaDocumentListResponse < KalturaObjectBase
+	class KalturaDocumentListResponse < KalturaListResponse
 		attr_accessor :objects
-		attr_accessor :total_count
 
-		def total_count=(val)
-			@total_count = val.to_i
-		end
 	end
 
 	class KalturaDocumentFlavorParams < KalturaFlavorParams
@@ -154,17 +150,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaDocumentEntryBaseFilter < KalturaBaseEntryFilter
-		attr_accessor :document_type_equal
-		attr_accessor :document_type_in
-		attr_accessor :asset_params_ids_match_or
-		attr_accessor :asset_params_ids_match_and
-
-		def document_type_equal=(val)
-			@document_type_equal = val.to_i
-		end
-	end
-
 	class KalturaDocumentFlavorParamsOutput < KalturaFlavorParamsOutput
 
 	end
@@ -210,6 +195,17 @@ module Kaltura
 		end
 		def poly2bitmap=(val)
 			@poly2bitmap = to_b(val)
+		end
+	end
+
+	class KalturaDocumentEntryBaseFilter < KalturaBaseEntryFilter
+		attr_accessor :document_type_equal
+		attr_accessor :document_type_in
+		attr_accessor :asset_params_ids_match_or
+		attr_accessor :asset_params_ids_match_and
+
+		def document_type_equal=(val)
+			@document_type_equal = val.to_i
 		end
 	end
 

@@ -352,15 +352,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaSystemPartnerUsageListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaSystemPartnerOveragedLimit < KalturaSystemPartnerLimit
 		attr_accessor :overage_price
 		attr_accessor :overage_unit
@@ -393,6 +384,11 @@ module Kaltura
 		def timezone_offset=(val)
 			@timezone_offset = val.to_i
 		end
+	end
+
+	class KalturaSystemPartnerUsageListResponse < KalturaListResponse
+		attr_accessor :objects
+
 	end
 
 	class KalturaSystemPartnerFilter < KalturaPartnerFilter

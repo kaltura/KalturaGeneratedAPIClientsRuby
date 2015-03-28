@@ -189,9 +189,6 @@ module Kaltura
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
-	class KalturaSyndicationDistributionProviderOrderBy
-	end
-
 	# Abstract class for asset distribution condition
 	#  
 	class KalturaAssetDistributionCondition < KalturaObjectBase
@@ -362,15 +359,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaDistributionProfileListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaDistributionProvider < KalturaObjectBase
 		attr_accessor :type
 		attr_accessor :name
@@ -396,15 +384,6 @@ module Kaltura
 		end
 		def interval_before_sunset=(val)
 			@interval_before_sunset = val.to_i
-		end
-	end
-
-	class KalturaDistributionProviderListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
 		end
 	end
 
@@ -547,15 +526,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaEntryDistributionListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaGenericDistributionProfileAction < KalturaObjectBase
 		attr_accessor :protocol
 		attr_accessor :server_url
@@ -625,15 +595,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaGenericDistributionProviderActionListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaGenericDistributionProvider < KalturaDistributionProvider
 		# Auto generated
 		# 	 
@@ -671,15 +632,6 @@ module Kaltura
 		end
 		def status=(val)
 			@status = val.to_i
-		end
-	end
-
-	class KalturaGenericDistributionProviderListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
 		end
 	end
 
@@ -799,9 +751,19 @@ module Kaltura
 		end
 	end
 
+	class KalturaDistributionProfileListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
 	class KalturaDistributionProviderBaseFilter < KalturaFilter
 		attr_accessor :type_equal
 		attr_accessor :type_in
+
+	end
+
+	class KalturaDistributionProviderListResponse < KalturaListResponse
+		attr_accessor :objects
 
 	end
 
@@ -843,7 +805,131 @@ module Kaltura
 
 	end
 
-	class KalturaEntryDistributionBaseFilter < KalturaFilter
+	class KalturaEntryDistributionListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
+	class KalturaGenericDistributionJobProviderData < KalturaDistributionJobProviderData
+		attr_accessor :xml
+		attr_accessor :result_parse_data
+		attr_accessor :result_parser_type
+
+		def result_parser_type=(val)
+			@result_parser_type = val.to_i
+		end
+	end
+
+	class KalturaGenericDistributionProfile < KalturaDistributionProfile
+		attr_accessor :generic_provider_id
+		attr_accessor :submit_action
+		attr_accessor :update_action
+		attr_accessor :delete_action
+		attr_accessor :fetch_report_action
+		attr_accessor :update_required_entry_fields
+		attr_accessor :update_required_metadata_xpaths
+
+		def generic_provider_id=(val)
+			@generic_provider_id = val.to_i
+		end
+	end
+
+	class KalturaGenericDistributionProviderActionBaseFilter < KalturaFilter
+		attr_accessor :id_equal
+		attr_accessor :id_in
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :created_at_less_than_or_equal
+		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
+		attr_accessor :generic_distribution_provider_id_equal
+		attr_accessor :generic_distribution_provider_id_in
+		attr_accessor :action_equal
+		attr_accessor :action_in
+
+		def id_equal=(val)
+			@id_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
+		def updated_at_greater_than_or_equal=(val)
+			@updated_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
+		end
+		def generic_distribution_provider_id_equal=(val)
+			@generic_distribution_provider_id_equal = val.to_i
+		end
+		def action_equal=(val)
+			@action_equal = val.to_i
+		end
+	end
+
+	class KalturaGenericDistributionProviderActionListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
+	class KalturaGenericDistributionProviderListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
+	class KalturaSyndicationDistributionProfile < KalturaDistributionProfile
+		attr_accessor :xsl
+		attr_accessor :feed_id
+
+	end
+
+	class KalturaSyndicationDistributionProvider < KalturaDistributionProvider
+
+	end
+
+	class KalturaDistributionDeleteJobData < KalturaDistributionJobData
+
+	end
+
+	class KalturaDistributionFetchReportJobData < KalturaDistributionJobData
+		attr_accessor :plays
+		attr_accessor :views
+
+		def plays=(val)
+			@plays = val.to_i
+		end
+		def views=(val)
+			@views = val.to_i
+		end
+	end
+
+	class KalturaDistributionProfileFilter < KalturaDistributionProfileBaseFilter
+
+	end
+
+	class KalturaDistributionProviderFilter < KalturaDistributionProviderBaseFilter
+
+	end
+
+	class KalturaDistributionSubmitJobData < KalturaDistributionJobData
+
+	end
+
+	class KalturaDistributionUpdateJobData < KalturaDistributionJobData
+
+	end
+
+	class KalturaDistributionValidationErrorInvalidMetadata < KalturaDistributionValidationErrorInvalidData
+		attr_accessor :metadata_profile_id
+
+		def metadata_profile_id=(val)
+			@metadata_profile_id = val.to_i
+		end
+	end
+
+	class KalturaEntryDistributionBaseFilter < KalturaRelatedFilter
 		attr_accessor :id_equal
 		attr_accessor :id_in
 		attr_accessor :created_at_greater_than_or_equal
@@ -909,119 +995,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaGenericDistributionJobProviderData < KalturaDistributionJobProviderData
-		attr_accessor :xml
-		attr_accessor :result_parse_data
-		attr_accessor :result_parser_type
-
-		def result_parser_type=(val)
-			@result_parser_type = val.to_i
-		end
-	end
-
-	class KalturaGenericDistributionProfile < KalturaDistributionProfile
-		attr_accessor :generic_provider_id
-		attr_accessor :submit_action
-		attr_accessor :update_action
-		attr_accessor :delete_action
-		attr_accessor :fetch_report_action
-		attr_accessor :update_required_entry_fields
-		attr_accessor :update_required_metadata_xpaths
-
-		def generic_provider_id=(val)
-			@generic_provider_id = val.to_i
-		end
-	end
-
-	class KalturaGenericDistributionProviderActionBaseFilter < KalturaFilter
-		attr_accessor :id_equal
-		attr_accessor :id_in
-		attr_accessor :created_at_greater_than_or_equal
-		attr_accessor :created_at_less_than_or_equal
-		attr_accessor :updated_at_greater_than_or_equal
-		attr_accessor :updated_at_less_than_or_equal
-		attr_accessor :generic_distribution_provider_id_equal
-		attr_accessor :generic_distribution_provider_id_in
-		attr_accessor :action_equal
-		attr_accessor :action_in
-
-		def id_equal=(val)
-			@id_equal = val.to_i
-		end
-		def created_at_greater_than_or_equal=(val)
-			@created_at_greater_than_or_equal = val.to_i
-		end
-		def created_at_less_than_or_equal=(val)
-			@created_at_less_than_or_equal = val.to_i
-		end
-		def updated_at_greater_than_or_equal=(val)
-			@updated_at_greater_than_or_equal = val.to_i
-		end
-		def updated_at_less_than_or_equal=(val)
-			@updated_at_less_than_or_equal = val.to_i
-		end
-		def generic_distribution_provider_id_equal=(val)
-			@generic_distribution_provider_id_equal = val.to_i
-		end
-		def action_equal=(val)
-			@action_equal = val.to_i
-		end
-	end
-
-	class KalturaSyndicationDistributionProfile < KalturaDistributionProfile
-		attr_accessor :xsl
-		attr_accessor :feed_id
-
-	end
-
-	class KalturaSyndicationDistributionProvider < KalturaDistributionProvider
-
-	end
-
-	class KalturaDistributionDeleteJobData < KalturaDistributionJobData
-
-	end
-
-	class KalturaDistributionFetchReportJobData < KalturaDistributionJobData
-		attr_accessor :plays
-		attr_accessor :views
-
-		def plays=(val)
-			@plays = val.to_i
-		end
-		def views=(val)
-			@views = val.to_i
-		end
-	end
-
-	class KalturaDistributionProfileFilter < KalturaDistributionProfileBaseFilter
-
-	end
-
-	class KalturaDistributionProviderFilter < KalturaDistributionProviderBaseFilter
-
-	end
-
-	class KalturaDistributionSubmitJobData < KalturaDistributionJobData
-
-	end
-
-	class KalturaDistributionUpdateJobData < KalturaDistributionJobData
-
-	end
-
-	class KalturaDistributionValidationErrorInvalidMetadata < KalturaDistributionValidationErrorInvalidData
-		attr_accessor :metadata_profile_id
-
-		def metadata_profile_id=(val)
-			@metadata_profile_id = val.to_i
-		end
-	end
-
-	class KalturaEntryDistributionFilter < KalturaEntryDistributionBaseFilter
-
-	end
-
 	class KalturaGenericDistributionProviderActionFilter < KalturaGenericDistributionProviderActionBaseFilter
 
 	end
@@ -1035,6 +1008,10 @@ module Kaltura
 	end
 
 	class KalturaDistributionEnableJobData < KalturaDistributionUpdateJobData
+
+	end
+
+	class KalturaEntryDistributionFilter < KalturaEntryDistributionBaseFilter
 
 	end
 
@@ -1103,10 +1080,6 @@ module Kaltura
 	end
 
 	class KalturaSyndicationDistributionProfileFilter < KalturaSyndicationDistributionProfileBaseFilter
-
-	end
-
-	class KalturaSyndicationDistributionProviderFilter < KalturaSyndicationDistributionProviderBaseFilter
 
 	end
 

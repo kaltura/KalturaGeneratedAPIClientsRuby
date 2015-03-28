@@ -159,14 +159,10 @@ module Kaltura
 		end
 	end
 
-	class KalturaPartnerUsageListResponse < KalturaObjectBase
+	class KalturaPartnerUsageListResponse < KalturaListResponse
 		attr_accessor :total
 		attr_accessor :objects
-		attr_accessor :total_count
 
-		def total_count=(val)
-			@total_count = val.to_i
-		end
 	end
 
 	class KalturaVarPartnerUsageTotalItem < KalturaVarPartnerUsageItem

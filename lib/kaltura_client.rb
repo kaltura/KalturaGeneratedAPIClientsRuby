@@ -435,6 +435,17 @@ module Kaltura
 		PARTNER_USAGE = 201
 	end
 
+	class KalturaResponseProfileStatus
+		DISABLED = 1
+		ENABLED = 2
+		DELETED = 3
+	end
+
+	class KalturaResponseProfileType
+		INCLUDE_FIELDS = 1
+		EXCLUDE_FIELDS = 2
+	end
+
 	class KalturaResponseType
 		RESPONSE_TYPE_JSON = 1
 		RESPONSE_TYPE_XML = 2
@@ -443,6 +454,16 @@ module Kaltura
 		RESPONSE_TYPE_HTML = 7
 		RESPONSE_TYPE_MRSS = 8
 		RESPONSE_TYPE_JSONP = 9
+	end
+
+	class KalturaSchedulerStatusType
+		RUNNING_BATCHES_COUNT = 1
+		RUNNING_BATCHES_CPU = 2
+		RUNNING_BATCHES_MEMORY = 3
+		RUNNING_BATCHES_NETWORK = 4
+		RUNNING_BATCHES_DISC_IO = 5
+		RUNNING_BATCHES_DISC_SPACE = 6
+		RUNNING_BATCHES_IS_RUNNING = 7
 	end
 
 	class KalturaSearchOperatorType
@@ -2113,13 +2134,6 @@ module Kaltura
 		FFMPEG = "1"
 	end
 
-	class KalturaMediaServerOrderBy
-		CREATED_AT_ASC = "+createdAt"
-		UPDATED_AT_ASC = "+updatedAt"
-		CREATED_AT_DESC = "-createdAt"
-		UPDATED_AT_DESC = "-updatedAt"
-	end
-
 	class KalturaMixEntryOrderBy
 		CREATED_AT_ASC = "+createdAt"
 		DURATION_ASC = "+duration"
@@ -2286,6 +2300,13 @@ module Kaltura
 	class KalturaReportOrderBy
 		CREATED_AT_ASC = "+createdAt"
 		CREATED_AT_DESC = "-createdAt"
+	end
+
+	class KalturaResponseProfileOrderBy
+		CREATED_AT_ASC = "+createdAt"
+		UPDATED_AT_ASC = "+updatedAt"
+		CREATED_AT_DESC = "-createdAt"
+		UPDATED_AT_DESC = "-updatedAt"
 	end
 
 	class KalturaRuleActionType
@@ -2509,6 +2530,14 @@ module Kaltura
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
+	class KalturaListResponse < KalturaObjectBase
+		attr_accessor :total_count
+
+		def total_count=(val)
+			@total_count = val.to_i
+		end
+	end
+
 	class KalturaBaseRestriction < KalturaObjectBase
 
 	end
@@ -2566,15 +2595,6 @@ module Kaltura
 
 	class KalturaAccessControlContextTypeHolder < KalturaContextTypeHolder
 
-	end
-
-	class KalturaAccessControlListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
 	end
 
 	class KalturaRuleAction < KalturaObjectBase
@@ -2659,15 +2679,6 @@ module Kaltura
 		end
 		def is_default=(val)
 			@is_default = val.to_i
-		end
-	end
-
-	class KalturaAccessControlProfileListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
 		end
 	end
 
@@ -3029,13 +3040,8 @@ module Kaltura
 		end
 	end
 
-	class KalturaBaseEntryListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
+	class KalturaBaseResponseProfile < KalturaObjectBase
 
-		def total_count=(val)
-			@total_count = val.to_i
-		end
 	end
 
 	class KalturaBaseSyndicationFeed < KalturaObjectBase
@@ -3125,12 +3131,180 @@ module Kaltura
 		end
 	end
 
-	class KalturaBaseSyndicationFeedListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
+	class KalturaBatchHistoryData < KalturaObjectBase
+		attr_accessor :scheduler_id
+		attr_accessor :worker_id
+		attr_accessor :batch_index
+		attr_accessor :time_stamp
+		attr_accessor :message
+		attr_accessor :err_type
+		attr_accessor :err_number
+		attr_accessor :host_name
+		attr_accessor :session_id
 
-		def total_count=(val)
-			@total_count = val.to_i
+		def scheduler_id=(val)
+			@scheduler_id = val.to_i
+		end
+		def worker_id=(val)
+			@worker_id = val.to_i
+		end
+		def batch_index=(val)
+			@batch_index = val.to_i
+		end
+		def time_stamp=(val)
+			@time_stamp = val.to_i
+		end
+		def err_type=(val)
+			@err_type = val.to_i
+		end
+		def err_number=(val)
+			@err_number = val.to_i
+		end
+	end
+
+	class KalturaJobData < KalturaObjectBase
+
+	end
+
+	class KalturaBatchJob < KalturaObjectBase
+		attr_accessor :id
+		attr_accessor :partner_id
+		attr_accessor :created_at
+		attr_accessor :updated_at
+		attr_accessor :deleted_at
+		attr_accessor :lock_expiration
+		attr_accessor :execution_attempts
+		attr_accessor :lock_version
+		attr_accessor :entry_id
+		attr_accessor :entry_name
+		attr_accessor :job_type
+		attr_accessor :job_sub_type
+		attr_accessor :data
+		attr_accessor :status
+		attr_accessor :abort
+		attr_accessor :check_again_timeout
+		attr_accessor :message
+		attr_accessor :description
+		attr_accessor :priority
+		attr_accessor :history
+		# The id of the bulk upload job that initiated this job
+		# 	 
+		attr_accessor :bulk_job_id
+		attr_accessor :batch_version
+		# When one job creates another - the parent should set this parentJobId to be its own id.
+		# 	 
+		attr_accessor :parent_job_id
+		# The id of the root parent job
+		# 	 
+		attr_accessor :root_job_id
+		# The time that the job was pulled from the queue
+		# 	 
+		attr_accessor :queue_time
+		# The time that the job was finished or closed as failed
+		# 	 
+		attr_accessor :finish_time
+		attr_accessor :err_type
+		attr_accessor :err_number
+		attr_accessor :estimated_effort
+		attr_accessor :urgency
+		attr_accessor :scheduler_id
+		attr_accessor :worker_id
+		attr_accessor :batch_index
+		attr_accessor :last_scheduler_id
+		attr_accessor :last_worker_id
+		attr_accessor :dc
+		attr_accessor :job_object_id
+		attr_accessor :job_object_type
+
+		def id=(val)
+			@id = val.to_i
+		end
+		def partner_id=(val)
+			@partner_id = val.to_i
+		end
+		def created_at=(val)
+			@created_at = val.to_i
+		end
+		def updated_at=(val)
+			@updated_at = val.to_i
+		end
+		def deleted_at=(val)
+			@deleted_at = val.to_i
+		end
+		def lock_expiration=(val)
+			@lock_expiration = val.to_i
+		end
+		def execution_attempts=(val)
+			@execution_attempts = val.to_i
+		end
+		def lock_version=(val)
+			@lock_version = val.to_i
+		end
+		def job_sub_type=(val)
+			@job_sub_type = val.to_i
+		end
+		def status=(val)
+			@status = val.to_i
+		end
+		def abort=(val)
+			@abort = val.to_i
+		end
+		def check_again_timeout=(val)
+			@check_again_timeout = val.to_i
+		end
+		def priority=(val)
+			@priority = val.to_i
+		end
+		def bulk_job_id=(val)
+			@bulk_job_id = val.to_i
+		end
+		def batch_version=(val)
+			@batch_version = val.to_i
+		end
+		def parent_job_id=(val)
+			@parent_job_id = val.to_i
+		end
+		def root_job_id=(val)
+			@root_job_id = val.to_i
+		end
+		def queue_time=(val)
+			@queue_time = val.to_i
+		end
+		def finish_time=(val)
+			@finish_time = val.to_i
+		end
+		def err_type=(val)
+			@err_type = val.to_i
+		end
+		def err_number=(val)
+			@err_number = val.to_i
+		end
+		def estimated_effort=(val)
+			@estimated_effort = val.to_i
+		end
+		def urgency=(val)
+			@urgency = val.to_i
+		end
+		def scheduler_id=(val)
+			@scheduler_id = val.to_i
+		end
+		def worker_id=(val)
+			@worker_id = val.to_i
+		end
+		def batch_index=(val)
+			@batch_index = val.to_i
+		end
+		def last_scheduler_id=(val)
+			@last_scheduler_id = val.to_i
+		end
+		def last_worker_id=(val)
+			@last_worker_id = val.to_i
+		end
+		def dc=(val)
+			@dc = val.to_i
+		end
+		def job_object_type=(val)
+			@job_object_type = val.to_i
 		end
 	end
 
@@ -3226,15 +3400,6 @@ module Kaltura
 		end
 		def num_of_objects=(val)
 			@num_of_objects = val.to_i
-		end
-	end
-
-	class KalturaBulkUploadListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
 		end
 	end
 
@@ -3452,24 +3617,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaCategoryEntryListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
-	class KalturaCategoryListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaCategoryUser < KalturaObjectBase
 		attr_accessor :category_id
 		# User id
@@ -3523,13 +3670,12 @@ module Kaltura
 		end
 	end
 
-	class KalturaCategoryUserListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
+	# Define client optional configurations
+	#  /
+	class KalturaClientConfiguration < KalturaObjectBase
+		attr_accessor :client_tag
+		attr_accessor :api_version
 
-		def total_count=(val)
-			@total_count = val.to_i
-		end
 	end
 
 	# Client notification object to hold the notification url and the data when sending client side notifications
@@ -3556,6 +3702,97 @@ module Kaltura
 		# 	 
 		attr_accessor :actions
 
+	end
+
+	class KalturaControlPanelCommand < KalturaObjectBase
+		# The id of the Category
+		# 	 
+		attr_accessor :id
+		# Creation date as Unix timestamp (In seconds)
+		# 	 
+		attr_accessor :created_at
+		# Creator name
+		# 	 
+		attr_accessor :created_by
+		# Update date as Unix timestamp (In seconds)
+		# 	 
+		attr_accessor :updated_at
+		# Updater name
+		# 	 
+		attr_accessor :updated_by
+		# Creator id
+		# 	 
+		attr_accessor :created_by_id
+		# The id of the scheduler that the command refers to
+		# 	 
+		attr_accessor :scheduler_id
+		# The id of the scheduler worker that the command refers to
+		# 	 
+		attr_accessor :worker_id
+		# The id of the scheduler worker as configured in the ini file
+		# 	 
+		attr_accessor :worker_configured_id
+		# The name of the scheduler worker that the command refers to
+		# 	 
+		attr_accessor :worker_name
+		# The index of the batch process that the command refers to
+		# 	 
+		attr_accessor :batch_index
+		# The command type - stop / start / config
+		# 	 
+		attr_accessor :type
+		# The command target type - data center / scheduler / job / job type
+		# 	 
+		attr_accessor :target_type
+		# The command status
+		# 	 
+		attr_accessor :status
+		# The reason for the command
+		# 	 
+		attr_accessor :cause
+		# Command description
+		# 	 
+		attr_accessor :description
+		# Error description
+		# 	 
+		attr_accessor :error_description
+
+		def id=(val)
+			@id = val.to_i
+		end
+		def created_at=(val)
+			@created_at = val.to_i
+		end
+		def updated_at=(val)
+			@updated_at = val.to_i
+		end
+		def created_by_id=(val)
+			@created_by_id = val.to_i
+		end
+		def scheduler_id=(val)
+			@scheduler_id = val.to_i
+		end
+		def worker_id=(val)
+			@worker_id = val.to_i
+		end
+		def worker_configured_id=(val)
+			@worker_configured_id = val.to_i
+		end
+		def worker_name=(val)
+			@worker_name = val.to_i
+		end
+		def batch_index=(val)
+			@batch_index = val.to_i
+		end
+		def type=(val)
+			@type = val.to_i
+		end
+		def target_type=(val)
+			@target_type = val.to_i
+		end
+		def status=(val)
+			@status = val.to_i
+		end
 	end
 
 	class KalturaConversionAttribute < KalturaObjectBase
@@ -3724,24 +3961,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaConversionProfileAssetParamsListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
-	class KalturaConversionProfileListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaConvertCollectionFlavorData < KalturaObjectBase
 		attr_accessor :flavor_asset_id
 		attr_accessor :flavor_params_output_id
@@ -3788,15 +4007,6 @@ module Kaltura
 
 		def retrieve_data_content_by_get=(val)
 			@retrieve_data_content_by_get = to_b(val)
-		end
-	end
-
-	class KalturaDataListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
 		end
 	end
 
@@ -3887,15 +4097,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaDeliveryProfileListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaFileSyncDescriptor < KalturaObjectBase
 		attr_accessor :file_sync_local_path
 		# The translated path as used by the scheduler
@@ -3910,6 +4111,62 @@ module Kaltura
 
 	class KalturaDestFileSyncDescriptor < KalturaFileSyncDescriptor
 
+	end
+
+	class KalturaSearchItem < KalturaObjectBase
+
+	end
+
+	class KalturaFilter < KalturaObjectBase
+		attr_accessor :order_by
+		attr_accessor :advanced_search
+
+	end
+
+	class KalturaRelatedFilter < KalturaFilter
+
+	end
+
+	# The KalturaFilterPager object enables paging management to be applied upon service list actions. 
+	#  
+	class KalturaFilterPager < KalturaObjectBase
+		# The number of objects to retrieve. (Default is 30, maximum page size is 500).
+		# 	 
+		attr_accessor :page_size
+		# The page number for which {pageSize} of objects should be retrieved (Default is 1).
+		# 	 
+		attr_accessor :page_index
+
+		def page_size=(val)
+			@page_size = val.to_i
+		end
+		def page_index=(val)
+			@page_index = val.to_i
+		end
+	end
+
+	class KalturaResponseProfileMapping < KalturaObjectBase
+		attr_accessor :parent_property
+		attr_accessor :filter_property
+
+	end
+
+	class KalturaDetachedResponseProfile < KalturaBaseResponseProfile
+		# Friendly name
+		# 	 
+		attr_accessor :name
+		attr_accessor :type
+		# Comma separated fields list to be included or excluded
+		# 	 
+		attr_accessor :fields
+		attr_accessor :filter
+		attr_accessor :pager
+		attr_accessor :related_profiles
+		attr_accessor :mappings
+
+		def type=(val)
+			@type = val.to_i
+		end
 	end
 
 	class KalturaEmailIngestionProfile < KalturaObjectBase
@@ -4108,15 +4365,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaFeatureStatusListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaFileAsset < KalturaObjectBase
 		attr_accessor :id
 		attr_accessor :partner_id
@@ -4144,43 +4392,6 @@ module Kaltura
 		end
 		def updated_at=(val)
 			@updated_at = val.to_i
-		end
-	end
-
-	class KalturaFileAssetListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
-	class KalturaSearchItem < KalturaObjectBase
-
-	end
-
-	class KalturaFilter < KalturaObjectBase
-		attr_accessor :order_by
-		attr_accessor :advanced_search
-
-	end
-
-	# The KalturaFilterPager object enables paging management to be applied upon service list actions. 
-	#  
-	class KalturaFilterPager < KalturaObjectBase
-		# The number of objects to retrieve. (Default is 30, maximum page size is 500).
-		# 	 
-		attr_accessor :page_size
-		# The page number for which {pageSize} of objects should be retrieved (Default is 1).
-		# 	 
-		attr_accessor :page_index
-
-		def page_size=(val)
-			@page_size = val.to_i
-		end
-		def page_index=(val)
-			@page_index = val.to_i
 		end
 	end
 
@@ -4239,15 +4450,6 @@ module Kaltura
 		end
 		def status=(val)
 			@status = val.to_i
-		end
-	end
-
-	class KalturaFlavorAssetListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
 		end
 	end
 
@@ -4410,15 +4612,6 @@ module Kaltura
 
 	end
 
-	class KalturaFlavorParamsListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaFlavorParamsOutput < KalturaFlavorParams
 		attr_accessor :flavor_params_id
 		attr_accessor :command_lines_str
@@ -4432,15 +4625,6 @@ module Kaltura
 		end
 		def ready_behavior=(val)
 			@ready_behavior = val.to_i
-		end
-	end
-
-	class KalturaFlavorParamsOutputListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
 		end
 	end
 
@@ -4470,16 +4654,8 @@ module Kaltura
 		end
 	end
 
-	class KalturaGroupUserListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaObject < KalturaObjectBase
+		attr_accessor :related_objects
 
 	end
 
@@ -4491,10 +4667,6 @@ module Kaltura
 		def value=(val)
 			@value = val.to_i
 		end
-	end
-
-	class KalturaJobData < KalturaObjectBase
-
 	end
 
 	# A key (boolean) value pair representation to return an array of key-(boolean)value pairs (associative array)
@@ -4616,15 +4788,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaLiveChannelListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaLiveChannelSegment < KalturaObjectBase
 		# Unique identifier
 		# 	 
@@ -4682,15 +4845,6 @@ module Kaltura
 		end
 		def duration=(val)
 			@duration = val.to_f
-		end
-	end
-
-	class KalturaLiveChannelSegmentListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
 		end
 	end
 
@@ -4823,15 +4977,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaLiveStatsListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaLiveStreamBitrate < KalturaObjectBase
 		attr_accessor :bitrate
 		attr_accessor :width
@@ -4888,16 +5033,7 @@ module Kaltura
 
 	end
 
-	class KalturaLiveStreamListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
-	class KalturaBaseEntryBaseFilter < KalturaFilter
+	class KalturaBaseEntryBaseFilter < KalturaRelatedFilter
 		# This filter should be in use for retrieving only a specific entry (identified by its entryId).
 		# 	 
 		attr_accessor :id_equal
@@ -5325,24 +5461,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaMediaInfoListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
-	class KalturaMediaListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaMediaServer < KalturaObjectBase
 		# Unique identifier
 		# 	 
@@ -5397,15 +5515,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaMixListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaModerationFlag < KalturaObjectBase
 		# Moderation flag id
 		# 	 
@@ -5447,24 +5556,6 @@ module Kaltura
 		end
 		def updated_at=(val)
 			@updated_at = val.to_i
-		end
-	end
-
-	class KalturaModerationFlagListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
-	class KalturaObjectListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
 		end
 	end
 
@@ -5620,15 +5711,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaPartnerListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaPartnerStatistics < KalturaObjectBase
 		# Package total allowed bandwidth and storage
 		# 	 
@@ -5765,24 +5847,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaPermissionItemListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
-	class KalturaPermissionListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaPlaylist < KalturaBaseEntry
 		# Content of the playlist - 
 		# 	 XML if the playlistType is dynamic 
@@ -5827,30 +5891,12 @@ module Kaltura
 		end
 	end
 
-	class KalturaPlaylistListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaRemotePath < KalturaObjectBase
 		attr_accessor :storage_profile_id
 		attr_accessor :uri
 
 		def storage_profile_id=(val)
 			@storage_profile_id = val.to_i
-		end
-	end
-
-	class KalturaRemotePathListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
 		end
 	end
 
@@ -5955,15 +6001,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaReportListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaReportResponse < KalturaObjectBase
 		attr_accessor :columns
 		attr_accessor :results
@@ -5984,6 +6021,280 @@ module Kaltura
 		attr_accessor :header
 		attr_accessor :data
 
+	end
+
+	# Define client request optional configurations
+	#  /
+	class KalturaRequestConfiguration < KalturaObjectBase
+		# Impersonated partner id
+		# 	 
+		attr_accessor :partner_id
+		# Kaltura API session
+		# 	 
+		attr_accessor :ks
+		# Response profile
+		# 	 
+		attr_accessor :response_profile
+
+		def partner_id=(val)
+			@partner_id = val.to_i
+		end
+	end
+
+	class KalturaResponseProfile < KalturaDetachedResponseProfile
+		# Auto generated numeric identifier
+		# 	 
+		attr_accessor :id
+		# Unique system name
+		# 	 
+		attr_accessor :system_name
+		attr_accessor :partner_id
+		# Creation time as Unix timestamp (In seconds) 
+		# 	 
+		attr_accessor :created_at
+		# Update time as Unix timestamp (In seconds) 
+		# 	 
+		attr_accessor :updated_at
+		attr_accessor :status
+
+		def id=(val)
+			@id = val.to_i
+		end
+		def partner_id=(val)
+			@partner_id = val.to_i
+		end
+		def created_at=(val)
+			@created_at = val.to_i
+		end
+		def updated_at=(val)
+			@updated_at = val.to_i
+		end
+		def status=(val)
+			@status = val.to_i
+		end
+	end
+
+	class KalturaSchedulerStatus < KalturaObjectBase
+		# The id of the Category
+		# 	 
+		attr_accessor :id
+		# The configured id of the scheduler
+		# 	 
+		attr_accessor :scheduler_configured_id
+		# The configured id of the job worker
+		# 	 
+		attr_accessor :worker_configured_id
+		# The type of the job worker.
+		# 	 
+		attr_accessor :worker_type
+		# The status type
+		# 	 
+		attr_accessor :type
+		# The status value
+		# 	 
+		attr_accessor :value
+		# The id of the scheduler
+		# 	 
+		attr_accessor :scheduler_id
+		# The id of the worker
+		# 	 
+		attr_accessor :worker_id
+
+		def id=(val)
+			@id = val.to_i
+		end
+		def scheduler_configured_id=(val)
+			@scheduler_configured_id = val.to_i
+		end
+		def worker_configured_id=(val)
+			@worker_configured_id = val.to_i
+		end
+		def type=(val)
+			@type = val.to_i
+		end
+		def value=(val)
+			@value = val.to_i
+		end
+		def scheduler_id=(val)
+			@scheduler_id = val.to_i
+		end
+		def worker_id=(val)
+			@worker_id = val.to_i
+		end
+	end
+
+	class KalturaSchedulerConfig < KalturaObjectBase
+		# The id of the Category
+		# 	 
+		attr_accessor :id
+		# Creator name
+		# 	 
+		attr_accessor :created_by
+		# Updater name
+		# 	 
+		attr_accessor :updated_by
+		# Id of the control panel command that created this config item 
+		# 	 
+		attr_accessor :command_id
+		# The status of the control panel command 
+		# 	 
+		attr_accessor :command_status
+		# The id of the scheduler 
+		# 	 
+		attr_accessor :scheduler_id
+		# The configured id of the scheduler 
+		# 	 
+		attr_accessor :scheduler_configured_id
+		# The name of the scheduler 
+		# 	 
+		attr_accessor :scheduler_name
+		# The id of the job worker
+		# 	 
+		attr_accessor :worker_id
+		# The configured id of the job worker
+		# 	 
+		attr_accessor :worker_configured_id
+		# The name of the job worker
+		# 	 
+		attr_accessor :worker_name
+		# The name of the variable
+		# 	 
+		attr_accessor :variable
+		# The part of the variable
+		# 	 
+		attr_accessor :variable_part
+		# The value of the variable
+		# 	 
+		attr_accessor :value
+
+		def id=(val)
+			@id = val.to_i
+		end
+		def scheduler_id=(val)
+			@scheduler_id = val.to_i
+		end
+		def scheduler_configured_id=(val)
+			@scheduler_configured_id = val.to_i
+		end
+		def worker_id=(val)
+			@worker_id = val.to_i
+		end
+		def worker_configured_id=(val)
+			@worker_configured_id = val.to_i
+		end
+	end
+
+	class KalturaSchedulerWorker < KalturaObjectBase
+		# The id of the Worker
+		# 	 
+		attr_accessor :id
+		# The id as configured in the batch config
+		# 	 
+		attr_accessor :configured_id
+		# The id of the Scheduler
+		# 	 
+		attr_accessor :scheduler_id
+		# The id of the scheduler as configured in the batch config
+		# 	 
+		attr_accessor :scheduler_configured_id
+		# The worker type
+		# 	 
+		attr_accessor :type
+		# The friendly name of the type
+		# 	 
+		attr_accessor :type_name
+		# The scheduler name
+		# 	 
+		attr_accessor :name
+		# Array of the last statuses
+		# 	 
+		attr_accessor :statuses
+		# Array of the last configs
+		# 	 
+		attr_accessor :configs
+		# Array of jobs that locked to this worker
+		# 	 
+		attr_accessor :locked_jobs
+		# Avarage time between creation and queue time
+		# 	 
+		attr_accessor :avg_wait
+		# Avarage time between queue time end finish time
+		# 	 
+		attr_accessor :avg_work
+		# last status time
+		# 	 
+		attr_accessor :last_status
+		# last status formated
+		# 	 
+		attr_accessor :last_status_str
+
+		def id=(val)
+			@id = val.to_i
+		end
+		def configured_id=(val)
+			@configured_id = val.to_i
+		end
+		def scheduler_id=(val)
+			@scheduler_id = val.to_i
+		end
+		def scheduler_configured_id=(val)
+			@scheduler_configured_id = val.to_i
+		end
+		def avg_wait=(val)
+			@avg_wait = val.to_i
+		end
+		def avg_work=(val)
+			@avg_work = val.to_i
+		end
+		def last_status=(val)
+			@last_status = val.to_i
+		end
+	end
+
+	class KalturaScheduler < KalturaObjectBase
+		# The id of the Scheduler
+		# 	 
+		attr_accessor :id
+		# The id as configured in the batch config
+		# 	 
+		attr_accessor :configured_id
+		# The scheduler name
+		# 	 
+		attr_accessor :name
+		# The host name
+		# 	 
+		attr_accessor :host
+		# Array of the last statuses
+		# 	 
+		attr_accessor :statuses
+		# Array of the last configs
+		# 	 
+		attr_accessor :configs
+		# Array of the workers
+		# 	 
+		attr_accessor :workers
+		# creation time
+		# 	 
+		attr_accessor :created_at
+		# last status time
+		# 	 
+		attr_accessor :last_status
+		# last status formated
+		# 	 
+		attr_accessor :last_status_str
+
+		def id=(val)
+			@id = val.to_i
+		end
+		def configured_id=(val)
+			@configured_id = val.to_i
+		end
+		def created_at=(val)
+			@created_at = val.to_i
+		end
+		def last_status=(val)
+			@last_status = val.to_i
+		end
 	end
 
 	class KalturaScope < KalturaObjectBase
@@ -6311,15 +6622,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaStorageProfileListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaSyndicationFeedEntryCount < KalturaObjectBase
 		# the total count of entries that should appear in the feed without flavor filtering
 		# 	 
@@ -6367,15 +6669,6 @@ module Kaltura
 		end
 		def status=(val)
 			@status = val.to_i
-		end
-	end
-
-	class KalturaThumbAssetListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
 		end
 	end
 
@@ -6457,15 +6750,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaThumbParamsListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaThumbParamsOutput < KalturaThumbParams
 		attr_accessor :thumb_params_id
 		attr_accessor :thumb_params_version
@@ -6478,15 +6762,6 @@ module Kaltura
 		end
 		def rotate=(val)
 			@rotate = val.to_i
-		end
-	end
-
-	class KalturaThumbParamsOutputListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
 		end
 	end
 
@@ -6558,15 +6833,6 @@ module Kaltura
 		end
 		def creation_mode=(val)
 			@creation_mode = val.to_i
-		end
-	end
-
-	class KalturaUiConfListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
 		end
 	end
 
@@ -6651,15 +6917,6 @@ module Kaltura
 		end
 		def updated_at=(val)
 			@updated_at = val.to_i
-		end
-	end
-
-	class KalturaUploadTokenListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
 		end
 	end
 
@@ -6757,28 +7014,10 @@ module Kaltura
 		end
 	end
 
-	class KalturaUserListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaUserLoginData < KalturaObjectBase
 		attr_accessor :id
 		attr_accessor :login_email
 
-	end
-
-	class KalturaUserLoginDataListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
 	end
 
 	class KalturaUserRole < KalturaObjectBase
@@ -6807,15 +7046,6 @@ module Kaltura
 		end
 		def updated_at=(val)
 			@updated_at = val.to_i
-		end
-	end
-
-	class KalturaUserRoleListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
 		end
 	end
 
@@ -6870,34 +7100,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaWidgetListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
-	class KalturaAccessControlBaseFilter < KalturaFilter
-		attr_accessor :id_equal
-		attr_accessor :id_in
-		attr_accessor :system_name_equal
-		attr_accessor :system_name_in
-		attr_accessor :created_at_greater_than_or_equal
-		attr_accessor :created_at_less_than_or_equal
-
-		def id_equal=(val)
-			@id_equal = val.to_i
-		end
-		def created_at_greater_than_or_equal=(val)
-			@created_at_greater_than_or_equal = val.to_i
-		end
-		def created_at_less_than_or_equal=(val)
-			@created_at_less_than_or_equal = val.to_i
-		end
-	end
-
 	class KalturaAccessControlBlockAction < KalturaRuleAction
 
 	end
@@ -6913,6 +7115,11 @@ module Kaltura
 		end
 	end
 
+	class KalturaAccessControlListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
 	class KalturaAccessControlPreviewAction < KalturaRuleAction
 		attr_accessor :limit
 
@@ -6921,31 +7128,9 @@ module Kaltura
 		end
 	end
 
-	class KalturaAccessControlProfileBaseFilter < KalturaFilter
-		attr_accessor :id_equal
-		attr_accessor :id_in
-		attr_accessor :system_name_equal
-		attr_accessor :system_name_in
-		attr_accessor :created_at_greater_than_or_equal
-		attr_accessor :created_at_less_than_or_equal
-		attr_accessor :updated_at_greater_than_or_equal
-		attr_accessor :updated_at_less_than_or_equal
+	class KalturaAccessControlProfileListResponse < KalturaListResponse
+		attr_accessor :objects
 
-		def id_equal=(val)
-			@id_equal = val.to_i
-		end
-		def created_at_greater_than_or_equal=(val)
-			@created_at_greater_than_or_equal = val.to_i
-		end
-		def created_at_less_than_or_equal=(val)
-			@created_at_less_than_or_equal = val.to_i
-		end
-		def updated_at_greater_than_or_equal=(val)
-			@updated_at_greater_than_or_equal = val.to_i
-		end
-		def updated_at_less_than_or_equal=(val)
-			@updated_at_less_than_or_equal = val.to_i
-		end
 	end
 
 	class KalturaAdminUser < KalturaUser
@@ -6968,65 +7153,6 @@ module Kaltura
 		attr_accessor :parameter
 		attr_accessor :action
 
-	end
-
-	class KalturaAssetBaseFilter < KalturaFilter
-		attr_accessor :id_equal
-		attr_accessor :id_in
-		attr_accessor :entry_id_equal
-		attr_accessor :entry_id_in
-		attr_accessor :partner_id_equal
-		attr_accessor :partner_id_in
-		attr_accessor :size_greater_than_or_equal
-		attr_accessor :size_less_than_or_equal
-		attr_accessor :tags_like
-		attr_accessor :tags_multi_like_or
-		attr_accessor :tags_multi_like_and
-		attr_accessor :created_at_greater_than_or_equal
-		attr_accessor :created_at_less_than_or_equal
-		attr_accessor :updated_at_greater_than_or_equal
-		attr_accessor :updated_at_less_than_or_equal
-		attr_accessor :deleted_at_greater_than_or_equal
-		attr_accessor :deleted_at_less_than_or_equal
-
-		def partner_id_equal=(val)
-			@partner_id_equal = val.to_i
-		end
-		def size_greater_than_or_equal=(val)
-			@size_greater_than_or_equal = val.to_i
-		end
-		def size_less_than_or_equal=(val)
-			@size_less_than_or_equal = val.to_i
-		end
-		def created_at_greater_than_or_equal=(val)
-			@created_at_greater_than_or_equal = val.to_i
-		end
-		def created_at_less_than_or_equal=(val)
-			@created_at_less_than_or_equal = val.to_i
-		end
-		def updated_at_greater_than_or_equal=(val)
-			@updated_at_greater_than_or_equal = val.to_i
-		end
-		def updated_at_less_than_or_equal=(val)
-			@updated_at_less_than_or_equal = val.to_i
-		end
-		def deleted_at_greater_than_or_equal=(val)
-			@deleted_at_greater_than_or_equal = val.to_i
-		end
-		def deleted_at_less_than_or_equal=(val)
-			@deleted_at_less_than_or_equal = val.to_i
-		end
-	end
-
-	class KalturaAssetParamsBaseFilter < KalturaFilter
-		attr_accessor :system_name_equal
-		attr_accessor :system_name_in
-		attr_accessor :is_system_default_equal
-		attr_accessor :tags_equal
-
-		def is_system_default_equal=(val)
-			@is_system_default_equal = val.to_i
-		end
 	end
 
 	class KalturaAssetParamsOutput < KalturaAssetParams
@@ -7068,7 +7194,17 @@ module Kaltura
 
 	end
 
+	class KalturaBaseEntryListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
 	class KalturaBaseSyndicationFeedBaseFilter < KalturaFilter
+
+	end
+
+	class KalturaBaseSyndicationFeedListResponse < KalturaListResponse
+		attr_accessor :objects
 
 	end
 
@@ -7208,6 +7344,11 @@ module Kaltura
 		end
 	end
 
+	class KalturaBatchJobListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
 	# A boolean representation to return an array of booleans
 	#  
 	class KalturaBooleanValue < KalturaValue
@@ -7345,6 +7486,11 @@ module Kaltura
 		def num_of_error_objects=(val)
 			@num_of_error_objects = val.to_i
 		end
+	end
+
+	class KalturaBulkUploadListResponse < KalturaListResponse
+		attr_accessor :objects
+
 	end
 
 	class KalturaBulkUploadResultCategory < KalturaBulkUploadResult
@@ -7510,107 +7656,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaCategoryBaseFilter < KalturaFilter
-		attr_accessor :id_equal
-		attr_accessor :id_in
-		attr_accessor :parent_id_equal
-		attr_accessor :parent_id_in
-		attr_accessor :depth_equal
-		attr_accessor :full_name_equal
-		attr_accessor :full_name_starts_with
-		attr_accessor :full_name_in
-		attr_accessor :full_ids_equal
-		attr_accessor :full_ids_starts_with
-		attr_accessor :full_ids_match_or
-		attr_accessor :created_at_greater_than_or_equal
-		attr_accessor :created_at_less_than_or_equal
-		attr_accessor :updated_at_greater_than_or_equal
-		attr_accessor :updated_at_less_than_or_equal
-		attr_accessor :tags_like
-		attr_accessor :tags_multi_like_or
-		attr_accessor :tags_multi_like_and
-		attr_accessor :appear_in_list_equal
-		attr_accessor :privacy_equal
-		attr_accessor :privacy_in
-		attr_accessor :inheritance_type_equal
-		attr_accessor :inheritance_type_in
-		attr_accessor :reference_id_equal
-		attr_accessor :reference_id_empty
-		attr_accessor :contribution_policy_equal
-		attr_accessor :members_count_greater_than_or_equal
-		attr_accessor :members_count_less_than_or_equal
-		attr_accessor :pending_members_count_greater_than_or_equal
-		attr_accessor :pending_members_count_less_than_or_equal
-		attr_accessor :privacy_context_equal
-		attr_accessor :status_equal
-		attr_accessor :status_in
-		attr_accessor :inherited_parent_id_equal
-		attr_accessor :inherited_parent_id_in
-		attr_accessor :partner_sort_value_greater_than_or_equal
-		attr_accessor :partner_sort_value_less_than_or_equal
-
-		def id_equal=(val)
-			@id_equal = val.to_i
-		end
-		def parent_id_equal=(val)
-			@parent_id_equal = val.to_i
-		end
-		def depth_equal=(val)
-			@depth_equal = val.to_i
-		end
-		def created_at_greater_than_or_equal=(val)
-			@created_at_greater_than_or_equal = val.to_i
-		end
-		def created_at_less_than_or_equal=(val)
-			@created_at_less_than_or_equal = val.to_i
-		end
-		def updated_at_greater_than_or_equal=(val)
-			@updated_at_greater_than_or_equal = val.to_i
-		end
-		def updated_at_less_than_or_equal=(val)
-			@updated_at_less_than_or_equal = val.to_i
-		end
-		def appear_in_list_equal=(val)
-			@appear_in_list_equal = val.to_i
-		end
-		def privacy_equal=(val)
-			@privacy_equal = val.to_i
-		end
-		def inheritance_type_equal=(val)
-			@inheritance_type_equal = val.to_i
-		end
-		def reference_id_empty=(val)
-			@reference_id_empty = val.to_i
-		end
-		def contribution_policy_equal=(val)
-			@contribution_policy_equal = val.to_i
-		end
-		def members_count_greater_than_or_equal=(val)
-			@members_count_greater_than_or_equal = val.to_i
-		end
-		def members_count_less_than_or_equal=(val)
-			@members_count_less_than_or_equal = val.to_i
-		end
-		def pending_members_count_greater_than_or_equal=(val)
-			@pending_members_count_greater_than_or_equal = val.to_i
-		end
-		def pending_members_count_less_than_or_equal=(val)
-			@pending_members_count_less_than_or_equal = val.to_i
-		end
-		def status_equal=(val)
-			@status_equal = val.to_i
-		end
-		def inherited_parent_id_equal=(val)
-			@inherited_parent_id_equal = val.to_i
-		end
-		def partner_sort_value_greater_than_or_equal=(val)
-			@partner_sort_value_greater_than_or_equal = val.to_i
-		end
-		def partner_sort_value_less_than_or_equal=(val)
-			@partner_sort_value_less_than_or_equal = val.to_i
-		end
-	end
-
 	class KalturaCategoryEntryAdvancedFilter < KalturaSearchItem
 		attr_accessor :categories_match_or
 		attr_accessor :category_entry_status_in
@@ -7622,35 +7667,20 @@ module Kaltura
 		end
 	end
 
-	class KalturaCategoryEntryBaseFilter < KalturaFilter
-		attr_accessor :category_id_equal
-		attr_accessor :category_id_in
-		attr_accessor :entry_id_equal
-		attr_accessor :entry_id_in
-		attr_accessor :created_at_greater_than_or_equal
-		attr_accessor :created_at_less_than_or_equal
-		attr_accessor :category_full_ids_starts_with
-		attr_accessor :status_equal
-		attr_accessor :status_in
+	class KalturaCategoryEntryListResponse < KalturaListResponse
+		attr_accessor :objects
 
-		def category_id_equal=(val)
-			@category_id_equal = val.to_i
-		end
-		def created_at_greater_than_or_equal=(val)
-			@created_at_greater_than_or_equal = val.to_i
-		end
-		def created_at_less_than_or_equal=(val)
-			@created_at_less_than_or_equal = val.to_i
-		end
-		def status_equal=(val)
-			@status_equal = val.to_i
-		end
 	end
 
 	class KalturaCategoryIdentifier < KalturaObjectIdentifier
 		# Identifier of the object
 		# 	 
 		attr_accessor :identifier
+
+	end
+
+	class KalturaCategoryListResponse < KalturaListResponse
+		attr_accessor :objects
 
 	end
 
@@ -7662,51 +7692,9 @@ module Kaltura
 
 	end
 
-	class KalturaCategoryUserBaseFilter < KalturaFilter
-		attr_accessor :category_id_equal
-		attr_accessor :category_id_in
-		attr_accessor :user_id_equal
-		attr_accessor :user_id_in
-		attr_accessor :permission_level_equal
-		attr_accessor :permission_level_in
-		attr_accessor :status_equal
-		attr_accessor :status_in
-		attr_accessor :created_at_greater_than_or_equal
-		attr_accessor :created_at_less_than_or_equal
-		attr_accessor :updated_at_greater_than_or_equal
-		attr_accessor :updated_at_less_than_or_equal
-		attr_accessor :update_method_equal
-		attr_accessor :update_method_in
-		attr_accessor :category_full_ids_starts_with
-		attr_accessor :category_full_ids_equal
-		attr_accessor :permission_names_match_and
-		attr_accessor :permission_names_match_or
-		attr_accessor :permission_names_not_contains
+	class KalturaCategoryUserListResponse < KalturaListResponse
+		attr_accessor :objects
 
-		def category_id_equal=(val)
-			@category_id_equal = val.to_i
-		end
-		def permission_level_equal=(val)
-			@permission_level_equal = val.to_i
-		end
-		def status_equal=(val)
-			@status_equal = val.to_i
-		end
-		def created_at_greater_than_or_equal=(val)
-			@created_at_greater_than_or_equal = val.to_i
-		end
-		def created_at_less_than_or_equal=(val)
-			@created_at_less_than_or_equal = val.to_i
-		end
-		def updated_at_greater_than_or_equal=(val)
-			@updated_at_greater_than_or_equal = val.to_i
-		end
-		def updated_at_less_than_or_equal=(val)
-			@updated_at_less_than_or_equal = val.to_i
-		end
-		def update_method_equal=(val)
-			@update_method_equal = val.to_i
-		end
 	end
 
 	# Clip operation attributes
@@ -7811,6 +7799,11 @@ module Kaltura
 		end
 	end
 
+	class KalturaControlPanelCommandListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
 	class KalturaConvartableJobData < KalturaJobData
 		attr_accessor :src_file_sync_local_path
 		# The translated path as used by the scheduler
@@ -7843,50 +7836,14 @@ module Kaltura
 		end
 	end
 
-	class KalturaConversionProfileAssetParamsBaseFilter < KalturaFilter
-		attr_accessor :conversion_profile_id_equal
-		attr_accessor :conversion_profile_id_in
-		attr_accessor :asset_params_id_equal
-		attr_accessor :asset_params_id_in
-		attr_accessor :ready_behavior_equal
-		attr_accessor :ready_behavior_in
-		attr_accessor :origin_equal
-		attr_accessor :origin_in
-		attr_accessor :system_name_equal
-		attr_accessor :system_name_in
+	class KalturaConversionProfileAssetParamsListResponse < KalturaListResponse
+		attr_accessor :objects
 
-		def conversion_profile_id_equal=(val)
-			@conversion_profile_id_equal = val.to_i
-		end
-		def asset_params_id_equal=(val)
-			@asset_params_id_equal = val.to_i
-		end
-		def ready_behavior_equal=(val)
-			@ready_behavior_equal = val.to_i
-		end
-		def origin_equal=(val)
-			@origin_equal = val.to_i
-		end
 	end
 
-	class KalturaConversionProfileBaseFilter < KalturaFilter
-		attr_accessor :id_equal
-		attr_accessor :id_in
-		attr_accessor :status_equal
-		attr_accessor :status_in
-		attr_accessor :type_equal
-		attr_accessor :type_in
-		attr_accessor :name_equal
-		attr_accessor :system_name_equal
-		attr_accessor :system_name_in
-		attr_accessor :tags_multi_like_or
-		attr_accessor :tags_multi_like_and
-		attr_accessor :default_entry_id_equal
-		attr_accessor :default_entry_id_in
+	class KalturaConversionProfileListResponse < KalturaListResponse
+		attr_accessor :objects
 
-		def id_equal=(val)
-			@id_equal = val.to_i
-		end
 	end
 
 	class KalturaConvertLiveSegmentJobData < KalturaJobData
@@ -7965,6 +7922,11 @@ module Kaltura
 		def country_restriction_type=(val)
 			@country_restriction_type = val.to_i
 		end
+	end
+
+	class KalturaDataListResponse < KalturaListResponse
+		attr_accessor :objects
+
 	end
 
 	class KalturaDeleteFileJobData < KalturaJobData
@@ -8079,6 +8041,11 @@ module Kaltura
 
 	end
 
+	class KalturaDeliveryProfileListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
 	class KalturaDeliveryProfileLiveAppleHttp < KalturaDeliveryProfile
 		attr_accessor :disable_extra_attributes
 		attr_accessor :force_proxy
@@ -8104,6 +8071,38 @@ module Kaltura
 		end
 	end
 
+	class KalturaDetachedResponseProfileFilter < KalturaFilter
+		attr_accessor :id_equal
+		attr_accessor :id_in
+		attr_accessor :system_name_equal
+		attr_accessor :system_name_in
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :created_at_less_than_or_equal
+		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
+		attr_accessor :status_equal
+		attr_accessor :status_in
+
+		def id_equal=(val)
+			@id_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
+		def updated_at_greater_than_or_equal=(val)
+			@updated_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
+		end
+		def status_equal=(val)
+			@status_equal = val.to_i
+		end
+	end
+
 	class KalturaDirectoryRestriction < KalturaBaseRestriction
 		# Kaltura directory restriction type
 		# 	 
@@ -8111,6 +8110,53 @@ module Kaltura
 
 		def directory_restriction_type=(val)
 			@directory_restriction_type = val.to_i
+		end
+	end
+
+	class KalturaCategoryUserBaseFilter < KalturaRelatedFilter
+		attr_accessor :category_id_equal
+		attr_accessor :category_id_in
+		attr_accessor :user_id_equal
+		attr_accessor :user_id_in
+		attr_accessor :permission_level_equal
+		attr_accessor :permission_level_in
+		attr_accessor :status_equal
+		attr_accessor :status_in
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :created_at_less_than_or_equal
+		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
+		attr_accessor :update_method_equal
+		attr_accessor :update_method_in
+		attr_accessor :category_full_ids_starts_with
+		attr_accessor :category_full_ids_equal
+		attr_accessor :permission_names_match_and
+		attr_accessor :permission_names_match_or
+		attr_accessor :permission_names_not_contains
+
+		def category_id_equal=(val)
+			@category_id_equal = val.to_i
+		end
+		def permission_level_equal=(val)
+			@permission_level_equal = val.to_i
+		end
+		def status_equal=(val)
+			@status_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
+		def updated_at_greater_than_or_equal=(val)
+			@updated_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
+		end
+		def update_method_equal=(val)
+			@update_method_equal = val.to_i
 		end
 	end
 
@@ -8130,7 +8176,7 @@ module Kaltura
 		end
 	end
 
-	class KalturaUserBaseFilter < KalturaFilter
+	class KalturaUserBaseFilter < KalturaRelatedFilter
 		attr_accessor :partner_id_equal
 		attr_accessor :type_equal
 		attr_accessor :type_in
@@ -8308,41 +8354,32 @@ module Kaltura
 
 	end
 
-	class KalturaFileAssetBaseFilter < KalturaFilter
-		attr_accessor :id_equal
-		attr_accessor :id_in
-		attr_accessor :partner_id_equal
-		attr_accessor :file_asset_object_type_equal
-		attr_accessor :object_id_equal
-		attr_accessor :object_id_in
-		attr_accessor :created_at_greater_than_or_equal
-		attr_accessor :created_at_less_than_or_equal
-		attr_accessor :updated_at_greater_than_or_equal
-		attr_accessor :updated_at_less_than_or_equal
-		attr_accessor :status_equal
-		attr_accessor :status_in
+	class KalturaFeatureStatusListResponse < KalturaListResponse
+		attr_accessor :objects
 
-		def id_equal=(val)
-			@id_equal = val.to_i
-		end
-		def partner_id_equal=(val)
-			@partner_id_equal = val.to_i
-		end
-		def created_at_greater_than_or_equal=(val)
-			@created_at_greater_than_or_equal = val.to_i
-		end
-		def created_at_less_than_or_equal=(val)
-			@created_at_less_than_or_equal = val.to_i
-		end
-		def updated_at_greater_than_or_equal=(val)
-			@updated_at_greater_than_or_equal = val.to_i
-		end
-		def updated_at_less_than_or_equal=(val)
-			@updated_at_less_than_or_equal = val.to_i
-		end
+	end
+
+	class KalturaFileAssetListResponse < KalturaListResponse
+		attr_accessor :objects
+
 	end
 
 	class KalturaFlattenJobData < KalturaJobData
+
+	end
+
+	class KalturaFlavorAssetListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
+	class KalturaFlavorParamsListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
+	class KalturaFlavorParamsOutputListResponse < KalturaListResponse
+		attr_accessor :objects
 
 	end
 
@@ -8361,33 +8398,9 @@ module Kaltura
 
 	end
 
-	class KalturaGroupUserBaseFilter < KalturaFilter
-		attr_accessor :user_id_equal
-		attr_accessor :user_id_in
-		attr_accessor :group_id_equal
-		attr_accessor :group_id_in
-		attr_accessor :status_equal
-		attr_accessor :status_in
-		attr_accessor :created_at_greater_than_or_equal
-		attr_accessor :created_at_less_than_or_equal
-		attr_accessor :updated_at_greater_than_or_equal
-		attr_accessor :updated_at_less_than_or_equal
+	class KalturaGroupUserListResponse < KalturaListResponse
+		attr_accessor :objects
 
-		def status_equal=(val)
-			@status_equal = val.to_i
-		end
-		def created_at_greater_than_or_equal=(val)
-			@created_at_greater_than_or_equal = val.to_i
-		end
-		def created_at_less_than_or_equal=(val)
-			@created_at_less_than_or_equal = val.to_i
-		end
-		def updated_at_greater_than_or_equal=(val)
-			@updated_at_greater_than_or_equal = val.to_i
-		end
-		def updated_at_less_than_or_equal=(val)
-			@updated_at_less_than_or_equal = val.to_i
-		end
 	end
 
 	class KalturaITunesSyndicationFeed < KalturaBaseSyndicationFeed
@@ -8485,36 +8498,14 @@ module Kaltura
 		end
 	end
 
-	class KalturaLiveChannelSegmentBaseFilter < KalturaFilter
-		attr_accessor :created_at_greater_than_or_equal
-		attr_accessor :created_at_less_than_or_equal
-		attr_accessor :updated_at_greater_than_or_equal
-		attr_accessor :updated_at_less_than_or_equal
-		attr_accessor :status_equal
-		attr_accessor :status_in
-		attr_accessor :channel_id_equal
-		attr_accessor :channel_id_in
-		attr_accessor :start_time_greater_than_or_equal
-		attr_accessor :start_time_less_than_or_equal
+	class KalturaLiveChannelListResponse < KalturaListResponse
+		attr_accessor :objects
 
-		def created_at_greater_than_or_equal=(val)
-			@created_at_greater_than_or_equal = val.to_i
-		end
-		def created_at_less_than_or_equal=(val)
-			@created_at_less_than_or_equal = val.to_i
-		end
-		def updated_at_greater_than_or_equal=(val)
-			@updated_at_greater_than_or_equal = val.to_i
-		end
-		def updated_at_less_than_or_equal=(val)
-			@updated_at_less_than_or_equal = val.to_i
-		end
-		def start_time_greater_than_or_equal=(val)
-			@start_time_greater_than_or_equal = val.to_f
-		end
-		def start_time_less_than_or_equal=(val)
-			@start_time_less_than_or_equal = val.to_f
-		end
+	end
+
+	class KalturaLiveChannelSegmentListResponse < KalturaListResponse
+		attr_accessor :objects
+
 	end
 
 	class KalturaLiveReportExportJobData < KalturaJobData
@@ -8530,6 +8521,16 @@ module Kaltura
 		def time_zone_offset=(val)
 			@time_zone_offset = val.to_i
 		end
+	end
+
+	class KalturaLiveStatsListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
+	class KalturaLiveStreamListResponse < KalturaListResponse
+		attr_accessor :objects
+
 	end
 
 	# A representation of an RTMP live stream configuration
@@ -8592,6 +8593,16 @@ module Kaltura
 
 	end
 
+	class KalturaMediaInfoListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
+	class KalturaMediaListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
 	class KalturaMediaServerBaseFilter < KalturaFilter
 		attr_accessor :created_at_greater_than_or_equal
 		attr_accessor :created_at_less_than_or_equal
@@ -8610,6 +8621,16 @@ module Kaltura
 		def updated_at_less_than_or_equal=(val)
 			@updated_at_less_than_or_equal = val.to_i
 		end
+	end
+
+	class KalturaMixListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
+	class KalturaModerationFlagListResponse < KalturaListResponse
+		attr_accessor :objects
+
 	end
 
 	class KalturaMoveCategoryEntriesJobData < KalturaJobData
@@ -8689,6 +8710,11 @@ module Kaltura
 		end
 	end
 
+	class KalturaObjectListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
 	class KalturaOrCondition < KalturaCondition
 		attr_accessor :conditions
 
@@ -8730,86 +8756,24 @@ module Kaltura
 		end
 	end
 
-	class KalturaPermissionBaseFilter < KalturaFilter
-		attr_accessor :id_equal
-		attr_accessor :id_in
-		attr_accessor :type_equal
-		attr_accessor :type_in
-		attr_accessor :name_equal
-		attr_accessor :name_in
-		attr_accessor :friendly_name_like
-		attr_accessor :description_like
-		attr_accessor :status_equal
-		attr_accessor :status_in
-		attr_accessor :partner_id_equal
-		attr_accessor :partner_id_in
-		attr_accessor :depends_on_permission_names_multi_like_or
-		attr_accessor :depends_on_permission_names_multi_like_and
-		attr_accessor :tags_multi_like_or
-		attr_accessor :tags_multi_like_and
-		attr_accessor :created_at_greater_than_or_equal
-		attr_accessor :created_at_less_than_or_equal
-		attr_accessor :updated_at_greater_than_or_equal
-		attr_accessor :updated_at_less_than_or_equal
+	class KalturaPartnerListResponse < KalturaListResponse
+		attr_accessor :objects
 
-		def id_equal=(val)
-			@id_equal = val.to_i
-		end
-		def type_equal=(val)
-			@type_equal = val.to_i
-		end
-		def status_equal=(val)
-			@status_equal = val.to_i
-		end
-		def partner_id_equal=(val)
-			@partner_id_equal = val.to_i
-		end
-		def created_at_greater_than_or_equal=(val)
-			@created_at_greater_than_or_equal = val.to_i
-		end
-		def created_at_less_than_or_equal=(val)
-			@created_at_less_than_or_equal = val.to_i
-		end
-		def updated_at_greater_than_or_equal=(val)
-			@updated_at_greater_than_or_equal = val.to_i
-		end
-		def updated_at_less_than_or_equal=(val)
-			@updated_at_less_than_or_equal = val.to_i
-		end
 	end
 
-	class KalturaPermissionItemBaseFilter < KalturaFilter
-		attr_accessor :id_equal
-		attr_accessor :id_in
-		attr_accessor :type_equal
-		attr_accessor :type_in
-		attr_accessor :partner_id_equal
-		attr_accessor :partner_id_in
-		attr_accessor :tags_multi_like_or
-		attr_accessor :tags_multi_like_and
-		attr_accessor :created_at_greater_than_or_equal
-		attr_accessor :created_at_less_than_or_equal
-		attr_accessor :updated_at_greater_than_or_equal
-		attr_accessor :updated_at_less_than_or_equal
+	class KalturaPermissionItemListResponse < KalturaListResponse
+		attr_accessor :objects
 
-		def id_equal=(val)
-			@id_equal = val.to_i
-		end
-		def partner_id_equal=(val)
-			@partner_id_equal = val.to_i
-		end
-		def created_at_greater_than_or_equal=(val)
-			@created_at_greater_than_or_equal = val.to_i
-		end
-		def created_at_less_than_or_equal=(val)
-			@created_at_less_than_or_equal = val.to_i
-		end
-		def updated_at_greater_than_or_equal=(val)
-			@updated_at_greater_than_or_equal = val.to_i
-		end
-		def updated_at_less_than_or_equal=(val)
-			@updated_at_less_than_or_equal = val.to_i
-		end
+	end
+
+	class KalturaPermissionListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
+	class KalturaPlaylistListResponse < KalturaListResponse
+		attr_accessor :objects
+
 	end
 
 	class KalturaProvisionJobData < KalturaJobData
@@ -8833,6 +8797,11 @@ module Kaltura
 		def media_type=(val)
 			@media_type = val.to_i
 		end
+	end
+
+	class KalturaRemotePathListResponse < KalturaListResponse
+		attr_accessor :objects
+
 	end
 
 	class KalturaReportBaseFilter < KalturaFilter
@@ -8880,6 +8849,39 @@ module Kaltura
 		def time_zone_offset=(val)
 			@time_zone_offset = val.to_i
 		end
+	end
+
+	class KalturaReportListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
+	class KalturaResponseProfileHolder < KalturaBaseResponseProfile
+		# Auto generated numeric identifier
+		# 	 
+		attr_accessor :id
+		# Unique system name
+		# 	 
+		attr_accessor :system_name
+
+		def id=(val)
+			@id = val.to_i
+		end
+	end
+
+	class KalturaResponseProfileListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
+	class KalturaSchedulerListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
+	class KalturaSchedulerWorkerListResponse < KalturaListResponse
+		attr_accessor :objects
+
 	end
 
 	class KalturaSearchCondition < KalturaSearchItem
@@ -8974,6 +8976,11 @@ module Kaltura
 		end
 	end
 
+	class KalturaStorageProfileListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
 	class KalturaSyncCategoryPrivacyContextJobData < KalturaJobData
 		# category id
 		# 	 
@@ -8996,6 +9003,21 @@ module Kaltura
 		def last_updated_category_created_at=(val)
 			@last_updated_category_created_at = val.to_i
 		end
+	end
+
+	class KalturaThumbAssetListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
+	class KalturaThumbParamsListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
+	class KalturaThumbParamsOutputListResponse < KalturaListResponse
+		attr_accessor :objects
+
 	end
 
 	class KalturaTubeMogulSyndicationFeed < KalturaBaseSyndicationFeed
@@ -9051,6 +9073,11 @@ module Kaltura
 		end
 	end
 
+	class KalturaUiConfListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
 	class KalturaUploadTokenBaseFilter < KalturaFilter
 		attr_accessor :id_equal
 		attr_accessor :id_in
@@ -9066,6 +9093,11 @@ module Kaltura
 		def file_size_equal=(val)
 			@file_size_equal = val.to_f
 		end
+	end
+
+	class KalturaUploadTokenListResponse < KalturaListResponse
+		attr_accessor :objects
+
 	end
 
 	class KalturaUrlRecognizerAkamaiG2O < KalturaUrlRecognizer
@@ -9182,57 +9214,25 @@ module Kaltura
 		end
 	end
 
-	class KalturaUserLoginDataBaseFilter < KalturaFilter
-		attr_accessor :login_email_equal
+	class KalturaUserListResponse < KalturaListResponse
+		attr_accessor :objects
 
 	end
 
-	class KalturaUserRoleBaseFilter < KalturaFilter
-		attr_accessor :id_equal
-		attr_accessor :id_in
-		attr_accessor :name_equal
-		attr_accessor :name_in
-		attr_accessor :system_name_equal
-		attr_accessor :system_name_in
-		attr_accessor :description_like
-		attr_accessor :status_equal
-		attr_accessor :status_in
-		attr_accessor :partner_id_equal
-		attr_accessor :partner_id_in
-		attr_accessor :tags_multi_like_or
-		attr_accessor :tags_multi_like_and
-		attr_accessor :created_at_greater_than_or_equal
-		attr_accessor :created_at_less_than_or_equal
-		attr_accessor :updated_at_greater_than_or_equal
-		attr_accessor :updated_at_less_than_or_equal
+	class KalturaUserLoginDataListResponse < KalturaListResponse
+		attr_accessor :objects
 
-		def id_equal=(val)
-			@id_equal = val.to_i
-		end
-		def status_equal=(val)
-			@status_equal = val.to_i
-		end
-		def partner_id_equal=(val)
-			@partner_id_equal = val.to_i
-		end
-		def created_at_greater_than_or_equal=(val)
-			@created_at_greater_than_or_equal = val.to_i
-		end
-		def created_at_less_than_or_equal=(val)
-			@created_at_less_than_or_equal = val.to_i
-		end
-		def updated_at_greater_than_or_equal=(val)
-			@updated_at_greater_than_or_equal = val.to_i
-		end
-		def updated_at_less_than_or_equal=(val)
-			@updated_at_less_than_or_equal = val.to_i
-		end
 	end
 
 	class KalturaUserRoleCondition < KalturaCondition
 		# Comma separated list of role ids
 		# 	 
 		attr_accessor :role_ids
+
+	end
+
+	class KalturaUserRoleListResponse < KalturaListResponse
+		attr_accessor :objects
 
 	end
 
@@ -9270,6 +9270,11 @@ module Kaltura
 		end
 	end
 
+	class KalturaWidgetListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
 	class KalturaYahooSyndicationFeed < KalturaBaseSyndicationFeed
 		attr_accessor :category
 		attr_accessor :adult_content
@@ -9282,12 +9287,50 @@ module Kaltura
 
 	end
 
-	class KalturaAccessControlFilter < KalturaAccessControlBaseFilter
+	class KalturaAccessControlBaseFilter < KalturaRelatedFilter
+		attr_accessor :id_equal
+		attr_accessor :id_in
+		attr_accessor :system_name_equal
+		attr_accessor :system_name_in
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :created_at_less_than_or_equal
 
+		def id_equal=(val)
+			@id_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
 	end
 
-	class KalturaAccessControlProfileFilter < KalturaAccessControlProfileBaseFilter
+	class KalturaAccessControlProfileBaseFilter < KalturaRelatedFilter
+		attr_accessor :id_equal
+		attr_accessor :id_in
+		attr_accessor :system_name_equal
+		attr_accessor :system_name_in
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :created_at_less_than_or_equal
+		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
 
+		def id_equal=(val)
+			@id_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
+		def updated_at_greater_than_or_equal=(val)
+			@updated_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
+		end
 	end
 
 	class KalturaAkamaiProvisionJobData < KalturaProvisionJobData
@@ -9323,12 +9366,63 @@ module Kaltura
 		end
 	end
 
-	class KalturaAssetFilter < KalturaAssetBaseFilter
+	class KalturaAssetBaseFilter < KalturaRelatedFilter
+		attr_accessor :id_equal
+		attr_accessor :id_in
+		attr_accessor :entry_id_equal
+		attr_accessor :entry_id_in
+		attr_accessor :partner_id_equal
+		attr_accessor :partner_id_in
+		attr_accessor :size_greater_than_or_equal
+		attr_accessor :size_less_than_or_equal
+		attr_accessor :tags_like
+		attr_accessor :tags_multi_like_or
+		attr_accessor :tags_multi_like_and
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :created_at_less_than_or_equal
+		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
+		attr_accessor :deleted_at_greater_than_or_equal
+		attr_accessor :deleted_at_less_than_or_equal
 
+		def partner_id_equal=(val)
+			@partner_id_equal = val.to_i
+		end
+		def size_greater_than_or_equal=(val)
+			@size_greater_than_or_equal = val.to_i
+		end
+		def size_less_than_or_equal=(val)
+			@size_less_than_or_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
+		def updated_at_greater_than_or_equal=(val)
+			@updated_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
+		end
+		def deleted_at_greater_than_or_equal=(val)
+			@deleted_at_greater_than_or_equal = val.to_i
+		end
+		def deleted_at_less_than_or_equal=(val)
+			@deleted_at_less_than_or_equal = val.to_i
+		end
 	end
 
-	class KalturaAssetParamsFilter < KalturaAssetParamsBaseFilter
+	class KalturaAssetParamsBaseFilter < KalturaRelatedFilter
+		attr_accessor :system_name_equal
+		attr_accessor :system_name_in
+		attr_accessor :is_system_default_equal
+		attr_accessor :tags_equal
 
+		def is_system_default_equal=(val)
+			@is_system_default_equal = val.to_i
+		end
 	end
 
 	# Used to ingest media that is already ingested to Kaltura system as a different flavor asset in the past, the new created flavor asset will be ready immediately using a file sync of link type that will point to the existing file sync of the existing flavor asset.
@@ -9352,36 +9446,180 @@ module Kaltura
 
 	end
 
-	class KalturaCategoryEntryFilter < KalturaCategoryEntryBaseFilter
+	class KalturaCategoryBaseFilter < KalturaRelatedFilter
+		attr_accessor :id_equal
+		attr_accessor :id_in
+		attr_accessor :parent_id_equal
+		attr_accessor :parent_id_in
+		attr_accessor :depth_equal
+		attr_accessor :full_name_equal
+		attr_accessor :full_name_starts_with
+		attr_accessor :full_name_in
+		attr_accessor :full_ids_equal
+		attr_accessor :full_ids_starts_with
+		attr_accessor :full_ids_match_or
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :created_at_less_than_or_equal
+		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
+		attr_accessor :tags_like
+		attr_accessor :tags_multi_like_or
+		attr_accessor :tags_multi_like_and
+		attr_accessor :appear_in_list_equal
+		attr_accessor :privacy_equal
+		attr_accessor :privacy_in
+		attr_accessor :inheritance_type_equal
+		attr_accessor :inheritance_type_in
+		attr_accessor :reference_id_equal
+		attr_accessor :reference_id_empty
+		attr_accessor :contribution_policy_equal
+		attr_accessor :members_count_greater_than_or_equal
+		attr_accessor :members_count_less_than_or_equal
+		attr_accessor :pending_members_count_greater_than_or_equal
+		attr_accessor :pending_members_count_less_than_or_equal
+		attr_accessor :privacy_context_equal
+		attr_accessor :status_equal
+		attr_accessor :status_in
+		attr_accessor :inherited_parent_id_equal
+		attr_accessor :inherited_parent_id_in
+		attr_accessor :partner_sort_value_greater_than_or_equal
+		attr_accessor :partner_sort_value_less_than_or_equal
 
+		def id_equal=(val)
+			@id_equal = val.to_i
+		end
+		def parent_id_equal=(val)
+			@parent_id_equal = val.to_i
+		end
+		def depth_equal=(val)
+			@depth_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
+		def updated_at_greater_than_or_equal=(val)
+			@updated_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
+		end
+		def appear_in_list_equal=(val)
+			@appear_in_list_equal = val.to_i
+		end
+		def privacy_equal=(val)
+			@privacy_equal = val.to_i
+		end
+		def inheritance_type_equal=(val)
+			@inheritance_type_equal = val.to_i
+		end
+		def reference_id_empty=(val)
+			@reference_id_empty = val.to_i
+		end
+		def contribution_policy_equal=(val)
+			@contribution_policy_equal = val.to_i
+		end
+		def members_count_greater_than_or_equal=(val)
+			@members_count_greater_than_or_equal = val.to_i
+		end
+		def members_count_less_than_or_equal=(val)
+			@members_count_less_than_or_equal = val.to_i
+		end
+		def pending_members_count_greater_than_or_equal=(val)
+			@pending_members_count_greater_than_or_equal = val.to_i
+		end
+		def pending_members_count_less_than_or_equal=(val)
+			@pending_members_count_less_than_or_equal = val.to_i
+		end
+		def status_equal=(val)
+			@status_equal = val.to_i
+		end
+		def inherited_parent_id_equal=(val)
+			@inherited_parent_id_equal = val.to_i
+		end
+		def partner_sort_value_greater_than_or_equal=(val)
+			@partner_sort_value_greater_than_or_equal = val.to_i
+		end
+		def partner_sort_value_less_than_or_equal=(val)
+			@partner_sort_value_less_than_or_equal = val.to_i
+		end
 	end
 
-	class KalturaCategoryFilter < KalturaCategoryBaseFilter
-		attr_accessor :free_text
-		attr_accessor :members_in
-		attr_accessor :name_or_reference_id_starts_with
-		attr_accessor :manager_equal
-		attr_accessor :member_equal
-		attr_accessor :full_name_starts_with_in
-		# not includes the category itself (only sub categories)
-		# 	 
-		attr_accessor :ancestor_id_in
-		attr_accessor :id_or_inherited_parent_id_in
+	class KalturaCategoryEntryBaseFilter < KalturaRelatedFilter
+		attr_accessor :category_id_equal
+		attr_accessor :category_id_in
+		attr_accessor :entry_id_equal
+		attr_accessor :entry_id_in
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :created_at_less_than_or_equal
+		attr_accessor :category_full_ids_starts_with
+		attr_accessor :status_equal
+		attr_accessor :status_in
 
+		def category_id_equal=(val)
+			@category_id_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
+		def status_equal=(val)
+			@status_equal = val.to_i
+		end
 	end
 
 	class KalturaControlPanelCommandFilter < KalturaControlPanelCommandBaseFilter
 
 	end
 
-	class KalturaConversionProfileFilter < KalturaConversionProfileBaseFilter
+	class KalturaConversionProfileAssetParamsBaseFilter < KalturaRelatedFilter
+		attr_accessor :conversion_profile_id_equal
+		attr_accessor :conversion_profile_id_in
+		attr_accessor :asset_params_id_equal
+		attr_accessor :asset_params_id_in
+		attr_accessor :ready_behavior_equal
+		attr_accessor :ready_behavior_in
+		attr_accessor :origin_equal
+		attr_accessor :origin_in
+		attr_accessor :system_name_equal
+		attr_accessor :system_name_in
 
+		def conversion_profile_id_equal=(val)
+			@conversion_profile_id_equal = val.to_i
+		end
+		def asset_params_id_equal=(val)
+			@asset_params_id_equal = val.to_i
+		end
+		def ready_behavior_equal=(val)
+			@ready_behavior_equal = val.to_i
+		end
+		def origin_equal=(val)
+			@origin_equal = val.to_i
+		end
 	end
 
-	class KalturaConversionProfileAssetParamsFilter < KalturaConversionProfileAssetParamsBaseFilter
-		attr_accessor :conversion_profile_id_filter
-		attr_accessor :asset_params_id_filter
+	class KalturaConversionProfileBaseFilter < KalturaRelatedFilter
+		attr_accessor :id_equal
+		attr_accessor :id_in
+		attr_accessor :status_equal
+		attr_accessor :status_in
+		attr_accessor :type_equal
+		attr_accessor :type_in
+		attr_accessor :name_equal
+		attr_accessor :system_name_equal
+		attr_accessor :system_name_in
+		attr_accessor :tags_multi_like_or
+		attr_accessor :tags_multi_like_and
+		attr_accessor :default_entry_id_equal
+		attr_accessor :default_entry_id_in
 
+		def id_equal=(val)
+			@id_equal = val.to_i
+		end
 	end
 
 	class KalturaConvertCollectionJobData < KalturaConvartableJobData
@@ -9486,8 +9724,38 @@ module Kaltura
 
 	end
 
-	class KalturaFileAssetFilter < KalturaFileAssetBaseFilter
+	class KalturaFileAssetBaseFilter < KalturaRelatedFilter
+		attr_accessor :id_equal
+		attr_accessor :id_in
+		attr_accessor :partner_id_equal
+		attr_accessor :file_asset_object_type_equal
+		attr_accessor :object_id_equal
+		attr_accessor :object_id_in
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :created_at_less_than_or_equal
+		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
+		attr_accessor :status_equal
+		attr_accessor :status_in
 
+		def id_equal=(val)
+			@id_equal = val.to_i
+		end
+		def partner_id_equal=(val)
+			@partner_id_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
+		def updated_at_greater_than_or_equal=(val)
+			@updated_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
+		end
 	end
 
 	# Used to ingest media that is already ingested to Kaltura system as a different file in the past, the new created flavor asset will be ready immediately using a file sync of link type that will point to the existing file sync.
@@ -9533,8 +9801,33 @@ module Kaltura
 
 	end
 
-	class KalturaGroupUserFilter < KalturaGroupUserBaseFilter
+	class KalturaGroupUserBaseFilter < KalturaRelatedFilter
+		attr_accessor :user_id_equal
+		attr_accessor :user_id_in
+		attr_accessor :group_id_equal
+		attr_accessor :group_id_in
+		attr_accessor :status_equal
+		attr_accessor :status_in
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :created_at_less_than_or_equal
+		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
 
+		def status_equal=(val)
+			@status_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
+		def updated_at_greater_than_or_equal=(val)
+			@updated_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
+		end
 	end
 
 	class KalturaIpAddressCondition < KalturaMatchCondition
@@ -9550,8 +9843,36 @@ module Kaltura
 		end
 	end
 
-	class KalturaLiveChannelSegmentFilter < KalturaLiveChannelSegmentBaseFilter
+	class KalturaLiveChannelSegmentBaseFilter < KalturaRelatedFilter
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :created_at_less_than_or_equal
+		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
+		attr_accessor :status_equal
+		attr_accessor :status_in
+		attr_accessor :channel_id_equal
+		attr_accessor :channel_id_in
+		attr_accessor :start_time_greater_than_or_equal
+		attr_accessor :start_time_less_than_or_equal
 
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
+		def updated_at_greater_than_or_equal=(val)
+			@updated_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
+		end
+		def start_time_greater_than_or_equal=(val)
+			@start_time_greater_than_or_equal = val.to_f
+		end
+		def start_time_less_than_or_equal=(val)
+			@start_time_less_than_or_equal = val.to_f
+		end
 	end
 
 	class KalturaLiveParams < KalturaFlavorParams
@@ -9566,10 +9887,6 @@ module Kaltura
 	end
 
 	class KalturaMediaInfoFilter < KalturaMediaInfoBaseFilter
-
-	end
-
-	class KalturaMediaServerFilter < KalturaMediaServerBaseFilter
 
 	end
 
@@ -9593,12 +9910,86 @@ module Kaltura
 
 	end
 
-	class KalturaPermissionFilter < KalturaPermissionBaseFilter
+	class KalturaPermissionBaseFilter < KalturaRelatedFilter
+		attr_accessor :id_equal
+		attr_accessor :id_in
+		attr_accessor :type_equal
+		attr_accessor :type_in
+		attr_accessor :name_equal
+		attr_accessor :name_in
+		attr_accessor :friendly_name_like
+		attr_accessor :description_like
+		attr_accessor :status_equal
+		attr_accessor :status_in
+		attr_accessor :partner_id_equal
+		attr_accessor :partner_id_in
+		attr_accessor :depends_on_permission_names_multi_like_or
+		attr_accessor :depends_on_permission_names_multi_like_and
+		attr_accessor :tags_multi_like_or
+		attr_accessor :tags_multi_like_and
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :created_at_less_than_or_equal
+		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
 
+		def id_equal=(val)
+			@id_equal = val.to_i
+		end
+		def type_equal=(val)
+			@type_equal = val.to_i
+		end
+		def status_equal=(val)
+			@status_equal = val.to_i
+		end
+		def partner_id_equal=(val)
+			@partner_id_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
+		def updated_at_greater_than_or_equal=(val)
+			@updated_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
+		end
 	end
 
-	class KalturaPermissionItemFilter < KalturaPermissionItemBaseFilter
+	class KalturaPermissionItemBaseFilter < KalturaRelatedFilter
+		attr_accessor :id_equal
+		attr_accessor :id_in
+		attr_accessor :type_equal
+		attr_accessor :type_in
+		attr_accessor :partner_id_equal
+		attr_accessor :partner_id_in
+		attr_accessor :tags_multi_like_or
+		attr_accessor :tags_multi_like_and
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :created_at_less_than_or_equal
+		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
 
+		def id_equal=(val)
+			@id_equal = val.to_i
+		end
+		def partner_id_equal=(val)
+			@partner_id_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
+		def updated_at_greater_than_or_equal=(val)
+			@updated_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
+		end
 	end
 
 	class KalturaPostConvertJobData < KalturaConvartableJobData
@@ -9661,6 +10052,10 @@ module Kaltura
 
 	end
 
+	class KalturaResponseProfileFilter < KalturaDetachedResponseProfileFilter
+
+	end
+
 	class KalturaSearchComparableCondition < KalturaSearchCondition
 		attr_accessor :comparison
 
@@ -9714,19 +10109,62 @@ module Kaltura
 
 	end
 
-	class KalturaUserLoginDataFilter < KalturaUserLoginDataBaseFilter
+	class KalturaUserLoginDataBaseFilter < KalturaRelatedFilter
+		attr_accessor :login_email_equal
 
 	end
 
-	class KalturaUserRoleFilter < KalturaUserRoleBaseFilter
+	class KalturaUserRoleBaseFilter < KalturaRelatedFilter
+		attr_accessor :id_equal
+		attr_accessor :id_in
+		attr_accessor :name_equal
+		attr_accessor :name_in
+		attr_accessor :system_name_equal
+		attr_accessor :system_name_in
+		attr_accessor :description_like
+		attr_accessor :status_equal
+		attr_accessor :status_in
+		attr_accessor :partner_id_equal
+		attr_accessor :partner_id_in
+		attr_accessor :tags_multi_like_or
+		attr_accessor :tags_multi_like_and
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :created_at_less_than_or_equal
+		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
 
+		def id_equal=(val)
+			@id_equal = val.to_i
+		end
+		def status_equal=(val)
+			@status_equal = val.to_i
+		end
+		def partner_id_equal=(val)
+			@partner_id_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
+		def updated_at_greater_than_or_equal=(val)
+			@updated_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
+		end
 	end
 
 	class KalturaWidgetFilter < KalturaWidgetBaseFilter
 
 	end
 
-	class KalturaAdminUserBaseFilter < KalturaUserFilter
+	class KalturaAccessControlFilter < KalturaAccessControlBaseFilter
+
+	end
+
+	class KalturaAccessControlProfileFilter < KalturaAccessControlProfileBaseFilter
 
 	end
 
@@ -9739,20 +10177,44 @@ module Kaltura
 
 	end
 
-	class KalturaApiActionPermissionItemBaseFilter < KalturaPermissionItemFilter
+	class KalturaAssetFilter < KalturaAssetBaseFilter
 
 	end
 
-	class KalturaApiParameterPermissionItemBaseFilter < KalturaPermissionItemFilter
-
-	end
-
-	class KalturaAssetParamsOutputBaseFilter < KalturaAssetParamsFilter
+	class KalturaAssetParamsFilter < KalturaAssetParamsBaseFilter
 
 	end
 
 	class KalturaBatchJobFilterExt < KalturaBatchJobFilter
 		attr_accessor :job_type_and_sub_type_in
+
+	end
+
+	class KalturaCategoryEntryFilter < KalturaCategoryEntryBaseFilter
+
+	end
+
+	class KalturaCategoryFilter < KalturaCategoryBaseFilter
+		attr_accessor :free_text
+		attr_accessor :members_in
+		attr_accessor :name_or_reference_id_starts_with
+		attr_accessor :manager_equal
+		attr_accessor :member_equal
+		attr_accessor :full_name_starts_with_in
+		# not includes the category itself (only sub categories)
+		# 	 
+		attr_accessor :ancestor_id_in
+		attr_accessor :id_or_inherited_parent_id_in
+
+	end
+
+	class KalturaConversionProfileFilter < KalturaConversionProfileBaseFilter
+
+	end
+
+	class KalturaConversionProfileAssetParamsFilter < KalturaConversionProfileAssetParamsBaseFilter
+		attr_accessor :conversion_profile_id_filter
+		attr_accessor :asset_params_id_filter
 
 	end
 
@@ -9771,10 +10233,6 @@ module Kaltura
 		# The ip geo coder engine to be used
 		# 	 
 		attr_accessor :geo_coder_type
-
-	end
-
-	class KalturaDataEntryBaseFilter < KalturaBaseEntryFilter
 
 	end
 
@@ -9832,23 +10290,7 @@ module Kaltura
 
 	end
 
-	class KalturaFlavorAssetBaseFilter < KalturaAssetFilter
-		attr_accessor :flavor_params_id_equal
-		attr_accessor :flavor_params_id_in
-		attr_accessor :status_equal
-		attr_accessor :status_in
-		attr_accessor :status_not_in
-
-		def flavor_params_id_equal=(val)
-			@flavor_params_id_equal = val.to_i
-		end
-		def status_equal=(val)
-			@status_equal = val.to_i
-		end
-	end
-
-	class KalturaFlavorParamsBaseFilter < KalturaAssetParamsFilter
-		attr_accessor :format_equal
+	class KalturaFileAssetFilter < KalturaFileAssetBaseFilter
 
 	end
 
@@ -9857,6 +10299,10 @@ module Kaltura
 	end
 
 	class KalturaGoogleVideoSyndicationFeedBaseFilter < KalturaBaseSyndicationFeedFilter
+
+	end
+
+	class KalturaGroupUserFilter < KalturaGroupUserBaseFilter
 
 	end
 
@@ -9870,6 +10316,10 @@ module Kaltura
 
 	end
 
+	class KalturaLiveChannelSegmentFilter < KalturaLiveChannelSegmentBaseFilter
+
+	end
+
 	class KalturaMediaFlavorParamsOutput < KalturaFlavorParamsOutput
 
 	end
@@ -9880,7 +10330,11 @@ module Kaltura
 
 	end
 
-	class KalturaPlaylistBaseFilter < KalturaBaseEntryFilter
+	class KalturaPermissionFilter < KalturaPermissionBaseFilter
+
+	end
+
+	class KalturaPermissionItemFilter < KalturaPermissionItemBaseFilter
 
 	end
 
@@ -9905,26 +10359,6 @@ module Kaltura
 		# Passphrase for SSH keys
 		# 	 
 		attr_accessor :key_passphrase
-
-	end
-
-	class KalturaThumbAssetBaseFilter < KalturaAssetFilter
-		attr_accessor :thumb_params_id_equal
-		attr_accessor :thumb_params_id_in
-		attr_accessor :status_equal
-		attr_accessor :status_in
-		attr_accessor :status_not_in
-
-		def thumb_params_id_equal=(val)
-			@thumb_params_id_equal = val.to_i
-		end
-		def status_equal=(val)
-			@status_equal = val.to_i
-		end
-	end
-
-	class KalturaThumbParamsBaseFilter < KalturaAssetParamsFilter
-		attr_accessor :format_equal
 
 	end
 
@@ -9969,6 +10403,14 @@ module Kaltura
 
 	end
 
+	class KalturaUserLoginDataFilter < KalturaUserLoginDataBaseFilter
+
+	end
+
+	class KalturaUserRoleFilter < KalturaUserRoleBaseFilter
+
+	end
+
 	# Used to ingest media that streamed to the system and represented by token that returned from media server such as FMS or red5.
 	#  
 	class KalturaWebcamTokenResource < KalturaDataCenterContentResource
@@ -9982,7 +10424,7 @@ module Kaltura
 
 	end
 
-	class KalturaAdminUserFilter < KalturaAdminUserBaseFilter
+	class KalturaAdminUserBaseFilter < KalturaUserFilter
 
 	end
 
@@ -9990,19 +10432,19 @@ module Kaltura
 
 	end
 
-	class KalturaApiActionPermissionItemFilter < KalturaApiActionPermissionItemBaseFilter
+	class KalturaApiActionPermissionItemBaseFilter < KalturaPermissionItemFilter
 
 	end
 
-	class KalturaApiParameterPermissionItemFilter < KalturaApiParameterPermissionItemBaseFilter
+	class KalturaApiParameterPermissionItemBaseFilter < KalturaPermissionItemFilter
 
 	end
 
-	class KalturaAssetParamsOutputFilter < KalturaAssetParamsOutputBaseFilter
+	class KalturaAssetParamsOutputBaseFilter < KalturaAssetParamsFilter
 
 	end
 
-	class KalturaDataEntryFilter < KalturaDataEntryBaseFilter
+	class KalturaDataEntryBaseFilter < KalturaBaseEntryFilter
 
 	end
 
@@ -10042,11 +10484,23 @@ module Kaltura
 
 	end
 
-	class KalturaFlavorAssetFilter < KalturaFlavorAssetBaseFilter
+	class KalturaFlavorAssetBaseFilter < KalturaAssetFilter
+		attr_accessor :flavor_params_id_equal
+		attr_accessor :flavor_params_id_in
+		attr_accessor :status_equal
+		attr_accessor :status_in
+		attr_accessor :status_not_in
 
+		def flavor_params_id_equal=(val)
+			@flavor_params_id_equal = val.to_i
+		end
+		def status_equal=(val)
+			@status_equal = val.to_i
+		end
 	end
 
-	class KalturaFlavorParamsFilter < KalturaFlavorParamsBaseFilter
+	class KalturaFlavorParamsBaseFilter < KalturaAssetParamsFilter
+		attr_accessor :format_equal
 
 	end
 
@@ -10059,6 +10513,78 @@ module Kaltura
 	end
 
 	class KalturaITunesSyndicationFeedFilter < KalturaITunesSyndicationFeedBaseFilter
+
+	end
+
+	class KalturaPlaylistBaseFilter < KalturaBaseEntryFilter
+
+	end
+
+	class KalturaThumbAssetBaseFilter < KalturaAssetFilter
+		attr_accessor :thumb_params_id_equal
+		attr_accessor :thumb_params_id_in
+		attr_accessor :status_equal
+		attr_accessor :status_in
+		attr_accessor :status_not_in
+
+		def thumb_params_id_equal=(val)
+			@thumb_params_id_equal = val.to_i
+		end
+		def status_equal=(val)
+			@status_equal = val.to_i
+		end
+	end
+
+	class KalturaThumbParamsBaseFilter < KalturaAssetParamsFilter
+		attr_accessor :format_equal
+
+	end
+
+	class KalturaTubeMogulSyndicationFeedFilter < KalturaTubeMogulSyndicationFeedBaseFilter
+
+	end
+
+	class KalturaYahooSyndicationFeedFilter < KalturaYahooSyndicationFeedBaseFilter
+
+	end
+
+	class KalturaAdminUserFilter < KalturaAdminUserBaseFilter
+
+	end
+
+	class KalturaApiActionPermissionItemFilter < KalturaApiActionPermissionItemBaseFilter
+
+	end
+
+	class KalturaApiParameterPermissionItemFilter < KalturaApiParameterPermissionItemBaseFilter
+
+	end
+
+	class KalturaAssetParamsOutputFilter < KalturaAssetParamsOutputBaseFilter
+
+	end
+
+	class KalturaDataEntryFilter < KalturaDataEntryBaseFilter
+
+	end
+
+	class KalturaDeliveryProfileGenericRtmpBaseFilter < KalturaDeliveryProfileRtmpFilter
+
+	end
+
+	class KalturaFlavorAssetFilter < KalturaFlavorAssetBaseFilter
+
+	end
+
+	class KalturaFlavorParamsFilter < KalturaFlavorParamsBaseFilter
+
+	end
+
+	class KalturaGenericXsltSyndicationFeedBaseFilter < KalturaGenericSyndicationFeedFilter
+
+	end
+
+	class KalturaLiveStreamAdminEntry < KalturaLiveStreamEntry
 
 	end
 
@@ -10075,15 +10601,7 @@ module Kaltura
 
 	end
 
-	class KalturaTubeMogulSyndicationFeedFilter < KalturaTubeMogulSyndicationFeedBaseFilter
-
-	end
-
-	class KalturaYahooSyndicationFeedFilter < KalturaYahooSyndicationFeedBaseFilter
-
-	end
-
-	class KalturaDeliveryProfileGenericRtmpBaseFilter < KalturaDeliveryProfileRtmpFilter
+	class KalturaDeliveryProfileGenericRtmpFilter < KalturaDeliveryProfileGenericRtmpBaseFilter
 
 	end
 
@@ -10098,7 +10616,7 @@ module Kaltura
 		end
 	end
 
-	class KalturaGenericXsltSyndicationFeedBaseFilter < KalturaGenericSyndicationFeedFilter
+	class KalturaGenericXsltSyndicationFeedFilter < KalturaGenericXsltSyndicationFeedBaseFilter
 
 	end
 
@@ -10107,10 +10625,6 @@ module Kaltura
 	end
 
 	class KalturaLiveParamsBaseFilter < KalturaFlavorParamsFilter
-
-	end
-
-	class KalturaLiveStreamAdminEntry < KalturaLiveStreamEntry
 
 	end
 
@@ -10133,15 +10647,7 @@ module Kaltura
 		end
 	end
 
-	class KalturaDeliveryProfileGenericRtmpFilter < KalturaDeliveryProfileGenericRtmpBaseFilter
-
-	end
-
 	class KalturaFlavorParamsOutputFilter < KalturaFlavorParamsOutputBaseFilter
-
-	end
-
-	class KalturaGenericXsltSyndicationFeedFilter < KalturaGenericXsltSyndicationFeedBaseFilter
 
 	end
 
@@ -14181,6 +14687,89 @@ module Kaltura
 		end
 	end
 
+	# Manage response profiles
+	#  
+	class KalturaResponseProfileService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		# Add new response profile
+		# 	 
+		def add(add_response_profile)
+			kparams = {}
+			client.add_param(kparams, 'addResponseProfile', add_response_profile);
+			client.queue_service_action_call('responseprofile', 'add', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		# Get response profile by id
+		# 	 
+		def get(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id);
+			client.queue_service_action_call('responseprofile', 'get', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		# Update response profile by id
+		# 	 
+		def update(id, update_response_profile)
+			kparams = {}
+			client.add_param(kparams, 'id', id);
+			client.add_param(kparams, 'updateResponseProfile', update_response_profile);
+			client.queue_service_action_call('responseprofile', 'update', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		# Update response profile status by id
+		# 	 
+		def update_status(id, status)
+			kparams = {}
+			client.add_param(kparams, 'id', id);
+			client.add_param(kparams, 'status', status);
+			client.queue_service_action_call('responseprofile', 'updateStatus', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		# Delete response profile by id
+		# 	 
+		def delete(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id);
+			client.queue_service_action_call('responseprofile', 'delete', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		# List response profiles by filter and pager
+		# 	 
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter);
+			client.add_param(kparams, 'pager', pager);
+			client.queue_service_action_call('responseprofile', 'list', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+	end
+
 	# Expose the schema definitions for syndication MRSS, bulk upload XML and other schema types. 
 	#  
 	class KalturaSchemaService < KalturaServiceBase
@@ -15891,6 +16480,13 @@ module Kaltura
 				@report_service = KalturaReportService.new(self)
 			end
 			return @report_service
+		end
+		attr_reader :response_profile_service
+		def response_profile_service
+			if (@response_profile_service == nil)
+				@response_profile_service = KalturaResponseProfileService.new(self)
+			end
+			return @response_profile_service
 		end
 		attr_reader :schema_service
 		def schema_service

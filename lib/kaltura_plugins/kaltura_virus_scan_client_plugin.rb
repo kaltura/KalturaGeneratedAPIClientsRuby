@@ -91,15 +91,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaVirusScanProfileListResponse < KalturaObjectBase
-		attr_accessor :objects
-		attr_accessor :total_count
-
-		def total_count=(val)
-			@total_count = val.to_i
-		end
-	end
-
 	class KalturaParseCaptionAssetJobData < KalturaJobData
 		attr_accessor :caption_asset_id
 
@@ -156,6 +147,11 @@ module Kaltura
 		def status_equal=(val)
 			@status_equal = val.to_i
 		end
+	end
+
+	class KalturaVirusScanProfileListResponse < KalturaListResponse
+		attr_accessor :objects
+
 	end
 
 	class KalturaVirusScanProfileFilter < KalturaVirusScanProfileBaseFilter

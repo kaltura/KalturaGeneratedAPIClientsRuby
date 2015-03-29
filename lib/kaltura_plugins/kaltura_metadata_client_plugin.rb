@@ -55,6 +55,7 @@ module Kaltura
 		CATEGORY = "2"
 		USER = "3"
 		PARTNER = "4"
+		DYNAMIC_OBJECT = "5"
 	end
 
 	class KalturaMetadataOrderBy
@@ -303,6 +304,8 @@ module Kaltura
 		attr_accessor :metadata_profile_version_equal
 		attr_accessor :metadata_profile_version_greater_than_or_equal
 		attr_accessor :metadata_profile_version_less_than_or_equal
+		# When null, default is KalturaMetadataObjectType::ENTRY
+		# 	 
 		attr_accessor :metadata_object_type_equal
 		attr_accessor :object_id_equal
 		attr_accessor :object_id_in
@@ -544,6 +547,19 @@ module Kaltura
 			# Enable update only if the metadata object version did not change by other process
 			client.add_param(kparams, 'version', version);
 			client.queue_service_action_call('metadata_metadata', 'invalidate', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		# Index metadata by id, will also index the related object
+		# 	 
+		def index(id, should_update)
+			kparams = {}
+			client.add_param(kparams, 'id', id);
+			client.add_param(kparams, 'shouldUpdate', should_update);
+			client.queue_service_action_call('metadata_metadata', 'index', kparams);
 			if (client.is_multirequest)
 				return nil;
 			end

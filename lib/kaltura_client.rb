@@ -1949,6 +1949,7 @@ module Kaltura
 	end
 
 	class KalturaLiveReportOrderBy
+		NAME_ASC = "+name"
 		AUDIENCE_DESC = "-audience"
 		EVENT_TIME_DESC = "-eventTime"
 		PLAYS_DESC = "-plays"
@@ -7139,6 +7140,7 @@ module Kaltura
 
 	class KalturaAmazonS3StorageProfile < KalturaStorageProfile
 		attr_accessor :files_permission_in_s3
+		attr_accessor :s3region
 
 	end
 
@@ -10170,6 +10172,7 @@ module Kaltura
 
 	class KalturaAmazonS3StorageExportJobData < KalturaStorageExportJobData
 		attr_accessor :files_permission_in_s3
+		attr_accessor :s3region
 
 	end
 

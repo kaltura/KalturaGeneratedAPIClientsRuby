@@ -1089,6 +1089,7 @@ module Kaltura
 		HLS = "hls"
 		ISMV = "ismv"
 		JPG = "jpg"
+		M2TS = "m2ts"
 		M4V = "m4v"
 		MKV = "mkv"
 		MOV = "mov"
@@ -1096,6 +1097,7 @@ module Kaltura
 		MP4 = "mp4"
 		MPEG = "mpeg"
 		MPEGTS = "mpegts"
+		MXF = "mxf"
 		OGG = "ogg"
 		OGV = "ogv"
 		PDF = "pdf"
@@ -9170,6 +9172,12 @@ module Kaltura
 		# hashPatternRegex
 		# 	 
 		attr_accessor :hash_pattern_regex
+
+	end
+
+	class KalturaUrlTokenizerCloudFront < KalturaUrlTokenizer
+		attr_accessor :key_pair_id
+		attr_accessor :root_dir
 
 	end
 

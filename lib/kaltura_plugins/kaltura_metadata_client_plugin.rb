@@ -242,6 +242,10 @@ module Kaltura
 
 	end
 
+	class KalturaMetadataResponseProfileMapping < KalturaResponseProfileMapping
+
+	end
+
 	class KalturaTransformMetadataJobData < KalturaJobData
 		attr_accessor :src_xsl_path
 		attr_accessor :src_version

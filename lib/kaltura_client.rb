@@ -4151,7 +4151,11 @@ module Kaltura
 	class KalturaResponseProfileMapping < KalturaObjectBase
 		attr_accessor :parent_property
 		attr_accessor :filter_property
+		attr_accessor :allow_null
 
+		def allow_null=(val)
+			@allow_null = to_b(val)
+		end
 	end
 
 	class KalturaDetachedResponseProfile < KalturaBaseResponseProfile

@@ -4460,6 +4460,13 @@ module Kaltura
 		end
 	end
 
+	class KalturaFlavorAssetUrlOptions < KalturaObjectBase
+		# The name of the downloaded file
+		# 	 
+		attr_accessor :file_name
+
+	end
+
 	class KalturaFlavorParams < KalturaAssetParams
 		# The video codec of the Flavor Params
 		# 	 
@@ -12581,11 +12588,12 @@ module Kaltura
 
 		# Get download URL for the asset
 		# 	 
-		def get_url(id, storage_id=KalturaNotImplemented, force_proxy=false)
+		def get_url(id, storage_id=KalturaNotImplemented, force_proxy=false, options=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'id', id);
 			client.add_param(kparams, 'storageId', storage_id);
 			client.add_param(kparams, 'forceProxy', force_proxy);
+			client.add_param(kparams, 'options', options);
 			client.queue_service_action_call('flavorasset', 'getUrl', kparams);
 			if (client.is_multirequest)
 				return nil;

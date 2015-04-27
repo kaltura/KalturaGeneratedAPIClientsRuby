@@ -8086,38 +8086,6 @@ module Kaltura
 		end
 	end
 
-	class KalturaDetachedResponseProfileFilter < KalturaFilter
-		attr_accessor :id_equal
-		attr_accessor :id_in
-		attr_accessor :system_name_equal
-		attr_accessor :system_name_in
-		attr_accessor :created_at_greater_than_or_equal
-		attr_accessor :created_at_less_than_or_equal
-		attr_accessor :updated_at_greater_than_or_equal
-		attr_accessor :updated_at_less_than_or_equal
-		attr_accessor :status_equal
-		attr_accessor :status_in
-
-		def id_equal=(val)
-			@id_equal = val.to_i
-		end
-		def created_at_greater_than_or_equal=(val)
-			@created_at_greater_than_or_equal = val.to_i
-		end
-		def created_at_less_than_or_equal=(val)
-			@created_at_less_than_or_equal = val.to_i
-		end
-		def updated_at_greater_than_or_equal=(val)
-			@updated_at_greater_than_or_equal = val.to_i
-		end
-		def updated_at_less_than_or_equal=(val)
-			@updated_at_less_than_or_equal = val.to_i
-		end
-		def status_equal=(val)
-			@status_equal = val.to_i
-		end
-	end
-
 	class KalturaDirectoryRestriction < KalturaBaseRestriction
 		# Kaltura directory restriction type
 		# 	 
@@ -8869,6 +8837,38 @@ module Kaltura
 	class KalturaReportListResponse < KalturaListResponse
 		attr_accessor :objects
 
+	end
+
+	class KalturaResponseProfileBaseFilter < KalturaFilter
+		attr_accessor :id_equal
+		attr_accessor :id_in
+		attr_accessor :system_name_equal
+		attr_accessor :system_name_in
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :created_at_less_than_or_equal
+		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
+		attr_accessor :status_equal
+		attr_accessor :status_in
+
+		def id_equal=(val)
+			@id_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
+		def updated_at_greater_than_or_equal=(val)
+			@updated_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
+		end
+		def status_equal=(val)
+			@status_equal = val.to_i
+		end
 	end
 
 	class KalturaResponseProfileHolder < KalturaBaseResponseProfile
@@ -10073,7 +10073,7 @@ module Kaltura
 
 	end
 
-	class KalturaResponseProfileFilter < KalturaDetachedResponseProfileFilter
+	class KalturaResponseProfileFilter < KalturaResponseProfileBaseFilter
 
 	end
 
@@ -14506,12 +14506,13 @@ module Kaltura
 
 		# Retrieve playlist for playing purpose
 		# 	 
-		def execute(id, detailed='', playlist_context=KalturaNotImplemented, filter=KalturaNotImplemented)
+		def execute(id, detailed='', playlist_context=KalturaNotImplemented, filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'id', id);
 			client.add_param(kparams, 'detailed', detailed);
 			client.add_param(kparams, 'playlistContext', playlist_context);
 			client.add_param(kparams, 'filter', filter);
+			client.add_param(kparams, 'pager', pager);
 			client.queue_service_action_call('playlist', 'execute', kparams);
 			if (client.is_multirequest)
 				return nil;
@@ -14521,11 +14522,12 @@ module Kaltura
 
 		# Retrieve playlist for playing purpose, based on content
 		# 	 
-		def execute_from_content(playlist_type, playlist_content, detailed='')
+		def execute_from_content(playlist_type, playlist_content, detailed='', pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'playlistType', playlist_type);
 			client.add_param(kparams, 'playlistContent', playlist_content);
 			client.add_param(kparams, 'detailed', detailed);
+			client.add_param(kparams, 'pager', pager);
 			client.queue_service_action_call('playlist', 'executeFromContent', kparams);
 			if (client.is_multirequest)
 				return nil;
@@ -14535,13 +14537,14 @@ module Kaltura
 
 		# Revrieve playlist for playing purpose, based on media entry filters
 		# 	 
-		def execute_from_filters(filters, total_results, detailed='')
+		def execute_from_filters(filters, total_results, detailed='1', pager=KalturaNotImplemented)
 			kparams = {}
 			filters.each do |obj|
 				client.add_param(kparams, 'filters', obj);
 			end
 			client.add_param(kparams, 'totalResults', total_results);
 			client.add_param(kparams, 'detailed', detailed);
+			client.add_param(kparams, 'pager', pager);
 			client.queue_service_action_call('playlist', 'executeFromFilters', kparams);
 			if (client.is_multirequest)
 				return nil;

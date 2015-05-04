@@ -135,6 +135,7 @@ module Kaltura
 	end
 
 	class KalturaDropFolderType
+		FEED = "FeedDropFolder.FEED"
 		LOCAL = "1"
 		FTP = "2"
 		SCP = "3"

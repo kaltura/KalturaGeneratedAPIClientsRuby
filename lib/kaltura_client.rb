@@ -2721,6 +2721,12 @@ module Kaltura
 		end
 	end
 
+	class KalturaApiExceptionArg < KalturaObjectBase
+		attr_accessor :name
+		attr_accessor :value
+
+	end
+
 	class KalturaAsset < KalturaObjectBase
 		# The ID of the Flavor Asset
 		# 	 
@@ -4076,6 +4082,9 @@ module Kaltura
 		# Comma separated list of supported media protocols. f.i. rtmpe
 		# 	 
 		attr_accessor :media_protocols
+		# priority used for ordering similar delivery profiles
+		# 	 
+		attr_accessor :priority
 
 		def id=(val)
 			@id = val.to_i
@@ -4097,6 +4106,9 @@ module Kaltura
 		end
 		def parent_id=(val)
 			@parent_id = val.to_i
+		end
+		def priority=(val)
+			@priority = val.to_i
 		end
 	end
 

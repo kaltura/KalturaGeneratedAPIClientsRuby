@@ -54,6 +54,13 @@ module Kaltura
 
 	end
 
+	class KalturaEntryCaptionAssetSearchItem < KalturaSearchItem
+		attr_accessor :content_like
+		attr_accessor :content_multi_like_or
+		attr_accessor :content_multi_like_and
+
+	end
+
 	class KalturaCaptionAssetItemFilter < KalturaCaptionAssetFilter
 		attr_accessor :content_like
 		attr_accessor :content_multi_like_or

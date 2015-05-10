@@ -65,6 +65,12 @@ module Kaltura
 		# Number of children, first generation only.
 		# 	 
 		attr_accessor :direct_children_count
+		# Is the annotation public.
+		# 	 
+		attr_accessor :is_public
+		# Should the cue point get indexed on the entry.
+		# 	 
+		attr_accessor :searchable_on_entry
 
 		def end_time=(val)
 			@end_time = val.to_i
@@ -80,6 +86,12 @@ module Kaltura
 		end
 		def direct_children_count=(val)
 			@direct_children_count = val.to_i
+		end
+		def is_public=(val)
+			@is_public = val.to_i
+		end
+		def searchable_on_entry=(val)
+			@searchable_on_entry = val.to_i
 		end
 	end
 
@@ -98,6 +110,7 @@ module Kaltura
 		attr_accessor :end_time_less_than_or_equal
 		attr_accessor :duration_greater_than_or_equal
 		attr_accessor :duration_less_than_or_equal
+		attr_accessor :is_public_equal
 
 		def end_time_greater_than_or_equal=(val)
 			@end_time_greater_than_or_equal = val.to_i
@@ -110,6 +123,9 @@ module Kaltura
 		end
 		def duration_less_than_or_equal=(val)
 			@duration_less_than_or_equal = val.to_i
+		end
+		def is_public_equal=(val)
+			@is_public_equal = val.to_i
 		end
 	end
 

@@ -5917,6 +5917,10 @@ module Kaltura
 		end
 	end
 
+	class KalturaPluginData < KalturaObjectBase
+
+	end
+
 	class KalturaRemotePath < KalturaObjectBase
 		attr_accessor :storage_profile_id
 		attr_accessor :uri
@@ -8108,6 +8112,14 @@ module Kaltura
 		end
 	end
 
+	class KalturaDrmEntryContextPluginData < KalturaPluginData
+		# For the uDRM we give the drm context data which is a json encoding of an array containing the uDRM data
+		#      for each flavor that is required from this getContextData request.
+		#      
+		attr_accessor :flavor_data
+
+	end
+
 	class KalturaCategoryUserBaseFilter < KalturaRelatedFilter
 		attr_accessor :category_id_equal
 		attr_accessor :category_id_in
@@ -8286,6 +8298,9 @@ module Kaltura
 		# Array of allowed flavor assets according to access control limitations and requested tags
 		# 	 
 		attr_accessor :flavor_assets
+		# Array of allowed flavor assets according to access control limitations and requested tags
+		#      
+		attr_accessor :plugin_data
 
 		def is_site_restricted=(val)
 			@is_site_restricted = to_b(val)

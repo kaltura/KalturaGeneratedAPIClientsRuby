@@ -2317,6 +2317,7 @@ module Kaltura
 		PREVIEW = "2"
 		LIMIT_FLAVORS = "3"
 		ADD_TO_STORAGE = "4"
+		LIMIT_DELIVERY_PROFILES = "5"
 	end
 
 	class KalturaSchemaType
@@ -7132,6 +7133,17 @@ module Kaltura
 
 	class KalturaAccessControlBlockAction < KalturaRuleAction
 
+	end
+
+	class KalturaAccessControlLimitDeliveryProfilesAction < KalturaRuleAction
+		# Comma separated list of delivery profile ids 
+		# 	 
+		attr_accessor :delivery_profile_ids
+		attr_accessor :is_blocked_list
+
+		def is_blocked_list=(val)
+			@is_blocked_list = to_b(val)
+		end
 	end
 
 	class KalturaAccessControlLimitFlavorsAction < KalturaRuleAction

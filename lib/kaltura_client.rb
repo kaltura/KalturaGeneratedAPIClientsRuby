@@ -164,6 +164,12 @@ module Kaltura
 		DISPLAY_WITH_LINK = 1
 	end
 
+	class KalturaEdgeServerStatus
+		ACTIVE = 1
+		DISABLED = 2
+		DELETED = 3
+	end
+
 	class KalturaEditorType
 		SIMPLE = 1
 		ADVANCED = 2
@@ -920,6 +926,7 @@ module Kaltura
 
 	class KalturaBatchJobType
 		CONVERT = "0"
+		PARSE_MULTI_LANGUAGE_CAPTION_ASSET = "caption.parsemultilanguagecaptionasset"
 		PARSE_CAPTION_ASSET = "captionSearch.parseCaptionAsset"
 		DISTRIBUTION_DELETE = "contentDistribution.DistributionDelete"
 		DISTRIBUTION_DISABLE = "contentDistribution.DistributionDisable"
@@ -1077,6 +1084,7 @@ module Kaltura
 		USER_ROLE = "9"
 		GEO_DISTANCE = "10"
 		OR_OPERATOR = "11"
+		HASH = "12"
 	end
 
 	class KalturaContainerFormat
@@ -1087,6 +1095,7 @@ module Kaltura
 		COPY = "copy"
 		FLV = "flv"
 		HLS = "hls"
+		ISMA = "isma"
 		ISMV = "ismv"
 		JPG = "jpg"
 		M2TS = "m2ts"
@@ -1301,6 +1310,13 @@ module Kaltura
 	end
 
 	class KalturaDynamicEnum
+	end
+
+	class KalturaEdgeServerOrderBy
+		CREATED_AT_ASC = "+createdAt"
+		UPDATED_AT_ASC = "+updatedAt"
+		CREATED_AT_DESC = "-createdAt"
+		UPDATED_AT_DESC = "-updatedAt"
 	end
 
 	class KalturaEntryIdentifierField
@@ -1627,6 +1643,7 @@ module Kaltura
 		MR = "Marathi"
 		MO = "Moldavian"
 		MN = "Mongolian"
+		MU = "Multilingual"
 		NA = "Nauru"
 		NE = "Nepali"
 		NO = "Norwegian"
@@ -1681,8 +1698,8 @@ module Kaltura
 		CY = "Welsh"
 		WO = "Wolof"
 		XH = "Xhosa"
-		YI = "Yiddish"
 		JI = "Yiddish"
+		YI = "Yiddish"
 		YO = "Yoruba"
 		ZU = "Zulu"
 	end
@@ -1771,6 +1788,7 @@ module Kaltura
 		MR = "mr"
 		MS = "ms"
 		MT = "mt"
+		MU = "multilingual"
 		MY = "my"
 		NA = "na"
 		NE = "ne"
@@ -4186,6 +4204,57 @@ module Kaltura
 
 		def type=(val)
 			@type = val.to_i
+		end
+	end
+
+	class KalturaEdgeServer < KalturaObjectBase
+		attr_accessor :id
+		attr_accessor :created_at
+		attr_accessor :updated_at
+		attr_accessor :partner_id
+		# edgeServer name
+		# 	 
+		attr_accessor :name
+		# edgeServer uniqe system name
+		# 	 
+		attr_accessor :system_name
+		# edgeServer description
+		# 	 
+		attr_accessor :desciption
+		attr_accessor :status
+		# edgeServer tags
+		# 	 
+		attr_accessor :tags
+		# edgeServer host name
+		# 	 
+		attr_accessor :host_name
+		# edgeServer playback hostName
+		# 	 
+		attr_accessor :playback_host_name
+		# Delivery profile ids comma seperated
+		# 	 
+		attr_accessor :delivery_profile_ids
+		# Id of the parent edge server
+		# 	 
+		attr_accessor :parent_id
+
+		def id=(val)
+			@id = val.to_i
+		end
+		def created_at=(val)
+			@created_at = val.to_i
+		end
+		def updated_at=(val)
+			@updated_at = val.to_i
+		end
+		def partner_id=(val)
+			@partner_id = val.to_i
+		end
+		def status=(val)
+			@status = val.to_i
+		end
+		def parent_id=(val)
+			@parent_id = val.to_i
 		end
 	end
 
@@ -8132,6 +8201,59 @@ module Kaltura
 
 	end
 
+	class KalturaEdgeServerBaseFilter < KalturaFilter
+		attr_accessor :id_equal
+		attr_accessor :id_in
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :created_at_less_than_or_equal
+		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
+		attr_accessor :name_equal
+		attr_accessor :name_in
+		attr_accessor :system_name_equal
+		attr_accessor :system_name_in
+		attr_accessor :status_equal
+		attr_accessor :status_in
+		attr_accessor :tags_like
+		attr_accessor :tags_multi_like_or
+		attr_accessor :tags_multi_like_and
+		attr_accessor :host_name_like
+		attr_accessor :host_name_multi_like_or
+		attr_accessor :host_name_multi_like_and
+		attr_accessor :playback_host_name_like
+		attr_accessor :playback_host_name_multi_like_or
+		attr_accessor :playback_host_name_multi_like_and
+		attr_accessor :parent_id_equal
+		attr_accessor :parent_id_in
+
+		def id_equal=(val)
+			@id_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
+		def updated_at_greater_than_or_equal=(val)
+			@updated_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
+		end
+		def status_equal=(val)
+			@status_equal = val.to_i
+		end
+		def parent_id_equal=(val)
+			@parent_id_equal = val.to_i
+		end
+	end
+
+	class KalturaEdgeServerListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
 	class KalturaCategoryUserBaseFilter < KalturaRelatedFilter
 		attr_accessor :category_id_equal
 		attr_accessor :category_id_in
@@ -8422,6 +8544,16 @@ module Kaltura
 
 	class KalturaGroupUserListResponse < KalturaListResponse
 		attr_accessor :objects
+
+	end
+
+	class KalturaHashCondition < KalturaCondition
+		# hash name
+		# 	 
+		attr_accessor :hash_name
+		# hash secret
+		# 	 
+		attr_accessor :hash_secret
 
 	end
 
@@ -9722,6 +9854,10 @@ module Kaltura
 		# rendererClass
 		# 	 
 		attr_accessor :renderer_class
+
+	end
+
+	class KalturaEdgeServerFilter < KalturaEdgeServerBaseFilter
 
 	end
 
@@ -12304,6 +12440,76 @@ module Kaltura
 			# Document entry id to cancel
 			client.add_param(kparams, 'entryId', entry_id);
 			client.queue_service_action_call('document', 'cancelReplace', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+	end
+
+	# Edge Server service
+	#  
+	class KalturaEdgeServerService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		# Adds a edge server to the Kaltura DB.
+		# 	 
+		def add(edge_server)
+			kparams = {}
+			# sto
+			client.add_param(kparams, 'edgeServer', edge_server);
+			client.queue_service_action_call('edgeserver', 'add', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		# Get edge server by id
+		# 	 
+		def get(edge_server_id)
+			kparams = {}
+			client.add_param(kparams, 'edgeServerId', edge_server_id);
+			client.queue_service_action_call('edgeserver', 'get', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		# Update edge server by id 
+		# 	 
+		def update(edge_server_id, edge_server)
+			kparams = {}
+			client.add_param(kparams, 'edgeServerId', edge_server_id);
+			# Id
+			client.add_param(kparams, 'edgeServer', edge_server);
+			client.queue_service_action_call('edgeserver', 'update', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		# delete edge server by id
+		# 	 
+		def delete(edge_server_id)
+			kparams = {}
+			client.add_param(kparams, 'edgeServerId', edge_server_id);
+			client.queue_service_action_call('edgeserver', 'delete', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter);
+			client.add_param(kparams, 'pager', pager);
+			client.queue_service_action_call('edgeserver', 'list', kparams);
 			if (client.is_multirequest)
 				return nil;
 			end
@@ -16398,6 +16604,13 @@ module Kaltura
 				@document_service = KalturaDocumentService.new(self)
 			end
 			return @document_service
+		end
+		attr_reader :edge_server_service
+		def edge_server_service
+			if (@edge_server_service == nil)
+				@edge_server_service = KalturaEdgeServerService.new(self)
+			end
+			return @edge_server_service
 		end
 		attr_reader :email_ingestion_profile_service
 		def email_ingestion_profile_service

@@ -80,6 +80,9 @@ module Kaltura
 		# The status of the asset
 		# 	 
 		attr_accessor :status
+		# The parent id of the asset
+		# 	 
+		attr_accessor :parent_id
 
 		def caption_params_id=(val)
 			@caption_params_id = val.to_i
@@ -124,6 +127,13 @@ module Kaltura
 
 	class KalturaCaptionParamsListResponse < KalturaListResponse
 		attr_accessor :objects
+
+	end
+
+	class KalturaParseMultiLanguageCaptionAssetJobData < KalturaJobData
+		attr_accessor :multi_lanaguage_caption_asset_id
+		attr_accessor :entry_id
+		attr_accessor :file_location
 
 	end
 

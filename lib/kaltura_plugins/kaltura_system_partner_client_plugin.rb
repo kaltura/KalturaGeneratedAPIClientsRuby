@@ -63,6 +63,7 @@ module Kaltura
 		attr_accessor :admin_email
 		attr_accessor :host
 		attr_accessor :cdn_host
+		attr_accessor :cdn_host_white_list
 		attr_accessor :thumbnail_host
 		attr_accessor :partner_package
 		attr_accessor :monitor_usage

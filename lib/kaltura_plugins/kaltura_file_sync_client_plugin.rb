@@ -130,6 +130,11 @@ module Kaltura
 		end
 	end
 
+	class KalturaFileSyncListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
 	class KalturaFileSyncBaseFilter < KalturaFilter
 		attr_accessor :partner_id_equal
 		attr_accessor :file_object_type_equal
@@ -215,11 +220,6 @@ module Kaltura
 		def file_size_less_than_or_equal=(val)
 			@file_size_less_than_or_equal = val.to_f
 		end
-	end
-
-	class KalturaFileSyncListResponse < KalturaListResponse
-		attr_accessor :objects
-
 	end
 
 	class KalturaFileSyncFilter < KalturaFileSyncBaseFilter

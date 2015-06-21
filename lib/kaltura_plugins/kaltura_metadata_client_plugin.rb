@@ -130,6 +130,7 @@ module Kaltura
 		attr_accessor :views
 		attr_accessor :xslt
 		attr_accessor :create_mode
+		attr_accessor :disable_re_indexing
 
 		def id=(val)
 			@id = val.to_i
@@ -151,6 +152,9 @@ module Kaltura
 		end
 		def create_mode=(val)
 			@create_mode = val.to_i
+		end
+		def disable_re_indexing=(val)
+			@disable_re_indexing = to_b(val)
 		end
 	end
 
@@ -281,6 +285,11 @@ module Kaltura
 		def profile_id=(val)
 			@profile_id = val.to_i
 		end
+	end
+
+	class KalturaDynamicObjectSearchItem < KalturaSearchOperator
+		attr_accessor :field
+
 	end
 
 	class KalturaMatchMetadataCondition < KalturaMatchCondition

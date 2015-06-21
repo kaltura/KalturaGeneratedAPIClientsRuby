@@ -758,6 +758,14 @@ module Kaltura
 		TIMEHASH = 2
 	end
 
+	class KalturaAccessControlActionType
+		BLOCK = "1"
+		PREVIEW = "2"
+		LIMIT_FLAVORS = "3"
+		ADD_TO_STORAGE = "4"
+		LIMIT_DELIVERY_PROFILES = "5"
+	end
+
 	class KalturaAccessControlOrderBy
 		CREATED_AT_ASC = "+createdAt"
 		CREATED_AT_DESC = "-createdAt"
@@ -2313,6 +2321,15 @@ module Kaltura
 		WEIGHT_DESC = "-weight"
 	end
 
+	class KalturaQuizUserEntryOrderBy
+		CREATED_AT_ASC = "+createdAt"
+		SCORE_ASC = "+score"
+		UPDATED_AT_ASC = "+updatedAt"
+		CREATED_AT_DESC = "-createdAt"
+		SCORE_DESC = "-score"
+		UPDATED_AT_DESC = "-updatedAt"
+	end
+
 	class KalturaReportInterval
 		DAYS = "days"
 		MONTHS = "months"
@@ -2456,6 +2473,18 @@ module Kaltura
 	class KalturaUploadTokenOrderBy
 		CREATED_AT_ASC = "+createdAt"
 		CREATED_AT_DESC = "-createdAt"
+	end
+
+	class KalturaUserEntryOrderBy
+		CREATED_AT_ASC = "+createdAt"
+		UPDATED_AT_ASC = "+updatedAt"
+		CREATED_AT_DESC = "-createdAt"
+		UPDATED_AT_DESC = "-updatedAt"
+	end
+
+	class KalturaUserEntryStatus
+		ACTIVE = "1"
+		DELETED = "2"
 	end
 
 	class KalturaUserLoginDataOrderBy
@@ -2606,6 +2635,13 @@ module Kaltura
 		def contains_unsuported_restrictions=(val)
 			@contains_unsuported_restrictions = to_b(val)
 		end
+	end
+
+	class KalturaAccessControlAction < KalturaObjectBase
+		# The type of the access control action
+		# 	 
+		attr_accessor :type
+
 	end
 
 	class KalturaContextTypeHolder < KalturaObjectBase
@@ -3017,6 +3053,9 @@ module Kaltura
 		# list of user ids that are entitled to publish the entry (no server enforcement) The difference between entitledUsersEdit and entitledUsersPublish is applicative only
 		# 	 
 		attr_accessor :entitled_users_publish
+		# Comma seperated string of the capabilities of the entry. Any capability needed can be added to this list.
+		# 	 
+		attr_accessor :capabilities
 
 		def partner_id=(val)
 			@partner_id = val.to_i
@@ -3333,6 +3372,49 @@ module Kaltura
 		end
 		def job_object_type=(val)
 			@job_object_type = val.to_i
+		end
+	end
+
+	class KalturaBatchQueuesStatus < KalturaObjectBase
+		attr_accessor :job_type
+		# The worker configured id
+		# 	 
+		attr_accessor :worker_id
+		# The friendly name of the type
+		# 	 
+		attr_accessor :type_name
+		# The size of the queue
+		# 	 
+		attr_accessor :size
+		# The avarage wait time
+		# 	 
+		attr_accessor :wait_time
+
+		def worker_id=(val)
+			@worker_id = val.to_i
+		end
+		def size=(val)
+			@size = val.to_i
+		end
+		def wait_time=(val)
+			@wait_time = val.to_i
+		end
+	end
+
+	# A representation to return an array of values
+	#  
+	class KalturaValue < KalturaObjectBase
+		attr_accessor :description
+
+	end
+
+	# A boolean representation to return an array of booleans
+	#  
+	class KalturaBooleanValue < KalturaValue
+		attr_accessor :value
+
+		def value=(val)
+			@value = to_b(val)
 		end
 	end
 
@@ -4299,13 +4381,6 @@ module Kaltura
 		end
 	end
 
-	# A representation to return an array of values
-	#  
-	class KalturaValue < KalturaObjectBase
-		attr_accessor :description
-
-	end
-
 	# A string representation to return an array of strings
 	#  
 	class KalturaStringValue < KalturaValue
@@ -4430,6 +4505,9 @@ module Kaltura
 		# Comma separated flavor params ids that exists for this media entry
 		# 	 
 		attr_accessor :flavor_params_ids
+		# True if trim action is disabled for this entry
+		# 	 
+		attr_accessor :is_trim_disabled
 
 		def media_type=(val)
 			@media_type = val.to_i
@@ -4439,6 +4517,9 @@ module Kaltura
 		end
 		def media_date=(val)
 			@media_date = val.to_i
+		end
+		def is_trim_disabled=(val)
+			@is_trim_disabled = val.to_i
 		end
 	end
 
@@ -4763,6 +4844,293 @@ module Kaltura
 		def value=(val)
 			@value = val.to_i
 		end
+	end
+
+	class KalturaMediaInfo < KalturaObjectBase
+		# The id of the media info
+		# 	 
+		attr_accessor :id
+		# The id of the related flavor asset
+		# 	 
+		attr_accessor :flavor_asset_id
+		# The file size
+		# 	 
+		attr_accessor :file_size
+		# The container format
+		# 	 
+		attr_accessor :container_format
+		# The container id
+		# 	 
+		attr_accessor :container_id
+		# The container profile
+		# 	 
+		attr_accessor :container_profile
+		# The container duration
+		# 	 
+		attr_accessor :container_duration
+		# The container bit rate
+		# 	 
+		attr_accessor :container_bit_rate
+		# The video format
+		# 	 
+		attr_accessor :video_format
+		# The video codec id
+		# 	 
+		attr_accessor :video_codec_id
+		# The video duration
+		# 	 
+		attr_accessor :video_duration
+		# The video bit rate
+		# 	 
+		attr_accessor :video_bit_rate
+		# The video bit rate mode
+		# 	 
+		attr_accessor :video_bit_rate_mode
+		# The video width
+		# 	 
+		attr_accessor :video_width
+		# The video height
+		# 	 
+		attr_accessor :video_height
+		# The video frame rate
+		# 	 
+		attr_accessor :video_frame_rate
+		# The video display aspect ratio (dar)
+		# 	 
+		attr_accessor :video_dar
+		attr_accessor :video_rotation
+		# The audio format
+		# 	 
+		attr_accessor :audio_format
+		# The audio codec id
+		# 	 
+		attr_accessor :audio_codec_id
+		# The audio duration
+		# 	 
+		attr_accessor :audio_duration
+		# The audio bit rate
+		# 	 
+		attr_accessor :audio_bit_rate
+		# The audio bit rate mode
+		# 	 
+		attr_accessor :audio_bit_rate_mode
+		# The number of audio channels
+		# 	 
+		attr_accessor :audio_channels
+		# The audio sampling rate
+		# 	 
+		attr_accessor :audio_sampling_rate
+		# The audio resolution
+		# 	 
+		attr_accessor :audio_resolution
+		# The writing library
+		# 	 
+		attr_accessor :writing_lib
+		# The data as returned by the mediainfo command line
+		# 	 
+		attr_accessor :raw_data
+		attr_accessor :multi_stream_info
+		attr_accessor :scan_type
+		attr_accessor :multi_stream
+		attr_accessor :is_fast_start
+		attr_accessor :content_streams
+
+		def id=(val)
+			@id = val.to_i
+		end
+		def file_size=(val)
+			@file_size = val.to_i
+		end
+		def container_duration=(val)
+			@container_duration = val.to_i
+		end
+		def container_bit_rate=(val)
+			@container_bit_rate = val.to_i
+		end
+		def video_duration=(val)
+			@video_duration = val.to_i
+		end
+		def video_bit_rate=(val)
+			@video_bit_rate = val.to_i
+		end
+		def video_bit_rate_mode=(val)
+			@video_bit_rate_mode = val.to_i
+		end
+		def video_width=(val)
+			@video_width = val.to_i
+		end
+		def video_height=(val)
+			@video_height = val.to_i
+		end
+		def video_frame_rate=(val)
+			@video_frame_rate = val.to_f
+		end
+		def video_dar=(val)
+			@video_dar = val.to_f
+		end
+		def video_rotation=(val)
+			@video_rotation = val.to_i
+		end
+		def audio_duration=(val)
+			@audio_duration = val.to_i
+		end
+		def audio_bit_rate=(val)
+			@audio_bit_rate = val.to_i
+		end
+		def audio_bit_rate_mode=(val)
+			@audio_bit_rate_mode = val.to_i
+		end
+		def audio_channels=(val)
+			@audio_channels = val.to_i
+		end
+		def audio_sampling_rate=(val)
+			@audio_sampling_rate = val.to_i
+		end
+		def audio_resolution=(val)
+			@audio_resolution = val.to_i
+		end
+		def scan_type=(val)
+			@scan_type = val.to_i
+		end
+		def is_fast_start=(val)
+			@is_fast_start = val.to_i
+		end
+	end
+
+	class KalturaMediaInfoListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
+	class KalturaFlavorParamsOutputListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
+	class KalturaThumbAsset < KalturaAsset
+		# The Flavor Params used to create this Flavor Asset
+		# 	 
+		attr_accessor :thumb_params_id
+		# The width of the Flavor Asset 
+		# 	 
+		attr_accessor :width
+		# The height of the Flavor Asset
+		# 	 
+		attr_accessor :height
+		# The status of the asset
+		# 	 
+		attr_accessor :status
+
+		def thumb_params_id=(val)
+			@thumb_params_id = val.to_i
+		end
+		def width=(val)
+			@width = val.to_i
+		end
+		def height=(val)
+			@height = val.to_i
+		end
+		def status=(val)
+			@status = val.to_i
+		end
+	end
+
+	class KalturaThumbParams < KalturaAssetParams
+		attr_accessor :crop_type
+		attr_accessor :quality
+		attr_accessor :crop_x
+		attr_accessor :crop_y
+		attr_accessor :crop_width
+		attr_accessor :crop_height
+		attr_accessor :video_offset
+		attr_accessor :width
+		attr_accessor :height
+		attr_accessor :scale_width
+		attr_accessor :scale_height
+		# Hexadecimal value
+		# 	 
+		attr_accessor :background_color
+		# Id of the flavor params or the thumbnail params to be used as source for the thumbnail creation
+		# 	 
+		attr_accessor :source_params_id
+		# The container format of the Flavor Params
+		# 	 
+		attr_accessor :format
+		# The image density (dpi) for example: 72 or 96
+		# 	 
+		attr_accessor :density
+		# Strip profiles and comments
+		# 	 
+		attr_accessor :strip_profiles
+		# Create thumbnail from the videoLengthpercentage second
+		#      
+		attr_accessor :video_offset_in_percentage
+
+		def crop_type=(val)
+			@crop_type = val.to_i
+		end
+		def quality=(val)
+			@quality = val.to_i
+		end
+		def crop_x=(val)
+			@crop_x = val.to_i
+		end
+		def crop_y=(val)
+			@crop_y = val.to_i
+		end
+		def crop_width=(val)
+			@crop_width = val.to_i
+		end
+		def crop_height=(val)
+			@crop_height = val.to_i
+		end
+		def video_offset=(val)
+			@video_offset = val.to_f
+		end
+		def width=(val)
+			@width = val.to_i
+		end
+		def height=(val)
+			@height = val.to_i
+		end
+		def scale_width=(val)
+			@scale_width = val.to_f
+		end
+		def scale_height=(val)
+			@scale_height = val.to_f
+		end
+		def source_params_id=(val)
+			@source_params_id = val.to_i
+		end
+		def density=(val)
+			@density = val.to_i
+		end
+		def strip_profiles=(val)
+			@strip_profiles = to_b(val)
+		end
+		def video_offset_in_percentage=(val)
+			@video_offset_in_percentage = val.to_i
+		end
+	end
+
+	class KalturaThumbParamsOutput < KalturaThumbParams
+		attr_accessor :thumb_params_id
+		attr_accessor :thumb_params_version
+		attr_accessor :thumb_asset_id
+		attr_accessor :thumb_asset_version
+		attr_accessor :rotate
+
+		def thumb_params_id=(val)
+			@thumb_params_id = val.to_i
+		end
+		def rotate=(val)
+			@rotate = val.to_i
+		end
+	end
+
+	class KalturaThumbParamsOutputListResponse < KalturaListResponse
+		attr_accessor :objects
+
 	end
 
 	# A key (boolean) value pair representation to return an array of key-(boolean)value pairs (associative array)
@@ -5403,157 +5771,6 @@ module Kaltura
 
 		def limit=(val)
 			@limit = val.to_i
-		end
-	end
-
-	class KalturaMediaInfo < KalturaObjectBase
-		# The id of the media info
-		# 	 
-		attr_accessor :id
-		# The id of the related flavor asset
-		# 	 
-		attr_accessor :flavor_asset_id
-		# The file size
-		# 	 
-		attr_accessor :file_size
-		# The container format
-		# 	 
-		attr_accessor :container_format
-		# The container id
-		# 	 
-		attr_accessor :container_id
-		# The container profile
-		# 	 
-		attr_accessor :container_profile
-		# The container duration
-		# 	 
-		attr_accessor :container_duration
-		# The container bit rate
-		# 	 
-		attr_accessor :container_bit_rate
-		# The video format
-		# 	 
-		attr_accessor :video_format
-		# The video codec id
-		# 	 
-		attr_accessor :video_codec_id
-		# The video duration
-		# 	 
-		attr_accessor :video_duration
-		# The video bit rate
-		# 	 
-		attr_accessor :video_bit_rate
-		# The video bit rate mode
-		# 	 
-		attr_accessor :video_bit_rate_mode
-		# The video width
-		# 	 
-		attr_accessor :video_width
-		# The video height
-		# 	 
-		attr_accessor :video_height
-		# The video frame rate
-		# 	 
-		attr_accessor :video_frame_rate
-		# The video display aspect ratio (dar)
-		# 	 
-		attr_accessor :video_dar
-		attr_accessor :video_rotation
-		# The audio format
-		# 	 
-		attr_accessor :audio_format
-		# The audio codec id
-		# 	 
-		attr_accessor :audio_codec_id
-		# The audio duration
-		# 	 
-		attr_accessor :audio_duration
-		# The audio bit rate
-		# 	 
-		attr_accessor :audio_bit_rate
-		# The audio bit rate mode
-		# 	 
-		attr_accessor :audio_bit_rate_mode
-		# The number of audio channels
-		# 	 
-		attr_accessor :audio_channels
-		# The audio sampling rate
-		# 	 
-		attr_accessor :audio_sampling_rate
-		# The audio resolution
-		# 	 
-		attr_accessor :audio_resolution
-		# The writing library
-		# 	 
-		attr_accessor :writing_lib
-		# The data as returned by the mediainfo command line
-		# 	 
-		attr_accessor :raw_data
-		attr_accessor :multi_stream_info
-		attr_accessor :scan_type
-		attr_accessor :multi_stream
-		attr_accessor :is_fast_start
-		attr_accessor :content_streams
-
-		def id=(val)
-			@id = val.to_i
-		end
-		def file_size=(val)
-			@file_size = val.to_i
-		end
-		def container_duration=(val)
-			@container_duration = val.to_i
-		end
-		def container_bit_rate=(val)
-			@container_bit_rate = val.to_i
-		end
-		def video_duration=(val)
-			@video_duration = val.to_i
-		end
-		def video_bit_rate=(val)
-			@video_bit_rate = val.to_i
-		end
-		def video_bit_rate_mode=(val)
-			@video_bit_rate_mode = val.to_i
-		end
-		def video_width=(val)
-			@video_width = val.to_i
-		end
-		def video_height=(val)
-			@video_height = val.to_i
-		end
-		def video_frame_rate=(val)
-			@video_frame_rate = val.to_f
-		end
-		def video_dar=(val)
-			@video_dar = val.to_f
-		end
-		def video_rotation=(val)
-			@video_rotation = val.to_i
-		end
-		def audio_duration=(val)
-			@audio_duration = val.to_i
-		end
-		def audio_bit_rate=(val)
-			@audio_bit_rate = val.to_i
-		end
-		def audio_bit_rate_mode=(val)
-			@audio_bit_rate_mode = val.to_i
-		end
-		def audio_channels=(val)
-			@audio_channels = val.to_i
-		end
-		def audio_sampling_rate=(val)
-			@audio_sampling_rate = val.to_i
-		end
-		def audio_resolution=(val)
-			@audio_resolution = val.to_i
-		end
-		def scan_type=(val)
-			@scan_type = val.to_i
-		end
-		def is_fast_start=(val)
-			@is_fast_start = val.to_i
 		end
 	end
 
@@ -6744,132 +6961,19 @@ module Kaltura
 		end
 	end
 
-	class KalturaThumbAsset < KalturaAsset
-		# The Flavor Params used to create this Flavor Asset
-		# 	 
-		attr_accessor :thumb_params_id
-		# The width of the Flavor Asset 
-		# 	 
-		attr_accessor :width
-		# The height of the Flavor Asset
-		# 	 
-		attr_accessor :height
-		# The status of the asset
-		# 	 
-		attr_accessor :status
-
-		def thumb_params_id=(val)
-			@thumb_params_id = val.to_i
-		end
-		def width=(val)
-			@width = val.to_i
-		end
-		def height=(val)
-			@height = val.to_i
-		end
-		def status=(val)
-			@status = val.to_i
-		end
-	end
-
-	class KalturaThumbParams < KalturaAssetParams
-		attr_accessor :crop_type
-		attr_accessor :quality
-		attr_accessor :crop_x
-		attr_accessor :crop_y
-		attr_accessor :crop_width
-		attr_accessor :crop_height
-		attr_accessor :video_offset
-		attr_accessor :width
-		attr_accessor :height
-		attr_accessor :scale_width
-		attr_accessor :scale_height
-		# Hexadecimal value
-		# 	 
-		attr_accessor :background_color
-		# Id of the flavor params or the thumbnail params to be used as source for the thumbnail creation
-		# 	 
-		attr_accessor :source_params_id
-		# The container format of the Flavor Params
-		# 	 
-		attr_accessor :format
-		# The image density (dpi) for example: 72 or 96
-		# 	 
-		attr_accessor :density
-		# Strip profiles and comments
-		# 	 
-		attr_accessor :strip_profiles
-		# Create thumbnail from the videoLengthpercentage second
-		#      
-		attr_accessor :video_offset_in_percentage
-
-		def crop_type=(val)
-			@crop_type = val.to_i
-		end
-		def quality=(val)
-			@quality = val.to_i
-		end
-		def crop_x=(val)
-			@crop_x = val.to_i
-		end
-		def crop_y=(val)
-			@crop_y = val.to_i
-		end
-		def crop_width=(val)
-			@crop_width = val.to_i
-		end
-		def crop_height=(val)
-			@crop_height = val.to_i
-		end
-		def video_offset=(val)
-			@video_offset = val.to_f
-		end
-		def width=(val)
-			@width = val.to_i
-		end
-		def height=(val)
-			@height = val.to_i
-		end
-		def scale_width=(val)
-			@scale_width = val.to_f
-		end
-		def scale_height=(val)
-			@scale_height = val.to_f
-		end
-		def source_params_id=(val)
-			@source_params_id = val.to_i
-		end
-		def density=(val)
-			@density = val.to_i
-		end
-		def strip_profiles=(val)
-			@strip_profiles = to_b(val)
-		end
-		def video_offset_in_percentage=(val)
-			@video_offset_in_percentage = val.to_i
-		end
-	end
-
-	class KalturaThumbParamsOutput < KalturaThumbParams
-		attr_accessor :thumb_params_id
-		attr_accessor :thumb_params_version
-		attr_accessor :thumb_asset_id
-		attr_accessor :thumb_asset_version
-		attr_accessor :rotate
-
-		def thumb_params_id=(val)
-			@thumb_params_id = val.to_i
-		end
-		def rotate=(val)
-			@rotate = val.to_i
-		end
-	end
-
 	class KalturaThumbnailServeOptions < KalturaObjectBase
 		attr_accessor :download
 
 		def download=(val)
 			@download = to_b(val)
+		end
+	end
+
+	class KalturaTypedArray < KalturaObjectBase
+		attr_accessor :count
+
+		def count=(val)
+			@count = val.to_i
 		end
 	end
 
@@ -7114,6 +7218,34 @@ module Kaltura
 		end
 	end
 
+	class KalturaUserEntry < KalturaObjectBase
+		# unique auto-generated identifier
+		# 	 
+		attr_accessor :id
+		attr_accessor :entry_id
+		attr_accessor :user_id
+		attr_accessor :partner_id
+		attr_accessor :status
+		attr_accessor :created_at
+		attr_accessor :updated_at
+
+		def id=(val)
+			@id = val.to_i
+		end
+		def user_id=(val)
+			@user_id = val.to_i
+		end
+		def partner_id=(val)
+			@partner_id = val.to_i
+		end
+		def created_at=(val)
+			@created_at = val.to_i
+		end
+		def updated_at=(val)
+			@updated_at = val.to_i
+		end
+	end
+
 	class KalturaUserLoginData < KalturaObjectBase
 		attr_accessor :id
 		attr_accessor :login_email
@@ -7198,126 +7330,6 @@ module Kaltura
 		def add_embed_html5support=(val)
 			@add_embed_html5support = to_b(val)
 		end
-	end
-
-	class KalturaAccessControlBlockAction < KalturaRuleAction
-
-	end
-
-	class KalturaAccessControlLimitDeliveryProfilesAction < KalturaRuleAction
-		# Comma separated list of delivery profile ids 
-		# 	 
-		attr_accessor :delivery_profile_ids
-		attr_accessor :is_blocked_list
-
-		def is_blocked_list=(val)
-			@is_blocked_list = to_b(val)
-		end
-	end
-
-	class KalturaAccessControlLimitFlavorsAction < KalturaRuleAction
-		# Comma separated list of flavor ids 
-		# 	 
-		attr_accessor :flavor_params_ids
-		attr_accessor :is_blocked_list
-
-		def is_blocked_list=(val)
-			@is_blocked_list = to_b(val)
-		end
-	end
-
-	class KalturaAccessControlListResponse < KalturaListResponse
-		attr_accessor :objects
-
-	end
-
-	class KalturaAccessControlPreviewAction < KalturaRuleAction
-		attr_accessor :limit
-
-		def limit=(val)
-			@limit = val.to_i
-		end
-	end
-
-	class KalturaAccessControlProfileListResponse < KalturaListResponse
-		attr_accessor :objects
-
-	end
-
-	class KalturaAdminUser < KalturaUser
-
-	end
-
-	class KalturaAmazonS3StorageProfile < KalturaStorageProfile
-		attr_accessor :files_permission_in_s3
-		attr_accessor :s3region
-
-	end
-
-	class KalturaApiActionPermissionItem < KalturaPermissionItem
-		attr_accessor :service
-		attr_accessor :action
-
-	end
-
-	class KalturaApiParameterPermissionItem < KalturaPermissionItem
-		attr_accessor :object
-		attr_accessor :parameter
-		attr_accessor :action
-
-	end
-
-	class KalturaAssetParamsOutput < KalturaAssetParams
-		attr_accessor :asset_params_id
-		attr_accessor :asset_params_version
-		attr_accessor :asset_id
-		attr_accessor :asset_version
-		attr_accessor :ready_behavior
-		# The container format of the Flavor Params
-		# 	 
-		attr_accessor :format
-
-		def asset_params_id=(val)
-			@asset_params_id = val.to_i
-		end
-		def ready_behavior=(val)
-			@ready_behavior = val.to_i
-		end
-	end
-
-	class KalturaAssetPropertiesCompareCondition < KalturaCondition
-		# Array of key/value objects that holds the property and the value to find and compare on an asset object
-		# 	 
-		attr_accessor :properties
-
-	end
-
-	class KalturaAssetsParamsResourceContainers < KalturaResource
-		# Array of resources associated with asset params ids
-		# 	 
-		attr_accessor :resources
-
-	end
-
-	class KalturaAuthenticatedCondition < KalturaCondition
-		# The privelege needed to remove the restriction
-		# 	 
-		attr_accessor :privileges
-
-	end
-
-	class KalturaBaseEntryListResponse < KalturaListResponse
-		attr_accessor :objects
-
-	end
-
-	class KalturaBaseSyndicationFeedBaseFilter < KalturaFilter
-
-	end
-
-	class KalturaBaseSyndicationFeedListResponse < KalturaListResponse
-		attr_accessor :objects
-
 	end
 
 	class KalturaBatchJobBaseFilter < KalturaFilter
@@ -7456,19 +7468,147 @@ module Kaltura
 		end
 	end
 
-	class KalturaBatchJobListResponse < KalturaListResponse
+	class KalturaBatchJobFilter < KalturaBatchJobBaseFilter
+
+	end
+
+	class KalturaWorkerQueueFilter < KalturaObjectBase
+		attr_accessor :scheduler_id
+		attr_accessor :worker_id
+		attr_accessor :job_type
+		attr_accessor :filter
+
+		def scheduler_id=(val)
+			@scheduler_id = val.to_i
+		end
+		def worker_id=(val)
+			@worker_id = val.to_i
+		end
+	end
+
+	class KalturaAccessControlBlockAction < KalturaRuleAction
+
+	end
+
+	class KalturaAccessControlLimitDeliveryProfilesAction < KalturaRuleAction
+		# Comma separated list of delivery profile ids 
+		# 	 
+		attr_accessor :delivery_profile_ids
+		attr_accessor :is_blocked_list
+
+		def is_blocked_list=(val)
+			@is_blocked_list = to_b(val)
+		end
+	end
+
+	class KalturaAccessControlLimitFlavorsAction < KalturaRuleAction
+		# Comma separated list of flavor ids 
+		# 	 
+		attr_accessor :flavor_params_ids
+		attr_accessor :is_blocked_list
+
+		def is_blocked_list=(val)
+			@is_blocked_list = to_b(val)
+		end
+	end
+
+	class KalturaAccessControlListResponse < KalturaListResponse
 		attr_accessor :objects
 
 	end
 
-	# A boolean representation to return an array of booleans
-	#  
-	class KalturaBooleanValue < KalturaValue
-		attr_accessor :value
+	class KalturaAccessControlPreviewAction < KalturaRuleAction
+		attr_accessor :limit
 
-		def value=(val)
-			@value = to_b(val)
+		def limit=(val)
+			@limit = val.to_i
 		end
+	end
+
+	class KalturaAccessControlProfileListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
+	class KalturaAdminUser < KalturaUser
+
+	end
+
+	class KalturaAmazonS3StorageProfile < KalturaStorageProfile
+		attr_accessor :files_permission_in_s3
+		attr_accessor :s3region
+
+	end
+
+	class KalturaApiActionPermissionItem < KalturaPermissionItem
+		attr_accessor :service
+		attr_accessor :action
+
+	end
+
+	class KalturaApiParameterPermissionItem < KalturaPermissionItem
+		attr_accessor :object
+		attr_accessor :parameter
+		attr_accessor :action
+
+	end
+
+	class KalturaAssetParamsOutput < KalturaAssetParams
+		attr_accessor :asset_params_id
+		attr_accessor :asset_params_version
+		attr_accessor :asset_id
+		attr_accessor :asset_version
+		attr_accessor :ready_behavior
+		# The container format of the Flavor Params
+		# 	 
+		attr_accessor :format
+
+		def asset_params_id=(val)
+			@asset_params_id = val.to_i
+		end
+		def ready_behavior=(val)
+			@ready_behavior = val.to_i
+		end
+	end
+
+	class KalturaAssetPropertiesCompareCondition < KalturaCondition
+		# Array of key/value objects that holds the property and the value to find and compare on an asset object
+		# 	 
+		attr_accessor :properties
+
+	end
+
+	class KalturaAssetsParamsResourceContainers < KalturaResource
+		# Array of resources associated with asset params ids
+		# 	 
+		attr_accessor :resources
+
+	end
+
+	class KalturaAuthenticatedCondition < KalturaCondition
+		# The privelege needed to remove the restriction
+		# 	 
+		attr_accessor :privileges
+
+	end
+
+	class KalturaBaseEntryListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
+	class KalturaBaseSyndicationFeedBaseFilter < KalturaFilter
+
+	end
+
+	class KalturaBaseSyndicationFeedListResponse < KalturaListResponse
+		attr_accessor :objects
+
+	end
+
+	class KalturaBatchJobListResponse < KalturaListResponse
+		attr_accessor :objects
+
 	end
 
 	class KalturaBulkDownloadJobData < KalturaJobData
@@ -8522,11 +8662,6 @@ module Kaltura
 
 	end
 
-	class KalturaFlavorParamsOutputListResponse < KalturaListResponse
-		attr_accessor :objects
-
-	end
-
 	class KalturaGenericSyndicationFeed < KalturaBaseSyndicationFeed
 		# feed description
 		#     
@@ -8747,11 +8882,6 @@ module Kaltura
 
 	end
 
-	class KalturaMediaInfoListResponse < KalturaListResponse
-		attr_accessor :objects
-
-	end
-
 	class KalturaMediaListResponse < KalturaListResponse
 		attr_accessor :objects
 
@@ -8950,6 +9080,14 @@ module Kaltura
 		end
 		def media_type=(val)
 			@media_type = val.to_i
+		end
+	end
+
+	class KalturaQuizUserEntry < KalturaUserEntry
+		attr_accessor :score
+
+		def score=(val)
+			@score = val.to_i
 		end
 	end
 
@@ -9201,11 +9339,6 @@ module Kaltura
 
 	end
 
-	class KalturaThumbParamsOutputListResponse < KalturaListResponse
-		attr_accessor :objects
-
-	end
-
 	class KalturaTubeMogulSyndicationFeed < KalturaBaseSyndicationFeed
 		attr_accessor :category
 
@@ -9404,6 +9537,46 @@ module Kaltura
 		def user_agent_restriction_type=(val)
 			@user_agent_restriction_type = val.to_i
 		end
+	end
+
+	class KalturaUserEntryBaseFilter < KalturaFilter
+		attr_accessor :id_equal
+		attr_accessor :id_in
+		attr_accessor :id_not_in
+		attr_accessor :entry_id_equal
+		attr_accessor :entry_id_in
+		attr_accessor :entry_id_not_in
+		attr_accessor :user_id_equal
+		attr_accessor :user_id_in
+		attr_accessor :user_id_not_in
+		attr_accessor :created_at_less_than_or_equal
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
+		attr_accessor :updated_at_greater_than_or_equal
+
+		def id_equal=(val)
+			@id_equal = val.to_i
+		end
+		def user_id_equal=(val)
+			@user_id_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
+		end
+		def updated_at_greater_than_or_equal=(val)
+			@updated_at_greater_than_or_equal = val.to_i
+		end
+	end
+
+	class KalturaUserEntryListResponse < KalturaListResponse
+		attr_accessor :objects
+
 	end
 
 	class KalturaUserListResponse < KalturaListResponse
@@ -9627,10 +9800,6 @@ module Kaltura
 	end
 
 	class KalturaBaseSyndicationFeedFilter < KalturaBaseSyndicationFeedBaseFilter
-
-	end
-
-	class KalturaBatchJobFilter < KalturaBatchJobBaseFilter
 
 	end
 
@@ -10305,6 +10474,10 @@ module Kaltura
 
 	end
 
+	class KalturaUserEntryFilter < KalturaUserEntryBaseFilter
+
+	end
+
 	class KalturaUserLoginDataBaseFilter < KalturaRelatedFilter
 		attr_accessor :login_email_equal
 
@@ -10535,6 +10708,10 @@ module Kaltura
 
 	end
 
+	class KalturaQuizUserEntryBaseFilter < KalturaUserEntryFilter
+
+	end
+
 	# Used to ingest media file that is already accessible on the shared disc.
 	#  
 	class KalturaServerFileResource < KalturaDataCenterContentResource
@@ -10714,6 +10891,10 @@ module Kaltura
 	end
 
 	class KalturaPlaylistBaseFilter < KalturaBaseEntryFilter
+
+	end
+
+	class KalturaQuizUserEntryFilter < KalturaQuizUserEntryBaseFilter
 
 	end
 
@@ -16047,6 +16228,66 @@ module Kaltura
 		end
 	end
 
+	class KalturaUserEntryService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		# Adds a user_entry to the Kaltura DB.
+		# 	 
+		def add(user_entry)
+			kparams = {}
+			client.add_param(kparams, 'userEntry', user_entry);
+			client.queue_service_action_call('userentry', 'add', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		def update(id, user_entry)
+			kparams = {}
+			client.add_param(kparams, 'id', id);
+			client.add_param(kparams, 'userEntry', user_entry);
+			client.queue_service_action_call('userentry', 'update', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		def delete(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id);
+			client.queue_service_action_call('userentry', 'delete', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		def list(filter, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter);
+			client.add_param(kparams, 'pager', pager);
+			client.queue_service_action_call('userentry', 'list', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		def get(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id);
+			client.queue_service_action_call('userentry', 'get', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+	end
+
 	# UserRole service lets you create and manage user roles
 	#  
 	class KalturaUserRoleService < KalturaServiceBase
@@ -16856,6 +17097,13 @@ module Kaltura
 				@upload_token_service = KalturaUploadTokenService.new(self)
 			end
 			return @upload_token_service
+		end
+		attr_reader :user_entry_service
+		def user_entry_service
+			if (@user_entry_service == nil)
+				@user_entry_service = KalturaUserEntryService.new(self)
+			end
+			return @user_entry_service
 		end
 		attr_reader :user_role_service
 		def user_role_service

@@ -32,13 +32,11 @@ module Kaltura
 
 	class KalturaAnswerCuePointOrderBy
 		CREATED_AT_ASC = "+createdAt"
-		IS_CORRECT_ASC = "+isCorrect"
 		PARTNER_SORT_VALUE_ASC = "+partnerSortValue"
 		START_TIME_ASC = "+startTime"
 		TRIGGERED_AT_ASC = "+triggeredAt"
 		UPDATED_AT_ASC = "+updatedAt"
 		CREATED_AT_DESC = "-createdAt"
-		IS_CORRECT_DESC = "-isCorrect"
 		PARTNER_SORT_VALUE_DESC = "-partnerSortValue"
 		START_TIME_DESC = "-startTime"
 		TRIGGERED_AT_DESC = "-triggeredAt"
@@ -48,13 +46,11 @@ module Kaltura
 	class KalturaQuestionCuePointOrderBy
 		CREATED_AT_ASC = "+createdAt"
 		PARTNER_SORT_VALUE_ASC = "+partnerSortValue"
-		QUESTION_ASC = "+question"
 		START_TIME_ASC = "+startTime"
 		TRIGGERED_AT_ASC = "+triggeredAt"
 		UPDATED_AT_ASC = "+updatedAt"
 		CREATED_AT_DESC = "-createdAt"
 		PARTNER_SORT_VALUE_DESC = "-partnerSortValue"
-		QUESTION_DESC = "-question"
 		START_TIME_DESC = "-startTime"
 		TRIGGERED_AT_DESC = "-triggeredAt"
 		UPDATED_AT_DESC = "-updatedAt"
@@ -170,5 +166,74 @@ module Kaltura
 
 	end
 
+
+	# Allows user to handle quizzes
+	#  
+	class KalturaQuizService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		# Allows to add a quiz to an entry
+		# 	 
+		def add(entry_id, quiz)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id);
+			client.add_param(kparams, 'quiz', quiz);
+			client.queue_service_action_call('quiz_quiz', 'add', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		# Allows to update a quiz
+		# 	 
+		def update(entry_id, quiz)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id);
+			client.add_param(kparams, 'quiz', quiz);
+			client.queue_service_action_call('quiz_quiz', 'update', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		# Allows to get a quiz
+		# 	 
+		def get(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id);
+			client.queue_service_action_call('quiz_quiz', 'get', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		# List quiz objects by filter and pager
+		# 	 
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter);
+			client.add_param(kparams, 'pager', pager);
+			client.queue_service_action_call('quiz_quiz', 'list', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+	end
+
+	class KalturaClient < KalturaClientBase
+		attr_reader :quiz_service
+		def quiz_service
+			if (@quiz_service == nil)
+				@quiz_service = KalturaQuizService.new(self)
+			end
+			return @quiz_service
+		end
+	end
 
 end

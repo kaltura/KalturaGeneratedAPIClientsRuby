@@ -764,6 +764,7 @@ module Kaltura
 		LIMIT_FLAVORS = "3"
 		ADD_TO_STORAGE = "4"
 		LIMIT_DELIVERY_PROFILES = "5"
+		SERVE_FROM_REMOTE_SERVER = "6"
 	end
 
 	class KalturaAccessControlOrderBy
@@ -2323,10 +2324,8 @@ module Kaltura
 
 	class KalturaQuizUserEntryOrderBy
 		CREATED_AT_ASC = "+createdAt"
-		SCORE_ASC = "+score"
 		UPDATED_AT_ASC = "+updatedAt"
 		CREATED_AT_DESC = "-createdAt"
-		SCORE_DESC = "-score"
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
@@ -2353,6 +2352,7 @@ module Kaltura
 		LIMIT_FLAVORS = "3"
 		ADD_TO_STORAGE = "4"
 		LIMIT_DELIVERY_PROFILES = "5"
+		SERVE_FROM_REMOTE_SERVER = "6"
 	end
 
 	class KalturaSchemaType
@@ -2483,6 +2483,7 @@ module Kaltura
 	end
 
 	class KalturaUserEntryStatus
+		QUIZ_SUBMITTED = "quiz.3"
 		ACTIVE = "1"
 		DELETED = "2"
 	end
@@ -7527,6 +7528,13 @@ module Kaltura
 
 	class KalturaAccessControlProfileListResponse < KalturaListResponse
 		attr_accessor :objects
+
+	end
+
+	class KalturaAccessControlServeRemoteEdgeServerAction < KalturaRuleAction
+		# Comma separated list of edge servers playBack should be done from
+		# 	 
+		attr_accessor :edge_server_ids
 
 	end
 
@@ -16281,6 +16289,18 @@ module Kaltura
 			kparams = {}
 			client.add_param(kparams, 'id', id);
 			client.queue_service_action_call('userentry', 'get', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		# Submits the quiz so that it's status will be submitted and calculates the score for the quiz
+		# 	 
+		def submit_quiz(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id);
+			client.queue_service_action_call('userentry', 'submitQuiz', kparams);
 			if (client.is_multirequest)
 				return nil;
 			end

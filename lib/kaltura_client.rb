@@ -10204,7 +10204,16 @@ module Kaltura
 	end
 
 	class KalturaIpAddressCondition < KalturaMatchCondition
+		# allow internal ips
+		# 	 
+		attr_accessor :accept_internal_ips
+		# http header name for extracting the ip
+		# 	 
+		attr_accessor :http_header
 
+		def accept_internal_ips=(val)
+			@accept_internal_ips = to_b(val)
+		end
 	end
 
 	class KalturaLiveAsset < KalturaFlavorAsset

@@ -29,6 +29,12 @@ require 'kaltura_client_base.rb'
 
 module Kaltura
 
+	class KalturaAppTokenStatus
+		DISABLED = 1
+		ACTIVE = 2
+		DELETED = 3
+	end
+
 	class KalturaAppearInListType
 		PARTNER_ONLY = 1
 		CATEGORY_MEMBERS_ONLY = 3
@@ -830,6 +836,13 @@ module Kaltura
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
+	class KalturaAppTokenOrderBy
+		CREATED_AT_ASC = "+createdAt"
+		UPDATED_AT_ASC = "+updatedAt"
+		CREATED_AT_DESC = "-createdAt"
+		UPDATED_AT_DESC = "-updatedAt"
+	end
+
 	class KalturaAssetOrderBy
 		CREATED_AT_ASC = "+createdAt"
 		DELETED_AT_ASC = "+deletedAt"
@@ -1094,6 +1107,7 @@ module Kaltura
 		GEO_DISTANCE = "10"
 		OR_OPERATOR = "11"
 		HASH = "12"
+		DELIVERY_PROFILE = "13"
 	end
 
 	class KalturaContainerFormat
@@ -1134,6 +1148,7 @@ module Kaltura
 		THUMBNAIL = "3"
 		METADATA = "4"
 		EXPORT = "5"
+		SERVE = "6"
 	end
 
 	class KalturaControlPanelCommandOrderBy
@@ -2488,6 +2503,10 @@ module Kaltura
 		DELETED = "2"
 	end
 
+	class KalturaUserEntryType
+		QUIZ = "quiz.QUIZ"
+	end
+
 	class KalturaUserLoginDataOrderBy
 	end
 
@@ -2781,6 +2800,62 @@ module Kaltura
 		attr_accessor :name
 		attr_accessor :value
 
+	end
+
+	class KalturaAppToken < KalturaObjectBase
+		# The id of the application token
+		# 	 
+		attr_accessor :id
+		# The application token
+		# 	 
+		attr_accessor :token
+		attr_accessor :partner_id
+		# Creation time as Unix timestamp (In seconds) 
+		# 	 
+		attr_accessor :created_at
+		# Update time as Unix timestamp (In seconds) 
+		# 	 
+		attr_accessor :updated_at
+		# Application token status 
+		# 	 
+		attr_accessor :status
+		# Expiry time of current token (unix timestamp in seconds)
+		# 	 
+		attr_accessor :expiry
+		# Type of KS (Kaltura Session) that created using the current token
+		# 	 
+		attr_accessor :session_type
+		# User id of KS (Kaltura Session) that created using the current token
+		# 	 
+		attr_accessor :session_user_id
+		# Expiry duration of KS (Kaltura Session) that created using the current token (in seconds)
+		# 	 
+		attr_accessor :session_duration
+		# Comma separated privileges to be applied on KS (Kaltura Session) that created using the current token
+		# 	 
+		attr_accessor :session_privileges
+
+		def partner_id=(val)
+			@partner_id = val.to_i
+		end
+		def created_at=(val)
+			@created_at = val.to_i
+		end
+		def updated_at=(val)
+			@updated_at = val.to_i
+		end
+		def status=(val)
+			@status = val.to_i
+		end
+		def expiry=(val)
+			@expiry = val.to_i
+		end
+		def session_type=(val)
+			@session_type = val.to_i
+		end
+		def session_duration=(val)
+			@session_duration = val.to_i
+		end
 	end
 
 	class KalturaAsset < KalturaObjectBase
@@ -7229,12 +7304,10 @@ module Kaltura
 		attr_accessor :status
 		attr_accessor :created_at
 		attr_accessor :updated_at
+		attr_accessor :type
 
 		def id=(val)
 			@id = val.to_i
-		end
-		def user_id=(val)
-			@user_id = val.to_i
 		end
 		def partner_id=(val)
 			@partner_id = val.to_i
@@ -7558,6 +7631,36 @@ module Kaltura
 		attr_accessor :object
 		attr_accessor :parameter
 		attr_accessor :action
+
+	end
+
+	class KalturaAppTokenBaseFilter < KalturaFilter
+		attr_accessor :id_equal
+		attr_accessor :id_in
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :created_at_less_than_or_equal
+		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
+
+		def id_equal=(val)
+			@id_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
+		def updated_at_greater_than_or_equal=(val)
+			@updated_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
+		end
+	end
+
+	class KalturaAppTokenListResponse < KalturaListResponse
+		attr_accessor :objects
 
 	end
 
@@ -8267,6 +8370,13 @@ module Kaltura
 		def status_equal=(val)
 			@status_equal = val.to_i
 		end
+	end
+
+	class KalturaDeliveryProfileCondition < KalturaCondition
+		# The delivery ids that are accepted by this condition
+		# 	 
+		attr_accessor :delivery_profile_ids
+
 	end
 
 	class KalturaDeliveryProfileGenericAppleHttp < KalturaDeliveryProfile
@@ -9557,10 +9667,12 @@ module Kaltura
 		attr_accessor :user_id_equal
 		attr_accessor :user_id_in
 		attr_accessor :user_id_not_in
+		attr_accessor :status_equal
 		attr_accessor :created_at_less_than_or_equal
 		attr_accessor :created_at_greater_than_or_equal
 		attr_accessor :updated_at_less_than_or_equal
 		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :type_equal
 
 		def id_equal=(val)
 			@id_equal = val.to_i
@@ -9737,6 +9849,10 @@ module Kaltura
 		def dvr_window=(val)
 			@dvr_window = val.to_i
 		end
+	end
+
+	class KalturaAppTokenFilter < KalturaAppTokenBaseFilter
+
 	end
 
 	class KalturaAssetBaseFilter < KalturaRelatedFilter
@@ -11312,6 +11428,97 @@ module Kaltura
 			# new password to set
 			client.add_param(kparams, 'newPassword', new_password);
 			client.queue_service_action_call('adminuser', 'setInitialPassword', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+	end
+
+	# Manage application authentication tokens
+	#  
+	class KalturaAppTokenService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		# Add new application authentication token
+		# 	 
+		def add(app_token)
+			kparams = {}
+			client.add_param(kparams, 'appToken', app_token);
+			client.queue_service_action_call('apptoken', 'add', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		# Get application authentication token by id
+		# 	 
+		def get(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id);
+			client.queue_service_action_call('apptoken', 'get', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		# Update application authentication token by id
+		# 	 
+		def update(id, app_token)
+			kparams = {}
+			client.add_param(kparams, 'id', id);
+			client.add_param(kparams, 'appToken', app_token);
+			client.queue_service_action_call('apptoken', 'update', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		# Delete application authentication token by id
+		# 	 
+		def delete(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id);
+			client.queue_service_action_call('apptoken', 'delete', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		# List application authentication tokens by filter and pager
+		# 	 
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter);
+			client.add_param(kparams, 'pager', pager);
+			client.queue_service_action_call('apptoken', 'list', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		# Starts a new KS (kaltura Session) based on application authentication token id
+		# 	 
+		def start_session(id, token_hash, user_id=KalturaNotImplemented, type=KalturaNotImplemented, expiry=KalturaNotImplemented)
+			kparams = {}
+			# application token id
+			client.add_param(kparams, 'id', id);
+			# hashed token, built of sha1 on current KS concatenated with the application token
+			client.add_param(kparams, 'tokenHash', token_hash);
+			# session user id, will be ignored if a different user id already defined on the application token
+			client.add_param(kparams, 'userId', user_id);
+			# session type, will be ignored if a different session type already defined on the application token
+			client.add_param(kparams, 'type', type);
+			# session expiry (in seconds), could be overwritten by shorter expiry of the application token and the session-expiry that defined on the application token 
+			client.add_param(kparams, 'expiry', expiry);
+			client.queue_service_action_call('apptoken', 'startSession', kparams);
 			if (client.is_multirequest)
 				return nil;
 			end
@@ -16804,6 +17011,13 @@ module Kaltura
 				@admin_user_service = KalturaAdminUserService.new(self)
 			end
 			return @admin_user_service
+		end
+		attr_reader :app_token_service
+		def app_token_service
+			if (@app_token_service == nil)
+				@app_token_service = KalturaAppTokenService.new(self)
+			end
+			return @app_token_service
 		end
 		attr_reader :base_entry_service
 		def base_entry_service

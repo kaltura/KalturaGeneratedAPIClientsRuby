@@ -82,6 +82,8 @@ module Kaltura
 		attr_accessor :file_content
 		attr_accessor :file_disc_size
 		attr_accessor :is_current_dc
+		attr_accessor :is_dir
+		attr_accessor :original_id
 
 		def id=(val)
 			@id = val.to_i
@@ -127,6 +129,12 @@ module Kaltura
 		end
 		def is_current_dc=(val)
 			@is_current_dc = to_b(val)
+		end
+		def is_dir=(val)
+			@is_dir = to_b(val)
+		end
+		def original_id=(val)
+			@original_id = val.to_i
 		end
 	end
 

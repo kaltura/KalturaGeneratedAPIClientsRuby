@@ -1323,6 +1323,7 @@ module Kaltura
 		LIVE_HDS = "1002"
 		LIVE_DASH = "1003"
 		LIVE_RTMP = "1005"
+		LIVE_HLS_TO_MULTICAST = "1006"
 		LIVE_AKAMAI_HDS = "1013"
 	end
 
@@ -2299,6 +2300,7 @@ module Kaltura
 
 	class KalturaPlaybackProtocol
 		APPLE_HTTP = "applehttp"
+		APPLE_HTTP_TO_MC = "applehttp_to_mc"
 		AUTO = "auto"
 		AKAMAI_HD = "hdnetwork"
 		AKAMAI_HDS = "hdnetworkmanifest"

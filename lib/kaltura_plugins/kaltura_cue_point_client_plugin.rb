@@ -36,6 +36,11 @@ module Kaltura
 		PENDING = 4
 	end
 
+	class KalturaThumbCuePointSubType
+		SLIDE = 1
+		CHAPTER = 2
+	end
+
 	class KalturaCuePointOrderBy
 		CREATED_AT_ASC = "+createdAt"
 		PARTNER_SORT_VALUE_ASC = "+partnerSortValue"
@@ -56,6 +61,7 @@ module Kaltura
 		EVENT = "eventCuePoint.Event"
 		QUIZ_ANSWER = "quiz.QUIZ_ANSWER"
 		QUIZ_QUESTION = "quiz.QUIZ_QUESTION"
+		THUMB = "thumbCuePoint.Thumb"
 	end
 
 	class KalturaCuePoint < KalturaObjectBase
@@ -185,7 +191,15 @@ module Kaltura
 
 	class KalturaCuePointFilter < KalturaCuePointBaseFilter
 		attr_accessor :free_text
+		attr_accessor :user_id_equal_current
+		attr_accessor :user_id_current
 
+		def user_id_equal_current=(val)
+			@user_id_equal_current = val.to_i
+		end
+		def user_id_current=(val)
+			@user_id_current = val.to_i
+		end
 	end
 
 

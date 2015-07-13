@@ -421,32 +421,6 @@ module Kaltura
 		PER_SESSION = 2
 	end
 
-	class KalturaReportType
-		TOP_CONTENT = 1
-		CONTENT_DROPOFF = 2
-		CONTENT_INTERACTIONS = 3
-		MAP_OVERLAY = 4
-		TOP_CONTRIBUTORS = 5
-		TOP_SYNDICATION = 6
-		CONTENT_CONTRIBUTIONS = 7
-		USER_ENGAGEMENT = 11
-		SPEFICIC_USER_ENGAGEMENT = 12
-		USER_TOP_CONTENT = 13
-		USER_CONTENT_DROPOFF = 14
-		USER_CONTENT_INTERACTIONS = 15
-		APPLICATIONS = 16
-		USER_USAGE = 17
-		SPECIFIC_USER_USAGE = 18
-		VAR_USAGE = 19
-		TOP_CREATORS = 20
-		PLATFORMS = 21
-		OPERATION_SYSTEM = 22
-		BROWSERS = 23
-		LIVE = 24
-		TOP_PLAYBACK_CONTEXT = 25
-		PARTNER_USAGE = 201
-	end
-
 	class KalturaResponseProfileStatus
 		DISABLED = 1
 		ENABLED = 2
@@ -867,6 +841,7 @@ module Kaltura
 		IMAGE = "document.Image"
 		PDF = "document.PDF"
 		SWF = "document.SWF"
+		TIMED_THUMB_ASSET = "thumbCuePoint.timedThumb"
 		FLAVOR = "1"
 		THUMBNAIL = "2"
 		LIVE = "3"
@@ -1000,6 +975,7 @@ module Kaltura
 		VALIDATE_LIVE_MEDIA_SERVERS = "38"
 		SYNC_CATEGORY_PRIVACY_CONTEXT = "39"
 		LIVE_REPORT_EXPORT = "40"
+		RECALCULATE_CACHE = "41"
 	end
 
 	class KalturaBulkUploadAction
@@ -2354,6 +2330,34 @@ module Kaltura
 	class KalturaReportOrderBy
 		CREATED_AT_ASC = "+createdAt"
 		CREATED_AT_DESC = "-createdAt"
+	end
+
+	class KalturaReportType
+		QUIZ = "quiz.QUIZ"
+		QUIZ_USER_PERCENTAGE = "quiz.self::QUIZ_USER_PERCENTAGE"
+		TOP_CONTENT = "1"
+		CONTENT_DROPOFF = "2"
+		CONTENT_INTERACTIONS = "3"
+		MAP_OVERLAY = "4"
+		TOP_CONTRIBUTORS = "5"
+		TOP_SYNDICATION = "6"
+		CONTENT_CONTRIBUTIONS = "7"
+		USER_ENGAGEMENT = "11"
+		SPEFICIC_USER_ENGAGEMENT = "12"
+		USER_TOP_CONTENT = "13"
+		USER_CONTENT_DROPOFF = "14"
+		USER_CONTENT_INTERACTIONS = "15"
+		APPLICATIONS = "16"
+		USER_USAGE = "17"
+		SPECIFIC_USER_USAGE = "18"
+		VAR_USAGE = "19"
+		TOP_CREATORS = "20"
+		PLATFORMS = "21"
+		OPERATION_SYSTEM = "22"
+		BROWSERS = "23"
+		LIVE = "24"
+		TOP_PLAYBACK_CONTEXT = "25"
+		PARTNER_USAGE = "201"
 	end
 
 	class KalturaResponseProfileOrderBy
@@ -6427,7 +6431,7 @@ module Kaltura
 		# Kaltura API session
 		# 	 
 		attr_accessor :ks
-		# Response profile
+		# Response profile - this attribute will be automatically unset after every API call.
 		# 	 
 		attr_accessor :response_profile
 
@@ -6451,6 +6455,7 @@ module Kaltura
 		# 	 
 		attr_accessor :updated_at
 		attr_accessor :status
+		attr_accessor :version
 
 		def id=(val)
 			@id = val.to_i
@@ -6466,6 +6471,46 @@ module Kaltura
 		end
 		def status=(val)
 			@status = val.to_i
+		end
+		def version=(val)
+			@version = val.to_i
+		end
+	end
+
+	class KalturaResponseProfileCacheRecalculateOptions < KalturaObjectBase
+		# Maximum number of keys to recalculate
+		# 	 
+		attr_accessor :limit
+		# Class name
+		# 	 
+		attr_accessor :cached_object_type
+		attr_accessor :object_id
+		attr_accessor :start_object_key
+		attr_accessor :end_object_key
+		attr_accessor :job_created_at
+		attr_accessor :is_first_loop
+
+		def limit=(val)
+			@limit = val.to_i
+		end
+		def job_created_at=(val)
+			@job_created_at = val.to_i
+		end
+		def is_first_loop=(val)
+			@is_first_loop = to_b(val)
+		end
+	end
+
+	class KalturaResponseProfileCacheRecalculateResults < KalturaObjectBase
+		# Last recalculated id
+		# 	 
+		attr_accessor :last_object_key
+		# Number of recalculated keys
+		# 	 
+		attr_accessor :recalculated
+
+		def recalculated=(val)
+			@recalculated = val.to_i
 		end
 	end
 
@@ -9211,6 +9256,10 @@ module Kaltura
 		end
 	end
 
+	class KalturaRecalculateCacheJobData < KalturaJobData
+
+	end
+
 	class KalturaRemotePathListResponse < KalturaListResponse
 		attr_accessor :objects
 
@@ -9678,9 +9727,6 @@ module Kaltura
 
 		def id_equal=(val)
 			@id_equal = val.to_i
-		end
-		def user_id_equal=(val)
-			@user_id_equal = val.to_i
 		end
 		def created_at_less_than_or_equal=(val)
 			@created_at_less_than_or_equal = val.to_i
@@ -10535,6 +10581,24 @@ module Kaltura
 		end
 	end
 
+	class KalturaRecalculateResponseProfileCacheJobData < KalturaRecalculateCacheJobData
+		# http / https
+		# 	 
+		attr_accessor :protocol
+		attr_accessor :ks_type
+		attr_accessor :user_roles
+		# Class name
+		# 	 
+		attr_accessor :cached_object_type
+		attr_accessor :object_id
+		attr_accessor :start_object_key
+		attr_accessor :end_object_key
+
+		def ks_type=(val)
+			@ks_type = val.to_i
+		end
+	end
+
 	class KalturaRegexCondition < KalturaMatchCondition
 
 	end
@@ -10610,7 +10674,11 @@ module Kaltura
 	end
 
 	class KalturaUserEntryFilter < KalturaUserEntryBaseFilter
+		attr_accessor :user_id_equal_current
 
+		def user_id_equal_current=(val)
+			@user_id_equal_current = val.to_i
+		end
 	end
 
 	class KalturaUserLoginDataBaseFilter < KalturaRelatedFilter
@@ -15441,6 +15509,18 @@ module Kaltura
 			client.add_param(kparams, 'filter', filter);
 			client.add_param(kparams, 'pager', pager);
 			client.queue_service_action_call('responseprofile', 'list', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		# Recalculate response profile cached objects
+		# 	 
+		def recalculate(options)
+			kparams = {}
+			client.add_param(kparams, 'options', options);
+			client.queue_service_action_call('responseprofile', 'recalculate', kparams);
 			if (client.is_multirequest)
 				return nil;
 			end

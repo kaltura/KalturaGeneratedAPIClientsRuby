@@ -4384,7 +4384,7 @@ module Kaltura
 		attr_accessor :system_name
 		# edgeServer description
 		# 	 
-		attr_accessor :desciption
+		attr_accessor :description
 		attr_accessor :status
 		# edgeServer tags
 		# 	 

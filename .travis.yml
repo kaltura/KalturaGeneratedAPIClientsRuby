@@ -8,4 +8,11 @@ install: gem install rest-client shoulda minitest
 # uncomment this line if your project needs to run something other than `rake`:
 # script: bundle exec rspec spec
 script: echo "y" | rake test
+notifications:
+  email:
+    recipients:
+      - moshe.maor@kaltura.com
+      - jess.portnoy@kaltura.com
+    on_success: change
+    on_failure: always
 

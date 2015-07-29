@@ -111,10 +111,6 @@ module Kaltura
 		HTTP = "httpNotification.Http"
 	end
 
-	class KalturaEventCondition < KalturaObjectBase
-
-	end
-
 	class KalturaEventNotificationParameter < KalturaObjectBase
 		# The key in the subject and body to be replaced with the dynamic value
 		# 	 

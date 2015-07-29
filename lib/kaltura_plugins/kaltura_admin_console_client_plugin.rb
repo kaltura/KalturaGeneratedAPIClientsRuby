@@ -46,23 +46,6 @@ module Kaltura
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
-	class KalturaInvestigateFlavorAssetData < KalturaObjectBase
-		attr_accessor :flavor_asset
-		attr_accessor :file_syncs
-		attr_accessor :media_infos
-		attr_accessor :flavor_params
-		attr_accessor :flavor_params_outputs
-
-	end
-
-	class KalturaInvestigateThumbAssetData < KalturaObjectBase
-		attr_accessor :thumb_asset
-		attr_accessor :file_syncs
-		attr_accessor :thumb_params
-		attr_accessor :thumb_params_outputs
-
-	end
-
 	class KalturaTrackEntry < KalturaObjectBase
 		attr_accessor :id
 		attr_accessor :track_event_type

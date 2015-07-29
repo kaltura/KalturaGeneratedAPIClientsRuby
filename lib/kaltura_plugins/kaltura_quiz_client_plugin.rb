@@ -148,6 +148,8 @@ module Kaltura
 	end
 
 	class KalturaAnswerCuePointBaseFilter < KalturaCuePointFilter
+		attr_accessor :parent_id_equal
+		attr_accessor :parent_id_in
 
 	end
 

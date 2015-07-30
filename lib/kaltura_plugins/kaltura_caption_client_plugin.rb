@@ -83,6 +83,9 @@ module Kaltura
 		# The parent id of the asset
 		# 	 
 		attr_accessor :parent_id
+		# The Accuracy of the caption content
+		# 	 
+		attr_accessor :accuracy
 
 		def caption_params_id=(val)
 			@caption_params_id = val.to_i
@@ -92,6 +95,9 @@ module Kaltura
 		end
 		def status=(val)
 			@status = val.to_i
+		end
+		def accuracy=(val)
+			@accuracy = val.to_i
 		end
 	end
 

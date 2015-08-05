@@ -2329,6 +2329,8 @@ module Kaltura
 
 	class KalturaReportType
 		QUIZ = "quiz.QUIZ"
+		QUIZ_AGGREGATE_BY_QUESTION = "quiz.QUIZ_AGGREGATE_BY_QUESTION"
+		QUIZ_USER_AGGREGATE_BY_QUESTION = "quiz.QUIZ_USER_AGGREGATE_BY_QUESTION"
 		QUIZ_USER_PERCENTAGE = "quiz.QUIZ_USER_PERCENTAGE"
 		TOP_CONTENT = "1"
 		CONTENT_DROPOFF = "2"
@@ -2386,6 +2388,7 @@ module Kaltura
 		GREATER_THAN_OR_EQUAL = "3"
 		LESS_THAN = "4"
 		LESS_THAN_OR_EQUAL = "5"
+		NOT_EQUAL = "6"
 	end
 
 	class KalturaSourceType
@@ -10563,6 +10566,14 @@ module Kaltura
 	class KalturaSearchComparableCondition < KalturaSearchCondition
 		attr_accessor :comparison
 
+	end
+
+	class KalturaSearchMatchCondition < KalturaSearchCondition
+		attr_accessor :not
+
+		def not=(val)
+			@not = to_b(val)
+		end
 	end
 
 	class KalturaSiteCondition < KalturaMatchCondition

@@ -801,13 +801,6 @@ module Kaltura
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
-	class KalturaAppTokenHashType
-		MD5 = "MD5"
-		SHA1 = "SHA1"
-		SHA256 = "SHA256"
-		SHA512 = "SHA512"
-	end
-
 	class KalturaAppTokenOrderBy
 		CREATED_AT_ASC = "+createdAt"
 		UPDATED_AT_ASC = "+updatedAt"
@@ -858,6 +851,39 @@ module Kaltura
 		VORBIS = "vorbis"
 		WMA = "wma"
 		WMAPRO = "wmapro"
+	end
+
+	class KalturaBaseEntryCompareAttribute
+		ACCESS_CONTROL_ID = "accessControlId"
+		CREATED_AT = "createdAt"
+		END_DATE = "endDate"
+		MODERATION_COUNT = "moderationCount"
+		MODERATION_STATUS = "moderationStatus"
+		PARTNER_ID = "partnerId"
+		PARTNER_SORT_VALUE = "partnerSortValue"
+		RANK = "rank"
+		REPLACEMENT_STATUS = "replacementStatus"
+		START_DATE = "startDate"
+		STATUS = "status"
+		TOTAL_RANK = "totalRank"
+		TYPE = "type"
+		UPDATED_AT = "updatedAt"
+	end
+
+	class KalturaBaseEntryMatchAttribute
+		ADMIN_TAGS = "adminTags"
+		CATEGORIES_IDS = "categoriesIds"
+		CREATOR_ID = "creatorId"
+		DESCRIPTION = "description"
+		GROUP_ID = "groupId"
+		ID = "id"
+		NAME = "name"
+		REFERENCE_ID = "referenceId"
+		REPLACED_ENTRY_ID = "replacedEntryId"
+		REPLACING_ENTRY_ID = "replacingEntryId"
+		SEARCH_TEXT = "searchText"
+		TAGS = "tags"
+		USER_ID = "userId"
 	end
 
 	class KalturaBaseEntryOrderBy
@@ -1151,6 +1177,39 @@ module Kaltura
 		LIVE_STREAM = "2"
 	end
 
+	class KalturaDataEntryCompareAttribute
+		ACCESS_CONTROL_ID = "accessControlId"
+		CREATED_AT = "createdAt"
+		END_DATE = "endDate"
+		MODERATION_COUNT = "moderationCount"
+		MODERATION_STATUS = "moderationStatus"
+		PARTNER_ID = "partnerId"
+		PARTNER_SORT_VALUE = "partnerSortValue"
+		RANK = "rank"
+		REPLACEMENT_STATUS = "replacementStatus"
+		START_DATE = "startDate"
+		STATUS = "status"
+		TOTAL_RANK = "totalRank"
+		TYPE = "type"
+		UPDATED_AT = "updatedAt"
+	end
+
+	class KalturaDataEntryMatchAttribute
+		ADMIN_TAGS = "adminTags"
+		CATEGORIES_IDS = "categoriesIds"
+		CREATOR_ID = "creatorId"
+		DESCRIPTION = "description"
+		GROUP_ID = "groupId"
+		ID = "id"
+		NAME = "name"
+		REFERENCE_ID = "referenceId"
+		REPLACED_ENTRY_ID = "replacedEntryId"
+		REPLACING_ENTRY_ID = "replacingEntryId"
+		SEARCH_TEXT = "searchText"
+		TAGS = "tags"
+		USER_ID = "userId"
+	end
+
 	class KalturaDataEntryOrderBy
 		CREATED_AT_ASC = "+createdAt"
 		END_DATE_ASC = "+endDate"
@@ -1301,6 +1360,39 @@ module Kaltura
 		LIVE_AKAMAI_HDS = "1013"
 	end
 
+	class KalturaDocumentEntryCompareAttribute
+		ACCESS_CONTROL_ID = "accessControlId"
+		CREATED_AT = "createdAt"
+		END_DATE = "endDate"
+		MODERATION_COUNT = "moderationCount"
+		MODERATION_STATUS = "moderationStatus"
+		PARTNER_ID = "partnerId"
+		PARTNER_SORT_VALUE = "partnerSortValue"
+		RANK = "rank"
+		REPLACEMENT_STATUS = "replacementStatus"
+		START_DATE = "startDate"
+		STATUS = "status"
+		TOTAL_RANK = "totalRank"
+		TYPE = "type"
+		UPDATED_AT = "updatedAt"
+	end
+
+	class KalturaDocumentEntryMatchAttribute
+		ADMIN_TAGS = "adminTags"
+		CATEGORIES_IDS = "categoriesIds"
+		CREATOR_ID = "creatorId"
+		DESCRIPTION = "description"
+		GROUP_ID = "groupId"
+		ID = "id"
+		NAME = "name"
+		REFERENCE_ID = "referenceId"
+		REPLACED_ENTRY_ID = "replacedEntryId"
+		REPLACING_ENTRY_ID = "replacingEntryId"
+		SEARCH_TEXT = "searchText"
+		TAGS = "tags"
+		USER_ID = "userId"
+	end
+
 	class KalturaDurationType
 		LONG = "long"
 		MEDIUM = "medium"
@@ -1356,6 +1448,47 @@ module Kaltura
 		LIVE_STREAM = "7"
 		LIVE_CHANNEL = "8"
 		DOCUMENT = "10"
+	end
+
+	class KalturaExternalMediaEntryCompareAttribute
+		ACCESS_CONTROL_ID = "accessControlId"
+		CREATED_AT = "createdAt"
+		END_DATE = "endDate"
+		LAST_PLAYED_AT = "lastPlayedAt"
+		MEDIA_DATE = "mediaDate"
+		MEDIA_TYPE = "mediaType"
+		MODERATION_COUNT = "moderationCount"
+		MODERATION_STATUS = "moderationStatus"
+		MS_DURATION = "msDuration"
+		PARTNER_ID = "partnerId"
+		PARTNER_SORT_VALUE = "partnerSortValue"
+		PLAYS = "plays"
+		RANK = "rank"
+		REPLACEMENT_STATUS = "replacementStatus"
+		START_DATE = "startDate"
+		STATUS = "status"
+		TOTAL_RANK = "totalRank"
+		TYPE = "type"
+		UPDATED_AT = "updatedAt"
+		VIEWS = "views"
+	end
+
+	class KalturaExternalMediaEntryMatchAttribute
+		ADMIN_TAGS = "adminTags"
+		CATEGORIES_IDS = "categoriesIds"
+		CREATOR_ID = "creatorId"
+		DESCRIPTION = "description"
+		DURATION_TYPE = "durationType"
+		FLAVOR_PARAMS_IDS = "flavorParamsIds"
+		GROUP_ID = "groupId"
+		ID = "id"
+		NAME = "name"
+		REFERENCE_ID = "referenceId"
+		REPLACED_ENTRY_ID = "replacedEntryId"
+		REPLACING_ENTRY_ID = "replacingEntryId"
+		SEARCH_TEXT = "searchText"
+		TAGS = "tags"
+		USER_ID = "userId"
 	end
 
 	class KalturaFileAssetObjectType
@@ -1865,6 +1998,47 @@ module Kaltura
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
+	class KalturaLiveChannelCompareAttribute
+		ACCESS_CONTROL_ID = "accessControlId"
+		CREATED_AT = "createdAt"
+		END_DATE = "endDate"
+		LAST_PLAYED_AT = "lastPlayedAt"
+		MEDIA_DATE = "mediaDate"
+		MEDIA_TYPE = "mediaType"
+		MODERATION_COUNT = "moderationCount"
+		MODERATION_STATUS = "moderationStatus"
+		MS_DURATION = "msDuration"
+		PARTNER_ID = "partnerId"
+		PARTNER_SORT_VALUE = "partnerSortValue"
+		PLAYS = "plays"
+		RANK = "rank"
+		REPLACEMENT_STATUS = "replacementStatus"
+		START_DATE = "startDate"
+		STATUS = "status"
+		TOTAL_RANK = "totalRank"
+		TYPE = "type"
+		UPDATED_AT = "updatedAt"
+		VIEWS = "views"
+	end
+
+	class KalturaLiveChannelMatchAttribute
+		ADMIN_TAGS = "adminTags"
+		CATEGORIES_IDS = "categoriesIds"
+		CREATOR_ID = "creatorId"
+		DESCRIPTION = "description"
+		DURATION_TYPE = "durationType"
+		FLAVOR_PARAMS_IDS = "flavorParamsIds"
+		GROUP_ID = "groupId"
+		ID = "id"
+		NAME = "name"
+		REFERENCE_ID = "referenceId"
+		REPLACED_ENTRY_ID = "replacedEntryId"
+		REPLACING_ENTRY_ID = "replacingEntryId"
+		SEARCH_TEXT = "searchText"
+		TAGS = "tags"
+		USER_ID = "userId"
+	end
+
 	class KalturaLiveChannelOrderBy
 		CREATED_AT_ASC = "+createdAt"
 		DURATION_ASC = "+duration"
@@ -1929,6 +2103,47 @@ module Kaltura
 		VIDEO_AND_AUDIO = "1"
 	end
 
+	class KalturaLiveEntryCompareAttribute
+		ACCESS_CONTROL_ID = "accessControlId"
+		CREATED_AT = "createdAt"
+		END_DATE = "endDate"
+		LAST_PLAYED_AT = "lastPlayedAt"
+		MEDIA_DATE = "mediaDate"
+		MEDIA_TYPE = "mediaType"
+		MODERATION_COUNT = "moderationCount"
+		MODERATION_STATUS = "moderationStatus"
+		MS_DURATION = "msDuration"
+		PARTNER_ID = "partnerId"
+		PARTNER_SORT_VALUE = "partnerSortValue"
+		PLAYS = "plays"
+		RANK = "rank"
+		REPLACEMENT_STATUS = "replacementStatus"
+		START_DATE = "startDate"
+		STATUS = "status"
+		TOTAL_RANK = "totalRank"
+		TYPE = "type"
+		UPDATED_AT = "updatedAt"
+		VIEWS = "views"
+	end
+
+	class KalturaLiveEntryMatchAttribute
+		ADMIN_TAGS = "adminTags"
+		CATEGORIES_IDS = "categoriesIds"
+		CREATOR_ID = "creatorId"
+		DESCRIPTION = "description"
+		DURATION_TYPE = "durationType"
+		FLAVOR_PARAMS_IDS = "flavorParamsIds"
+		GROUP_ID = "groupId"
+		ID = "id"
+		NAME = "name"
+		REFERENCE_ID = "referenceId"
+		REPLACED_ENTRY_ID = "replacedEntryId"
+		REPLACING_ENTRY_ID = "replacingEntryId"
+		SEARCH_TEXT = "searchText"
+		TAGS = "tags"
+		USER_ID = "userId"
+	end
+
 	class KalturaLiveEntryOrderBy
 		CREATED_AT_ASC = "+createdAt"
 		DURATION_ASC = "+duration"
@@ -1986,6 +2201,47 @@ module Kaltura
 		PARTNER_TOTAL = "PARTNER_TOTAL"
 	end
 
+	class KalturaLiveStreamAdminEntryCompareAttribute
+		ACCESS_CONTROL_ID = "accessControlId"
+		CREATED_AT = "createdAt"
+		END_DATE = "endDate"
+		LAST_PLAYED_AT = "lastPlayedAt"
+		MEDIA_DATE = "mediaDate"
+		MEDIA_TYPE = "mediaType"
+		MODERATION_COUNT = "moderationCount"
+		MODERATION_STATUS = "moderationStatus"
+		MS_DURATION = "msDuration"
+		PARTNER_ID = "partnerId"
+		PARTNER_SORT_VALUE = "partnerSortValue"
+		PLAYS = "plays"
+		RANK = "rank"
+		REPLACEMENT_STATUS = "replacementStatus"
+		START_DATE = "startDate"
+		STATUS = "status"
+		TOTAL_RANK = "totalRank"
+		TYPE = "type"
+		UPDATED_AT = "updatedAt"
+		VIEWS = "views"
+	end
+
+	class KalturaLiveStreamAdminEntryMatchAttribute
+		ADMIN_TAGS = "adminTags"
+		CATEGORIES_IDS = "categoriesIds"
+		CREATOR_ID = "creatorId"
+		DESCRIPTION = "description"
+		DURATION_TYPE = "durationType"
+		FLAVOR_PARAMS_IDS = "flavorParamsIds"
+		GROUP_ID = "groupId"
+		ID = "id"
+		NAME = "name"
+		REFERENCE_ID = "referenceId"
+		REPLACED_ENTRY_ID = "replacedEntryId"
+		REPLACING_ENTRY_ID = "replacingEntryId"
+		SEARCH_TEXT = "searchText"
+		TAGS = "tags"
+		USER_ID = "userId"
+	end
+
 	class KalturaLiveStreamAdminEntryOrderBy
 		CREATED_AT_ASC = "+createdAt"
 		DURATION_ASC = "+duration"
@@ -2023,6 +2279,47 @@ module Kaltura
 		UPDATED_AT_DESC = "-updatedAt"
 		VIEWS_DESC = "-views"
 		WEIGHT_DESC = "-weight"
+	end
+
+	class KalturaLiveStreamEntryCompareAttribute
+		ACCESS_CONTROL_ID = "accessControlId"
+		CREATED_AT = "createdAt"
+		END_DATE = "endDate"
+		LAST_PLAYED_AT = "lastPlayedAt"
+		MEDIA_DATE = "mediaDate"
+		MEDIA_TYPE = "mediaType"
+		MODERATION_COUNT = "moderationCount"
+		MODERATION_STATUS = "moderationStatus"
+		MS_DURATION = "msDuration"
+		PARTNER_ID = "partnerId"
+		PARTNER_SORT_VALUE = "partnerSortValue"
+		PLAYS = "plays"
+		RANK = "rank"
+		REPLACEMENT_STATUS = "replacementStatus"
+		START_DATE = "startDate"
+		STATUS = "status"
+		TOTAL_RANK = "totalRank"
+		TYPE = "type"
+		UPDATED_AT = "updatedAt"
+		VIEWS = "views"
+	end
+
+	class KalturaLiveStreamEntryMatchAttribute
+		ADMIN_TAGS = "adminTags"
+		CATEGORIES_IDS = "categoriesIds"
+		CREATOR_ID = "creatorId"
+		DESCRIPTION = "description"
+		DURATION_TYPE = "durationType"
+		FLAVOR_PARAMS_IDS = "flavorParamsIds"
+		GROUP_ID = "groupId"
+		ID = "id"
+		NAME = "name"
+		REFERENCE_ID = "referenceId"
+		REPLACED_ENTRY_ID = "replacedEntryId"
+		REPLACING_ENTRY_ID = "replacingEntryId"
+		SEARCH_TEXT = "searchText"
+		TAGS = "tags"
+		USER_ID = "userId"
 	end
 
 	class KalturaLiveStreamEntryOrderBy
@@ -2109,6 +2406,47 @@ module Kaltura
 		MAIL_TYPE_LIVE_REPORT_EXPORT_ABORT = "132"
 	end
 
+	class KalturaMediaEntryCompareAttribute
+		ACCESS_CONTROL_ID = "accessControlId"
+		CREATED_AT = "createdAt"
+		END_DATE = "endDate"
+		LAST_PLAYED_AT = "lastPlayedAt"
+		MEDIA_DATE = "mediaDate"
+		MEDIA_TYPE = "mediaType"
+		MODERATION_COUNT = "moderationCount"
+		MODERATION_STATUS = "moderationStatus"
+		MS_DURATION = "msDuration"
+		PARTNER_ID = "partnerId"
+		PARTNER_SORT_VALUE = "partnerSortValue"
+		PLAYS = "plays"
+		RANK = "rank"
+		REPLACEMENT_STATUS = "replacementStatus"
+		START_DATE = "startDate"
+		STATUS = "status"
+		TOTAL_RANK = "totalRank"
+		TYPE = "type"
+		UPDATED_AT = "updatedAt"
+		VIEWS = "views"
+	end
+
+	class KalturaMediaEntryMatchAttribute
+		ADMIN_TAGS = "adminTags"
+		CATEGORIES_IDS = "categoriesIds"
+		CREATOR_ID = "creatorId"
+		DESCRIPTION = "description"
+		DURATION_TYPE = "durationType"
+		FLAVOR_PARAMS_IDS = "flavorParamsIds"
+		GROUP_ID = "groupId"
+		ID = "id"
+		NAME = "name"
+		REFERENCE_ID = "referenceId"
+		REPLACED_ENTRY_ID = "replacedEntryId"
+		REPLACING_ENTRY_ID = "replacingEntryId"
+		SEARCH_TEXT = "searchText"
+		TAGS = "tags"
+		USER_ID = "userId"
+	end
+
 	class KalturaMediaEntryOrderBy
 		CREATED_AT_ASC = "+createdAt"
 		DURATION_ASC = "+duration"
@@ -2156,6 +2494,44 @@ module Kaltura
 	class KalturaMediaParserType
 		MEDIAINFO = "0"
 		FFMPEG = "1"
+	end
+
+	class KalturaMixEntryCompareAttribute
+		ACCESS_CONTROL_ID = "accessControlId"
+		CREATED_AT = "createdAt"
+		END_DATE = "endDate"
+		LAST_PLAYED_AT = "lastPlayedAt"
+		MODERATION_COUNT = "moderationCount"
+		MODERATION_STATUS = "moderationStatus"
+		MS_DURATION = "msDuration"
+		PARTNER_ID = "partnerId"
+		PARTNER_SORT_VALUE = "partnerSortValue"
+		PLAYS = "plays"
+		RANK = "rank"
+		REPLACEMENT_STATUS = "replacementStatus"
+		START_DATE = "startDate"
+		STATUS = "status"
+		TOTAL_RANK = "totalRank"
+		TYPE = "type"
+		UPDATED_AT = "updatedAt"
+		VIEWS = "views"
+	end
+
+	class KalturaMixEntryMatchAttribute
+		ADMIN_TAGS = "adminTags"
+		CATEGORIES_IDS = "categoriesIds"
+		CREATOR_ID = "creatorId"
+		DESCRIPTION = "description"
+		DURATION_TYPE = "durationType"
+		GROUP_ID = "groupId"
+		ID = "id"
+		NAME = "name"
+		REFERENCE_ID = "referenceId"
+		REPLACED_ENTRY_ID = "replacedEntryId"
+		REPLACING_ENTRY_ID = "replacingEntryId"
+		SEARCH_TEXT = "searchText"
+		TAGS = "tags"
+		USER_ID = "userId"
 	end
 
 	class KalturaMixEntryOrderBy
@@ -2243,6 +2619,44 @@ module Kaltura
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
+	class KalturaPlayableEntryCompareAttribute
+		ACCESS_CONTROL_ID = "accessControlId"
+		CREATED_AT = "createdAt"
+		END_DATE = "endDate"
+		LAST_PLAYED_AT = "lastPlayedAt"
+		MODERATION_COUNT = "moderationCount"
+		MODERATION_STATUS = "moderationStatus"
+		MS_DURATION = "msDuration"
+		PARTNER_ID = "partnerId"
+		PARTNER_SORT_VALUE = "partnerSortValue"
+		PLAYS = "plays"
+		RANK = "rank"
+		REPLACEMENT_STATUS = "replacementStatus"
+		START_DATE = "startDate"
+		STATUS = "status"
+		TOTAL_RANK = "totalRank"
+		TYPE = "type"
+		UPDATED_AT = "updatedAt"
+		VIEWS = "views"
+	end
+
+	class KalturaPlayableEntryMatchAttribute
+		ADMIN_TAGS = "adminTags"
+		CATEGORIES_IDS = "categoriesIds"
+		CREATOR_ID = "creatorId"
+		DESCRIPTION = "description"
+		DURATION_TYPE = "durationType"
+		GROUP_ID = "groupId"
+		ID = "id"
+		NAME = "name"
+		REFERENCE_ID = "referenceId"
+		REPLACED_ENTRY_ID = "replacedEntryId"
+		REPLACING_ENTRY_ID = "replacingEntryId"
+		SEARCH_TEXT = "searchText"
+		TAGS = "tags"
+		USER_ID = "userId"
+	end
+
 	class KalturaPlayableEntryOrderBy
 		CREATED_AT_ASC = "+createdAt"
 		DURATION_ASC = "+duration"
@@ -2290,6 +2704,39 @@ module Kaltura
 		RTMP = "rtmp"
 		RTSP = "rtsp"
 		SILVER_LIGHT = "sl"
+	end
+
+	class KalturaPlaylistCompareAttribute
+		ACCESS_CONTROL_ID = "accessControlId"
+		CREATED_AT = "createdAt"
+		END_DATE = "endDate"
+		MODERATION_COUNT = "moderationCount"
+		MODERATION_STATUS = "moderationStatus"
+		PARTNER_ID = "partnerId"
+		PARTNER_SORT_VALUE = "partnerSortValue"
+		RANK = "rank"
+		REPLACEMENT_STATUS = "replacementStatus"
+		START_DATE = "startDate"
+		STATUS = "status"
+		TOTAL_RANK = "totalRank"
+		TYPE = "type"
+		UPDATED_AT = "updatedAt"
+	end
+
+	class KalturaPlaylistMatchAttribute
+		ADMIN_TAGS = "adminTags"
+		CATEGORIES_IDS = "categoriesIds"
+		CREATOR_ID = "creatorId"
+		DESCRIPTION = "description"
+		GROUP_ID = "groupId"
+		ID = "id"
+		NAME = "name"
+		REFERENCE_ID = "referenceId"
+		REPLACED_ENTRY_ID = "replacedEntryId"
+		REPLACING_ENTRY_ID = "replacingEntryId"
+		SEARCH_TEXT = "searchText"
+		TAGS = "tags"
+		USER_ID = "userId"
 	end
 
 	class KalturaPlaylistOrderBy
@@ -2838,7 +3285,6 @@ module Kaltura
 		# Comma separated privileges to be applied on KS (Kaltura Session) that created using the current token
 		# 	 
 		attr_accessor :session_privileges
-		attr_accessor :hash_type
 
 		def partner_id=(val)
 			@partner_id = val.to_i
@@ -7529,6 +7975,11 @@ module Kaltura
 
 	end
 
+	class KalturaAttributeCondition < KalturaSearchItem
+		attr_accessor :value
+
+	end
+
 	class KalturaAuthenticatedCondition < KalturaCondition
 		# The privelege needed to remove the restriction
 		# 	 
@@ -10571,9 +11022,22 @@ module Kaltura
 
 	end
 
+	class KalturaSearchComparableAttributeCondition < KalturaAttributeCondition
+		attr_accessor :comparison
+
+	end
+
 	class KalturaSearchComparableCondition < KalturaSearchCondition
 		attr_accessor :comparison
 
+	end
+
+	class KalturaSearchMatchAttributeCondition < KalturaAttributeCondition
+		attr_accessor :not
+
+		def not=(val)
+			@not = to_b(val)
+		end
 	end
 
 	class KalturaSearchMatchCondition < KalturaSearchCondition
@@ -10717,6 +11181,22 @@ module Kaltura
 
 	end
 
+	# Auto-generated class.
+	#  Used to search KalturaBaseEntry attributes. Use KalturaBaseEntryCompareAttribute enum to provide attribute name.
+	# /
+	class KalturaBaseEntryCompareAttributeCondition < KalturaSearchComparableAttributeCondition
+		attr_accessor :attribute
+
+	end
+
+	# Auto-generated class.
+	#  Used to search KalturaBaseEntry attributes. Use KalturaBaseEntryMatchAttribute enum to provide attribute name.
+	# /
+	class KalturaBaseEntryMatchAttributeCondition < KalturaSearchMatchAttributeCondition
+		attr_accessor :attribute
+
+	end
+
 	class KalturaBatchJobFilterExt < KalturaBatchJobFilter
 		attr_accessor :job_type_and_sub_type_in
 
@@ -10768,6 +11248,22 @@ module Kaltura
 
 	end
 
+	# Auto-generated class.
+	#  Used to search KalturaDataEntry attributes. Use KalturaDataEntryCompareAttribute enum to provide attribute name.
+	# /
+	class KalturaDataEntryCompareAttributeCondition < KalturaSearchComparableAttributeCondition
+		attr_accessor :attribute
+
+	end
+
+	# Auto-generated class.
+	#  Used to search KalturaDataEntry attributes. Use KalturaDataEntryMatchAttribute enum to provide attribute name.
+	# /
+	class KalturaDataEntryMatchAttributeCondition < KalturaSearchMatchAttributeCondition
+		attr_accessor :attribute
+
+	end
+
 	class KalturaDeliveryProfileAkamaiAppleHttpManifestBaseFilter < KalturaDeliveryProfileFilter
 
 	end
@@ -10804,6 +11300,22 @@ module Kaltura
 
 	end
 
+	# Auto-generated class.
+	#  Used to search KalturaDocumentEntry attributes. Use KalturaDocumentEntryCompareAttribute enum to provide attribute name.
+	# /
+	class KalturaDocumentEntryCompareAttributeCondition < KalturaSearchComparableAttributeCondition
+		attr_accessor :attribute
+
+	end
+
+	# Auto-generated class.
+	#  Used to search KalturaDocumentEntry attributes. Use KalturaDocumentEntryMatchAttribute enum to provide attribute name.
+	# /
+	class KalturaDocumentEntryMatchAttributeCondition < KalturaSearchMatchAttributeCondition
+		attr_accessor :attribute
+
+	end
+
 	# Evaluates PHP statement, depends on the execution context
 	#  
 	class KalturaEvalBooleanField < KalturaBooleanField
@@ -10819,6 +11331,22 @@ module Kaltura
 		# PHP code
 		# 	 
 		attr_accessor :code
+
+	end
+
+	# Auto-generated class.
+	#  Used to search KalturaExternalMediaEntry attributes. Use KalturaExternalMediaEntryCompareAttribute enum to provide attribute name.
+	# /
+	class KalturaExternalMediaEntryCompareAttributeCondition < KalturaSearchComparableAttributeCondition
+		attr_accessor :attribute
+
+	end
+
+	# Auto-generated class.
+	#  Used to search KalturaExternalMediaEntry attributes. Use KalturaExternalMediaEntryMatchAttribute enum to provide attribute name.
+	# /
+	class KalturaExternalMediaEntryMatchAttributeCondition < KalturaSearchMatchAttributeCondition
+		attr_accessor :attribute
 
 	end
 
@@ -10848,11 +11376,107 @@ module Kaltura
 
 	end
 
+	# Auto-generated class.
+	#  Used to search KalturaLiveChannel attributes. Use KalturaLiveChannelCompareAttribute enum to provide attribute name.
+	# /
+	class KalturaLiveChannelCompareAttributeCondition < KalturaSearchComparableAttributeCondition
+		attr_accessor :attribute
+
+	end
+
+	# Auto-generated class.
+	#  Used to search KalturaLiveChannel attributes. Use KalturaLiveChannelMatchAttribute enum to provide attribute name.
+	# /
+	class KalturaLiveChannelMatchAttributeCondition < KalturaSearchMatchAttributeCondition
+		attr_accessor :attribute
+
+	end
+
 	class KalturaLiveChannelSegmentFilter < KalturaLiveChannelSegmentBaseFilter
 
 	end
 
+	# Auto-generated class.
+	#  Used to search KalturaLiveEntry attributes. Use KalturaLiveEntryCompareAttribute enum to provide attribute name.
+	# /
+	class KalturaLiveEntryCompareAttributeCondition < KalturaSearchComparableAttributeCondition
+		attr_accessor :attribute
+
+	end
+
+	# Auto-generated class.
+	#  Used to search KalturaLiveEntry attributes. Use KalturaLiveEntryMatchAttribute enum to provide attribute name.
+	# /
+	class KalturaLiveEntryMatchAttributeCondition < KalturaSearchMatchAttributeCondition
+		attr_accessor :attribute
+
+	end
+
+	# Auto-generated class.
+	#  Used to search KalturaLiveStreamAdminEntry attributes. Use KalturaLiveStreamAdminEntryCompareAttribute enum to provide attribute name.
+	# /
+	class KalturaLiveStreamAdminEntryCompareAttributeCondition < KalturaSearchComparableAttributeCondition
+		attr_accessor :attribute
+
+	end
+
+	# Auto-generated class.
+	#  Used to search KalturaLiveStreamAdminEntry attributes. Use KalturaLiveStreamAdminEntryMatchAttribute enum to provide attribute name.
+	# /
+	class KalturaLiveStreamAdminEntryMatchAttributeCondition < KalturaSearchMatchAttributeCondition
+		attr_accessor :attribute
+
+	end
+
+	# Auto-generated class.
+	#  Used to search KalturaLiveStreamEntry attributes. Use KalturaLiveStreamEntryCompareAttribute enum to provide attribute name.
+	# /
+	class KalturaLiveStreamEntryCompareAttributeCondition < KalturaSearchComparableAttributeCondition
+		attr_accessor :attribute
+
+	end
+
+	# Auto-generated class.
+	#  Used to search KalturaLiveStreamEntry attributes. Use KalturaLiveStreamEntryMatchAttribute enum to provide attribute name.
+	# /
+	class KalturaLiveStreamEntryMatchAttributeCondition < KalturaSearchMatchAttributeCondition
+		attr_accessor :attribute
+
+	end
+
+	# Auto-generated class.
+	#  Used to search KalturaMediaEntry attributes. Use KalturaMediaEntryCompareAttribute enum to provide attribute name.
+	# /
+	class KalturaMediaEntryCompareAttributeCondition < KalturaSearchComparableAttributeCondition
+		attr_accessor :attribute
+
+	end
+
+	# Auto-generated class.
+	#  Used to search KalturaMediaEntry attributes. Use KalturaMediaEntryMatchAttribute enum to provide attribute name.
+	# /
+	class KalturaMediaEntryMatchAttributeCondition < KalturaSearchMatchAttributeCondition
+		attr_accessor :attribute
+
+	end
+
 	class KalturaMediaFlavorParamsOutput < KalturaFlavorParamsOutput
+
+	end
+
+	# Auto-generated class.
+	#  Used to search KalturaMixEntry attributes. Use KalturaMixEntryCompareAttribute enum to provide attribute name.
+	# /
+	class KalturaMixEntryCompareAttributeCondition < KalturaSearchComparableAttributeCondition
+		attr_accessor :attribute
+
+	end
+
+	# Auto-generated class.
+	#  Used to search KalturaMixEntry attributes. Use KalturaMixEntryMatchAttribute enum to provide attribute name.
+	# /
+	class KalturaMixEntryMatchAttributeCondition < KalturaSearchMatchAttributeCondition
+		attr_accessor :attribute
 
 	end
 
@@ -10867,6 +11491,38 @@ module Kaltura
 	end
 
 	class KalturaPermissionItemFilter < KalturaPermissionItemBaseFilter
+
+	end
+
+	# Auto-generated class.
+	#  Used to search KalturaPlayableEntry attributes. Use KalturaPlayableEntryCompareAttribute enum to provide attribute name.
+	# /
+	class KalturaPlayableEntryCompareAttributeCondition < KalturaSearchComparableAttributeCondition
+		attr_accessor :attribute
+
+	end
+
+	# Auto-generated class.
+	#  Used to search KalturaPlayableEntry attributes. Use KalturaPlayableEntryMatchAttribute enum to provide attribute name.
+	# /
+	class KalturaPlayableEntryMatchAttributeCondition < KalturaSearchMatchAttributeCondition
+		attr_accessor :attribute
+
+	end
+
+	# Auto-generated class.
+	#  Used to search KalturaPlaylist attributes. Use KalturaPlaylistCompareAttribute enum to provide attribute name.
+	# /
+	class KalturaPlaylistCompareAttributeCondition < KalturaSearchComparableAttributeCondition
+		attr_accessor :attribute
+
+	end
+
+	# Auto-generated class.
+	#  Used to search KalturaPlaylist attributes. Use KalturaPlaylistMatchAttribute enum to provide attribute name.
+	# /
+	class KalturaPlaylistMatchAttributeCondition < KalturaSearchMatchAttributeCondition
+		attr_accessor :attribute
 
 	end
 

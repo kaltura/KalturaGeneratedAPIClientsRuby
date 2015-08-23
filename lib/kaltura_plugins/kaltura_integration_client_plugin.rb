@@ -60,4 +60,47 @@ module Kaltura
 	end
 
 
+	# Integration service lets you dispatch integration tasks
+	#  
+	class KalturaIntegrationService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		# Dispatch integration task
+		# 	 
+		def dispatch(data, object_type, object_id)
+			kparams = {}
+			client.add_param(kparams, 'data', data);
+			client.add_param(kparams, 'objectType', object_type);
+			client.add_param(kparams, 'objectId', object_id);
+			client.queue_service_action_call('integration_integration', 'dispatch', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+
+		def notify(id)
+			kparams = {}
+			# integration job id
+			client.add_param(kparams, 'id', id);
+			client.queue_service_action_call('integration_integration', 'notify', kparams);
+			if (client.is_multirequest)
+				return nil;
+			end
+			return client.do_queue();
+		end
+	end
+
+	class KalturaClient < KalturaClientBase
+		attr_reader :integration_service
+		def integration_service
+			if (@integration_service == nil)
+				@integration_service = KalturaIntegrationService.new(self)
+			end
+			return @integration_service
+		end
+	end
+
 end

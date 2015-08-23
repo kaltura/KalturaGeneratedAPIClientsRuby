@@ -924,6 +924,18 @@ module Kaltura
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
+	class KalturaBatchJobObjectType
+		ENTRY_DISTRIBUTION = "contentDistribution.EntryDistribution"
+		DROP_FOLDER_FILE = "dropFolderXmlBulkUpload.DropFolderFile"
+		METADATA = "metadata.Metadata"
+		METADATA_PROFILE = "metadata.MetadataProfile"
+		SCHEDULED_TASK_PROFILE = "scheduledTask.ScheduledTaskProfile"
+		ENTRY = "1"
+		CATEGORY = "2"
+		FILE_SYNC = "3"
+		ASSET = "4"
+	end
+
 	class KalturaBatchJobOrderBy
 		CREATED_AT_ASC = "+createdAt"
 		ESTIMATED_EFFORT_ASC = "+estimatedEffort"
@@ -959,6 +971,7 @@ module Kaltura
 		DROP_FOLDER_CONTENT_PROCESSOR = "dropFolder.DropFolderContentProcessor"
 		DROP_FOLDER_WATCHER = "dropFolder.DropFolderWatcher"
 		EVENT_NOTIFICATION_HANDLER = "eventNotification.EventNotificationHandler"
+		INTEGRATION = "integration.Integration"
 		SCHEDULED_TASK = "scheduledTask.ScheduledTask"
 		INDEX_TAGS = "tagSearch.IndexTagsByPrivacyContext"
 		TAG_RESOLVE = "tagSearch.TagResolve"

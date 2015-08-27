@@ -801,6 +801,13 @@ module Kaltura
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
+	class KalturaAppTokenHashType
+		MD5 = "MD5"
+		SHA1 = "SHA1"
+		SHA256 = "SHA256"
+		SHA512 = "SHA512"
+	end
+
 	class KalturaAppTokenOrderBy
 		CREATED_AT_ASC = "+createdAt"
 		UPDATED_AT_ASC = "+updatedAt"
@@ -3298,6 +3305,7 @@ module Kaltura
 		# Comma separated privileges to be applied on KS (Kaltura Session) that created using the current token
 		# 	 
 		attr_accessor :session_privileges
+		attr_accessor :hash_type
 
 		def partner_id=(val)
 			@partner_id = val.to_i

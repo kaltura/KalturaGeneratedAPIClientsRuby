@@ -6334,6 +6334,7 @@ module Kaltura
 		attr_accessor :partner_parent_id
 		attr_accessor :crm_id
 		attr_accessor :reference_id
+		attr_accessor :time_aligned_renditions
 
 		def id=(val)
 			@id = val.to_i
@@ -6397,6 +6398,9 @@ module Kaltura
 		end
 		def partner_parent_id=(val)
 			@partner_parent_id = val.to_i
+		end
+		def time_aligned_renditions=(val)
+			@time_aligned_renditions = to_b(val)
 		end
 	end
 
@@ -9596,6 +9600,7 @@ module Kaltura
 		attr_accessor :partner_package_equal
 		attr_accessor :partner_package_greater_than_or_equal
 		attr_accessor :partner_package_less_than_or_equal
+		attr_accessor :partner_package_in
 		attr_accessor :partner_group_type_equal
 		attr_accessor :partner_name_description_website_admin_name_admin_email_like
 

@@ -124,6 +124,7 @@ module Kaltura
 		attr_accessor :language
 		attr_accessor :audio_thumb_entry_id
 		attr_accessor :live_thumb_entry_id
+		attr_accessor :time_aligned_renditions
 
 		def id=(val)
 			@id = val.to_i
@@ -214,6 +215,9 @@ module Kaltura
 		end
 		def restrict_entry_by_metadata=(val)
 			@restrict_entry_by_metadata = to_b(val)
+		end
+		def time_aligned_renditions=(val)
+			@time_aligned_renditions = to_b(val)
 		end
 	end
 

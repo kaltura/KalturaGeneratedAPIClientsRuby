@@ -2845,6 +2845,7 @@ module Kaltura
 		ADD_TO_STORAGE = "4"
 		LIMIT_DELIVERY_PROFILES = "5"
 		SERVE_FROM_REMOTE_SERVER = "6"
+		REQUEST_HOST_REGEX = "7"
 	end
 
 	class KalturaSchemaType
@@ -7892,6 +7893,16 @@ module Kaltura
 
 	class KalturaAccessControlListResponse < KalturaListResponse
 		attr_accessor :objects
+
+	end
+
+	class KalturaAccessControlModifyRequestHostRegexAction < KalturaRuleAction
+		# Request host regex pattern
+		# 	 
+		attr_accessor :pattern
+		# Request host regex replacment
+		# 	 
+		attr_accessor :replacement
 
 	end
 

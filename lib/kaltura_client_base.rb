@@ -368,7 +368,7 @@ module Kaltura
 		def initialize(partner_id = -1,service_url="http://www.kaltura.com")
 			@service_url 	= service_url
 			@format 		= 2 # xml
-			@client_tag 	= "ruby:15-09-05"
+			@client_tag 	= "ruby:15-09-06"
 			@timeout 		= 120
 			@partner_id 	= partner_id
 			@requestHeaders = {}

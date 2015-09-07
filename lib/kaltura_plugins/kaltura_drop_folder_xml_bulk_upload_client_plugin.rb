@@ -33,6 +33,11 @@ module Kaltura
 
 	class KalturaDropFolderXmlBulkUploadFileHandlerConfig < KalturaDropFolderFileHandlerConfig
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 

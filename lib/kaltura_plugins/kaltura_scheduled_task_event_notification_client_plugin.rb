@@ -39,6 +39,12 @@ module Kaltura
 		def event_notification_template_id=(val)
 			@event_notification_template_id = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.event_notification_template_id = xml_element.elements['eventNotificationTemplateId'].text
+		end
+
 	end
 
 

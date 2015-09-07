@@ -45,6 +45,14 @@ module Kaltura
 		def metadata_profile_id=(val)
 			@metadata_profile_id = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
+			self.metadata_object_type = xml_element.elements['metadataObjectType'].text
+			self.xslt = xml_element.elements['xslt'].text
+		end
+
 	end
 
 

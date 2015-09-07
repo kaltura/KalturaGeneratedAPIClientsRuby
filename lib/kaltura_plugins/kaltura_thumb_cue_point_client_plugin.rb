@@ -65,12 +65,27 @@ module Kaltura
 		def sub_type=(val)
 			@sub_type = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.asset_id = xml_element.elements['assetId'].text
+			self.description = xml_element.elements['description'].text
+			self.title = xml_element.elements['title'].text
+			self.sub_type = xml_element.elements['subType'].text
+		end
+
 	end
 
 	class KalturaTimedThumbAsset < KalturaThumbAsset
 		# Associated thumb cue point ID
 		# 	 
 		attr_accessor :cue_point_id
+
+
+		def from_xml(xml_element)
+			super
+			self.cue_point_id = xml_element.elements['cuePointId'].text
+		end
 
 	end
 
@@ -87,17 +102,45 @@ module Kaltura
 		def sub_type_equal=(val)
 			@sub_type_equal = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.description_like = xml_element.elements['descriptionLike'].text
+			self.description_multi_like_or = xml_element.elements['descriptionMultiLikeOr'].text
+			self.description_multi_like_and = xml_element.elements['descriptionMultiLikeAnd'].text
+			self.title_like = xml_element.elements['titleLike'].text
+			self.title_multi_like_or = xml_element.elements['titleMultiLikeOr'].text
+			self.title_multi_like_and = xml_element.elements['titleMultiLikeAnd'].text
+			self.sub_type_equal = xml_element.elements['subTypeEqual'].text
+			self.sub_type_in = xml_element.elements['subTypeIn'].text
+		end
+
 	end
 
 	class KalturaThumbCuePointFilter < KalturaThumbCuePointBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
 	class KalturaTimedThumbAssetBaseFilter < KalturaThumbAssetFilter
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaTimedThumbAssetFilter < KalturaTimedThumbAssetBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 

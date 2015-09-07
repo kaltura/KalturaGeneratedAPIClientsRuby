@@ -53,6 +53,13 @@ module Kaltura
 		def max=(val)
 			@max = val.to_f
 		end
+
+		def from_xml(xml_element)
+			super
+			self.type = xml_element.elements['type'].text
+			self.max = xml_element.elements['max'].text
+		end
+
 	end
 
 	class KalturaSystemPartnerConfiguration < KalturaObjectBase
@@ -219,6 +226,74 @@ module Kaltura
 		def time_aligned_renditions=(val)
 			@time_aligned_renditions = to_b(val)
 		end
+
+		def from_xml(xml_element)
+			super
+			self.id = xml_element.elements['id'].text
+			self.partner_name = xml_element.elements['partnerName'].text
+			self.description = xml_element.elements['description'].text
+			self.admin_name = xml_element.elements['adminName'].text
+			self.admin_email = xml_element.elements['adminEmail'].text
+			self.host = xml_element.elements['host'].text
+			self.cdn_host = xml_element.elements['cdnHost'].text
+			self.cdn_host_white_list = xml_element.elements['cdnHostWhiteList'].text
+			self.thumbnail_host = xml_element.elements['thumbnailHost'].text
+			self.partner_package = xml_element.elements['partnerPackage'].text
+			self.monitor_usage = xml_element.elements['monitorUsage'].text
+			self.moderate_content = xml_element.elements['moderateContent'].text
+			self.storage_delete_from_kaltura = xml_element.elements['storageDeleteFromKaltura'].text
+			self.storage_serve_priority = xml_element.elements['storageServePriority'].text
+			self.kmc_version = xml_element.elements['kmcVersion'].text
+			self.restrict_thumbnail_by_ks = xml_element.elements['restrictThumbnailByKs'].text
+			self.support_animated_thumbnails = xml_element.elements['supportAnimatedThumbnails'].text
+			self.def_thumb_offset = xml_element.elements['defThumbOffset'].text
+			self.def_thumb_density = xml_element.elements['defThumbDensity'].text
+			self.user_session_role_id = xml_element.elements['userSessionRoleId'].text
+			self.admin_session_role_id = xml_element.elements['adminSessionRoleId'].text
+			self.always_allowed_permission_names = xml_element.elements['alwaysAllowedPermissionNames'].text
+			self.import_remote_source_for_convert = xml_element.elements['importRemoteSourceForConvert'].text
+			self.permissions = KalturaClientBase.object_from_xml(xml_element.elements['permissions'], 'KalturaPermission')
+			self.notifications_config = xml_element.elements['notificationsConfig'].text
+			self.allow_multi_notification = xml_element.elements['allowMultiNotification'].text
+			self.login_block_period = xml_element.elements['loginBlockPeriod'].text
+			self.num_prev_pass_to_keep = xml_element.elements['numPrevPassToKeep'].text
+			self.pass_replace_freq = xml_element.elements['passReplaceFreq'].text
+			self.is_first_login = xml_element.elements['isFirstLogin'].text
+			self.partner_group_type = xml_element.elements['partnerGroupType'].text
+			self.partner_parent_id = xml_element.elements['partnerParentId'].text
+			self.limits = KalturaClientBase.object_from_xml(xml_element.elements['limits'], 'KalturaSystemPartnerLimit')
+			self.streamer_type = xml_element.elements['streamerType'].text
+			self.media_protocol = xml_element.elements['mediaProtocol'].text
+			self.extended_free_trail_expiry_reason = xml_element.elements['extendedFreeTrailExpiryReason'].text
+			self.extended_free_trail_expiry_date = xml_element.elements['extendedFreeTrailExpiryDate'].text
+			self.extended_free_trail = xml_element.elements['extendedFreeTrail'].text
+			self.crm_id = xml_element.elements['crmId'].text
+			self.reference_id = xml_element.elements['referenceId'].text
+			self.crm_link = xml_element.elements['crmLink'].text
+			self.vertical_clasiffication = xml_element.elements['verticalClasiffication'].text
+			self.partner_package_class_of_service = xml_element.elements['partnerPackageClassOfService'].text
+			self.enable_bulk_upload_notifications_emails = xml_element.elements['enableBulkUploadNotificationsEmails'].text
+			self.delivery_profile_ids = xml_element.elements['deliveryProfileIds'].text
+			self.enforce_delivery = xml_element.elements['enforceDelivery'].text
+			self.bulk_upload_notifications_email = xml_element.elements['bulkUploadNotificationsEmail'].text
+			self.internal_use = xml_element.elements['internalUse'].text
+			self.default_live_stream_entry_source_type = xml_element.elements['defaultLiveStreamEntrySourceType'].text
+			self.live_stream_provision_params = xml_element.elements['liveStreamProvisionParams'].text
+			self.auto_moderate_entry_filter = KalturaClientBase.object_from_xml(xml_element.elements['autoModerateEntryFilter'], 'KalturaBaseEntryFilter')
+			self.logout_url = xml_element.elements['logoutUrl'].text
+			self.default_entitlement_enforcement = xml_element.elements['defaultEntitlementEnforcement'].text
+			self.cache_flavor_version = xml_element.elements['cacheFlavorVersion'].text
+			self.api_access_control_id = xml_element.elements['apiAccessControlId'].text
+			self.default_delivery_type = xml_element.elements['defaultDeliveryType'].text
+			self.default_embed_code_type = xml_element.elements['defaultEmbedCodeType'].text
+			self.custom_delivery_types = KalturaClientBase.object_from_xml(xml_element.elements['customDeliveryTypes'], 'KalturaKeyBooleanValue')
+			self.restrict_entry_by_metadata = xml_element.elements['restrictEntryByMetadata'].text
+			self.language = xml_element.elements['language'].text
+			self.audio_thumb_entry_id = xml_element.elements['audioThumbEntryId'].text
+			self.live_thumb_entry_id = xml_element.elements['liveThumbEntryId'].text
+			self.time_aligned_renditions = xml_element.elements['timeAlignedRenditions'].text
+		end
+
 	end
 
 	class KalturaSystemPartnerPackage < KalturaObjectBase
@@ -228,6 +303,13 @@ module Kaltura
 		def id=(val)
 			@id = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.id = xml_element.elements['id'].text
+			self.name = xml_element.elements['name'].text
+		end
+
 	end
 
 	class KalturaSystemPartnerUsageItem < KalturaObjectBase
@@ -355,6 +437,32 @@ module Kaltura
 		def transcoding_usage=(val)
 			@transcoding_usage = val.to_f
 		end
+
+		def from_xml(xml_element)
+			super
+			self.partner_id = xml_element.elements['partnerId'].text
+			self.partner_name = xml_element.elements['partnerName'].text
+			self.partner_status = xml_element.elements['partnerStatus'].text
+			self.partner_package = xml_element.elements['partnerPackage'].text
+			self.partner_created_at = xml_element.elements['partnerCreatedAt'].text
+			self.views = xml_element.elements['views'].text
+			self.plays = xml_element.elements['plays'].text
+			self.entries_count = xml_element.elements['entriesCount'].text
+			self.total_entries_count = xml_element.elements['totalEntriesCount'].text
+			self.video_entries_count = xml_element.elements['videoEntriesCount'].text
+			self.image_entries_count = xml_element.elements['imageEntriesCount'].text
+			self.audio_entries_count = xml_element.elements['audioEntriesCount'].text
+			self.mix_entries_count = xml_element.elements['mixEntriesCount'].text
+			self.bandwidth = xml_element.elements['bandwidth'].text
+			self.total_storage = xml_element.elements['totalStorage'].text
+			self.storage = xml_element.elements['storage'].text
+			self.peak_storage = xml_element.elements['peakStorage'].text
+			self.avg_storage = xml_element.elements['avgStorage'].text
+			self.combined_bandwidth_storage = xml_element.elements['combinedBandwidthStorage'].text
+			self.deleted_storage = xml_element.elements['deletedStorage'].text
+			self.transcoding_usage = xml_element.elements['transcodingUsage'].text
+		end
+
 	end
 
 	class KalturaSystemPartnerOveragedLimit < KalturaSystemPartnerLimit
@@ -367,6 +475,13 @@ module Kaltura
 		def overage_unit=(val)
 			@overage_unit = val.to_f
 		end
+
+		def from_xml(xml_element)
+			super
+			self.overage_price = xml_element.elements['overagePrice'].text
+			self.overage_unit = xml_element.elements['overageUnit'].text
+		end
+
 	end
 
 	class KalturaSystemPartnerUsageFilter < KalturaFilter
@@ -389,10 +504,24 @@ module Kaltura
 		def timezone_offset=(val)
 			@timezone_offset = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.from_date = xml_element.elements['fromDate'].text
+			self.to_date = xml_element.elements['toDate'].text
+			self.timezone_offset = xml_element.elements['timezoneOffset'].text
+		end
+
 	end
 
 	class KalturaSystemPartnerUsageListResponse < KalturaListResponse
 		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaSystemPartnerUsageItem')
+		end
 
 	end
 
@@ -403,6 +532,13 @@ module Kaltura
 		def partner_parent_id_equal=(val)
 			@partner_parent_id_equal = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.partner_parent_id_equal = xml_element.elements['partnerParentIdEqual'].text
+			self.partner_parent_id_in = xml_element.elements['partnerParentIdIn'].text
+		end
+
 	end
 
 
@@ -418,148 +554,147 @@ module Kaltura
 		# 	 
 		def get(partner_id)
 			kparams = {}
-			# X
-			client.add_param(kparams, 'partnerId', partner_id);
-			client.queue_service_action_call('systempartner_systempartner', 'get', kparams);
+			client.add_param(kparams, 'partnerId', partner_id)
+			client.queue_service_action_call('systempartner_systempartner', 'get', 'KalturaPartner', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def get_usage(partner_filter=KalturaNotImplemented, usage_filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'partnerFilter', partner_filter);
-			client.add_param(kparams, 'usageFilter', usage_filter);
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('systempartner_systempartner', 'getUsage', kparams);
+			client.add_param(kparams, 'partnerFilter', partner_filter)
+			client.add_param(kparams, 'usageFilter', usage_filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('systempartner_systempartner', 'getUsage', 'KalturaSystemPartnerUsageListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter);
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('systempartner_systempartner', 'list', kparams);
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('systempartner_systempartner', 'list', 'KalturaPartnerListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def update_status(partner_id, status, reason)
 			kparams = {}
-			client.add_param(kparams, 'partnerId', partner_id);
-			client.add_param(kparams, 'status', status);
-			client.add_param(kparams, 'reason', reason);
-			client.queue_service_action_call('systempartner_systempartner', 'updateStatus', kparams);
+			client.add_param(kparams, 'partnerId', partner_id)
+			client.add_param(kparams, 'status', status)
+			client.add_param(kparams, 'reason', reason)
+			client.queue_service_action_call('systempartner_systempartner', 'updateStatus', '', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def get_admin_session(partner_id, user_id=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'partnerId', partner_id);
-			client.add_param(kparams, 'userId', user_id);
-			client.queue_service_action_call('systempartner_systempartner', 'getAdminSession', kparams);
+			client.add_param(kparams, 'partnerId', partner_id)
+			client.add_param(kparams, 'userId', user_id)
+			client.queue_service_action_call('systempartner_systempartner', 'getAdminSession', 'string', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def update_configuration(partner_id, configuration)
 			kparams = {}
-			client.add_param(kparams, 'partnerId', partner_id);
-			client.add_param(kparams, 'configuration', configuration);
-			client.queue_service_action_call('systempartner_systempartner', 'updateConfiguration', kparams);
+			client.add_param(kparams, 'partnerId', partner_id)
+			client.add_param(kparams, 'configuration', configuration)
+			client.queue_service_action_call('systempartner_systempartner', 'updateConfiguration', '', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def get_configuration(partner_id)
 			kparams = {}
-			client.add_param(kparams, 'partnerId', partner_id);
-			client.queue_service_action_call('systempartner_systempartner', 'getConfiguration', kparams);
+			client.add_param(kparams, 'partnerId', partner_id)
+			client.queue_service_action_call('systempartner_systempartner', 'getConfiguration', 'KalturaSystemPartnerConfiguration', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def get_packages()
 			kparams = {}
-			client.queue_service_action_call('systempartner_systempartner', 'getPackages', kparams);
+			client.queue_service_action_call('systempartner_systempartner', 'getPackages', 'array', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def get_packages_class_of_service()
 			kparams = {}
-			client.queue_service_action_call('systempartner_systempartner', 'getPackagesClassOfService', kparams);
+			client.queue_service_action_call('systempartner_systempartner', 'getPackagesClassOfService', 'array', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def get_packages_vertical()
 			kparams = {}
-			client.queue_service_action_call('systempartner_systempartner', 'getPackagesVertical', kparams);
+			client.queue_service_action_call('systempartner_systempartner', 'getPackagesVertical', 'array', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def get_player_embed_code_types()
 			kparams = {}
-			client.queue_service_action_call('systempartner_systempartner', 'getPlayerEmbedCodeTypes', kparams);
+			client.queue_service_action_call('systempartner_systempartner', 'getPlayerEmbedCodeTypes', 'array', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def get_player_delivery_types()
 			kparams = {}
-			client.queue_service_action_call('systempartner_systempartner', 'getPlayerDeliveryTypes', kparams);
+			client.queue_service_action_call('systempartner_systempartner', 'getPlayerDeliveryTypes', 'array', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def reset_user_password(user_id, partner_id, new_password)
 			kparams = {}
-			client.add_param(kparams, 'userId', user_id);
-			client.add_param(kparams, 'partnerId', partner_id);
-			client.add_param(kparams, 'newPassword', new_password);
-			client.queue_service_action_call('systempartner_systempartner', 'resetUserPassword', kparams);
+			client.add_param(kparams, 'userId', user_id)
+			client.add_param(kparams, 'partnerId', partner_id)
+			client.add_param(kparams, 'newPassword', new_password)
+			client.queue_service_action_call('systempartner_systempartner', 'resetUserPassword', '', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def list_user_login_data(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter);
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('systempartner_systempartner', 'listUserLoginData', kparams);
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('systempartner_systempartner', 'listUserLoginData', 'KalturaUserLoginDataListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 	end
 
@@ -571,6 +706,7 @@ module Kaltura
 			end
 			return @system_partner_service
 		end
+		
 	end
 
 end

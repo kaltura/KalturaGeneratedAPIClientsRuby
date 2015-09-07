@@ -62,6 +62,20 @@ module Kaltura
 		def replace_media_content=(val)
 			@replace_media_content = to_b(val)
 		end
+
+		def from_xml(xml_element)
+			super
+			self.entry_id = xml_element.elements['entryId'].text
+			self.flavor_asset_id = xml_element.elements['flavorAssetId'].text
+			self.transcript_id = xml_element.elements['transcriptId'].text
+			self.caption_asset_formats = xml_element.elements['captionAssetFormats'].text
+			self.api_key = xml_element.elements['apiKey'].text
+			self.api_password = xml_element.elements['apiPassword'].text
+			self.spoken_language = xml_element.elements['spokenLanguage'].text
+			self.file_location = xml_element.elements['fileLocation'].text
+			self.replace_media_content = xml_element.elements['replaceMediaContent'].text
+		end
+
 	end
 
 

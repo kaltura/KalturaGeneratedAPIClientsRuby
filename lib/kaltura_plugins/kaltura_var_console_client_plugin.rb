@@ -157,15 +157,54 @@ module Kaltura
 		def transcoding_usage=(val)
 			@transcoding_usage = val.to_f
 		end
+
+		def from_xml(xml_element)
+			super
+			self.partner_id = xml_element.elements['partnerId'].text
+			self.partner_name = xml_element.elements['partnerName'].text
+			self.partner_status = xml_element.elements['partnerStatus'].text
+			self.partner_package = xml_element.elements['partnerPackage'].text
+			self.partner_created_at = xml_element.elements['partnerCreatedAt'].text
+			self.views = xml_element.elements['views'].text
+			self.plays = xml_element.elements['plays'].text
+			self.entries_count = xml_element.elements['entriesCount'].text
+			self.total_entries_count = xml_element.elements['totalEntriesCount'].text
+			self.video_entries_count = xml_element.elements['videoEntriesCount'].text
+			self.image_entries_count = xml_element.elements['imageEntriesCount'].text
+			self.audio_entries_count = xml_element.elements['audioEntriesCount'].text
+			self.mix_entries_count = xml_element.elements['mixEntriesCount'].text
+			self.bandwidth = xml_element.elements['bandwidth'].text
+			self.total_storage = xml_element.elements['totalStorage'].text
+			self.storage = xml_element.elements['storage'].text
+			self.deleted_storage = xml_element.elements['deletedStorage'].text
+			self.peak_storage = xml_element.elements['peakStorage'].text
+			self.avg_storage = xml_element.elements['avgStorage'].text
+			self.combined_storage_bandwidth = xml_element.elements['combinedStorageBandwidth'].text
+			self.transcoding_usage = xml_element.elements['transcodingUsage'].text
+			self.date_id = xml_element.elements['dateId'].text
+		end
+
 	end
 
 	class KalturaPartnerUsageListResponse < KalturaListResponse
 		attr_accessor :total
 		attr_accessor :objects
 
+
+		def from_xml(xml_element)
+			super
+			self.total = KalturaClientBase.object_from_xml(xml_element.elements['total'], 'KalturaVarPartnerUsageItem')
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaVarPartnerUsageItem')
+		end
+
 	end
 
 	class KalturaVarPartnerUsageTotalItem < KalturaVarPartnerUsageItem
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
@@ -183,6 +222,14 @@ module Kaltura
 		def group_type_eq=(val)
 			@group_type_eq = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.group_type_eq = xml_element.elements['groupTypeEq'].text
+			self.group_type_in = xml_element.elements['groupTypeIn'].text
+			self.partner_permissions_exist = xml_element.elements['partnerPermissionsExist'].text
+		end
+
 	end
 
 
@@ -197,27 +244,27 @@ module Kaltura
 		#      
 		def get_partner_usage(partner_filter=KalturaNotImplemented, usage_filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'partnerFilter', partner_filter);
-			client.add_param(kparams, 'usageFilter', usage_filter);
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('varconsole_varconsole', 'getPartnerUsage', kparams);
+			client.add_param(kparams, 'partnerFilter', partner_filter)
+			client.add_param(kparams, 'usageFilter', usage_filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('varconsole_varconsole', 'getPartnerUsage', 'KalturaPartnerUsageListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Function to change a sub-publisher's status
 		# 	 
 		def update_status(id, status)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.add_param(kparams, 'status', status);
-			client.queue_service_action_call('varconsole_varconsole', 'updateStatus', kparams);
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'status', status)
+			client.queue_service_action_call('varconsole_varconsole', 'updateStatus', '', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 	end
 
@@ -229,6 +276,7 @@ module Kaltura
 			end
 			return @var_console_service
 		end
+		
 	end
 
 end

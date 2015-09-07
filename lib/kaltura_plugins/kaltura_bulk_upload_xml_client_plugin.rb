@@ -34,6 +34,11 @@ module Kaltura
 	#  
 	class KalturaBulkUploadXmlJobData < KalturaBulkUploadJobData
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 

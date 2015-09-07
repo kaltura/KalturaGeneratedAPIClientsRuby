@@ -47,10 +47,26 @@ module Kaltura
 		def end_time=(val)
 			@end_time = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.asset = KalturaClientBase.object_from_xml(xml_element.elements['asset'], 'KalturaCaptionAsset')
+			self.entry = KalturaClientBase.object_from_xml(xml_element.elements['entry'], 'KalturaBaseEntry')
+			self.start_time = xml_element.elements['startTime'].text
+			self.end_time = xml_element.elements['endTime'].text
+			self.content = xml_element.elements['content'].text
+		end
+
 	end
 
 	class KalturaCaptionAssetItemListResponse < KalturaListResponse
 		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaCaptionAssetItem')
+		end
 
 	end
 
@@ -58,6 +74,14 @@ module Kaltura
 		attr_accessor :content_like
 		attr_accessor :content_multi_like_or
 		attr_accessor :content_multi_like_and
+
+
+		def from_xml(xml_element)
+			super
+			self.content_like = xml_element.elements['contentLike'].text
+			self.content_multi_like_or = xml_element.elements['contentMultiLikeOr'].text
+			self.content_multi_like_and = xml_element.elements['contentMultiLikeAnd'].text
+		end
 
 	end
 
@@ -89,6 +113,25 @@ module Kaltura
 		def end_time_less_than_or_equal=(val)
 			@end_time_less_than_or_equal = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.content_like = xml_element.elements['contentLike'].text
+			self.content_multi_like_or = xml_element.elements['contentMultiLikeOr'].text
+			self.content_multi_like_and = xml_element.elements['contentMultiLikeAnd'].text
+			self.partner_description_like = xml_element.elements['partnerDescriptionLike'].text
+			self.partner_description_multi_like_or = xml_element.elements['partnerDescriptionMultiLikeOr'].text
+			self.partner_description_multi_like_and = xml_element.elements['partnerDescriptionMultiLikeAnd'].text
+			self.language_equal = xml_element.elements['languageEqual'].text
+			self.language_in = xml_element.elements['languageIn'].text
+			self.label_equal = xml_element.elements['labelEqual'].text
+			self.label_in = xml_element.elements['labelIn'].text
+			self.start_time_greater_than_or_equal = xml_element.elements['startTimeGreaterThanOrEqual'].text
+			self.start_time_less_than_or_equal = xml_element.elements['startTimeLessThanOrEqual'].text
+			self.end_time_greater_than_or_equal = xml_element.elements['endTimeGreaterThanOrEqual'].text
+			self.end_time_less_than_or_equal = xml_element.elements['endTimeLessThanOrEqual'].text
+		end
+
 	end
 
 
@@ -103,28 +146,28 @@ module Kaltura
 		# 	 
 		def search(entry_filter=KalturaNotImplemented, caption_asset_item_filter=KalturaNotImplemented, caption_asset_item_pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'entryFilter', entry_filter);
-			client.add_param(kparams, 'captionAssetItemFilter', caption_asset_item_filter);
-			client.add_param(kparams, 'captionAssetItemPager', caption_asset_item_pager);
-			client.queue_service_action_call('captionsearch_captionassetitem', 'search', kparams);
+			client.add_param(kparams, 'entryFilter', entry_filter)
+			client.add_param(kparams, 'captionAssetItemFilter', caption_asset_item_filter)
+			client.add_param(kparams, 'captionAssetItemPager', caption_asset_item_pager)
+			client.queue_service_action_call('captionsearch_captionassetitem', 'search', 'KalturaCaptionAssetItemListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Search caption asset items by filter, pager and free text
 		# 	 
 		def search_entries(entry_filter=KalturaNotImplemented, caption_asset_item_filter=KalturaNotImplemented, caption_asset_item_pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'entryFilter', entry_filter);
-			client.add_param(kparams, 'captionAssetItemFilter', caption_asset_item_filter);
-			client.add_param(kparams, 'captionAssetItemPager', caption_asset_item_pager);
-			client.queue_service_action_call('captionsearch_captionassetitem', 'searchEntries', kparams);
+			client.add_param(kparams, 'entryFilter', entry_filter)
+			client.add_param(kparams, 'captionAssetItemFilter', caption_asset_item_filter)
+			client.add_param(kparams, 'captionAssetItemPager', caption_asset_item_pager)
+			client.queue_service_action_call('captionsearch_captionassetitem', 'searchEntries', 'KalturaBaseEntryListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 	end
 
@@ -136,6 +179,7 @@ module Kaltura
 			end
 			return @caption_asset_item_service
 		end
+		
 	end
 
 end

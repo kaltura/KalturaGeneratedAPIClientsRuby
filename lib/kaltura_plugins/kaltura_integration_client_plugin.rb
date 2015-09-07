@@ -40,9 +40,19 @@ module Kaltura
 
 	class KalturaIntegrationJobProviderData < KalturaObjectBase
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaIntegrationJobTriggerData < KalturaObjectBase
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
@@ -56,6 +66,16 @@ module Kaltura
 		# Additional data that relevant for the trigger only
 		# 	 
 		attr_accessor :trigger_data
+
+
+		def from_xml(xml_element)
+			super
+			self.callback_notification_url = xml_element.elements['callbackNotificationUrl'].text
+			self.provider_type = xml_element.elements['providerType'].text
+			self.provider_data = KalturaClientBase.object_from_xml(xml_element.elements['providerData'], 'KalturaIntegrationJobProviderData')
+			self.trigger_type = xml_element.elements['triggerType'].text
+			self.trigger_data = KalturaClientBase.object_from_xml(xml_element.elements['triggerData'], 'KalturaIntegrationJobTriggerData')
+		end
 
 	end
 
@@ -71,25 +91,24 @@ module Kaltura
 		# 	 
 		def dispatch(data, object_type, object_id)
 			kparams = {}
-			client.add_param(kparams, 'data', data);
-			client.add_param(kparams, 'objectType', object_type);
-			client.add_param(kparams, 'objectId', object_id);
-			client.queue_service_action_call('integration_integration', 'dispatch', kparams);
+			client.add_param(kparams, 'data', data)
+			client.add_param(kparams, 'objectType', object_type)
+			client.add_param(kparams, 'objectId', object_id)
+			client.queue_service_action_call('integration_integration', 'dispatch', 'int', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def notify(id)
 			kparams = {}
-			# integration job id
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('integration_integration', 'notify', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('integration_integration', 'notify', '', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 	end
 
@@ -101,6 +120,7 @@ module Kaltura
 			end
 			return @integration_service
 		end
+		
 	end
 
 end

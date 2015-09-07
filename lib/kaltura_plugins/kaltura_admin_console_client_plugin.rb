@@ -80,6 +80,28 @@ module Kaltura
 		def updated_at=(val)
 			@updated_at = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.id = xml_element.elements['id'].text
+			self.track_event_type = xml_element.elements['trackEventType'].text
+			self.ps_version = xml_element.elements['psVersion'].text
+			self.context = xml_element.elements['context'].text
+			self.partner_id = xml_element.elements['partnerId'].text
+			self.entry_id = xml_element.elements['entryId'].text
+			self.host_name = xml_element.elements['hostName'].text
+			self.user_id = xml_element.elements['userId'].text
+			self.changed_properties = xml_element.elements['changedProperties'].text
+			self.param_str1 = xml_element.elements['paramStr1'].text
+			self.param_str2 = xml_element.elements['paramStr2'].text
+			self.param_str3 = xml_element.elements['paramStr3'].text
+			self.ks = xml_element.elements['ks'].text
+			self.description = xml_element.elements['description'].text
+			self.created_at = xml_element.elements['createdAt'].text
+			self.updated_at = xml_element.elements['updatedAt'].text
+			self.user_ip = xml_element.elements['userIp'].text
+		end
+
 	end
 
 	class KalturaUiConfAdmin < KalturaUiConf
@@ -88,23 +110,51 @@ module Kaltura
 		def is_public=(val)
 			@is_public = to_b(val)
 		end
+
+		def from_xml(xml_element)
+			super
+			self.is_public = xml_element.elements['isPublic'].text
+		end
+
 	end
 
 	class KalturaTrackEntryListResponse < KalturaListResponse
 		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaTrackEntry')
+		end
 
 	end
 
 	class KalturaUiConfAdminListResponse < KalturaListResponse
 		attr_accessor :objects
 
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaUiConfAdmin')
+		end
+
 	end
 
 	class KalturaUiConfAdminBaseFilter < KalturaUiConfFilter
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaUiConfAdminFilter < KalturaUiConfAdminBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
@@ -120,42 +170,38 @@ module Kaltura
 		# 	 
 		def get(entry_id, version=-1)
 			kparams = {}
-			# Entry id
-			client.add_param(kparams, 'entryId', entry_id);
-			# Desired version of the data
-			client.add_param(kparams, 'version', version);
-			client.queue_service_action_call('adminconsole_entryadmin', 'get', kparams);
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'version', version)
+			client.queue_service_action_call('adminconsole_entryadmin', 'get', 'KalturaBaseEntry', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Get base entry by flavor ID with no filters.
 		# 	 
 		def get_by_flavor_id(flavor_id, version=-1)
 			kparams = {}
-			client.add_param(kparams, 'flavorId', flavor_id);
-			# Desired version of the data
-			client.add_param(kparams, 'version', version);
-			client.queue_service_action_call('adminconsole_entryadmin', 'getByFlavorId', kparams);
+			client.add_param(kparams, 'flavorId', flavor_id)
+			client.add_param(kparams, 'version', version)
+			client.queue_service_action_call('adminconsole_entryadmin', 'getByFlavorId', 'KalturaBaseEntry', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Get base entry by ID with no filters.
 		# 	 
 		def get_tracks(entry_id)
 			kparams = {}
-			# Entry id
-			client.add_param(kparams, 'entryId', entry_id);
-			client.queue_service_action_call('adminconsole_entryadmin', 'getTracks', kparams);
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('adminconsole_entryadmin', 'getTracks', 'KalturaTrackEntryListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 	end
 
@@ -170,62 +216,62 @@ module Kaltura
 		# 	 
 		def add(ui_conf)
 			kparams = {}
-			client.add_param(kparams, 'uiConf', ui_conf);
-			client.queue_service_action_call('adminconsole_uiconfadmin', 'add', kparams);
+			client.add_param(kparams, 'uiConf', ui_conf)
+			client.queue_service_action_call('adminconsole_uiconfadmin', 'add', 'KalturaUiConfAdmin', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Update an existing UIConf with no partner limitation
 		# 	 
 		def update(id, ui_conf)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.add_param(kparams, 'uiConf', ui_conf);
-			client.queue_service_action_call('adminconsole_uiconfadmin', 'update', kparams);
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'uiConf', ui_conf)
+			client.queue_service_action_call('adminconsole_uiconfadmin', 'update', 'KalturaUiConfAdmin', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Retrieve a UIConf by id with no partner limitation
 		# 	 
 		def get(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('adminconsole_uiconfadmin', 'get', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('adminconsole_uiconfadmin', 'get', 'KalturaUiConfAdmin', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Delete an existing UIConf with no partner limitation
 		# 	 
 		def delete(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('adminconsole_uiconfadmin', 'delete', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('adminconsole_uiconfadmin', 'delete', '', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Retrieve a list of available UIConfs  with no partner limitation
 		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter);
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('adminconsole_uiconfadmin', 'list', kparams);
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('adminconsole_uiconfadmin', 'list', 'KalturaUiConfAdminListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 	end
 
@@ -236,88 +282,86 @@ module Kaltura
 
 		def add(report)
 			kparams = {}
-			client.add_param(kparams, 'report', report);
-			client.queue_service_action_call('adminconsole_reportadmin', 'add', kparams);
+			client.add_param(kparams, 'report', report)
+			client.queue_service_action_call('adminconsole_reportadmin', 'add', 'KalturaReport', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def get(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('adminconsole_reportadmin', 'get', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('adminconsole_reportadmin', 'get', 'KalturaReport', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter);
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('adminconsole_reportadmin', 'list', kparams);
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('adminconsole_reportadmin', 'list', 'KalturaReportListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def update(id, report)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.add_param(kparams, 'report', report);
-			client.queue_service_action_call('adminconsole_reportadmin', 'update', kparams);
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'report', report)
+			client.queue_service_action_call('adminconsole_reportadmin', 'update', 'KalturaReport', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def delete(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('adminconsole_reportadmin', 'delete', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('adminconsole_reportadmin', 'delete', '', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def execute_debug(id, params=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			params.each do |obj|
-				client.add_param(kparams, 'params', obj);
-			end
-			client.queue_service_action_call('adminconsole_reportadmin', 'executeDebug', kparams);
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'params', params)
+			client.queue_service_action_call('adminconsole_reportadmin', 'executeDebug', 'KalturaReportResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def get_parameters(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('adminconsole_reportadmin', 'getParameters', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('adminconsole_reportadmin', 'getParameters', 'array', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def get_csv_url(id, report_partner_id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.add_param(kparams, 'reportPartnerId', report_partner_id);
-			client.queue_service_action_call('adminconsole_reportadmin', 'getCsvUrl', kparams);
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'reportPartnerId', report_partner_id)
+			client.queue_service_action_call('adminconsole_reportadmin', 'getCsvUrl', 'string', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 	end
 
@@ -329,6 +373,7 @@ module Kaltura
 			end
 			return @entry_admin_service
 		end
+		
 		attr_reader :ui_conf_admin_service
 		def ui_conf_admin_service
 			if (@ui_conf_admin_service == nil)
@@ -336,6 +381,7 @@ module Kaltura
 			end
 			return @ui_conf_admin_service
 		end
+		
 		attr_reader :report_admin_service
 		def report_admin_service
 			if (@report_admin_service == nil)
@@ -343,6 +389,7 @@ module Kaltura
 			end
 			return @report_admin_service
 		end
+		
 	end
 
 end

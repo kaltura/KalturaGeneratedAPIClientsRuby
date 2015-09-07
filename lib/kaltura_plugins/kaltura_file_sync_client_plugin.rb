@@ -136,6 +136,36 @@ module Kaltura
 		def original_id=(val)
 			@original_id = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.id = xml_element.elements['id'].text
+			self.partner_id = xml_element.elements['partnerId'].text
+			self.file_object_type = xml_element.elements['fileObjectType'].text
+			self.object_id = xml_element.elements['objectId'].text
+			self.version = xml_element.elements['version'].text
+			self.object_sub_type = xml_element.elements['objectSubType'].text
+			self.dc = xml_element.elements['dc'].text
+			self.original = xml_element.elements['original'].text
+			self.created_at = xml_element.elements['createdAt'].text
+			self.updated_at = xml_element.elements['updatedAt'].text
+			self.ready_at = xml_element.elements['readyAt'].text
+			self.sync_time = xml_element.elements['syncTime'].text
+			self.status = xml_element.elements['status'].text
+			self.file_type = xml_element.elements['fileType'].text
+			self.linked_id = xml_element.elements['linkedId'].text
+			self.link_count = xml_element.elements['linkCount'].text
+			self.file_root = xml_element.elements['fileRoot'].text
+			self.file_path = xml_element.elements['filePath'].text
+			self.file_size = xml_element.elements['fileSize'].text
+			self.file_url = xml_element.elements['fileUrl'].text
+			self.file_content = xml_element.elements['fileContent'].text
+			self.file_disc_size = xml_element.elements['fileDiscSize'].text
+			self.is_current_dc = xml_element.elements['isCurrentDc'].text
+			self.is_dir = xml_element.elements['isDir'].text
+			self.original_id = xml_element.elements['originalId'].text
+		end
+
 	end
 
 	class KalturaFileSyncBaseFilter < KalturaFilter
@@ -223,10 +253,50 @@ module Kaltura
 		def file_size_less_than_or_equal=(val)
 			@file_size_less_than_or_equal = val.to_f
 		end
+
+		def from_xml(xml_element)
+			super
+			self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
+			self.file_object_type_equal = xml_element.elements['fileObjectTypeEqual'].text
+			self.file_object_type_in = xml_element.elements['fileObjectTypeIn'].text
+			self.object_id_equal = xml_element.elements['objectIdEqual'].text
+			self.object_id_in = xml_element.elements['objectIdIn'].text
+			self.version_equal = xml_element.elements['versionEqual'].text
+			self.version_in = xml_element.elements['versionIn'].text
+			self.object_sub_type_equal = xml_element.elements['objectSubTypeEqual'].text
+			self.object_sub_type_in = xml_element.elements['objectSubTypeIn'].text
+			self.dc_equal = xml_element.elements['dcEqual'].text
+			self.dc_in = xml_element.elements['dcIn'].text
+			self.original_equal = xml_element.elements['originalEqual'].text
+			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			self.ready_at_greater_than_or_equal = xml_element.elements['readyAtGreaterThanOrEqual'].text
+			self.ready_at_less_than_or_equal = xml_element.elements['readyAtLessThanOrEqual'].text
+			self.sync_time_greater_than_or_equal = xml_element.elements['syncTimeGreaterThanOrEqual'].text
+			self.sync_time_less_than_or_equal = xml_element.elements['syncTimeLessThanOrEqual'].text
+			self.status_equal = xml_element.elements['statusEqual'].text
+			self.status_in = xml_element.elements['statusIn'].text
+			self.file_type_equal = xml_element.elements['fileTypeEqual'].text
+			self.file_type_in = xml_element.elements['fileTypeIn'].text
+			self.linked_id_equal = xml_element.elements['linkedIdEqual'].text
+			self.link_count_greater_than_or_equal = xml_element.elements['linkCountGreaterThanOrEqual'].text
+			self.link_count_less_than_or_equal = xml_element.elements['linkCountLessThanOrEqual'].text
+			self.file_size_greater_than_or_equal = xml_element.elements['fileSizeGreaterThanOrEqual'].text
+			self.file_size_less_than_or_equal = xml_element.elements['fileSizeLessThanOrEqual'].text
+		end
+
 	end
 
 	class KalturaFileSyncListResponse < KalturaListResponse
 		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaFileSync')
+		end
 
 	end
 
@@ -236,6 +306,12 @@ module Kaltura
 		def current_dc=(val)
 			@current_dc = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.current_dc = xml_element.elements['currentDc'].text
+		end
+
 	end
 
 

@@ -77,10 +77,23 @@ module Kaltura
 		# 	 
 		attr_accessor :asset_params_ids
 
+
+		def from_xml(xml_element)
+			super
+			self.external_source_type = xml_element.elements['externalSourceType'].text
+			self.asset_params_ids = xml_element.elements['assetParamsIds'].text
+		end
+
 	end
 
 	class KalturaExternalMediaEntryListResponse < KalturaListResponse
 		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaExternalMediaEntry')
+		end
 
 	end
 
@@ -90,9 +103,23 @@ module Kaltura
 		attr_accessor :asset_params_ids_match_or
 		attr_accessor :asset_params_ids_match_and
 
+
+		def from_xml(xml_element)
+			super
+			self.external_source_type_equal = xml_element.elements['externalSourceTypeEqual'].text
+			self.external_source_type_in = xml_element.elements['externalSourceTypeIn'].text
+			self.asset_params_ids_match_or = xml_element.elements['assetParamsIdsMatchOr'].text
+			self.asset_params_ids_match_and = xml_element.elements['assetParamsIdsMatchAnd'].text
+		end
+
 	end
 
 	class KalturaExternalMediaEntryFilter < KalturaExternalMediaEntryBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
@@ -108,81 +135,74 @@ module Kaltura
 		# 	 
 		def add(entry)
 			kparams = {}
-			client.add_param(kparams, 'entry', entry);
-			client.queue_service_action_call('externalmedia_externalmedia', 'add', kparams);
+			client.add_param(kparams, 'entry', entry)
+			client.queue_service_action_call('externalmedia_externalmedia', 'add', 'KalturaExternalMediaEntry', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Get external media entry by ID.
 		# 	 
 		def get(id)
 			kparams = {}
-			# External media entry id
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('externalmedia_externalmedia', 'get', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('externalmedia_externalmedia', 'get', 'KalturaExternalMediaEntry', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Update external media entry. Only the properties that were set will be updated.
 		# 	 
 		def update(id, entry)
 			kparams = {}
-			# External media entry id to update
-			client.add_param(kparams, 'id', id);
-			# External media entry object to update
-			client.add_param(kparams, 'entry', entry);
-			client.queue_service_action_call('externalmedia_externalmedia', 'update', kparams);
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'entry', entry)
+			client.queue_service_action_call('externalmedia_externalmedia', 'update', 'KalturaExternalMediaEntry', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Delete a external media entry.
 		# 	 
 		def delete(id)
 			kparams = {}
-			# External media entry id to delete
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('externalmedia_externalmedia', 'delete', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('externalmedia_externalmedia', 'delete', '', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# List media entries by filter with paging support.
 		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			# External media entry filter
-			client.add_param(kparams, 'filter', filter);
-			# Pager
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('externalmedia_externalmedia', 'list', kparams);
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('externalmedia_externalmedia', 'list', 'KalturaExternalMediaEntryListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Count media entries by filter.
 		# 	 
 		def count(filter=KalturaNotImplemented)
 			kparams = {}
-			# External media entry filter
-			client.add_param(kparams, 'filter', filter);
-			client.queue_service_action_call('externalmedia_externalmedia', 'count', kparams);
+			client.add_param(kparams, 'filter', filter)
+			client.queue_service_action_call('externalmedia_externalmedia', 'count', 'int', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 	end
 
@@ -194,6 +214,7 @@ module Kaltura
 			end
 			return @external_media_service
 		end
+		
 	end
 
 end

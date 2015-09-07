@@ -39,6 +39,12 @@ module Kaltura
 	class KalturaKontikiStorageProfile < KalturaStorageProfile
 		attr_accessor :service_token
 
+
+		def from_xml(xml_element)
+			super
+			self.service_token = xml_element.elements['serviceToken'].text
+		end
+
 	end
 
 	class KalturaKontikiStorageDeleteJobData < KalturaStorageDeleteJobData
@@ -46,6 +52,13 @@ module Kaltura
 		#      
 		attr_accessor :content_moid
 		attr_accessor :service_token
+
+
+		def from_xml(xml_element)
+			super
+			self.content_moid = xml_element.elements['contentMoid'].text
+			self.service_token = xml_element.elements['serviceToken'].text
+		end
 
 	end
 
@@ -58,13 +71,31 @@ module Kaltura
 		attr_accessor :content_moid
 		attr_accessor :service_token
 
+
+		def from_xml(xml_element)
+			super
+			self.flavor_asset_id = xml_element.elements['flavorAssetId'].text
+			self.content_moid = xml_element.elements['contentMoid'].text
+			self.service_token = xml_element.elements['serviceToken'].text
+		end
+
 	end
 
 	class KalturaKontikiStorageProfileBaseFilter < KalturaStorageProfileFilter
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaKontikiStorageProfileFilter < KalturaKontikiStorageProfileBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 

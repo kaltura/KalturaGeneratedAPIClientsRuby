@@ -193,6 +193,11 @@ module Kaltura
 	#  
 	class KalturaAssetDistributionCondition < KalturaObjectBase
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaAssetDistributionRule < KalturaObjectBase
@@ -202,6 +207,13 @@ module Kaltura
 		# An array of asset distribution conditions
 		# 	 
 		attr_accessor :asset_distribution_conditions
+
+
+		def from_xml(xml_element)
+			super
+			self.validation_error = xml_element.elements['validationError'].text
+			self.asset_distribution_conditions = KalturaClientBase.object_from_xml(xml_element.elements['assetDistributionConditions'], 'KalturaAssetDistributionCondition')
+		end
 
 	end
 
@@ -239,9 +251,26 @@ module Kaltura
 		def is_default=(val)
 			@is_default = to_b(val)
 		end
+
+		def from_xml(xml_element)
+			super
+			self.field_name = xml_element.elements['fieldName'].text
+			self.user_friendly_field_name = xml_element.elements['userFriendlyFieldName'].text
+			self.entry_mrss_xslt = xml_element.elements['entryMrssXslt'].text
+			self.is_required = xml_element.elements['isRequired'].text
+			self.update_on_change = xml_element.elements['updateOnChange'].text
+			self.update_params = KalturaClientBase.object_from_xml(xml_element.elements['updateParams'], 'KalturaString')
+			self.is_default = xml_element.elements['isDefault'].text
+		end
+
 	end
 
 	class KalturaDistributionJobProviderData < KalturaObjectBase
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
@@ -255,6 +284,13 @@ module Kaltura
 		def height=(val)
 			@height = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.width = xml_element.elements['width'].text
+			self.height = xml_element.elements['height'].text
+		end
+
 	end
 
 	class KalturaDistributionProfile < KalturaObjectBase
@@ -357,6 +393,35 @@ module Kaltura
 		def recommended_dc_for_execute=(val)
 			@recommended_dc_for_execute = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.id = xml_element.elements['id'].text
+			self.created_at = xml_element.elements['createdAt'].text
+			self.updated_at = xml_element.elements['updatedAt'].text
+			self.partner_id = xml_element.elements['partnerId'].text
+			self.provider_type = xml_element.elements['providerType'].text
+			self.name = xml_element.elements['name'].text
+			self.status = xml_element.elements['status'].text
+			self.submit_enabled = xml_element.elements['submitEnabled'].text
+			self.update_enabled = xml_element.elements['updateEnabled'].text
+			self.delete_enabled = xml_element.elements['deleteEnabled'].text
+			self.report_enabled = xml_element.elements['reportEnabled'].text
+			self.auto_create_flavors = xml_element.elements['autoCreateFlavors'].text
+			self.auto_create_thumb = xml_element.elements['autoCreateThumb'].text
+			self.optional_flavor_params_ids = xml_element.elements['optionalFlavorParamsIds'].text
+			self.required_flavor_params_ids = xml_element.elements['requiredFlavorParamsIds'].text
+			self.optional_thumb_dimensions = KalturaClientBase.object_from_xml(xml_element.elements['optionalThumbDimensions'], 'KalturaDistributionThumbDimensions')
+			self.required_thumb_dimensions = KalturaClientBase.object_from_xml(xml_element.elements['requiredThumbDimensions'], 'KalturaDistributionThumbDimensions')
+			self.optional_asset_distribution_rules = KalturaClientBase.object_from_xml(xml_element.elements['optionalAssetDistributionRules'], 'KalturaAssetDistributionRule')
+			self.required_asset_distribution_rules = KalturaClientBase.object_from_xml(xml_element.elements['requiredAssetDistributionRules'], 'KalturaAssetDistributionRule')
+			self.sunrise_default_offset = xml_element.elements['sunriseDefaultOffset'].text
+			self.sunset_default_offset = xml_element.elements['sunsetDefaultOffset'].text
+			self.recommended_storage_profile_for_download = xml_element.elements['recommendedStorageProfileForDownload'].text
+			self.recommended_dc_for_download = xml_element.elements['recommendedDcForDownload'].text
+			self.recommended_dc_for_execute = xml_element.elements['recommendedDcForExecute'].text
+		end
+
 	end
 
 	class KalturaDistributionProvider < KalturaObjectBase
@@ -385,12 +450,34 @@ module Kaltura
 		def interval_before_sunset=(val)
 			@interval_before_sunset = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.type = xml_element.elements['type'].text
+			self.name = xml_element.elements['name'].text
+			self.schedule_update_enabled = xml_element.elements['scheduleUpdateEnabled'].text
+			self.availability_update_enabled = xml_element.elements['availabilityUpdateEnabled'].text
+			self.delete_instead_update = xml_element.elements['deleteInsteadUpdate'].text
+			self.interval_before_sunrise = xml_element.elements['intervalBeforeSunrise'].text
+			self.interval_before_sunset = xml_element.elements['intervalBeforeSunset'].text
+			self.update_required_entry_fields = xml_element.elements['updateRequiredEntryFields'].text
+			self.update_required_metadata_xpaths = xml_element.elements['updateRequiredMetadataXPaths'].text
+		end
+
 	end
 
 	class KalturaDistributionRemoteMediaFile < KalturaObjectBase
 		attr_accessor :version
 		attr_accessor :asset_id
 		attr_accessor :remote_id
+
+
+		def from_xml(xml_element)
+			super
+			self.version = xml_element.elements['version'].text
+			self.asset_id = xml_element.elements['assetId'].text
+			self.remote_id = xml_element.elements['remoteId'].text
+		end
 
 	end
 
@@ -405,6 +492,14 @@ module Kaltura
 		def error_type=(val)
 			@error_type = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.action = xml_element.elements['action'].text
+			self.error_type = xml_element.elements['errorType'].text
+			self.description = xml_element.elements['description'].text
+		end
+
 	end
 
 	class KalturaEntryDistribution < KalturaObjectBase
@@ -524,6 +619,39 @@ module Kaltura
 		def has_delete_sent_data_log=(val)
 			@has_delete_sent_data_log = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.id = xml_element.elements['id'].text
+			self.created_at = xml_element.elements['createdAt'].text
+			self.updated_at = xml_element.elements['updatedAt'].text
+			self.submitted_at = xml_element.elements['submittedAt'].text
+			self.entry_id = xml_element.elements['entryId'].text
+			self.partner_id = xml_element.elements['partnerId'].text
+			self.distribution_profile_id = xml_element.elements['distributionProfileId'].text
+			self.status = xml_element.elements['status'].text
+			self.sun_status = xml_element.elements['sunStatus'].text
+			self.dirty_status = xml_element.elements['dirtyStatus'].text
+			self.thumb_asset_ids = xml_element.elements['thumbAssetIds'].text
+			self.flavor_asset_ids = xml_element.elements['flavorAssetIds'].text
+			self.asset_ids = xml_element.elements['assetIds'].text
+			self.sunrise = xml_element.elements['sunrise'].text
+			self.sunset = xml_element.elements['sunset'].text
+			self.remote_id = xml_element.elements['remoteId'].text
+			self.plays = xml_element.elements['plays'].text
+			self.views = xml_element.elements['views'].text
+			self.validation_errors = KalturaClientBase.object_from_xml(xml_element.elements['validationErrors'], 'KalturaDistributionValidationError')
+			self.error_type = xml_element.elements['errorType'].text
+			self.error_number = xml_element.elements['errorNumber'].text
+			self.error_description = xml_element.elements['errorDescription'].text
+			self.has_submit_results_log = xml_element.elements['hasSubmitResultsLog'].text
+			self.has_submit_sent_data_log = xml_element.elements['hasSubmitSentDataLog'].text
+			self.has_update_results_log = xml_element.elements['hasUpdateResultsLog'].text
+			self.has_update_sent_data_log = xml_element.elements['hasUpdateSentDataLog'].text
+			self.has_delete_results_log = xml_element.elements['hasDeleteResultsLog'].text
+			self.has_delete_sent_data_log = xml_element.elements['hasDeleteSentDataLog'].text
+		end
+
 	end
 
 	class KalturaGenericDistributionProfileAction < KalturaObjectBase
@@ -542,6 +670,19 @@ module Kaltura
 		def ftp_passive_mode=(val)
 			@ftp_passive_mode = to_b(val)
 		end
+
+		def from_xml(xml_element)
+			super
+			self.protocol = xml_element.elements['protocol'].text
+			self.server_url = xml_element.elements['serverUrl'].text
+			self.server_path = xml_element.elements['serverPath'].text
+			self.username = xml_element.elements['username'].text
+			self.password = xml_element.elements['password'].text
+			self.ftp_passive_mode = xml_element.elements['ftpPassiveMode'].text
+			self.http_field_name = xml_element.elements['httpFieldName'].text
+			self.http_file_name = xml_element.elements['httpFileName'].text
+		end
+
 	end
 
 	class KalturaGenericDistributionProviderAction < KalturaObjectBase
@@ -593,6 +734,28 @@ module Kaltura
 		def protocol=(val)
 			@protocol = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.id = xml_element.elements['id'].text
+			self.created_at = xml_element.elements['createdAt'].text
+			self.updated_at = xml_element.elements['updatedAt'].text
+			self.generic_distribution_provider_id = xml_element.elements['genericDistributionProviderId'].text
+			self.action = xml_element.elements['action'].text
+			self.status = xml_element.elements['status'].text
+			self.results_parser = xml_element.elements['resultsParser'].text
+			self.protocol = xml_element.elements['protocol'].text
+			self.server_address = xml_element.elements['serverAddress'].text
+			self.remote_path = xml_element.elements['remotePath'].text
+			self.remote_username = xml_element.elements['remoteUsername'].text
+			self.remote_password = xml_element.elements['remotePassword'].text
+			self.editable_fields = xml_element.elements['editableFields'].text
+			self.mandatory_fields = xml_element.elements['mandatoryFields'].text
+			self.mrss_transformer = xml_element.elements['mrssTransformer'].text
+			self.mrss_validator = xml_element.elements['mrssValidator'].text
+			self.results_transformer = xml_element.elements['resultsTransformer'].text
+		end
+
 	end
 
 	class KalturaGenericDistributionProvider < KalturaDistributionProvider
@@ -633,6 +796,23 @@ module Kaltura
 		def status=(val)
 			@status = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.id = xml_element.elements['id'].text
+			self.created_at = xml_element.elements['createdAt'].text
+			self.updated_at = xml_element.elements['updatedAt'].text
+			self.partner_id = xml_element.elements['partnerId'].text
+			self.is_default = xml_element.elements['isDefault'].text
+			self.status = xml_element.elements['status'].text
+			self.optional_flavor_params_ids = xml_element.elements['optionalFlavorParamsIds'].text
+			self.required_flavor_params_ids = xml_element.elements['requiredFlavorParamsIds'].text
+			self.optional_thumb_dimensions = KalturaClientBase.object_from_xml(xml_element.elements['optionalThumbDimensions'], 'KalturaDistributionThumbDimensions')
+			self.required_thumb_dimensions = KalturaClientBase.object_from_xml(xml_element.elements['requiredThumbDimensions'], 'KalturaDistributionThumbDimensions')
+			self.editable_fields = xml_element.elements['editableFields'].text
+			self.mandatory_fields = xml_element.elements['mandatoryFields'].text
+		end
+
 	end
 
 	# Defines the condition to match a property and value on core asset object (or one if its inherited objects)
@@ -646,16 +826,36 @@ module Kaltura
 		# 	 
 		attr_accessor :property_value
 
+
+		def from_xml(xml_element)
+			super
+			self.property_name = xml_element.elements['propertyName'].text
+			self.property_value = xml_element.elements['propertyValue'].text
+		end
+
 	end
 
 	class KalturaConfigurableDistributionJobProviderData < KalturaDistributionJobProviderData
 		attr_accessor :field_values
+
+
+		def from_xml(xml_element)
+			super
+			self.field_values = xml_element.elements['fieldValues'].text
+		end
 
 	end
 
 	class KalturaConfigurableDistributionProfile < KalturaDistributionProfile
 		attr_accessor :field_config_array
 		attr_accessor :item_xpaths_to_extend
+
+
+		def from_xml(xml_element)
+			super
+			self.field_config_array = KalturaClientBase.object_from_xml(xml_element.elements['fieldConfigArray'], 'KalturaDistributionFieldConfig')
+			self.item_xpaths_to_extend = KalturaClientBase.object_from_xml(xml_element.elements['itemXpathsToExtend'], 'KalturaExtendingItemMrssParameter')
+		end
 
 	end
 
@@ -688,6 +888,18 @@ module Kaltura
 		def has_entry_distribution_validation_errors=(val)
 			@has_entry_distribution_validation_errors = to_b(val)
 		end
+
+		def from_xml(xml_element)
+			super
+			self.no_distribution_profiles = xml_element.elements['noDistributionProfiles'].text
+			self.distribution_profile_id = xml_element.elements['distributionProfileId'].text
+			self.distribution_sun_status = xml_element.elements['distributionSunStatus'].text
+			self.entry_distribution_flag = xml_element.elements['entryDistributionFlag'].text
+			self.entry_distribution_status = xml_element.elements['entryDistributionStatus'].text
+			self.has_entry_distribution_validation_errors = xml_element.elements['hasEntryDistributionValidationErrors'].text
+			self.entry_distribution_validation_errors = xml_element.elements['entryDistributionValidationErrors'].text
+		end
+
 	end
 
 	class KalturaDistributionJobData < KalturaJobData
@@ -719,6 +931,21 @@ module Kaltura
 		def entry_distribution_id=(val)
 			@entry_distribution_id = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.distribution_profile_id = xml_element.elements['distributionProfileId'].text
+			self.distribution_profile = KalturaClientBase.object_from_xml(xml_element.elements['distributionProfile'], 'KalturaDistributionProfile')
+			self.entry_distribution_id = xml_element.elements['entryDistributionId'].text
+			self.entry_distribution = KalturaClientBase.object_from_xml(xml_element.elements['entryDistribution'], 'KalturaEntryDistribution')
+			self.remote_id = xml_element.elements['remoteId'].text
+			self.provider_type = xml_element.elements['providerType'].text
+			self.provider_data = KalturaClientBase.object_from_xml(xml_element.elements['providerData'], 'KalturaDistributionJobProviderData')
+			self.results = xml_element.elements['results'].text
+			self.sent_data = xml_element.elements['sentData'].text
+			self.media_files = KalturaClientBase.object_from_xml(xml_element.elements['mediaFiles'], 'KalturaDistributionRemoteMediaFile')
+		end
+
 	end
 
 	class KalturaDistributionProfileBaseFilter < KalturaFilter
@@ -749,10 +976,29 @@ module Kaltura
 		def status_equal=(val)
 			@status_equal = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.id_equal = xml_element.elements['idEqual'].text
+			self.id_in = xml_element.elements['idIn'].text
+			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			self.status_equal = xml_element.elements['statusEqual'].text
+			self.status_in = xml_element.elements['statusIn'].text
+		end
+
 	end
 
 	class KalturaDistributionProfileListResponse < KalturaListResponse
 		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaDistributionProfile')
+		end
 
 	end
 
@@ -760,15 +1006,34 @@ module Kaltura
 		attr_accessor :type_equal
 		attr_accessor :type_in
 
+
+		def from_xml(xml_element)
+			super
+			self.type_equal = xml_element.elements['typeEqual'].text
+			self.type_in = xml_element.elements['typeIn'].text
+		end
+
 	end
 
 	class KalturaDistributionProviderListResponse < KalturaListResponse
 		attr_accessor :objects
 
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaDistributionProvider')
+		end
+
 	end
 
 	class KalturaDistributionValidationErrorConditionNotMet < KalturaDistributionValidationError
 		attr_accessor :condition_name
+
+
+		def from_xml(xml_element)
+			super
+			self.condition_name = xml_element.elements['conditionName'].text
+		end
 
 	end
 
@@ -783,30 +1048,68 @@ module Kaltura
 		def validation_error_type=(val)
 			@validation_error_type = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.field_name = xml_element.elements['fieldName'].text
+			self.validation_error_type = xml_element.elements['validationErrorType'].text
+			self.validation_error_param = xml_element.elements['validationErrorParam'].text
+		end
+
 	end
 
 	class KalturaDistributionValidationErrorMissingAsset < KalturaDistributionValidationError
 		attr_accessor :data
+
+
+		def from_xml(xml_element)
+			super
+			self.data = xml_element.elements['data'].text
+		end
 
 	end
 
 	class KalturaDistributionValidationErrorMissingFlavor < KalturaDistributionValidationError
 		attr_accessor :flavor_params_id
 
+
+		def from_xml(xml_element)
+			super
+			self.flavor_params_id = xml_element.elements['flavorParamsId'].text
+		end
+
 	end
 
 	class KalturaDistributionValidationErrorMissingMetadata < KalturaDistributionValidationError
 		attr_accessor :field_name
+
+
+		def from_xml(xml_element)
+			super
+			self.field_name = xml_element.elements['fieldName'].text
+		end
 
 	end
 
 	class KalturaDistributionValidationErrorMissingThumbnail < KalturaDistributionValidationError
 		attr_accessor :dimensions
 
+
+		def from_xml(xml_element)
+			super
+			self.dimensions = KalturaClientBase.object_from_xml(xml_element.elements['dimensions'], 'KalturaDistributionThumbDimensions')
+		end
+
 	end
 
 	class KalturaEntryDistributionListResponse < KalturaListResponse
 		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaEntryDistribution')
+		end
 
 	end
 
@@ -818,6 +1121,14 @@ module Kaltura
 		def result_parser_type=(val)
 			@result_parser_type = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.xml = xml_element.elements['xml'].text
+			self.result_parse_data = xml_element.elements['resultParseData'].text
+			self.result_parser_type = xml_element.elements['resultParserType'].text
+		end
+
 	end
 
 	class KalturaGenericDistributionProfile < KalturaDistributionProfile
@@ -832,6 +1143,18 @@ module Kaltura
 		def generic_provider_id=(val)
 			@generic_provider_id = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.generic_provider_id = xml_element.elements['genericProviderId'].text
+			self.submit_action = KalturaClientBase.object_from_xml(xml_element.elements['submitAction'], 'KalturaGenericDistributionProfileAction')
+			self.update_action = KalturaClientBase.object_from_xml(xml_element.elements['updateAction'], 'KalturaGenericDistributionProfileAction')
+			self.delete_action = KalturaClientBase.object_from_xml(xml_element.elements['deleteAction'], 'KalturaGenericDistributionProfileAction')
+			self.fetch_report_action = KalturaClientBase.object_from_xml(xml_element.elements['fetchReportAction'], 'KalturaGenericDistributionProfileAction')
+			self.update_required_entry_fields = xml_element.elements['updateRequiredEntryFields'].text
+			self.update_required_metadata_xpaths = xml_element.elements['updateRequiredMetadataXPaths'].text
+		end
+
 	end
 
 	class KalturaGenericDistributionProviderActionBaseFilter < KalturaFilter
@@ -867,15 +1190,42 @@ module Kaltura
 		def action_equal=(val)
 			@action_equal = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.id_equal = xml_element.elements['idEqual'].text
+			self.id_in = xml_element.elements['idIn'].text
+			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			self.generic_distribution_provider_id_equal = xml_element.elements['genericDistributionProviderIdEqual'].text
+			self.generic_distribution_provider_id_in = xml_element.elements['genericDistributionProviderIdIn'].text
+			self.action_equal = xml_element.elements['actionEqual'].text
+			self.action_in = xml_element.elements['actionIn'].text
+		end
+
 	end
 
 	class KalturaGenericDistributionProviderActionListResponse < KalturaListResponse
 		attr_accessor :objects
 
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaGenericDistributionProviderAction')
+		end
+
 	end
 
 	class KalturaGenericDistributionProviderListResponse < KalturaListResponse
 		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaGenericDistributionProvider')
+		end
 
 	end
 
@@ -883,13 +1233,30 @@ module Kaltura
 		attr_accessor :xsl
 		attr_accessor :feed_id
 
+
+		def from_xml(xml_element)
+			super
+			self.xsl = xml_element.elements['xsl'].text
+			self.feed_id = xml_element.elements['feedId'].text
+		end
+
 	end
 
 	class KalturaSyndicationDistributionProvider < KalturaDistributionProvider
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaDistributionDeleteJobData < KalturaDistributionJobData
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
@@ -903,21 +1270,48 @@ module Kaltura
 		def views=(val)
 			@views = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.plays = xml_element.elements['plays'].text
+			self.views = xml_element.elements['views'].text
+		end
+
 	end
 
 	class KalturaDistributionProfileFilter < KalturaDistributionProfileBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
 	class KalturaDistributionProviderFilter < KalturaDistributionProviderBaseFilter
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaDistributionSubmitJobData < KalturaDistributionJobData
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaDistributionUpdateJobData < KalturaDistributionJobData
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
@@ -927,6 +1321,12 @@ module Kaltura
 		def metadata_profile_id=(val)
 			@metadata_profile_id = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
+		end
+
 	end
 
 	class KalturaEntryDistributionBaseFilter < KalturaRelatedFilter
@@ -993,29 +1393,84 @@ module Kaltura
 		def sunset_less_than_or_equal=(val)
 			@sunset_less_than_or_equal = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.id_equal = xml_element.elements['idEqual'].text
+			self.id_in = xml_element.elements['idIn'].text
+			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			self.submitted_at_greater_than_or_equal = xml_element.elements['submittedAtGreaterThanOrEqual'].text
+			self.submitted_at_less_than_or_equal = xml_element.elements['submittedAtLessThanOrEqual'].text
+			self.entry_id_equal = xml_element.elements['entryIdEqual'].text
+			self.entry_id_in = xml_element.elements['entryIdIn'].text
+			self.distribution_profile_id_equal = xml_element.elements['distributionProfileIdEqual'].text
+			self.distribution_profile_id_in = xml_element.elements['distributionProfileIdIn'].text
+			self.status_equal = xml_element.elements['statusEqual'].text
+			self.status_in = xml_element.elements['statusIn'].text
+			self.dirty_status_equal = xml_element.elements['dirtyStatusEqual'].text
+			self.dirty_status_in = xml_element.elements['dirtyStatusIn'].text
+			self.sunrise_greater_than_or_equal = xml_element.elements['sunriseGreaterThanOrEqual'].text
+			self.sunrise_less_than_or_equal = xml_element.elements['sunriseLessThanOrEqual'].text
+			self.sunset_greater_than_or_equal = xml_element.elements['sunsetGreaterThanOrEqual'].text
+			self.sunset_less_than_or_equal = xml_element.elements['sunsetLessThanOrEqual'].text
+		end
+
 	end
 
 	class KalturaGenericDistributionProviderActionFilter < KalturaGenericDistributionProviderActionBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
 	class KalturaConfigurableDistributionProfileBaseFilter < KalturaDistributionProfileFilter
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaDistributionDisableJobData < KalturaDistributionUpdateJobData
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
 	class KalturaDistributionEnableJobData < KalturaDistributionUpdateJobData
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaEntryDistributionFilter < KalturaEntryDistributionBaseFilter
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaGenericDistributionProfileBaseFilter < KalturaDistributionProfileFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
@@ -1057,29 +1512,76 @@ module Kaltura
 		def status_equal=(val)
 			@status_equal = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.id_equal = xml_element.elements['idEqual'].text
+			self.id_in = xml_element.elements['idIn'].text
+			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
+			self.partner_id_in = xml_element.elements['partnerIdIn'].text
+			self.is_default_equal = xml_element.elements['isDefaultEqual'].text
+			self.is_default_in = xml_element.elements['isDefaultIn'].text
+			self.status_equal = xml_element.elements['statusEqual'].text
+			self.status_in = xml_element.elements['statusIn'].text
+		end
+
 	end
 
 	class KalturaSyndicationDistributionProfileBaseFilter < KalturaDistributionProfileFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
 	class KalturaSyndicationDistributionProviderBaseFilter < KalturaDistributionProviderFilter
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaConfigurableDistributionProfileFilter < KalturaConfigurableDistributionProfileBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
 	class KalturaGenericDistributionProfileFilter < KalturaGenericDistributionProfileBaseFilter
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaGenericDistributionProviderFilter < KalturaGenericDistributionProviderBaseFilter
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaSyndicationDistributionProfileFilter < KalturaSyndicationDistributionProfileBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
@@ -1095,86 +1597,86 @@ module Kaltura
 		# 	 
 		def add(distribution_profile)
 			kparams = {}
-			client.add_param(kparams, 'distributionProfile', distribution_profile);
-			client.queue_service_action_call('contentdistribution_distributionprofile', 'add', kparams);
+			client.add_param(kparams, 'distributionProfile', distribution_profile)
+			client.queue_service_action_call('contentdistribution_distributionprofile', 'add', 'KalturaDistributionProfile', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Get Distribution Profile by id
 		# 	 
 		def get(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('contentdistribution_distributionprofile', 'get', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('contentdistribution_distributionprofile', 'get', 'KalturaDistributionProfile', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Update Distribution Profile by id
 		# 	 
 		def update(id, distribution_profile)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.add_param(kparams, 'distributionProfile', distribution_profile);
-			client.queue_service_action_call('contentdistribution_distributionprofile', 'update', kparams);
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'distributionProfile', distribution_profile)
+			client.queue_service_action_call('contentdistribution_distributionprofile', 'update', 'KalturaDistributionProfile', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Update Distribution Profile status by id
 		# 	 
 		def update_status(id, status)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.add_param(kparams, 'status', status);
-			client.queue_service_action_call('contentdistribution_distributionprofile', 'updateStatus', kparams);
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'status', status)
+			client.queue_service_action_call('contentdistribution_distributionprofile', 'updateStatus', 'KalturaDistributionProfile', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Delete Distribution Profile by id
 		# 	 
 		def delete(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('contentdistribution_distributionprofile', 'delete', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('contentdistribution_distributionprofile', 'delete', '', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# List all distribution providers
 		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter);
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('contentdistribution_distributionprofile', 'list', kparams);
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('contentdistribution_distributionprofile', 'list', 'KalturaDistributionProfileListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def list_by_partner(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter);
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('contentdistribution_distributionprofile', 'listByPartner', kparams);
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('contentdistribution_distributionprofile', 'listByPartner', 'KalturaDistributionProfileListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 	end
 
@@ -1189,155 +1691,155 @@ module Kaltura
 		# 	 
 		def add(entry_distribution)
 			kparams = {}
-			client.add_param(kparams, 'entryDistribution', entry_distribution);
-			client.queue_service_action_call('contentdistribution_entrydistribution', 'add', kparams);
+			client.add_param(kparams, 'entryDistribution', entry_distribution)
+			client.queue_service_action_call('contentdistribution_entrydistribution', 'add', 'KalturaEntryDistribution', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Get Entry Distribution by id
 		# 	 
 		def get(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('contentdistribution_entrydistribution', 'get', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('contentdistribution_entrydistribution', 'get', 'KalturaEntryDistribution', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Validates Entry Distribution by id for submission
 		# 	 
 		def validate(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('contentdistribution_entrydistribution', 'validate', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('contentdistribution_entrydistribution', 'validate', 'KalturaEntryDistribution', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Update Entry Distribution by id
 		# 	 
 		def update(id, entry_distribution)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.add_param(kparams, 'entryDistribution', entry_distribution);
-			client.queue_service_action_call('contentdistribution_entrydistribution', 'update', kparams);
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'entryDistribution', entry_distribution)
+			client.queue_service_action_call('contentdistribution_entrydistribution', 'update', 'KalturaEntryDistribution', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Delete Entry Distribution by id
 		# 	 
 		def delete(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('contentdistribution_entrydistribution', 'delete', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('contentdistribution_entrydistribution', 'delete', '', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# List all distribution providers
 		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter);
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('contentdistribution_entrydistribution', 'list', kparams);
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('contentdistribution_entrydistribution', 'list', 'KalturaEntryDistributionListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Submits Entry Distribution to the remote destination
 		# 	 
 		def submit_add(id, submit_when_ready=false)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.add_param(kparams, 'submitWhenReady', submit_when_ready);
-			client.queue_service_action_call('contentdistribution_entrydistribution', 'submitAdd', kparams);
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'submitWhenReady', submit_when_ready)
+			client.queue_service_action_call('contentdistribution_entrydistribution', 'submitAdd', 'KalturaEntryDistribution', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Submits Entry Distribution changes to the remote destination
 		# 	 
 		def submit_update(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('contentdistribution_entrydistribution', 'submitUpdate', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('contentdistribution_entrydistribution', 'submitUpdate', 'KalturaEntryDistribution', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Submits Entry Distribution report request
 		# 	 
 		def submit_fetch_report(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('contentdistribution_entrydistribution', 'submitFetchReport', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('contentdistribution_entrydistribution', 'submitFetchReport', 'KalturaEntryDistribution', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Deletes Entry Distribution from the remote destination
 		# 	 
 		def submit_delete(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('contentdistribution_entrydistribution', 'submitDelete', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('contentdistribution_entrydistribution', 'submitDelete', 'KalturaEntryDistribution', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Retries last submit action
 		# 	 
 		def retry_submit(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('contentdistribution_entrydistribution', 'retrySubmit', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('contentdistribution_entrydistribution', 'retrySubmit', 'KalturaEntryDistribution', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Serves entry distribution sent data
 		# 	 
 		def serve_sent_data(id, action_type)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.add_param(kparams, 'actionType', action_type);
-			client.queue_service_action_call('contentdistribution_entrydistribution', 'serveSentData', kparams);
-			return client.get_serve_url();
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'actionType', action_type)
+			client.queue_service_action_call('contentdistribution_entrydistribution', 'serveSentData', 'file', kparams)
+			return client.get_serve_url()
 		end
 
 		# Serves entry distribution returned data
 		# 	 
 		def serve_returned_data(id, action_type)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.add_param(kparams, 'actionType', action_type);
-			client.queue_service_action_call('contentdistribution_entrydistribution', 'serveReturnedData', kparams);
-			return client.get_serve_url();
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'actionType', action_type)
+			client.queue_service_action_call('contentdistribution_entrydistribution', 'serveReturnedData', 'file', kparams)
+			return client.get_serve_url()
 		end
 	end
 
@@ -1352,13 +1854,13 @@ module Kaltura
 		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter);
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('contentdistribution_distributionprovider', 'list', kparams);
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('contentdistribution_distributionprovider', 'list', 'KalturaDistributionProviderListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 	end
 
@@ -1373,62 +1875,62 @@ module Kaltura
 		# 	 
 		def add(generic_distribution_provider)
 			kparams = {}
-			client.add_param(kparams, 'genericDistributionProvider', generic_distribution_provider);
-			client.queue_service_action_call('contentdistribution_genericdistributionprovider', 'add', kparams);
+			client.add_param(kparams, 'genericDistributionProvider', generic_distribution_provider)
+			client.queue_service_action_call('contentdistribution_genericdistributionprovider', 'add', 'KalturaGenericDistributionProvider', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Get Generic Distribution Provider by id
 		# 	 
 		def get(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('contentdistribution_genericdistributionprovider', 'get', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('contentdistribution_genericdistributionprovider', 'get', 'KalturaGenericDistributionProvider', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Update Generic Distribution Provider by id
 		# 	 
 		def update(id, generic_distribution_provider)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.add_param(kparams, 'genericDistributionProvider', generic_distribution_provider);
-			client.queue_service_action_call('contentdistribution_genericdistributionprovider', 'update', kparams);
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'genericDistributionProvider', generic_distribution_provider)
+			client.queue_service_action_call('contentdistribution_genericdistributionprovider', 'update', 'KalturaGenericDistributionProvider', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Delete Generic Distribution Provider by id
 		# 	 
 		def delete(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('contentdistribution_genericdistributionprovider', 'delete', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('contentdistribution_genericdistributionprovider', 'delete', '', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# List all distribution providers
 		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter);
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('contentdistribution_genericdistributionprovider', 'list', kparams);
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('contentdistribution_genericdistributionprovider', 'list', 'KalturaGenericDistributionProviderListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 	end
 
@@ -1443,192 +1945,183 @@ module Kaltura
 		# 	 
 		def add(generic_distribution_provider_action)
 			kparams = {}
-			client.add_param(kparams, 'genericDistributionProviderAction', generic_distribution_provider_action);
-			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'add', kparams);
+			client.add_param(kparams, 'genericDistributionProviderAction', generic_distribution_provider_action)
+			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'add', 'KalturaGenericDistributionProviderAction', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Add MRSS transform file to generic distribution provider action
 		# 	 
 		def add_mrss_transform(id, xsl_data)
 			kparams = {}
-			# the id of the generic distribution provider action
-			client.add_param(kparams, 'id', id);
-			# XSL MRSS transformation data
-			client.add_param(kparams, 'xslData', xsl_data);
-			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'addMrssTransform', kparams);
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'xslData', xsl_data)
+			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'addMrssTransform', 'KalturaGenericDistributionProviderAction', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Add MRSS transform file to generic distribution provider action
 		# 	 
 		def add_mrss_transform_from_file(id, xsl_file)
 			kparams = {}
-			# the id of the generic distribution provider action
-			client.add_param(kparams, 'id', id);
-			# XSL MRSS transformation file
-			client.add_param(kparams, 'xslFile', xsl_file);
-			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'addMrssTransformFromFile', kparams);
+			kfiles = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kfiles, 'xslFile', xsl_file)
+			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'addMrssTransformFromFile', 'KalturaGenericDistributionProviderAction', kparams, kfiles)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Add MRSS validate file to generic distribution provider action
 		# 	 
 		def add_mrss_validate(id, xsd_data)
 			kparams = {}
-			# the id of the generic distribution provider action
-			client.add_param(kparams, 'id', id);
-			# XSD MRSS validatation data
-			client.add_param(kparams, 'xsdData', xsd_data);
-			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'addMrssValidate', kparams);
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'xsdData', xsd_data)
+			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'addMrssValidate', 'KalturaGenericDistributionProviderAction', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Add MRSS validate file to generic distribution provider action
 		# 	 
 		def add_mrss_validate_from_file(id, xsd_file)
 			kparams = {}
-			# the id of the generic distribution provider action
-			client.add_param(kparams, 'id', id);
-			# XSD MRSS validatation file
-			client.add_param(kparams, 'xsdFile', xsd_file);
-			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'addMrssValidateFromFile', kparams);
+			kfiles = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kfiles, 'xsdFile', xsd_file)
+			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'addMrssValidateFromFile', 'KalturaGenericDistributionProviderAction', kparams, kfiles)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Add results transform file to generic distribution provider action
 		# 	 
 		def add_results_transform(id, transform_data)
 			kparams = {}
-			# the id of the generic distribution provider action
-			client.add_param(kparams, 'id', id);
-			# transformation data xsl, xPath or regex
-			client.add_param(kparams, 'transformData', transform_data);
-			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'addResultsTransform', kparams);
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'transformData', transform_data)
+			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'addResultsTransform', 'KalturaGenericDistributionProviderAction', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Add MRSS transform file to generic distribution provider action
 		# 	 
 		def add_results_transform_from_file(id, transform_file)
 			kparams = {}
-			# the id of the generic distribution provider action
-			client.add_param(kparams, 'id', id);
-			# transformation file xsl, xPath or regex
-			client.add_param(kparams, 'transformFile', transform_file);
-			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'addResultsTransformFromFile', kparams);
+			kfiles = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kfiles, 'transformFile', transform_file)
+			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'addResultsTransformFromFile', 'KalturaGenericDistributionProviderAction', kparams, kfiles)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Get Generic Distribution Provider Action by id
 		# 	 
 		def get(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'get', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'get', 'KalturaGenericDistributionProviderAction', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Get Generic Distribution Provider Action by provider id
 		# 	 
 		def get_by_provider_id(generic_distribution_provider_id, action_type)
 			kparams = {}
-			client.add_param(kparams, 'genericDistributionProviderId', generic_distribution_provider_id);
-			client.add_param(kparams, 'actionType', action_type);
-			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'getByProviderId', kparams);
+			client.add_param(kparams, 'genericDistributionProviderId', generic_distribution_provider_id)
+			client.add_param(kparams, 'actionType', action_type)
+			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'getByProviderId', 'KalturaGenericDistributionProviderAction', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Update Generic Distribution Provider Action by provider id
 		# 	 
 		def update_by_provider_id(generic_distribution_provider_id, action_type, generic_distribution_provider_action)
 			kparams = {}
-			client.add_param(kparams, 'genericDistributionProviderId', generic_distribution_provider_id);
-			client.add_param(kparams, 'actionType', action_type);
-			client.add_param(kparams, 'genericDistributionProviderAction', generic_distribution_provider_action);
-			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'updateByProviderId', kparams);
+			client.add_param(kparams, 'genericDistributionProviderId', generic_distribution_provider_id)
+			client.add_param(kparams, 'actionType', action_type)
+			client.add_param(kparams, 'genericDistributionProviderAction', generic_distribution_provider_action)
+			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'updateByProviderId', 'KalturaGenericDistributionProviderAction', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Update Generic Distribution Provider Action by id
 		# 	 
 		def update(id, generic_distribution_provider_action)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.add_param(kparams, 'genericDistributionProviderAction', generic_distribution_provider_action);
-			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'update', kparams);
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'genericDistributionProviderAction', generic_distribution_provider_action)
+			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'update', 'KalturaGenericDistributionProviderAction', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Delete Generic Distribution Provider Action by id
 		# 	 
 		def delete(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'delete', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'delete', '', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Delete Generic Distribution Provider Action by provider id
 		# 	 
 		def delete_by_provider_id(generic_distribution_provider_id, action_type)
 			kparams = {}
-			client.add_param(kparams, 'genericDistributionProviderId', generic_distribution_provider_id);
-			client.add_param(kparams, 'actionType', action_type);
-			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'deleteByProviderId', kparams);
+			client.add_param(kparams, 'genericDistributionProviderId', generic_distribution_provider_id)
+			client.add_param(kparams, 'actionType', action_type)
+			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'deleteByProviderId', '', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# List all distribution providers
 		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter);
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'list', kparams);
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'list', 'KalturaGenericDistributionProviderActionListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 	end
 
@@ -1640,6 +2133,7 @@ module Kaltura
 			end
 			return @distribution_profile_service
 		end
+		
 		attr_reader :entry_distribution_service
 		def entry_distribution_service
 			if (@entry_distribution_service == nil)
@@ -1647,6 +2141,7 @@ module Kaltura
 			end
 			return @entry_distribution_service
 		end
+		
 		attr_reader :distribution_provider_service
 		def distribution_provider_service
 			if (@distribution_provider_service == nil)
@@ -1654,6 +2149,7 @@ module Kaltura
 			end
 			return @distribution_provider_service
 		end
+		
 		attr_reader :generic_distribution_provider_service
 		def generic_distribution_provider_service
 			if (@generic_distribution_provider_service == nil)
@@ -1661,6 +2157,7 @@ module Kaltura
 			end
 			return @generic_distribution_provider_service
 		end
+		
 		attr_reader :generic_distribution_provider_action_service
 		def generic_distribution_provider_action_service
 			if (@generic_distribution_provider_action_service == nil)
@@ -1668,6 +2165,7 @@ module Kaltura
 			end
 			return @generic_distribution_provider_action_service
 		end
+		
 	end
 
 end

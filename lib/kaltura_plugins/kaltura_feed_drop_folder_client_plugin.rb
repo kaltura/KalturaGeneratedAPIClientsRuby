@@ -41,6 +41,20 @@ module Kaltura
 		attr_accessor :item_content_xpath
 		attr_accessor :content_bitrate_attribute_name
 
+
+		def from_xml(xml_element)
+			super
+			self.item_xpath = xml_element.elements['itemXPath'].text
+			self.item_publish_date_xpath = xml_element.elements['itemPublishDateXPath'].text
+			self.item_unique_identifier_xpath = xml_element.elements['itemUniqueIdentifierXPath'].text
+			self.item_content_file_size_xpath = xml_element.elements['itemContentFileSizeXPath'].text
+			self.item_content_url_xpath = xml_element.elements['itemContentUrlXPath'].text
+			self.item_content_bitrate_xpath = xml_element.elements['itemContentBitrateXPath'].text
+			self.item_hash_xpath = xml_element.elements['itemHashXPath'].text
+			self.item_content_xpath = xml_element.elements['itemContentXpath'].text
+			self.content_bitrate_attribute_name = xml_element.elements['contentBitrateAttributeName'].text
+		end
+
 	end
 
 	class KalturaFeedDropFolder < KalturaDropFolder
@@ -50,6 +64,13 @@ module Kaltura
 		def item_handling_limit=(val)
 			@item_handling_limit = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.item_handling_limit = xml_element.elements['itemHandlingLimit'].text
+			self.feed_item_info = KalturaClientBase.object_from_xml(xml_element.elements['feedItemInfo'], 'KalturaFeedItemInfo')
+		end
+
 	end
 
 	class KalturaFeedDropFolderFile < KalturaDropFolderFile
@@ -59,6 +80,13 @@ module Kaltura
 		# Path of the original Feed content XML
 		# 	 
 		attr_accessor :feed_xml_path
+
+
+		def from_xml(xml_element)
+			super
+			self.hash = xml_element.elements['hash'].text
+			self.feed_xml_path = xml_element.elements['feedXmlPath'].text
+		end
 
 	end
 

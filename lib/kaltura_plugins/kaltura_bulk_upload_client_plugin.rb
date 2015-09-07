@@ -34,6 +34,11 @@ module Kaltura
 	#  
 	class KalturaBulkServiceData < KalturaObjectBase
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 
@@ -48,58 +53,55 @@ module Kaltura
 		# 	 
 		def get(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('bulkupload_bulk', 'get', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('bulkupload_bulk', 'get', 'KalturaBulkUpload', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# List bulk upload batch jobs
 		# 	 
 		def list(bulk_upload_filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'bulkUploadFilter', bulk_upload_filter);
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('bulkupload_bulk', 'list', kparams);
+			client.add_param(kparams, 'bulkUploadFilter', bulk_upload_filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('bulkupload_bulk', 'list', 'KalturaBulkUploadListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# serve action returns the original file.
 		# 	 
 		def serve(id)
 			kparams = {}
-			# job id
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('bulkupload_bulk', 'serve', kparams);
-			return client.get_serve_url();
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('bulkupload_bulk', 'serve', 'file', kparams)
+			return client.get_serve_url()
 		end
 
 		# serveLog action returns the log file for the bulk-upload job.
 		# 	 
 		def serve_log(id)
 			kparams = {}
-			# job id
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('bulkupload_bulk', 'serveLog', kparams);
-			return client.get_serve_url();
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('bulkupload_bulk', 'serveLog', 'file', kparams)
+			return client.get_serve_url()
 		end
 
 		# Aborts the bulk upload and all its child jobs
 		# 	 
 		def abort(id)
 			kparams = {}
-			# job id
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('bulkupload_bulk', 'abort', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('bulkupload_bulk', 'abort', 'KalturaBulkUpload', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 	end
 
@@ -111,6 +113,7 @@ module Kaltura
 			end
 			return @bulk_service
 		end
+		
 	end
 
 end

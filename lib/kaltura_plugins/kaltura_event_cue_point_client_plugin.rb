@@ -51,15 +51,33 @@ module Kaltura
 	class KalturaEventCuePoint < KalturaCuePoint
 		attr_accessor :event_type
 
+
+		def from_xml(xml_element)
+			super
+			self.event_type = xml_element.elements['eventType'].text
+		end
+
 	end
 
 	class KalturaEventCuePointBaseFilter < KalturaCuePointFilter
 		attr_accessor :event_type_equal
 		attr_accessor :event_type_in
 
+
+		def from_xml(xml_element)
+			super
+			self.event_type_equal = xml_element.elements['eventTypeEqual'].text
+			self.event_type_in = xml_element.elements['eventTypeIn'].text
+		end
+
 	end
 
 	class KalturaEventCuePointFilter < KalturaEventCuePointBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 

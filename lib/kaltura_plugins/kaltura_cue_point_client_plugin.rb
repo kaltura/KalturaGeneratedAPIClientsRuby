@@ -111,10 +111,37 @@ module Kaltura
 		def thumb_offset=(val)
 			@thumb_offset = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.id = xml_element.elements['id'].text
+			self.cue_point_type = xml_element.elements['cuePointType'].text
+			self.status = xml_element.elements['status'].text
+			self.entry_id = xml_element.elements['entryId'].text
+			self.partner_id = xml_element.elements['partnerId'].text
+			self.created_at = xml_element.elements['createdAt'].text
+			self.updated_at = xml_element.elements['updatedAt'].text
+			self.triggered_at = xml_element.elements['triggeredAt'].text
+			self.tags = xml_element.elements['tags'].text
+			self.start_time = xml_element.elements['startTime'].text
+			self.user_id = xml_element.elements['userId'].text
+			self.partner_data = xml_element.elements['partnerData'].text
+			self.partner_sort_value = xml_element.elements['partnerSortValue'].text
+			self.force_stop = xml_element.elements['forceStop'].text
+			self.thumb_offset = xml_element.elements['thumbOffset'].text
+			self.system_name = xml_element.elements['systemName'].text
+		end
+
 	end
 
 	class KalturaCuePointListResponse < KalturaListResponse
 		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaCuePoint')
+		end
 
 	end
 
@@ -187,6 +214,39 @@ module Kaltura
 		def force_stop_equal=(val)
 			@force_stop_equal = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.id_equal = xml_element.elements['idEqual'].text
+			self.id_in = xml_element.elements['idIn'].text
+			self.cue_point_type_equal = xml_element.elements['cuePointTypeEqual'].text
+			self.cue_point_type_in = xml_element.elements['cuePointTypeIn'].text
+			self.status_equal = xml_element.elements['statusEqual'].text
+			self.status_in = xml_element.elements['statusIn'].text
+			self.entry_id_equal = xml_element.elements['entryIdEqual'].text
+			self.entry_id_in = xml_element.elements['entryIdIn'].text
+			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			self.triggered_at_greater_than_or_equal = xml_element.elements['triggeredAtGreaterThanOrEqual'].text
+			self.triggered_at_less_than_or_equal = xml_element.elements['triggeredAtLessThanOrEqual'].text
+			self.tags_like = xml_element.elements['tagsLike'].text
+			self.tags_multi_like_or = xml_element.elements['tagsMultiLikeOr'].text
+			self.tags_multi_like_and = xml_element.elements['tagsMultiLikeAnd'].text
+			self.start_time_greater_than_or_equal = xml_element.elements['startTimeGreaterThanOrEqual'].text
+			self.start_time_less_than_or_equal = xml_element.elements['startTimeLessThanOrEqual'].text
+			self.user_id_equal = xml_element.elements['userIdEqual'].text
+			self.user_id_in = xml_element.elements['userIdIn'].text
+			self.partner_sort_value_equal = xml_element.elements['partnerSortValueEqual'].text
+			self.partner_sort_value_in = xml_element.elements['partnerSortValueIn'].text
+			self.partner_sort_value_greater_than_or_equal = xml_element.elements['partnerSortValueGreaterThanOrEqual'].text
+			self.partner_sort_value_less_than_or_equal = xml_element.elements['partnerSortValueLessThanOrEqual'].text
+			self.force_stop_equal = xml_element.elements['forceStopEqual'].text
+			self.system_name_equal = xml_element.elements['systemNameEqual'].text
+			self.system_name_in = xml_element.elements['systemNameIn'].text
+		end
+
 	end
 
 	class KalturaCuePointFilter < KalturaCuePointBaseFilter
@@ -200,6 +260,14 @@ module Kaltura
 		def user_id_current=(val)
 			@user_id_current = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.free_text = xml_element.elements['freeText'].text
+			self.user_id_equal_current = xml_element.elements['userIdEqualCurrent'].text
+			self.user_id_current = xml_element.elements['userIdCurrent'].text
+		end
+
 	end
 
 
@@ -214,96 +282,97 @@ module Kaltura
 		# 	 
 		def add(cue_point)
 			kparams = {}
-			client.add_param(kparams, 'cuePoint', cue_point);
-			client.queue_service_action_call('cuepoint_cuepoint', 'add', kparams);
+			client.add_param(kparams, 'cuePoint', cue_point)
+			client.queue_service_action_call('cuepoint_cuepoint', 'add', 'KalturaCuePoint', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Allows you to add multiple cue points objects by uploading XML that contains multiple cue point definitions
 		# 	 
 		def add_from_bulk(file_data)
 			kparams = {}
-			client.add_param(kparams, 'fileData', file_data);
-			client.queue_service_action_call('cuepoint_cuepoint', 'addFromBulk', kparams);
+			kfiles = {}
+			client.add_param(kfiles, 'fileData', file_data)
+			client.queue_service_action_call('cuepoint_cuepoint', 'addFromBulk', 'KalturaCuePointListResponse', kparams, kfiles)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Download multiple cue points objects as XML definitions
 		# 	 
 		def serve_bulk(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter);
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('cuepoint_cuepoint', 'serveBulk', kparams);
-			return client.get_serve_url();
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('cuepoint_cuepoint', 'serveBulk', 'file', kparams)
+			return client.get_serve_url()
 		end
 
 		# Retrieve an CuePoint object by id
 		# 	 
 		def get(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('cuepoint_cuepoint', 'get', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('cuepoint_cuepoint', 'get', 'KalturaCuePoint', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# List cue point objects by filter and pager
 		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter);
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('cuepoint_cuepoint', 'list', kparams);
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('cuepoint_cuepoint', 'list', 'KalturaCuePointListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# count cue point objects by filter
 		# 	 
 		def count(filter=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter);
-			client.queue_service_action_call('cuepoint_cuepoint', 'count', kparams);
+			client.add_param(kparams, 'filter', filter)
+			client.queue_service_action_call('cuepoint_cuepoint', 'count', 'int', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Update cue point by id 
 		# 	 
 		def update(id, cue_point)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.add_param(kparams, 'cuePoint', cue_point);
-			client.queue_service_action_call('cuepoint_cuepoint', 'update', kparams);
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'cuePoint', cue_point)
+			client.queue_service_action_call('cuepoint_cuepoint', 'update', 'KalturaCuePoint', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# delete cue point by id, and delete all children cue points
 		# 	 
 		def delete(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('cuepoint_cuepoint', 'delete', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('cuepoint_cuepoint', 'delete', '', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 	end
 
@@ -315,6 +384,7 @@ module Kaltura
 			end
 			return @cue_point_service
 		end
+		
 	end
 
 end

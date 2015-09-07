@@ -61,6 +61,15 @@ module Kaltura
 		def duration=(val)
 			@duration = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.code = xml_element.elements['code'].text
+			self.description = xml_element.elements['description'].text
+			self.end_time = xml_element.elements['endTime'].text
+			self.duration = xml_element.elements['duration'].text
+		end
+
 	end
 
 	class KalturaCodeCuePointBaseFilter < KalturaCuePointFilter
@@ -89,9 +98,31 @@ module Kaltura
 		def duration_less_than_or_equal=(val)
 			@duration_less_than_or_equal = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.code_like = xml_element.elements['codeLike'].text
+			self.code_multi_like_or = xml_element.elements['codeMultiLikeOr'].text
+			self.code_multi_like_and = xml_element.elements['codeMultiLikeAnd'].text
+			self.code_equal = xml_element.elements['codeEqual'].text
+			self.code_in = xml_element.elements['codeIn'].text
+			self.description_like = xml_element.elements['descriptionLike'].text
+			self.description_multi_like_or = xml_element.elements['descriptionMultiLikeOr'].text
+			self.description_multi_like_and = xml_element.elements['descriptionMultiLikeAnd'].text
+			self.end_time_greater_than_or_equal = xml_element.elements['endTimeGreaterThanOrEqual'].text
+			self.end_time_less_than_or_equal = xml_element.elements['endTimeLessThanOrEqual'].text
+			self.duration_greater_than_or_equal = xml_element.elements['durationGreaterThanOrEqual'].text
+			self.duration_less_than_or_equal = xml_element.elements['durationLessThanOrEqual'].text
+		end
+
 	end
 
 	class KalturaCodeCuePointFilter < KalturaCodeCuePointBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 

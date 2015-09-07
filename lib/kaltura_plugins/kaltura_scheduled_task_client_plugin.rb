@@ -82,6 +82,13 @@ module Kaltura
 		def stop_processing_on_error=(val)
 			@stop_processing_on_error = to_b(val)
 		end
+
+		def from_xml(xml_element)
+			super
+			self.type = xml_element.elements['type'].text
+			self.stop_processing_on_error = xml_element.elements['stopProcessingOnError'].text
+		end
+
 	end
 
 	class KalturaScheduledTaskProfile < KalturaObjectBase
@@ -128,6 +135,24 @@ module Kaltura
 		def max_total_count_allowed=(val)
 			@max_total_count_allowed = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.id = xml_element.elements['id'].text
+			self.partner_id = xml_element.elements['partnerId'].text
+			self.name = xml_element.elements['name'].text
+			self.system_name = xml_element.elements['systemName'].text
+			self.description = xml_element.elements['description'].text
+			self.status = xml_element.elements['status'].text
+			self.object_filter_engine_type = xml_element.elements['objectFilterEngineType'].text
+			self.object_filter = KalturaClientBase.object_from_xml(xml_element.elements['objectFilter'], 'KalturaFilter')
+			self.object_tasks = KalturaClientBase.object_from_xml(xml_element.elements['objectTasks'], 'KalturaObjectTask')
+			self.created_at = xml_element.elements['createdAt'].text
+			self.updated_at = xml_element.elements['updatedAt'].text
+			self.last_execution_started_at = xml_element.elements['lastExecutionStartedAt'].text
+			self.max_total_count_allowed = xml_element.elements['maxTotalCountAllowed'].text
+		end
+
 	end
 
 	class KalturaConvertEntryFlavorsObjectTask < KalturaObjectTask
@@ -141,6 +166,13 @@ module Kaltura
 		def reconvert=(val)
 			@reconvert = to_b(val)
 		end
+
+		def from_xml(xml_element)
+			super
+			self.flavor_params_ids = xml_element.elements['flavorParamsIds'].text
+			self.reconvert = xml_element.elements['reconvert'].text
+		end
+
 	end
 
 	class KalturaDeleteEntryFlavorsObjectTask < KalturaObjectTask
@@ -154,13 +186,30 @@ module Kaltura
 		def delete_type=(val)
 			@delete_type = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.delete_type = xml_element.elements['deleteType'].text
+			self.flavor_params_ids = xml_element.elements['flavorParamsIds'].text
+		end
+
 	end
 
 	class KalturaDeleteEntryObjectTask < KalturaObjectTask
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaDeleteLocalContentObjectTask < KalturaObjectTask
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
@@ -175,6 +224,13 @@ module Kaltura
 		def add_remove_type=(val)
 			@add_remove_type = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.add_remove_type = xml_element.elements['addRemoveType'].text
+			self.category_ids = KalturaClientBase.object_from_xml(xml_element.elements['categoryIds'], 'KalturaIntegerValue')
+		end
+
 	end
 
 	class KalturaScheduledTaskJobData < KalturaJobData
@@ -188,6 +244,14 @@ module Kaltura
 		def reference_time=(val)
 			@reference_time = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.max_results = xml_element.elements['maxResults'].text
+			self.results_file_path = xml_element.elements['resultsFilePath'].text
+			self.reference_time = xml_element.elements['referenceTime'].text
+		end
+
 	end
 
 	class KalturaScheduledTaskProfileBaseFilter < KalturaFilter
@@ -233,10 +297,35 @@ module Kaltura
 		def last_execution_started_at_less_than_or_equal=(val)
 			@last_execution_started_at_less_than_or_equal = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.id_equal = xml_element.elements['idEqual'].text
+			self.id_in = xml_element.elements['idIn'].text
+			self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
+			self.partner_id_in = xml_element.elements['partnerIdIn'].text
+			self.system_name_equal = xml_element.elements['systemNameEqual'].text
+			self.system_name_in = xml_element.elements['systemNameIn'].text
+			self.status_equal = xml_element.elements['statusEqual'].text
+			self.status_in = xml_element.elements['statusIn'].text
+			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			self.last_execution_started_at_greater_than_or_equal = xml_element.elements['lastExecutionStartedAtGreaterThanOrEqual'].text
+			self.last_execution_started_at_less_than_or_equal = xml_element.elements['lastExecutionStartedAtLessThanOrEqual'].text
+		end
+
 	end
 
 	class KalturaScheduledTaskProfileListResponse < KalturaListResponse
 		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaScheduledTaskProfile')
+		end
 
 	end
 
@@ -245,9 +334,20 @@ module Kaltura
 		# 	 
 		attr_accessor :storage_id
 
+
+		def from_xml(xml_element)
+			super
+			self.storage_id = xml_element.elements['storageId'].text
+		end
+
 	end
 
 	class KalturaScheduledTaskProfileFilter < KalturaScheduledTaskProfileBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
@@ -263,83 +363,83 @@ module Kaltura
 		# 	 
 		def add(scheduled_task_profile)
 			kparams = {}
-			client.add_param(kparams, 'scheduledTaskProfile', scheduled_task_profile);
-			client.queue_service_action_call('scheduledtask_scheduledtaskprofile', 'add', kparams);
+			client.add_param(kparams, 'scheduledTaskProfile', scheduled_task_profile)
+			client.queue_service_action_call('scheduledtask_scheduledtaskprofile', 'add', 'KalturaScheduledTaskProfile', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Retrieve a scheduled task profile by id
 		# 	 
 		def get(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('scheduledtask_scheduledtaskprofile', 'get', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('scheduledtask_scheduledtaskprofile', 'get', 'KalturaScheduledTaskProfile', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Update an existing scheduled task profile
 		# 	 
 		def update(id, scheduled_task_profile)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.add_param(kparams, 'scheduledTaskProfile', scheduled_task_profile);
-			client.queue_service_action_call('scheduledtask_scheduledtaskprofile', 'update', kparams);
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'scheduledTaskProfile', scheduled_task_profile)
+			client.queue_service_action_call('scheduledtask_scheduledtaskprofile', 'update', 'KalturaScheduledTaskProfile', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Delete a scheduled task profile
 		# 	 
 		def delete(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('scheduledtask_scheduledtaskprofile', 'delete', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('scheduledtask_scheduledtaskprofile', 'delete', '', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# List scheduled task profiles
 		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter);
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('scheduledtask_scheduledtaskprofile', 'list', kparams);
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('scheduledtask_scheduledtaskprofile', 'list', 'KalturaScheduledTaskProfileListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def request_dry_run(scheduled_task_profile_id, max_results=500)
 			kparams = {}
-			client.add_param(kparams, 'scheduledTaskProfileId', scheduled_task_profile_id);
-			client.add_param(kparams, 'maxResults', max_results);
-			client.queue_service_action_call('scheduledtask_scheduledtaskprofile', 'requestDryRun', kparams);
+			client.add_param(kparams, 'scheduledTaskProfileId', scheduled_task_profile_id)
+			client.add_param(kparams, 'maxResults', max_results)
+			client.queue_service_action_call('scheduledtask_scheduledtaskprofile', 'requestDryRun', 'int', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def get_dry_run_results(request_id)
 			kparams = {}
-			client.add_param(kparams, 'requestId', request_id);
-			client.queue_service_action_call('scheduledtask_scheduledtaskprofile', 'getDryRunResults', kparams);
+			client.add_param(kparams, 'requestId', request_id)
+			client.queue_service_action_call('scheduledtask_scheduledtaskprofile', 'getDryRunResults', 'KalturaObjectListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 	end
 
@@ -351,6 +451,7 @@ module Kaltura
 			end
 			return @scheduled_task_profile_service
 		end
+		
 	end
 
 end

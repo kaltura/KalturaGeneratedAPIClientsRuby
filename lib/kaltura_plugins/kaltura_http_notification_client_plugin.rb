@@ -103,9 +103,26 @@ module Kaltura
 		def template_id=(val)
 			@template_id = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.object = KalturaClientBase.object_from_xml(xml_element.elements['object'], 'KalturaObjectBase')
+			self.event_object_type = xml_element.elements['eventObjectType'].text
+			self.event_notification_job_id = xml_element.elements['eventNotificationJobId'].text
+			self.template_id = xml_element.elements['templateId'].text
+			self.template_name = xml_element.elements['templateName'].text
+			self.template_system_name = xml_element.elements['templateSystemName'].text
+			self.event_type = xml_element.elements['eventType'].text
+		end
+
 	end
 
 	class KalturaHttpNotificationData < KalturaObjectBase
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
@@ -113,10 +130,21 @@ module Kaltura
 	#  
 	class KalturaHttpNotificationDataFields < KalturaHttpNotificationData
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaHttpNotificationDataText < KalturaHttpNotificationData
 		attr_accessor :content
+
+
+		def from_xml(xml_element)
+			super
+			self.content = KalturaClientBase.object_from_xml(xml_element.elements['content'], 'KalturaStringValue')
+		end
 
 	end
 
@@ -142,6 +170,15 @@ module Kaltura
 		def ignore_null=(val)
 			@ignore_null = to_b(val)
 		end
+
+		def from_xml(xml_element)
+			super
+			self.api_object_type = xml_element.elements['apiObjectType'].text
+			self.format = xml_element.elements['format'].text
+			self.ignore_null = xml_element.elements['ignoreNull'].text
+			self.code = xml_element.elements['code'].text
+		end
+
 	end
 
 	class KalturaHttpNotificationTemplate < KalturaEventNotificationTemplate
@@ -217,6 +254,29 @@ module Kaltura
 		def ssl_version=(val)
 			@ssl_version = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.url = xml_element.elements['url'].text
+			self.method = xml_element.elements['method'].text
+			self.data = KalturaClientBase.object_from_xml(xml_element.elements['data'], 'KalturaHttpNotificationData')
+			self.timeout = xml_element.elements['timeout'].text
+			self.connect_timeout = xml_element.elements['connectTimeout'].text
+			self.username = xml_element.elements['username'].text
+			self.password = xml_element.elements['password'].text
+			self.authentication_method = xml_element.elements['authenticationMethod'].text
+			self.ssl_version = xml_element.elements['sslVersion'].text
+			self.ssl_certificate = xml_element.elements['sslCertificate'].text
+			self.ssl_certificate_type = xml_element.elements['sslCertificateType'].text
+			self.ssl_certificate_password = xml_element.elements['sslCertificatePassword'].text
+			self.ssl_engine = xml_element.elements['sslEngine'].text
+			self.ssl_engine_default = xml_element.elements['sslEngineDefault'].text
+			self.ssl_key_type = xml_element.elements['sslKeyType'].text
+			self.ssl_key = xml_element.elements['sslKey'].text
+			self.ssl_key_password = xml_element.elements['sslKeyPassword'].text
+			self.custom_headers = KalturaClientBase.object_from_xml(xml_element.elements['customHeaders'], 'KalturaKeyValue')
+		end
+
 	end
 
 	class KalturaHttpNotificationDispatchJobData < KalturaEventNotificationDispatchJobData
@@ -295,13 +355,47 @@ module Kaltura
 		def ssl_version=(val)
 			@ssl_version = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.url = xml_element.elements['url'].text
+			self.method = xml_element.elements['method'].text
+			self.data = xml_element.elements['data'].text
+			self.timeout = xml_element.elements['timeout'].text
+			self.connect_timeout = xml_element.elements['connectTimeout'].text
+			self.username = xml_element.elements['username'].text
+			self.password = xml_element.elements['password'].text
+			self.authentication_method = xml_element.elements['authenticationMethod'].text
+			self.ssl_version = xml_element.elements['sslVersion'].text
+			self.ssl_certificate = xml_element.elements['sslCertificate'].text
+			self.ssl_certificate_type = xml_element.elements['sslCertificateType'].text
+			self.ssl_certificate_password = xml_element.elements['sslCertificatePassword'].text
+			self.ssl_engine = xml_element.elements['sslEngine'].text
+			self.ssl_engine_default = xml_element.elements['sslEngineDefault'].text
+			self.ssl_key_type = xml_element.elements['sslKeyType'].text
+			self.ssl_key = xml_element.elements['sslKey'].text
+			self.ssl_key_password = xml_element.elements['sslKeyPassword'].text
+			self.custom_headers = KalturaClientBase.object_from_xml(xml_element.elements['customHeaders'], 'KalturaKeyValue')
+			self.sign_secret = xml_element.elements['signSecret'].text
+		end
+
 	end
 
 	class KalturaHttpNotificationTemplateBaseFilter < KalturaEventNotificationTemplateFilter
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaHttpNotificationTemplateFilter < KalturaHttpNotificationTemplateBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 

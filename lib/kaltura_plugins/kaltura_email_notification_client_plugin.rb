@@ -64,6 +64,13 @@ module Kaltura
 		# 	 
 		attr_accessor :name
 
+
+		def from_xml(xml_element)
+			super
+			self.email = KalturaClientBase.object_from_xml(xml_element.elements['email'], 'KalturaStringValue')
+			self.name = KalturaClientBase.object_from_xml(xml_element.elements['name'], 'KalturaStringValue')
+		end
+
 	end
 
 	# Abstract class representing the final output recipients going into the batch mechanism
@@ -73,11 +80,22 @@ module Kaltura
 		# 	  
 		attr_accessor :provider_type
 
+
+		def from_xml(xml_element)
+			super
+			self.provider_type = xml_element.elements['providerType'].text
+		end
+
 	end
 
 	# Abstract core class  which provides the recipients (to, CC, BCC) for an email notification
 	#  
 	class KalturaEmailNotificationRecipientProvider < KalturaObjectBase
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
@@ -113,12 +131,35 @@ module Kaltura
 		def update_method_equal=(val)
 			@update_method_equal = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.user_id_equal = xml_element.elements['userIdEqual'].text
+			self.user_id_in = xml_element.elements['userIdIn'].text
+			self.status_equal = xml_element.elements['statusEqual'].text
+			self.status_in = xml_element.elements['statusIn'].text
+			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			self.update_method_equal = xml_element.elements['updateMethodEqual'].text
+			self.update_method_in = xml_element.elements['updateMethodIn'].text
+			self.permission_names_match_and = xml_element.elements['permissionNamesMatchAnd'].text
+			self.permission_names_match_or = xml_element.elements['permissionNamesMatchOr'].text
+		end
+
 	end
 
 	# Job Data representing the provider of recipients for a single categoryId
 	#  
 	class KalturaEmailNotificationCategoryRecipientJobData < KalturaEmailNotificationRecipientJobData
 		attr_accessor :category_user_filter
+
+
+		def from_xml(xml_element)
+			super
+			self.category_user_filter = KalturaClientBase.object_from_xml(xml_element.elements['categoryUserFilter'], 'KalturaCategoryUserFilter')
+		end
 
 	end
 
@@ -130,9 +171,21 @@ module Kaltura
 		attr_accessor :category_id
 		attr_accessor :category_user_filter
 
+
+		def from_xml(xml_element)
+			super
+			self.category_id = KalturaClientBase.object_from_xml(xml_element.elements['categoryId'], 'KalturaStringValue')
+			self.category_user_filter = KalturaClientBase.object_from_xml(xml_element.elements['categoryUserFilter'], 'KalturaCategoryUserProviderFilter')
+		end
+
 	end
 
 	class KalturaEmailNotificationParameter < KalturaEventNotificationParameter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
@@ -143,6 +196,12 @@ module Kaltura
 		# 	 
 		attr_accessor :email_recipients
 
+
+		def from_xml(xml_element)
+			super
+			self.email_recipients = KalturaClientBase.object_from_xml(xml_element.elements['emailRecipients'], 'KalturaKeyValue')
+		end
+
 	end
 
 	# API class for recipient provider containing a static list of email recipients.
@@ -151,6 +210,12 @@ module Kaltura
 		# Email to emails and names
 		# 	 
 		attr_accessor :email_recipients
+
+
+		def from_xml(xml_element)
+			super
+			self.email_recipients = KalturaClientBase.object_from_xml(xml_element.elements['emailRecipients'], 'KalturaEmailNotificationRecipient')
+		end
 
 	end
 
@@ -203,6 +268,25 @@ module Kaltura
 		def priority=(val)
 			@priority = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.format = xml_element.elements['format'].text
+			self.subject = xml_element.elements['subject'].text
+			self.body = xml_element.elements['body'].text
+			self.from_email = xml_element.elements['fromEmail'].text
+			self.from_name = xml_element.elements['fromName'].text
+			self.to = KalturaClientBase.object_from_xml(xml_element.elements['to'], 'KalturaEmailNotificationRecipientProvider')
+			self.cc = KalturaClientBase.object_from_xml(xml_element.elements['cc'], 'KalturaEmailNotificationRecipientProvider')
+			self.bcc = KalturaClientBase.object_from_xml(xml_element.elements['bcc'], 'KalturaEmailNotificationRecipientProvider')
+			self.reply_to = KalturaClientBase.object_from_xml(xml_element.elements['replyTo'], 'KalturaEmailNotificationRecipientProvider')
+			self.priority = xml_element.elements['priority'].text
+			self.confirm_reading_to = xml_element.elements['confirmReadingTo'].text
+			self.hostname = xml_element.elements['hostname'].text
+			self.message_id = xml_element.elements['messageID'].text
+			self.custom_headers = KalturaClientBase.object_from_xml(xml_element.elements['customHeaders'], 'KalturaKeyValue')
+		end
+
 	end
 
 	# JobData representing the dynamic user receipient array
@@ -210,12 +294,24 @@ module Kaltura
 	class KalturaEmailNotificationUserRecipientJobData < KalturaEmailNotificationRecipientJobData
 		attr_accessor :filter
 
+
+		def from_xml(xml_element)
+			super
+			self.filter = KalturaClientBase.object_from_xml(xml_element.elements['filter'], 'KalturaUserFilter')
+		end
+
 	end
 
 	# API class for recipient provider which constructs a dynamic list of recipients according to a user filter
 	#  
 	class KalturaEmailNotificationUserRecipientProvider < KalturaEmailNotificationRecipientProvider
 		attr_accessor :filter
+
+
+		def from_xml(xml_element)
+			super
+			self.filter = KalturaClientBase.object_from_xml(xml_element.elements['filter'], 'KalturaUserFilter')
+		end
 
 	end
 
@@ -259,13 +355,39 @@ module Kaltura
 		def priority=(val)
 			@priority = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.from_email = xml_element.elements['fromEmail'].text
+			self.from_name = xml_element.elements['fromName'].text
+			self.to = KalturaClientBase.object_from_xml(xml_element.elements['to'], 'KalturaEmailNotificationRecipientJobData')
+			self.cc = KalturaClientBase.object_from_xml(xml_element.elements['cc'], 'KalturaEmailNotificationRecipientJobData')
+			self.bcc = KalturaClientBase.object_from_xml(xml_element.elements['bcc'], 'KalturaEmailNotificationRecipientJobData')
+			self.reply_to = KalturaClientBase.object_from_xml(xml_element.elements['replyTo'], 'KalturaEmailNotificationRecipientJobData')
+			self.priority = xml_element.elements['priority'].text
+			self.confirm_reading_to = xml_element.elements['confirmReadingTo'].text
+			self.hostname = xml_element.elements['hostname'].text
+			self.message_id = xml_element.elements['messageID'].text
+			self.custom_headers = KalturaClientBase.object_from_xml(xml_element.elements['customHeaders'], 'KalturaKeyValue')
+		end
+
 	end
 
 	class KalturaEmailNotificationTemplateBaseFilter < KalturaEventNotificationTemplateFilter
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaEmailNotificationTemplateFilter < KalturaEmailNotificationTemplateBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 

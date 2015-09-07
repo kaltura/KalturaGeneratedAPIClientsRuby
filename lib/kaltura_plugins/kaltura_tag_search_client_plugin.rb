@@ -53,6 +53,18 @@ module Kaltura
 		def updated_at=(val)
 			@updated_at = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.id = xml_element.elements['id'].text
+			self.tag = xml_element.elements['tag'].text
+			self.tagged_object_type = xml_element.elements['taggedObjectType'].text
+			self.partner_id = xml_element.elements['partnerId'].text
+			self.instance_count = xml_element.elements['instanceCount'].text
+			self.created_at = xml_element.elements['createdAt'].text
+			self.updated_at = xml_element.elements['updatedAt'].text
+		end
+
 	end
 
 	class KalturaIndexTagsByPrivacyContextJobData < KalturaJobData
@@ -63,6 +75,14 @@ module Kaltura
 		def changed_category_id=(val)
 			@changed_category_id = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.changed_category_id = xml_element.elements['changedCategoryId'].text
+			self.deleted_privacy_contexts = xml_element.elements['deletedPrivacyContexts'].text
+			self.added_privacy_contexts = xml_element.elements['addedPrivacyContexts'].text
+		end
+
 	end
 
 	class KalturaTagFilter < KalturaFilter
@@ -78,10 +98,26 @@ module Kaltura
 		def instance_count_in=(val)
 			@instance_count_in = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.object_type_equal = xml_element.elements['objectTypeEqual'].text
+			self.tag_equal = xml_element.elements['tagEqual'].text
+			self.tag_starts_with = xml_element.elements['tagStartsWith'].text
+			self.instance_count_equal = xml_element.elements['instanceCountEqual'].text
+			self.instance_count_in = xml_element.elements['instanceCountIn'].text
+		end
+
 	end
 
 	class KalturaTagListResponse < KalturaListResponse
 		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaTag')
+		end
 
 	end
 
@@ -95,36 +131,36 @@ module Kaltura
 
 		def search(tag_filter, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'tagFilter', tag_filter);
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('tagsearch_tag', 'search', kparams);
+			client.add_param(kparams, 'tagFilter', tag_filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('tagsearch_tag', 'search', 'KalturaTagListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Action goes over all tags with instanceCount==0 and checks whether they need to be removed from the DB. Returns number of removed tags.
 		#      
 		def delete_pending()
 			kparams = {}
-			client.queue_service_action_call('tagsearch_tag', 'deletePending', kparams);
+			client.queue_service_action_call('tagsearch_tag', 'deletePending', 'int', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def index_category_entry_tags(category_id, pc_to_decrement, pc_to_increment)
 			kparams = {}
-			client.add_param(kparams, 'categoryId', category_id);
-			client.add_param(kparams, 'pcToDecrement', pc_to_decrement);
-			client.add_param(kparams, 'pcToIncrement', pc_to_increment);
-			client.queue_service_action_call('tagsearch_tag', 'indexCategoryEntryTags', kparams);
+			client.add_param(kparams, 'categoryId', category_id)
+			client.add_param(kparams, 'pcToDecrement', pc_to_decrement)
+			client.add_param(kparams, 'pcToIncrement', pc_to_increment)
+			client.queue_service_action_call('tagsearch_tag', 'indexCategoryEntryTags', '', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 	end
 
@@ -136,6 +172,7 @@ module Kaltura
 			end
 			return @tag_service
 		end
+		
 	end
 
 end

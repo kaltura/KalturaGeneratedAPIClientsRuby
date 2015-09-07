@@ -40,6 +40,13 @@ module Kaltura
 		# 	 
 		attr_accessor :template_object
 
+
+		def from_xml(xml_element)
+			super
+			self.filter = KalturaClientBase.object_from_xml(xml_element.elements['filter'], 'KalturaFilter')
+			self.template_object = KalturaClientBase.object_from_xml(xml_element.elements['templateObject'], 'KalturaObjectBase')
+		end
+
 	end
 
 	# Represents the Bulk upload job data for filter bulk upload
@@ -51,6 +58,13 @@ module Kaltura
 		# Template object for new object creation
 		# 	 
 		attr_accessor :template_object
+
+
+		def from_xml(xml_element)
+			super
+			self.filter = KalturaClientBase.object_from_xml(xml_element.elements['filter'], 'KalturaFilter')
+			self.template_object = KalturaClientBase.object_from_xml(xml_element.elements['templateObject'], 'KalturaObjectBase')
+		end
 
 	end
 

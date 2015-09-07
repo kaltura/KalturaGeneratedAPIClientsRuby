@@ -72,10 +72,25 @@ module Kaltura
 		def status=(val)
 			@status = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.filename = xml_element.elements['filename'].text
+			self.title = xml_element.elements['title'].text
+			self.format = xml_element.elements['format'].text
+			self.status = xml_element.elements['status'].text
+		end
+
 	end
 
 	class KalturaAttachmentAssetListResponse < KalturaListResponse
 		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaAttachmentAsset')
+		end
 
 	end
 
@@ -89,9 +104,24 @@ module Kaltura
 		def status_equal=(val)
 			@status_equal = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.format_equal = xml_element.elements['formatEqual'].text
+			self.format_in = xml_element.elements['formatIn'].text
+			self.status_equal = xml_element.elements['statusEqual'].text
+			self.status_in = xml_element.elements['statusIn'].text
+			self.status_not_in = xml_element.elements['statusNotIn'].text
+		end
+
 	end
 
 	class KalturaAttachmentAssetFilter < KalturaAttachmentAssetBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
@@ -107,106 +137,106 @@ module Kaltura
 		#      
 		def add(entry_id, attachment_asset)
 			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id);
-			client.add_param(kparams, 'attachmentAsset', attachment_asset);
-			client.queue_service_action_call('attachment_attachmentasset', 'add', kparams);
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'attachmentAsset', attachment_asset)
+			client.queue_service_action_call('attachment_attachmentasset', 'add', 'KalturaAttachmentAsset', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Update content of attachment asset
 		#      
 		def set_content(id, content_resource)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.add_param(kparams, 'contentResource', content_resource);
-			client.queue_service_action_call('attachment_attachmentasset', 'setContent', kparams);
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'contentResource', content_resource)
+			client.queue_service_action_call('attachment_attachmentasset', 'setContent', 'KalturaAttachmentAsset', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Update attachment asset
 		#      
 		def update(id, attachment_asset)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.add_param(kparams, 'attachmentAsset', attachment_asset);
-			client.queue_service_action_call('attachment_attachmentasset', 'update', kparams);
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'attachmentAsset', attachment_asset)
+			client.queue_service_action_call('attachment_attachmentasset', 'update', 'KalturaAttachmentAsset', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Get download URL for the asset
 		# 	 
 		def get_url(id, storage_id=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.add_param(kparams, 'storageId', storage_id);
-			client.queue_service_action_call('attachment_attachmentasset', 'getUrl', kparams);
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'storageId', storage_id)
+			client.queue_service_action_call('attachment_attachmentasset', 'getUrl', 'string', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Get remote storage existing paths for the asset
 		# 	 
 		def get_remote_paths(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('attachment_attachmentasset', 'getRemotePaths', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('attachment_attachmentasset', 'getRemotePaths', 'KalturaRemotePathListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Serves attachment by its id
 		# 	 
 		def serve(attachment_asset_id)
 			kparams = {}
-			client.add_param(kparams, 'attachmentAssetId', attachment_asset_id);
-			client.queue_service_action_call('attachment_attachmentasset', 'serve', kparams);
-			return client.get_serve_url();
+			client.add_param(kparams, 'attachmentAssetId', attachment_asset_id)
+			client.queue_service_action_call('attachment_attachmentasset', 'serve', 'file', kparams)
+			return client.get_serve_url()
 		end
 
 		def get(attachment_asset_id)
 			kparams = {}
-			client.add_param(kparams, 'attachmentAssetId', attachment_asset_id);
-			client.queue_service_action_call('attachment_attachmentasset', 'get', kparams);
+			client.add_param(kparams, 'attachmentAssetId', attachment_asset_id)
+			client.queue_service_action_call('attachment_attachmentasset', 'get', 'KalturaAttachmentAsset', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# List attachment Assets by filter and pager
 		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter);
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('attachment_attachmentasset', 'list', kparams);
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('attachment_attachmentasset', 'list', 'KalturaAttachmentAssetListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def delete(attachment_asset_id)
 			kparams = {}
-			client.add_param(kparams, 'attachmentAssetId', attachment_asset_id);
-			client.queue_service_action_call('attachment_attachmentasset', 'delete', kparams);
+			client.add_param(kparams, 'attachmentAssetId', attachment_asset_id)
+			client.queue_service_action_call('attachment_attachmentasset', 'delete', '', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 	end
 
@@ -218,6 +248,7 @@ module Kaltura
 			end
 			return @attachment_asset_service
 		end
+		
 	end
 
 end

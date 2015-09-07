@@ -51,6 +51,19 @@ module Kaltura
 		def rand=(val)
 			@rand = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.partner_id = xml_element.elements['partner_id'].text
+			self.valid_until = xml_element.elements['valid_until'].text
+			self.partner_pattern = xml_element.elements['partner_pattern'].text
+			self.type = xml_element.elements['type'].text
+			self.error = xml_element.elements['error'].text
+			self.rand = xml_element.elements['rand'].text
+			self.user = xml_element.elements['user'].text
+			self.privileges = xml_element.elements['privileges'].text
+		end
+
 	end
 
 
@@ -65,33 +78,33 @@ module Kaltura
 		# 	 
 		def from_secure_string(str)
 			kparams = {}
-			client.add_param(kparams, 'str', str);
-			client.queue_service_action_call('kalturainternaltools_kalturainternaltoolssystemhelper', 'fromSecureString', kparams);
+			client.add_param(kparams, 'str', str)
+			client.queue_service_action_call('kalturainternaltools_kalturainternaltoolssystemhelper', 'fromSecureString', 'KalturaInternalToolsSession', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# from ip to country
 		# 	 
 		def iptocountry(remote_addr)
 			kparams = {}
-			client.add_param(kparams, 'remote_addr', remote_addr);
-			client.queue_service_action_call('kalturainternaltools_kalturainternaltoolssystemhelper', 'iptocountry', kparams);
+			client.add_param(kparams, 'remote_addr', remote_addr)
+			client.queue_service_action_call('kalturainternaltools_kalturainternaltoolssystemhelper', 'iptocountry', 'string', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def get_remote_address()
 			kparams = {}
-			client.queue_service_action_call('kalturainternaltools_kalturainternaltoolssystemhelper', 'getRemoteAddress', kparams);
+			client.queue_service_action_call('kalturainternaltools_kalturainternaltoolssystemhelper', 'getRemoteAddress', 'string', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 	end
 
@@ -103,6 +116,7 @@ module Kaltura
 			end
 			return @kaltura_internal_tools_system_helper_service
 		end
+		
 	end
 
 end

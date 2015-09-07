@@ -74,6 +74,21 @@ module Kaltura
 		def status=(val)
 			@status = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.id = xml_element.elements['id'].text
+			self.created_at = xml_element.elements['createdAt'].text
+			self.updated_at = xml_element.elements['updatedAt'].text
+			self.expires_at = xml_element.elements['expiresAt'].text
+			self.partner_id = xml_element.elements['partnerId'].text
+			self.user_id = xml_element.elements['userId'].text
+			self.name = xml_element.elements['name'].text
+			self.system_name = xml_element.elements['systemName'].text
+			self.full_url = xml_element.elements['fullUrl'].text
+			self.status = xml_element.elements['status'].text
+		end
+
 	end
 
 	class KalturaShortLinkBaseFilter < KalturaFilter
@@ -121,14 +136,46 @@ module Kaltura
 		def status_equal=(val)
 			@status_equal = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.id_equal = xml_element.elements['idEqual'].text
+			self.id_in = xml_element.elements['idIn'].text
+			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			self.expires_at_greater_than_or_equal = xml_element.elements['expiresAtGreaterThanOrEqual'].text
+			self.expires_at_less_than_or_equal = xml_element.elements['expiresAtLessThanOrEqual'].text
+			self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
+			self.partner_id_in = xml_element.elements['partnerIdIn'].text
+			self.user_id_equal = xml_element.elements['userIdEqual'].text
+			self.user_id_in = xml_element.elements['userIdIn'].text
+			self.system_name_equal = xml_element.elements['systemNameEqual'].text
+			self.system_name_in = xml_element.elements['systemNameIn'].text
+			self.status_equal = xml_element.elements['statusEqual'].text
+			self.status_in = xml_element.elements['statusIn'].text
+		end
+
 	end
 
 	class KalturaShortLinkListResponse < KalturaListResponse
 		attr_accessor :objects
 
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaShortLink')
+		end
+
 	end
 
 	class KalturaShortLinkFilter < KalturaShortLinkBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
@@ -144,73 +191,72 @@ module Kaltura
 		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter);
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('shortlink_shortlink', 'list', kparams);
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('shortlink_shortlink', 'list', 'KalturaShortLinkListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Allows you to add a short link object
 		# 	 
 		def add(short_link)
 			kparams = {}
-			client.add_param(kparams, 'shortLink', short_link);
-			client.queue_service_action_call('shortlink_shortlink', 'add', kparams);
+			client.add_param(kparams, 'shortLink', short_link)
+			client.queue_service_action_call('shortlink_shortlink', 'add', 'KalturaShortLink', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Retrieve an short link object by id
 		# 	 
 		def get(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('shortlink_shortlink', 'get', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('shortlink_shortlink', 'get', 'KalturaShortLink', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Update exisitng short link
 		# 	 
 		def update(id, short_link)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.add_param(kparams, 'shortLink', short_link);
-			client.queue_service_action_call('shortlink_shortlink', 'update', kparams);
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'shortLink', short_link)
+			client.queue_service_action_call('shortlink_shortlink', 'update', 'KalturaShortLink', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Mark the short link as deleted
 		# 	 
 		def delete(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('shortlink_shortlink', 'delete', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('shortlink_shortlink', 'delete', 'KalturaShortLink', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Serves short link
 		# 	 
 		def goto(id, proxy=false)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			# proxy the response instead of redirect
-			client.add_param(kparams, 'proxy', proxy);
-			client.queue_service_action_call('shortlink_shortlink', 'goto', kparams);
-			return client.get_serve_url();
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'proxy', proxy)
+			client.queue_service_action_call('shortlink_shortlink', 'goto', 'file', kparams)
+			return client.get_serve_url()
 		end
 	end
 
@@ -222,6 +268,7 @@ module Kaltura
 			end
 			return @short_link_service
 		end
+		
 	end
 
 end

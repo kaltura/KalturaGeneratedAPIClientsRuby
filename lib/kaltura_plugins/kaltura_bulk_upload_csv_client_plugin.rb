@@ -49,6 +49,13 @@ module Kaltura
 		def csv_version=(val)
 			@csv_version = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.csv_version = xml_element.elements['csvVersion'].text
+			self.columns = KalturaClientBase.object_from_xml(xml_element.elements['columns'], 'KalturaString')
+		end
+
 	end
 
 

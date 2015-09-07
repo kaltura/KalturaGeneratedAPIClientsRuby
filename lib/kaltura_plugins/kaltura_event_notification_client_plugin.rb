@@ -120,6 +120,14 @@ module Kaltura
 		# 	 
 		attr_accessor :value
 
+
+		def from_xml(xml_element)
+			super
+			self.key = xml_element.elements['key'].text
+			self.description = xml_element.elements['description'].text
+			self.value = KalturaClientBase.object_from_xml(xml_element.elements['value'], 'KalturaStringValue')
+		end
+
 	end
 
 	class KalturaEventNotificationTemplate < KalturaObjectBase
@@ -175,12 +183,39 @@ module Kaltura
 		def automatic_dispatch_enabled=(val)
 			@automatic_dispatch_enabled = to_b(val)
 		end
+
+		def from_xml(xml_element)
+			super
+			self.id = xml_element.elements['id'].text
+			self.partner_id = xml_element.elements['partnerId'].text
+			self.name = xml_element.elements['name'].text
+			self.system_name = xml_element.elements['systemName'].text
+			self.description = xml_element.elements['description'].text
+			self.type = xml_element.elements['type'].text
+			self.status = xml_element.elements['status'].text
+			self.created_at = xml_element.elements['createdAt'].text
+			self.updated_at = xml_element.elements['updatedAt'].text
+			self.manual_dispatch_enabled = xml_element.elements['manualDispatchEnabled'].text
+			self.automatic_dispatch_enabled = xml_element.elements['automaticDispatchEnabled'].text
+			self.event_type = xml_element.elements['eventType'].text
+			self.event_object_type = xml_element.elements['eventObjectType'].text
+			self.event_conditions = KalturaClientBase.object_from_xml(xml_element.elements['eventConditions'], 'KalturaCondition')
+			self.content_parameters = KalturaClientBase.object_from_xml(xml_element.elements['contentParameters'], 'KalturaEventNotificationParameter')
+			self.user_parameters = KalturaClientBase.object_from_xml(xml_element.elements['userParameters'], 'KalturaEventNotificationParameter')
+		end
+
 	end
 
 	class KalturaEventFieldCondition < KalturaCondition
 		# The field to be evaluated at runtime
 		# 	 
 		attr_accessor :field
+
+
+		def from_xml(xml_element)
+			super
+			self.field = KalturaClientBase.object_from_xml(xml_element.elements['field'], 'KalturaBooleanField')
+		end
 
 	end
 
@@ -189,6 +224,13 @@ module Kaltura
 		# Used to restrict the values to close list
 		# 	 
 		attr_accessor :allowed_values
+
+
+		def from_xml(xml_element)
+			super
+			self.values = KalturaClientBase.object_from_xml(xml_element.elements['values'], 'KalturaString')
+			self.allowed_values = KalturaClientBase.object_from_xml(xml_element.elements['allowedValues'], 'KalturaStringValue')
+		end
 
 	end
 
@@ -201,11 +243,25 @@ module Kaltura
 		def template_id=(val)
 			@template_id = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.template_id = xml_element.elements['templateId'].text
+			self.content_parameters = KalturaClientBase.object_from_xml(xml_element.elements['contentParameters'], 'KalturaKeyValue')
+		end
+
 	end
 
 	class KalturaEventNotificationScope < KalturaScope
 		attr_accessor :object_id
 		attr_accessor :scope_object_type
+
+
+		def from_xml(xml_element)
+			super
+			self.object_id = xml_element.elements['objectId'].text
+			self.scope_object_type = xml_element.elements['scopeObjectType'].text
+		end
 
 	end
 
@@ -246,10 +302,35 @@ module Kaltura
 		def updated_at_less_than_or_equal=(val)
 			@updated_at_less_than_or_equal = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.id_equal = xml_element.elements['idEqual'].text
+			self.id_in = xml_element.elements['idIn'].text
+			self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
+			self.partner_id_in = xml_element.elements['partnerIdIn'].text
+			self.system_name_equal = xml_element.elements['systemNameEqual'].text
+			self.system_name_in = xml_element.elements['systemNameIn'].text
+			self.type_equal = xml_element.elements['typeEqual'].text
+			self.type_in = xml_element.elements['typeIn'].text
+			self.status_equal = xml_element.elements['statusEqual'].text
+			self.status_in = xml_element.elements['statusIn'].text
+			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+		end
+
 	end
 
 	class KalturaEventNotificationTemplateListResponse < KalturaListResponse
 		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaEventNotificationTemplate')
+		end
 
 	end
 
@@ -258,9 +339,20 @@ module Kaltura
 		# 	 
 		attr_accessor :modified_columns
 
+
+		def from_xml(xml_element)
+			super
+			self.modified_columns = xml_element.elements['modifiedColumns'].text
+		end
+
 	end
 
 	class KalturaEventNotificationTemplateFilter < KalturaEventNotificationTemplateBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
@@ -276,127 +368,125 @@ module Kaltura
 		# 	 
 		def add(event_notification_template)
 			kparams = {}
-			client.add_param(kparams, 'eventNotificationTemplate', event_notification_template);
-			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'add', kparams);
+			client.add_param(kparams, 'eventNotificationTemplate', event_notification_template)
+			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'add', 'KalturaEventNotificationTemplate', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# This action allows registering to various backend event. Use this action to create notifications that will react to events such as new video was uploaded or metadata field was updated. To see the list of available event types, call the listTemplates action.
 		# 	 
 		def clone(id, event_notification_template=KalturaNotImplemented)
 			kparams = {}
-			# source template to clone
-			client.add_param(kparams, 'id', id);
-			# overwrite configuration object
-			client.add_param(kparams, 'eventNotificationTemplate', event_notification_template);
-			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'clone', kparams);
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'eventNotificationTemplate', event_notification_template)
+			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'clone', 'KalturaEventNotificationTemplate', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Retrieve an event notification template object by id
 		# 	 
 		def get(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'get', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'get', 'KalturaEventNotificationTemplate', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Update an existing event notification template object
 		# 	 
 		def update(id, event_notification_template)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.add_param(kparams, 'eventNotificationTemplate', event_notification_template);
-			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'update', kparams);
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'eventNotificationTemplate', event_notification_template)
+			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'update', 'KalturaEventNotificationTemplate', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Update event notification template status by id
 		# 	 
 		def update_status(id, status)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.add_param(kparams, 'status', status);
-			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'updateStatus', kparams);
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'status', status)
+			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'updateStatus', 'KalturaEventNotificationTemplate', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Delete an event notification template object
 		# 	 
 		def delete(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'delete', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'delete', '', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# list event notification template objects
 		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter);
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'list', kparams);
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'list', 'KalturaEventNotificationTemplateListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def list_by_partner(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter);
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'listByPartner', kparams);
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'listByPartner', 'KalturaEventNotificationTemplateListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Dispatch event notification object by id
 		# 	 
 		def dispatch(id, scope)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.add_param(kparams, 'scope', scope);
-			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'dispatch', kparams);
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'scope', scope)
+			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'dispatch', 'int', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Action lists the template partner event notification templates.
 		# 	 
 		def list_templates(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter);
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'listTemplates', kparams);
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'listTemplates', 'KalturaEventNotificationTemplateListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 	end
 
@@ -408,6 +498,7 @@ module Kaltura
 			end
 			return @event_notification_template_service
 		end
+		
 	end
 
 end

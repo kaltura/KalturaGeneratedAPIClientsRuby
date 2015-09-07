@@ -95,14 +95,32 @@ module Kaltura
 		def document_type=(val)
 			@document_type = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.document_type = xml_element.elements['documentType'].text
+			self.asset_params_ids = xml_element.elements['assetParamsIds'].text
+		end
+
 	end
 
 	class KalturaDocumentListResponse < KalturaListResponse
 		attr_accessor :objects
 
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaDocumentEntry')
+		end
+
 	end
 
 	class KalturaDocumentFlavorParams < KalturaFlavorParams
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
@@ -128,6 +146,16 @@ module Kaltura
 		def depth=(val)
 			@depth = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.density_width = xml_element.elements['densityWidth'].text
+			self.density_height = xml_element.elements['densityHeight'].text
+			self.size_width = xml_element.elements['sizeWidth'].text
+			self.size_height = xml_element.elements['sizeHeight'].text
+			self.depth = xml_element.elements['depth'].text
+		end
+
 	end
 
 	class KalturaPdfFlavorParams < KalturaFlavorParams
@@ -136,6 +164,12 @@ module Kaltura
 		def readonly=(val)
 			@readonly = to_b(val)
 		end
+
+		def from_xml(xml_element)
+			super
+			self.readonly = xml_element.elements['readonly'].text
+		end
+
 	end
 
 	class KalturaSwfFlavorParams < KalturaFlavorParams
@@ -148,9 +182,21 @@ module Kaltura
 		def poly2bitmap=(val)
 			@poly2bitmap = to_b(val)
 		end
+
+		def from_xml(xml_element)
+			super
+			self.flash_version = xml_element.elements['flashVersion'].text
+			self.poly2bitmap = xml_element.elements['poly2Bitmap'].text
+		end
+
 	end
 
 	class KalturaDocumentFlavorParamsOutput < KalturaFlavorParamsOutput
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
@@ -176,6 +222,16 @@ module Kaltura
 		def depth=(val)
 			@depth = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.density_width = xml_element.elements['densityWidth'].text
+			self.density_height = xml_element.elements['densityHeight'].text
+			self.size_width = xml_element.elements['sizeWidth'].text
+			self.size_height = xml_element.elements['sizeHeight'].text
+			self.depth = xml_element.elements['depth'].text
+		end
+
 	end
 
 	class KalturaPdfFlavorParamsOutput < KalturaFlavorParamsOutput
@@ -184,6 +240,12 @@ module Kaltura
 		def readonly=(val)
 			@readonly = to_b(val)
 		end
+
+		def from_xml(xml_element)
+			super
+			self.readonly = xml_element.elements['readonly'].text
+		end
+
 	end
 
 	class KalturaSwfFlavorParamsOutput < KalturaFlavorParamsOutput
@@ -196,6 +258,13 @@ module Kaltura
 		def poly2bitmap=(val)
 			@poly2bitmap = to_b(val)
 		end
+
+		def from_xml(xml_element)
+			super
+			self.flash_version = xml_element.elements['flashVersion'].text
+			self.poly2bitmap = xml_element.elements['poly2Bitmap'].text
+		end
+
 	end
 
 	class KalturaDocumentEntryBaseFilter < KalturaBaseEntryFilter
@@ -207,73 +276,167 @@ module Kaltura
 		def document_type_equal=(val)
 			@document_type_equal = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.document_type_equal = xml_element.elements['documentTypeEqual'].text
+			self.document_type_in = xml_element.elements['documentTypeIn'].text
+			self.asset_params_ids_match_or = xml_element.elements['assetParamsIdsMatchOr'].text
+			self.asset_params_ids_match_and = xml_element.elements['assetParamsIdsMatchAnd'].text
+		end
+
 	end
 
 	class KalturaDocumentEntryFilter < KalturaDocumentEntryBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
 	class KalturaDocumentFlavorParamsBaseFilter < KalturaFlavorParamsFilter
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaImageFlavorParamsBaseFilter < KalturaFlavorParamsFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
 	class KalturaPdfFlavorParamsBaseFilter < KalturaFlavorParamsFilter
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaSwfFlavorParamsBaseFilter < KalturaFlavorParamsFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
 	class KalturaDocumentFlavorParamsFilter < KalturaDocumentFlavorParamsBaseFilter
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaImageFlavorParamsFilter < KalturaImageFlavorParamsBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
 	class KalturaPdfFlavorParamsFilter < KalturaPdfFlavorParamsBaseFilter
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaSwfFlavorParamsFilter < KalturaSwfFlavorParamsBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
 	class KalturaDocumentFlavorParamsOutputBaseFilter < KalturaFlavorParamsOutputFilter
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaImageFlavorParamsOutputBaseFilter < KalturaFlavorParamsOutputFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
 	class KalturaPdfFlavorParamsOutputBaseFilter < KalturaFlavorParamsOutputFilter
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaSwfFlavorParamsOutputBaseFilter < KalturaFlavorParamsOutputFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
 	class KalturaDocumentFlavorParamsOutputFilter < KalturaDocumentFlavorParamsOutputBaseFilter
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaImageFlavorParamsOutputFilter < KalturaImageFlavorParamsOutputBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
 	class KalturaPdfFlavorParamsOutputFilter < KalturaPdfFlavorParamsOutputBaseFilter
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaSwfFlavorParamsOutputFilter < KalturaSwfFlavorParamsOutputBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
@@ -289,135 +452,118 @@ module Kaltura
 		# 	 
 		def add_from_uploaded_file(document_entry, upload_token_id)
 			kparams = {}
-			# Document entry metadata
-			client.add_param(kparams, 'documentEntry', document_entry);
-			# Upload token id
-			client.add_param(kparams, 'uploadTokenId', upload_token_id);
-			client.queue_service_action_call('document_documents', 'addFromUploadedFile', kparams);
+			client.add_param(kparams, 'documentEntry', document_entry)
+			client.add_param(kparams, 'uploadTokenId', upload_token_id)
+			client.queue_service_action_call('document_documents', 'addFromUploadedFile', 'KalturaDocumentEntry', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Copy entry into new entry
 		# 	 
 		def add_from_entry(source_entry_id, document_entry=KalturaNotImplemented, source_flavor_params_id=KalturaNotImplemented)
 			kparams = {}
-			# Document entry id to copy from
-			client.add_param(kparams, 'sourceEntryId', source_entry_id);
-			# Document entry metadata
-			client.add_param(kparams, 'documentEntry', document_entry);
-			# The flavor to be used as the new entry source, source flavor will be used if not specified
-			client.add_param(kparams, 'sourceFlavorParamsId', source_flavor_params_id);
-			client.queue_service_action_call('document_documents', 'addFromEntry', kparams);
+			client.add_param(kparams, 'sourceEntryId', source_entry_id)
+			client.add_param(kparams, 'documentEntry', document_entry)
+			client.add_param(kparams, 'sourceFlavorParamsId', source_flavor_params_id)
+			client.queue_service_action_call('document_documents', 'addFromEntry', 'KalturaDocumentEntry', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Copy flavor asset into new entry
 		# 	 
 		def add_from_flavor_asset(source_flavor_asset_id, document_entry=KalturaNotImplemented)
 			kparams = {}
-			# Flavor asset id to be used as the new entry source
-			client.add_param(kparams, 'sourceFlavorAssetId', source_flavor_asset_id);
-			# Document entry metadata
-			client.add_param(kparams, 'documentEntry', document_entry);
-			client.queue_service_action_call('document_documents', 'addFromFlavorAsset', kparams);
+			client.add_param(kparams, 'sourceFlavorAssetId', source_flavor_asset_id)
+			client.add_param(kparams, 'documentEntry', document_entry)
+			client.queue_service_action_call('document_documents', 'addFromFlavorAsset', 'KalturaDocumentEntry', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Convert entry
 		# 	 
 		def convert(entry_id, conversion_profile_id=KalturaNotImplemented, dynamic_conversion_attributes=KalturaNotImplemented)
 			kparams = {}
-			# Document entry id
-			client.add_param(kparams, 'entryId', entry_id);
-			client.add_param(kparams, 'conversionProfileId', conversion_profile_id);
-			dynamicConversionAttributes.each do |obj|
-				client.add_param(kparams, 'dynamicConversionAttributes', obj);
-			end
-			client.queue_service_action_call('document_documents', 'convert', kparams);
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'conversionProfileId', conversion_profile_id)
+			client.add_param(kparams, 'dynamicConversionAttributes', dynamic_conversion_attributes)
+			client.queue_service_action_call('document_documents', 'convert', 'bigint', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Get document entry by ID.
 		# 	 
 		def get(entry_id, version=-1)
 			kparams = {}
-			# Document entry id
-			client.add_param(kparams, 'entryId', entry_id);
-			# Desired version of the data
-			client.add_param(kparams, 'version', version);
-			client.queue_service_action_call('document_documents', 'get', kparams);
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'version', version)
+			client.queue_service_action_call('document_documents', 'get', 'KalturaDocumentEntry', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Update document entry. Only the properties that were set will be updated.
 		# 	 
 		def update(entry_id, document_entry)
 			kparams = {}
-			# Document entry id to update
-			client.add_param(kparams, 'entryId', entry_id);
-			# Document entry metadata to update
-			client.add_param(kparams, 'documentEntry', document_entry);
-			client.queue_service_action_call('document_documents', 'update', kparams);
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'documentEntry', document_entry)
+			client.queue_service_action_call('document_documents', 'update', 'KalturaDocumentEntry', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Delete a document entry.
 		# 	 
 		def delete(entry_id)
 			kparams = {}
-			# Document entry id to delete
-			client.add_param(kparams, 'entryId', entry_id);
-			client.queue_service_action_call('document_documents', 'delete', kparams);
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('document_documents', 'delete', '', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# List document entries by filter with paging support.
 		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			# Document entry filter
-			client.add_param(kparams, 'filter', filter);
-			# Pager
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('document_documents', 'list', kparams);
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('document_documents', 'list', 'KalturaDocumentListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Upload a document file to Kaltura, then the file can be used to create a document entry. 
 		# 	 
 		def upload(file_data)
 			kparams = {}
-			# The file data
-			client.add_param(kparams, 'fileData', file_data);
-			client.queue_service_action_call('document_documents', 'upload', kparams);
+			kfiles = {}
+			client.add_param(kfiles, 'fileData', file_data)
+			client.queue_service_action_call('document_documents', 'upload', 'string', kparams, kfiles)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# This will queue a batch job for converting the document file to swf
@@ -425,83 +571,72 @@ module Kaltura
 		# 	 
 		def convert_ppt_to_swf(entry_id)
 			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id);
-			client.queue_service_action_call('document_documents', 'convertPptToSwf', kparams);
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('document_documents', 'convertPptToSwf', 'string', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Serves the file content
 		# 	 
 		def serve(entry_id, flavor_asset_id=KalturaNotImplemented, force_proxy=false)
 			kparams = {}
-			# Document entry id
-			client.add_param(kparams, 'entryId', entry_id);
-			# Flavor asset id
-			client.add_param(kparams, 'flavorAssetId', flavor_asset_id);
-			# force to get the content without redirect
-			client.add_param(kparams, 'forceProxy', force_proxy);
-			client.queue_service_action_call('document_documents', 'serve', kparams);
-			return client.get_serve_url();
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'flavorAssetId', flavor_asset_id)
+			client.add_param(kparams, 'forceProxy', force_proxy)
+			client.queue_service_action_call('document_documents', 'serve', 'file', kparams)
+			return client.get_serve_url()
 		end
 
 		# Serves the file content
 		# 	 
 		def serve_by_flavor_params_id(entry_id, flavor_params_id=KalturaNotImplemented, force_proxy=false)
 			kparams = {}
-			# Document entry id
-			client.add_param(kparams, 'entryId', entry_id);
-			# Flavor params id
-			client.add_param(kparams, 'flavorParamsId', flavor_params_id);
-			# force to get the content without redirect
-			client.add_param(kparams, 'forceProxy', force_proxy);
-			client.queue_service_action_call('document_documents', 'serveByFlavorParamsId', kparams);
-			return client.get_serve_url();
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'flavorParamsId', flavor_params_id)
+			client.add_param(kparams, 'forceProxy', force_proxy)
+			client.queue_service_action_call('document_documents', 'serveByFlavorParamsId', 'file', kparams)
+			return client.get_serve_url()
 		end
 
 		# Replace content associated with the given document entry.
 		# 	 
 		def update_content(entry_id, resource, conversion_profile_id=KalturaNotImplemented)
 			kparams = {}
-			# document entry id to update
-			client.add_param(kparams, 'entryId', entry_id);
-			# Resource to be used to replace entry doc content
-			client.add_param(kparams, 'resource', resource);
-			# The conversion profile id to be used on the entry
-			client.add_param(kparams, 'conversionProfileId', conversion_profile_id);
-			client.queue_service_action_call('document_documents', 'updateContent', kparams);
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'resource', resource)
+			client.add_param(kparams, 'conversionProfileId', conversion_profile_id)
+			client.queue_service_action_call('document_documents', 'updateContent', 'KalturaDocumentEntry', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Approves document replacement
 		# 	 
 		def approve_replace(entry_id)
 			kparams = {}
-			# document entry id to replace
-			client.add_param(kparams, 'entryId', entry_id);
-			client.queue_service_action_call('document_documents', 'approveReplace', kparams);
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('document_documents', 'approveReplace', 'KalturaDocumentEntry', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Cancels document replacement
 		# 	 
 		def cancel_replace(entry_id)
 			kparams = {}
-			# Document entry id to cancel
-			client.add_param(kparams, 'entryId', entry_id);
-			client.queue_service_action_call('document_documents', 'cancelReplace', kparams);
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('document_documents', 'cancelReplace', 'KalturaDocumentEntry', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 	end
 
@@ -513,6 +648,7 @@ module Kaltura
 			end
 			return @documents_service
 		end
+		
 	end
 
 end

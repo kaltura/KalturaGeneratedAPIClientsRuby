@@ -39,33 +39,33 @@ module Kaltura
 
 		def like(entry_id)
 			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id);
-			client.queue_service_action_call('like_like', 'like', kparams);
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('like_like', 'like', 'bool', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def unlike(entry_id)
 			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id);
-			client.queue_service_action_call('like_like', 'unlike', kparams);
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('like_like', 'unlike', 'bool', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		def check_like_exists(entry_id, user_id=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id);
-			client.add_param(kparams, 'userId', user_id);
-			client.queue_service_action_call('like_like', 'checkLikeExists', kparams);
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'userId', user_id)
+			client.queue_service_action_call('like_like', 'checkLikeExists', 'bool', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 	end
 
@@ -77,6 +77,7 @@ module Kaltura
 			end
 			return @like_service
 		end
+		
 	end
 
 end

@@ -26,20 +26,61 @@
 # @ignore
 # ===================================================================================================
 require 'kaltura_client.rb'
+require File.dirname(__FILE__) + '/kaltura_integration_client_plugin.rb'
 
 module Kaltura
 
-	class KalturaVelocixProvisionJobData < KalturaProvisionJobData
-		attr_accessor :provisioning_params
-		attr_accessor :user_name
-		attr_accessor :password
+	class KalturaCielo24Fidelity
+		MECHANICAL = "MECHANICAL"
+		PREMIUM = "PREMIUM"
+		PROFESSIONAL = "PROFESSIONAL"
+	end
 
+	class KalturaCielo24Priority
+		PRIORITY = "PRIORITY"
+		STANDARD = "STANDARD"
+	end
+
+	class KalturaCielo24JobProviderData < KalturaIntegrationJobProviderData
+		# Entry ID
+		# 	 
+		attr_accessor :entry_id
+		# Flavor ID
+		# 	 
+		attr_accessor :flavor_asset_id
+		# Caption formats
+		# 	 
+		attr_accessor :caption_asset_formats
+		attr_accessor :priority
+		attr_accessor :fidelity
+		# Api key for service provider
+		# 	 
+		attr_accessor :username
+		# Api key for service provider
+		# 	 
+		attr_accessor :password
+		# Transcript content language
+		# 	 
+		attr_accessor :spoken_language
+		# should replace remote media content
+		# 	 
+		attr_accessor :replace_media_content
+
+		def replace_media_content=(val)
+			@replace_media_content = to_b(val)
+		end
 
 		def from_xml(xml_element)
 			super
-			self.provisioning_params = KalturaClientBase.object_from_xml(xml_element.elements['provisioningParams'], 'KalturaKeyValue')
-			self.user_name = xml_element.elements['userName'].text
+			self.entry_id = xml_element.elements['entryId'].text
+			self.flavor_asset_id = xml_element.elements['flavorAssetId'].text
+			self.caption_asset_formats = xml_element.elements['captionAssetFormats'].text
+			self.priority = xml_element.elements['priority'].text
+			self.fidelity = xml_element.elements['fidelity'].text
+			self.username = xml_element.elements['username'].text
 			self.password = xml_element.elements['password'].text
+			self.spoken_language = xml_element.elements['spokenLanguage'].text
+			self.replace_media_content = xml_element.elements['replaceMediaContent'].text
 		end
 
 	end

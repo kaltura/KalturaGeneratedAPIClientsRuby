@@ -93,10 +93,30 @@ module Kaltura
 		def searchable_on_entry=(val)
 			@searchable_on_entry = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.parent_id = xml_element.elements['parentId'].text
+			self.text = xml_element.elements['text'].text
+			self.end_time = xml_element.elements['endTime'].text
+			self.duration = xml_element.elements['duration'].text
+			self.depth = xml_element.elements['depth'].text
+			self.children_count = xml_element.elements['childrenCount'].text
+			self.direct_children_count = xml_element.elements['directChildrenCount'].text
+			self.is_public = xml_element.elements['isPublic'].text
+			self.searchable_on_entry = xml_element.elements['searchableOnEntry'].text
+		end
+
 	end
 
 	class KalturaAnnotationListResponse < KalturaListResponse
 		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaAnnotation')
+		end
 
 	end
 
@@ -127,9 +147,29 @@ module Kaltura
 		def is_public_equal=(val)
 			@is_public_equal = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.parent_id_equal = xml_element.elements['parentIdEqual'].text
+			self.parent_id_in = xml_element.elements['parentIdIn'].text
+			self.text_like = xml_element.elements['textLike'].text
+			self.text_multi_like_or = xml_element.elements['textMultiLikeOr'].text
+			self.text_multi_like_and = xml_element.elements['textMultiLikeAnd'].text
+			self.end_time_greater_than_or_equal = xml_element.elements['endTimeGreaterThanOrEqual'].text
+			self.end_time_less_than_or_equal = xml_element.elements['endTimeLessThanOrEqual'].text
+			self.duration_greater_than_or_equal = xml_element.elements['durationGreaterThanOrEqual'].text
+			self.duration_less_than_or_equal = xml_element.elements['durationLessThanOrEqual'].text
+			self.is_public_equal = xml_element.elements['isPublicEqual'].text
+		end
+
 	end
 
 	class KalturaAnnotationFilter < KalturaAnnotationBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
@@ -145,96 +185,97 @@ module Kaltura
 		# 	 
 		def add(annotation)
 			kparams = {}
-			client.add_param(kparams, 'annotation', annotation);
-			client.queue_service_action_call('annotation_annotation', 'add', kparams);
+			client.add_param(kparams, 'annotation', annotation)
+			client.queue_service_action_call('annotation_annotation', 'add', 'KalturaAnnotation', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Update annotation by id
 		# 	 
 		def update(id, annotation)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.add_param(kparams, 'annotation', annotation);
-			client.queue_service_action_call('annotation_annotation', 'update', kparams);
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'annotation', annotation)
+			client.queue_service_action_call('annotation_annotation', 'update', 'KalturaAnnotation', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# List annotation objects by filter and pager
 		# 	
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter);
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('annotation_annotation', 'list', kparams);
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('annotation_annotation', 'list', 'KalturaAnnotationListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Allows you to add multiple cue points objects by uploading XML that contains multiple cue point definitions
 		# 	 
 		def add_from_bulk(file_data)
 			kparams = {}
-			client.add_param(kparams, 'fileData', file_data);
-			client.queue_service_action_call('annotation_annotation', 'addFromBulk', kparams);
+			kfiles = {}
+			client.add_param(kfiles, 'fileData', file_data)
+			client.queue_service_action_call('annotation_annotation', 'addFromBulk', 'KalturaCuePointListResponse', kparams, kfiles)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Download multiple cue points objects as XML definitions
 		# 	 
 		def serve_bulk(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter);
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('annotation_annotation', 'serveBulk', kparams);
-			return client.get_serve_url();
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('annotation_annotation', 'serveBulk', 'file', kparams)
+			return client.get_serve_url()
 		end
 
 		# Retrieve an CuePoint object by id
 		# 	 
 		def get(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('annotation_annotation', 'get', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('annotation_annotation', 'get', 'KalturaCuePoint', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# count cue point objects by filter
 		# 	 
 		def count(filter=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter);
-			client.queue_service_action_call('annotation_annotation', 'count', kparams);
+			client.add_param(kparams, 'filter', filter)
+			client.queue_service_action_call('annotation_annotation', 'count', 'int', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# delete cue point by id, and delete all children cue points
 		# 	 
 		def delete(id)
 			kparams = {}
-			client.add_param(kparams, 'id', id);
-			client.queue_service_action_call('annotation_annotation', 'delete', kparams);
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('annotation_annotation', 'delete', '', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 	end
 
@@ -246,6 +287,7 @@ module Kaltura
 			end
 			return @annotation_service
 		end
+		
 	end
 
 end

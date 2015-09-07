@@ -70,6 +70,15 @@ module Kaltura
 		def is_correct=(val)
 			@is_correct = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.key = xml_element.elements['key'].text
+			self.text = xml_element.elements['text'].text
+			self.weight = xml_element.elements['weight'].text
+			self.is_correct = xml_element.elements['isCorrect'].text
+		end
+
 	end
 
 	class KalturaQuiz < KalturaObjectBase
@@ -97,6 +106,17 @@ module Kaltura
 		def show_correct_after_submission=(val)
 			@show_correct_after_submission = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.version = xml_element.elements['version'].text
+			self.ui_attributes = KalturaClientBase.object_from_xml(xml_element.elements['uiAttributes'], 'KalturaKeyValue')
+			self.show_result_on_answer = xml_element.elements['showResultOnAnswer'].text
+			self.show_correct_key_on_answer = xml_element.elements['showCorrectKeyOnAnswer'].text
+			self.allow_answer_update = xml_element.elements['allowAnswerUpdate'].text
+			self.show_correct_after_submission = xml_element.elements['showCorrectAfterSubmission'].text
+		end
+
 	end
 
 	class KalturaAnswerCuePoint < KalturaCuePoint
@@ -112,6 +132,17 @@ module Kaltura
 		def is_correct=(val)
 			@is_correct = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.parent_id = xml_element.elements['parentId'].text
+			self.quiz_user_entry_id = xml_element.elements['quizUserEntryId'].text
+			self.answer_key = xml_element.elements['answerKey'].text
+			self.is_correct = xml_element.elements['isCorrect'].text
+			self.correct_answer_keys = KalturaClientBase.object_from_xml(xml_element.elements['correctAnswerKeys'], 'KalturaString')
+			self.explanation = xml_element.elements['explanation'].text
+		end
+
 	end
 
 	class KalturaQuestionCuePoint < KalturaCuePoint
@@ -122,6 +153,15 @@ module Kaltura
 		attr_accessor :question
 		attr_accessor :explanation
 
+
+		def from_xml(xml_element)
+			super
+			self.optional_answers = KalturaClientBase.object_from_xml(xml_element.elements['optionalAnswers'], 'KalturaOptionalAnswer')
+			self.hint = xml_element.elements['hint'].text
+			self.question = xml_element.elements['question'].text
+			self.explanation = xml_element.elements['explanation'].text
+		end
+
 	end
 
 	class KalturaQuizAdvancedFilter < KalturaSearchItem
@@ -130,10 +170,22 @@ module Kaltura
 		def is_quiz=(val)
 			@is_quiz = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			self.is_quiz = xml_element.elements['isQuiz'].text
+		end
+
 	end
 
 	class KalturaQuizListResponse < KalturaListResponse
 		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaQuiz')
+		end
 
 	end
 
@@ -145,11 +197,25 @@ module Kaltura
 		# 	 
 		attr_accessor :entry_id_in
 
+
+		def from_xml(xml_element)
+			super
+			self.entry_id_equal = xml_element.elements['entryIdEqual'].text
+			self.entry_id_in = xml_element.elements['entryIdIn'].text
+		end
+
 	end
 
 	class KalturaAnswerCuePointBaseFilter < KalturaCuePointFilter
 		attr_accessor :parent_id_equal
 		attr_accessor :parent_id_in
+
+
+		def from_xml(xml_element)
+			super
+			self.parent_id_equal = xml_element.elements['parentIdEqual'].text
+			self.parent_id_in = xml_element.elements['parentIdIn'].text
+		end
 
 	end
 
@@ -158,13 +224,31 @@ module Kaltura
 		attr_accessor :question_multi_like_or
 		attr_accessor :question_multi_like_and
 
+
+		def from_xml(xml_element)
+			super
+			self.question_like = xml_element.elements['questionLike'].text
+			self.question_multi_like_or = xml_element.elements['questionMultiLikeOr'].text
+			self.question_multi_like_and = xml_element.elements['questionMultiLikeAnd'].text
+		end
+
 	end
 
 	class KalturaAnswerCuePointFilter < KalturaAnswerCuePointBaseFilter
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaQuestionCuePointFilter < KalturaQuestionCuePointBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
@@ -180,51 +264,51 @@ module Kaltura
 		# 	 
 		def add(entry_id, quiz)
 			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id);
-			client.add_param(kparams, 'quiz', quiz);
-			client.queue_service_action_call('quiz_quiz', 'add', kparams);
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'quiz', quiz)
+			client.queue_service_action_call('quiz_quiz', 'add', 'KalturaQuiz', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Allows to update a quiz
 		# 	 
 		def update(entry_id, quiz)
 			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id);
-			client.add_param(kparams, 'quiz', quiz);
-			client.queue_service_action_call('quiz_quiz', 'update', kparams);
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'quiz', quiz)
+			client.queue_service_action_call('quiz_quiz', 'update', 'KalturaQuiz', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Allows to get a quiz
 		# 	 
 		def get(entry_id)
 			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id);
-			client.queue_service_action_call('quiz_quiz', 'get', kparams);
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('quiz_quiz', 'get', 'KalturaQuiz', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# List quiz objects by filter and pager
 		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter);
-			client.add_param(kparams, 'pager', pager);
-			client.queue_service_action_call('quiz_quiz', 'list', kparams);
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('quiz_quiz', 'list', 'KalturaQuizListResponse', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 	end
 
@@ -236,6 +320,7 @@ module Kaltura
 			end
 			return @quiz_service
 		end
+		
 	end
 
 end

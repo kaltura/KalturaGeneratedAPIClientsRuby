@@ -31,6 +31,7 @@ require File.dirname(__FILE__) + '/kaltura_metadata_client_plugin.rb'
 module Kaltura
 
 	class KalturaIntegrationProviderType
+		CIELO24 = "cielo24.Cielo24"
 		VOICEBASE = "voicebase.Voicebase"
 	end
 

@@ -13699,6 +13699,7 @@ module Kaltura
 	class KalturaLiveEntryFilter < KalturaLiveEntryBaseFilter
 		attr_accessor :is_live
 		attr_accessor :is_recorded_entry_id_empty
+		attr_accessor :has_media_server_hostname
 
 		def is_live=(val)
 			@is_live = val.to_i
@@ -13711,6 +13712,7 @@ module Kaltura
 			super
 			self.is_live = xml_element.elements['isLive'].text
 			self.is_recorded_entry_id_empty = xml_element.elements['isRecordedEntryIdEmpty'].text
+			self.has_media_server_hostname = xml_element.elements['hasMediaServerHostname'].text
 		end
 
 	end

@@ -10439,12 +10439,17 @@ module Kaltura
 	class KalturaUrlTokenizerCloudFront < KalturaUrlTokenizer
 		attr_accessor :key_pair_id
 		attr_accessor :root_dir
+		attr_accessor :limit_ip_address
 
+		def limit_ip_address=(val)
+			@limit_ip_address = to_b(val)
+		end
 
 		def from_xml(xml_element)
 			super
 			self.key_pair_id = xml_element.elements['keyPairId'].text
 			self.root_dir = xml_element.elements['rootDir'].text
+			self.limit_ip_address = xml_element.elements['limitIpAddress'].text
 		end
 
 	end

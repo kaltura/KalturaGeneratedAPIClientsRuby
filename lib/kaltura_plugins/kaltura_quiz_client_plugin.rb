@@ -209,12 +209,16 @@ module Kaltura
 	class KalturaAnswerCuePointBaseFilter < KalturaCuePointFilter
 		attr_accessor :parent_id_equal
 		attr_accessor :parent_id_in
+		attr_accessor :quiz_user_entry_id_equal
+		attr_accessor :quiz_user_entry_id_in
 
 
 		def from_xml(xml_element)
 			super
 			self.parent_id_equal = xml_element.elements['parentIdEqual'].text
 			self.parent_id_in = xml_element.elements['parentIdIn'].text
+			self.quiz_user_entry_id_equal = xml_element.elements['quizUserEntryIdEqual'].text
+			self.quiz_user_entry_id_in = xml_element.elements['quizUserEntryIdIn'].text
 		end
 
 	end
@@ -305,6 +309,18 @@ module Kaltura
 			client.add_param(kparams, 'filter', filter)
 			client.add_param(kparams, 'pager', pager)
 			client.queue_service_action_call('quiz_quiz', 'list', 'KalturaQuizListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# creates a pdf from quiz object
+		# 	 
+		def serve_pdf(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('quiz_quiz', 'servePdf', 'KalturaQuiz', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

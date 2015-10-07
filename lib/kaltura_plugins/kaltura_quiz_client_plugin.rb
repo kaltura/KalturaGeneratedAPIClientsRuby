@@ -90,6 +90,7 @@ module Kaltura
 		attr_accessor :show_correct_key_on_answer
 		attr_accessor :allow_answer_update
 		attr_accessor :show_correct_after_submission
+		attr_accessor :allow_download
 
 		def version=(val)
 			@version = val.to_i
@@ -106,6 +107,9 @@ module Kaltura
 		def show_correct_after_submission=(val)
 			@show_correct_after_submission = val.to_i
 		end
+		def allow_download=(val)
+			@allow_download = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
@@ -115,6 +119,7 @@ module Kaltura
 			self.show_correct_key_on_answer = xml_element.elements['showCorrectKeyOnAnswer'].text
 			self.allow_answer_update = xml_element.elements['allowAnswerUpdate'].text
 			self.show_correct_after_submission = xml_element.elements['showCorrectAfterSubmission'].text
+			self.allow_download = xml_element.elements['allowDownload'].text
 		end
 
 	end
@@ -320,11 +325,8 @@ module Kaltura
 		def serve_pdf(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('quiz_quiz', 'servePdf', 'KalturaQuiz', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
+			client.queue_service_action_call('quiz_quiz', 'servePdf', 'file', kparams)
+			return client.get_serve_url()
 		end
 	end
 

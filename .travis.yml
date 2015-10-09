@@ -13,6 +13,7 @@ notifications:
     recipients:
       - moshe.maor@kaltura.com
       - jess.portnoy@kaltura.com
+      - Jonathan.Kanarek@kaltura.com
     on_success: change
     on_failure: always
 

@@ -2918,10 +2918,11 @@ module Kaltura
 		# Get MRSS by entry id
 		#      XML will return as an escaped string
 		#      
-		def get_mrss(entry_id, extending_items_array=KalturaNotImplemented)
+		def get_mrss(entry_id, extending_items_array=KalturaNotImplemented, features=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
 			client.add_param(kparams, 'extendingItemsArray', extending_items_array)
+			client.add_param(kparams, 'features', features)
 			client.queue_service_action_call('media', 'getMrss', 'string', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -5975,7 +5976,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:15-10-13'
+			self.client_tag = 'ruby:15-10-14'
 			self.api_version = '3.3.0'
 		end
 		

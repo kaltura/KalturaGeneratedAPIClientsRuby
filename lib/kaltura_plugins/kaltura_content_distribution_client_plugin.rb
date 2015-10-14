@@ -849,12 +849,19 @@ module Kaltura
 	class KalturaConfigurableDistributionProfile < KalturaDistributionProfile
 		attr_accessor :field_config_array
 		attr_accessor :item_xpaths_to_extend
+		# When checking custom XSLT conditions using the fieldConfigArray - address only categories associated with the entry via the categoryEntry object
+		# 	 
+		attr_accessor :use_category_entries
 
+		def use_category_entries=(val)
+			@use_category_entries = to_b(val)
+		end
 
 		def from_xml(xml_element)
 			super
 			self.field_config_array = KalturaClientBase.object_from_xml(xml_element.elements['fieldConfigArray'], 'KalturaDistributionFieldConfig')
 			self.item_xpaths_to_extend = KalturaClientBase.object_from_xml(xml_element.elements['itemXpathsToExtend'], 'KalturaExtendingItemMrssParameter')
+			self.use_category_entries = xml_element.elements['useCategoryEntries'].text
 		end
 
 	end

@@ -241,6 +241,9 @@ module Kaltura
 		# Is this field config is the default for the distribution provider?
 		#      
 		attr_accessor :is_default
+		# Is an error on this field going to trigger deletion of distributed content?
+		#      
+		attr_accessor :trigger_delete_on_error
 
 		def is_required=(val)
 			@is_required = val.to_i
@@ -250,6 +253,9 @@ module Kaltura
 		end
 		def is_default=(val)
 			@is_default = to_b(val)
+		end
+		def trigger_delete_on_error=(val)
+			@trigger_delete_on_error = to_b(val)
 		end
 
 		def from_xml(xml_element)
@@ -261,6 +267,7 @@ module Kaltura
 			self.update_on_change = xml_element.elements['updateOnChange'].text
 			self.update_params = KalturaClientBase.object_from_xml(xml_element.elements['updateParams'], 'KalturaString')
 			self.is_default = xml_element.elements['isDefault'].text
+			self.trigger_delete_on_error = xml_element.elements['triggerDeleteOnError'].text
 		end
 
 	end

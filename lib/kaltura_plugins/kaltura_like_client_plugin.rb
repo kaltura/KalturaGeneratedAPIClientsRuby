@@ -29,6 +29,59 @@ require 'kaltura_client.rb'
 
 module Kaltura
 
+	class KalturaLikeOrderBy
+	end
+
+	class KalturaLike < KalturaObjectBase
+		# The id of the entry that the like belongs to
+		# 	 
+		attr_accessor :entry_id
+		# The id of user that the like belongs to
+		# 	 
+		attr_accessor :user_id
+
+
+		def from_xml(xml_element)
+			super
+			self.entry_id = xml_element.elements['entryId'].text
+			self.user_id = xml_element.elements['userId'].text
+		end
+
+	end
+
+	class KalturaLikeListResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaLike')
+		end
+
+	end
+
+	class KalturaLikeBaseFilter < KalturaRelatedFilter
+		attr_accessor :entry_id_equal
+		attr_accessor :user_id_equal
+
+
+		def from_xml(xml_element)
+			super
+			self.entry_id_equal = xml_element.elements['entryIdEqual'].text
+			self.user_id_equal = xml_element.elements['userIdEqual'].text
+		end
+
+	end
+
+	class KalturaLikeFilter < KalturaLikeBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 
 	# Allows user to 'like' or 'unlike' and entry
 	#  
@@ -62,6 +115,17 @@ module Kaltura
 			client.add_param(kparams, 'entryId', entry_id)
 			client.add_param(kparams, 'userId', user_id)
 			client.queue_service_action_call('like_like', 'checkLikeExists', 'bool', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('like_like', 'list', 'KalturaLikeListResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

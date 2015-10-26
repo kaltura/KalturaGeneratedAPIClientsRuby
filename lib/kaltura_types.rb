@@ -2995,7 +2995,7 @@ module Kaltura
 			@height = val.to_i
 		end
 		def frame_rate=(val)
-			@frame_rate = val.to_i
+			@frame_rate = val.to_f
 		end
 		def gop_size=(val)
 			@gop_size = val.to_i

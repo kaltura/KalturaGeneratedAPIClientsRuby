@@ -36,6 +36,10 @@ module Kaltura
 		PENDING = 4
 	end
 
+	class KalturaQuizFileType
+		PDF = 1
+	end
+
 	class KalturaThumbCuePointSubType
 		SLIDE = 1
 		CHAPTER = 2

@@ -321,6 +321,8 @@ module Kaltura
 		end
 
 		# creates a pdf from quiz object
+		# 	 The Output type defines the file format in which the quiz will be generated
+		# 	 Currently only PDF files are supported
 		# 	 
 		def serve(entry_id, quiz_output_type)
 			kparams = {}

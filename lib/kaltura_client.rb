@@ -1581,74 +1581,6 @@ module Kaltura
 		end
 	end
 
-	# Edge Server service
-	#  
-	class KalturaEdgeServerService < KalturaServiceBase
-		def initialize(client)
-			super(client)
-		end
-
-		# Adds a edge server to the Kaltura DB.
-		# 	 
-		def add(edge_server)
-			kparams = {}
-			client.add_param(kparams, 'edgeServer', edge_server)
-			client.queue_service_action_call('edgeserver', 'add', 'KalturaEdgeServer', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Get edge server by id
-		# 	 
-		def get(edge_server_id)
-			kparams = {}
-			client.add_param(kparams, 'edgeServerId', edge_server_id)
-			client.queue_service_action_call('edgeserver', 'get', 'KalturaEdgeServer', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update edge server by id 
-		# 	 
-		def update(edge_server_id, edge_server)
-			kparams = {}
-			client.add_param(kparams, 'edgeServerId', edge_server_id)
-			client.add_param(kparams, 'edgeServer', edge_server)
-			client.queue_service_action_call('edgeserver', 'update', 'KalturaEdgeServer', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# delete edge server by id
-		# 	 
-		def delete(edge_server_id)
-			kparams = {}
-			client.add_param(kparams, 'edgeServerId', edge_server_id)
-			client.queue_service_action_call('edgeserver', 'delete', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('edgeserver', 'list', 'KalturaEdgeServerListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-	end
-
 	# EmailIngestionProfile service lets you manage email ingestion profile records
 	#  
 	class KalturaEmailIngestionProfileService < KalturaServiceBase
@@ -2734,39 +2666,6 @@ module Kaltura
 			client.add_param(kparams, 'filter', filter)
 			client.add_param(kparams, 'pager', pager)
 			client.queue_service_action_call('mediainfo', 'list', 'KalturaMediaInfoListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-	end
-
-	# Manage media servers
-	#  
-	class KalturaMediaServerService < KalturaServiceBase
-		def initialize(client)
-			super(client)
-		end
-
-		# Get media server by hostname
-		# 	 
-		def get(hostname)
-			kparams = {}
-			client.add_param(kparams, 'hostname', hostname)
-			client.queue_service_action_call('mediaserver', 'get', 'KalturaMediaServer', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update media server status
-		# 	 
-		def report_status(hostname, media_server_status)
-			kparams = {}
-			client.add_param(kparams, 'hostname', hostname)
-			client.add_param(kparams, 'mediaServerStatus', media_server_status)
-			client.queue_service_action_call('mediaserver', 'reportStatus', 'KalturaMediaServer', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -4119,6 +4018,111 @@ module Kaltura
 			client.add_param(kparams, 'userName', user_name)
 			client.add_param(kparams, 'password', password)
 			client.queue_service_action_call('search', 'externalLogin', 'KalturaSearchAuthData', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+	end
+
+	# Server Node service
+	#  
+	class KalturaServerNodeService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		# Adds a server node to the Kaltura DB.
+		# 	 
+		def add(server_node)
+			kparams = {}
+			client.add_param(kparams, 'serverNode', server_node)
+			client.queue_service_action_call('servernode', 'add', 'KalturaServerNode', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Get server node by id
+		# 	 
+		def get(server_node_id)
+			kparams = {}
+			client.add_param(kparams, 'serverNodeId', server_node_id)
+			client.queue_service_action_call('servernode', 'get', 'KalturaServerNode', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update server node by id 
+		# 	 
+		def update(server_node_id, server_node)
+			kparams = {}
+			client.add_param(kparams, 'serverNodeId', server_node_id)
+			client.add_param(kparams, 'serverNode', server_node)
+			client.queue_service_action_call('servernode', 'update', 'KalturaServerNode', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# delete server node by id
+		# 	 
+		def delete(server_node_id)
+			kparams = {}
+			client.add_param(kparams, 'serverNodeId', server_node_id)
+			client.queue_service_action_call('servernode', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Disable server node by id
+		# 	 
+		def disable(server_node_id)
+			kparams = {}
+			client.add_param(kparams, 'serverNodeId', server_node_id)
+			client.queue_service_action_call('servernode', 'disable', 'KalturaServerNode', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Enable server node by id
+		# 	 
+		def enable(server_node_id)
+			kparams = {}
+			client.add_param(kparams, 'serverNodeId', server_node_id)
+			client.queue_service_action_call('servernode', 'enable', 'KalturaServerNode', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('servernode', 'list', 'KalturaServerNodeListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update server node status
+		# 	 
+		def report_status(host_name, server_node=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'hostName', host_name)
+			client.add_param(kparams, 'serverNode', server_node)
+			client.queue_service_action_call('servernode', 'reportStatus', 'KalturaServerNode', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -5646,14 +5650,6 @@ module Kaltura
 			return @document_service
 		end
 		
-		attr_reader :edge_server_service
-		def edge_server_service
-			if (@edge_server_service == nil)
-				@edge_server_service = KalturaEdgeServerService.new(self)
-			end
-			return @edge_server_service
-		end
-		
 		attr_reader :email_ingestion_profile_service
 		def email_ingestion_profile_service
 			if (@email_ingestion_profile_service == nil)
@@ -5750,14 +5746,6 @@ module Kaltura
 			return @media_info_service
 		end
 		
-		attr_reader :media_server_service
-		def media_server_service
-			if (@media_server_service == nil)
-				@media_server_service = KalturaMediaServerService.new(self)
-			end
-			return @media_server_service
-		end
-		
 		attr_reader :media_service
 		def media_service
 			if (@media_service == nil)
@@ -5844,6 +5832,14 @@ module Kaltura
 				@search_service = KalturaSearchService.new(self)
 			end
 			return @search_service
+		end
+		
+		attr_reader :server_node_service
+		def server_node_service
+			if (@server_node_service == nil)
+				@server_node_service = KalturaServerNodeService.new(self)
+			end
+			return @server_node_service
 		end
 		
 		attr_reader :session_service
@@ -5976,7 +5972,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:15-10-28'
+			self.client_tag = 'ruby:15-10-29'
 			self.api_version = '3.3.0'
 		end
 		

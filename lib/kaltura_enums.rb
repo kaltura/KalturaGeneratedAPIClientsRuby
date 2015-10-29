@@ -168,12 +168,6 @@ module Kaltura
 		DISPLAY_WITH_LINK = 1
 	end
 
-	class KalturaEdgeServerStatus
-		ACTIVE = 1
-		DISABLED = 2
-		DELETED = 3
-	end
-
 	class KalturaEditorType
 		SIMPLE = 1
 		ADVANCED = 2
@@ -472,6 +466,13 @@ module Kaltura
 		METACAFE = 24
 		SEARCH_PROXY = 28
 		PARTNER_SPECIFIC = 100
+	end
+
+	class KalturaServerNodeStatus
+		ACTIVE = 1
+		DISABLED = 2
+		DELETED = 3
+		NOT_REGISTERED = 4
 	end
 
 	class KalturaSessionType
@@ -1379,6 +1380,15 @@ module Kaltura
 		LIVE_AKAMAI_HDS = "1013"
 	end
 
+	class KalturaDeliveryServerNodeOrderBy
+		CREATED_AT_ASC = "+createdAt"
+		HEARTBEAT_TIME_ASC = "+heartbeatTime"
+		UPDATED_AT_ASC = "+updatedAt"
+		CREATED_AT_DESC = "-createdAt"
+		HEARTBEAT_TIME_DESC = "-heartbeatTime"
+		UPDATED_AT_DESC = "-updatedAt"
+	end
+
 	class KalturaDocumentEntryCompareAttribute
 		ACCESS_CONTROL_ID = "accessControlId"
 		CREATED_AT = "createdAt"
@@ -1422,10 +1432,12 @@ module Kaltura
 	class KalturaDynamicEnum
 	end
 
-	class KalturaEdgeServerOrderBy
+	class KalturaEdgeServerNodeOrderBy
 		CREATED_AT_ASC = "+createdAt"
+		HEARTBEAT_TIME_ASC = "+heartbeatTime"
 		UPDATED_AT_ASC = "+updatedAt"
 		CREATED_AT_DESC = "-createdAt"
+		HEARTBEAT_TIME_DESC = "-heartbeatTime"
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
@@ -2515,6 +2527,15 @@ module Kaltura
 		FFMPEG = "1"
 	end
 
+	class KalturaMediaServerNodeOrderBy
+		CREATED_AT_ASC = "+createdAt"
+		HEARTBEAT_TIME_ASC = "+heartbeatTime"
+		UPDATED_AT_ASC = "+updatedAt"
+		CREATED_AT_DESC = "-createdAt"
+		HEARTBEAT_TIME_DESC = "-heartbeatTime"
+		UPDATED_AT_DESC = "-updatedAt"
+	end
+
 	class KalturaMixEntryCompareAttribute
 		ACCESS_CONTROL_ID = "accessControlId"
 		CREATED_AT = "createdAt"
@@ -2863,6 +2884,20 @@ module Kaltura
 		LESS_THAN = "4"
 		LESS_THAN_OR_EQUAL = "5"
 		NOT_EQUAL = "6"
+	end
+
+	class KalturaServerNodeOrderBy
+		CREATED_AT_ASC = "+createdAt"
+		HEARTBEAT_TIME_ASC = "+heartbeatTime"
+		UPDATED_AT_ASC = "+updatedAt"
+		CREATED_AT_DESC = "-createdAt"
+		HEARTBEAT_TIME_DESC = "-heartbeatTime"
+		UPDATED_AT_DESC = "-updatedAt"
+	end
+
+	class KalturaServerNodeType
+		WOWZA_MEDIA_SERVER = "wowza.WOWZA_MEDIA_SERVER"
+		EDGE = "1"
 	end
 
 	class KalturaSourceType

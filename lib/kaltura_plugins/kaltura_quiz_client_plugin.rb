@@ -322,20 +322,20 @@ module Kaltura
 
 		# creates a pdf from quiz object
 		# 	 
-		def serve(entry_id, quiz_file_type)
+		def serve(entry_id, quiz_output_type)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'quizFileType', quiz_file_type)
+			client.add_param(kparams, 'quizOutputType', quiz_output_type)
 			client.queue_service_action_call('quiz_quiz', 'serve', 'file', kparams)
 			return client.get_serve_url()
 		end
 
 		# sends a with an api request for pdf from quiz object
 		# 	 
-		def get_url(entry_id, quiz_file_type)
+		def get_url(entry_id, quiz_output_type)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'quizFileType', quiz_file_type)
+			client.add_param(kparams, 'quizOutputType', quiz_output_type)
 			client.queue_service_action_call('quiz_quiz', 'getUrl', 'string', kparams)
 			if (client.is_multirequest)
 				return nil

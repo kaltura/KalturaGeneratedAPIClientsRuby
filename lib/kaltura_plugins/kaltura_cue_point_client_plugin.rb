@@ -36,7 +36,7 @@ module Kaltura
 		PENDING = 4
 	end
 
-	class KalturaQuizFileType
+	class KalturaQuizOutputType
 		PDF = 1
 	end
 

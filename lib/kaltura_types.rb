@@ -2421,75 +2421,6 @@ module Kaltura
 
 	end
 
-	class KalturaEdgeServer < KalturaObjectBase
-		attr_accessor :id
-		attr_accessor :created_at
-		attr_accessor :updated_at
-		attr_accessor :partner_id
-		# edgeServer name
-		# 	 
-		attr_accessor :name
-		# edgeServer uniqe system name
-		# 	 
-		attr_accessor :system_name
-		# edgeServer description
-		# 	 
-		attr_accessor :description
-		attr_accessor :status
-		# edgeServer tags
-		# 	 
-		attr_accessor :tags
-		# edgeServer host name
-		# 	 
-		attr_accessor :host_name
-		# edgeServer playback hostName
-		# 	 
-		attr_accessor :playback_host_name
-		# Delivery profile ids comma seperated
-		# 	 
-		attr_accessor :delivery_profile_ids
-		# Id of the parent edge server
-		# 	 
-		attr_accessor :parent_id
-
-		def id=(val)
-			@id = val.to_i
-		end
-		def created_at=(val)
-			@created_at = val.to_i
-		end
-		def updated_at=(val)
-			@updated_at = val.to_i
-		end
-		def partner_id=(val)
-			@partner_id = val.to_i
-		end
-		def status=(val)
-			@status = val.to_i
-		end
-		def parent_id=(val)
-			@parent_id = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			self.id = xml_element.elements['id'].text
-			self.created_at = xml_element.elements['createdAt'].text
-			self.updated_at = xml_element.elements['updatedAt'].text
-			self.partner_id = xml_element.elements['partnerId'].text
-			self.name = xml_element.elements['name'].text
-			self.system_name = xml_element.elements['systemName'].text
-			self.description = xml_element.elements['description'].text
-			self.status = xml_element.elements['status'].text
-			self.tags = xml_element.elements['tags'].text
-			self.host_name = xml_element.elements['hostName'].text
-			self.playback_host_name = xml_element.elements['playbackHostName'].text
-			self.delivery_profile_ids = xml_element.elements['deliveryProfileIds'].text
-			self.parent_id = xml_element.elements['parentId'].text
-		end
-
-	end
-
 	class KalturaEmailIngestionProfile < KalturaObjectBase
 		attr_accessor :id
 		attr_accessor :name
@@ -4334,56 +4265,6 @@ module Kaltura
 
 	end
 
-	class KalturaMediaServer < KalturaObjectBase
-		# Unique identifier
-		# 	 
-		attr_accessor :id
-		# Server data center id
-		# 	 
-		attr_accessor :dc
-		# Server host name
-		# 	 
-		attr_accessor :hostname
-		# Server first registration date as Unix timestamp (In seconds)
-		# 	 
-		attr_accessor :created_at
-		# Server last update date as Unix timestamp (In seconds)
-		# 	 
-		attr_accessor :updated_at
-
-		def id=(val)
-			@id = val.to_i
-		end
-		def dc=(val)
-			@dc = val.to_i
-		end
-		def created_at=(val)
-			@created_at = val.to_i
-		end
-		def updated_at=(val)
-			@updated_at = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			self.id = xml_element.elements['id'].text
-			self.dc = xml_element.elements['dc'].text
-			self.hostname = xml_element.elements['hostname'].text
-			self.created_at = xml_element.elements['createdAt'].text
-			self.updated_at = xml_element.elements['updatedAt'].text
-		end
-
-	end
-
-	class KalturaMediaServerStatus < KalturaObjectBase
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
 	class KalturaMixEntry < KalturaPlayableEntry
 		# Indicates whether the user has submited a real thumbnail to the mix (Not the one that was generated automaticaly)
 		# 	 
@@ -5692,6 +5573,79 @@ module Kaltura
 			super
 			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaSearchResult')
 			self.need_media_info = xml_element.elements['needMediaInfo'].text
+		end
+
+	end
+
+	class KalturaServerNode < KalturaObjectBase
+		attr_accessor :id
+		attr_accessor :partner_id
+		attr_accessor :created_at
+		attr_accessor :updated_at
+		attr_accessor :heartbeat_time
+		# serverNode name
+		# 	 
+		attr_accessor :name
+		# serverNode uniqe system name
+		# 	 
+		attr_accessor :system_name
+		attr_accessor :description
+		# serverNode hostName
+		# 	 
+		attr_accessor :host_name
+		attr_accessor :status
+		attr_accessor :type
+		# serverNode tags
+		# 	 
+		attr_accessor :tags
+		# DC where the serverNode is located
+		# 	 
+		attr_accessor :dc
+		# Id of the parent serverNode
+		# 	 
+		attr_accessor :parent_id
+
+		def id=(val)
+			@id = val.to_i
+		end
+		def partner_id=(val)
+			@partner_id = val.to_i
+		end
+		def created_at=(val)
+			@created_at = val.to_i
+		end
+		def updated_at=(val)
+			@updated_at = val.to_i
+		end
+		def heartbeat_time=(val)
+			@heartbeat_time = val.to_i
+		end
+		def status=(val)
+			@status = val.to_i
+		end
+		def dc=(val)
+			@dc = val.to_i
+		end
+		def parent_id=(val)
+			@parent_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			self.id = xml_element.elements['id'].text
+			self.partner_id = xml_element.elements['partnerId'].text
+			self.created_at = xml_element.elements['createdAt'].text
+			self.updated_at = xml_element.elements['updatedAt'].text
+			self.heartbeat_time = xml_element.elements['heartbeatTime'].text
+			self.name = xml_element.elements['name'].text
+			self.system_name = xml_element.elements['systemName'].text
+			self.description = xml_element.elements['description'].text
+			self.host_name = xml_element.elements['hostName'].text
+			self.status = xml_element.elements['status'].text
+			self.type = xml_element.elements['type'].text
+			self.tags = xml_element.elements['tags'].text
+			self.dc = xml_element.elements['dc'].text
+			self.parent_id = xml_element.elements['parentId'].text
 		end
 
 	end
@@ -8464,6 +8418,19 @@ module Kaltura
 
 	end
 
+	class KalturaDeliveryServerNode < KalturaServerNode
+		# Delivery server playback Domain
+		# 	 
+		attr_accessor :playback_domain
+
+
+		def from_xml(xml_element)
+			super
+			self.playback_domain = xml_element.elements['playbackDomain'].text
+		end
+
+	end
+
 	class KalturaDirectoryRestriction < KalturaBaseRestriction
 		# Kaltura directory restriction type
 		# 	 
@@ -8490,93 +8457,6 @@ module Kaltura
 		def from_xml(xml_element)
 			super
 			self.flavor_data = xml_element.elements['flavorData'].text
-		end
-
-	end
-
-	class KalturaEdgeServerBaseFilter < KalturaFilter
-		attr_accessor :id_equal
-		attr_accessor :id_in
-		attr_accessor :created_at_greater_than_or_equal
-		attr_accessor :created_at_less_than_or_equal
-		attr_accessor :updated_at_greater_than_or_equal
-		attr_accessor :updated_at_less_than_or_equal
-		attr_accessor :name_equal
-		attr_accessor :name_in
-		attr_accessor :system_name_equal
-		attr_accessor :system_name_in
-		attr_accessor :status_equal
-		attr_accessor :status_in
-		attr_accessor :tags_like
-		attr_accessor :tags_multi_like_or
-		attr_accessor :tags_multi_like_and
-		attr_accessor :host_name_like
-		attr_accessor :host_name_multi_like_or
-		attr_accessor :host_name_multi_like_and
-		attr_accessor :playback_host_name_like
-		attr_accessor :playback_host_name_multi_like_or
-		attr_accessor :playback_host_name_multi_like_and
-		attr_accessor :parent_id_equal
-		attr_accessor :parent_id_in
-
-		def id_equal=(val)
-			@id_equal = val.to_i
-		end
-		def created_at_greater_than_or_equal=(val)
-			@created_at_greater_than_or_equal = val.to_i
-		end
-		def created_at_less_than_or_equal=(val)
-			@created_at_less_than_or_equal = val.to_i
-		end
-		def updated_at_greater_than_or_equal=(val)
-			@updated_at_greater_than_or_equal = val.to_i
-		end
-		def updated_at_less_than_or_equal=(val)
-			@updated_at_less_than_or_equal = val.to_i
-		end
-		def status_equal=(val)
-			@status_equal = val.to_i
-		end
-		def parent_id_equal=(val)
-			@parent_id_equal = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			self.id_equal = xml_element.elements['idEqual'].text
-			self.id_in = xml_element.elements['idIn'].text
-			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
-			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
-			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
-			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
-			self.name_equal = xml_element.elements['nameEqual'].text
-			self.name_in = xml_element.elements['nameIn'].text
-			self.system_name_equal = xml_element.elements['systemNameEqual'].text
-			self.system_name_in = xml_element.elements['systemNameIn'].text
-			self.status_equal = xml_element.elements['statusEqual'].text
-			self.status_in = xml_element.elements['statusIn'].text
-			self.tags_like = xml_element.elements['tagsLike'].text
-			self.tags_multi_like_or = xml_element.elements['tagsMultiLikeOr'].text
-			self.tags_multi_like_and = xml_element.elements['tagsMultiLikeAnd'].text
-			self.host_name_like = xml_element.elements['hostNameLike'].text
-			self.host_name_multi_like_or = xml_element.elements['hostNameMultiLikeOr'].text
-			self.host_name_multi_like_and = xml_element.elements['hostNameMultiLikeAnd'].text
-			self.playback_host_name_like = xml_element.elements['playbackHostNameLike'].text
-			self.playback_host_name_multi_like_or = xml_element.elements['playbackHostNameMultiLikeOr'].text
-			self.playback_host_name_multi_like_and = xml_element.elements['playbackHostNameMultiLikeAnd'].text
-			self.parent_id_equal = xml_element.elements['parentIdEqual'].text
-			self.parent_id_in = xml_element.elements['parentIdIn'].text
-		end
-
-	end
-
-	class KalturaEdgeServerListResponse < KalturaListResponse
-		attr_accessor :objects
-
-
-		def from_xml(xml_element)
-			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaStorageProfile')
 		end
 
 	end
@@ -9416,35 +9296,6 @@ module Kaltura
 
 	end
 
-	class KalturaMediaServerBaseFilter < KalturaFilter
-		attr_accessor :created_at_greater_than_or_equal
-		attr_accessor :created_at_less_than_or_equal
-		attr_accessor :updated_at_greater_than_or_equal
-		attr_accessor :updated_at_less_than_or_equal
-
-		def created_at_greater_than_or_equal=(val)
-			@created_at_greater_than_or_equal = val.to_i
-		end
-		def created_at_less_than_or_equal=(val)
-			@created_at_less_than_or_equal = val.to_i
-		end
-		def updated_at_greater_than_or_equal=(val)
-			@updated_at_greater_than_or_equal = val.to_i
-		end
-		def updated_at_less_than_or_equal=(val)
-			@updated_at_less_than_or_equal = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
-			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
-			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
-			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
-		end
-
-	end
-
 	class KalturaMixListResponse < KalturaListResponse
 		attr_accessor :objects
 
@@ -9974,6 +9825,108 @@ module Kaltura
 			super
 			self.type = xml_element.elements['type'].text
 			self.items = KalturaClientBase.object_from_xml(xml_element.elements['items'], 'KalturaSearchItem')
+		end
+
+	end
+
+	class KalturaServerNodeBaseFilter < KalturaFilter
+		attr_accessor :id_equal
+		attr_accessor :id_in
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :created_at_less_than_or_equal
+		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
+		attr_accessor :heartbeat_time_greater_than_or_equal
+		attr_accessor :heartbeat_time_less_than_or_equal
+		attr_accessor :name_equal
+		attr_accessor :name_in
+		attr_accessor :system_name_equal
+		attr_accessor :system_name_in
+		attr_accessor :host_name_like
+		attr_accessor :host_name_multi_like_or
+		attr_accessor :host_name_multi_like_and
+		attr_accessor :status_equal
+		attr_accessor :status_in
+		attr_accessor :type_equal
+		attr_accessor :type_in
+		attr_accessor :tags_like
+		attr_accessor :tags_multi_like_or
+		attr_accessor :tags_multi_like_and
+		attr_accessor :dc_equal
+		attr_accessor :dc_in
+		attr_accessor :parent_id_equal
+		attr_accessor :parent_id_in
+
+		def id_equal=(val)
+			@id_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
+		def updated_at_greater_than_or_equal=(val)
+			@updated_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
+		end
+		def heartbeat_time_greater_than_or_equal=(val)
+			@heartbeat_time_greater_than_or_equal = val.to_i
+		end
+		def heartbeat_time_less_than_or_equal=(val)
+			@heartbeat_time_less_than_or_equal = val.to_i
+		end
+		def status_equal=(val)
+			@status_equal = val.to_i
+		end
+		def dc_equal=(val)
+			@dc_equal = val.to_i
+		end
+		def parent_id_equal=(val)
+			@parent_id_equal = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			self.id_equal = xml_element.elements['idEqual'].text
+			self.id_in = xml_element.elements['idIn'].text
+			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			self.heartbeat_time_greater_than_or_equal = xml_element.elements['heartbeatTimeGreaterThanOrEqual'].text
+			self.heartbeat_time_less_than_or_equal = xml_element.elements['heartbeatTimeLessThanOrEqual'].text
+			self.name_equal = xml_element.elements['nameEqual'].text
+			self.name_in = xml_element.elements['nameIn'].text
+			self.system_name_equal = xml_element.elements['systemNameEqual'].text
+			self.system_name_in = xml_element.elements['systemNameIn'].text
+			self.host_name_like = xml_element.elements['hostNameLike'].text
+			self.host_name_multi_like_or = xml_element.elements['hostNameMultiLikeOr'].text
+			self.host_name_multi_like_and = xml_element.elements['hostNameMultiLikeAnd'].text
+			self.status_equal = xml_element.elements['statusEqual'].text
+			self.status_in = xml_element.elements['statusIn'].text
+			self.type_equal = xml_element.elements['typeEqual'].text
+			self.type_in = xml_element.elements['typeIn'].text
+			self.tags_like = xml_element.elements['tagsLike'].text
+			self.tags_multi_like_or = xml_element.elements['tagsMultiLikeOr'].text
+			self.tags_multi_like_and = xml_element.elements['tagsMultiLikeAnd'].text
+			self.dc_equal = xml_element.elements['dcEqual'].text
+			self.dc_in = xml_element.elements['dcIn'].text
+			self.parent_id_equal = xml_element.elements['parentIdEqual'].text
+			self.parent_id_in = xml_element.elements['parentIdIn'].text
+		end
+
+	end
+
+	class KalturaServerNodeListResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaServerNode')
 		end
 
 	end
@@ -11346,7 +11299,7 @@ module Kaltura
 
 	end
 
-	class KalturaEdgeServerFilter < KalturaEdgeServerBaseFilter
+	class KalturaEdgeServerNode < KalturaDeliveryServerNode
 
 
 		def from_xml(xml_element)
@@ -11745,6 +11698,27 @@ module Kaltura
 
 	end
 
+	class KalturaMediaServerNode < KalturaDeliveryServerNode
+		# Media server application name
+		# 	 
+		attr_accessor :application_name
+		# Media server playback port configuration by protocol and format
+		# 	 
+		attr_accessor :media_server_port_config
+		# Media server playback Domain configuration by protocol and format
+		# 	 
+		attr_accessor :media_server_playback_domain_config
+
+
+		def from_xml(xml_element)
+			super
+			self.application_name = xml_element.elements['applicationName'].text
+			self.media_server_port_config = KalturaClientBase.object_from_xml(xml_element.elements['mediaServerPortConfig'], 'KalturaKeyValue')
+			self.media_server_playback_domain_config = KalturaClientBase.object_from_xml(xml_element.elements['mediaServerPlaybackDomainConfig'], 'KalturaKeyValue')
+		end
+
+	end
+
 	# A resource that perform operation (transcoding, clipping, cropping) before the flavor is ready.
 	#  
 	class KalturaOperationResource < KalturaContentResource
@@ -12081,6 +12055,15 @@ module Kaltura
 		def from_xml(xml_element)
 			super
 			self.not = xml_element.elements['not'].text
+		end
+
+	end
+
+	class KalturaServerNodeFilter < KalturaServerNodeBaseFilter
+
+
+		def from_xml(xml_element)
+			super
 		end
 
 	end
@@ -12567,6 +12550,21 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
+		end
+
+	end
+
+	class KalturaDeliveryServerNodeBaseFilter < KalturaServerNodeFilter
+		attr_accessor :playback_domain_like
+		attr_accessor :playback_domain_multi_like_or
+		attr_accessor :playback_domain_multi_like_and
+
+
+		def from_xml(xml_element)
+			super
+			self.playback_domain_like = xml_element.elements['playbackDomainLike'].text
+			self.playback_domain_multi_like_or = xml_element.elements['playbackDomainMultiLikeOr'].text
+			self.playback_domain_multi_like_and = xml_element.elements['playbackDomainMultiLikeAnd'].text
 		end
 
 	end
@@ -13281,6 +13279,15 @@ module Kaltura
 
 	end
 
+	class KalturaDeliveryServerNodeFilter < KalturaDeliveryServerNodeBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaFlavorAssetBaseFilter < KalturaAssetFilter
 		attr_accessor :flavor_params_id_equal
 		attr_accessor :flavor_params_id_in
@@ -13470,6 +13477,15 @@ module Kaltura
 
 	end
 
+	class KalturaEdgeServerNodeBaseFilter < KalturaDeliveryServerNodeFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaFlavorAssetFilter < KalturaFlavorAssetBaseFilter
 
 
@@ -13498,6 +13514,15 @@ module Kaltura
 	end
 
 	class KalturaLiveStreamAdminEntry < KalturaLiveStreamEntry
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaMediaServerNodeBaseFilter < KalturaDeliveryServerNodeFilter
 
 
 		def from_xml(xml_element)
@@ -13536,6 +13561,15 @@ module Kaltura
 	end
 
 	class KalturaDeliveryProfileGenericRtmpFilter < KalturaDeliveryProfileGenericRtmpBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaEdgeServerNodeFilter < KalturaEdgeServerNodeBaseFilter
 
 
 		def from_xml(xml_element)
@@ -13592,6 +13626,15 @@ module Kaltura
 	end
 
 	class KalturaMediaFlavorParamsBaseFilter < KalturaFlavorParamsFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaMediaServerNodeFilter < KalturaMediaServerNodeBaseFilter
 
 
 		def from_xml(xml_element)

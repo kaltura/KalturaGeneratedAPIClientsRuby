@@ -39,12 +39,19 @@ module Kaltura
 		# The id of user that the like belongs to
 		# 	 
 		attr_accessor :user_id
+		# The date of the like's creation
+		# 	 
+		attr_accessor :created_at
 
+		def created_at=(val)
+			@created_at = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
 			self.entry_id = xml_element.elements['entryId'].text
 			self.user_id = xml_element.elements['userId'].text
+			self.created_at = xml_element.elements['createdAt'].text
 		end
 
 	end
@@ -63,12 +70,22 @@ module Kaltura
 	class KalturaLikeBaseFilter < KalturaRelatedFilter
 		attr_accessor :entry_id_equal
 		attr_accessor :user_id_equal
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :created_at_less_than_or_equal
 
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
 			self.entry_id_equal = xml_element.elements['entryIdEqual'].text
 			self.user_id_equal = xml_element.elements['userIdEqual'].text
+			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
 		end
 
 	end

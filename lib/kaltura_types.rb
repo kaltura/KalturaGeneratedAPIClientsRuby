@@ -834,6 +834,22 @@ module Kaltura
 
 	end
 
+	# A representation of a live stream recording entry configuration
+	#  
+	class KalturaBaseEntryCloneOptions < KalturaObjectBase
+		attr_accessor :should_copy_entitlement
+
+		def should_copy_entitlement=(val)
+			@should_copy_entitlement = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			self.should_copy_entitlement = xml_element.elements['shouldCopyEntitlement'].text
+		end
+
+	end
+
 	class KalturaBaseResponseProfile < KalturaObjectBase
 
 

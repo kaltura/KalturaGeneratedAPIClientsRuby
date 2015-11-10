@@ -91,6 +91,7 @@ module Kaltura
 		attr_accessor :allow_answer_update
 		attr_accessor :show_correct_after_submission
 		attr_accessor :allow_download
+		attr_accessor :show_grade_after_submission
 
 		def version=(val)
 			@version = val.to_i
@@ -110,6 +111,9 @@ module Kaltura
 		def allow_download=(val)
 			@allow_download = val.to_i
 		end
+		def show_grade_after_submission=(val)
+			@show_grade_after_submission = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
@@ -120,6 +124,7 @@ module Kaltura
 			self.allow_answer_update = xml_element.elements['allowAnswerUpdate'].text
 			self.show_correct_after_submission = xml_element.elements['showCorrectAfterSubmission'].text
 			self.allow_download = xml_element.elements['allowDownload'].text
+			self.show_grade_after_submission = xml_element.elements['showGradeAfterSubmission'].text
 		end
 
 	end

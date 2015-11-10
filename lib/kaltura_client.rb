@@ -637,9 +637,10 @@ module Kaltura
 
 		# Clone an entry with optional attributes to apply to the clone
 		# 	 
-		def clone(entry_id)
+		def clone(entry_id, clone_options)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'cloneOptions', clone_options)
 			client.queue_service_action_call('baseentry', 'clone', 'KalturaBaseEntry', kparams)
 			if (client.is_multirequest)
 				return nil

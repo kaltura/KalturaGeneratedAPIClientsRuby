@@ -637,10 +637,9 @@ module Kaltura
 
 		# Clone an entry with optional attributes to apply to the clone
 		# 	 
-		def clone(entry_id, clone_options)
+		def clone(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'cloneOptions', clone_options)
 			client.queue_service_action_call('baseentry', 'clone', 'KalturaBaseEntry', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -5973,7 +5972,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:15-11-12'
+			self.client_tag = 'ruby:15-11-13'
 			self.api_version = '3.3.0'
 		end
 		

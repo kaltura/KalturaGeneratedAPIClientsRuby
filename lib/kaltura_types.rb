@@ -891,6 +891,7 @@ module Kaltura
 		# Update date as Unix timestamp (In seconds)
 		# 	 
 		attr_accessor :updated_at
+		attr_accessor :use_category_entries
 
 		def partner_id=(val)
 			@partner_id = val.to_i
@@ -928,6 +929,9 @@ module Kaltura
 		def updated_at=(val)
 			@updated_at = val.to_i
 		end
+		def use_category_entries=(val)
+			@use_category_entries = to_b(val)
+		end
 
 		def from_xml(xml_element)
 			super
@@ -951,6 +955,7 @@ module Kaltura
 			self.enforce_entitlement = xml_element.elements['enforceEntitlement'].text
 			self.privacy_context = xml_element.elements['privacyContext'].text
 			self.updated_at = xml_element.elements['updatedAt'].text
+			self.use_category_entries = xml_element.elements['useCategoryEntries'].text
 		end
 
 	end

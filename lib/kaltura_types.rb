@@ -11305,10 +11305,14 @@ module Kaltura
 	end
 
 	class KalturaEdgeServerNode < KalturaDeliveryServerNode
+		# Delivery profile ids
+		# 	 
+		attr_accessor :delivery_profile_ids
 
 
 		def from_xml(xml_element)
 			super
+			self.delivery_profile_ids = KalturaClientBase.object_from_xml(xml_element.elements['deliveryProfileIds'], 'KalturaKeyValue')
 		end
 
 	end

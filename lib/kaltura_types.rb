@@ -7898,6 +7898,7 @@ module Kaltura
 		# Clipping duration in seconds
 		# 	 
 		attr_accessor :duration
+		attr_accessor :amf_array
 
 		def offset=(val)
 			@offset = val.to_f
@@ -7913,6 +7914,7 @@ module Kaltura
 			self.flavor_asset_id = xml_element.elements['flavorAssetId'].text
 			self.offset = xml_element.elements['offset'].text
 			self.duration = xml_element.elements['duration'].text
+			self.amf_array = KalturaClientBase.object_from_xml(xml_element.elements['amfArray'], 'KalturaKeyValue')
 		end
 
 	end
@@ -8070,6 +8072,7 @@ module Kaltura
 		# Duration of the live entry including all recorded segments including the current
 		# 	 
 		attr_accessor :end_time
+		attr_accessor :amf_array
 
 		def media_server_index=(val)
 			@media_server_index = val.to_i
@@ -8090,6 +8093,7 @@ module Kaltura
 			self.src_file_path = xml_element.elements['srcFilePath'].text
 			self.dest_file_path = xml_element.elements['destFilePath'].text
 			self.end_time = xml_element.elements['endTime'].text
+			self.amf_array = KalturaClientBase.object_from_xml(xml_element.elements['amfArray'], 'KalturaKeyValue')
 		end
 
 	end
@@ -11308,11 +11312,15 @@ module Kaltura
 		# Delivery profile ids
 		# 	 
 		attr_accessor :delivery_profile_ids
+		# Overdie edge server default configuration - json format
+		# 	 
+		attr_accessor :config
 
 
 		def from_xml(xml_element)
 			super
 			self.delivery_profile_ids = KalturaClientBase.object_from_xml(xml_element.elements['deliveryProfileIds'], 'KalturaKeyValue')
+			self.config = xml_element.elements['config'].text
 		end
 
 	end

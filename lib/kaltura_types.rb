@@ -7898,13 +7898,18 @@ module Kaltura
 		# Clipping duration in seconds
 		# 	 
 		attr_accessor :duration
-		attr_accessor :amf_array
+		# duration of the concated video
+		# 	 
+		attr_accessor :concatenated_duration
 
 		def offset=(val)
 			@offset = val.to_f
 		end
 		def duration=(val)
 			@duration = val.to_f
+		end
+		def concatenated_duration=(val)
+			@concatenated_duration = val.to_f
 		end
 
 		def from_xml(xml_element)
@@ -7914,7 +7919,7 @@ module Kaltura
 			self.flavor_asset_id = xml_element.elements['flavorAssetId'].text
 			self.offset = xml_element.elements['offset'].text
 			self.duration = xml_element.elements['duration'].text
-			self.amf_array = KalturaClientBase.object_from_xml(xml_element.elements['amfArray'], 'KalturaKeyValue')
+			self.concatenated_duration = xml_element.elements['concatenatedDuration'].text
 		end
 
 	end
@@ -8073,6 +8078,10 @@ module Kaltura
 		# 	 
 		attr_accessor :end_time
 		attr_accessor :amf_array
+		# Duration of the live segment.
+		# 	 filled by the ConvertLiveSegment job
+		# 	 
+		attr_accessor :duration
 
 		def media_server_index=(val)
 			@media_server_index = val.to_i
@@ -8082,6 +8091,9 @@ module Kaltura
 		end
 		def end_time=(val)
 			@end_time = val.to_f
+		end
+		def duration=(val)
+			@duration = val.to_f
 		end
 
 		def from_xml(xml_element)
@@ -8094,6 +8106,7 @@ module Kaltura
 			self.dest_file_path = xml_element.elements['destFilePath'].text
 			self.end_time = xml_element.elements['endTime'].text
 			self.amf_array = KalturaClientBase.object_from_xml(xml_element.elements['amfArray'], 'KalturaKeyValue')
+			self.duration = xml_element.elements['duration'].text
 		end
 
 	end

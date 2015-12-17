@@ -3,5 +3,5 @@ test:
     partner_id: 1931861
     administrator_secret: 83c3d4449a3abbe92ca5966f5f010eb4
     secret: c66b9aed76e28c91455cb69fec6f2f7d
-    service_url: http://www.kaltura.com
+    service_url: https://www.kaltura.com
     timeout: 120

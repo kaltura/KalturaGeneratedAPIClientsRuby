@@ -2243,6 +2243,9 @@ module Kaltura
 		# priority used for ordering similar delivery profiles
 		# 	 
 		attr_accessor :priority
+		# Extra query string parameters that should be added to the url
+		# 	 
+		attr_accessor :extra_params
 
 		def id=(val)
 			@id = val.to_i
@@ -2289,6 +2292,7 @@ module Kaltura
 			self.parent_id = xml_element.elements['parentId'].text
 			self.media_protocols = xml_element.elements['mediaProtocols'].text
 			self.priority = xml_element.elements['priority'].text
+			self.extra_params = xml_element.elements['extraParams'].text
 		end
 
 	end

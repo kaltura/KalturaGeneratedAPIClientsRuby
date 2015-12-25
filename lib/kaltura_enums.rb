@@ -1128,6 +1128,7 @@ module Kaltura
 		OR_OPERATOR = "11"
 		HASH = "12"
 		DELIVERY_PROFILE = "13"
+		ACTIVE_EDGE_VALIDATE = "14"
 	end
 
 	class KalturaContainerFormat

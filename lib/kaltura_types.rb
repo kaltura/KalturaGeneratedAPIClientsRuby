@@ -8081,11 +8081,9 @@ module Kaltura
 		# Duration of the live entry including all recorded segments including the current
 		# 	 
 		attr_accessor :end_time
-		attr_accessor :amf_array
-		# Duration of the live segment.
-		# 	 filled by the ConvertLiveSegment job
+		# The data output file
 		# 	 
-		attr_accessor :duration
+		attr_accessor :dest_data_file_path
 
 		def media_server_index=(val)
 			@media_server_index = val.to_i
@@ -8095,9 +8093,6 @@ module Kaltura
 		end
 		def end_time=(val)
 			@end_time = val.to_f
-		end
-		def duration=(val)
-			@duration = val.to_f
 		end
 
 		def from_xml(xml_element)
@@ -8109,8 +8104,7 @@ module Kaltura
 			self.src_file_path = xml_element.elements['srcFilePath'].text
 			self.dest_file_path = xml_element.elements['destFilePath'].text
 			self.end_time = xml_element.elements['endTime'].text
-			self.amf_array = KalturaClientBase.object_from_xml(xml_element.elements['amfArray'], 'KalturaKeyValue')
-			self.duration = xml_element.elements['duration'].text
+			self.dest_data_file_path = xml_element.elements['destDataFilePath'].text
 		end
 
 	end
@@ -10611,6 +10605,19 @@ module Kaltura
 		def from_xml(xml_element)
 			super
 			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaUserRole')
+		end
+
+	end
+
+	class KalturaValidateActiveEdgeCondition < KalturaCondition
+		# Comma separated list of edge servers to validate are active
+		# 	 
+		attr_accessor :edge_server_ids
+
+
+		def from_xml(xml_element)
+			super
+			self.edge_server_ids = xml_element.elements['edgeServerIds'].text
 		end
 
 	end

@@ -834,6 +834,15 @@ module Kaltura
 
 	end
 
+	class KalturaBaseEntryCloneOptionItem < KalturaObjectBase
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaBaseResponseProfile < KalturaObjectBase
 
 
@@ -7027,6 +7036,21 @@ module Kaltura
 		def from_xml(xml_element)
 			super
 			self.privileges = KalturaClientBase.object_from_xml(xml_element.elements['privileges'], 'KalturaStringValue')
+		end
+
+	end
+
+	class KalturaBaseEntryCloneOptionComponent < KalturaBaseEntryCloneOptionItem
+		attr_accessor :item_type
+		# condition rule (include/exclude)
+		#      
+		attr_accessor :rule
+
+
+		def from_xml(xml_element)
+			super
+			self.item_type = xml_element.elements['itemType'].text
+			self.rule = xml_element.elements['rule'].text
 		end
 
 	end

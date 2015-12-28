@@ -860,6 +860,11 @@ module Kaltura
 		WMAPRO = "wmapro"
 	end
 
+	class KalturaBaseEntryCloneOptions
+		USERS = "1"
+		CATEGORIES = "2"
+	end
+
 	class KalturaBaseEntryCompareAttribute
 		ACCESS_CONTROL_ID = "accessControlId"
 		CREATED_AT = "createdAt"
@@ -1107,6 +1112,11 @@ module Kaltura
 		UPDATED_AT_ASC = "+updatedAt"
 		CREATED_AT_DESC = "-createdAt"
 		UPDATED_AT_DESC = "-updatedAt"
+	end
+
+	class KalturaCloneComponentSelectorType
+		INCLUDE_COMPONENT = "0"
+		EXCLUDE_COMPONENT = "1"
 	end
 
 	class KalturaConditionType

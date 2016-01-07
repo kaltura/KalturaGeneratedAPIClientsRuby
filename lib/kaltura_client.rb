@@ -2313,12 +2313,13 @@ module Kaltura
 
 		# Register media server to live entry
 		# 	 
-		def register_media_server(entry_id, hostname, media_server_index, application_name=KalturaNotImplemented)
+		def register_media_server(entry_id, hostname, media_server_index, application_name=KalturaNotImplemented, live_entry_status=1)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
 			client.add_param(kparams, 'hostname', hostname)
 			client.add_param(kparams, 'mediaServerIndex', media_server_index)
 			client.add_param(kparams, 'applicationName', application_name)
+			client.add_param(kparams, 'liveEntryStatus', live_entry_status)
 			client.queue_service_action_call('livechannel', 'registerMediaServer', 'KalturaLiveEntry', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -2599,12 +2600,13 @@ module Kaltura
 
 		# Register media server to live entry
 		# 	 
-		def register_media_server(entry_id, hostname, media_server_index, application_name=KalturaNotImplemented)
+		def register_media_server(entry_id, hostname, media_server_index, application_name=KalturaNotImplemented, live_entry_status=1)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
 			client.add_param(kparams, 'hostname', hostname)
 			client.add_param(kparams, 'mediaServerIndex', media_server_index)
 			client.add_param(kparams, 'applicationName', application_name)
+			client.add_param(kparams, 'liveEntryStatus', live_entry_status)
 			client.queue_service_action_call('livestream', 'registerMediaServer', 'KalturaLiveEntry', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -5973,7 +5975,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:16-01-06'
+			self.client_tag = 'ruby:16-01-07'
 			self.api_version = '3.3.0'
 		end
 		

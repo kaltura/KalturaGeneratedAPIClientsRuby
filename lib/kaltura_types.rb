@@ -166,6 +166,12 @@ module Kaltura
 	end
 
 	class KalturaRule < KalturaObjectBase
+		# Short Rule Description
+		# 	 
+		attr_accessor :description
+		# Rule Custom Data to allow saving rule specific information 
+		# 	 
+		attr_accessor :rule_data
 		# Message to be thrown to the player in case the rule is fulfilled
 		# 	 
 		attr_accessor :message
@@ -188,6 +194,8 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
+			self.description = xml_element.elements['description'].text
+			self.rule_data = xml_element.elements['ruleData'].text
 			self.message = xml_element.elements['message'].text
 			self.actions = KalturaClientBase.object_from_xml(xml_element.elements['actions'], 'KalturaRuleAction')
 			self.conditions = KalturaClientBase.object_from_xml(xml_element.elements['conditions'], 'KalturaCondition')
@@ -3270,6 +3278,9 @@ module Kaltura
 		# 	 
 		attr_accessor :current_broadcast_start_time
 		attr_accessor :recording_options
+		# the status of the entry of type LiveEntryStatus
+		# 	 
+		attr_accessor :live_status
 
 		def record_status=(val)
 			@record_status = val.to_i
@@ -3295,6 +3306,9 @@ module Kaltura
 		def current_broadcast_start_time=(val)
 			@current_broadcast_start_time = val.to_f
 		end
+		def live_status=(val)
+			@live_status = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
@@ -3311,6 +3325,7 @@ module Kaltura
 			self.last_broadcast = xml_element.elements['lastBroadcast'].text
 			self.current_broadcast_start_time = xml_element.elements['currentBroadcastStartTime'].text
 			self.recording_options = KalturaClientBase.object_from_xml(xml_element.elements['recordingOptions'], 'KalturaLiveEntryRecordingOptions')
+			self.live_status = xml_element.elements['liveStatus'].text
 		end
 
 	end

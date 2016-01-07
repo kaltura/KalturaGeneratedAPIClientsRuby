@@ -262,6 +262,12 @@ module Kaltura
 		ALLOW_LIST = 1
 	end
 
+	class KalturaLiveEntryStatus
+		STOPPED = 0
+		PLAYABLE = 1
+		BROADCASTING = 2
+	end
+
 	class KalturaLivePublishStatus
 		DISABLED = 0
 		ENABLED = 1

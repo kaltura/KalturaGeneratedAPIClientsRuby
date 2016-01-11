@@ -203,6 +203,18 @@ module Kaltura
 			end
 			return client.do_queue()
 		end
+
+		# Restore deleted entry.
+		# 	 
+		def restore_deleted_entry(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('adminconsole_entryadmin', 'restoreDeletedEntry', 'KalturaBaseEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
 	end
 
 	# UiConf Admin service

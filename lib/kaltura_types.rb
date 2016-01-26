@@ -8782,6 +8782,9 @@ module Kaltura
 		# Array of allowed flavor assets according to access control limitations and requested tags
 		# 	 
 		attr_accessor :flavor_assets
+		# The duration of the entry in milliseconds
+		# 	 
+		attr_accessor :ms_duration
 		# Array of allowed flavor assets according to access control limitations and requested tags
 		#      
 		attr_accessor :plugin_data
@@ -8810,6 +8813,9 @@ module Kaltura
 		def is_admin=(val)
 			@is_admin = to_b(val)
 		end
+		def ms_duration=(val)
+			@ms_duration = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
@@ -8827,6 +8833,7 @@ module Kaltura
 			self.access_control_messages = KalturaClientBase.object_from_xml(xml_element.elements['accessControlMessages'], 'KalturaString')
 			self.access_control_actions = KalturaClientBase.object_from_xml(xml_element.elements['accessControlActions'], 'KalturaRuleAction')
 			self.flavor_assets = KalturaClientBase.object_from_xml(xml_element.elements['flavorAssets'], 'KalturaFlavorAsset')
+			self.ms_duration = xml_element.elements['msDuration'].text
 			self.plugin_data = KalturaClientBase.object_from_xml(xml_element.elements['pluginData'], 'KalturaPluginData')
 		end
 
@@ -13441,10 +13448,15 @@ module Kaltura
 	end
 
 	class KalturaQuizUserEntryFilter < KalturaQuizUserEntryBaseFilter
+		attr_accessor :is_anonymous
 
+		def is_anonymous=(val)
+			@is_anonymous = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
+			self.is_anonymous = xml_element.elements['isAnonymous'].text
 		end
 
 	end

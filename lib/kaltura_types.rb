@@ -2930,6 +2930,7 @@ module Kaltura
 		attr_accessor :video_constant_bitrate
 		attr_accessor :video_bitrate_tolerance
 		attr_accessor :watermark_data
+		attr_accessor :is_encrypted
 		attr_accessor :clip_offset
 		attr_accessor :clip_duration
 
@@ -3008,6 +3009,9 @@ module Kaltura
 		def video_bitrate_tolerance=(val)
 			@video_bitrate_tolerance = val.to_i
 		end
+		def is_encrypted=(val)
+			@is_encrypted = val.to_i
+		end
 		def clip_offset=(val)
 			@clip_offset = val.to_i
 		end
@@ -3050,6 +3054,7 @@ module Kaltura
 			self.video_constant_bitrate = xml_element.elements['videoConstantBitrate'].text
 			self.video_bitrate_tolerance = xml_element.elements['videoBitrateTolerance'].text
 			self.watermark_data = xml_element.elements['watermarkData'].text
+			self.is_encrypted = xml_element.elements['isEncrypted'].text
 			self.clip_offset = xml_element.elements['clipOffset'].text
 			self.clip_duration = xml_element.elements['clipDuration'].text
 		end
@@ -9656,7 +9661,7 @@ module Kaltura
 		attr_accessor :score
 
 		def score=(val)
-			@score = val.to_i
+			@score = val.to_f
 		end
 
 		def from_xml(xml_element)

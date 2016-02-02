@@ -68,6 +68,21 @@ module Kaltura
 
 	end
 
+	class KalturaEntryTranscriptAssetSearchItem < KalturaSearchItem
+		attr_accessor :content_like
+		attr_accessor :content_multi_like_or
+		attr_accessor :content_multi_like_and
+
+
+		def from_xml(xml_element)
+			super
+			self.content_like = xml_element.elements['contentLike'].text
+			self.content_multi_like_or = xml_element.elements['contentMultiLikeOr'].text
+			self.content_multi_like_and = xml_element.elements['contentMultiLikeAnd'].text
+		end
+
+	end
+
 	class KalturaTranscriptAssetListResponse < KalturaListResponse
 		attr_accessor :objects
 

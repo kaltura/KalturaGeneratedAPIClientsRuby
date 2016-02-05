@@ -3821,7 +3821,9 @@ module Kaltura
 		attr_accessor :root_entry_id_in
 		attr_accessor :parent_entry_id_equal
 		attr_accessor :entitled_users_edit_match_and
+		attr_accessor :entitled_users_edit_match_or
 		attr_accessor :entitled_users_publish_match_and
+		attr_accessor :entitled_users_publish_match_or
 		attr_accessor :tags_name_multi_like_or
 		attr_accessor :tags_admin_tags_multi_like_or
 		attr_accessor :tags_admin_tags_name_multi_like_or
@@ -3966,7 +3968,9 @@ module Kaltura
 			self.root_entry_id_in = xml_element.elements['rootEntryIdIn'].text
 			self.parent_entry_id_equal = xml_element.elements['parentEntryIdEqual'].text
 			self.entitled_users_edit_match_and = xml_element.elements['entitledUsersEditMatchAnd'].text
+			self.entitled_users_edit_match_or = xml_element.elements['entitledUsersEditMatchOr'].text
 			self.entitled_users_publish_match_and = xml_element.elements['entitledUsersPublishMatchAnd'].text
+			self.entitled_users_publish_match_or = xml_element.elements['entitledUsersPublishMatchOr'].text
 			self.tags_name_multi_like_or = xml_element.elements['tagsNameMultiLikeOr'].text
 			self.tags_admin_tags_multi_like_or = xml_element.elements['tagsAdminTagsMultiLikeOr'].text
 			self.tags_admin_tags_name_multi_like_or = xml_element.elements['tagsAdminTagsNameMultiLikeOr'].text
@@ -12256,14 +12260,19 @@ module Kaltura
 
 	class KalturaUserEntryFilter < KalturaUserEntryBaseFilter
 		attr_accessor :user_id_equal_current
+		attr_accessor :is_anonymous
 
 		def user_id_equal_current=(val)
 			@user_id_equal_current = val.to_i
+		end
+		def is_anonymous=(val)
+			@is_anonymous = val.to_i
 		end
 
 		def from_xml(xml_element)
 			super
 			self.user_id_equal_current = xml_element.elements['userIdEqualCurrent'].text
+			self.is_anonymous = xml_element.elements['isAnonymous'].text
 		end
 
 	end
@@ -13453,15 +13462,10 @@ module Kaltura
 	end
 
 	class KalturaQuizUserEntryFilter < KalturaQuizUserEntryBaseFilter
-		attr_accessor :is_anonymous
 
-		def is_anonymous=(val)
-			@is_anonymous = val.to_i
-		end
 
 		def from_xml(xml_element)
 			super
-			self.is_anonymous = xml_element.elements['isAnonymous'].text
 		end
 
 	end

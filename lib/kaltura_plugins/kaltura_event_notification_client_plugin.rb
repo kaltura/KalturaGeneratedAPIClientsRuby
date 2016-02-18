@@ -38,6 +38,7 @@ module Kaltura
 	class KalturaEventNotificationEventObjectType
 		AD_CUE_POINT = "adCuePointEventNotifications.AdCuePoint"
 		ANNOTATION = "annotationEventNotifications.Annotation"
+		ATTACHMENT_ASSET = "attachmentAssetEventNotifications.AttachmentAsset"
 		CAPTION_ASSET = "captionAssetEventNotifications.CaptionAsset"
 		CODE_CUE_POINT = "codeCuePointEventNotifications.CodeCuePoint"
 		DISTRIBUTION_PROFILE = "contentDistributionEventNotifications.DistributionProfile"
@@ -46,6 +47,7 @@ module Kaltura
 		DROP_FOLDER = "dropFolderEventNotifications.DropFolder"
 		DROP_FOLDER_FILE = "dropFolderEventNotifications.DropFolderFile"
 		METADATA = "metadataEventNotifications.Metadata"
+		TRANSCRIPT_ASSET = "transcriptAssetEventNotifications.TranscriptAsset"
 		ENTRY = "1"
 		CATEGORY = "2"
 		ASSET = "3"

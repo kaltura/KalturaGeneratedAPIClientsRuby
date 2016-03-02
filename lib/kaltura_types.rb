@@ -6730,6 +6730,7 @@ module Kaltura
 		# Addes the HTML5 script line to the widget's embed code
 		# 	 
 		attr_accessor :add_embed_html5support
+		attr_accessor :roles
 
 		def partner_id=(val)
 			@partner_id = val.to_i
@@ -6773,6 +6774,7 @@ module Kaltura
 			self.enforce_entitlement = xml_element.elements['enforceEntitlement'].text
 			self.privacy_context = xml_element.elements['privacyContext'].text
 			self.add_embed_html5support = xml_element.elements['addEmbedHtml5Support'].text
+			self.roles = xml_element.elements['roles'].text
 		end
 
 	end

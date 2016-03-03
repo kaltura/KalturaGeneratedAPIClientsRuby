@@ -1267,10 +1267,17 @@ module Kaltura
 	end
 
 	class KalturaDistributionDeleteJobData < KalturaDistributionJobData
+		# Flag signifying that the associated distribution item should not be moved to 'removed' status
+		# 	 
+		attr_accessor :keep_distribution_item
 
+		def keep_distribution_item=(val)
+			@keep_distribution_item = to_b(val)
+		end
 
 		def from_xml(xml_element)
 			super
+			self.keep_distribution_item = xml_element.elements['keepDistributionItem'].text
 		end
 
 	end

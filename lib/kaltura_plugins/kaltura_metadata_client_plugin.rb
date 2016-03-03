@@ -446,6 +446,7 @@ module Kaltura
 	class KalturaMetadataBaseFilter < KalturaRelatedFilter
 		attr_accessor :partner_id_equal
 		attr_accessor :metadata_profile_id_equal
+		attr_accessor :metadata_profile_id_in
 		attr_accessor :metadata_profile_version_equal
 		attr_accessor :metadata_profile_version_greater_than_or_equal
 		attr_accessor :metadata_profile_version_less_than_or_equal
@@ -508,6 +509,7 @@ module Kaltura
 			super
 			self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
 			self.metadata_profile_id_equal = xml_element.elements['metadataProfileIdEqual'].text
+			self.metadata_profile_id_in = xml_element.elements['metadataProfileIdIn'].text
 			self.metadata_profile_version_equal = xml_element.elements['metadataProfileVersionEqual'].text
 			self.metadata_profile_version_greater_than_or_equal = xml_element.elements['metadataProfileVersionGreaterThanOrEqual'].text
 			self.metadata_profile_version_less_than_or_equal = xml_element.elements['metadataProfileVersionLessThanOrEqual'].text

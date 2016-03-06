@@ -6254,6 +6254,7 @@ module Kaltura
 
 	class KalturaThumbnailServeOptions < KalturaObjectBase
 		attr_accessor :download
+		attr_accessor :referrer
 
 		def download=(val)
 			@download = to_b(val)
@@ -6262,6 +6263,7 @@ module Kaltura
 		def from_xml(xml_element)
 			super
 			self.download = xml_element.elements['download'].text
+			self.referrer = xml_element.elements['referrer'].text
 		end
 
 	end

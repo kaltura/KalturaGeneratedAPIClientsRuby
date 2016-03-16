@@ -277,6 +277,19 @@ module Kaltura
 			end
 			return client.do_queue()
 		end
+
+		# Update cuePoint status by id
+		# 	 
+		def update_status(id, status)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'status', status)
+			client.queue_service_action_call('annotation_annotation', 'updateStatus', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
 	end
 
 	class KalturaClient < KalturaClientBase

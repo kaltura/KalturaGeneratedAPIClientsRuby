@@ -1667,6 +1667,35 @@ module Kaltura
 		end
 	end
 
+	# Base class for entry server node
+	#  
+	class KalturaEntryServerNodeService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		def list(filter, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('entryservernode', 'list', 'KalturaEntryServerNodeListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		def get(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('entryservernode', 'get', 'KalturaEntryServerNode', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+	end
+
 	# Manage file assets
 	#  
 	class KalturaFileAssetService < KalturaServiceBase
@@ -5669,6 +5698,14 @@ module Kaltura
 			return @email_ingestion_profile_service
 		end
 		
+		attr_reader :entry_server_node_service
+		def entry_server_node_service
+			if (@entry_server_node_service == nil)
+				@entry_server_node_service = KalturaEntryServerNodeService.new(self)
+			end
+			return @entry_server_node_service
+		end
+		
 		attr_reader :file_asset_service
 		def file_asset_service
 			if (@file_asset_service == nil)
@@ -5983,7 +6020,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:16-03-16'
+			self.client_tag = 'ruby:16-03-18'
 			self.api_version = '3.3.0'
 		end
 		

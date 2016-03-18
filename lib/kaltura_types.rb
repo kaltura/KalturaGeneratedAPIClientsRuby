@@ -2553,6 +2553,51 @@ module Kaltura
 
 	end
 
+	class KalturaEntryServerNode < KalturaObjectBase
+		# unique auto-generated identifier
+		# 	 
+		attr_accessor :id
+		attr_accessor :entry_id
+		attr_accessor :server_node_id
+		attr_accessor :partner_id
+		attr_accessor :created_at
+		attr_accessor :updated_at
+		attr_accessor :status
+		attr_accessor :server_type
+
+		def id=(val)
+			@id = val.to_i
+		end
+		def server_node_id=(val)
+			@server_node_id = val.to_i
+		end
+		def partner_id=(val)
+			@partner_id = val.to_i
+		end
+		def created_at=(val)
+			@created_at = val.to_i
+		end
+		def updated_at=(val)
+			@updated_at = val.to_i
+		end
+		def status=(val)
+			@status = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			self.id = xml_element.elements['id'].text
+			self.entry_id = xml_element.elements['entryId'].text
+			self.server_node_id = xml_element.elements['serverNodeId'].text
+			self.partner_id = xml_element.elements['partnerId'].text
+			self.created_at = xml_element.elements['createdAt'].text
+			self.updated_at = xml_element.elements['updatedAt'].text
+			self.status = xml_element.elements['status'].text
+			self.server_type = xml_element.elements['serverType'].text
+		end
+
+	end
+
 	# Configuration for extended item in the Kaltura MRSS feeds
 	#  
 	class KalturaObjectIdentifier < KalturaObjectBase
@@ -3283,7 +3328,7 @@ module Kaltura
 		# 	 
 		attr_accessor :current_broadcast_start_time
 		attr_accessor :recording_options
-		# the status of the entry of type LiveEntryStatus
+		# the status of the entry of type EntryServerNodeStatus
 		# 	 
 		attr_accessor :live_status
 
@@ -3700,6 +3745,44 @@ module Kaltura
 			self.encoding_ip2 = xml_element.elements['encodingIP2'].text
 			self.stream_password = xml_element.elements['streamPassword'].text
 			self.stream_username = xml_element.elements['streamUsername'].text
+		end
+
+	end
+
+	class KalturaLiveStreamParams < KalturaObjectBase
+		# Bit rate of the stream. (i.e. 900)
+		# 	 
+		attr_accessor :bitrate
+		# flavor asset id
+		# 	 
+		attr_accessor :flavor_id
+		# Stream's width
+		# 	 
+		attr_accessor :width
+		# Stream's height
+		# 	 
+		attr_accessor :height
+		# Live stream's codec
+		# 	 
+		attr_accessor :codec
+
+		def bitrate=(val)
+			@bitrate = val.to_i
+		end
+		def width=(val)
+			@width = val.to_i
+		end
+		def height=(val)
+			@height = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			self.bitrate = xml_element.elements['bitrate'].text
+			self.flavor_id = xml_element.elements['flavorId'].text
+			self.width = xml_element.elements['width'].text
+			self.height = xml_element.elements['height'].text
+			self.codec = xml_element.elements['codec'].text
 		end
 
 	end
@@ -8137,9 +8220,6 @@ module Kaltura
 		# 	 
 		attr_accessor :dest_data_file_path
 
-		def media_server_index=(val)
-			@media_server_index = val.to_i
-		end
 		def file_index=(val)
 			@file_index = val.to_i
 		end
@@ -8904,6 +8984,17 @@ module Kaltura
 
 	end
 
+	class KalturaEntryServerNodeListResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaEntryServerNode')
+		end
+
+	end
+
 	# A boolean representation to return evaluated dynamic value
 	#  
 	class KalturaBooleanField < KalturaBooleanValue
@@ -9200,6 +9291,19 @@ module Kaltura
 		def from_xml(xml_element)
 			super
 			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaLiveChannelSegment')
+		end
+
+	end
+
+	class KalturaLiveEntryServerNode < KalturaEntryServerNode
+		# parameters of the stream we got
+		# 	 
+		attr_accessor :streams
+
+
+		def from_xml(xml_element)
+			super
+			self.streams = KalturaClientBase.object_from_xml(xml_element.elements['streams'], 'KalturaLiveStreamParams')
 		end
 
 	end
@@ -11458,6 +11562,66 @@ module Kaltura
 
 	end
 
+	class KalturaEntryServerNodeBaseFilter < KalturaRelatedFilter
+		attr_accessor :id_equal
+		attr_accessor :id_in
+		attr_accessor :id_not_in
+		attr_accessor :entry_id_equal
+		attr_accessor :entry_id_in
+		attr_accessor :entry_id_not_in
+		attr_accessor :server_node_id_equal
+		attr_accessor :server_node_id_in
+		attr_accessor :server_node_id_not_in
+		attr_accessor :created_at_less_than_or_equal
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
+		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :status_equal
+		attr_accessor :server_type_equal
+
+		def id_equal=(val)
+			@id_equal = val.to_i
+		end
+		def server_node_id_equal=(val)
+			@server_node_id_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
+		end
+		def updated_at_greater_than_or_equal=(val)
+			@updated_at_greater_than_or_equal = val.to_i
+		end
+		def status_equal=(val)
+			@status_equal = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			self.id_equal = xml_element.elements['idEqual'].text
+			self.id_in = xml_element.elements['idIn'].text
+			self.id_not_in = xml_element.elements['idNotIn'].text
+			self.entry_id_equal = xml_element.elements['entryIdEqual'].text
+			self.entry_id_in = xml_element.elements['entryIdIn'].text
+			self.entry_id_not_in = xml_element.elements['entryIdNotIn'].text
+			self.server_node_id_equal = xml_element.elements['serverNodeIdEqual'].text
+			self.server_node_id_in = xml_element.elements['serverNodeIdIn'].text
+			self.server_node_id_not_in = xml_element.elements['serverNodeIdNotIn'].text
+			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			self.status_equal = xml_element.elements['statusEqual'].text
+			self.server_type_equal = xml_element.elements['serverTypeEqual'].text
+		end
+
+	end
+
 	class KalturaExtractMediaJobData < KalturaConvartableJobData
 		attr_accessor :flavor_asset_id
 
@@ -12698,6 +12862,15 @@ module Kaltura
 		def from_xml(xml_element)
 			super
 			self.attribute = xml_element.elements['attribute'].text
+		end
+
+	end
+
+	class KalturaEntryServerNodeFilter < KalturaEntryServerNodeBaseFilter
+
+
+		def from_xml(xml_element)
+			super
 		end
 
 	end

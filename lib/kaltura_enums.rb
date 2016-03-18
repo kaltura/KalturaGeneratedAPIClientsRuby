@@ -186,6 +186,13 @@ module Kaltura
 		AUTO_APPROVED = 6
 	end
 
+	class KalturaEntryServerNodeStatus
+		STOPPED = 0
+		PLAYABLE = 1
+		BROADCASTING = 2
+		AUTHENTICATED = 3
+	end
+
 	class KalturaFeatureStatusType
 		LOCK_CATEGORY = 1
 		CATEGORY = 2
@@ -262,12 +269,6 @@ module Kaltura
 		ALLOW_LIST = 1
 	end
 
-	class KalturaLiveEntryStatus
-		STOPPED = 0
-		PLAYABLE = 1
-		BROADCASTING = 2
-	end
-
 	class KalturaLivePublishStatus
 		DISABLED = 0
 		ENABLED = 1
@@ -294,11 +295,6 @@ module Kaltura
 		SENT = 2
 		ERROR = 3
 		QUEUED = 4
-	end
-
-	class KalturaMediaServerIndex
-		PRIMARY = 0
-		SECONDARY = 1
 	end
 
 	class KalturaMediaType
@@ -1473,6 +1469,18 @@ module Kaltura
 		READY_BUT_NOT_APPROVED = "2"
 		NOT_READY_AND_NOT_APPROVED = "3"
 		FAILED = "4"
+	end
+
+	class KalturaEntryServerNodeOrderBy
+		CREATED_AT_ASC = "+createdAt"
+		UPDATED_AT_ASC = "+updatedAt"
+		CREATED_AT_DESC = "-createdAt"
+		UPDATED_AT_DESC = "-updatedAt"
+	end
+
+	class KalturaEntryServerNodeType
+		LIVE_PRIMARY = "0"
+		LIVE_BACKUP = "1"
 	end
 
 	class KalturaEntryStatus

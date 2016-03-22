@@ -59,6 +59,9 @@ module Kaltura
 		# Api key for service provider
 		# 	 
 		attr_accessor :password
+		# Base url for service provider
+		# 	 
+		attr_accessor :base_url
 		# Transcript content language
 		# 	 
 		attr_accessor :spoken_language
@@ -79,6 +82,7 @@ module Kaltura
 			self.fidelity = xml_element.elements['fidelity'].text
 			self.username = xml_element.elements['username'].text
 			self.password = xml_element.elements['password'].text
+			self.base_url = xml_element.elements['baseUrl'].text
 			self.spoken_language = xml_element.elements['spokenLanguage'].text
 			self.replace_media_content = xml_element.elements['replaceMediaContent'].text
 		end

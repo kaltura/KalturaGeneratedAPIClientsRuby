@@ -9523,9 +9523,6 @@ module Kaltura
 		# All entries from all child categories will be moved as well
 		#      
 		attr_accessor :move_from_children
-		# Entries won't be deleted from the source entry
-		#      
-		attr_accessor :copy_only
 		# Destination categories fallback ids
 		#      
 		attr_accessor :dest_category_full_ids
@@ -9548,9 +9545,6 @@ module Kaltura
 		def move_from_children=(val)
 			@move_from_children = to_b(val)
 		end
-		def copy_only=(val)
-			@copy_only = to_b(val)
-		end
 
 		def from_xml(xml_element)
 			super
@@ -9560,7 +9554,6 @@ module Kaltura
 			self.last_moved_category_page_index = xml_element.elements['lastMovedCategoryPageIndex'].text
 			self.last_moved_category_entry_page_index = xml_element.elements['lastMovedCategoryEntryPageIndex'].text
 			self.move_from_children = xml_element.elements['moveFromChildren'].text
-			self.copy_only = xml_element.elements['copyOnly'].text
 			self.dest_category_full_ids = xml_element.elements['destCategoryFullIds'].text
 		end
 

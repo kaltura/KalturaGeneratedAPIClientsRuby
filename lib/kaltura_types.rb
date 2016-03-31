@@ -2906,11 +2906,13 @@ module Kaltura
 		# The name of the downloaded file
 		# 	 
 		attr_accessor :file_name
+		attr_accessor :referrer
 
 
 		def from_xml(xml_element)
 			super
 			self.file_name = xml_element.elements['fileName'].text
+			self.referrer = xml_element.elements['referrer'].text
 		end
 
 	end

@@ -585,9 +585,9 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		def update_status(partner_id, status, reason)
+		def update_status(id, status, reason)
 			kparams = {}
-			client.add_param(kparams, 'partnerId', partner_id)
+			client.add_param(kparams, 'id', id)
 			client.add_param(kparams, 'status', status)
 			client.add_param(kparams, 'reason', reason)
 			client.queue_service_action_call('systempartner_systempartner', 'updateStatus', '', kparams)

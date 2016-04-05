@@ -11572,6 +11572,7 @@ module Kaltura
 		attr_accessor :updated_at_less_than_or_equal
 		attr_accessor :updated_at_greater_than_or_equal
 		attr_accessor :status_equal
+		attr_accessor :status_in
 		attr_accessor :server_type_equal
 
 		def id_equal=(val)
@@ -11595,6 +11596,9 @@ module Kaltura
 		def status_equal=(val)
 			@status_equal = val.to_i
 		end
+		def status_in=(val)
+			@status_in = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
@@ -11612,6 +11616,7 @@ module Kaltura
 			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
 			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
 			self.status_equal = xml_element.elements['statusEqual'].text
+			self.status_in = xml_element.elements['statusIn'].text
 			self.server_type_equal = xml_element.elements['serverTypeEqual'].text
 		end
 

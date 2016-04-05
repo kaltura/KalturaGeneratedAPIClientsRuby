@@ -1674,7 +1674,7 @@ module Kaltura
 			super(client)
 		end
 
-		def list(filter, pager=KalturaNotImplemented)
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
 			client.add_param(kparams, 'pager', pager)

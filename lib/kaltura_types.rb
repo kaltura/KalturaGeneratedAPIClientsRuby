@@ -744,6 +744,9 @@ module Kaltura
 		# Comma seperated string of the capabilities of the entry. Any capability needed can be added to this list.
 		# 	 
 		attr_accessor :capabilities
+		# Template entry id 
+		# 	 
+		attr_accessor :template_entry_id
 
 		def partner_id=(val)
 			@partner_id = val.to_i
@@ -838,6 +841,7 @@ module Kaltura
 			self.entitled_users_edit = xml_element.elements['entitledUsersEdit'].text
 			self.entitled_users_publish = xml_element.elements['entitledUsersPublish'].text
 			self.capabilities = xml_element.elements['capabilities'].text
+			self.template_entry_id = xml_element.elements['templateEntryId'].text
 		end
 
 	end
@@ -7744,6 +7748,8 @@ module Kaltura
 		attr_accessor :entitled_users_edit
 		attr_accessor :entitled_users_publish
 		attr_accessor :owner_id
+		attr_accessor :reference_id
+		attr_accessor :template_entry_id
 
 		def conversion_profile_id=(val)
 			@conversion_profile_id = val.to_i
@@ -7787,6 +7793,8 @@ module Kaltura
 			self.entitled_users_edit = xml_element.elements['entitledUsersEdit'].text
 			self.entitled_users_publish = xml_element.elements['entitledUsersPublish'].text
 			self.owner_id = xml_element.elements['ownerId'].text
+			self.reference_id = xml_element.elements['referenceId'].text
+			self.template_entry_id = xml_element.elements['templateEntryId'].text
 		end
 
 	end

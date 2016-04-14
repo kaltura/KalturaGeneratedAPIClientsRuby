@@ -1053,14 +1053,6 @@ module Kaltura
 	class KalturaBulkUploadOrderBy
 	end
 
-	class KalturaBulkUploadResultObjectType
-		ENTRY = "1"
-		CATEGORY = "2"
-		USER = "3"
-		CATEGORY_USER = "4"
-		CATEGORY_ENTRY = "5"
-	end
-
 	class KalturaBulkUploadResultStatus
 		ERROR = "1"
 		OK = "2"

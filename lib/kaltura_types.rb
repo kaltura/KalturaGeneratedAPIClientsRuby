@@ -3284,14 +3284,24 @@ module Kaltura
 	#  
 	class KalturaLiveEntryRecordingOptions < KalturaObjectBase
 		attr_accessor :should_copy_entitlement
+		attr_accessor :should_copy_scheduling
+		attr_accessor :should_copy_thumbnail
 
 		def should_copy_entitlement=(val)
 			@should_copy_entitlement = val.to_i
+		end
+		def should_copy_scheduling=(val)
+			@should_copy_scheduling = val.to_i
+		end
+		def should_copy_thumbnail=(val)
+			@should_copy_thumbnail = val.to_i
 		end
 
 		def from_xml(xml_element)
 			super
 			self.should_copy_entitlement = xml_element.elements['shouldCopyEntitlement'].text
+			self.should_copy_scheduling = xml_element.elements['shouldCopyScheduling'].text
+			self.should_copy_thumbnail = xml_element.elements['shouldCopyThumbnail'].text
 		end
 
 	end

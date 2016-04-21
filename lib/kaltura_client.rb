@@ -2493,10 +2493,13 @@ module Kaltura
 
 		# Authenticate live-stream entry against stream token and partner limitations
 		# 	 
-		def authenticate(entry_id, token)
+		def authenticate(entry_id, token, hostname=KalturaNotImplemented, media_server_index=KalturaNotImplemented, application_name=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
 			client.add_param(kparams, 'token', token)
+			client.add_param(kparams, 'hostname', hostname)
+			client.add_param(kparams, 'mediaServerIndex', media_server_index)
+			client.add_param(kparams, 'applicationName', application_name)
 			client.queue_service_action_call('livestream', 'authenticate', 'KalturaLiveStreamEntry', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -6020,7 +6023,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:16-04-20'
+			self.client_tag = 'ruby:16-04-21'
 			self.api_version = '3.3.0'
 		end
 		

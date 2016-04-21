@@ -3742,7 +3742,13 @@ module Kaltura
 		# The broadcast username
 		# 	 
 		attr_accessor :stream_username
+		# The Streams primary server node id 
+		# 	 
+		attr_accessor :primary_server_node_id
 
+		def primary_server_node_id=(val)
+			@primary_server_node_id = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
@@ -3761,6 +3767,7 @@ module Kaltura
 			self.encoding_ip2 = xml_element.elements['encodingIP2'].text
 			self.stream_password = xml_element.elements['streamPassword'].text
 			self.stream_username = xml_element.elements['streamUsername'].text
+			self.primary_server_node_id = xml_element.elements['primaryServerNodeId'].text
 		end
 
 	end

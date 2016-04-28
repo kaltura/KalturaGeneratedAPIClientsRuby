@@ -56,9 +56,6 @@ module Kaltura
 		attr_accessor :full_url
 		attr_accessor :status
 
-		def id=(val)
-			@id = val.to_i
-		end
 		def created_at=(val)
 			@created_at = val.to_i
 		end

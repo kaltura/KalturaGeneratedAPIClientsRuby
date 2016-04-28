@@ -69,6 +69,7 @@ module Kaltura
 
 	class KalturaLikeBaseFilter < KalturaRelatedFilter
 		attr_accessor :entry_id_equal
+		attr_accessor :entry_id_in
 		attr_accessor :user_id_equal
 		attr_accessor :created_at_greater_than_or_equal
 		attr_accessor :created_at_less_than_or_equal
@@ -83,6 +84,7 @@ module Kaltura
 		def from_xml(xml_element)
 			super
 			self.entry_id_equal = xml_element.elements['entryIdEqual'].text
+			self.entry_id_in = xml_element.elements['entryIdIn'].text
 			self.user_id_equal = xml_element.elements['userIdEqual'].text
 			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
 			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text

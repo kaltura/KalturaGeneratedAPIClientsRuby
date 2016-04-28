@@ -47,6 +47,11 @@ module Kaltura
 		DELETED = 3
 	end
 
+	class KalturaScheduleEventType
+		RECORD = 1
+		LIVE_STREAM = 2
+	end
+
 	class KalturaScheduleResourceStatus
 		DISABLED = 1
 		ACTIVE = 2

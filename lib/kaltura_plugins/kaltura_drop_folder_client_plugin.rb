@@ -101,6 +101,7 @@ module Kaltura
 
 	class KalturaDropFolderFileHandlerType
 		XML = "dropFolderXmlBulkUpload.XML"
+		ICAL = "scheduleDropFolder.ICAL"
 		CONTENT = "1"
 	end
 

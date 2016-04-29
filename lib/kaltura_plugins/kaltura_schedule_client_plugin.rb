@@ -1039,6 +1039,20 @@ module Kaltura
 			end
 			return client.do_queue()
 		end
+
+		# Add new bulk upload batch job
+		# 	 
+		def add_from_bulk_upload(file_data, bulk_upload_data=KalturaNotImplemented)
+			kparams = {}
+			kfiles = {}
+			client.add_param(kfiles, 'fileData', file_data)
+			client.add_param(kparams, 'bulkUploadData', bulk_upload_data)
+			client.queue_service_action_call('schedule_scheduleevent', 'addFromBulkUpload', 'KalturaBulkUpload', kparams, kfiles)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
 	end
 
 	# ScheduleResource service lets you create and manage schedule events
@@ -1104,6 +1118,20 @@ module Kaltura
 			client.add_param(kparams, 'filter', filter)
 			client.add_param(kparams, 'pager', pager)
 			client.queue_service_action_call('schedule_scheduleresource', 'list', 'KalturaScheduleResourceListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Add new bulk upload batch job
+		# 	 
+		def add_from_bulk_upload(file_data, bulk_upload_data=KalturaNotImplemented)
+			kparams = {}
+			kfiles = {}
+			client.add_param(kfiles, 'fileData', file_data)
+			client.add_param(kparams, 'bulkUploadData', bulk_upload_data)
+			client.queue_service_action_call('schedule_scheduleresource', 'addFromBulkUpload', 'KalturaBulkUpload', kparams, kfiles)
 			if (client.is_multirequest)
 				return nil
 			end

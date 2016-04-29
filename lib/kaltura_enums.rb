@@ -1034,6 +1034,7 @@ module Kaltura
 	end
 
 	class KalturaBulkUploadAction
+		CANCEL = "scheduleBulkUpload.CANCEL"
 		ADD = "1"
 		UPDATE = "2"
 		DELETE = "3"
@@ -1043,6 +1044,8 @@ module Kaltura
 	end
 
 	class KalturaBulkUploadObjectType
+		SCHEDULE_EVENT = "scheduleBulkUpload.SCHEDULE_EVENT"
+		SCHEDULE_RESOURCE = "scheduleBulkUpload.SCHEDULE_RESOURCE"
 		ENTRY = "1"
 		CATEGORY = "2"
 		USER = "3"
@@ -1064,6 +1067,8 @@ module Kaltura
 		FILTER = "bulkUploadFilter.FILTER"
 		XML = "bulkUploadXml.XML"
 		DROP_FOLDER_XML = "dropFolderXmlBulkUpload.DROP_FOLDER_XML"
+		ICAL = "scheduleBulkUpload.ICAL"
+		DROP_FOLDER_ICAL = "scheduleDropFolder.DROP_FOLDER_ICAL"
 	end
 
 	class KalturaCategoryEntryAdvancedOrderBy

@@ -234,6 +234,26 @@ module Kaltura
 		end
 	end
 
+	# api for getting analytics data
+	#  
+	class KalturaAnalyticsService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		# report query action allows to get a analytics data for specific query dimensions, metrics and filters.
+		# 	 
+		def query(filter)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.queue_service_action_call('analytics', 'query', 'KalturaReportResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+	end
+
 	# Manage application authentication tokens
 	#  
 	class KalturaAppTokenService < KalturaServiceBase
@@ -5605,6 +5625,14 @@ module Kaltura
 			return @admin_user_service
 		end
 		
+		attr_reader :analytics_service
+		def analytics_service
+			if (@analytics_service == nil)
+				@analytics_service = KalturaAnalyticsService.new(self)
+			end
+			return @analytics_service
+		end
+		
 		attr_reader :app_token_service
 		def app_token_service
 			if (@app_token_service == nil)
@@ -6023,7 +6051,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:16-05-03'
+			self.client_tag = 'ruby:16-05-04'
 			self.api_version = '3.3.0'
 		end
 		

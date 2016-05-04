@@ -187,9 +187,15 @@ module Kaltura
 		# Indicates that this rule is enough and no need to continue checking the rest of the rules 
 		# 	 
 		attr_accessor :stop_processing
+		# Indicates if we should force ks validation for admin ks users as well
+		# 	 
+		attr_accessor :force_admin_validation
 
 		def stop_processing=(val)
 			@stop_processing = to_b(val)
+		end
+		def force_admin_validation=(val)
+			@force_admin_validation = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -201,6 +207,7 @@ module Kaltura
 			self.conditions = KalturaClientBase.object_from_xml(xml_element.elements['conditions'], 'KalturaCondition')
 			self.contexts = KalturaClientBase.object_from_xml(xml_element.elements['contexts'], 'KalturaContextTypeHolder')
 			self.stop_processing = xml_element.elements['stopProcessing'].text
+			self.force_admin_validation = xml_element.elements['forceAdminValidation'].text
 		end
 
 	end
@@ -314,6 +321,59 @@ module Kaltura
 			self.time = xml_element.elements['time'].text
 			self.contexts = KalturaClientBase.object_from_xml(xml_element.elements['contexts'], 'KalturaAccessControlContextTypeHolder')
 			self.hashes = KalturaClientBase.object_from_xml(xml_element.elements['hashes'], 'KalturaKeyValue')
+		end
+
+	end
+
+	class KalturaReportFilter < KalturaObjectBase
+		# The dimension whose values should be filtered
+		# 	 
+		attr_accessor :dimension
+		# The (comma separated) values to include in the filter
+		# 	 
+		attr_accessor :values
+
+
+		def from_xml(xml_element)
+			super
+			self.dimension = xml_element.elements['dimension'].text
+			self.values = xml_element.elements['values'].text
+		end
+
+	end
+
+	class KalturaAnalyticsFilter < KalturaObjectBase
+		# Query start time (in local time)
+		# 	 
+		attr_accessor :from_time
+		# Query end time (in local time)
+		# 	 
+		attr_accessor :to_time
+		# Comma separated metrics list
+		# 	 
+		attr_accessor :metrics
+		# Timezone offset from UTC (in minutes)
+		# 	 
+		attr_accessor :utc_offset
+		# Comma separated dimensions list
+		# 	 
+		attr_accessor :dimensions
+		# Array of filters
+		# 	 
+		attr_accessor :filters
+
+		def utc_offset=(val)
+			@utc_offset = val.to_f
+		end
+
+		def from_xml(xml_element)
+			super
+			self.from_time = xml_element.elements['from_time'].text
+			self.to_time = xml_element.elements['to_time'].text
+			self.metrics = xml_element.elements['metrics'].text
+			self.utc_offset = xml_element.elements['utcOffset'].text
+			self.dimensions = xml_element.elements['dimensions'].text
+			self.filters = KalturaClientBase.object_from_xml(xml_element.elements['filters'], 'KalturaReportFilter')
 		end
 
 	end
@@ -10663,6 +10723,20 @@ module Kaltura
 
 	end
 
+	class KalturaUrlTokenizerVnpt < KalturaUrlTokenizer
+		attr_accessor :tokenization_format
+
+		def tokenization_format=(val)
+			@tokenization_format = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			self.tokenization_format = xml_element.elements['tokenizationFormat'].text
+		end
+
+	end
+
 	class KalturaUserAgentRestriction < KalturaBaseRestriction
 		# User agent restriction type (Allow or deny)
 		# 	 
@@ -11585,63 +11659,45 @@ module Kaltura
 	end
 
 	class KalturaEntryServerNodeBaseFilter < KalturaRelatedFilter
-		attr_accessor :id_equal
-		attr_accessor :id_in
-		attr_accessor :id_not_in
 		attr_accessor :entry_id_equal
 		attr_accessor :entry_id_in
-		attr_accessor :entry_id_not_in
 		attr_accessor :server_node_id_equal
-		attr_accessor :server_node_id_in
-		attr_accessor :server_node_id_not_in
-		attr_accessor :created_at_less_than_or_equal
 		attr_accessor :created_at_greater_than_or_equal
-		attr_accessor :updated_at_less_than_or_equal
+		attr_accessor :created_at_less_than_or_equal
 		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
 		attr_accessor :status_equal
 		attr_accessor :status_in
 		attr_accessor :server_type_equal
 
-		def id_equal=(val)
-			@id_equal = val.to_i
-		end
 		def server_node_id_equal=(val)
 			@server_node_id_equal = val.to_i
-		end
-		def created_at_less_than_or_equal=(val)
-			@created_at_less_than_or_equal = val.to_i
 		end
 		def created_at_greater_than_or_equal=(val)
 			@created_at_greater_than_or_equal = val.to_i
 		end
-		def updated_at_less_than_or_equal=(val)
-			@updated_at_less_than_or_equal = val.to_i
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
 		end
 		def updated_at_greater_than_or_equal=(val)
 			@updated_at_greater_than_or_equal = val.to_i
 		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
+		end
 		def status_equal=(val)
 			@status_equal = val.to_i
-		end
-		def status_in=(val)
-			@status_in = val.to_i
 		end
 
 		def from_xml(xml_element)
 			super
-			self.id_equal = xml_element.elements['idEqual'].text
-			self.id_in = xml_element.elements['idIn'].text
-			self.id_not_in = xml_element.elements['idNotIn'].text
 			self.entry_id_equal = xml_element.elements['entryIdEqual'].text
 			self.entry_id_in = xml_element.elements['entryIdIn'].text
-			self.entry_id_not_in = xml_element.elements['entryIdNotIn'].text
 			self.server_node_id_equal = xml_element.elements['serverNodeIdEqual'].text
-			self.server_node_id_in = xml_element.elements['serverNodeIdIn'].text
-			self.server_node_id_not_in = xml_element.elements['serverNodeIdNotIn'].text
-			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
 			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
-			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
 			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
 			self.status_equal = xml_element.elements['statusEqual'].text
 			self.status_in = xml_element.elements['statusIn'].text
 			self.server_type_equal = xml_element.elements['serverTypeEqual'].text
@@ -12278,15 +12334,6 @@ module Kaltura
 		def from_xml(xml_element)
 			super
 			self.resources = KalturaClientBase.object_from_xml(xml_element.elements['resources'], 'KalturaRemoteStorageResource')
-		end
-
-	end
-
-	class KalturaReportFilter < KalturaReportBaseFilter
-
-
-		def from_xml(xml_element)
-			super
 		end
 
 	end

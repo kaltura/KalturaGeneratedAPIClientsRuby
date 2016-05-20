@@ -37,13 +37,10 @@ module Kaltura
 	end
 
 	# Represents the Bulk upload job data for xml bulk upload
-	#  
 	class KalturaBulkUploadCsvJobData < KalturaBulkUploadJobData
 		# The version of the csv file
-		# 	 
 		attr_accessor :csv_version
 		# Array containing CSV headers
-		# 	 
 		attr_accessor :columns
 
 		def csv_version=(val)

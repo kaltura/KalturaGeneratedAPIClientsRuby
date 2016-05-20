@@ -72,29 +72,21 @@ module Kaltura
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
-	# Wrapper for sent notifications 
-	#  
+	# Wrapper for sent notifications
 	class KalturaHttpNotification < KalturaObjectBase
 		# Object that triggered the notification
-		# 	 
 		attr_accessor :object
 		# Object type that triggered the notification
-		# 	 
 		attr_accessor :event_object_type
 		# ID of the batch job that execute the notification
-		# 	 
 		attr_accessor :event_notification_job_id
 		# ID of the template that triggered the notification
-		# 	 
 		attr_accessor :template_id
 		# Name of the template that triggered the notification
-		# 	 
 		attr_accessor :template_name
 		# System name of the template that triggered the notification
-		# 	 
 		attr_accessor :template_system_name
 		# Ecent type that triggered the notification
-		# 	 
 		attr_accessor :event_type
 
 		def event_notification_job_id=(val)
@@ -127,7 +119,6 @@ module Kaltura
 	end
 
 	# If this class used as the template data, the fields will be taken from the content parameters
-	#  
 	class KalturaHttpNotificationDataFields < KalturaHttpNotificationData
 
 
@@ -149,19 +140,14 @@ module Kaltura
 	end
 
 	# Evaluates PHP statement, depends on the execution context
-	#  
 	class KalturaHttpNotificationObjectData < KalturaHttpNotificationData
 		# Kaltura API object type
-		# 	 
 		attr_accessor :api_object_type
 		# Data format
-		# 	 
 		attr_accessor :format
 		# Ignore null attributes during serialization
-		# 	 
 		attr_accessor :ignore_null
 		# PHP code
-		# 	 
 		attr_accessor :code
 
 		def format=(val)
@@ -183,60 +169,42 @@ module Kaltura
 
 	class KalturaHttpNotificationTemplate < KalturaEventNotificationTemplate
 		# Remote server URL
-		# 	 
 		attr_accessor :url
 		# Request method.
-		# 	 
 		attr_accessor :method
 		# Data to send.
-		# 	 
 		attr_accessor :data
 		# The maximum number of seconds to allow cURL functions to execute.
-		# 	 
 		attr_accessor :timeout
 		# The number of seconds to wait while trying to connect.
 		# 	 Must be larger than zero.
-		# 	 
 		attr_accessor :connect_timeout
 		# A username to use for the connection.
-		# 	 
 		attr_accessor :username
 		# A password to use for the connection.
-		# 	 
 		attr_accessor :password
 		# The HTTP authentication method to use.
-		# 	 
 		attr_accessor :authentication_method
 		# The SSL version (2 or 3) to use.
 		# 	 By default PHP will try to determine this itself, although in some cases this must be set manually.
-		# 	 
 		attr_accessor :ssl_version
 		# SSL certificate to verify the peer with.
-		# 	 
 		attr_accessor :ssl_certificate
 		# The format of the certificate.
-		# 	 
 		attr_accessor :ssl_certificate_type
 		# The password required to use the certificate.
-		# 	 
 		attr_accessor :ssl_certificate_password
 		# The identifier for the crypto engine of the private SSL key specified in ssl key.
-		# 	 
 		attr_accessor :ssl_engine
 		# The identifier for the crypto engine used for asymmetric crypto operations.
-		# 	 
 		attr_accessor :ssl_engine_default
 		# The key type of the private SSL key specified in ssl key - PEM / DER / ENG.
-		# 	 
 		attr_accessor :ssl_key_type
 		# Private SSL key.
-		# 	 
 		attr_accessor :ssl_key
 		# The secret password needed to use the private SSL key specified in ssl key.
-		# 	 
 		attr_accessor :ssl_key_password
 		# Adds a e-mail custom header
-		# 	 
 		attr_accessor :custom_headers
 
 		def method=(val)
@@ -281,63 +249,44 @@ module Kaltura
 
 	class KalturaHttpNotificationDispatchJobData < KalturaEventNotificationDispatchJobData
 		# Remote server URL
-		# 	 
 		attr_accessor :url
 		# Request method.
-		# 	 
 		attr_accessor :method
 		# Data to send.
-		# 	 
 		attr_accessor :data
 		# The maximum number of seconds to allow cURL functions to execute.
-		# 	 
 		attr_accessor :timeout
 		# The number of seconds to wait while trying to connect.
 		# 	 Must be larger than zero.
-		# 	 
 		attr_accessor :connect_timeout
 		# A username to use for the connection.
-		# 	 
 		attr_accessor :username
 		# A password to use for the connection.
-		# 	 
 		attr_accessor :password
 		# The HTTP authentication method to use.
-		# 	 
 		attr_accessor :authentication_method
 		# The SSL version (2 or 3) to use.
 		# 	 By default PHP will try to determine this itself, although in some cases this must be set manually.
-		# 	 
 		attr_accessor :ssl_version
 		# SSL certificate to verify the peer with.
-		# 	 
 		attr_accessor :ssl_certificate
 		# The format of the certificate.
-		# 	 
 		attr_accessor :ssl_certificate_type
 		# The password required to use the certificate.
-		# 	 
 		attr_accessor :ssl_certificate_password
 		# The identifier for the crypto engine of the private SSL key specified in ssl key.
-		# 	 
 		attr_accessor :ssl_engine
 		# The identifier for the crypto engine used for asymmetric crypto operations.
-		# 	 
 		attr_accessor :ssl_engine_default
 		# The key type of the private SSL key specified in ssl key - PEM / DER / ENG.
-		# 	 
 		attr_accessor :ssl_key_type
 		# Private SSL key.
-		# 	 
 		attr_accessor :ssl_key
 		# The secret password needed to use the private SSL key specified in ssl key.
-		# 	 
 		attr_accessor :ssl_key_password
 		# Adds a e-mail custom header
-		# 	 
 		attr_accessor :custom_headers
 		# The secret to sign the notification with
-		# 	 
 		attr_accessor :sign_secret
 
 		def method=(val)

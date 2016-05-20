@@ -79,7 +79,6 @@ module Kaltura
 		attr_accessor :triggered_at
 		attr_accessor :tags
 		# Start time in milliseconds
-		# 	 
 		attr_accessor :start_time
 		attr_accessor :user_id
 		attr_accessor :partner_data
@@ -276,14 +275,12 @@ module Kaltura
 
 
 	# Cue Point service
-	#  
 	class KalturaCuePointService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Allows you to add an cue point object associated with an entry
-		# 	 
 		def add(cue_point)
 			kparams = {}
 			client.add_param(kparams, 'cuePoint', cue_point)
@@ -295,7 +292,6 @@ module Kaltura
 		end
 
 		# Allows you to add multiple cue points objects by uploading XML that contains multiple cue point definitions
-		# 	 
 		def add_from_bulk(file_data)
 			kparams = {}
 			kfiles = {}
@@ -308,7 +304,6 @@ module Kaltura
 		end
 
 		# Download multiple cue points objects as XML definitions
-		# 	 
 		def serve_bulk(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -318,7 +313,6 @@ module Kaltura
 		end
 
 		# Retrieve an CuePoint object by id
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -330,7 +324,6 @@ module Kaltura
 		end
 
 		# List cue point objects by filter and pager
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -343,7 +336,6 @@ module Kaltura
 		end
 
 		# count cue point objects by filter
-		# 	 
 		def count(filter=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -354,8 +346,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Update cue point by id 
-		# 	 
+		# Update cue point by id
 		def update(id, cue_point)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -368,7 +359,6 @@ module Kaltura
 		end
 
 		# delete cue point by id, and delete all children cue points
-		# 	 
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -380,7 +370,6 @@ module Kaltura
 		end
 
 		# Update cuePoint status by id
-		# 	 
 		def update_status(id, status)
 			kparams = {}
 			client.add_param(kparams, 'id', id)

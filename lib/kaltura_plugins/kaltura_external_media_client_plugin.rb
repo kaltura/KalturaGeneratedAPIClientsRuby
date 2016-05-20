@@ -71,10 +71,8 @@ module Kaltura
 
 	class KalturaExternalMediaEntry < KalturaMediaEntry
 		# The source type of the external media
-		# 	 
 		attr_accessor :external_source_type
 		# Comma separated asset params ids that exists for this external media entry
-		# 	 
 		attr_accessor :asset_params_ids
 
 
@@ -125,14 +123,12 @@ module Kaltura
 
 
 	# External media service lets you upload and manage embed codes and external playable content
-	#  
 	class KalturaExternalMediaService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add external media entry
-		# 	 
 		def add(entry)
 			kparams = {}
 			client.add_param(kparams, 'entry', entry)
@@ -144,7 +140,6 @@ module Kaltura
 		end
 
 		# Get external media entry by ID.
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -156,7 +151,6 @@ module Kaltura
 		end
 
 		# Update external media entry. Only the properties that were set will be updated.
-		# 	 
 		def update(id, entry)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -169,7 +163,6 @@ module Kaltura
 		end
 
 		# Delete a external media entry.
-		# 	 
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -181,7 +174,6 @@ module Kaltura
 		end
 
 		# List media entries by filter with paging support.
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -194,7 +186,6 @@ module Kaltura
 		end
 
 		# Count media entries by filter.
-		# 	 
 		def count(filter=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)

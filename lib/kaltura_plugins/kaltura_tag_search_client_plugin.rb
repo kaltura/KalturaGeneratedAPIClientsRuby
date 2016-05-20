@@ -123,7 +123,6 @@ module Kaltura
 
 
 	# Search object tags
-	#  
 	class KalturaTagService < KalturaServiceBase
 		def initialize(client)
 			super(client)
@@ -141,7 +140,6 @@ module Kaltura
 		end
 
 		# Action goes over all tags with instanceCount==0 and checks whether they need to be removed from the DB. Returns number of removed tags.
-		#      
 		def delete_pending()
 			kparams = {}
 			client.queue_service_action_call('tagsearch_tag', 'deletePending', 'int', kparams)

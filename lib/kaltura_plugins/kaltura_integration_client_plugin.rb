@@ -61,11 +61,9 @@ module Kaltura
 		attr_accessor :callback_notification_url
 		attr_accessor :provider_type
 		# Additional data that relevant for the provider only
-		# 	 
 		attr_accessor :provider_data
 		attr_accessor :trigger_type
 		# Additional data that relevant for the trigger only
-		# 	 
 		attr_accessor :trigger_data
 
 
@@ -82,14 +80,12 @@ module Kaltura
 
 
 	# Integration service lets you dispatch integration tasks
-	#  
 	class KalturaIntegrationService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Dispatch integration task
-		# 	 
 		def dispatch(data, object_type, object_id)
 			kparams = {}
 			client.add_param(kparams, 'data', data)

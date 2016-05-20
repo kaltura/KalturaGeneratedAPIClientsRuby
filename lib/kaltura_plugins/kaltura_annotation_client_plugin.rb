@@ -51,25 +51,18 @@ module Kaltura
 		attr_accessor :parent_id
 		attr_accessor :text
 		# End time in milliseconds
-		# 	 
 		attr_accessor :end_time
 		# Duration in milliseconds
-		# 	 
 		attr_accessor :duration
 		# Depth in the tree
-		# 	 
 		attr_accessor :depth
 		# Number of all descendants
-		# 	 
 		attr_accessor :children_count
 		# Number of children, first generation only.
-		# 	 
 		attr_accessor :direct_children_count
 		# Is the annotation public.
-		# 	 
 		attr_accessor :is_public
 		# Should the cue point get indexed on the entry.
-		# 	 
 		attr_accessor :searchable_on_entry
 
 		def end_time=(val)
@@ -175,14 +168,12 @@ module Kaltura
 
 
 	# Annotation service - Video Annotation
-	#  
 	class KalturaAnnotationService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Allows you to add an annotation object associated with an entry
-		# 	 
 		def add(annotation)
 			kparams = {}
 			client.add_param(kparams, 'annotation', annotation)
@@ -194,7 +185,6 @@ module Kaltura
 		end
 
 		# Update annotation by id
-		# 	 
 		def update(id, annotation)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -207,7 +197,6 @@ module Kaltura
 		end
 
 		# List annotation objects by filter and pager
-		# 	
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -220,7 +209,6 @@ module Kaltura
 		end
 
 		# Allows you to add multiple cue points objects by uploading XML that contains multiple cue point definitions
-		# 	 
 		def add_from_bulk(file_data)
 			kparams = {}
 			kfiles = {}
@@ -233,7 +221,6 @@ module Kaltura
 		end
 
 		# Download multiple cue points objects as XML definitions
-		# 	 
 		def serve_bulk(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -243,7 +230,6 @@ module Kaltura
 		end
 
 		# Retrieve an CuePoint object by id
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -255,7 +241,6 @@ module Kaltura
 		end
 
 		# count cue point objects by filter
-		# 	 
 		def count(filter=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -267,7 +252,6 @@ module Kaltura
 		end
 
 		# delete cue point by id, and delete all children cue points
-		# 	 
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -279,7 +263,6 @@ module Kaltura
 		end
 
 		# Update cuePoint status by id
-		# 	 
 		def update_status(id, status)
 			kparams = {}
 			client.add_param(kparams, 'id', id)

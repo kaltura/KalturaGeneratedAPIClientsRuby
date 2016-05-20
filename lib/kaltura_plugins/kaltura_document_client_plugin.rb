@@ -86,10 +86,8 @@ module Kaltura
 
 	class KalturaDocumentEntry < KalturaBaseEntry
 		# The type of the document
-		# 	 
 		attr_accessor :document_type
 		# Comma separated asset params ids that exists for this media entry
-		# 	 
 		attr_accessor :asset_params_ids
 
 		def document_type=(val)
@@ -442,14 +440,12 @@ module Kaltura
 
 
 	# Document service lets you upload and manage document files
-	#  
 	class KalturaDocumentsService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add new document entry after the specific document file was uploaded and the upload token id exists
-		# 	 
 		def add_from_uploaded_file(document_entry, upload_token_id)
 			kparams = {}
 			client.add_param(kparams, 'documentEntry', document_entry)
@@ -462,7 +458,6 @@ module Kaltura
 		end
 
 		# Copy entry into new entry
-		# 	 
 		def add_from_entry(source_entry_id, document_entry=KalturaNotImplemented, source_flavor_params_id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'sourceEntryId', source_entry_id)
@@ -476,7 +471,6 @@ module Kaltura
 		end
 
 		# Copy flavor asset into new entry
-		# 	 
 		def add_from_flavor_asset(source_flavor_asset_id, document_entry=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'sourceFlavorAssetId', source_flavor_asset_id)
@@ -489,7 +483,6 @@ module Kaltura
 		end
 
 		# Convert entry
-		# 	 
 		def convert(entry_id, conversion_profile_id=KalturaNotImplemented, dynamic_conversion_attributes=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -503,7 +496,6 @@ module Kaltura
 		end
 
 		# Get document entry by ID.
-		# 	 
 		def get(entry_id, version=-1)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -516,7 +508,6 @@ module Kaltura
 		end
 
 		# Update document entry. Only the properties that were set will be updated.
-		# 	 
 		def update(entry_id, document_entry)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -529,7 +520,6 @@ module Kaltura
 		end
 
 		# Delete a document entry.
-		# 	 
 		def delete(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -541,7 +531,6 @@ module Kaltura
 		end
 
 		# List document entries by filter with paging support.
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -553,8 +542,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Upload a document file to Kaltura, then the file can be used to create a document entry. 
-		# 	 
+		# Upload a document file to Kaltura, then the file can be used to create a document entry.
 		def upload(file_data)
 			kparams = {}
 			kfiles = {}
@@ -567,8 +555,7 @@ module Kaltura
 		end
 
 		# This will queue a batch job for converting the document file to swf
-		# 	 Returns the URL where the new swf will be available 
-		# 	 
+		# 	 Returns the URL where the new swf will be available
 		def convert_ppt_to_swf(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -580,7 +567,6 @@ module Kaltura
 		end
 
 		# Serves the file content
-		# 	 
 		def serve(entry_id, flavor_asset_id=KalturaNotImplemented, force_proxy=false)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -591,7 +577,6 @@ module Kaltura
 		end
 
 		# Serves the file content
-		# 	 
 		def serve_by_flavor_params_id(entry_id, flavor_params_id=KalturaNotImplemented, force_proxy=false)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -602,7 +587,6 @@ module Kaltura
 		end
 
 		# Replace content associated with the given document entry.
-		# 	 
 		def update_content(entry_id, resource, conversion_profile_id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -616,7 +600,6 @@ module Kaltura
 		end
 
 		# Approves document replacement
-		# 	 
 		def approve_replace(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -628,7 +611,6 @@ module Kaltura
 		end
 
 		# Cancels document replacement
-		# 	 
 		def cancel_replace(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)

@@ -34,13 +34,10 @@ module Kaltura
 
 	class KalturaLike < KalturaObjectBase
 		# The id of the entry that the like belongs to
-		# 	 
 		attr_accessor :entry_id
 		# The id of user that the like belongs to
-		# 	 
 		attr_accessor :user_id
 		# The date of the like's creation
-		# 	 
 		attr_accessor :created_at
 
 		def created_at=(val)
@@ -103,7 +100,6 @@ module Kaltura
 
 
 	# Allows user to 'like' or 'unlike' and entry
-	#  
 	class KalturaLikeService < KalturaServiceBase
 		def initialize(client)
 			super(client)

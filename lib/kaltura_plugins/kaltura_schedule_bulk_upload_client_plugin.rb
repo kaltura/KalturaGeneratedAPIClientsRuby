@@ -68,10 +68,8 @@ module Kaltura
 	end
 
 	# Represents the Bulk upload job data for iCal bulk upload
-	#  
 	class KalturaBulkUploadICalJobData < KalturaBulkUploadJobData
 		# The type of the events that ill be created by this upload
-		# 	 
 		attr_accessor :events_type
 
 		def events_type=(val)

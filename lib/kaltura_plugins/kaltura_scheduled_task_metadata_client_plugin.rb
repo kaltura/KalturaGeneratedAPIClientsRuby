@@ -33,13 +33,10 @@ module Kaltura
 
 	class KalturaExecuteMetadataXsltObjectTask < KalturaObjectTask
 		# Metadata profile id to lookup the metadata object
-		# 	 
 		attr_accessor :metadata_profile_id
 		# Metadata object type to lookup the metadata object
-		# 	 
 		attr_accessor :metadata_object_type
 		# The XSLT to execute
-		# 	 
 		attr_accessor :xslt
 
 		def metadata_profile_id=(val)

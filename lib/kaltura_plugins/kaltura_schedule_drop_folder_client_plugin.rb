@@ -33,7 +33,6 @@ module Kaltura
 
 	class KalturaDropFolderICalBulkUploadFileHandlerConfig < KalturaDropFolderFileHandlerConfig
 		# The type of the events that ill be created by this upload
-		# 	 
 		attr_accessor :events_type
 
 		def events_type=(val)

@@ -31,13 +31,10 @@ require File.dirname(__FILE__) + '/kaltura_bulk_upload_client_plugin.rb'
 module Kaltura
 
 	# Represents the Bulk service input for filter bulk upload
-	#  
 	class KalturaBulkServiceFilterData < KalturaBulkServiceData
-		# Filter for extracting the objects list to upload 
-		# 	 
+		# Filter for extracting the objects list to upload
 		attr_accessor :filter
 		# Template object for new object creation
-		# 	 
 		attr_accessor :template_object
 
 
@@ -50,13 +47,10 @@ module Kaltura
 	end
 
 	# Represents the Bulk upload job data for filter bulk upload
-	#  
 	class KalturaBulkUploadFilterJobData < KalturaBulkUploadJobData
-		# Filter for extracting the objects list to upload 
-		# 	 
+		# Filter for extracting the objects list to upload
 		attr_accessor :filter
 		# Template object for new object creation
-		# 	 
 		attr_accessor :template_object
 
 

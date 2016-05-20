@@ -49,15 +49,6 @@ module Kaltura
 		CONVERT_WHEN_MISSING = 2
 	end
 
-	class KalturaAssetStatus
-		ERROR = -1
-		QUEUED = 0
-		READY = 2
-		DELETED = 3
-		IMPORTING = 7
-		EXPORTING = 9
-	end
-
 	class KalturaBatchJobErrorTypes
 		APP = 0
 		RUNTIME = 1
@@ -616,13 +607,6 @@ module Kaltura
 		DISABLED = 1
 		AUTOMATIC = 2
 		MANUAL = 3
-	end
-
-	class KalturaStorageServePriority
-		KALTURA_ONLY = 1
-		KALTURA_FIRST = 2
-		EXTERNAL_FIRST = 3
-		EXTERNAL_ONLY = 4
 	end
 
 	class KalturaSyndicationFeedStatus
@@ -1441,9 +1425,6 @@ module Kaltura
 		MEDIUM = "medium"
 		NOT_AVAILABLE = "notavailable"
 		SHORT = "short"
-	end
-
-	class KalturaDynamicEnum
 	end
 
 	class KalturaEdgeServerNodeOrderBy

@@ -57,7 +57,6 @@ module Kaltura
 	end
 
 	# A representation of an optional answer for question cue point
-	#  
 	class KalturaOptionalAnswer < KalturaObjectBase
 		attr_accessor :key
 		attr_accessor :text
@@ -84,7 +83,6 @@ module Kaltura
 	class KalturaQuiz < KalturaObjectBase
 		attr_accessor :version
 		# Array of key value ui related objects
-		# 	 
 		attr_accessor :ui_attributes
 		attr_accessor :show_result_on_answer
 		attr_accessor :show_correct_key_on_answer
@@ -135,7 +133,6 @@ module Kaltura
 		attr_accessor :answer_key
 		attr_accessor :is_correct
 		# Array of string
-		# 	 
 		attr_accessor :correct_answer_keys
 		attr_accessor :explanation
 
@@ -157,7 +154,6 @@ module Kaltura
 
 	class KalturaQuestionCuePoint < KalturaCuePoint
 		# Array of key value answerKey->optionAnswer objects
-		# 	 
 		attr_accessor :optional_answers
 		attr_accessor :hint
 		attr_accessor :question
@@ -201,10 +197,8 @@ module Kaltura
 
 	class KalturaQuizFilter < KalturaRelatedFilter
 		# This filter should be in use for retrieving only a specific quiz entry (identified by its entryId).
-		# 	 
 		attr_accessor :entry_id_equal
 		# This filter should be in use for retrieving few specific quiz entries (string should include comma separated list of entryId strings).
-		# 	 
 		attr_accessor :entry_id_in
 
 
@@ -268,14 +262,12 @@ module Kaltura
 
 
 	# Allows user to handle quizzes
-	#  
 	class KalturaQuizService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Allows to add a quiz to an entry
-		# 	 
 		def add(entry_id, quiz)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -288,7 +280,6 @@ module Kaltura
 		end
 
 		# Allows to update a quiz
-		# 	 
 		def update(entry_id, quiz)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -301,7 +292,6 @@ module Kaltura
 		end
 
 		# Allows to get a quiz
-		# 	 
 		def get(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -313,7 +303,6 @@ module Kaltura
 		end
 
 		# List quiz objects by filter and pager
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -328,7 +317,6 @@ module Kaltura
 		# creates a pdf from quiz object
 		# 	 The Output type defines the file format in which the quiz will be generated
 		# 	 Currently only PDF files are supported
-		# 	 
 		def serve(entry_id, quiz_output_type)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -338,7 +326,6 @@ module Kaltura
 		end
 
 		# sends a with an api request for pdf from quiz object
-		# 	 
 		def get_url(entry_id, quiz_output_type)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)

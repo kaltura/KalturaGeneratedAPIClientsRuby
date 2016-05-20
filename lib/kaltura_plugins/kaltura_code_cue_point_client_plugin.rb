@@ -52,7 +52,6 @@ module Kaltura
 		attr_accessor :description
 		attr_accessor :end_time
 		# Duration in milliseconds
-		# 	 
 		attr_accessor :duration
 
 		def end_time=(val)

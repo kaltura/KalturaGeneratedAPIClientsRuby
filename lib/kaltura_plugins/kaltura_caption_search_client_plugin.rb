@@ -32,10 +32,8 @@ module Kaltura
 
 	class KalturaCaptionAssetItem < KalturaObjectBase
 		# The Caption Asset object
-		# 	 
 		attr_accessor :asset
 		# The entry object
-		# 	 
 		attr_accessor :entry
 		attr_accessor :start_time
 		attr_accessor :end_time
@@ -135,51 +133,7 @@ module Kaltura
 	end
 
 
-	# Search caption asset items
-	#  
-	class KalturaCaptionAssetItemService < KalturaServiceBase
-		def initialize(client)
-			super(client)
-		end
-
-		# Search caption asset items by filter, pager and free text
-		# 	 
-		def search(entry_filter=KalturaNotImplemented, caption_asset_item_filter=KalturaNotImplemented, caption_asset_item_pager=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'entryFilter', entry_filter)
-			client.add_param(kparams, 'captionAssetItemFilter', caption_asset_item_filter)
-			client.add_param(kparams, 'captionAssetItemPager', caption_asset_item_pager)
-			client.queue_service_action_call('captionsearch_captionassetitem', 'search', 'KalturaCaptionAssetItemListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Search caption asset items by filter, pager and free text
-		# 	 
-		def search_entries(entry_filter=KalturaNotImplemented, caption_asset_item_filter=KalturaNotImplemented, caption_asset_item_pager=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'entryFilter', entry_filter)
-			client.add_param(kparams, 'captionAssetItemFilter', caption_asset_item_filter)
-			client.add_param(kparams, 'captionAssetItemPager', caption_asset_item_pager)
-			client.queue_service_action_call('captionsearch_captionassetitem', 'searchEntries', 'KalturaBaseEntryListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-	end
-
 	class KalturaClient < KalturaClientBase
-		attr_reader :caption_asset_item_service
-		def caption_asset_item_service
-			if (@caption_asset_item_service == nil)
-				@caption_asset_item_service = KalturaCaptionAssetItemService.new(self)
-			end
-			return @caption_asset_item_service
-		end
-		
 	end
 
 end

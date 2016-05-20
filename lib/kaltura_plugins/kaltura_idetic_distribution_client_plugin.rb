@@ -26,72 +26,21 @@
 # @ignore
 # ===================================================================================================
 require 'kaltura_client.rb'
-require File.dirname(__FILE__) + '/kaltura_attachment_client_plugin.rb'
+require File.dirname(__FILE__) + '/kaltura_content_distribution_client_plugin.rb'
 
 module Kaltura
 
-	class KalturaTranscriptAssetOrderBy
+	class KalturaIdeticDistributionProfileOrderBy
 		CREATED_AT_ASC = "+createdAt"
-		DELETED_AT_ASC = "+deletedAt"
-		SIZE_ASC = "+size"
 		UPDATED_AT_ASC = "+updatedAt"
 		CREATED_AT_DESC = "-createdAt"
-		DELETED_AT_DESC = "-deletedAt"
-		SIZE_DESC = "-size"
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
-	class KalturaTranscriptAsset < KalturaAttachmentAsset
-		# The accuracy of the transcript - values between 0 and 1
-		attr_accessor :accuracy
-		# Was verified by human or machine
-		attr_accessor :human_verified
-		# The language of the transcript
-		attr_accessor :language
-
-		def accuracy=(val)
-			@accuracy = val.to_f
-		end
-		def human_verified=(val)
-			@human_verified = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			self.accuracy = xml_element.elements['accuracy'].text
-			self.human_verified = xml_element.elements['humanVerified'].text
-			self.language = xml_element.elements['language'].text
-		end
-
+	class KalturaIdeticDistributionProviderOrderBy
 	end
 
-	class KalturaEntryTranscriptAssetSearchItem < KalturaSearchItem
-		attr_accessor :content_like
-		attr_accessor :content_multi_like_or
-		attr_accessor :content_multi_like_and
-
-
-		def from_xml(xml_element)
-			super
-			self.content_like = xml_element.elements['contentLike'].text
-			self.content_multi_like_or = xml_element.elements['contentMultiLikeOr'].text
-			self.content_multi_like_and = xml_element.elements['contentMultiLikeAnd'].text
-		end
-
-	end
-
-	class KalturaTranscriptAssetListResponse < KalturaListResponse
-		attr_accessor :objects
-
-
-		def from_xml(xml_element)
-			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaTranscriptAsset')
-		end
-
-	end
-
-	class KalturaTranscriptAssetBaseFilter < KalturaAttachmentAssetFilter
+	class KalturaIdeticDistributionProvider < KalturaDistributionProvider
 
 
 		def from_xml(xml_element)
@@ -100,7 +49,64 @@ module Kaltura
 
 	end
 
-	class KalturaTranscriptAssetFilter < KalturaTranscriptAssetBaseFilter
+	class KalturaIdeticDistributionJobProviderData < KalturaConfigurableDistributionJobProviderData
+		attr_accessor :thumbnail_url
+		attr_accessor :flavor_asset_url
+
+
+		def from_xml(xml_element)
+			super
+			self.thumbnail_url = xml_element.elements['thumbnailUrl'].text
+			self.flavor_asset_url = xml_element.elements['flavorAssetUrl'].text
+		end
+
+	end
+
+	class KalturaIdeticDistributionProfile < KalturaConfigurableDistributionProfile
+		attr_accessor :ftp_path
+		attr_accessor :username
+		attr_accessor :password
+		attr_accessor :domain
+
+
+		def from_xml(xml_element)
+			super
+			self.ftp_path = xml_element.elements['ftpPath'].text
+			self.username = xml_element.elements['username'].text
+			self.password = xml_element.elements['password'].text
+			self.domain = xml_element.elements['domain'].text
+		end
+
+	end
+
+	class KalturaIdeticDistributionProviderBaseFilter < KalturaDistributionProviderFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaIdeticDistributionProviderFilter < KalturaIdeticDistributionProviderBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaIdeticDistributionProfileBaseFilter < KalturaConfigurableDistributionProfileFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaIdeticDistributionProfileFilter < KalturaIdeticDistributionProfileBaseFilter
 
 
 		def from_xml(xml_element)

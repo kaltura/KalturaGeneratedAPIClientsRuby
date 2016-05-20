@@ -40,22 +40,16 @@ module Kaltura
 
 	class KalturaWowzaMediaServerNode < KalturaMediaServerNode
 		# Wowza Media server app prefix
-		# 	 
 		attr_accessor :app_prefix
 		# Wowza Media server transcoder configuration overide
-		# 	 
 		attr_accessor :transcoder
 		# Wowza Media server GPU index id
-		# 	 
 		attr_accessor :gpu_id
 		# Live service port
-		# 	 
 		attr_accessor :live_service_port
 		# Live service protocol
-		# 	 
 		attr_accessor :live_service_protocol
 		# Wowza media server live service internal domain
-		# 	 
 		attr_accessor :live_service_internal_domain
 
 		def gpu_id=(val)
@@ -95,5 +89,8 @@ module Kaltura
 
 	end
 
+
+	class KalturaClient < KalturaClientBase
+	end
 
 end

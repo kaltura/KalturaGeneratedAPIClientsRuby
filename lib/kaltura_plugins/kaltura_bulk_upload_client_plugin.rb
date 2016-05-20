@@ -31,7 +31,6 @@ module Kaltura
 
 	# This class represents object-specific data passed to the 
 	#  bulk upload job.
-	#  
 	class KalturaBulkServiceData < KalturaObjectBase
 
 
@@ -43,14 +42,12 @@ module Kaltura
 
 
 	# Bulk upload service is used to upload & manage bulk uploads
-	#  
 	class KalturaBulkService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Get bulk upload batch job by id
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -62,7 +59,6 @@ module Kaltura
 		end
 
 		# List bulk upload batch jobs
-		# 	 
 		def list(bulk_upload_filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'bulkUploadFilter', bulk_upload_filter)
@@ -75,7 +71,6 @@ module Kaltura
 		end
 
 		# serve action returns the original file.
-		# 	 
 		def serve(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -84,7 +79,6 @@ module Kaltura
 		end
 
 		# serveLog action returns the log file for the bulk-upload job.
-		# 	 
 		def serve_log(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -93,7 +87,6 @@ module Kaltura
 		end
 
 		# Aborts the bulk upload and all its child jobs
-		# 	 
 		def abort(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)

@@ -57,16 +57,12 @@ module Kaltura
 
 	class KalturaAttachmentAsset < KalturaAsset
 		# The filename of the attachment asset content
-		# 	 
 		attr_accessor :filename
 		# Attachment asset title
-		# 	 
 		attr_accessor :title
 		# The attachment format
-		# 	 
 		attr_accessor :format
 		# The status of the asset
-		# 	 
 		attr_accessor :status
 
 		def status=(val)
@@ -127,14 +123,12 @@ module Kaltura
 
 
 	# Retrieve information and invoke actions on attachment Asset
-	#  
 	class KalturaAttachmentAssetService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add attachment asset
-		#      
 		def add(entry_id, attachment_asset)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -147,7 +141,6 @@ module Kaltura
 		end
 
 		# Update content of attachment asset
-		#      
 		def set_content(id, content_resource)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -160,7 +153,6 @@ module Kaltura
 		end
 
 		# Update attachment asset
-		#      
 		def update(id, attachment_asset)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -173,7 +165,6 @@ module Kaltura
 		end
 
 		# Get download URL for the asset
-		# 	 
 		def get_url(id, storage_id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -186,7 +177,6 @@ module Kaltura
 		end
 
 		# Get remote storage existing paths for the asset
-		# 	 
 		def get_remote_paths(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -198,7 +188,6 @@ module Kaltura
 		end
 
 		# Serves attachment by its id
-		# 	 
 		def serve(attachment_asset_id)
 			kparams = {}
 			client.add_param(kparams, 'attachmentAssetId', attachment_asset_id)
@@ -217,7 +206,6 @@ module Kaltura
 		end
 
 		# List attachment Assets by filter and pager
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)

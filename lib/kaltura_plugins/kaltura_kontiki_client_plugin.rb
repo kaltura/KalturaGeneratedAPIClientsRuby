@@ -49,7 +49,6 @@ module Kaltura
 
 	class KalturaKontikiStorageDeleteJobData < KalturaStorageDeleteJobData
 		# Unique Kontiki MOID for the content uploaded to Kontiki
-		#      
 		attr_accessor :content_moid
 		attr_accessor :service_token
 
@@ -64,10 +63,8 @@ module Kaltura
 
 	class KalturaKontikiStorageExportJobData < KalturaStorageExportJobData
 		# Holds the id of the exported asset
-		# 	 
 		attr_accessor :flavor_asset_id
 		# Unique Kontiki MOID for the content uploaded to Kontiki
-		# 	 
 		attr_accessor :content_moid
 		attr_accessor :service_token
 

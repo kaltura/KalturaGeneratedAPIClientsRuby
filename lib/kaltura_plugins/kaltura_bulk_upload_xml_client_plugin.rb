@@ -31,7 +31,6 @@ require File.dirname(__FILE__) + '/kaltura_bulk_upload_client_plugin.rb'
 module Kaltura
 
 	# Represents the Bulk upload job data for xml bulk upload
-	#  
 	class KalturaBulkUploadXmlJobData < KalturaBulkUploadJobData
 
 

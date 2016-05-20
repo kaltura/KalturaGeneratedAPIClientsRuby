@@ -33,7 +33,6 @@ module Kaltura
 
 	class KalturaDispatchEventNotificationObjectTask < KalturaObjectTask
 		# The event notification template id to dispatch
-		# 	 
 		attr_accessor :event_notification_template_id
 
 		def event_notification_template_id=(val)

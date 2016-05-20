@@ -221,7 +221,6 @@ module Kaltura
 		attr_accessor :dc
 		attr_accessor :path
 		# The ammount of time, in seconds, that should pass so that a file with no change in size we'll be treated as "finished uploading to folder"
-		# 	 
 		attr_accessor :file_size_check_interval
 		attr_accessor :file_delete_policy
 		attr_accessor :auto_file_delete_days
@@ -527,7 +526,6 @@ module Kaltura
 		# 	 The following might be extracted from the file name and used if defined:
 		# 	 - (?P<referenceId>\w+) - will be used as the drop folder file's parsed slug.
 		# 	 - (?P<flavorName>\w+)  - will be used as the drop folder file's parsed flavor.
-		# 	 
 		attr_accessor :slug_regex
 
 		def content_match_policy=(val)
@@ -766,10 +764,8 @@ module Kaltura
 	end
 
 	# Used to ingest media that dropped through drop folder
-	#  
 	class KalturaDropFolderFileResource < KalturaDataCenterContentResource
 		# Id of the drop folder file object
-		# 	 
 		attr_accessor :drop_folder_file_id
 
 		def drop_folder_file_id=(val)
@@ -907,14 +903,12 @@ module Kaltura
 
 
 	# DropFolder service lets you create and manage drop folders
-	#  
 	class KalturaDropFolderService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Allows you to add a new KalturaDropFolder object
-		# 	 
 		def add(drop_folder)
 			kparams = {}
 			client.add_param(kparams, 'dropFolder', drop_folder)
@@ -926,7 +920,6 @@ module Kaltura
 		end
 
 		# Retrieve a KalturaDropFolder object by ID
-		# 	 
 		def get(drop_folder_id)
 			kparams = {}
 			client.add_param(kparams, 'dropFolderId', drop_folder_id)
@@ -938,7 +931,6 @@ module Kaltura
 		end
 
 		# Update an existing KalturaDropFolder object
-		# 	 
 		def update(drop_folder_id, drop_folder)
 			kparams = {}
 			client.add_param(kparams, 'dropFolderId', drop_folder_id)
@@ -951,7 +943,6 @@ module Kaltura
 		end
 
 		# Mark the KalturaDropFolder object as deleted
-		# 	 
 		def delete(drop_folder_id)
 			kparams = {}
 			client.add_param(kparams, 'dropFolderId', drop_folder_id)
@@ -963,7 +954,6 @@ module Kaltura
 		end
 
 		# List KalturaDropFolder objects
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -977,14 +967,12 @@ module Kaltura
 	end
 
 	# DropFolderFile service lets you create and manage drop folder files
-	#  
 	class KalturaDropFolderFileService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Allows you to add a new KalturaDropFolderFile object
-		# 	 
 		def add(drop_folder_file)
 			kparams = {}
 			client.add_param(kparams, 'dropFolderFile', drop_folder_file)
@@ -996,7 +984,6 @@ module Kaltura
 		end
 
 		# Retrieve a KalturaDropFolderFile object by ID
-		# 	 
 		def get(drop_folder_file_id)
 			kparams = {}
 			client.add_param(kparams, 'dropFolderFileId', drop_folder_file_id)
@@ -1008,7 +995,6 @@ module Kaltura
 		end
 
 		# Update an existing KalturaDropFolderFile object
-		# 	 
 		def update(drop_folder_file_id, drop_folder_file)
 			kparams = {}
 			client.add_param(kparams, 'dropFolderFileId', drop_folder_file_id)
@@ -1021,7 +1007,6 @@ module Kaltura
 		end
 
 		# Update status of KalturaDropFolderFile
-		# 	 
 		def update_status(drop_folder_file_id, status)
 			kparams = {}
 			client.add_param(kparams, 'dropFolderFileId', drop_folder_file_id)
@@ -1034,7 +1019,6 @@ module Kaltura
 		end
 
 		# Mark the KalturaDropFolderFile object as deleted
-		# 	 
 		def delete(drop_folder_file_id)
 			kparams = {}
 			client.add_param(kparams, 'dropFolderFileId', drop_folder_file_id)
@@ -1046,7 +1030,6 @@ module Kaltura
 		end
 
 		# List KalturaDropFolderFile objects
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -1059,7 +1042,6 @@ module Kaltura
 		end
 
 		# Set the KalturaDropFolderFile status to ignore (KalturaDropFolderFileStatus::IGNORE)
-		# 	 
 		def ignore(drop_folder_file_id)
 			kparams = {}
 			client.add_param(kparams, 'dropFolderFileId', drop_folder_file_id)

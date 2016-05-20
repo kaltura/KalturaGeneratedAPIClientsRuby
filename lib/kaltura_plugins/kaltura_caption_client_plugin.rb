@@ -60,31 +60,22 @@ module Kaltura
 
 	class KalturaCaptionAsset < KalturaAsset
 		# The Caption Params used to create this Caption Asset
-		# 	 
 		attr_accessor :caption_params_id
 		# The language of the caption asset content
-		# 	 
 		attr_accessor :language
 		# The language of the caption asset content
-		# 	 
 		attr_accessor :language_code
 		# Is default caption asset of the entry
-		# 	 
 		attr_accessor :is_default
 		# Friendly label
-		# 	 
 		attr_accessor :label
 		# The caption format
-		# 	 
 		attr_accessor :format
 		# The status of the asset
-		# 	 
 		attr_accessor :status
 		# The parent id of the asset
-		# 	 
 		attr_accessor :parent_id
 		# The Accuracy of the caption content
-		# 	 
 		attr_accessor :accuracy
 
 		def caption_params_id=(val)
@@ -117,19 +108,14 @@ module Kaltura
 
 	class KalturaCaptionParams < KalturaAssetParams
 		# The language of the caption content
-		# 	 
 		attr_accessor :language
 		# Is default caption asset of the entry
-		# 	 
 		attr_accessor :is_default
 		# Friendly label
-		# 	 
 		attr_accessor :label
 		# The caption format
-		# 	 
 		attr_accessor :format
 		# Id of the caption params or the flavor params to be used as source for the caption creation
-		# 	 
 		attr_accessor :source_params_id
 
 		def is_default=(val)
@@ -249,14 +235,12 @@ module Kaltura
 
 
 	# Retrieve information and invoke actions on caption Asset
-	#  
 	class KalturaCaptionAssetService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add caption asset
-		#      
 		def add(entry_id, caption_asset)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -269,7 +253,6 @@ module Kaltura
 		end
 
 		# Update content of caption asset
-		#      
 		def set_content(id, content_resource)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -282,7 +265,6 @@ module Kaltura
 		end
 
 		# Update caption asset
-		#      
 		def update(id, caption_asset)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -295,7 +277,6 @@ module Kaltura
 		end
 
 		# Serves caption by entry id and thumnail params id
-		# 	 
 		def serve_by_entry_id(entry_id, caption_param_id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -305,7 +286,6 @@ module Kaltura
 		end
 
 		# Get download URL for the asset
-		# 	 
 		def get_url(id, storage_id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -318,7 +298,6 @@ module Kaltura
 		end
 
 		# Get remote storage existing paths for the asset
-		# 	 
 		def get_remote_paths(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -330,7 +309,6 @@ module Kaltura
 		end
 
 		# Serves caption by its id
-		# 	 
 		def serve(caption_asset_id)
 			kparams = {}
 			client.add_param(kparams, 'captionAssetId', caption_asset_id)
@@ -339,7 +317,6 @@ module Kaltura
 		end
 
 		# Serves caption by its id converting it to segmented WebVTT
-		# 	 
 		def serve_web_vtt(caption_asset_id, segment_duration=30, segment_index=KalturaNotImplemented, local_timestamp=10000)
 			kparams = {}
 			client.add_param(kparams, 'captionAssetId', caption_asset_id)
@@ -351,7 +328,6 @@ module Kaltura
 		end
 
 		# Markss the caption as default and removes that mark from all other caption assets of the entry.
-		# 	 
 		def set_as_default(caption_asset_id)
 			kparams = {}
 			client.add_param(kparams, 'captionAssetId', caption_asset_id)
@@ -373,7 +349,6 @@ module Kaltura
 		end
 
 		# List caption Assets by filter and pager
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -397,14 +372,12 @@ module Kaltura
 	end
 
 	# Add & Manage Caption Params
-	#  
 	class KalturaCaptionParamsService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add new Caption Params
-		# 	 
 		def add(caption_params)
 			kparams = {}
 			client.add_param(kparams, 'captionParams', caption_params)
@@ -416,7 +389,6 @@ module Kaltura
 		end
 
 		# Get Caption Params by ID
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -428,7 +400,6 @@ module Kaltura
 		end
 
 		# Update Caption Params by ID
-		# 	 
 		def update(id, caption_params)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -441,7 +412,6 @@ module Kaltura
 		end
 
 		# Delete Caption Params by ID
-		# 	 
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -453,7 +423,6 @@ module Kaltura
 		end
 
 		# List Caption Params by filter with paging support (By default - all system default params will be listed too)
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)

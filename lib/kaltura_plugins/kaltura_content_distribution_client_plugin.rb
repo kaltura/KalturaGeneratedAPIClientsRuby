@@ -191,7 +191,6 @@ module Kaltura
 	end
 
 	# Abstract class for asset distribution condition
-	#  
 	class KalturaAssetDistributionCondition < KalturaObjectBase
 
 
@@ -203,10 +202,8 @@ module Kaltura
 
 	class KalturaAssetDistributionRule < KalturaObjectBase
 		# The validation error description that will be set on the "data" property on KalturaDistributionValidationErrorMissingAsset if rule was not fulfilled
-		# 	 
 		attr_accessor :validation_error
 		# An array of asset distribution conditions
-		# 	 
 		attr_accessor :asset_distribution_conditions
 
 
@@ -221,29 +218,21 @@ module Kaltura
 	class KalturaDistributionFieldConfig < KalturaObjectBase
 		# A value taken from a connector field enum which associates the current configuration to that connector field
 		#      Field enum class should be returned by the provider's getFieldEnumClass function.
-		#      
 		attr_accessor :field_name
 		# A string that will be shown to the user as the field name in error messages related to the current field
-		#      
 		attr_accessor :user_friendly_field_name
 		# An XSLT string that extracts the right value from the Kaltura entry MRSS XML.
 		#      The value of the current connector field will be the one that is returned from transforming the Kaltura entry MRSS XML using this XSLT string.
-		#      
 		attr_accessor :entry_mrss_xslt
 		# Is the field required to have a value for submission ?
-		#      
 		attr_accessor :is_required
 		# Trigger distribution update when this field changes or not ?
-		#      
 		attr_accessor :update_on_change
 		# Entry column or metadata xpath that should trigger an update
-		#      
 		attr_accessor :update_params
 		# Is this field config is the default for the distribution provider?
-		#      
 		attr_accessor :is_default
 		# Is an error on this field going to trigger deletion of distributed content?
-		#      
 		attr_accessor :trigger_delete_on_error
 
 		def is_required=(val)
@@ -303,13 +292,10 @@ module Kaltura
 
 	class KalturaDistributionProfile < KalturaObjectBase
 		# Auto generated unique id
-		# 	 
 		attr_accessor :id
 		# Profile creation date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :created_at
 		# Profile last update date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :updated_at
 		attr_accessor :partner_id
 		attr_accessor :provider_type
@@ -320,43 +306,30 @@ module Kaltura
 		attr_accessor :delete_enabled
 		attr_accessor :report_enabled
 		# Comma separated flavor params ids that should be auto converted
-		# 	 
 		attr_accessor :auto_create_flavors
 		# Comma separated thumbnail params ids that should be auto generated
-		# 	 
 		attr_accessor :auto_create_thumb
 		# Comma separated flavor params ids that should be submitted if ready
-		# 	 
 		attr_accessor :optional_flavor_params_ids
 		# Comma separated flavor params ids that required to be ready before submission
-		# 	 
 		attr_accessor :required_flavor_params_ids
 		# Thumbnail dimensions that should be submitted if ready
-		# 	 
 		attr_accessor :optional_thumb_dimensions
 		# Thumbnail dimensions that required to be readt before submission
-		# 	 
 		attr_accessor :required_thumb_dimensions
 		# Asset Distribution Rules for assets that should be submitted if ready
-		# 	 
 		attr_accessor :optional_asset_distribution_rules
 		# Assets Asset Distribution Rules for assets that are required to be ready before submission
-		# 	 
 		attr_accessor :required_asset_distribution_rules
 		# If entry distribution sunrise not specified that will be the default since entry creation time, in seconds
-		# 	 
 		attr_accessor :sunrise_default_offset
 		# If entry distribution sunset not specified that will be the default since entry creation time, in seconds
-		# 	 
 		attr_accessor :sunset_default_offset
 		# The best external storage to be used to download the asset files from
-		# 	 
 		attr_accessor :recommended_storage_profile_for_download
 		# The best Kaltura data center to be used to download the asset files to
-		# 	 
 		attr_accessor :recommended_dc_for_download
 		# The best Kaltura data center to be used to execute the distribution job
-		# 	 
 		attr_accessor :recommended_dc_for_execute
 
 		def id=(val)
@@ -512,16 +485,12 @@ module Kaltura
 
 	class KalturaEntryDistribution < KalturaObjectBase
 		# Auto generated unique id
-		# 	 
 		attr_accessor :id
 		# Entry distribution creation date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :created_at
 		# Entry distribution last update date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :updated_at
 		# Entry distribution submission date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :submitted_at
 		attr_accessor :entry_id
 		attr_accessor :partner_id
@@ -530,28 +499,20 @@ module Kaltura
 		attr_accessor :sun_status
 		attr_accessor :dirty_status
 		# Comma separated thumbnail asset ids
-		# 	 
 		attr_accessor :thumb_asset_ids
 		# Comma separated flavor asset ids
-		# 	 
 		attr_accessor :flavor_asset_ids
 		# Comma separated asset ids
-		# 	 
 		attr_accessor :asset_ids
 		# Entry distribution publish time as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :sunrise
 		# Entry distribution un-publish time as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :sunset
 		# The id as returned from the distributed destination
-		# 	 
 		attr_accessor :remote_id
 		# The plays as retrieved from the remote destination reports
-		# 	 
 		attr_accessor :plays
 		# The views as retrieved from the remote destination reports
-		# 	 
 		attr_accessor :views
 		attr_accessor :validation_errors
 		attr_accessor :error_type
@@ -695,13 +656,10 @@ module Kaltura
 
 	class KalturaGenericDistributionProviderAction < KalturaObjectBase
 		# Auto generated
-		# 	 
 		attr_accessor :id
 		# Generic distribution provider action creation date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :created_at
 		# Generic distribution provider action last update date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :updated_at
 		attr_accessor :generic_distribution_provider_id
 		attr_accessor :action
@@ -768,13 +726,10 @@ module Kaltura
 
 	class KalturaGenericDistributionProvider < KalturaDistributionProvider
 		# Auto generated
-		# 	 
 		attr_accessor :id
 		# Generic distribution provider creation date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :created_at
 		# Generic distribution provider last update date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :updated_at
 		attr_accessor :partner_id
 		attr_accessor :is_default
@@ -824,14 +779,11 @@ module Kaltura
 	end
 
 	# Defines the condition to match a property and value on core asset object (or one if its inherited objects)
-	#  
 	class KalturaAssetDistributionPropertyCondition < KalturaAssetDistributionCondition
 		# The property name to look for, this will match to a getter on the asset object.
 		# 	 Should be camelCase naming convention (defining "myPropertyName" will look for getMyPropertyName())
-		# 	 
 		attr_accessor :property_name
 		# The value to compare
-		# 	 
 		attr_accessor :property_value
 
 
@@ -858,7 +810,6 @@ module Kaltura
 		attr_accessor :field_config_array
 		attr_accessor :item_xpaths_to_extend
 		# When checking custom XSLT conditions using the fieldConfigArray - address only categories associated with the entry via the categoryEntry object
-		# 	 
 		attr_accessor :use_category_entries
 
 		def use_category_entries=(val)
@@ -882,7 +833,6 @@ module Kaltura
 		attr_accessor :entry_distribution_status
 		attr_accessor :has_entry_distribution_validation_errors
 		# Comma seperated validation error types
-		# 	 
 		attr_accessor :entry_distribution_validation_errors
 
 		def no_distribution_profiles=(val)
@@ -923,21 +873,16 @@ module Kaltura
 		attr_accessor :entry_distribution_id
 		attr_accessor :entry_distribution
 		# Id of the media in the remote system
-		# 	 
 		attr_accessor :remote_id
 		attr_accessor :provider_type
 		# Additional data that relevant for the provider only
-		# 	 
 		attr_accessor :provider_data
 		# The results as returned from the remote destination
-		# 	 
 		attr_accessor :results
 		# The data as sent to the remote destination
-		# 	 
 		attr_accessor :sent_data
 		# Stores array of media files that submitted to the destination site
-		# 	 Could be used later for media update 
-		# 	 
+		# 	 Could be used later for media update
 		attr_accessor :media_files
 
 		def distribution_profile_id=(val)
@@ -1057,7 +1002,6 @@ module Kaltura
 		attr_accessor :validation_error_type
 		# Parameter of the validation error
 		# 	 For example, minimum value for KalturaDistributionValidationErrorType::STRING_TOO_SHORT validation error
-		# 	 
 		attr_accessor :validation_error_param
 
 		def validation_error_type=(val)
@@ -1268,7 +1212,6 @@ module Kaltura
 
 	class KalturaDistributionDeleteJobData < KalturaDistributionJobData
 		# Flag signifying that the associated distribution item should not be moved to 'removed' status
-		# 	 
 		attr_accessor :keep_distribution_item
 
 		def keep_distribution_item=(val)
@@ -1609,14 +1552,12 @@ module Kaltura
 
 
 	# Distribution Profile service
-	#  
 	class KalturaDistributionProfileService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add new Distribution Profile
-		# 	 
 		def add(distribution_profile)
 			kparams = {}
 			client.add_param(kparams, 'distributionProfile', distribution_profile)
@@ -1628,7 +1569,6 @@ module Kaltura
 		end
 
 		# Get Distribution Profile by id
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1640,7 +1580,6 @@ module Kaltura
 		end
 
 		# Update Distribution Profile by id
-		# 	 
 		def update(id, distribution_profile)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1653,7 +1592,6 @@ module Kaltura
 		end
 
 		# Update Distribution Profile status by id
-		# 	 
 		def update_status(id, status)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1666,7 +1604,6 @@ module Kaltura
 		end
 
 		# Delete Distribution Profile by id
-		# 	 
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1678,7 +1615,6 @@ module Kaltura
 		end
 
 		# List all distribution providers
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -1703,14 +1639,12 @@ module Kaltura
 	end
 
 	# Entry Distribution service
-	#  
 	class KalturaEntryDistributionService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add new Entry Distribution
-		# 	 
 		def add(entry_distribution)
 			kparams = {}
 			client.add_param(kparams, 'entryDistribution', entry_distribution)
@@ -1722,7 +1656,6 @@ module Kaltura
 		end
 
 		# Get Entry Distribution by id
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1734,7 +1667,6 @@ module Kaltura
 		end
 
 		# Validates Entry Distribution by id for submission
-		# 	 
 		def validate(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1746,7 +1678,6 @@ module Kaltura
 		end
 
 		# Update Entry Distribution by id
-		# 	 
 		def update(id, entry_distribution)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1759,7 +1690,6 @@ module Kaltura
 		end
 
 		# Delete Entry Distribution by id
-		# 	 
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1771,7 +1701,6 @@ module Kaltura
 		end
 
 		# List all distribution providers
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -1784,7 +1713,6 @@ module Kaltura
 		end
 
 		# Submits Entry Distribution to the remote destination
-		# 	 
 		def submit_add(id, submit_when_ready=false)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1797,7 +1725,6 @@ module Kaltura
 		end
 
 		# Submits Entry Distribution changes to the remote destination
-		# 	 
 		def submit_update(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1809,7 +1736,6 @@ module Kaltura
 		end
 
 		# Submits Entry Distribution report request
-		# 	 
 		def submit_fetch_report(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1821,7 +1747,6 @@ module Kaltura
 		end
 
 		# Deletes Entry Distribution from the remote destination
-		# 	 
 		def submit_delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1833,7 +1758,6 @@ module Kaltura
 		end
 
 		# Retries last submit action
-		# 	 
 		def retry_submit(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1845,7 +1769,6 @@ module Kaltura
 		end
 
 		# Serves entry distribution sent data
-		# 	 
 		def serve_sent_data(id, action_type)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1855,7 +1778,6 @@ module Kaltura
 		end
 
 		# Serves entry distribution returned data
-		# 	 
 		def serve_returned_data(id, action_type)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1866,14 +1788,12 @@ module Kaltura
 	end
 
 	# Distribution Provider service
-	#  
 	class KalturaDistributionProviderService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# List all distribution providers
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -1887,14 +1807,12 @@ module Kaltura
 	end
 
 	# Generic Distribution Provider service
-	#  
 	class KalturaGenericDistributionProviderService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add new Generic Distribution Provider
-		# 	 
 		def add(generic_distribution_provider)
 			kparams = {}
 			client.add_param(kparams, 'genericDistributionProvider', generic_distribution_provider)
@@ -1906,7 +1824,6 @@ module Kaltura
 		end
 
 		# Get Generic Distribution Provider by id
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1918,7 +1835,6 @@ module Kaltura
 		end
 
 		# Update Generic Distribution Provider by id
-		# 	 
 		def update(id, generic_distribution_provider)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1931,7 +1847,6 @@ module Kaltura
 		end
 
 		# Delete Generic Distribution Provider by id
-		# 	 
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1943,7 +1858,6 @@ module Kaltura
 		end
 
 		# List all distribution providers
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -1957,14 +1871,12 @@ module Kaltura
 	end
 
 	# Generic Distribution Provider Actions service
-	#  
 	class KalturaGenericDistributionProviderActionService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add new Generic Distribution Provider Action
-		# 	 
 		def add(generic_distribution_provider_action)
 			kparams = {}
 			client.add_param(kparams, 'genericDistributionProviderAction', generic_distribution_provider_action)
@@ -1976,7 +1888,6 @@ module Kaltura
 		end
 
 		# Add MRSS transform file to generic distribution provider action
-		# 	 
 		def add_mrss_transform(id, xsl_data)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1989,7 +1900,6 @@ module Kaltura
 		end
 
 		# Add MRSS transform file to generic distribution provider action
-		# 	 
 		def add_mrss_transform_from_file(id, xsl_file)
 			kparams = {}
 			kfiles = {}
@@ -2003,7 +1913,6 @@ module Kaltura
 		end
 
 		# Add MRSS validate file to generic distribution provider action
-		# 	 
 		def add_mrss_validate(id, xsd_data)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -2016,7 +1925,6 @@ module Kaltura
 		end
 
 		# Add MRSS validate file to generic distribution provider action
-		# 	 
 		def add_mrss_validate_from_file(id, xsd_file)
 			kparams = {}
 			kfiles = {}
@@ -2030,7 +1938,6 @@ module Kaltura
 		end
 
 		# Add results transform file to generic distribution provider action
-		# 	 
 		def add_results_transform(id, transform_data)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -2043,7 +1950,6 @@ module Kaltura
 		end
 
 		# Add MRSS transform file to generic distribution provider action
-		# 	 
 		def add_results_transform_from_file(id, transform_file)
 			kparams = {}
 			kfiles = {}
@@ -2057,7 +1963,6 @@ module Kaltura
 		end
 
 		# Get Generic Distribution Provider Action by id
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -2069,7 +1974,6 @@ module Kaltura
 		end
 
 		# Get Generic Distribution Provider Action by provider id
-		# 	 
 		def get_by_provider_id(generic_distribution_provider_id, action_type)
 			kparams = {}
 			client.add_param(kparams, 'genericDistributionProviderId', generic_distribution_provider_id)
@@ -2082,7 +1986,6 @@ module Kaltura
 		end
 
 		# Update Generic Distribution Provider Action by provider id
-		# 	 
 		def update_by_provider_id(generic_distribution_provider_id, action_type, generic_distribution_provider_action)
 			kparams = {}
 			client.add_param(kparams, 'genericDistributionProviderId', generic_distribution_provider_id)
@@ -2096,7 +1999,6 @@ module Kaltura
 		end
 
 		# Update Generic Distribution Provider Action by id
-		# 	 
 		def update(id, generic_distribution_provider_action)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -2109,7 +2011,6 @@ module Kaltura
 		end
 
 		# Delete Generic Distribution Provider Action by id
-		# 	 
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -2121,7 +2022,6 @@ module Kaltura
 		end
 
 		# Delete Generic Distribution Provider Action by provider id
-		# 	 
 		def delete_by_provider_id(generic_distribution_provider_id, action_type)
 			kparams = {}
 			client.add_param(kparams, 'genericDistributionProviderId', generic_distribution_provider_id)
@@ -2134,7 +2034,6 @@ module Kaltura
 		end
 
 		# List all distribution providers
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)

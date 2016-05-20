@@ -168,6 +168,17 @@ module Kaltura
 
 	end
 
+	class KalturaFileSyncListResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaFileSync')
+		end
+
+	end
+
 	class KalturaFileSyncBaseFilter < KalturaFilter
 		attr_accessor :partner_id_equal
 		attr_accessor :file_object_type_equal
@@ -289,17 +300,6 @@ module Kaltura
 
 	end
 
-	class KalturaFileSyncListResponse < KalturaListResponse
-		attr_accessor :objects
-
-
-		def from_xml(xml_element)
-			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaFileSync')
-		end
-
-	end
-
 	class KalturaFileSyncFilter < KalturaFileSyncBaseFilter
 		attr_accessor :current_dc
 
@@ -314,5 +314,8 @@ module Kaltura
 
 	end
 
+
+	class KalturaClient < KalturaClientBase
+	end
 
 end

@@ -115,11 +115,9 @@ module Kaltura
 
 	class KalturaEventNotificationParameter < KalturaObjectBase
 		# The key in the subject and body to be replaced with the dynamic value
-		# 	 
 		attr_accessor :key
 		attr_accessor :description
 		# The dynamic value to be placed in the final output
-		# 	 
 		attr_accessor :value
 
 
@@ -143,25 +141,18 @@ module Kaltura
 		attr_accessor :created_at
 		attr_accessor :updated_at
 		# Define that the template could be dispatched manually from the API
-		# 	 
 		attr_accessor :manual_dispatch_enabled
 		# Define that the template could be dispatched automatically by the system
-		# 	 
 		attr_accessor :automatic_dispatch_enabled
 		# Define the event that should trigger this notification
-		# 	 
 		attr_accessor :event_type
 		# Define the object that raied the event that should trigger this notification
-		# 	 
 		attr_accessor :event_object_type
 		# Define the conditions that cause this notification to be triggered
-		# 	 
 		attr_accessor :event_conditions
 		# Define the content dynamic parameters
-		# 	 
 		attr_accessor :content_parameters
 		# Define the content dynamic parameters
-		# 	 
 		attr_accessor :user_parameters
 
 		def id=(val)
@@ -210,7 +201,6 @@ module Kaltura
 
 	class KalturaEventFieldCondition < KalturaCondition
 		# The field to be evaluated at runtime
-		# 	 
 		attr_accessor :field
 
 
@@ -224,7 +214,6 @@ module Kaltura
 	class KalturaEventNotificationArrayParameter < KalturaEventNotificationParameter
 		attr_accessor :values
 		# Used to restrict the values to close list
-		# 	 
 		attr_accessor :allowed_values
 
 
@@ -239,7 +228,6 @@ module Kaltura
 	class KalturaEventNotificationDispatchJobData < KalturaJobData
 		attr_accessor :template_id
 		# Define the content dynamic parameters
-		# 	 
 		attr_accessor :content_parameters
 
 		def template_id=(val)
@@ -338,7 +326,6 @@ module Kaltura
 
 	class KalturaEventObjectChangedCondition < KalturaCondition
 		# Comma seperated column names to be tested
-		# 	 
 		attr_accessor :modified_columns
 
 
@@ -360,14 +347,12 @@ module Kaltura
 
 
 	# Event notification template service lets you create and manage event notification templates
-	#  
 	class KalturaEventNotificationTemplateService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# This action allows for the creation of new backend event types in the system. This action requires access to the Kaltura server Admin Console. If you're looking to register to existing event types, please use the clone action instead.
-		# 	 
 		def add(event_notification_template)
 			kparams = {}
 			client.add_param(kparams, 'eventNotificationTemplate', event_notification_template)
@@ -379,7 +364,6 @@ module Kaltura
 		end
 
 		# This action allows registering to various backend event. Use this action to create notifications that will react to events such as new video was uploaded or metadata field was updated. To see the list of available event types, call the listTemplates action.
-		# 	 
 		def clone(id, event_notification_template=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -392,7 +376,6 @@ module Kaltura
 		end
 
 		# Retrieve an event notification template object by id
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -404,7 +387,6 @@ module Kaltura
 		end
 
 		# Update an existing event notification template object
-		# 	 
 		def update(id, event_notification_template)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -417,7 +399,6 @@ module Kaltura
 		end
 
 		# Update event notification template status by id
-		# 	 
 		def update_status(id, status)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -430,7 +411,6 @@ module Kaltura
 		end
 
 		# Delete an event notification template object
-		# 	 
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -442,7 +422,6 @@ module Kaltura
 		end
 
 		# list event notification template objects
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -466,7 +445,6 @@ module Kaltura
 		end
 
 		# Dispatch event notification object by id
-		# 	 
 		def dispatch(id, scope)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -479,7 +457,6 @@ module Kaltura
 		end
 
 		# Action lists the template partner event notification templates.
-		# 	 
 		def list_templates(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)

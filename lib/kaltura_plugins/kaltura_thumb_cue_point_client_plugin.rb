@@ -59,7 +59,6 @@ module Kaltura
 		attr_accessor :description
 		attr_accessor :title
 		# The sub type of the ThumbCuePoint
-		# 	 
 		attr_accessor :sub_type
 
 		def sub_type=(val)
@@ -78,7 +77,6 @@ module Kaltura
 
 	class KalturaTimedThumbAsset < KalturaThumbAsset
 		# Associated thumb cue point ID
-		# 	 
 		attr_accessor :cue_point_id
 
 

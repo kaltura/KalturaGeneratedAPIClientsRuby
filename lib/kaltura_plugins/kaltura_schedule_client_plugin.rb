@@ -172,13 +172,10 @@ module Kaltura
 		attr_accessor :count
 		attr_accessor :interval
 		# Comma separated numbers between 0 to 59
-		# 	 
 		attr_accessor :by_second
 		# Comma separated numbers between 0 to 59
-		# 	 
 		attr_accessor :by_minute
 		# Comma separated numbers between 0 to 23
-		# 	 
 		attr_accessor :by_hour
 		# Comma separated of KalturaScheduleEventRecurrenceDay
 		# 	 Each byDay value can also be preceded by a positive (+n) or negative (-n) integer.
@@ -186,15 +183,12 @@ module Kaltura
 		# 	 For example, within a MONTHLY rule, +1MO (or simply 1MO) represents the first Monday within the month, whereas -1MO represents the last Monday of the month.
 		# 	 If an integer modifier is not present, it means all days of this type within the specified frequency.
 		# 	 For example, within a MONTHLY rule, MO represents all Mondays within the month.
-		# 	 
 		attr_accessor :by_day
 		# Comma separated of numbers between -31 to 31, excluding 0.
 		# 	 For example, -10 represents the tenth to the last day of the month.
-		# 	 
 		attr_accessor :by_month_day
 		# Comma separated of numbers between -366 to 366, excluding 0.
 		# 	 For example, -1 represents the last day of the year (December 31st) and -306 represents the 306th to the last day of the year (March 1st).
-		# 	 
 		attr_accessor :by_year_day
 		# Comma separated of numbers between -53 to 53, excluding 0.
 		# 	 This corresponds to weeks according to week numbering.
@@ -202,10 +196,8 @@ module Kaltura
 		# 	 Week number one of the calendar year is the first week which contains at least four (4) days in that calendar year.
 		# 	 This rule part is only valid for YEARLY frequency.
 		# 	 For example, 3 represents the third week of the year.
-		# 	 
 		attr_accessor :by_week_number
 		# Comma separated numbers between 1 to 12
-		# 	 
 		attr_accessor :by_month
 		# Comma separated of numbers between -366 to 366, excluding 0.
 		# 	 Corresponds to the nth occurrence within the set of events specified by the rule.
@@ -213,7 +205,6 @@ module Kaltura
 		# 	 For example "the last work day of the month" could be represented as: frequency=MONTHLY;byDay=MO,TU,WE,TH,FR;byOffset=-1
 		# 	 Each byOffset value can include a positive (+n) or negative (-n) integer.
 		# 	 If present, this indicates the nth occurrence of the specific occurrence within the set of events specified by the rule.
-		# 	 
 		attr_accessor :by_offset
 		attr_accessor :week_start_day
 
@@ -250,12 +241,10 @@ module Kaltura
 
 	class KalturaScheduleEvent < KalturaObjectBase
 		# Auto-generated unique identifier
-		# 	 
 		attr_accessor :id
 		attr_accessor :partner_id
 		attr_accessor :parent_id
 		# Defines a short summary or subject for the event
-		# 	 
 		attr_accessor :summary
 		attr_accessor :description
 		attr_accessor :status
@@ -264,38 +253,28 @@ module Kaltura
 		attr_accessor :reference_id
 		attr_accessor :classification_type
 		# Specifies the global position for the activity
-		# 	 
 		attr_accessor :geo_latitude
 		# Specifies the global position for the activity
-		# 	 
 		attr_accessor :geo_longitude
 		# Defines the intended venue for the activity
-		# 	 
 		attr_accessor :location
 		attr_accessor :organizer
 		attr_accessor :owner_id
 		# The value for the priority field.
-		# 	 
 		attr_accessor :priority
 		# Defines the revision sequence number.
-		# 	 
 		attr_accessor :sequence
 		attr_accessor :recurrence_type
 		# Duration in seconds
-		# 	 
 		attr_accessor :duration
 		# Used to represent contact information or alternately a reference to contact information.
-		# 	 
 		attr_accessor :contact
 		# Specifies non-processing information intended to provide a comment to the calendar user.
-		# 	 
 		attr_accessor :comment
 		attr_accessor :tags
 		# Creation date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :created_at
 		# Last update as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :updated_at
 		attr_accessor :recurrence
 
@@ -381,10 +360,8 @@ module Kaltura
 		attr_accessor :resource_id
 		attr_accessor :partner_id
 		# Creation date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :created_at
 		# Last update as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :updated_at
 
 		def event_id=(val)
@@ -416,24 +393,19 @@ module Kaltura
 
 	class KalturaScheduleResource < KalturaObjectBase
 		# Auto-generated unique identifier
-		# 	 
 		attr_accessor :id
 		attr_accessor :parent_id
 		attr_accessor :partner_id
 		# Defines a short name
-		# 	 
 		attr_accessor :name
 		# Defines a unique system-name
-		# 	 
 		attr_accessor :system_name
 		attr_accessor :description
 		attr_accessor :status
 		attr_accessor :tags
 		# Creation date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :created_at
 		# Last update as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :updated_at
 
 		def id=(val)
@@ -473,7 +445,6 @@ module Kaltura
 
 	class KalturaCameraScheduleResource < KalturaScheduleResource
 		# URL of the stream
-		# 	 
 		attr_accessor :stream_url
 
 
@@ -486,13 +457,10 @@ module Kaltura
 
 	class KalturaEntryScheduleEvent < KalturaScheduleEvent
 		# Entry to be used as template during content ingestion
-		# 	 
 		attr_accessor :template_entry_id
 		# Entries that associated with this event
-		# 	 
 		attr_accessor :entry_ids
 		# Categories that associated with this event
-		# 	 
 		attr_accessor :category_ids
 
 
@@ -960,14 +928,12 @@ module Kaltura
 
 
 	# ScheduleEvent service lets you create and manage schedule events
-	#  
 	class KalturaScheduleEventService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Allows you to add a new KalturaScheduleEvent object
-		# 	 
 		def add(schedule_event)
 			kparams = {}
 			client.add_param(kparams, 'scheduleEvent', schedule_event)
@@ -979,7 +945,6 @@ module Kaltura
 		end
 
 		# Retrieve a KalturaScheduleEvent object by ID
-		# 	 
 		def get(schedule_event_id)
 			kparams = {}
 			client.add_param(kparams, 'scheduleEventId', schedule_event_id)
@@ -991,7 +956,6 @@ module Kaltura
 		end
 
 		# Update an existing KalturaScheduleEvent object
-		# 	 
 		def update(schedule_event_id, schedule_event)
 			kparams = {}
 			client.add_param(kparams, 'scheduleEventId', schedule_event_id)
@@ -1004,7 +968,6 @@ module Kaltura
 		end
 
 		# Mark the KalturaScheduleEvent object as deleted
-		# 	 
 		def delete(schedule_event_id)
 			kparams = {}
 			client.add_param(kparams, 'scheduleEventId', schedule_event_id)
@@ -1016,7 +979,6 @@ module Kaltura
 		end
 
 		# Mark the KalturaScheduleEvent object as cancelled
-		# 	 
 		def cancel(schedule_event_id)
 			kparams = {}
 			client.add_param(kparams, 'scheduleEventId', schedule_event_id)
@@ -1028,7 +990,6 @@ module Kaltura
 		end
 
 		# List KalturaScheduleEvent objects
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -1041,7 +1002,6 @@ module Kaltura
 		end
 
 		# Add new bulk upload batch job
-		# 	 
 		def add_from_bulk_upload(file_data, bulk_upload_data=KalturaNotImplemented)
 			kparams = {}
 			kfiles = {}
@@ -1056,14 +1016,12 @@ module Kaltura
 	end
 
 	# ScheduleResource service lets you create and manage schedule events
-	#  
 	class KalturaScheduleResourceService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Allows you to add a new KalturaScheduleResource object
-		# 	 
 		def add(schedule_resource)
 			kparams = {}
 			client.add_param(kparams, 'scheduleResource', schedule_resource)
@@ -1075,7 +1033,6 @@ module Kaltura
 		end
 
 		# Retrieve a KalturaScheduleResource object by ID
-		# 	 
 		def get(schedule_resource_id)
 			kparams = {}
 			client.add_param(kparams, 'scheduleResourceId', schedule_resource_id)
@@ -1087,7 +1044,6 @@ module Kaltura
 		end
 
 		# Update an existing KalturaScheduleResource object
-		# 	 
 		def update(schedule_resource_id, schedule_resource)
 			kparams = {}
 			client.add_param(kparams, 'scheduleResourceId', schedule_resource_id)
@@ -1100,7 +1056,6 @@ module Kaltura
 		end
 
 		# Mark the KalturaScheduleResource object as deleted
-		# 	 
 		def delete(schedule_resource_id)
 			kparams = {}
 			client.add_param(kparams, 'scheduleResourceId', schedule_resource_id)
@@ -1112,7 +1067,6 @@ module Kaltura
 		end
 
 		# List KalturaScheduleResource objects
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -1125,7 +1079,6 @@ module Kaltura
 		end
 
 		# Add new bulk upload batch job
-		# 	 
 		def add_from_bulk_upload(file_data, bulk_upload_data=KalturaNotImplemented)
 			kparams = {}
 			kfiles = {}
@@ -1140,14 +1093,12 @@ module Kaltura
 	end
 
 	# ScheduleEventResource service lets you create and manage connections between events and resources
-	#  
 	class KalturaScheduleEventResourceService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Allows you to add a new KalturaScheduleEventResource object
-		# 	 
 		def add(schedule_event_resource)
 			kparams = {}
 			client.add_param(kparams, 'scheduleEventResource', schedule_event_resource)
@@ -1159,7 +1110,6 @@ module Kaltura
 		end
 
 		# Retrieve a KalturaScheduleEventResource object by ID
-		# 	 
 		def get(schedule_event_id, schedule_resource_id)
 			kparams = {}
 			client.add_param(kparams, 'scheduleEventId', schedule_event_id)
@@ -1172,7 +1122,6 @@ module Kaltura
 		end
 
 		# Update an existing KalturaScheduleEventResource object
-		# 	 
 		def update(schedule_event_id, schedule_resource_id, schedule_event_resource)
 			kparams = {}
 			client.add_param(kparams, 'scheduleEventId', schedule_event_id)
@@ -1186,7 +1135,6 @@ module Kaltura
 		end
 
 		# Mark the KalturaScheduleEventResource object as deleted
-		# 	 
 		def delete(schedule_event_id, schedule_resource_id)
 			kparams = {}
 			client.add_param(kparams, 'scheduleEventId', schedule_event_id)
@@ -1199,7 +1147,6 @@ module Kaltura
 		end
 
 		# List KalturaScheduleEventResource objects
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)

@@ -58,10 +58,8 @@ module Kaltura
 
 	class KalturaEmailNotificationRecipient < KalturaObjectBase
 		# Recipient e-mail address
-		# 	 
 		attr_accessor :email
 		# Recipient name
-		# 	 
 		attr_accessor :name
 
 
@@ -74,10 +72,8 @@ module Kaltura
 	end
 
 	# Abstract class representing the final output recipients going into the batch mechanism
-	#  
 	class KalturaEmailNotificationRecipientJobData < KalturaObjectBase
 		# Provider type of the job data.
-		# 	  
 		attr_accessor :provider_type
 
 
@@ -89,7 +85,6 @@ module Kaltura
 	end
 
 	# Abstract core class  which provides the recipients (to, CC, BCC) for an email notification
-	#  
 	class KalturaEmailNotificationRecipientProvider < KalturaObjectBase
 
 
@@ -151,7 +146,6 @@ module Kaltura
 	end
 
 	# Job Data representing the provider of recipients for a single categoryId
-	#  
 	class KalturaEmailNotificationCategoryRecipientJobData < KalturaEmailNotificationRecipientJobData
 		attr_accessor :category_user_filter
 
@@ -164,10 +158,8 @@ module Kaltura
 	end
 
 	# API object which provides the recipients of category related notifications.
-	#  
 	class KalturaEmailNotificationCategoryRecipientProvider < KalturaEmailNotificationRecipientProvider
 		# The ID of the category whose subscribers should receive the email notification.
-		# 	 
 		attr_accessor :category_id
 		attr_accessor :category_user_filter
 
@@ -190,10 +182,8 @@ module Kaltura
 	end
 
 	# JobData representing the static receipient array
-	#  
 	class KalturaEmailNotificationStaticRecipientJobData < KalturaEmailNotificationRecipientJobData
 		# Email to emails and names
-		# 	 
 		attr_accessor :email_recipients
 
 
@@ -205,10 +195,8 @@ module Kaltura
 	end
 
 	# API class for recipient provider containing a static list of email recipients.
-	#  
 	class KalturaEmailNotificationStaticRecipientProvider < KalturaEmailNotificationRecipientProvider
 		# Email to emails and names
-		# 	 
 		attr_accessor :email_recipients
 
 
@@ -221,48 +209,34 @@ module Kaltura
 
 	class KalturaEmailNotificationTemplate < KalturaEventNotificationTemplate
 		# Define the email body format
-		# 	 
 		attr_accessor :format
-		# Define the email subject 
-		# 	 
+		# Define the email subject
 		attr_accessor :subject
 		# Define the email body content
-		# 	 
 		attr_accessor :body
 		# Define the email sender email
-		# 	 
 		attr_accessor :from_email
 		# Define the email sender name
-		# 	 
 		attr_accessor :from_name
 		# Email recipient emails and names
-		# 	 
 		attr_accessor :to
 		# Email recipient emails and names
-		# 	 
 		attr_accessor :cc
 		# Email recipient emails and names
-		# 	 
 		attr_accessor :bcc
-		# Default email addresses to whom the reply should be sent. 
-		# 	 
+		# Default email addresses to whom the reply should be sent.
 		attr_accessor :reply_to
 		# Define the email priority
-		# 	 
 		attr_accessor :priority
 		# Email address that a reading confirmation will be sent
-		# 	 
 		attr_accessor :confirm_reading_to
 		# Hostname to use in Message-Id and Received headers and as default HELLO string. 
 		# 	 If empty, the value returned by SERVER_NAME is used or 'localhost.localdomain'.
-		# 	 
 		attr_accessor :hostname
 		# Sets the message ID to be used in the Message-Id header.
 		# 	 If empty, a unique id will be generated.
-		# 	 
 		attr_accessor :message_id
 		# Adds a e-mail custom header
-		# 	 
 		attr_accessor :custom_headers
 
 		def priority=(val)
@@ -290,7 +264,6 @@ module Kaltura
 	end
 
 	# JobData representing the dynamic user receipient array
-	#  
 	class KalturaEmailNotificationUserRecipientJobData < KalturaEmailNotificationRecipientJobData
 		attr_accessor :filter
 
@@ -303,7 +276,6 @@ module Kaltura
 	end
 
 	# API class for recipient provider which constructs a dynamic list of recipients according to a user filter
-	#  
 	class KalturaEmailNotificationUserRecipientProvider < KalturaEmailNotificationRecipientProvider
 		attr_accessor :filter
 
@@ -317,39 +289,28 @@ module Kaltura
 
 	class KalturaEmailNotificationDispatchJobData < KalturaEventNotificationDispatchJobData
 		# Define the email sender email
-		# 	 
 		attr_accessor :from_email
 		# Define the email sender name
-		# 	 
 		attr_accessor :from_name
 		# Email recipient emails and names, key is mail address and value is the name
-		# 	 
 		attr_accessor :to
 		# Email cc emails and names, key is mail address and value is the name
-		# 	 
 		attr_accessor :cc
 		# Email bcc emails and names, key is mail address and value is the name
-		# 	 
 		attr_accessor :bcc
 		# Email addresses that a replies should be sent to, key is mail address and value is the name
-		# 	 
 		attr_accessor :reply_to
 		# Define the email priority
-		# 	 
 		attr_accessor :priority
 		# Email address that a reading confirmation will be sent to
-		# 	 
 		attr_accessor :confirm_reading_to
 		# Hostname to use in Message-Id and Received headers and as default HELO string. 
 		# 	 If empty, the value returned by SERVER_NAME is used or 'localhost.localdomain'.
-		# 	 
 		attr_accessor :hostname
 		# Sets the message ID to be used in the Message-Id header.
 		# 	 If empty, a unique id will be generated.
-		# 	 
 		attr_accessor :message_id
 		# Adds a e-mail custom header
-		# 	 
 		attr_accessor :custom_headers
 
 		def priority=(val)

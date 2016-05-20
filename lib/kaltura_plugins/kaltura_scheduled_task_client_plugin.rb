@@ -99,19 +99,15 @@ module Kaltura
 		attr_accessor :description
 		attr_accessor :status
 		# The type of engine to use to list objects using the given "objectFilter"
-		# 	 
 		attr_accessor :object_filter_engine_type
 		# A filter object (inherits KalturaFilter) that is used to list objects for scheduled tasks
-		# 	 
 		attr_accessor :object_filter
 		# A list of tasks to execute on the founded objects
-		# 	 
 		attr_accessor :object_tasks
 		attr_accessor :created_at
 		attr_accessor :updated_at
 		attr_accessor :last_execution_started_at
 		# The maximum number of result count allowed to be processed by this profile per execution
-		# 	 
 		attr_accessor :max_total_count_allowed
 
 		def id=(val)
@@ -157,10 +153,8 @@ module Kaltura
 
 	class KalturaConvertEntryFlavorsObjectTask < KalturaObjectTask
 		# Comma separated list of flavor param ids to convert
-		# 	 
 		attr_accessor :flavor_params_ids
 		# Should reconvert when flavor already exists?
-		# 	 
 		attr_accessor :reconvert
 
 		def reconvert=(val)
@@ -177,10 +171,8 @@ module Kaltura
 
 	class KalturaDeleteEntryFlavorsObjectTask < KalturaObjectTask
 		# The logic to use to choose the flavors for deletion
-		# 	 
 		attr_accessor :delete_type
 		# Comma separated list of flavor param ids to delete or keep
-		# 	 
 		attr_accessor :flavor_params_ids
 
 		def delete_type=(val)
@@ -215,10 +207,8 @@ module Kaltura
 
 	class KalturaModifyCategoriesObjectTask < KalturaObjectTask
 		# Should the object task add or remove categories?
-		# 	 
 		attr_accessor :add_remove_type
 		# The list of category ids to add or remove
-		# 	 
 		attr_accessor :category_ids
 
 		def add_remove_type=(val)
@@ -331,7 +321,6 @@ module Kaltura
 
 	class KalturaStorageExportObjectTask < KalturaObjectTask
 		# Storage profile id
-		# 	 
 		attr_accessor :storage_id
 
 
@@ -353,14 +342,12 @@ module Kaltura
 
 
 	# Schedule task service lets you create and manage scheduled task profiles
-	#  
 	class KalturaScheduledTaskProfileService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add a new scheduled task profile
-		# 	 
 		def add(scheduled_task_profile)
 			kparams = {}
 			client.add_param(kparams, 'scheduledTaskProfile', scheduled_task_profile)
@@ -372,7 +359,6 @@ module Kaltura
 		end
 
 		# Retrieve a scheduled task profile by id
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -384,7 +370,6 @@ module Kaltura
 		end
 
 		# Update an existing scheduled task profile
-		# 	 
 		def update(id, scheduled_task_profile)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -397,7 +382,6 @@ module Kaltura
 		end
 
 		# Delete a scheduled task profile
-		# 	 
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -409,7 +393,6 @@ module Kaltura
 		end
 
 		# List scheduled task profiles
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)

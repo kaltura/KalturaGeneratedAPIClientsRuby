@@ -31,70 +31,48 @@ module Kaltura
 
 	class KalturaVarPartnerUsageItem < KalturaObjectBase
 		# Partner ID
-		# 	 
 		attr_accessor :partner_id
 		# Partner name
-		# 	 
 		attr_accessor :partner_name
 		# Partner status
-		# 	 
 		attr_accessor :partner_status
 		# Partner package
-		# 	 
 		attr_accessor :partner_package
 		# Partner creation date (Unix timestamp)
-		# 	 
 		attr_accessor :partner_created_at
 		# Number of player loads in the specific date range
-		# 	 
 		attr_accessor :views
 		# Number of plays in the specific date range
-		# 	 
 		attr_accessor :plays
 		# Number of new entries created during specific date range
-		# 	 
 		attr_accessor :entries_count
 		# Total number of entries
-		# 	 
 		attr_accessor :total_entries_count
 		# Number of new video entries created during specific date range
-		# 	 
 		attr_accessor :video_entries_count
 		# Number of new image entries created during specific date range
-		# 	 
 		attr_accessor :image_entries_count
 		# Number of new audio entries created during specific date range
-		# 	 
 		attr_accessor :audio_entries_count
 		# Number of new mix entries created during specific date range
-		# 	 
 		attr_accessor :mix_entries_count
 		# The total bandwidth usage during the given date range (in MB)
-		# 	 
 		attr_accessor :bandwidth
 		# The total storage consumption (in MB)
-		# 	 
 		attr_accessor :total_storage
 		# The added storage consumption (new uploads) during the given date range (in MB)
-		# 	 
 		attr_accessor :storage
 		# The deleted storage consumption (new uploads) during the given date range (in MB)
-		# 	 
 		attr_accessor :deleted_storage
 		# The peak amount of storage consumption during the given date range for the specific publisher
-		# 	 
 		attr_accessor :peak_storage
 		# The average amount of storage consumption during the given date range for the specific publisher
-		# 	 
 		attr_accessor :avg_storage
 		# The combined amount of bandwidth and storage consumed during the given date range for the specific publisher
-		# 	 
 		attr_accessor :combined_storage_bandwidth
 		# Amount of transcoding usage in MB
-		# 	 
 		attr_accessor :transcoding_usage
 		# TGhe date at which the report was taken - Unix Timestamp
-		# 	 
 		attr_accessor :date_id
 
 		def partner_id=(val)
@@ -210,13 +188,10 @@ module Kaltura
 
 	class KalturaVarConsolePartnerFilter < KalturaPartnerFilter
 		# Eq filter for the partner's group type
-		#      
 		attr_accessor :group_type_eq
 		# In filter for the partner's group type
-		#      
 		attr_accessor :group_type_in
 		# Filter for partner permissions- filter contains comma-separated string of permission names which the returned partners should have.
-		#      
 		attr_accessor :partner_permissions_exist
 
 		def group_type_eq=(val)
@@ -234,14 +209,12 @@ module Kaltura
 
 
 	# Utility service for the Multi-publishers console
-	#  
 	class KalturaVarConsoleService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Function which calulates partner usage of a group of a VAR's sub-publishers
-		#      
 		def get_partner_usage(partner_filter=KalturaNotImplemented, usage_filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'partnerFilter', partner_filter)
@@ -255,7 +228,6 @@ module Kaltura
 		end
 
 		# Function to change a sub-publisher's status
-		# 	 
 		def update_status(id, status)
 			kparams = {}
 			client.add_param(kparams, 'id', id)

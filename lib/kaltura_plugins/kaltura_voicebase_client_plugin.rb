@@ -32,31 +32,22 @@ module Kaltura
 
 	class KalturaVoicebaseJobProviderData < KalturaIntegrationJobProviderData
 		# Entry ID
-		# 	 
 		attr_accessor :entry_id
 		# Flavor ID
-		# 	 
 		attr_accessor :flavor_asset_id
 		# input Transcript-asset ID
-		# 	 
 		attr_accessor :transcript_id
 		# Caption formats
-		# 	 
 		attr_accessor :caption_asset_formats
 		# Api key for service provider
-		# 	 
 		attr_accessor :api_key
 		# Api key for service provider
-		# 	 
 		attr_accessor :api_password
 		# Transcript content language
-		# 	 
 		attr_accessor :spoken_language
 		# Transcript Content location
-		# 	 
 		attr_accessor :file_location
 		# should replace remote media content
-		# 	 
 		attr_accessor :replace_media_content
 
 		def replace_media_content=(val)

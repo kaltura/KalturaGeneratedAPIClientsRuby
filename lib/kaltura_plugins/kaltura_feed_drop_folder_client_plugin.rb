@@ -75,10 +75,8 @@ module Kaltura
 
 	class KalturaFeedDropFolderFile < KalturaDropFolderFile
 		# MD5 or Sha1 encrypted string
-		# 	 
 		attr_accessor :hash
 		# Path of the original Feed content XML
-		# 	 
 		attr_accessor :feed_xml_path
 
 

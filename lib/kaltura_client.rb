@@ -33,14 +33,12 @@ module Kaltura
 
 
 	# Manage access control profiles
-	#  
 	class KalturaAccessControlProfileService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add new access control profile
-		# 	 
 		def add(access_control_profile)
 			kparams = {}
 			client.add_param(kparams, 'accessControlProfile', access_control_profile)
@@ -52,7 +50,6 @@ module Kaltura
 		end
 
 		# Get access control profile by id
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -64,7 +61,6 @@ module Kaltura
 		end
 
 		# Update access control profile by id
-		# 	 
 		def update(id, access_control_profile)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -77,7 +73,6 @@ module Kaltura
 		end
 
 		# Delete access control profile by id
-		# 	 
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -89,7 +84,6 @@ module Kaltura
 		end
 
 		# List access control profiles by filter and pager
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -103,14 +97,12 @@ module Kaltura
 	end
 
 	# Add & Manage Access Controls
-	#  
 	class KalturaAccessControlService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add new Access Control Profile
-		# 	 
 		def add(access_control)
 			kparams = {}
 			client.add_param(kparams, 'accessControl', access_control)
@@ -122,7 +114,6 @@ module Kaltura
 		end
 
 		# Get Access Control Profile by id
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -134,7 +125,6 @@ module Kaltura
 		end
 
 		# Update Access Control Profile by id
-		# 	 
 		def update(id, access_control)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -147,7 +137,6 @@ module Kaltura
 		end
 
 		# Delete Access Control Profile by id
-		# 	 
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -159,7 +148,6 @@ module Kaltura
 		end
 
 		# List Access Control Profiles by filter and pager
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -173,14 +161,12 @@ module Kaltura
 	end
 
 	# Manage details for the administrative user
-	#  
 	class KalturaAdminUserService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Update admin user password and email
-		# 	 
 		def update_password(email, password, new_email='', new_password='')
 			kparams = {}
 			client.add_param(kparams, 'email', email)
@@ -195,7 +181,6 @@ module Kaltura
 		end
 
 		# Reset admin user password and send it to the users email address
-		# 	 
 		def reset_password(email)
 			kparams = {}
 			client.add_param(kparams, 'email', email)
@@ -207,7 +192,6 @@ module Kaltura
 		end
 
 		# Get an admin session using admin email and password (Used for login to the KMC application)
-		# 	 
 		def login(email, password, partner_id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'email', email)
@@ -221,7 +205,6 @@ module Kaltura
 		end
 
 		# Set initial users password
-		# 	 
 		def set_initial_password(hash_key, new_password)
 			kparams = {}
 			client.add_param(kparams, 'hashKey', hash_key)
@@ -235,14 +218,12 @@ module Kaltura
 	end
 
 	# api for getting analytics data
-	#  
 	class KalturaAnalyticsService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# report query action allows to get a analytics data for specific query dimensions, metrics and filters.
-		# 	 
 		def query(filter)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -255,14 +236,12 @@ module Kaltura
 	end
 
 	# Manage application authentication tokens
-	#  
 	class KalturaAppTokenService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add new application authentication token
-		# 	 
 		def add(app_token)
 			kparams = {}
 			client.add_param(kparams, 'appToken', app_token)
@@ -274,7 +253,6 @@ module Kaltura
 		end
 
 		# Get application authentication token by id
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -286,7 +264,6 @@ module Kaltura
 		end
 
 		# Update application authentication token by id
-		# 	 
 		def update(id, app_token)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -299,7 +276,6 @@ module Kaltura
 		end
 
 		# Delete application authentication token by id
-		# 	 
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -311,7 +287,6 @@ module Kaltura
 		end
 
 		# List application authentication tokens by filter and pager
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -324,7 +299,6 @@ module Kaltura
 		end
 
 		# Starts a new KS (kaltura Session) based on application authentication token id
-		# 	 
 		def start_session(id, token_hash, user_id=KalturaNotImplemented, type=KalturaNotImplemented, expiry=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -341,14 +315,12 @@ module Kaltura
 	end
 
 	# Base Entry Service
-	#  
 	class KalturaBaseEntryService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Generic add entry, should be used when the uploaded entry type is not known.
-		#      
 		def add(entry, type=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entry', entry)
@@ -361,7 +333,6 @@ module Kaltura
 		end
 
 		# Attach content resource to entry in status NO_MEDIA
-		#      
 		def add_content(entry_id, resource)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -374,7 +345,6 @@ module Kaltura
 		end
 
 		# Generic add entry using an uploaded file, should be used when the uploaded entry type is not known.
-		#      
 		def add_from_uploaded_file(entry, upload_token_id, type=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entry', entry)
@@ -388,7 +358,6 @@ module Kaltura
 		end
 
 		# Get base entry by ID.
-		# 	 
 		def get(entry_id, version=-1)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -401,7 +370,6 @@ module Kaltura
 		end
 
 		# Get remote storage existing paths for the asset.
-		#      
 		def get_remote_paths(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -413,7 +381,6 @@ module Kaltura
 		end
 
 		# Update base entry. Only the properties that were set will be updated.
-		# 	 
 		def update(entry_id, base_entry)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -426,7 +393,6 @@ module Kaltura
 		end
 
 		# Update the content resource associated with the entry.
-		# 	 
 		def update_content(entry_id, resource, conversion_profile_id=KalturaNotImplemented, advanced_options=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -441,7 +407,6 @@ module Kaltura
 		end
 
 		# Get an array of KalturaBaseEntry objects by a comma-separated list of ids.
-		# 	 
 		def get_by_ids(entry_ids)
 			kparams = {}
 			client.add_param(kparams, 'entryIds', entry_ids)
@@ -453,7 +418,6 @@ module Kaltura
 		end
 
 		# Delete an entry.
-		# 	 
 		def delete(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -465,7 +429,6 @@ module Kaltura
 		end
 
 		# List base entries by filter with paging support.
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -478,7 +441,6 @@ module Kaltura
 		end
 
 		# List base entries by filter according to reference id
-		# 	 
 		def list_by_reference_id(ref_id, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'refId', ref_id)
@@ -491,7 +453,6 @@ module Kaltura
 		end
 
 		# Count base entries by filter.
-		# 	 
 		def count(filter=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -503,7 +464,6 @@ module Kaltura
 		end
 
 		# Upload a file to Kaltura, that can be used to create an entry.
-		# 	 
 		def upload(file_data)
 			kparams = {}
 			kfiles = {}
@@ -516,7 +476,6 @@ module Kaltura
 		end
 
 		# Update entry thumbnail using a raw jpeg file.
-		# 	 
 		def update_thumbnail_jpeg(entry_id, file_data)
 			kparams = {}
 			kfiles = {}
@@ -530,7 +489,6 @@ module Kaltura
 		end
 
 		# Update entry thumbnail using url.
-		# 	 
 		def update_thumbnail_from_url(entry_id, url)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -543,7 +501,6 @@ module Kaltura
 		end
 
 		# Update entry thumbnail from a different entry by a specified time offset (in seconds).
-		# 	 
 		def update_thumbnail_from_source_entry(entry_id, source_entry_id, time_offset)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -557,7 +514,6 @@ module Kaltura
 		end
 
 		# Flag inappropriate entry for moderation.
-		# 	 
 		def flag(moderation_flag)
 			kparams = {}
 			client.add_param(kparams, 'moderationFlag', moderation_flag)
@@ -569,7 +525,6 @@ module Kaltura
 		end
 
 		# Reject the entry and mark the pending flags (if any) as moderated (this will make the entry non-playable).
-		# 	 
 		def reject(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -581,7 +536,6 @@ module Kaltura
 		end
 
 		# Approve the entry and mark the pending flags (if any) as moderated (this will make the entry playable).
-		# 	 
 		def approve(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -593,7 +547,6 @@ module Kaltura
 		end
 
 		# List all pending flags for the entry.
-		# 	 
 		def list_flags(entry_id, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -606,7 +559,6 @@ module Kaltura
 		end
 
 		# Anonymously rank an entry, no validation is done on duplicate rankings.
-		# 	 
 		def anonymous_rank(entry_id, rank)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -619,7 +571,6 @@ module Kaltura
 		end
 
 		# This action delivers entry-related data, based on the user's context: access control, restriction, playback format and storage information.
-		# 	 
 		def get_context_data(entry_id, context_data_params)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -643,7 +594,6 @@ module Kaltura
 		end
 
 		# Index an entry by id.
-		# 	 
 		def index(id, should_update=true)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -656,7 +606,6 @@ module Kaltura
 		end
 
 		# Clone an entry with optional attributes to apply to the clone
-		# 	 
 		def clone(entry_id, clone_options=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -671,7 +620,6 @@ module Kaltura
 
 	# Bulk upload service is used to upload & manage bulk uploads using CSV files.
 	#  This service manages only entry bulk uploads.
-	#  
 	class KalturaBulkUploadService < KalturaServiceBase
 		def initialize(client)
 			super(client)
@@ -680,7 +628,6 @@ module Kaltura
 		# Add new bulk upload batch job
 		# 	 Conversion profile id can be specified in the API or in the CSV file, the one in the CSV file will be stronger.
 		# 	 If no conversion profile was specified, partner's default will be used
-		# 	 
 		def add(conversion_profile_id, csv_file_data, bulk_upload_type=KalturaNotImplemented, uploaded_by=KalturaNotImplemented, file_name=KalturaNotImplemented)
 			kparams = {}
 			kfiles = {}
@@ -697,7 +644,6 @@ module Kaltura
 		end
 
 		# Get bulk upload batch job by id
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -709,7 +655,6 @@ module Kaltura
 		end
 
 		# List bulk upload batch jobs
-		# 	 
 		def list(pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'pager', pager)
@@ -721,7 +666,6 @@ module Kaltura
 		end
 
 		# serve action returan the original file.
-		# 	 
 		def serve(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -730,7 +674,6 @@ module Kaltura
 		end
 
 		# serveLog action returan the original file.
-		# 	 
 		def serve_log(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -739,7 +682,6 @@ module Kaltura
 		end
 
 		# Aborts the bulk upload and all its child jobs
-		# 	 
 		def abort(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -752,14 +694,12 @@ module Kaltura
 	end
 
 	# Add & Manage CategoryEntry - assign entry to category
-	#  
 	class KalturaCategoryEntryService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add new CategoryEntry
-		# 	 
 		def add(category_entry)
 			kparams = {}
 			client.add_param(kparams, 'categoryEntry', category_entry)
@@ -771,7 +711,6 @@ module Kaltura
 		end
 
 		# Delete CategoryEntry
-		# 	 
 		def delete(entry_id, category_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -784,7 +723,6 @@ module Kaltura
 		end
 
 		# List all categoryEntry
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -797,7 +735,6 @@ module Kaltura
 		end
 
 		# Index CategoryEntry by Id
-		# 	 
 		def index(entry_id, category_id, should_update=true)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -811,7 +748,6 @@ module Kaltura
 		end
 
 		# activate CategoryEntry when it is pending moderation
-		# 	 
 		def activate(entry_id, category_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -824,7 +760,6 @@ module Kaltura
 		end
 
 		# activate CategoryEntry when it is pending moderation
-		# 	 
 		def reject(entry_id, category_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -837,7 +772,6 @@ module Kaltura
 		end
 
 		# update privacy context from the category
-		# 	 
 		def sync_privacy_context(entry_id, category_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -862,14 +796,12 @@ module Kaltura
 	end
 
 	# Add & Manage Categories
-	#  
 	class KalturaCategoryService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add new Category
-		# 	 
 		def add(category)
 			kparams = {}
 			client.add_param(kparams, 'category', category)
@@ -881,7 +813,6 @@ module Kaltura
 		end
 
 		# Get Category by id
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -893,7 +824,6 @@ module Kaltura
 		end
 
 		# Update Category
-		# 	 
 		def update(id, category)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -906,7 +836,6 @@ module Kaltura
 		end
 
 		# Delete a Category
-		# 	 
 		def delete(id, move_entries_to_parent_category=1)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -919,7 +848,6 @@ module Kaltura
 		end
 
 		# List all categories
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -932,7 +860,6 @@ module Kaltura
 		end
 
 		# Index Category by id
-		# 	 
 		def index(id, should_update=true)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -945,7 +872,6 @@ module Kaltura
 		end
 
 		# Move categories that belong to the same parent category to a target categroy - enabled only for ks with disable entitlement
-		# 	 
 		def move(category_ids, target_category_parent_id)
 			kparams = {}
 			client.add_param(kparams, 'categoryIds', category_ids)
@@ -958,7 +884,6 @@ module Kaltura
 		end
 
 		# Unlock categories
-		# 	 
 		def unlock_categories()
 			kparams = {}
 			client.queue_service_action_call('category', 'unlockCategories', '', kparams)
@@ -983,14 +908,12 @@ module Kaltura
 	end
 
 	# Add & Manage CategoryUser - membership of a user in a category
-	#  
 	class KalturaCategoryUserService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add new CategoryUser
-		# 	 
 		def add(category_user)
 			kparams = {}
 			client.add_param(kparams, 'categoryUser', category_user)
@@ -1002,7 +925,6 @@ module Kaltura
 		end
 
 		# Get CategoryUser by id
-		# 	 
 		def get(category_id, user_id)
 			kparams = {}
 			client.add_param(kparams, 'categoryId', category_id)
@@ -1015,7 +937,6 @@ module Kaltura
 		end
 
 		# Update CategoryUser by id
-		# 	 
 		def update(category_id, user_id, category_user, override=false)
 			kparams = {}
 			client.add_param(kparams, 'categoryId', category_id)
@@ -1030,7 +951,6 @@ module Kaltura
 		end
 
 		# Delete a CategoryUser
-		# 	 
 		def delete(category_id, user_id)
 			kparams = {}
 			client.add_param(kparams, 'categoryId', category_id)
@@ -1043,7 +963,6 @@ module Kaltura
 		end
 
 		# activate CategoryUser
-		# 	 
 		def activate(category_id, user_id)
 			kparams = {}
 			client.add_param(kparams, 'categoryId', category_id)
@@ -1056,7 +975,6 @@ module Kaltura
 		end
 
 		# reject CategoryUser
-		# 	 
 		def deactivate(category_id, user_id)
 			kparams = {}
 			client.add_param(kparams, 'categoryId', category_id)
@@ -1069,7 +987,6 @@ module Kaltura
 		end
 
 		# List all categories
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -1082,7 +999,6 @@ module Kaltura
 		end
 
 		# Copy all memeber from parent category
-		# 	 
 		def copy_from_category(category_id)
 			kparams = {}
 			client.add_param(kparams, 'categoryId', category_id)
@@ -1094,7 +1010,6 @@ module Kaltura
 		end
 
 		# Index CategoryUser by userid and category id
-		# 	 
 		def index(user_id, category_id, should_update=true)
 			kparams = {}
 			client.add_param(kparams, 'userId', user_id)
@@ -1122,14 +1037,12 @@ module Kaltura
 	end
 
 	# Manage the connection between Conversion Profiles and Asset Params
-	#  
 	class KalturaConversionProfileAssetParamsService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Lists asset parmas of conversion profile by ID
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -1142,7 +1055,6 @@ module Kaltura
 		end
 
 		# Update asset parmas of conversion profile by ID
-		# 	 
 		def update(conversion_profile_id, asset_params_id, conversion_profile_asset_params)
 			kparams = {}
 			client.add_param(kparams, 'conversionProfileId', conversion_profile_id)
@@ -1157,14 +1069,12 @@ module Kaltura
 	end
 
 	# Add & Manage Conversion Profiles
-	#  
 	class KalturaConversionProfileService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Set Conversion Profile to be the partner default
-		# 	 
 		def set_as_default(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1176,7 +1086,6 @@ module Kaltura
 		end
 
 		# Get the partner's default conversion profile
-		# 	 
 		def get_default(type=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'type', type)
@@ -1188,7 +1097,6 @@ module Kaltura
 		end
 
 		# Add new Conversion Profile
-		# 	 
 		def add(conversion_profile)
 			kparams = {}
 			client.add_param(kparams, 'conversionProfile', conversion_profile)
@@ -1200,7 +1108,6 @@ module Kaltura
 		end
 
 		# Get Conversion Profile by ID
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1212,7 +1119,6 @@ module Kaltura
 		end
 
 		# Update Conversion Profile by ID
-		# 	 
 		def update(id, conversion_profile)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1225,7 +1131,6 @@ module Kaltura
 		end
 
 		# Delete Conversion Profile by ID
-		# 	 
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1237,7 +1142,6 @@ module Kaltura
 		end
 
 		# List Conversion Profiles by filter with paging support
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -1251,14 +1155,12 @@ module Kaltura
 	end
 
 	# Data service lets you manage data content (textual content)
-	#  
 	class KalturaDataService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Adds a new data entry
-		# 	 
 		def add(data_entry)
 			kparams = {}
 			client.add_param(kparams, 'dataEntry', data_entry)
@@ -1270,7 +1172,6 @@ module Kaltura
 		end
 
 		# Get data entry by ID.
-		# 	 
 		def get(entry_id, version=-1)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -1283,7 +1184,6 @@ module Kaltura
 		end
 
 		# Update data entry. Only the properties that were set will be updated.
-		# 	 
 		def update(entry_id, document_entry)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -1296,7 +1196,6 @@ module Kaltura
 		end
 
 		# Delete a data entry.
-		# 	 
 		def delete(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -1308,7 +1207,6 @@ module Kaltura
 		end
 
 		# List data entries by filter with paging support.
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -1321,7 +1219,6 @@ module Kaltura
 		end
 
 		# serve action returan the file from dataContent field.
-		# 	 
 		def serve(entry_id, version=-1, force_proxy=false)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -1333,14 +1230,12 @@ module Kaltura
 	end
 
 	# delivery service is used to control delivery objects
-	#  
 	class KalturaDeliveryProfileService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add new delivery.
-		# 	 
 		def add(delivery)
 			kparams = {}
 			client.add_param(kparams, 'delivery', delivery)
@@ -1352,7 +1247,6 @@ module Kaltura
 		end
 
 		# Update exisiting delivery
-		# 	 
 		def update(id, delivery)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1365,7 +1259,6 @@ module Kaltura
 		end
 
 		# Get delivery by id
-		# 	
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1378,7 +1271,6 @@ module Kaltura
 
 		# Add delivery based on existing delivery.
 		# 	Must provide valid sourceDeliveryId
-		# 	
 		def clone(delivery_id)
 			kparams = {}
 			client.add_param(kparams, 'deliveryId', delivery_id)
@@ -1390,7 +1282,6 @@ module Kaltura
 		end
 
 		# Retrieve a list of available delivery depends on the filter given
-		# 	
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -1403,214 +1294,13 @@ module Kaltura
 		end
 	end
 
-	# Document service
-	#  
-	class KalturaDocumentService < KalturaServiceBase
-		def initialize(client)
-			super(client)
-		end
-
-		# Add new document entry after the specific document file was uploaded and the upload token id exists
-		# 	 
-		def add_from_uploaded_file(document_entry, upload_token_id)
-			kparams = {}
-			client.add_param(kparams, 'documentEntry', document_entry)
-			client.add_param(kparams, 'uploadTokenId', upload_token_id)
-			client.queue_service_action_call('document', 'addFromUploadedFile', 'KalturaDocumentEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Copy entry into new entry
-		# 	 
-		def add_from_entry(source_entry_id, document_entry=KalturaNotImplemented, source_flavor_params_id=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'sourceEntryId', source_entry_id)
-			client.add_param(kparams, 'documentEntry', document_entry)
-			client.add_param(kparams, 'sourceFlavorParamsId', source_flavor_params_id)
-			client.queue_service_action_call('document', 'addFromEntry', 'KalturaDocumentEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Copy flavor asset into new entry
-		# 	 
-		def add_from_flavor_asset(source_flavor_asset_id, document_entry=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'sourceFlavorAssetId', source_flavor_asset_id)
-			client.add_param(kparams, 'documentEntry', document_entry)
-			client.queue_service_action_call('document', 'addFromFlavorAsset', 'KalturaDocumentEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Convert entry
-		# 	 
-		def convert(entry_id, conversion_profile_id=KalturaNotImplemented, dynamic_conversion_attributes=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'conversionProfileId', conversion_profile_id)
-			client.add_param(kparams, 'dynamicConversionAttributes', dynamic_conversion_attributes)
-			client.queue_service_action_call('document', 'convert', 'bigint', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Get document entry by ID.
-		# 	 
-		def get(entry_id, version=-1)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'version', version)
-			client.queue_service_action_call('document', 'get', 'KalturaDocumentEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update document entry. Only the properties that were set will be updated.
-		# 	 
-		def update(entry_id, document_entry)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'documentEntry', document_entry)
-			client.queue_service_action_call('document', 'update', 'KalturaDocumentEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Delete a document entry.
-		# 	 
-		def delete(entry_id)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('document', 'delete', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# List document entries by filter with paging support.
-		# 	 
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('document', 'list', 'KalturaDocumentListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Upload a document file to Kaltura, then the file can be used to create a document entry. 
-		# 	 
-		def upload(file_data)
-			kparams = {}
-			kfiles = {}
-			client.add_param(kfiles, 'fileData', file_data)
-			client.queue_service_action_call('document', 'upload', 'string', kparams, kfiles)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# This will queue a batch job for converting the document file to swf
-		# 	 Returns the URL where the new swf will be available 
-		# 	 
-		def convert_ppt_to_swf(entry_id)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('document', 'convertPptToSwf', 'string', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Serves the file content
-		# 	 
-		def serve(entry_id, flavor_asset_id=KalturaNotImplemented, force_proxy=false)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'flavorAssetId', flavor_asset_id)
-			client.add_param(kparams, 'forceProxy', force_proxy)
-			client.queue_service_action_call('document', 'serve', 'file', kparams)
-			return client.get_serve_url()
-		end
-
-		# Serves the file content
-		# 	 
-		def serve_by_flavor_params_id(entry_id, flavor_params_id=KalturaNotImplemented, force_proxy=false)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'flavorParamsId', flavor_params_id)
-			client.add_param(kparams, 'forceProxy', force_proxy)
-			client.queue_service_action_call('document', 'serveByFlavorParamsId', 'file', kparams)
-			return client.get_serve_url()
-		end
-
-		# Replace content associated with the given document entry.
-		# 	 
-		def update_content(entry_id, resource, conversion_profile_id=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'resource', resource)
-			client.add_param(kparams, 'conversionProfileId', conversion_profile_id)
-			client.queue_service_action_call('document', 'updateContent', 'KalturaDocumentEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Approves document replacement
-		# 	 
-		def approve_replace(entry_id)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('document', 'approveReplace', 'KalturaDocumentEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Cancels document replacement
-		# 	 
-		def cancel_replace(entry_id)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('document', 'cancelReplace', 'KalturaDocumentEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-	end
-
 	# EmailIngestionProfile service lets you manage email ingestion profile records
-	#  
 	class KalturaEmailIngestionProfileService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# EmailIngestionProfile Add action allows you to add a EmailIngestionProfile to Kaltura DB
-		# 	 
 		def add(email_ip)
 			kparams = {}
 			client.add_param(kparams, 'EmailIP', email_ip)
@@ -1622,7 +1312,6 @@ module Kaltura
 		end
 
 		# Retrieve a EmailIngestionProfile by email address
-		# 	 
 		def get_by_email_address(email_address)
 			kparams = {}
 			client.add_param(kparams, 'emailAddress', email_address)
@@ -1634,7 +1323,6 @@ module Kaltura
 		end
 
 		# Retrieve a EmailIngestionProfile by id
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1646,7 +1334,6 @@ module Kaltura
 		end
 
 		# Update an existing EmailIngestionProfile
-		# 	 
 		def update(id, email_ip)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1659,7 +1346,6 @@ module Kaltura
 		end
 
 		# Delete an existing EmailIngestionProfile
-		# 	 
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1671,7 +1357,6 @@ module Kaltura
 		end
 
 		# add KalturaMediaEntry from email ingestion
-		# 	 
 		def add_media_entry(media_entry, upload_token_id, email_prof_id, from_address, email_msg_id)
 			kparams = {}
 			client.add_param(kparams, 'mediaEntry', media_entry)
@@ -1688,7 +1373,6 @@ module Kaltura
 	end
 
 	# Base class for entry server node
-	#  
 	class KalturaEntryServerNodeService < KalturaServiceBase
 		def initialize(client)
 			super(client)
@@ -1717,14 +1401,12 @@ module Kaltura
 	end
 
 	# Manage file assets
-	#  
 	class KalturaFileAssetService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add new file asset
-		# 	 
 		def add(file_asset)
 			kparams = {}
 			client.add_param(kparams, 'fileAsset', file_asset)
@@ -1736,7 +1418,6 @@ module Kaltura
 		end
 
 		# Get file asset by id
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1748,7 +1429,6 @@ module Kaltura
 		end
 
 		# Update file asset by id
-		# 	 
 		def update(id, file_asset)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1761,7 +1441,6 @@ module Kaltura
 		end
 
 		# Delete file asset by id
-		# 	 
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1773,7 +1452,6 @@ module Kaltura
 		end
 
 		# Serve file asset by id
-		# 	 
 		def serve(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1782,7 +1460,6 @@ module Kaltura
 		end
 
 		# Set content of file asset
-		#      
 		def set_content(id, content_resource)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1795,7 +1472,6 @@ module Kaltura
 		end
 
 		# List file assets by filter and pager
-		# 	 
 		def list(filter, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -1809,14 +1485,12 @@ module Kaltura
 	end
 
 	# Retrieve information and invoke actions on Flavor Asset
-	#  
 	class KalturaFlavorAssetService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add flavor asset
-		#      
 		def add(entry_id, flavor_asset)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -1829,7 +1503,6 @@ module Kaltura
 		end
 
 		# Update flavor asset
-		#      
 		def update(id, flavor_asset)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1842,7 +1515,6 @@ module Kaltura
 		end
 
 		# Update content of flavor asset
-		#      
 		def set_content(id, content_resource)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1855,7 +1527,6 @@ module Kaltura
 		end
 
 		# Get Flavor Asset by ID
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1867,7 +1538,6 @@ module Kaltura
 		end
 
 		# Get Flavor Assets for Entry
-		# 	 
 		def get_by_entry_id(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -1879,7 +1549,6 @@ module Kaltura
 		end
 
 		# List Flavor Assets by filter and pager
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -1892,7 +1561,6 @@ module Kaltura
 		end
 
 		# Get web playable Flavor Assets for Entry
-		# 	 
 		def get_web_playable_by_entry_id(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -1904,7 +1572,6 @@ module Kaltura
 		end
 
 		# Add and convert new Flavor Asset for Entry with specific Flavor Params
-		# 	 
 		def convert(entry_id, flavor_params_id, priority=0)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -1918,7 +1585,6 @@ module Kaltura
 		end
 
 		# Reconvert Flavor Asset by ID
-		# 	 
 		def reconvert(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1930,7 +1596,6 @@ module Kaltura
 		end
 
 		# Delete Flavor Asset by ID
-		# 	 
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1942,7 +1607,6 @@ module Kaltura
 		end
 
 		# Get download URL for the asset
-		# 	 
 		def get_url(id, storage_id=KalturaNotImplemented, force_proxy=false, options=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1957,7 +1621,6 @@ module Kaltura
 		end
 
 		# Get remote storage existing paths for the asset
-		# 	 
 		def get_remote_paths(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1969,7 +1632,6 @@ module Kaltura
 		end
 
 		# Get download URL for the Flavor Asset
-		# 	 
 		def get_download_url(id, use_cdn=false)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1982,7 +1644,6 @@ module Kaltura
 		end
 
 		# Get Flavor Asset with the relevant Flavor Params (Flavor Params can exist without Flavor Asset & vice versa)
-		# 	 
 		def get_flavor_assets_with_params(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -1994,7 +1655,6 @@ module Kaltura
 		end
 
 		# manually export an asset
-		# 	 
 		def export(asset_id, storage_profile_id)
 			kparams = {}
 			client.add_param(kparams, 'assetId', asset_id)
@@ -2007,7 +1667,6 @@ module Kaltura
 		end
 
 		# Set a given flavor as the original flavor
-		# 	 
 		def set_as_source(asset_id)
 			kparams = {}
 			client.add_param(kparams, 'assetId', asset_id)
@@ -2019,7 +1678,6 @@ module Kaltura
 		end
 
 		# delete all local file syncs for this asset
-		# 	 
 		def delete_local_content(asset_id)
 			kparams = {}
 			client.add_param(kparams, 'assetId', asset_id)
@@ -2032,14 +1690,12 @@ module Kaltura
 	end
 
 	# Flavor Params Output service
-	#  
 	class KalturaFlavorParamsOutputService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Get flavor params output object by ID
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -2051,7 +1707,6 @@ module Kaltura
 		end
 
 		# List flavor params output objects by filter and pager
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -2065,14 +1720,12 @@ module Kaltura
 	end
 
 	# Add & Manage Flavor Params
-	#  
 	class KalturaFlavorParamsService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add new Flavor Params
-		# 	 
 		def add(flavor_params)
 			kparams = {}
 			client.add_param(kparams, 'flavorParams', flavor_params)
@@ -2084,7 +1737,6 @@ module Kaltura
 		end
 
 		# Get Flavor Params by ID
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -2096,7 +1748,6 @@ module Kaltura
 		end
 
 		# Update Flavor Params by ID
-		# 	 
 		def update(id, flavor_params)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -2109,7 +1760,6 @@ module Kaltura
 		end
 
 		# Delete Flavor Params by ID
-		# 	 
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -2121,7 +1771,6 @@ module Kaltura
 		end
 
 		# List Flavor Params by filter with paging support (By default - all system default params will be listed too)
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -2134,7 +1783,6 @@ module Kaltura
 		end
 
 		# Get Flavor Params by Conversion Profile ID
-		# 	 
 		def get_by_conversion_profile_id(conversion_profile_id)
 			kparams = {}
 			client.add_param(kparams, 'conversionProfileId', conversion_profile_id)
@@ -2147,14 +1795,12 @@ module Kaltura
 	end
 
 	# Add & Manage GroupUser
-	#  
 	class KalturaGroupUserService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add new GroupUser
-		# 	 
 		def add(group_user)
 			kparams = {}
 			client.add_param(kparams, 'groupUser', group_user)
@@ -2166,7 +1812,6 @@ module Kaltura
 		end
 
 		# delete by userId and groupId
-		# 	 
 		def delete(user_id, group_id)
 			kparams = {}
 			client.add_param(kparams, 'userId', user_id)
@@ -2179,7 +1824,6 @@ module Kaltura
 		end
 
 		# List all GroupUsers
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -2193,14 +1837,12 @@ module Kaltura
 	end
 
 	# Manage live channel segments
-	#  
 	class KalturaLiveChannelSegmentService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add new live channel segment
-		# 	 
 		def add(live_channel_segment)
 			kparams = {}
 			client.add_param(kparams, 'liveChannelSegment', live_channel_segment)
@@ -2212,7 +1854,6 @@ module Kaltura
 		end
 
 		# Get live channel segment by id
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -2224,7 +1865,6 @@ module Kaltura
 		end
 
 		# Update live channel segment by id
-		# 	 
 		def update(id, live_channel_segment)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -2237,7 +1877,6 @@ module Kaltura
 		end
 
 		# Delete live channel segment by id
-		# 	 
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -2249,7 +1888,6 @@ module Kaltura
 		end
 
 		# List live channel segments by filter and pager
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -2263,14 +1901,12 @@ module Kaltura
 	end
 
 	# Live Channel service lets you manage live channels
-	#  
 	class KalturaLiveChannelService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Adds new live channel.
-		# 	 
 		def add(live_channel)
 			kparams = {}
 			client.add_param(kparams, 'liveChannel', live_channel)
@@ -2282,7 +1918,6 @@ module Kaltura
 		end
 
 		# Get live channel by ID.
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -2294,7 +1929,6 @@ module Kaltura
 		end
 
 		# Update live channel. Only the properties that were set will be updated.
-		# 	 
 		def update(id, live_channel)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -2307,7 +1941,6 @@ module Kaltura
 		end
 
 		# Delete a live channel.
-		# 	 
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -2319,7 +1952,6 @@ module Kaltura
 		end
 
 		# List live channels by filter with paging support.
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -2332,7 +1964,6 @@ module Kaltura
 		end
 
 		# Delivering the status of a live channel (on-air/offline)
-		# 	 
 		def is_live(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -2344,7 +1975,6 @@ module Kaltura
 		end
 
 		# Append recorded video to live entry
-		# 	 
 		def append_recording(entry_id, asset_id, media_server_index, resource, duration, is_last_chunk=false)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -2361,7 +1991,6 @@ module Kaltura
 		end
 
 		# Register media server to live entry
-		# 	 
 		def register_media_server(entry_id, hostname, media_server_index, application_name=KalturaNotImplemented, live_entry_status=1)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -2377,7 +2006,6 @@ module Kaltura
 		end
 
 		# Unregister media server from live entry
-		# 	 
 		def unregister_media_server(entry_id, hostname, media_server_index)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -2391,7 +2019,6 @@ module Kaltura
 		end
 
 		# Validates all registered media servers
-		# 	 
 		def validate_registered_media_servers(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -2444,7 +2071,6 @@ module Kaltura
 		end
 
 		# Will serve a requested report
-		# 	 
 		def serve_report(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -2457,7 +2083,6 @@ module Kaltura
 	end
 
 	# Stats Service
-	#  
 	class KalturaLiveStatsService < KalturaServiceBase
 		def initialize(client)
 			super(client)
@@ -2465,7 +2090,6 @@ module Kaltura
 
 		# Will write to the event log a single line representing the event
 		# 	 KalturaStatsEvent $event
-		# 	 
 		def collect(event)
 			kparams = {}
 			client.add_param(kparams, 'event', event)
@@ -2478,7 +2102,6 @@ module Kaltura
 	end
 
 	# Live Stream service lets you manage live stream entries
-	#  
 	class KalturaLiveStreamService < KalturaServiceBase
 		def initialize(client)
 			super(client)
@@ -2486,7 +2109,6 @@ module Kaltura
 
 		# Adds new live stream entry.
 		# 	 The entry will be queued for provision.
-		# 	 
 		def add(live_stream_entry, source_type=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'liveStreamEntry', live_stream_entry)
@@ -2499,7 +2121,6 @@ module Kaltura
 		end
 
 		# Get live stream entry by ID.
-		# 	 
 		def get(entry_id, version=-1)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -2512,7 +2133,6 @@ module Kaltura
 		end
 
 		# Authenticate live-stream entry against stream token and partner limitations
-		# 	 
 		def authenticate(entry_id, token, hostname=KalturaNotImplemented, media_server_index=KalturaNotImplemented, application_name=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -2528,7 +2148,6 @@ module Kaltura
 		end
 
 		# Update live stream entry. Only the properties that were set will be updated.
-		# 	 
 		def update(entry_id, live_stream_entry)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -2541,7 +2160,6 @@ module Kaltura
 		end
 
 		# Delete a live stream entry.
-		# 	 
 		def delete(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -2553,7 +2171,6 @@ module Kaltura
 		end
 
 		# List live stream entries by filter with paging support.
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -2566,7 +2183,6 @@ module Kaltura
 		end
 
 		# Update live stream entry thumbnail using a raw jpeg file
-		# 	 
 		def update_offline_thumbnail_jpeg(entry_id, file_data)
 			kparams = {}
 			kfiles = {}
@@ -2580,7 +2196,6 @@ module Kaltura
 		end
 
 		# Update entry thumbnail using url
-		# 	 
 		def update_offline_thumbnail_from_url(entry_id, url)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -2593,7 +2208,6 @@ module Kaltura
 		end
 
 		# Delivering the status of a live stream (on-air/offline) if it is possible
-		# 	 
 		def is_live(id, protocol)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -2606,7 +2220,6 @@ module Kaltura
 		end
 
 		# Add new pushPublish configuration to entry
-		# 	 
 		def add_live_stream_push_publish_configuration(entry_id, protocol, url=KalturaNotImplemented, live_stream_configuration=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -2621,7 +2234,6 @@ module Kaltura
 		end
 
 		# Remove push publish configuration from entry
-		# 	 
 		def remove_live_stream_push_publish_configuration(entry_id, protocol)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -2634,7 +2246,6 @@ module Kaltura
 		end
 
 		# Append recorded video to live entry
-		# 	 
 		def append_recording(entry_id, asset_id, media_server_index, resource, duration, is_last_chunk=false)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -2651,7 +2262,6 @@ module Kaltura
 		end
 
 		# Register media server to live entry
-		# 	 
 		def register_media_server(entry_id, hostname, media_server_index, application_name=KalturaNotImplemented, live_entry_status=1)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -2667,7 +2277,6 @@ module Kaltura
 		end
 
 		# Unregister media server from live entry
-		# 	 
 		def unregister_media_server(entry_id, hostname, media_server_index)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -2681,7 +2290,6 @@ module Kaltura
 		end
 
 		# Validates all registered media servers
-		# 	 
 		def validate_registered_media_servers(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -2693,7 +2301,6 @@ module Kaltura
 		end
 
 		# Creates perioding metadata sync-point events on a live stream
-		# 	 
 		def create_periodic_sync_points(entry_id, interval, duration)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -2708,14 +2315,12 @@ module Kaltura
 	end
 
 	# Media Info service
-	#  
 	class KalturaMediaInfoService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# List media info objects by filter and pager
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -2729,14 +2334,12 @@ module Kaltura
 	end
 
 	# Media service lets you upload and manage media files (images / videos & audio)
-	#  
 	class KalturaMediaService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add entry
-		#      
 		def add(entry)
 			kparams = {}
 			client.add_param(kparams, 'entry', entry)
@@ -2749,7 +2352,6 @@ module Kaltura
 
 		# Add content to media entry which is not yet associated with content (therefore is in status NO_CONTENT).
 		#      If the requirement is to replace the entry's associated content, use action updateContent.
-		#      
 		def add_content(entry_id, resource=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -2763,7 +2365,21 @@ module Kaltura
 
 		# Adds new media entry by importing an HTTP or FTP URL.
 		# 	 The entry will be queued for import and then for conversion.
-		# 	 
+		# 	 This action should be exposed only to the batches
+		def add_from_bulk(media_entry, url, bulk_upload_id)
+			kparams = {}
+			client.add_param(kparams, 'mediaEntry', media_entry)
+			client.add_param(kparams, 'url', url)
+			client.add_param(kparams, 'bulkUploadId', bulk_upload_id)
+			client.queue_service_action_call('media', 'addFromBulk', 'KalturaMediaEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Adds new media entry by importing an HTTP or FTP URL.
+		# 	 The entry will be queued for import and then for conversion.
 		def add_from_url(media_entry, url)
 			kparams = {}
 			client.add_param(kparams, 'mediaEntry', media_entry)
@@ -2777,7 +2393,6 @@ module Kaltura
 
 		# Adds new media entry by importing the media file from a search provider.
 		# 	 This action should be used with the search service result.
-		# 	 
 		def add_from_search_result(media_entry=KalturaNotImplemented, search_result=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'mediaEntry', media_entry)
@@ -2790,7 +2405,6 @@ module Kaltura
 		end
 
 		# Add new entry after the specific media file was uploaded and the upload token id exists
-		# 	 
 		def add_from_uploaded_file(media_entry, upload_token_id)
 			kparams = {}
 			client.add_param(kparams, 'mediaEntry', media_entry)
@@ -2803,7 +2417,6 @@ module Kaltura
 		end
 
 		# Add new entry after the file was recored on the server and the token id exists
-		# 	 
 		def add_from_recorded_webcam(media_entry, webcam_token_id)
 			kparams = {}
 			client.add_param(kparams, 'mediaEntry', media_entry)
@@ -2816,7 +2429,6 @@ module Kaltura
 		end
 
 		# Copy entry into new entry
-		# 	 
 		def add_from_entry(source_entry_id, media_entry=KalturaNotImplemented, source_flavor_params_id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'sourceEntryId', source_entry_id)
@@ -2830,7 +2442,6 @@ module Kaltura
 		end
 
 		# Copy flavor asset into new entry
-		# 	 
 		def add_from_flavor_asset(source_flavor_asset_id, media_entry=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'sourceFlavorAssetId', source_flavor_asset_id)
@@ -2843,7 +2454,6 @@ module Kaltura
 		end
 
 		# Convert entry
-		# 	 
 		def convert(entry_id, conversion_profile_id=KalturaNotImplemented, dynamic_conversion_attributes=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -2857,7 +2467,6 @@ module Kaltura
 		end
 
 		# Get media entry by ID.
-		# 	 
 		def get(entry_id, version=-1)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -2871,7 +2480,6 @@ module Kaltura
 
 		# Get MRSS by entry id
 		#      XML will return as an escaped string
-		#      
 		def get_mrss(entry_id, extending_items_array=KalturaNotImplemented, features=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -2885,7 +2493,6 @@ module Kaltura
 		end
 
 		# Update media entry. Only the properties that were set will be updated.
-		# 	 
 		def update(entry_id, media_entry)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -2898,7 +2505,6 @@ module Kaltura
 		end
 
 		# Replace content associated with the media entry.
-		# 	 
 		def update_content(entry_id, resource, conversion_profile_id=KalturaNotImplemented, advanced_options=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -2913,7 +2519,6 @@ module Kaltura
 		end
 
 		# Delete a media entry.
-		# 	 
 		def delete(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -2925,7 +2530,6 @@ module Kaltura
 		end
 
 		# Approves media replacement
-		# 	 
 		def approve_replace(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -2937,7 +2541,6 @@ module Kaltura
 		end
 
 		# Cancels media replacement
-		# 	 
 		def cancel_replace(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -2949,7 +2552,6 @@ module Kaltura
 		end
 
 		# List media entries by filter with paging support.
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -2962,7 +2564,6 @@ module Kaltura
 		end
 
 		# Count media entries by filter.
-		# 	 
 		def count(filter=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -2974,7 +2575,6 @@ module Kaltura
 		end
 
 		# Upload a media file to Kaltura, then the file can be used to create a media entry.
-		# 	 
 		def upload(file_data)
 			kparams = {}
 			kfiles = {}
@@ -2988,7 +2588,6 @@ module Kaltura
 
 		# Update media entry thumbnail by a specified time offset (In seconds)
 		# 	 If flavor params id not specified, source flavor will be used by default
-		# 	 
 		def update_thumbnail(entry_id, time_offset, flavor_params_id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -3003,7 +2602,6 @@ module Kaltura
 
 		# Update media entry thumbnail from a different entry by a specified time offset (In seconds)
 		# 	 If flavor params id not specified, source flavor will be used by default
-		# 	 
 		def update_thumbnail_from_source_entry(entry_id, source_entry_id, time_offset, flavor_params_id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -3018,7 +2616,6 @@ module Kaltura
 		end
 
 		# Update media entry thumbnail using a raw jpeg file
-		# 	 
 		def update_thumbnail_jpeg(entry_id, file_data)
 			kparams = {}
 			kfiles = {}
@@ -3032,7 +2629,6 @@ module Kaltura
 		end
 
 		# Update entry thumbnail using url
-		# 	 
 		def update_thumbnail_from_url(entry_id, url)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -3045,7 +2641,6 @@ module Kaltura
 		end
 
 		# Request a new conversion job, this can be used to convert the media entry to a different format
-		# 	 
 		def request_conversion(entry_id, file_format)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -3058,7 +2653,6 @@ module Kaltura
 		end
 
 		# Flag inappropriate media entry for moderation
-		# 	 
 		def flag(moderation_flag)
 			kparams = {}
 			client.add_param(kparams, 'moderationFlag', moderation_flag)
@@ -3070,7 +2664,6 @@ module Kaltura
 		end
 
 		# Reject the media entry and mark the pending flags (if any) as moderated (this will make the entry non playable)
-		# 	 
 		def reject(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -3082,7 +2675,6 @@ module Kaltura
 		end
 
 		# Approve the media entry and mark the pending flags (if any) as moderated (this will make the entry playable)
-		# 	 
 		def approve(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -3094,7 +2686,6 @@ module Kaltura
 		end
 
 		# List all pending flags for the media entry
-		# 	 
 		def list_flags(entry_id, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -3107,7 +2698,6 @@ module Kaltura
 		end
 
 		# Anonymously rank a media entry, no validation is done on duplicate rankings
-		# 	 
 		def anonymous_rank(entry_id, rank)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -3122,7 +2712,6 @@ module Kaltura
 		# Add new bulk upload batch job
 		# 	 Conversion profile id can be specified in the API or in the CSV file, the one in the CSV file will be stronger.
 		# 	 If no conversion profile was specified, partner's default will be used
-		# 	 
 		def bulk_upload_add(file_data, bulk_upload_data=KalturaNotImplemented, bulk_upload_entry_data=KalturaNotImplemented)
 			kparams = {}
 			kfiles = {}
@@ -3138,8 +2727,7 @@ module Kaltura
 	end
 
 	# A Mix is an XML unique format invented by Kaltura, it allows the user to create a mix of videos and images, in and out points, transitions, text overlays, soundtrack, effects and much more...
-	#  Mixing service lets you create a new mix, manage its metadata and make basic manipulations.   
-	#  
+	#  Mixing service lets you create a new mix, manage its metadata and make basic manipulations.
 	class KalturaMixingService < KalturaServiceBase
 		def initialize(client)
 			super(client)
@@ -3147,7 +2735,6 @@ module Kaltura
 
 		# Adds a new mix.
 		# 	 If the dataContent is null, a default timeline will be created.
-		# 	 
 		def add(mix_entry)
 			kparams = {}
 			client.add_param(kparams, 'mixEntry', mix_entry)
@@ -3159,7 +2746,6 @@ module Kaltura
 		end
 
 		# Get mix entry by id.
-		# 	 
 		def get(entry_id, version=-1)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -3172,7 +2758,6 @@ module Kaltura
 		end
 
 		# Update mix entry. Only the properties that were set will be updated.
-		# 	 
 		def update(entry_id, mix_entry)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -3185,7 +2770,6 @@ module Kaltura
 		end
 
 		# Delete a mix entry.
-		# 	 
 		def delete(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -3198,7 +2782,6 @@ module Kaltura
 
 		# List entries by filter with paging support.
 		# 	 Return parameter is an array of mix entries.
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -3211,7 +2794,6 @@ module Kaltura
 		end
 
 		# Count mix entries by filter.
-		# 	 
 		def count(filter=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -3223,7 +2805,6 @@ module Kaltura
 		end
 
 		# Clones an existing mix.
-		# 	 
 		def clone(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -3235,7 +2816,6 @@ module Kaltura
 		end
 
 		# Appends a media entry to a the end of the mix timeline, this will save the mix timeline as a new version.
-		# 	 
 		def append_media_entry(mix_entry_id, media_entry_id)
 			kparams = {}
 			client.add_param(kparams, 'mixEntryId', mix_entry_id)
@@ -3248,7 +2828,6 @@ module Kaltura
 		end
 
 		# Get the mixes in which the media entry is included
-		# 	 
 		def get_mixes_by_media_id(media_entry_id)
 			kparams = {}
 			client.add_param(kparams, 'mediaEntryId', media_entry_id)
@@ -3260,7 +2839,6 @@ module Kaltura
 		end
 
 		# Get all ready media entries that exist in the given mix id
-		# 	 
 		def get_ready_media_entries(mix_id, version=-1)
 			kparams = {}
 			client.add_param(kparams, 'mixId', mix_id)
@@ -3273,7 +2851,6 @@ module Kaltura
 		end
 
 		# Anonymously rank a mix entry, no validation is done on duplicate rankings
-		# 	 
 		def anonymous_rank(entry_id, rank)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -3287,14 +2864,12 @@ module Kaltura
 	end
 
 	# Notification Service
-	#  
 	class KalturaNotificationService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Return the notifications for a specific entry id and type
-		# 	 
 		def get_client_notification(entry_id, type)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -3308,14 +2883,12 @@ module Kaltura
 	end
 
 	# partner service allows you to change/manage your partner personal details and settings as well
-	#  
 	class KalturaPartnerService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Create a new Partner object
-		# 	 
 		def register(partner, cms_password='', template_partner_id=KalturaNotImplemented, silent=false)
 			kparams = {}
 			client.add_param(kparams, 'partner', partner)
@@ -3330,7 +2903,6 @@ module Kaltura
 		end
 
 		# Update details and settings of an existing partner
-		# 	 
 		def update(partner, allow_empty=false)
 			kparams = {}
 			client.add_param(kparams, 'partner', partner)
@@ -3343,7 +2915,6 @@ module Kaltura
 		end
 
 		# Retrieve partner object by Id
-		# 	 
 		def get(id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -3355,7 +2926,6 @@ module Kaltura
 		end
 
 		# Retrieve partner secret and admin secret
-		# 	 
 		def get_secrets(partner_id, admin_email, cms_password)
 			kparams = {}
 			client.add_param(kparams, 'partnerId', partner_id)
@@ -3370,7 +2940,6 @@ module Kaltura
 
 		# Retrieve all info attributed to the partner
 		# 	 This action expects no parameters. It returns information for the current KS partnerId.
-		# 	 
 		def get_info()
 			kparams = {}
 			client.queue_service_action_call('partner', 'getInfo', 'KalturaPartner', kparams)
@@ -3384,7 +2953,6 @@ module Kaltura
 		# 	 Calculation is done according to partner's package
 		# 	 Additional data returned is a graph points of streaming usage in a timeframe
 		# 	 The resolution can be "days" or "months"
-		# 	 
 		def get_usage(year='', month=1, resolution=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'year', year)
@@ -3399,7 +2967,6 @@ module Kaltura
 
 		# Get usage statistics for a partner
 		# 	 Calculation is done according to partner's package
-		# 	 
 		def get_statistics()
 			kparams = {}
 			client.queue_service_action_call('partner', 'getStatistics', 'KalturaPartnerStatistics', kparams)
@@ -3410,7 +2977,6 @@ module Kaltura
 		end
 
 		# Retrieve a list of partner objects which the current user is allowed to access.
-		# 	 
 		def list_partners_for_user(partner_filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'partnerFilter', partner_filter)
@@ -3425,7 +2991,6 @@ module Kaltura
 		# List partners by filter with paging support
 		# 	 Current implementation will only list the sub partners of the partner initiating the api call (using the current KS).
 		# 	 This action is only partially implemented to support listing sub partners of a VAR partner.
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -3438,7 +3003,6 @@ module Kaltura
 		end
 
 		# List partner's current processes' statuses
-		# 	 
 		def list_feature_status()
 			kparams = {}
 			client.queue_service_action_call('partner', 'listFeatureStatus', 'KalturaFeatureStatusListResponse', kparams)
@@ -3449,7 +3013,6 @@ module Kaltura
 		end
 
 		# Count partner's existing sub-publishers (count includes the partner itself).
-		# 	 
 		def count(filter=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -3462,7 +3025,6 @@ module Kaltura
 	end
 
 	# PermissionItem service lets you create and manage permission items
-	#  
 	class KalturaPermissionItemService < KalturaServiceBase
 		def initialize(client)
 			super(client)
@@ -3470,7 +3032,6 @@ module Kaltura
 
 		# Adds a new permission item object to the account.
 		# 	 This action is available only to Kaltura system administrators.
-		# 	 
 		def add(permission_item)
 			kparams = {}
 			client.add_param(kparams, 'permissionItem', permission_item)
@@ -3482,7 +3043,6 @@ module Kaltura
 		end
 
 		# Retrieves a permission item object using its ID.
-		# 	 
 		def get(permission_item_id)
 			kparams = {}
 			client.add_param(kparams, 'permissionItemId', permission_item_id)
@@ -3495,7 +3055,6 @@ module Kaltura
 
 		# Updates an existing permission item object.
 		# 	 This action is available only to Kaltura system administrators.
-		# 	 
 		def update(permission_item_id, permission_item)
 			kparams = {}
 			client.add_param(kparams, 'permissionItemId', permission_item_id)
@@ -3509,7 +3068,6 @@ module Kaltura
 
 		# Deletes an existing permission item object.
 		# 	 This action is available only to Kaltura system administrators.
-		# 	 
 		def delete(permission_item_id)
 			kparams = {}
 			client.add_param(kparams, 'permissionItemId', permission_item_id)
@@ -3521,7 +3079,6 @@ module Kaltura
 		end
 
 		# Lists permission item objects that are associated with an account.
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -3535,14 +3092,12 @@ module Kaltura
 	end
 
 	# Permission service lets you create and manage user permissions
-	#  
 	class KalturaPermissionService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Adds a new permission object to the account.
-		# 	 
 		def add(permission)
 			kparams = {}
 			client.add_param(kparams, 'permission', permission)
@@ -3554,7 +3109,6 @@ module Kaltura
 		end
 
 		# Retrieves a permission object using its ID.
-		# 	 
 		def get(permission_name)
 			kparams = {}
 			client.add_param(kparams, 'permissionName', permission_name)
@@ -3566,7 +3120,6 @@ module Kaltura
 		end
 
 		# Updates an existing permission object.
-		# 	 
 		def update(permission_name, permission)
 			kparams = {}
 			client.add_param(kparams, 'permissionName', permission_name)
@@ -3579,7 +3132,6 @@ module Kaltura
 		end
 
 		# Deletes an existing permission object.
-		# 	 
 		def delete(permission_name)
 			kparams = {}
 			client.add_param(kparams, 'permissionName', permission_name)
@@ -3593,7 +3145,6 @@ module Kaltura
 		# Lists permission objects that are associated with an account.
 		# 	 Blocked permissions are listed unless you use a filter to exclude them.
 		# 	 Blocked permissions are listed unless you use a filter to exclude them.
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -3606,7 +3157,6 @@ module Kaltura
 		end
 
 		# Retrieves a list of permissions that apply to the current KS.
-		# 	 
 		def get_current_permissions()
 			kparams = {}
 			client.queue_service_action_call('permission', 'getCurrentPermissions', 'string', kparams)
@@ -3619,7 +3169,6 @@ module Kaltura
 
 	# Playlist service lets you create,manage and play your playlists
 	#  Playlists could be static (containing a fixed list of entries) or dynamic (baseed on a filter)
-	#  
 	class KalturaPlaylistService < KalturaServiceBase
 		def initialize(client)
 			super(client)
@@ -3627,7 +3176,6 @@ module Kaltura
 
 		# Add new playlist
 		# 	 Note that all entries used in a playlist will become public and may appear in KalturaNetwork
-		# 	 
 		def add(playlist, update_stats=false)
 			kparams = {}
 			client.add_param(kparams, 'playlist', playlist)
@@ -3640,7 +3188,6 @@ module Kaltura
 		end
 
 		# Retrieve a playlist
-		# 	 
 		def get(id, version=-1)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -3654,7 +3201,6 @@ module Kaltura
 
 		# Update existing playlist
 		# 	 Note - you cannot change playlist type. updated playlist must be of the same type.
-		# 	 
 		def update(id, playlist, update_stats=false)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -3668,7 +3214,6 @@ module Kaltura
 		end
 
 		# Delete existing playlist
-		# 	 
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -3680,7 +3225,6 @@ module Kaltura
 		end
 
 		# Clone an existing playlist
-		# 	 
 		def clone(id, new_playlist=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -3693,7 +3237,6 @@ module Kaltura
 		end
 
 		# List available playlists
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -3706,7 +3249,6 @@ module Kaltura
 		end
 
 		# Retrieve playlist for playing purpose
-		# 	 
 		def execute(id, detailed='', playlist_context=KalturaNotImplemented, filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -3722,7 +3264,6 @@ module Kaltura
 		end
 
 		# Retrieve playlist for playing purpose, based on content
-		# 	 
 		def execute_from_content(playlist_type, playlist_content, detailed='', pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'playlistType', playlist_type)
@@ -3737,7 +3278,6 @@ module Kaltura
 		end
 
 		# Revrieve playlist for playing purpose, based on media entry filters
-		# 	 
 		def execute_from_filters(filters, total_results, detailed='1', pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filters', filters)
@@ -3752,7 +3292,6 @@ module Kaltura
 		end
 
 		# Retrieve playlist statistics
-		# 	 
 		def get_stats_from_content(playlist_type, playlist_content)
 			kparams = {}
 			client.add_param(kparams, 'playlistType', playlist_type)
@@ -3766,14 +3305,12 @@ module Kaltura
 	end
 
 	# api for getting reports data by the report type and some inputFilter
-	#  
 	class KalturaReportService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
-		# report getGraphs action allows to get a graph data for a specific report. 
-		# 	 
+		# report getGraphs action allows to get a graph data for a specific report.
 		def get_graphs(report_type, report_input_filter, dimension=KalturaNotImplemented, object_ids=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'reportType', report_type)
@@ -3787,8 +3324,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# report getTotal action allows to get a graph data for a specific report. 
-		# 	 
+		# report getTotal action allows to get a graph data for a specific report.
 		def get_total(report_type, report_input_filter, object_ids=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'reportType', report_type)
@@ -3801,8 +3337,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# report getBaseTotal action allows to get a the total base for storage reports  
-		# 	 
+		# report getBaseTotal action allows to get a the total base for storage reports
 		def get_base_total(report_type, report_input_filter, object_ids=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'reportType', report_type)
@@ -3815,8 +3350,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# report getTable action allows to get a graph data for a specific report. 
-		# 	 
+		# report getTable action allows to get a graph data for a specific report.
 		def get_table(report_type, report_input_filter, pager, order=KalturaNotImplemented, object_ids=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'reportType', report_type)
@@ -3832,7 +3366,6 @@ module Kaltura
 		end
 
 		# will create a Csv file for the given report and return the URL to access it
-		# 	 
 		def get_url_for_report_as_csv(report_title, report_text, headers, report_type, report_input_filter, dimension=KalturaNotImplemented, pager=KalturaNotImplemented, order=KalturaNotImplemented, object_ids=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'reportTitle', report_title)
@@ -3852,7 +3385,6 @@ module Kaltura
 		end
 
 		# Will serve a requested report
-		# 	 
 		def serve(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -3882,8 +3414,7 @@ module Kaltura
 			return client.get_serve_url()
 		end
 
-		# Returns report CSV file executed by string params with the following convention: param1=value1;param2=value2 
-		# 	 
+		# Returns report CSV file executed by string params with the following convention: param1=value1;param2=value2
 		def get_csv_from_string_params(id, params=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -3894,14 +3425,12 @@ module Kaltura
 	end
 
 	# Manage response profiles
-	#  
 	class KalturaResponseProfileService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add new response profile
-		# 	 
 		def add(add_response_profile)
 			kparams = {}
 			client.add_param(kparams, 'addResponseProfile', add_response_profile)
@@ -3913,7 +3442,6 @@ module Kaltura
 		end
 
 		# Get response profile by id
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -3925,7 +3453,6 @@ module Kaltura
 		end
 
 		# Update response profile by id
-		# 	 
 		def update(id, update_response_profile)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -3938,7 +3465,6 @@ module Kaltura
 		end
 
 		# Update response profile status by id
-		# 	 
 		def update_status(id, status)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -3951,7 +3477,6 @@ module Kaltura
 		end
 
 		# Delete response profile by id
-		# 	 
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -3963,7 +3488,6 @@ module Kaltura
 		end
 
 		# List response profiles by filter and pager
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -3976,7 +3500,6 @@ module Kaltura
 		end
 
 		# Recalculate response profile cached objects
-		# 	 
 		def recalculate(options)
 			kparams = {}
 			client.add_param(kparams, 'options', options)
@@ -3988,7 +3511,6 @@ module Kaltura
 		end
 
 		# Clone an existing response profile
-		# 	 
 		def clone(id, profile)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -4001,15 +3523,13 @@ module Kaltura
 		end
 	end
 
-	# Expose the schema definitions for syndication MRSS, bulk upload XML and other schema types. 
-	#  
+	# Expose the schema definitions for syndication MRSS, bulk upload XML and other schema types.
 	class KalturaSchemaService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
-		# Serves the requested XSD according to the type and name. 
-		# 	 
+		# Serves the requested XSD according to the type and name.
 		def serve(type)
 			kparams = {}
 			client.add_param(kparams, 'type', type)
@@ -4020,14 +3540,12 @@ module Kaltura
 
 	# Search service allows you to search for media in various media providers
 	#  This service is being used mostly by the CW component
-	#  
 	class KalturaSearchService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Search for media in one of the supported media providers
-		# 	 
 		def search(search, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'search', search)
@@ -4041,7 +3559,6 @@ module Kaltura
 
 		# Retrieve extra information about media found in search action
 		# 	 Some providers return only part of the fields needed to create entry from, use this action to get the rest of the fields.
-		# 	 
 		def get_media_info(search_result)
 			kparams = {}
 			client.add_param(kparams, 'searchResult', search_result)
@@ -4055,7 +3572,6 @@ module Kaltura
 		# Search for media given a specific URL
 		# 	 Kaltura supports a searchURL action on some of the media providers.
 		# 	 This action will return a KalturaSearchResult object based on a given URL (assuming the media provider is supported)
-		# 	 
 		def search_url(media_type, url)
 			kparams = {}
 			client.add_param(kparams, 'mediaType', media_type)
@@ -4081,14 +3597,12 @@ module Kaltura
 	end
 
 	# Server Node service
-	#  
 	class KalturaServerNodeService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Adds a server node to the Kaltura DB.
-		# 	 
 		def add(server_node)
 			kparams = {}
 			client.add_param(kparams, 'serverNode', server_node)
@@ -4100,7 +3614,6 @@ module Kaltura
 		end
 
 		# Get server node by id
-		# 	 
 		def get(server_node_id)
 			kparams = {}
 			client.add_param(kparams, 'serverNodeId', server_node_id)
@@ -4111,8 +3624,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Update server node by id 
-		# 	 
+		# Update server node by id
 		def update(server_node_id, server_node)
 			kparams = {}
 			client.add_param(kparams, 'serverNodeId', server_node_id)
@@ -4125,7 +3637,6 @@ module Kaltura
 		end
 
 		# delete server node by id
-		# 	 
 		def delete(server_node_id)
 			kparams = {}
 			client.add_param(kparams, 'serverNodeId', server_node_id)
@@ -4137,7 +3648,6 @@ module Kaltura
 		end
 
 		# Disable server node by id
-		# 	 
 		def disable(server_node_id)
 			kparams = {}
 			client.add_param(kparams, 'serverNodeId', server_node_id)
@@ -4149,7 +3659,6 @@ module Kaltura
 		end
 
 		# Enable server node by id
-		# 	 
 		def enable(server_node_id)
 			kparams = {}
 			client.add_param(kparams, 'serverNodeId', server_node_id)
@@ -4172,7 +3681,6 @@ module Kaltura
 		end
 
 		# Update server node status
-		# 	 
 		def report_status(host_name, server_node=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'hostName', host_name)
@@ -4186,7 +3694,6 @@ module Kaltura
 	end
 
 	# Session service
-	#  
 	class KalturaSessionService < KalturaServiceBase
 		def initialize(client)
 			super(client)
@@ -4194,7 +3701,6 @@ module Kaltura
 
 		# Start a session with Kaltura's server.
 		# 	 The result KS is the session key that you should pass to all services that requires a ticket.
-		# 	 
 		def start(secret, user_id='', type=0, partner_id=KalturaNotImplemented, expiry=86400, privileges=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'secret', secret)
@@ -4211,7 +3717,6 @@ module Kaltura
 		end
 
 		# End a session with the Kaltura server, making the current KS invalid.
-		# 	 
 		def end()
 			kparams = {}
 			client.queue_service_action_call('session', 'end', '', kparams)
@@ -4223,7 +3728,6 @@ module Kaltura
 
 		# Start an impersonated session with Kaltura's server.
 		# 	 The result KS is the session key that you should pass to all services that requires a ticket.
-		# 	 
 		def impersonate(secret, impersonated_partner_id, user_id='', type=0, partner_id=KalturaNotImplemented, expiry=86400, privileges=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'secret', secret)
@@ -4243,7 +3747,6 @@ module Kaltura
 		# Start an impersonated session with Kaltura's server.
 		# 	 The result KS info contains the session key that you should pass to all services that requires a ticket.
 		# 	 Type, expiry and privileges won't be changed if they're not set
-		# 	 
 		def impersonate_by_ks(session, type=KalturaNotImplemented, expiry=KalturaNotImplemented, privileges=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'session', session)
@@ -4258,7 +3761,6 @@ module Kaltura
 		end
 
 		# Parse session key and return its info
-		# 	 
 		def get(session=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'session', session)
@@ -4270,7 +3772,6 @@ module Kaltura
 		end
 
 		# Start a session for Kaltura's flash widgets
-		# 	 
 		def start_widget_session(widget_id, expiry=86400)
 			kparams = {}
 			client.add_param(kparams, 'widgetId', widget_id)
@@ -4284,7 +3785,6 @@ module Kaltura
 	end
 
 	# Stats Service
-	#  
 	class KalturaStatsService < KalturaServiceBase
 		def initialize(client)
 			super(client)
@@ -4312,7 +3812,6 @@ module Kaltura
 		# 	
 		# 	
 		# 	 KalturaStatsEvent $event
-		# 	 
 		def collect(event)
 			kparams = {}
 			client.add_param(kparams, 'event', event)
@@ -4325,7 +3824,6 @@ module Kaltura
 
 		# Will collect the kmcEvent sent form the KMC client
 		# 	 // this will actually be an empty function because all events will be sent using GET and will anyway be logged in the apache log
-		# 	 
 		def kmc_collect(kmc_event)
 			kparams = {}
 			client.add_param(kparams, 'kmcEvent', kmc_event)
@@ -4347,7 +3845,6 @@ module Kaltura
 		end
 
 		# Use this action to report errors to the kaltura server.
-		# 	 
 		def report_error(error_code, error_message)
 			kparams = {}
 			client.add_param(kparams, 'errorCode', error_code)
@@ -4361,14 +3858,12 @@ module Kaltura
 	end
 
 	# Storage Profiles service
-	#  
 	class KalturaStorageProfileService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Adds a storage profile to the Kaltura DB.
-		# 	 
 		def add(storage_profile)
 			kparams = {}
 			client.add_param(kparams, 'storageProfile', storage_profile)
@@ -4391,7 +3886,6 @@ module Kaltura
 		end
 
 		# Get storage profile by id
-		# 	 
 		def get(storage_profile_id)
 			kparams = {}
 			client.add_param(kparams, 'storageProfileId', storage_profile_id)
@@ -4402,8 +3896,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Update storage profile by id 
-		# 	 
+		# Update storage profile by id
 		def update(storage_profile_id, storage_profile)
 			kparams = {}
 			client.add_param(kparams, 'storageProfileId', storage_profile_id)
@@ -4428,14 +3921,12 @@ module Kaltura
 	end
 
 	# Add & Manage Syndication Feeds
-	#  
 	class KalturaSyndicationFeedService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add new Syndication Feed
-		# 	 
 		def add(syndication_feed)
 			kparams = {}
 			client.add_param(kparams, 'syndicationFeed', syndication_feed)
@@ -4447,7 +3938,6 @@ module Kaltura
 		end
 
 		# Get Syndication Feed by ID
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -4459,7 +3949,6 @@ module Kaltura
 		end
 
 		# Update Syndication Feed by ID
-		# 	 
 		def update(id, syndication_feed)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -4472,7 +3961,6 @@ module Kaltura
 		end
 
 		# Delete Syndication Feed by ID
-		# 	 
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -4484,7 +3972,6 @@ module Kaltura
 		end
 
 		# List Syndication Feeds by filter with paging support
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -4497,7 +3984,6 @@ module Kaltura
 		end
 
 		# get entry count for a syndication feed
-		# 	 
 		def get_entry_count(feed_id)
 			kparams = {}
 			client.add_param(kparams, 'feedId', feed_id)
@@ -4510,7 +3996,6 @@ module Kaltura
 
 		# request conversion for all entries that doesnt have the required flavor param
 		# 	 returns a comma-separated ids of conversion jobs
-		# 	 
 		def request_conversion(feed_id)
 			kparams = {}
 			client.add_param(kparams, 'feedId', feed_id)
@@ -4523,7 +4008,6 @@ module Kaltura
 	end
 
 	# System service is used for internal system helpers & to retrieve system level information
-	#  
 	class KalturaSystemService < KalturaServiceBase
 		def initialize(client)
 			super(client)
@@ -4567,14 +4051,12 @@ module Kaltura
 	end
 
 	# Retrieve information and invoke actions on Thumb Asset
-	#  
 	class KalturaThumbAssetService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add thumbnail asset
-		#      
 		def add(entry_id, thumb_asset)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -4587,7 +4069,6 @@ module Kaltura
 		end
 
 		# Update content of thumbnail asset
-		#      
 		def set_content(id, content_resource)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -4600,7 +4081,6 @@ module Kaltura
 		end
 
 		# Update thumbnail asset
-		#      
 		def update(id, thumb_asset)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -4613,7 +4093,6 @@ module Kaltura
 		end
 
 		# Serves thumbnail by entry id and thumnail params id
-		# 	 
 		def serve_by_entry_id(entry_id, thumb_param_id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -4623,7 +4102,6 @@ module Kaltura
 		end
 
 		# Serves thumbnail by its id
-		# 	 
 		def serve(thumb_asset_id, version=KalturaNotImplemented, thumb_params=KalturaNotImplemented, options=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'thumbAssetId', thumb_asset_id)
@@ -4636,7 +4114,6 @@ module Kaltura
 
 		# Tags the thumbnail as DEFAULT_THUMB and removes that tag from all other thumbnail assets of the entry.
 		# 	 Create a new file sync link on the entry thumbnail that points to the thumbnail asset file sync.
-		# 	 
 		def set_as_default(thumb_asset_id)
 			kparams = {}
 			client.add_param(kparams, 'thumbAssetId', thumb_asset_id)
@@ -4701,7 +4178,6 @@ module Kaltura
 		end
 
 		# List Thumbnail Assets by filter and pager
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -4747,7 +4223,6 @@ module Kaltura
 		end
 
 		# Get download URL for the asset
-		# 	 
 		def get_url(id, storage_id=KalturaNotImplemented, thumb_params=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -4761,7 +4236,6 @@ module Kaltura
 		end
 
 		# Get remote storage existing paths for the asset
-		# 	 
 		def get_remote_paths(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -4774,14 +4248,12 @@ module Kaltura
 	end
 
 	# Thumbnail Params Output service
-	#  
 	class KalturaThumbParamsOutputService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Get thumb params output object by ID
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -4793,7 +4265,6 @@ module Kaltura
 		end
 
 		# List thumb params output objects by filter and pager
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -4807,14 +4278,12 @@ module Kaltura
 	end
 
 	# Add & Manage Thumb Params
-	#  
 	class KalturaThumbParamsService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Add new Thumb Params
-		# 	 
 		def add(thumb_params)
 			kparams = {}
 			client.add_param(kparams, 'thumbParams', thumb_params)
@@ -4826,7 +4295,6 @@ module Kaltura
 		end
 
 		# Get Thumb Params by ID
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -4838,7 +4306,6 @@ module Kaltura
 		end
 
 		# Update Thumb Params by ID
-		# 	 
 		def update(id, thumb_params)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -4851,7 +4318,6 @@ module Kaltura
 		end
 
 		# Delete Thumb Params by ID
-		# 	 
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -4863,7 +4329,6 @@ module Kaltura
 		end
 
 		# List Thumb Params by filter with paging support (By default - all system default params will be listed too)
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -4876,7 +4341,6 @@ module Kaltura
 		end
 
 		# Get Thumb Params by Conversion Profile ID
-		# 	 
 		def get_by_conversion_profile_id(conversion_profile_id)
 			kparams = {}
 			client.add_param(kparams, 'conversionProfileId', conversion_profile_id)
@@ -4890,14 +4354,12 @@ module Kaltura
 
 	# UiConf service lets you create and manage your UIConfs for the various flash components
 	#  This service is used by the KMC-ApplicationStudio
-	#  
 	class KalturaUiConfService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# UIConf Add action allows you to add a UIConf to Kaltura DB
-		# 	 
 		def add(ui_conf)
 			kparams = {}
 			client.add_param(kparams, 'uiConf', ui_conf)
@@ -4909,7 +4371,6 @@ module Kaltura
 		end
 
 		# Update an existing UIConf
-		# 	 
 		def update(id, ui_conf)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -4922,7 +4383,6 @@ module Kaltura
 		end
 
 		# Retrieve a UIConf by id
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -4934,7 +4394,6 @@ module Kaltura
 		end
 
 		# Delete an existing UIConf
-		# 	 
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -4946,7 +4405,6 @@ module Kaltura
 		end
 
 		# Clone an existing UIConf
-		# 	 
 		def clone(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -4958,7 +4416,6 @@ module Kaltura
 		end
 
 		# retrieve a list of available template UIConfs
-		# 	 
 		def list_templates(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -4971,7 +4428,6 @@ module Kaltura
 		end
 
 		# Retrieve a list of available UIConfs
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -4984,7 +4440,6 @@ module Kaltura
 		end
 
 		# Retrieve a list of all available versions by object type
-		# 	 
 		def get_available_types()
 			kparams = {}
 			client.queue_service_action_call('uiconf', 'getAvailableTypes', 'array', kparams)
@@ -5028,7 +4483,6 @@ module Kaltura
 		end
 
 		# Adds new upload token to upload a file
-		# 	 
 		def add(upload_token=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'uploadToken', upload_token)
@@ -5040,7 +4494,6 @@ module Kaltura
 		end
 
 		# Get upload token by id
-		# 	 
 		def get(upload_token_id)
 			kparams = {}
 			client.add_param(kparams, 'uploadTokenId', upload_token_id)
@@ -5059,8 +4512,7 @@ module Kaltura
 		# 	 If a chunk fails to upload it can be re-uploaded.
 		# 	 3. After all of the chunks have been uploaded a final chunk (can be of zero size) should be uploaded 
 		# 	 with resume=true, finalChunk=true and the expected resumeAt position. In case an UPLOAD_TOKEN_CANNOT_MATCH_EXPECTED_SIZE exception
-		# 	 has been returned (indicating not all of the chunks were appended yet) the final request can be retried.     
-		# 	 
+		# 	 has been returned (indicating not all of the chunks were appended yet) the final request can be retried.
 		def upload(upload_token_id, file_data, resume=false, final_chunk=true, resume_at=-1)
 			kparams = {}
 			kfiles = {}
@@ -5077,7 +4529,6 @@ module Kaltura
 		end
 
 		# Deletes the upload token by upload token id
-		# 	 
 		def delete(upload_token_id)
 			kparams = {}
 			client.add_param(kparams, 'uploadTokenId', upload_token_id)
@@ -5090,7 +4541,6 @@ module Kaltura
 
 		# List upload token by filter with pager support. 
 		# 	 When using a user session the service will be restricted to users objects only.
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -5109,7 +4559,6 @@ module Kaltura
 		end
 
 		# Adds a user_entry to the Kaltura DB.
-		# 	 
 		def add(user_entry)
 			kparams = {}
 			client.add_param(kparams, 'userEntry', user_entry)
@@ -5163,7 +4612,6 @@ module Kaltura
 		end
 
 		# Submits the quiz so that it's status will be submitted and calculates the score for the quiz
-		# 	 
 		def submit_quiz(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -5176,14 +4624,12 @@ module Kaltura
 	end
 
 	# UserRole service lets you create and manage user roles
-	#  
 	class KalturaUserRoleService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
 		# Adds a new user role object to the account.
-		# 	 
 		def add(user_role)
 			kparams = {}
 			client.add_param(kparams, 'userRole', user_role)
@@ -5195,7 +4641,6 @@ module Kaltura
 		end
 
 		# Retrieves a user role object using its ID.
-		# 	 
 		def get(user_role_id)
 			kparams = {}
 			client.add_param(kparams, 'userRoleId', user_role_id)
@@ -5207,7 +4652,6 @@ module Kaltura
 		end
 
 		# Updates an existing user role object.
-		# 	 
 		def update(user_role_id, user_role)
 			kparams = {}
 			client.add_param(kparams, 'userRoleId', user_role_id)
@@ -5220,7 +4664,6 @@ module Kaltura
 		end
 
 		# Deletes an existing user role object.
-		# 	 
 		def delete(user_role_id)
 			kparams = {}
 			client.add_param(kparams, 'userRoleId', user_role_id)
@@ -5234,7 +4677,6 @@ module Kaltura
 		# Lists user role objects that are associated with an account.
 		# 	 Blocked user roles are listed unless you use a filter to exclude them.
 		# 	 Deleted user roles are not listed unless you use a filter to include them.
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -5247,7 +4689,6 @@ module Kaltura
 		end
 
 		# Creates a new user role object that is a duplicate of an existing role.
-		# 	 
 		def clone(user_role_id)
 			kparams = {}
 			client.add_param(kparams, 'userRoleId', user_role_id)
@@ -5261,7 +4702,6 @@ module Kaltura
 
 	# Manage partner users on Kaltura's side
 	#  The userId in kaltura is the unique Id in the partner's system, and the [partnerId,Id] couple are unique key in kaltura's DB
-	#  
 	class KalturaUserService < KalturaServiceBase
 		def initialize(client)
 			super(client)
@@ -5269,7 +4709,6 @@ module Kaltura
 
 		# Adds a new user to an existing account in the Kaltura database.
 		# 	 Input param $id is the unique identifier in the partner's system.
-		# 	 
 		def add(user)
 			kparams = {}
 			client.add_param(kparams, 'user', user)
@@ -5282,7 +4721,6 @@ module Kaltura
 
 		# Updates an existing user object.
 		# 	 You can also use this action to update the userId.
-		# 	 
 		def update(user_id, user)
 			kparams = {}
 			client.add_param(kparams, 'userId', user_id)
@@ -5295,7 +4733,6 @@ module Kaltura
 		end
 
 		# Retrieves a user object for a specified user ID.
-		# 	 
 		def get(user_id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'userId', user_id)
@@ -5308,7 +4745,6 @@ module Kaltura
 
 		# Retrieves a user object for a user's login ID and partner ID.
 		# 	 A login ID is the email address used by a user to log into the system.
-		# 	 
 		def get_by_login_id(login_id)
 			kparams = {}
 			client.add_param(kparams, 'loginId', login_id)
@@ -5320,7 +4756,6 @@ module Kaltura
 		end
 
 		# Deletes a user from a partner account.
-		# 	 
 		def delete(user_id)
 			kparams = {}
 			client.add_param(kparams, 'userId', user_id)
@@ -5334,7 +4769,6 @@ module Kaltura
 		# Lists user objects that are associated with an account.
 		# 	 Blocked users are listed unless you use a filter to exclude them.
 		# 	 Deleted users are not listed unless you use a filter to include them.
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -5347,7 +4781,6 @@ module Kaltura
 		end
 
 		# Notifies that a user is banned from an account.
-		# 	 
 		def notify_ban(user_id)
 			kparams = {}
 			client.add_param(kparams, 'userId', user_id)
@@ -5359,7 +4792,6 @@ module Kaltura
 		end
 
 		# Logs a user into a partner account with a partner ID, a partner user ID (puser), and a user password.
-		# 	 
 		def login(partner_id, user_id, password, expiry=86400, privileges='*')
 			kparams = {}
 			client.add_param(kparams, 'partnerId', partner_id)
@@ -5375,7 +4807,6 @@ module Kaltura
 		end
 
 		# Logs a user into a partner account with a user login ID and a user password.
-		# 	 
 		def login_by_login_id(login_id, password, partner_id=KalturaNotImplemented, expiry=86400, privileges='*')
 			kparams = {}
 			client.add_param(kparams, 'loginId', login_id)
@@ -5391,7 +4822,6 @@ module Kaltura
 		end
 
 		# Updates a user's login data: email, password, name.
-		# 	 
 		def update_login_data(old_login_id, password, new_login_id='', new_password='', new_first_name=KalturaNotImplemented, new_last_name=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'oldLoginId', old_login_id)
@@ -5408,7 +4838,6 @@ module Kaltura
 		end
 
 		# Reset user's password and send the user an email to generate a new one.
-		# 	 
 		def reset_password(email)
 			kparams = {}
 			client.add_param(kparams, 'email', email)
@@ -5420,7 +4849,6 @@ module Kaltura
 		end
 
 		# Set initial users password
-		# 	 
 		def set_initial_password(hash_key, new_password)
 			kparams = {}
 			client.add_param(kparams, 'hashKey', hash_key)
@@ -5433,7 +4861,6 @@ module Kaltura
 		end
 
 		# Enables a user to log into a partner account using an email address and a password
-		# 	 
 		def enable_login(user_id, login_id, password=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'userId', user_id)
@@ -5448,7 +4875,6 @@ module Kaltura
 
 		# Disables a user's ability to log into a partner account using an email address and a password.
 		# 	 You may use either a userId or a loginId parameter for this action.
-		# 	 
 		def disable_login(user_id=KalturaNotImplemented, login_id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'userId', user_id)
@@ -5461,7 +4887,6 @@ module Kaltura
 		end
 
 		# Index an entry by id.
-		# 	 
 		def index(id, should_update=true)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -5486,8 +4911,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Action which checks whther user login 
-		#      
+		# Action which checks whther user login
 		def check_login_data_exists(filter)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -5500,7 +4924,6 @@ module Kaltura
 	end
 
 	# widget service for full widget management
-	#  
 	class KalturaWidgetService < KalturaServiceBase
 		def initialize(client)
 			super(client)
@@ -5508,7 +4931,6 @@ module Kaltura
 
 		# Add new widget, can be attached to entry or kshow
 		# 	 SourceWidget is ignored.
-		# 	 
 		def add(widget)
 			kparams = {}
 			client.add_param(kparams, 'widget', widget)
@@ -5520,7 +4942,6 @@ module Kaltura
 		end
 
 		# Update exisiting widget
-		#  	 
 		def update(id, widget)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -5533,7 +4954,6 @@ module Kaltura
 		end
 
 		# Get widget by id
-		# 	 
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -5546,7 +4966,6 @@ module Kaltura
 
 		# Add widget based on existing widget.
 		# 	 Must provide valid sourceWidgetId
-		# 	 
 		def clone(widget)
 			kparams = {}
 			client.add_param(kparams, 'widget', widget)
@@ -5558,7 +4977,6 @@ module Kaltura
 		end
 
 		# Retrieve a list of available widget depends on the filter given
-		# 	 
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -5572,7 +4990,6 @@ module Kaltura
 	end
 
 	# Internal Service is used for actions that are used internally in Kaltura applications and might be changed in the future without any notice.
-	#  
 	class KalturaXInternalService < KalturaServiceBase
 		def initialize(client)
 			super(client)
@@ -5586,8 +5003,7 @@ module Kaltura
 		# 	 - Image will be downloaded as Jpeg
 		# 	 - MixEntry will be flattened using the flavor params id
 		# 	 - Other entry types are not supported
-		# 	 Returns the admin email that the email message will be sent to 
-		# 	 
+		# 	 Returns the admin email that the email message will be sent to
 		def x_add_bulk_download(entry_ids, flavor_params_id='')
 			kparams = {}
 			client.add_param(kparams, 'entryIds', entry_ids)
@@ -5711,14 +5127,6 @@ module Kaltura
 				@delivery_profile_service = KalturaDeliveryProfileService.new(self)
 			end
 			return @delivery_profile_service
-		end
-		
-		attr_reader :document_service
-		def document_service
-			if (@document_service == nil)
-				@document_service = KalturaDocumentService.new(self)
-			end
-			return @document_service
 		end
 		
 		attr_reader :email_ingestion_profile_service
@@ -6051,7 +5459,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:16-05-11'
+			self.client_tag = 'ruby:16-05-20'
 			self.api_version = '3.3.0'
 		end
 		

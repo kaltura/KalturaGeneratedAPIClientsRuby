@@ -43,30 +43,22 @@ module Kaltura
 
 	class KalturaCielo24JobProviderData < KalturaIntegrationJobProviderData
 		# Entry ID
-		# 	 
 		attr_accessor :entry_id
 		# Flavor ID
-		# 	 
 		attr_accessor :flavor_asset_id
 		# Caption formats
-		# 	 
 		attr_accessor :caption_asset_formats
 		attr_accessor :priority
 		attr_accessor :fidelity
 		# Api key for service provider
-		# 	 
 		attr_accessor :username
 		# Api key for service provider
-		# 	 
 		attr_accessor :password
 		# Base url for service provider
-		# 	 
 		attr_accessor :base_url
 		# Transcript content language
-		# 	 
 		attr_accessor :spoken_language
 		# should replace remote media content
-		# 	 
 		attr_accessor :replace_media_content
 
 		def replace_media_content=(val)

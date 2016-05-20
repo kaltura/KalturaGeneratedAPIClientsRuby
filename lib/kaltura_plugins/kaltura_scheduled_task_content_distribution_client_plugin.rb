@@ -33,7 +33,6 @@ module Kaltura
 
 	class KalturaDistributeObjectTask < KalturaObjectTask
 		# Distribution profile id
-		# 	 
 		attr_accessor :distribution_profile_id
 
 

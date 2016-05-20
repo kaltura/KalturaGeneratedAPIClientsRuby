@@ -54,29 +54,21 @@ module Kaltura
 
 	class KalturaAccessControl < KalturaObjectBase
 		# The id of the Access Control Profile
-		# 	 
 		attr_accessor :id
 		attr_accessor :partner_id
 		# The name of the Access Control Profile
-		# 	 
 		attr_accessor :name
 		# System name of the Access Control Profile
-		# 	 
 		attr_accessor :system_name
 		# The description of the Access Control Profile
-		# 	 
 		attr_accessor :description
-		# Creation date as Unix timestamp (In seconds) 
-		# 	 
+		# Creation date as Unix timestamp (In seconds)
 		attr_accessor :created_at
 		# True if this Conversion Profile is the default
-		# 	 
 		attr_accessor :is_default
 		# Array of Access Control Restrictions
-		# 	 
 		attr_accessor :restrictions
 		# Indicates that the access control profile is new and should be handled using KalturaAccessControlProfile object and accessControlProfile service
-		# 	 
 		attr_accessor :contains_unsuported_restrictions
 
 		def id=(val)
@@ -112,7 +104,6 @@ module Kaltura
 
 	class KalturaContextTypeHolder < KalturaObjectBase
 		# The type of the condition context
-		# 	 
 		attr_accessor :type
 
 
@@ -134,7 +125,6 @@ module Kaltura
 
 	class KalturaRuleAction < KalturaObjectBase
 		# The type of the action
-		# 	 
 		attr_accessor :type
 
 
@@ -147,7 +137,6 @@ module Kaltura
 
 	class KalturaCondition < KalturaObjectBase
 		# The type of the access control condition
-		# 	 
 		attr_accessor :type
 		attr_accessor :description
 		attr_accessor :not
@@ -167,28 +156,20 @@ module Kaltura
 
 	class KalturaRule < KalturaObjectBase
 		# Short Rule Description
-		# 	 
 		attr_accessor :description
-		# Rule Custom Data to allow saving rule specific information 
-		# 	 
+		# Rule Custom Data to allow saving rule specific information
 		attr_accessor :rule_data
 		# Message to be thrown to the player in case the rule is fulfilled
-		# 	 
 		attr_accessor :message
 		# Actions to be performed by the player in case the rule is fulfilled
-		# 	 
 		attr_accessor :actions
 		# Conditions to validate the rule
-		# 	 
 		attr_accessor :conditions
-		# Indicates what contexts should be tested by this rule 
-		# 	 
+		# Indicates what contexts should be tested by this rule
 		attr_accessor :contexts
-		# Indicates that this rule is enough and no need to continue checking the rest of the rules 
-		# 	 
+		# Indicates that this rule is enough and no need to continue checking the rest of the rules
 		attr_accessor :stop_processing
 		# Indicates if we should force ks validation for admin ks users as well
-		# 	 
 		attr_accessor :force_admin_validation
 
 		def stop_processing=(val)
@@ -214,29 +195,21 @@ module Kaltura
 
 	class KalturaAccessControlProfile < KalturaObjectBase
 		# The id of the Access Control Profile
-		# 	 
 		attr_accessor :id
 		attr_accessor :partner_id
 		# The name of the Access Control Profile
-		# 	 
 		attr_accessor :name
 		# System name of the Access Control Profile
-		# 	 
 		attr_accessor :system_name
 		# The description of the Access Control Profile
-		# 	 
 		attr_accessor :description
-		# Creation time as Unix timestamp (In seconds) 
-		# 	 
+		# Creation time as Unix timestamp (In seconds)
 		attr_accessor :created_at
-		# Update time as Unix timestamp (In seconds) 
-		# 	 
+		# Update time as Unix timestamp (In seconds)
 		attr_accessor :updated_at
 		# True if this access control profile is the partner default
-		# 	 
 		attr_accessor :is_default
 		# Array of access control rules
-		# 	 
 		attr_accessor :rules
 
 		def id=(val)
@@ -271,7 +244,6 @@ module Kaltura
 	end
 
 	# A key value pair representation to return an array of key-value pairs (associative array)
-	#  
 	class KalturaKeyValue < KalturaObjectBase
 		attr_accessor :key
 		attr_accessor :value
@@ -287,25 +259,18 @@ module Kaltura
 
 	class KalturaAccessControlScope < KalturaObjectBase
 		# URL to be used to test domain conditions.
-		# 	 
 		attr_accessor :referrer
 		# IP to be used to test geographic location conditions.
-		# 	 
 		attr_accessor :ip
 		# Kaltura session to be used to test session and user conditions.
-		# 	 
 		attr_accessor :ks
 		# Browser or client application to be used to test agent conditions.
-		# 	 
 		attr_accessor :user_agent
 		# Unix timestamp (In seconds) to be used to test entry scheduling, keep null to use now.
-		# 	 
 		attr_accessor :time
 		# Indicates what contexts should be tested. No contexts means any context.
-		# 	 
 		attr_accessor :contexts
 		# Array of hashes to pass to the access control profile scope
-		# 	 
 		attr_accessor :hashes
 
 		def time=(val)
@@ -327,10 +292,8 @@ module Kaltura
 
 	class KalturaReportFilter < KalturaObjectBase
 		# The dimension whose values should be filtered
-		# 	 
 		attr_accessor :dimension
 		# The (comma separated) values to include in the filter
-		# 	 
 		attr_accessor :values
 
 
@@ -344,22 +307,16 @@ module Kaltura
 
 	class KalturaAnalyticsFilter < KalturaObjectBase
 		# Query start time (in local time)
-		# 	 
 		attr_accessor :from_time
 		# Query end time (in local time)
-		# 	 
 		attr_accessor :to_time
 		# Comma separated metrics list
-		# 	 
 		attr_accessor :metrics
 		# Timezone offset from UTC (in minutes)
-		# 	 
 		attr_accessor :utc_offset
 		# Comma separated dimensions list
-		# 	 
 		attr_accessor :dimensions
 		# Array of filters
-		# 	 
 		attr_accessor :filters
 
 		def utc_offset=(val)
@@ -393,35 +350,25 @@ module Kaltura
 
 	class KalturaAppToken < KalturaObjectBase
 		# The id of the application token
-		# 	 
 		attr_accessor :id
 		# The application token
-		# 	 
 		attr_accessor :token
 		attr_accessor :partner_id
-		# Creation time as Unix timestamp (In seconds) 
-		# 	 
+		# Creation time as Unix timestamp (In seconds)
 		attr_accessor :created_at
-		# Update time as Unix timestamp (In seconds) 
-		# 	 
+		# Update time as Unix timestamp (In seconds)
 		attr_accessor :updated_at
-		# Application token status 
-		# 	 
+		# Application token status
 		attr_accessor :status
 		# Expiry time of current token (unix timestamp in seconds)
-		# 	 
 		attr_accessor :expiry
 		# Type of KS (Kaltura Session) that created using the current token
-		# 	 
 		attr_accessor :session_type
 		# User id of KS (Kaltura Session) that created using the current token
-		# 	 
 		attr_accessor :session_user_id
 		# Expiry duration of KS (Kaltura Session) that created using the current token (in seconds)
-		# 	 
 		attr_accessor :session_duration
 		# Comma separated privileges to be applied on KS (Kaltura Session) that created using the current token
-		# 	 
 		attr_accessor :session_privileges
 		attr_accessor :hash_type
 
@@ -467,38 +414,28 @@ module Kaltura
 
 	class KalturaAsset < KalturaObjectBase
 		# The ID of the Flavor Asset
-		# 	 
 		attr_accessor :id
 		# The entry ID of the Flavor Asset
-		# 	 
 		attr_accessor :entry_id
 		attr_accessor :partner_id
 		# The version of the Flavor Asset
-		# 	 
 		attr_accessor :version
 		# The size (in KBytes) of the Flavor Asset
-		# 	 
 		attr_accessor :size
 		# Tags used to identify the Flavor Asset in various scenarios
-		# 	 
 		attr_accessor :tags
 		# The file extension
-		# 	 
 		attr_accessor :file_ext
 		attr_accessor :created_at
 		attr_accessor :updated_at
 		attr_accessor :deleted_at
 		# System description, error message, warnings and failure cause.
-		# 	 
 		attr_accessor :description
 		# Partner private data
-		# 	 
 		attr_accessor :partner_data
 		# Partner friendly description
-		# 	 
 		attr_accessor :partner_description
 		# Comma separated list of source flavor params ids
-		# 	 
 		attr_accessor :actual_source_asset_params_ids
 
 		def partner_id=(val)
@@ -541,7 +478,6 @@ module Kaltura
 	end
 
 	# A string representation to return an array of strings
-	#  
 	class KalturaString < KalturaObjectBase
 		attr_accessor :value
 
@@ -555,41 +491,29 @@ module Kaltura
 
 	class KalturaAssetParams < KalturaObjectBase
 		# The id of the Flavor Params
-		# 	 
 		attr_accessor :id
 		attr_accessor :partner_id
 		# The name of the Flavor Params
-		# 	 
 		attr_accessor :name
 		# System name of the Flavor Params
-		# 	 
 		attr_accessor :system_name
 		# The description of the Flavor Params
-		# 	 
 		attr_accessor :description
 		# Creation date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :created_at
 		# True if those Flavor Params are part of system defaults
-		# 	 
 		attr_accessor :is_system_default
 		# The Flavor Params tags are used to identify the flavor for different usage (e.g. web, hd, mobile)
-		# 	 
 		attr_accessor :tags
 		# Array of partner permisison names that required for using this asset params
-		# 	 
 		attr_accessor :required_permissions
 		# Id of remote storage profile that used to get the source, zero indicates Kaltura data center
-		# 	 
 		attr_accessor :source_remote_storage_profile_id
 		# Comma seperated ids of remote storage profiles that the flavor distributed to, the distribution done by the conversion engine
-		# 	 
 		attr_accessor :remote_storage_profile_ids
 		# Media parser type to be used for post-conversion validation
-		# 	 
 		attr_accessor :media_parser_type
 		# Comma seperated ids of source flavor params this flavor is created from
-		# 	 
 		attr_accessor :source_asset_params_ids
 
 		def id=(val)
@@ -631,7 +555,6 @@ module Kaltura
 	end
 
 	# Used to ingest entry object, as single resource or list of resources accompanied by asset params ids.
-	#  
 	class KalturaResource < KalturaObjectBase
 
 
@@ -642,7 +565,6 @@ module Kaltura
 	end
 
 	# Is a unified way to add content to Kaltura whether it's an uploaded file, webcam recording, imported URL or existing file sync.
-	#  
 	class KalturaContentResource < KalturaResource
 
 
@@ -654,10 +576,8 @@ module Kaltura
 
 	class KalturaAssetParamsResourceContainer < KalturaResource
 		# The content resource to associate with asset params
-		# 	 
 		attr_accessor :resource
 		# The asset params to associate with the reaource
-		# 	 
 		attr_accessor :asset_params_id
 
 		def asset_params_id=(val)
@@ -673,7 +593,6 @@ module Kaltura
 	end
 
 	# Base class to all operation attributes types
-	#  
 	class KalturaOperationAttributes < KalturaObjectBase
 
 
@@ -685,127 +604,87 @@ module Kaltura
 
 	class KalturaBaseEntry < KalturaObjectBase
 		# Auto generated 10 characters alphanumeric string
-		# 	 
 		attr_accessor :id
 		# Entry name (Min 1 chars)
-		# 	 
 		attr_accessor :name
 		# Entry description
-		# 	 
 		attr_accessor :description
 		attr_accessor :partner_id
-		# The ID of the user who is the owner of this entry 
-		# 	 
+		# The ID of the user who is the owner of this entry
 		attr_accessor :user_id
-		# The ID of the user who created this entry 
-		# 	 
+		# The ID of the user who created this entry
 		attr_accessor :creator_id
 		# Entry tags
-		# 	 
 		attr_accessor :tags
 		# Entry admin tags can be updated only by administrators
-		# 	 
 		attr_accessor :admin_tags
-		# Comma separated list of full names of categories to which this entry belongs. Only categories that don't have entitlement (privacy context) are listed, to retrieve the full list of categories, use the categoryEntry.list action. 
-		# 	 
+		# Comma separated list of full names of categories to which this entry belongs. Only categories that don't have entitlement (privacy context) are listed, to retrieve the full list of categories, use the categoryEntry.list action.
 		attr_accessor :categories
-		# Comma separated list of ids of categories to which this entry belongs. Only categories that don't have entitlement (privacy context) are listed, to retrieve the full list of categories, use the categoryEntry.list action. 
-		# 	 
+		# Comma separated list of ids of categories to which this entry belongs. Only categories that don't have entitlement (privacy context) are listed, to retrieve the full list of categories, use the categoryEntry.list action.
 		attr_accessor :categories_ids
 		attr_accessor :status
 		# Entry moderation status
-		# 	 
 		attr_accessor :moderation_status
 		# Number of moderation requests waiting for this entry
-		# 	 
 		attr_accessor :moderation_count
 		# The type of the entry, this is auto filled by the derived entry object
-		# 	 
 		attr_accessor :type
 		# Entry creation date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :created_at
 		# Entry update date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :updated_at
 		# The calculated average rank. rank = totalRank / votes
-		# 	 
 		attr_accessor :rank
 		# The sum of all rank values submitted to the baseEntry.anonymousRank action
-		# 	 
 		attr_accessor :total_rank
 		# A count of all requests made to the baseEntry.anonymousRank action
-		# 	 
 		attr_accessor :votes
 		attr_accessor :group_id
-		# Can be used to store various partner related data as a string 
-		# 	 
+		# Can be used to store various partner related data as a string
 		attr_accessor :partner_data
 		# Download URL for the entry
-		# 	 
 		attr_accessor :download_url
 		# Indexed search text for full text search
-		# 	 
 		attr_accessor :search_text
 		# License type used for this entry
-		# 	 
 		attr_accessor :license_type
 		# Version of the entry data
-		# 	 
 		attr_accessor :version
 		# Thumbnail URL
-		# 	 
 		attr_accessor :thumbnail_url
-		# The Access Control ID assigned to this entry (null when not set, send -1 to remove)  
-		# 	 
+		# The Access Control ID assigned to this entry (null when not set, send -1 to remove)
 		attr_accessor :access_control_id
 		# Entry scheduling start date (null when not set, send -1 to remove)
-		# 	 
 		attr_accessor :start_date
 		# Entry scheduling end date (null when not set, send -1 to remove)
-		# 	 
 		attr_accessor :end_date
 		# Entry external reference id
-		# 	 
 		attr_accessor :reference_id
 		# ID of temporary entry that will replace this entry when it's approved and ready for replacement
-		# 	 
 		attr_accessor :replacing_entry_id
 		# ID of the entry that will be replaced when the replacement approved and this entry is ready
-		# 	 
 		attr_accessor :replaced_entry_id
 		# Status of the replacement readiness and approval
-		# 	 
 		attr_accessor :replacement_status
 		# Can be used to store various partner related data as a numeric value
-		# 	 
 		attr_accessor :partner_sort_value
-		# Override the default ingestion profile  
-		# 	 
+		# Override the default ingestion profile
 		attr_accessor :conversion_profile_id
-		# IF not empty, points to an entry ID the should replace this current entry's id. 
-		# 	 
+		# IF not empty, points to an entry ID the should replace this current entry's id.
 		attr_accessor :redirect_entry_id
 		# ID of source root entry, used for clipped, skipped and cropped entries that created from another entry
-		# 	 
 		attr_accessor :root_entry_id
 		# ID of source root entry, used for defining entires association
-		#  	 
 		attr_accessor :parent_entry_id
-		# clipping, skipping and cropping attributes that used to create this entry  
-		# 	 
+		# clipping, skipping and cropping attributes that used to create this entry
 		attr_accessor :operation_attributes
 		# list of user ids that are entitled to edit the entry (no server enforcement) The difference between entitledUsersEdit and entitledUsersPublish is applicative only
-		# 	 
 		attr_accessor :entitled_users_edit
 		# list of user ids that are entitled to publish the entry (no server enforcement) The difference between entitledUsersEdit and entitledUsersPublish is applicative only
-		# 	 
 		attr_accessor :entitled_users_publish
 		# Comma seperated string of the capabilities of the entry. Any capability needed can be added to this list.
-		# 	 
 		attr_accessor :capabilities
-		# Template entry id 
-		# 	 
+		# Template entry id
 		attr_accessor :template_entry_id
 
 		def partner_id=(val)
@@ -930,32 +809,24 @@ module Kaltura
 		attr_accessor :partner_id
 		# link a playlist that will set what content the feed will include
 		# 	 if empty, all content will be included in feed
-		# 	 
 		attr_accessor :playlist_id
 		# feed name
-		# 	 
 		attr_accessor :name
 		# feed status
-		# 	 
 		attr_accessor :status
 		# feed type
-		# 	 
 		attr_accessor :type
 		# Base URL for each video, on the partners site
 		# 	 This is required by all syndication types.
-		# 	 
 		attr_accessor :landing_page
 		# Creation date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :created_at
 		# allow_embed tells google OR yahoo weather to allow embedding the video on google OR yahoo video results
 		# 	 or just to provide a link to the landing page.
 		# 	 it is applied on the video-player_loc property in the XML (google)
 		# 	 and addes media-player tag (yahoo)
-		# 	 
 		attr_accessor :allow_embed
 		# Select a uiconf ID as player skin to include in the kwidget url
-		# 	 
 		attr_accessor :player_uiconf_id
 		attr_accessor :flavor_param_id
 		attr_accessor :transcode_existing_content
@@ -964,13 +835,10 @@ module Kaltura
 		attr_accessor :storage_id
 		attr_accessor :entries_order_by
 		# Should enforce entitlement on feed entries
-		# 	 
 		attr_accessor :enforce_entitlement
 		# Set privacy context for search entries that assiged to private and public categories within a category privacy context.
-		# 	 
 		attr_accessor :privacy_context
 		# Update date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :updated_at
 		attr_accessor :use_category_entries
 
@@ -1041,6 +909,15 @@ module Kaltura
 
 	end
 
+	class KalturaJobData < KalturaObjectBase
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaBatchHistoryData < KalturaObjectBase
 		attr_accessor :scheduler_id
 		attr_accessor :worker_id
@@ -1086,15 +963,6 @@ module Kaltura
 
 	end
 
-	class KalturaJobData < KalturaObjectBase
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
 	class KalturaBatchJob < KalturaObjectBase
 		attr_accessor :id
 		attr_accessor :partner_id
@@ -1117,20 +985,15 @@ module Kaltura
 		attr_accessor :priority
 		attr_accessor :history
 		# The id of the bulk upload job that initiated this job
-		# 	 
 		attr_accessor :bulk_job_id
 		attr_accessor :batch_version
 		# When one job creates another - the parent should set this parentJobId to be its own id.
-		# 	 
 		attr_accessor :parent_job_id
 		# The id of the root parent job
-		# 	 
 		attr_accessor :root_job_id
 		# The time that the job was pulled from the queue
-		# 	 
 		attr_accessor :queue_time
 		# The time that the job was finished or closed as failed
-		# 	 
 		attr_accessor :finish_time
 		attr_accessor :err_type
 		attr_accessor :err_number
@@ -1280,6 +1143,261 @@ module Kaltura
 
 	end
 
+	class KalturaPlayerDeliveryType < KalturaObjectBase
+		attr_accessor :id
+		attr_accessor :label
+		attr_accessor :flashvars
+		attr_accessor :min_version
+		attr_accessor :enabled_by_default
+
+		def enabled_by_default=(val)
+			@enabled_by_default = to_b(val)
+		end
+
+		def from_xml(xml_element)
+			super
+			self.id = xml_element.elements['id'].text
+			self.label = xml_element.elements['label'].text
+			self.flashvars = KalturaClientBase.object_from_xml(xml_element.elements['flashvars'], 'KalturaKeyValue')
+			self.min_version = xml_element.elements['minVersion'].text
+			self.enabled_by_default = xml_element.elements['enabledByDefault'].text
+		end
+
+	end
+
+	class KalturaPlayerEmbedCodeType < KalturaObjectBase
+		attr_accessor :id
+		attr_accessor :label
+		attr_accessor :entry_only
+		attr_accessor :min_version
+
+		def entry_only=(val)
+			@entry_only = to_b(val)
+		end
+
+		def from_xml(xml_element)
+			super
+			self.id = xml_element.elements['id'].text
+			self.label = xml_element.elements['label'].text
+			self.entry_only = xml_element.elements['entryOnly'].text
+			self.min_version = xml_element.elements['minVersion'].text
+		end
+
+	end
+
+	class KalturaPartner < KalturaObjectBase
+		attr_accessor :id
+		attr_accessor :name
+		attr_accessor :website
+		attr_accessor :notification_url
+		attr_accessor :appear_in_search
+		attr_accessor :created_at
+		# deprecated - lastName and firstName replaces this field
+		attr_accessor :admin_name
+		attr_accessor :admin_email
+		attr_accessor :description
+		attr_accessor :commercial_use
+		attr_accessor :landing_page
+		attr_accessor :user_landing_page
+		attr_accessor :content_categories
+		attr_accessor :type
+		attr_accessor :phone
+		attr_accessor :describe_yourself
+		attr_accessor :adult_content
+		attr_accessor :def_conversion_profile_type
+		attr_accessor :notify
+		attr_accessor :status
+		attr_accessor :allow_quick_edit
+		attr_accessor :merge_entry_lists
+		attr_accessor :notifications_config
+		attr_accessor :max_upload_size
+		attr_accessor :partner_package
+		attr_accessor :secret
+		attr_accessor :admin_secret
+		attr_accessor :cms_password
+		attr_accessor :allow_multi_notification
+		attr_accessor :admin_login_users_quota
+		attr_accessor :admin_user_id
+		# firstName and lastName replace the old (deprecated) adminName
+		attr_accessor :first_name
+		# lastName and firstName replace the old (deprecated) adminName
+		attr_accessor :last_name
+		# country code (2char) - this field is optional
+		attr_accessor :country
+		# state code (2char) - this field is optional
+		attr_accessor :state
+		attr_accessor :additional_params
+		attr_accessor :publishers_quota
+		attr_accessor :partner_group_type
+		attr_accessor :default_entitlement_enforcement
+		attr_accessor :default_delivery_type
+		attr_accessor :default_embed_code_type
+		attr_accessor :delivery_types
+		attr_accessor :embed_code_types
+		attr_accessor :template_partner_id
+		attr_accessor :ignore_seo_links
+		attr_accessor :host
+		attr_accessor :cdn_host
+		attr_accessor :is_first_login
+		attr_accessor :logout_url
+		attr_accessor :partner_parent_id
+		attr_accessor :crm_id
+		attr_accessor :reference_id
+		attr_accessor :time_aligned_renditions
+
+		def id=(val)
+			@id = val.to_i
+		end
+		def appear_in_search=(val)
+			@appear_in_search = val.to_i
+		end
+		def created_at=(val)
+			@created_at = val.to_i
+		end
+		def commercial_use=(val)
+			@commercial_use = val.to_i
+		end
+		def type=(val)
+			@type = val.to_i
+		end
+		def adult_content=(val)
+			@adult_content = to_b(val)
+		end
+		def notify=(val)
+			@notify = val.to_i
+		end
+		def status=(val)
+			@status = val.to_i
+		end
+		def allow_quick_edit=(val)
+			@allow_quick_edit = val.to_i
+		end
+		def merge_entry_lists=(val)
+			@merge_entry_lists = val.to_i
+		end
+		def max_upload_size=(val)
+			@max_upload_size = val.to_i
+		end
+		def partner_package=(val)
+			@partner_package = val.to_i
+		end
+		def allow_multi_notification=(val)
+			@allow_multi_notification = val.to_i
+		end
+		def admin_login_users_quota=(val)
+			@admin_login_users_quota = val.to_i
+		end
+		def publishers_quota=(val)
+			@publishers_quota = val.to_i
+		end
+		def partner_group_type=(val)
+			@partner_group_type = val.to_i
+		end
+		def default_entitlement_enforcement=(val)
+			@default_entitlement_enforcement = to_b(val)
+		end
+		def template_partner_id=(val)
+			@template_partner_id = val.to_i
+		end
+		def ignore_seo_links=(val)
+			@ignore_seo_links = to_b(val)
+		end
+		def is_first_login=(val)
+			@is_first_login = to_b(val)
+		end
+		def partner_parent_id=(val)
+			@partner_parent_id = val.to_i
+		end
+		def time_aligned_renditions=(val)
+			@time_aligned_renditions = to_b(val)
+		end
+
+		def from_xml(xml_element)
+			super
+			self.id = xml_element.elements['id'].text
+			self.name = xml_element.elements['name'].text
+			self.website = xml_element.elements['website'].text
+			self.notification_url = xml_element.elements['notificationUrl'].text
+			self.appear_in_search = xml_element.elements['appearInSearch'].text
+			self.created_at = xml_element.elements['createdAt'].text
+			self.admin_name = xml_element.elements['adminName'].text
+			self.admin_email = xml_element.elements['adminEmail'].text
+			self.description = xml_element.elements['description'].text
+			self.commercial_use = xml_element.elements['commercialUse'].text
+			self.landing_page = xml_element.elements['landingPage'].text
+			self.user_landing_page = xml_element.elements['userLandingPage'].text
+			self.content_categories = xml_element.elements['contentCategories'].text
+			self.type = xml_element.elements['type'].text
+			self.phone = xml_element.elements['phone'].text
+			self.describe_yourself = xml_element.elements['describeYourself'].text
+			self.adult_content = xml_element.elements['adultContent'].text
+			self.def_conversion_profile_type = xml_element.elements['defConversionProfileType'].text
+			self.notify = xml_element.elements['notify'].text
+			self.status = xml_element.elements['status'].text
+			self.allow_quick_edit = xml_element.elements['allowQuickEdit'].text
+			self.merge_entry_lists = xml_element.elements['mergeEntryLists'].text
+			self.notifications_config = xml_element.elements['notificationsConfig'].text
+			self.max_upload_size = xml_element.elements['maxUploadSize'].text
+			self.partner_package = xml_element.elements['partnerPackage'].text
+			self.secret = xml_element.elements['secret'].text
+			self.admin_secret = xml_element.elements['adminSecret'].text
+			self.cms_password = xml_element.elements['cmsPassword'].text
+			self.allow_multi_notification = xml_element.elements['allowMultiNotification'].text
+			self.admin_login_users_quota = xml_element.elements['adminLoginUsersQuota'].text
+			self.admin_user_id = xml_element.elements['adminUserId'].text
+			self.first_name = xml_element.elements['firstName'].text
+			self.last_name = xml_element.elements['lastName'].text
+			self.country = xml_element.elements['country'].text
+			self.state = xml_element.elements['state'].text
+			self.additional_params = KalturaClientBase.object_from_xml(xml_element.elements['additionalParams'], 'KalturaKeyValue')
+			self.publishers_quota = xml_element.elements['publishersQuota'].text
+			self.partner_group_type = xml_element.elements['partnerGroupType'].text
+			self.default_entitlement_enforcement = xml_element.elements['defaultEntitlementEnforcement'].text
+			self.default_delivery_type = xml_element.elements['defaultDeliveryType'].text
+			self.default_embed_code_type = xml_element.elements['defaultEmbedCodeType'].text
+			self.delivery_types = KalturaClientBase.object_from_xml(xml_element.elements['deliveryTypes'], 'KalturaPlayerDeliveryType')
+			self.embed_code_types = KalturaClientBase.object_from_xml(xml_element.elements['embedCodeTypes'], 'KalturaPlayerEmbedCodeType')
+			self.template_partner_id = xml_element.elements['templatePartnerId'].text
+			self.ignore_seo_links = xml_element.elements['ignoreSeoLinks'].text
+			self.host = xml_element.elements['host'].text
+			self.cdn_host = xml_element.elements['cdnHost'].text
+			self.is_first_login = xml_element.elements['isFirstLogin'].text
+			self.logout_url = xml_element.elements['logoutUrl'].text
+			self.partner_parent_id = xml_element.elements['partnerParentId'].text
+			self.crm_id = xml_element.elements['crmId'].text
+			self.reference_id = xml_element.elements['referenceId'].text
+			self.time_aligned_renditions = xml_element.elements['timeAlignedRenditions'].text
+		end
+
+	end
+
+	# A representation to return an array of values
+	class KalturaValue < KalturaObjectBase
+		attr_accessor :description
+
+
+		def from_xml(xml_element)
+			super
+			self.description = xml_element.elements['description'].text
+		end
+
+	end
+
+	# A boolean representation to return an array of booleans
+	class KalturaBooleanValue < KalturaValue
+		attr_accessor :value
+
+		def value=(val)
+			@value = to_b(val)
+		end
+
+		def from_xml(xml_element)
+			super
+			self.value = xml_element.elements['value'].text
+		end
+
+	end
+
 	class KalturaBulkUploadPluginData < KalturaObjectBase
 		attr_accessor :field
 		attr_accessor :value
@@ -1295,13 +1413,10 @@ module Kaltura
 
 	class KalturaBulkUploadResult < KalturaObjectBase
 		# The id of the result
-		#      
 		attr_accessor :id
 		# The id of the parent job
-		# 	 
 		attr_accessor :bulk_upload_job_id
 		# The index of the line in the CSV
-		# 	 
 		attr_accessor :line_index
 		attr_accessor :partner_id
 		attr_accessor :status
@@ -1310,7 +1425,6 @@ module Kaltura
 		attr_accessor :object_status
 		attr_accessor :bulk_upload_result_object_type
 		# The data as recieved in the csv
-		# 	 
 		attr_accessor :row_data
 		attr_accessor :partner_data
 		attr_accessor :object_error_description
@@ -1428,7 +1542,6 @@ module Kaltura
 
 	# This class represents object-specific data passed to the 
 	#  bulk upload job.
-	#  
 	class KalturaBulkUploadObjectData < KalturaObjectBase
 
 
@@ -1472,98 +1585,68 @@ module Kaltura
 
 	class KalturaCategory < KalturaObjectBase
 		# The id of the Category
-		# 	 
 		attr_accessor :id
 		attr_accessor :parent_id
 		attr_accessor :depth
 		attr_accessor :partner_id
 		# The name of the Category. 
 		# 	 The following characters are not allowed: '<', '>', ','
-		# 	 
 		attr_accessor :name
 		# The full name of the Category
-		# 	 
 		attr_accessor :full_name
 		# The full ids of the Category
-		# 	 
 		attr_accessor :full_ids
 		# Number of entries in this Category (including child categories)
-		# 	 
 		attr_accessor :entries_count
 		# Creation date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :created_at
 		# Update date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :updated_at
 		# Category description
-		# 	 
 		attr_accessor :description
 		# Category tags
-		# 	 
 		attr_accessor :tags
 		# If category will be returned for list action.
-		# 	 
 		attr_accessor :appear_in_list
 		# defines the privacy of the entries that assigned to this category
-		# 	 
 		attr_accessor :privacy
-		# If Category members are inherited from parent category or set manualy. 
-		# 	 
+		# If Category members are inherited from parent category or set manualy.
 		attr_accessor :inheritance_type
 		# Who can ask to join this category
-		# 	 
 		attr_accessor :user_join_policy
 		# Default permissionLevel for new users
-		# 	 
 		attr_accessor :default_permission_level
 		# Category Owner (User id)
-		# 	 
 		attr_accessor :owner
 		# Number of entries that belong to this category directly
-		# 	 
 		attr_accessor :direct_entries_count
 		# Category external id, controlled and managed by the partner.
-		# 	 
 		attr_accessor :reference_id
 		# who can assign entries to this category
-		# 	 
 		attr_accessor :contribution_policy
 		# Number of active members for this category
-		# 	 
 		attr_accessor :members_count
 		# Number of pending members for this category
-		# 	 
 		attr_accessor :pending_members_count
 		# Set privacy context for search entries that assiged to private and public categories. the entries will be private if the search context is set with those categories.
-		# 	 
 		attr_accessor :privacy_context
 		# comma separated parents that defines a privacyContext for search
-		# 	 
 		attr_accessor :privacy_contexts
 		# Status
-		# 	 
 		attr_accessor :status
 		# The category id that this category inherit its members and members permission (for contribution and join)
-		# 	 
 		attr_accessor :inherited_parent_id
 		# Can be used to store various partner related data as a numeric value
-		# 	 
 		attr_accessor :partner_sort_value
-		# Can be used to store various partner related data as a string 
-		# 	 
+		# Can be used to store various partner related data as a string
 		attr_accessor :partner_data
-		# Enable client side applications to define how to sort the category child categories 
-		# 	 
+		# Enable client side applications to define how to sort the category child categories
 		attr_accessor :default_order_by
 		# Number of direct children categories
-		# 	 
 		attr_accessor :direct_sub_categories_count
-		# Moderation to add entries to this category by users that are not of permission level Manager or Moderator.  
-		# 	 
+		# Moderation to add entries to this category by users that are not of permission level Manager or Moderator.
 		attr_accessor :moderation
 		# Nunber of pending moderation entries
-		# 	 
 		attr_accessor :pending_entries_count
 
 		def id=(val)
@@ -1675,16 +1758,12 @@ module Kaltura
 	class KalturaCategoryEntry < KalturaObjectBase
 		attr_accessor :category_id
 		# entry id
-		# 	 
 		attr_accessor :entry_id
 		# Creation date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :created_at
 		# The full ids of the Category
-		# 	 
 		attr_accessor :category_full_ids
 		# CategroyEntry status
-		# 	 
 		attr_accessor :status
 
 		def category_id=(val)
@@ -1711,31 +1790,22 @@ module Kaltura
 	class KalturaCategoryUser < KalturaObjectBase
 		attr_accessor :category_id
 		# User id
-		# 	 
 		attr_accessor :user_id
 		# Partner id
-		# 	 
 		attr_accessor :partner_id
 		# Permission level
-		# 	 
 		attr_accessor :permission_level
 		# Status
-		# 	 
 		attr_accessor :status
 		# CategoryUser creation date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :created_at
 		# CategoryUser update date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :updated_at
-		# Update method can be either manual or automatic to distinguish between manual operations (for example in KMC) on automatic - using bulk upload 
-		# 	 
+		# Update method can be either manual or automatic to distinguish between manual operations (for example in KMC) on automatic - using bulk upload
 		attr_accessor :update_method
 		# The full ids of the Category
-		# 	 
 		attr_accessor :category_full_ids
 		# Set of category-related permissions for the current category user.
-		# 	 
 		attr_accessor :permission_names
 
 		def category_id=(val)
@@ -1776,29 +1846,11 @@ module Kaltura
 
 	end
 
-	# Define client optional configurations
-	#  /
-	class KalturaClientConfiguration < KalturaObjectBase
-		attr_accessor :client_tag
-		attr_accessor :api_version
-
-
-		def from_xml(xml_element)
-			super
-			self.client_tag = xml_element.elements['clientTag'].text
-			self.api_version = xml_element.elements['apiVersion'].text
-		end
-
-	end
-
 	# Client notification object to hold the notification url and the data when sending client side notifications
-	#  
 	class KalturaClientNotification < KalturaObjectBase
-		# The URL where the notification should be sent to 
-		#      
+		# The URL where the notification should be sent to
 		attr_accessor :url
 		# The serialized notification data to send
-		#      
 		attr_accessor :data
 
 
@@ -1821,10 +1873,8 @@ module Kaltura
 
 	class KalturaContextDataResult < KalturaObjectBase
 		# Array of messages as received from the rules that invalidated
-		# 	 
 		attr_accessor :messages
 		# Array of actions as received from the rules that invalidated
-		# 	 
 		attr_accessor :actions
 
 
@@ -1838,55 +1888,38 @@ module Kaltura
 
 	class KalturaControlPanelCommand < KalturaObjectBase
 		# The id of the Category
-		# 	 
 		attr_accessor :id
 		# Creation date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :created_at
 		# Creator name
-		# 	 
 		attr_accessor :created_by
 		# Update date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :updated_at
 		# Updater name
-		# 	 
 		attr_accessor :updated_by
 		# Creator id
-		# 	 
 		attr_accessor :created_by_id
 		# The id of the scheduler that the command refers to
-		# 	 
 		attr_accessor :scheduler_id
 		# The id of the scheduler worker that the command refers to
-		# 	 
 		attr_accessor :worker_id
 		# The id of the scheduler worker as configured in the ini file
-		# 	 
 		attr_accessor :worker_configured_id
 		# The name of the scheduler worker that the command refers to
-		# 	 
 		attr_accessor :worker_name
 		# The index of the batch process that the command refers to
-		# 	 
 		attr_accessor :batch_index
 		# The command type - stop / start / config
-		# 	 
 		attr_accessor :type
 		# The command target type - data center / scheduler / job / job type
-		# 	 
 		attr_accessor :target_type
 		# The command status
-		# 	 
 		attr_accessor :status
 		# The reason for the command
-		# 	 
 		attr_accessor :cause
 		# Command description
-		# 	 
 		attr_accessor :description
 		# Error description
-		# 	 
 		attr_accessor :error_description
 
 		def id=(val)
@@ -1951,13 +1984,10 @@ module Kaltura
 
 	class KalturaConversionAttribute < KalturaObjectBase
 		# The id of the flavor params, set to null for source flavor
-		# 	 
 		attr_accessor :flavor_params_id
-		# Attribute name  
-		# 	 
+		# Attribute name
 		attr_accessor :name
-		# Attribute value  
-		# 	 
+		# Attribute value
 		attr_accessor :value
 
 		def flavor_params_id=(val)
@@ -1975,16 +2005,12 @@ module Kaltura
 
 	class KalturaCropDimensions < KalturaObjectBase
 		# Crop left point
-		# 	 
 		attr_accessor :left
 		# Crop top point
-		# 	 
 		attr_accessor :top
 		# Crop width
-		# 	 
 		attr_accessor :width
 		# Crop height
-		# 	 
 		attr_accessor :height
 
 		def left=(val)
@@ -2012,55 +2038,39 @@ module Kaltura
 
 	class KalturaConversionProfile < KalturaObjectBase
 		# The id of the Conversion Profile
-		# 	 
 		attr_accessor :id
 		attr_accessor :partner_id
 		attr_accessor :status
 		attr_accessor :type
 		# The name of the Conversion Profile
-		# 	 
 		attr_accessor :name
 		# System name of the Conversion Profile
-		# 	 
 		attr_accessor :system_name
 		# Comma separated tags
-		# 	 
 		attr_accessor :tags
 		# The description of the Conversion Profile
-		# 	 
 		attr_accessor :description
 		# ID of the default entry to be used for template data
-		# 	 
 		attr_accessor :default_entry_id
-		# Creation date as Unix timestamp (In seconds) 
-		# 	 
+		# Creation date as Unix timestamp (In seconds)
 		attr_accessor :created_at
 		# List of included flavor ids (comma separated)
-		# 	 
 		attr_accessor :flavor_params_ids
 		# Indicates that this conversion profile is system default
-		# 	 
 		attr_accessor :is_default
 		# Indicates that this conversion profile is partner default
-		# 	 
 		attr_accessor :is_partner_default
 		# Cropping dimensions
-		# 	 
 		attr_accessor :crop_dimensions
 		# Clipping start position (in miliseconds)
-		# 	 
 		attr_accessor :clip_start
 		# Clipping duration (in miliseconds)
-		# 	 
 		attr_accessor :clip_duration
 		# XSL to transform ingestion MRSS XML
-		# 	 
 		attr_accessor :xsl_transformation
 		# ID of default storage profile to be used for linked net-storage file syncs
-		# 	 
 		attr_accessor :storage_profile_id
 		# Media parser type to be used for extract media
-		# 	 
 		attr_accessor :media_parser_type
 
 		def id=(val)
@@ -2115,25 +2125,18 @@ module Kaltura
 
 	class KalturaConversionProfileAssetParams < KalturaObjectBase
 		# The id of the conversion profile
-		# 	 
 		attr_accessor :conversion_profile_id
 		# The id of the asset params
-		# 	 
 		attr_accessor :asset_params_id
 		# The ingestion origin of the asset params
-		# 	 
 		attr_accessor :ready_behavior
 		# The ingestion origin of the asset params
-		# 	 
 		attr_accessor :origin
 		# Asset params system name
-		# 	 
 		attr_accessor :system_name
 		# Starts conversion even if the decision layer reduced the configuration to comply with the source
-		# 	 
 		attr_accessor :force_none_complied
 		# Specifies how to treat the flavor after conversion is finished
-		# 	 
 		attr_accessor :delete_policy
 
 		def conversion_profile_id=(val)
@@ -2226,10 +2229,8 @@ module Kaltura
 
 	class KalturaDataEntry < KalturaBaseEntry
 		# The data of the entry
-		# 	 
 		attr_accessor :data_content
 		# indicator whether to return the object for get action with the dataContent field.
-		# 	 
 		attr_accessor :retrieve_data_content_by_get
 
 		def retrieve_data_content_by_get=(val)
@@ -2246,10 +2247,8 @@ module Kaltura
 
 	class KalturaUrlRecognizer < KalturaObjectBase
 		# The hosts that are recognized
-		# 	 
 		attr_accessor :hosts
 		# The URI prefix we use for security
-		# 	 
 		attr_accessor :uri_prefix
 
 
@@ -2263,10 +2262,8 @@ module Kaltura
 
 	class KalturaUrlTokenizer < KalturaObjectBase
 		# Window
-		# 	 
 		attr_accessor :window
 		# key
-		# 	 
 		attr_accessor :key
 
 		def window=(val)
@@ -2283,49 +2280,36 @@ module Kaltura
 
 	class KalturaDeliveryProfile < KalturaObjectBase
 		# The id of the Delivery
-		# 	 
 		attr_accessor :id
 		attr_accessor :partner_id
 		# The name of the Delivery
-		# 	 
 		attr_accessor :name
 		# Delivery type
-		# 	 
 		attr_accessor :type
 		# System name of the delivery
-		# 	 
 		attr_accessor :system_name
 		# The description of the Delivery
-		# 	 
 		attr_accessor :description
 		# Creation time as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :created_at
 		# Update time as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :updated_at
 		attr_accessor :streamer_type
 		attr_accessor :url
 		# the host part of the url
-		# 	 
 		attr_accessor :host_name
 		attr_accessor :status
 		attr_accessor :recognizer
 		attr_accessor :tokenizer
 		# True if this is the systemwide default for the protocol
-		# 	 
 		attr_accessor :is_default
 		# the object from which this object was cloned (or 0)
-		# 	 
 		attr_accessor :parent_id
 		# Comma separated list of supported media protocols. f.i. rtmpe
-		# 	 
 		attr_accessor :media_protocols
 		# priority used for ordering similar delivery profiles
-		# 	 
 		attr_accessor :priority
 		# Extra query string parameters that should be added to the url
-		# 	 
 		attr_accessor :extra_params
 
 		def id=(val)
@@ -2381,7 +2365,6 @@ module Kaltura
 	class KalturaFileSyncDescriptor < KalturaObjectBase
 		attr_accessor :file_sync_local_path
 		# The translated path as used by the scheduler
-		# 	 
 		attr_accessor :file_sync_remote_url
 		attr_accessor :file_sync_object_sub_type
 
@@ -2438,14 +2421,11 @@ module Kaltura
 
 	end
 
-	# The KalturaFilterPager object enables paging management to be applied upon service list actions. 
-	#  
+	# The KalturaFilterPager object enables paging management to be applied upon service list actions.
 	class KalturaFilterPager < KalturaObjectBase
 		# The number of objects to retrieve. (Default is 30, maximum page size is 500).
-		# 	 
 		attr_accessor :page_size
 		# The page number for which {pageSize} of objects should be retrieved (Default is 1).
-		# 	 
 		attr_accessor :page_index
 
 		def page_size=(val)
@@ -2483,11 +2463,9 @@ module Kaltura
 
 	class KalturaDetachedResponseProfile < KalturaBaseResponseProfile
 		# Friendly name
-		# 	 
 		attr_accessor :name
 		attr_accessor :type
 		# Comma separated fields list to be included or excluded
-		# 	 
 		attr_accessor :fields
 		attr_accessor :filter
 		attr_accessor :pager
@@ -2573,21 +2551,7 @@ module Kaltura
 
 	end
 
-	# A representation to return an array of values
-	#  
-	class KalturaValue < KalturaObjectBase
-		attr_accessor :description
-
-
-		def from_xml(xml_element)
-			super
-			self.description = xml_element.elements['description'].text
-		end
-
-	end
-
 	# A string representation to return an array of strings
-	#  
 	class KalturaStringValue < KalturaValue
 		attr_accessor :value
 
@@ -2600,10 +2564,8 @@ module Kaltura
 	end
 
 	# Advanced configuration for entry replacement process
-	#  
 	class KalturaEntryReplacementOptions < KalturaObjectBase
 		# If true manually created thumbnails will not be deleted on entry replacement
-		# 	 
 		attr_accessor :keep_manual_thumbnails
 
 		def keep_manual_thumbnails=(val)
@@ -2619,7 +2581,6 @@ module Kaltura
 
 	class KalturaEntryServerNode < KalturaObjectBase
 		# unique auto-generated identifier
-		# 	 
 		attr_accessor :id
 		attr_accessor :entry_id
 		attr_accessor :server_node_id
@@ -2663,10 +2624,8 @@ module Kaltura
 	end
 
 	# Configuration for extended item in the Kaltura MRSS feeds
-	#  
 	class KalturaObjectIdentifier < KalturaObjectBase
-		# Comma separated string of enum values denoting which features of the item need to be included in the MRSS 
-		# 	 
+		# Comma separated string of enum values denoting which features of the item need to be included in the MRSS
 		attr_accessor :extended_features
 
 
@@ -2679,13 +2638,10 @@ module Kaltura
 
 	class KalturaExtendingItemMrssParameter < KalturaObjectBase
 		# XPath for the extending item
-		# 	 
 		attr_accessor :xpath
 		# Object identifier
-		# 	 
 		attr_accessor :identifier
 		# Mode of extension - append to MRSS or replace the xpath content.
-		# 	 
 		attr_accessor :extension_mode
 
 		def extension_mode=(val)
@@ -2703,28 +2659,20 @@ module Kaltura
 
 	class KalturaPlayableEntry < KalturaBaseEntry
 		# Number of plays
-		# 	 
 		attr_accessor :plays
 		# Number of views
-		# 	 
 		attr_accessor :views
 		# The last time the entry was played
-		# 	 
 		attr_accessor :last_played_at
 		# The width in pixels
-		# 	 
 		attr_accessor :width
 		# The height in pixels
-		# 	 
 		attr_accessor :height
 		# The duration in seconds
-		# 	 
 		attr_accessor :duration
 		# The duration in miliseconds
-		# 	 
 		attr_accessor :ms_duration
 		# The duration type (short for 0-4 mins, medium for 4-20 mins, long for 20+ mins)
-		# 	 
 		attr_accessor :duration_type
 
 		def plays=(val)
@@ -2765,37 +2713,26 @@ module Kaltura
 
 	class KalturaMediaEntry < KalturaPlayableEntry
 		# The media type of the entry
-		# 	 
 		attr_accessor :media_type
-		# Override the default conversion quality  
-		# 	 
+		# Override the default conversion quality
 		attr_accessor :conversion_quality
-		# The source type of the entry 
-		# 	 
+		# The source type of the entry
 		attr_accessor :source_type
 		# The search provider type used to import this entry
-		# 	 
 		attr_accessor :search_provider_type
 		# The ID of the media in the importing site
-		# 	 
 		attr_accessor :search_provider_id
 		# The user name used for credits
-		# 	 
 		attr_accessor :credit_user_name
 		# The URL for credits
-		# 	 
 		attr_accessor :credit_url
 		# The media date extracted from EXIF data (For images) as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :media_date
 		# The URL used for playback. This is not the download URL.
-		# 	 
 		attr_accessor :data_url
 		# Comma separated flavor params ids that exists for this media entry
-		# 	 
 		attr_accessor :flavor_params_ids
 		# True if trim action is disabled for this entry
-		# 	 
 		attr_accessor :is_trim_disabled
 
 		def media_type=(val)
@@ -2895,35 +2832,27 @@ module Kaltura
 
 	class KalturaFlavorAsset < KalturaAsset
 		# The Flavor Params used to create this Flavor Asset
-		# 	 
 		attr_accessor :flavor_params_id
-		# The width of the Flavor Asset 
-		# 	 
+		# The width of the Flavor Asset
 		attr_accessor :width
 		# The height of the Flavor Asset
-		# 	 
 		attr_accessor :height
-		# The overall bitrate (in KBits) of the Flavor Asset 
-		# 	 
+		# The overall bitrate (in KBits) of the Flavor Asset
 		attr_accessor :bitrate
 		# The frame rate (in FPS) of the Flavor Asset
-		# 	 
 		attr_accessor :frame_rate
 		# True if this Flavor Asset is the original source
-		# 	 
 		attr_accessor :is_original
 		# True if this Flavor Asset is playable in KDP
-		# 	 
 		attr_accessor :is_web
 		# The container format
-		# 	 
 		attr_accessor :container_format
 		# The video codec
-		# 	 
 		attr_accessor :video_codec_id
 		# The status of the Flavor Asset
-		# 	 
 		attr_accessor :status
+		# The language of the flavor asset
+		attr_accessor :language
 
 		def flavor_params_id=(val)
 			@flavor_params_id = val.to_i
@@ -2962,13 +2891,13 @@ module Kaltura
 			self.container_format = xml_element.elements['containerFormat'].text
 			self.video_codec_id = xml_element.elements['videoCodecId'].text
 			self.status = xml_element.elements['status'].text
+			self.language = xml_element.elements['language'].text
 		end
 
 	end
 
 	class KalturaFlavorAssetUrlOptions < KalturaObjectBase
 		# The name of the downloaded file
-		# 	 
 		attr_accessor :file_name
 		attr_accessor :referrer
 
@@ -2983,40 +2912,28 @@ module Kaltura
 
 	class KalturaFlavorParams < KalturaAssetParams
 		# The video codec of the Flavor Params
-		# 	 
 		attr_accessor :video_codec
 		# The video bitrate (in KBits) of the Flavor Params
-		# 	 
 		attr_accessor :video_bitrate
 		# The audio codec of the Flavor Params
-		# 	 
 		attr_accessor :audio_codec
 		# The audio bitrate (in KBits) of the Flavor Params
-		# 	 
 		attr_accessor :audio_bitrate
 		# The number of audio channels for "downmixing"
-		# 	 
 		attr_accessor :audio_channels
 		# The audio sample rate of the Flavor Params
-		# 	 
 		attr_accessor :audio_sample_rate
 		# The desired width of the Flavor Params
-		# 	 
 		attr_accessor :width
 		# The desired height of the Flavor Params
-		# 	 
 		attr_accessor :height
 		# The frame rate of the Flavor Params
-		# 	 
 		attr_accessor :frame_rate
 		# The gop size of the Flavor Params
-		# 	 
 		attr_accessor :gop_size
 		# The list of conversion engines (comma separated)
-		# 	 
 		attr_accessor :conversion_engines
 		# The list of conversion engines extra params (separated with "|")
-		# 	 
 		attr_accessor :conversion_engines_extra_params
 		attr_accessor :two_pass
 		attr_accessor :deinterlice
@@ -3024,7 +2941,6 @@ module Kaltura
 		attr_accessor :operators
 		attr_accessor :engine_version
 		# The container format of the Flavor Params
-		# 	 
 		attr_accessor :format
 		attr_accessor :aspect_ratio_processing_mode
 		attr_accessor :force_frame_to_multiplication16
@@ -3176,13 +3092,10 @@ module Kaltura
 
 	class KalturaFlavorAssetWithParams < KalturaObjectBase
 		# The Flavor Asset (Can be null when there are params without asset)
-		# 	 
 		attr_accessor :flavor_asset
 		# The Flavor Params
-		# 	 
 		attr_accessor :flavor_params
 		# The entry id
-		# 	 
 		attr_accessor :entry_id
 
 
@@ -3222,16 +3135,257 @@ module Kaltura
 
 	end
 
+	class KalturaSchedulerStatus < KalturaObjectBase
+		# The id of the Category
+		attr_accessor :id
+		# The configured id of the scheduler
+		attr_accessor :scheduler_configured_id
+		# The configured id of the job worker
+		attr_accessor :worker_configured_id
+		# The type of the job worker.
+		attr_accessor :worker_type
+		# The status type
+		attr_accessor :type
+		# The status value
+		attr_accessor :value
+		# The id of the scheduler
+		attr_accessor :scheduler_id
+		# The id of the worker
+		attr_accessor :worker_id
+
+		def id=(val)
+			@id = val.to_i
+		end
+		def scheduler_configured_id=(val)
+			@scheduler_configured_id = val.to_i
+		end
+		def worker_configured_id=(val)
+			@worker_configured_id = val.to_i
+		end
+		def type=(val)
+			@type = val.to_i
+		end
+		def value=(val)
+			@value = val.to_i
+		end
+		def scheduler_id=(val)
+			@scheduler_id = val.to_i
+		end
+		def worker_id=(val)
+			@worker_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			self.id = xml_element.elements['id'].text
+			self.scheduler_configured_id = xml_element.elements['schedulerConfiguredId'].text
+			self.worker_configured_id = xml_element.elements['workerConfiguredId'].text
+			self.worker_type = xml_element.elements['workerType'].text
+			self.type = xml_element.elements['type'].text
+			self.value = xml_element.elements['value'].text
+			self.scheduler_id = xml_element.elements['schedulerId'].text
+			self.worker_id = xml_element.elements['workerId'].text
+		end
+
+	end
+
+	class KalturaSchedulerConfig < KalturaObjectBase
+		# The id of the Category
+		attr_accessor :id
+		# Creator name
+		attr_accessor :created_by
+		# Updater name
+		attr_accessor :updated_by
+		# Id of the control panel command that created this config item
+		attr_accessor :command_id
+		# The status of the control panel command
+		attr_accessor :command_status
+		# The id of the scheduler
+		attr_accessor :scheduler_id
+		# The configured id of the scheduler
+		attr_accessor :scheduler_configured_id
+		# The name of the scheduler
+		attr_accessor :scheduler_name
+		# The id of the job worker
+		attr_accessor :worker_id
+		# The configured id of the job worker
+		attr_accessor :worker_configured_id
+		# The name of the job worker
+		attr_accessor :worker_name
+		# The name of the variable
+		attr_accessor :variable
+		# The part of the variable
+		attr_accessor :variable_part
+		# The value of the variable
+		attr_accessor :value
+
+		def id=(val)
+			@id = val.to_i
+		end
+		def scheduler_id=(val)
+			@scheduler_id = val.to_i
+		end
+		def scheduler_configured_id=(val)
+			@scheduler_configured_id = val.to_i
+		end
+		def worker_id=(val)
+			@worker_id = val.to_i
+		end
+		def worker_configured_id=(val)
+			@worker_configured_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			self.id = xml_element.elements['id'].text
+			self.created_by = xml_element.elements['createdBy'].text
+			self.updated_by = xml_element.elements['updatedBy'].text
+			self.command_id = xml_element.elements['commandId'].text
+			self.command_status = xml_element.elements['commandStatus'].text
+			self.scheduler_id = xml_element.elements['schedulerId'].text
+			self.scheduler_configured_id = xml_element.elements['schedulerConfiguredId'].text
+			self.scheduler_name = xml_element.elements['schedulerName'].text
+			self.worker_id = xml_element.elements['workerId'].text
+			self.worker_configured_id = xml_element.elements['workerConfiguredId'].text
+			self.worker_name = xml_element.elements['workerName'].text
+			self.variable = xml_element.elements['variable'].text
+			self.variable_part = xml_element.elements['variablePart'].text
+			self.value = xml_element.elements['value'].text
+		end
+
+	end
+
+	class KalturaSchedulerWorker < KalturaObjectBase
+		# The id of the Worker
+		attr_accessor :id
+		# The id as configured in the batch config
+		attr_accessor :configured_id
+		# The id of the Scheduler
+		attr_accessor :scheduler_id
+		# The id of the scheduler as configured in the batch config
+		attr_accessor :scheduler_configured_id
+		# The worker type
+		attr_accessor :type
+		# The friendly name of the type
+		attr_accessor :type_name
+		# The scheduler name
+		attr_accessor :name
+		# Array of the last statuses
+		attr_accessor :statuses
+		# Array of the last configs
+		attr_accessor :configs
+		# Array of jobs that locked to this worker
+		attr_accessor :locked_jobs
+		# Avarage time between creation and queue time
+		attr_accessor :avg_wait
+		# Avarage time between queue time end finish time
+		attr_accessor :avg_work
+		# last status time
+		attr_accessor :last_status
+		# last status formated
+		attr_accessor :last_status_str
+
+		def id=(val)
+			@id = val.to_i
+		end
+		def configured_id=(val)
+			@configured_id = val.to_i
+		end
+		def scheduler_id=(val)
+			@scheduler_id = val.to_i
+		end
+		def scheduler_configured_id=(val)
+			@scheduler_configured_id = val.to_i
+		end
+		def avg_wait=(val)
+			@avg_wait = val.to_i
+		end
+		def avg_work=(val)
+			@avg_work = val.to_i
+		end
+		def last_status=(val)
+			@last_status = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			self.id = xml_element.elements['id'].text
+			self.configured_id = xml_element.elements['configuredId'].text
+			self.scheduler_id = xml_element.elements['schedulerId'].text
+			self.scheduler_configured_id = xml_element.elements['schedulerConfiguredId'].text
+			self.type = xml_element.elements['type'].text
+			self.type_name = xml_element.elements['typeName'].text
+			self.name = xml_element.elements['name'].text
+			self.statuses = KalturaClientBase.object_from_xml(xml_element.elements['statuses'], 'KalturaSchedulerStatus')
+			self.configs = KalturaClientBase.object_from_xml(xml_element.elements['configs'], 'KalturaSchedulerConfig')
+			self.locked_jobs = KalturaClientBase.object_from_xml(xml_element.elements['lockedJobs'], 'KalturaBatchJob')
+			self.avg_wait = xml_element.elements['avgWait'].text
+			self.avg_work = xml_element.elements['avgWork'].text
+			self.last_status = xml_element.elements['lastStatus'].text
+			self.last_status_str = xml_element.elements['lastStatusStr'].text
+		end
+
+	end
+
+	class KalturaScheduler < KalturaObjectBase
+		# The id of the Scheduler
+		attr_accessor :id
+		# The id as configured in the batch config
+		attr_accessor :configured_id
+		# The scheduler name
+		attr_accessor :name
+		# The host name
+		attr_accessor :host
+		# Array of the last statuses
+		attr_accessor :statuses
+		# Array of the last configs
+		attr_accessor :configs
+		# Array of the workers
+		attr_accessor :workers
+		# creation time
+		attr_accessor :created_at
+		# last status time
+		attr_accessor :last_status
+		# last status formated
+		attr_accessor :last_status_str
+
+		def id=(val)
+			@id = val.to_i
+		end
+		def configured_id=(val)
+			@configured_id = val.to_i
+		end
+		def created_at=(val)
+			@created_at = val.to_i
+		end
+		def last_status=(val)
+			@last_status = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			self.id = xml_element.elements['id'].text
+			self.configured_id = xml_element.elements['configuredId'].text
+			self.name = xml_element.elements['name'].text
+			self.host = xml_element.elements['host'].text
+			self.statuses = KalturaClientBase.object_from_xml(xml_element.elements['statuses'], 'KalturaSchedulerStatus')
+			self.configs = KalturaClientBase.object_from_xml(xml_element.elements['configs'], 'KalturaSchedulerConfig')
+			self.workers = KalturaClientBase.object_from_xml(xml_element.elements['workers'], 'KalturaSchedulerWorker')
+			self.created_at = xml_element.elements['createdAt'].text
+			self.last_status = xml_element.elements['lastStatus'].text
+			self.last_status_str = xml_element.elements['lastStatusStr'].text
+		end
+
+	end
+
 	class KalturaGroupUser < KalturaObjectBase
 		attr_accessor :user_id
 		attr_accessor :group_id
 		attr_accessor :status
 		attr_accessor :partner_id
 		# Creation date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :created_at
 		# Last update date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :updated_at
 
 		def status=(val)
@@ -3271,7 +3425,6 @@ module Kaltura
 	end
 
 	# An int representation to return an array of ints
-	#  
 	class KalturaIntegerValue < KalturaValue
 		attr_accessor :value
 
@@ -3286,26 +3439,365 @@ module Kaltura
 
 	end
 
-	# A key (boolean) value pair representation to return an array of key-(boolean)value pairs (associative array)
-	#  
-	class KalturaKeyBooleanValue < KalturaObjectBase
-		attr_accessor :key
-		attr_accessor :value
+	class KalturaBatchJobListResponse < KalturaListResponse
+		attr_accessor :objects
 
-		def value=(val)
-			@value = to_b(val)
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaBatchJob')
+		end
+
+	end
+
+	class KalturaMediaInfo < KalturaObjectBase
+		# The id of the media info
+		attr_accessor :id
+		# The id of the related flavor asset
+		attr_accessor :flavor_asset_id
+		# The file size
+		attr_accessor :file_size
+		# The container format
+		attr_accessor :container_format
+		# The container id
+		attr_accessor :container_id
+		# The container profile
+		attr_accessor :container_profile
+		# The container duration
+		attr_accessor :container_duration
+		# The container bit rate
+		attr_accessor :container_bit_rate
+		# The video format
+		attr_accessor :video_format
+		# The video codec id
+		attr_accessor :video_codec_id
+		# The video duration
+		attr_accessor :video_duration
+		# The video bit rate
+		attr_accessor :video_bit_rate
+		# The video bit rate mode
+		attr_accessor :video_bit_rate_mode
+		# The video width
+		attr_accessor :video_width
+		# The video height
+		attr_accessor :video_height
+		# The video frame rate
+		attr_accessor :video_frame_rate
+		# The video display aspect ratio (dar)
+		attr_accessor :video_dar
+		attr_accessor :video_rotation
+		# The audio format
+		attr_accessor :audio_format
+		# The audio codec id
+		attr_accessor :audio_codec_id
+		# The audio duration
+		attr_accessor :audio_duration
+		# The audio bit rate
+		attr_accessor :audio_bit_rate
+		# The audio bit rate mode
+		attr_accessor :audio_bit_rate_mode
+		# The number of audio channels
+		attr_accessor :audio_channels
+		# The audio sampling rate
+		attr_accessor :audio_sampling_rate
+		# The audio resolution
+		attr_accessor :audio_resolution
+		# The writing library
+		attr_accessor :writing_lib
+		# The data as returned by the mediainfo command line
+		attr_accessor :raw_data
+		attr_accessor :multi_stream_info
+		attr_accessor :scan_type
+		attr_accessor :multi_stream
+		attr_accessor :is_fast_start
+		attr_accessor :content_streams
+
+		def id=(val)
+			@id = val.to_i
+		end
+		def file_size=(val)
+			@file_size = val.to_i
+		end
+		def container_duration=(val)
+			@container_duration = val.to_i
+		end
+		def container_bit_rate=(val)
+			@container_bit_rate = val.to_i
+		end
+		def video_duration=(val)
+			@video_duration = val.to_i
+		end
+		def video_bit_rate=(val)
+			@video_bit_rate = val.to_i
+		end
+		def video_bit_rate_mode=(val)
+			@video_bit_rate_mode = val.to_i
+		end
+		def video_width=(val)
+			@video_width = val.to_i
+		end
+		def video_height=(val)
+			@video_height = val.to_i
+		end
+		def video_frame_rate=(val)
+			@video_frame_rate = val.to_f
+		end
+		def video_dar=(val)
+			@video_dar = val.to_f
+		end
+		def video_rotation=(val)
+			@video_rotation = val.to_i
+		end
+		def audio_duration=(val)
+			@audio_duration = val.to_i
+		end
+		def audio_bit_rate=(val)
+			@audio_bit_rate = val.to_i
+		end
+		def audio_bit_rate_mode=(val)
+			@audio_bit_rate_mode = val.to_i
+		end
+		def audio_channels=(val)
+			@audio_channels = val.to_i
+		end
+		def audio_sampling_rate=(val)
+			@audio_sampling_rate = val.to_i
+		end
+		def audio_resolution=(val)
+			@audio_resolution = val.to_i
+		end
+		def scan_type=(val)
+			@scan_type = val.to_i
+		end
+		def is_fast_start=(val)
+			@is_fast_start = val.to_i
 		end
 
 		def from_xml(xml_element)
 			super
-			self.key = xml_element.elements['key'].text
-			self.value = xml_element.elements['value'].text
+			self.id = xml_element.elements['id'].text
+			self.flavor_asset_id = xml_element.elements['flavorAssetId'].text
+			self.file_size = xml_element.elements['fileSize'].text
+			self.container_format = xml_element.elements['containerFormat'].text
+			self.container_id = xml_element.elements['containerId'].text
+			self.container_profile = xml_element.elements['containerProfile'].text
+			self.container_duration = xml_element.elements['containerDuration'].text
+			self.container_bit_rate = xml_element.elements['containerBitRate'].text
+			self.video_format = xml_element.elements['videoFormat'].text
+			self.video_codec_id = xml_element.elements['videoCodecId'].text
+			self.video_duration = xml_element.elements['videoDuration'].text
+			self.video_bit_rate = xml_element.elements['videoBitRate'].text
+			self.video_bit_rate_mode = xml_element.elements['videoBitRateMode'].text
+			self.video_width = xml_element.elements['videoWidth'].text
+			self.video_height = xml_element.elements['videoHeight'].text
+			self.video_frame_rate = xml_element.elements['videoFrameRate'].text
+			self.video_dar = xml_element.elements['videoDar'].text
+			self.video_rotation = xml_element.elements['videoRotation'].text
+			self.audio_format = xml_element.elements['audioFormat'].text
+			self.audio_codec_id = xml_element.elements['audioCodecId'].text
+			self.audio_duration = xml_element.elements['audioDuration'].text
+			self.audio_bit_rate = xml_element.elements['audioBitRate'].text
+			self.audio_bit_rate_mode = xml_element.elements['audioBitRateMode'].text
+			self.audio_channels = xml_element.elements['audioChannels'].text
+			self.audio_sampling_rate = xml_element.elements['audioSamplingRate'].text
+			self.audio_resolution = xml_element.elements['audioResolution'].text
+			self.writing_lib = xml_element.elements['writingLib'].text
+			self.raw_data = xml_element.elements['rawData'].text
+			self.multi_stream_info = xml_element.elements['multiStreamInfo'].text
+			self.scan_type = xml_element.elements['scanType'].text
+			self.multi_stream = xml_element.elements['multiStream'].text
+			self.is_fast_start = xml_element.elements['isFastStart'].text
+			self.content_streams = xml_element.elements['contentStreams'].text
+		end
+
+	end
+
+	class KalturaMediaInfoListResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaMediaInfo')
+		end
+
+	end
+
+	class KalturaFlavorParamsOutputListResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaFlavorParamsOutput')
+		end
+
+	end
+
+	class KalturaThumbAsset < KalturaAsset
+		# The Flavor Params used to create this Flavor Asset
+		attr_accessor :thumb_params_id
+		# The width of the Flavor Asset
+		attr_accessor :width
+		# The height of the Flavor Asset
+		attr_accessor :height
+		# The status of the asset
+		attr_accessor :status
+
+		def thumb_params_id=(val)
+			@thumb_params_id = val.to_i
+		end
+		def width=(val)
+			@width = val.to_i
+		end
+		def height=(val)
+			@height = val.to_i
+		end
+		def status=(val)
+			@status = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			self.thumb_params_id = xml_element.elements['thumbParamsId'].text
+			self.width = xml_element.elements['width'].text
+			self.height = xml_element.elements['height'].text
+			self.status = xml_element.elements['status'].text
+		end
+
+	end
+
+	class KalturaThumbParams < KalturaAssetParams
+		attr_accessor :crop_type
+		attr_accessor :quality
+		attr_accessor :crop_x
+		attr_accessor :crop_y
+		attr_accessor :crop_width
+		attr_accessor :crop_height
+		attr_accessor :video_offset
+		attr_accessor :width
+		attr_accessor :height
+		attr_accessor :scale_width
+		attr_accessor :scale_height
+		# Hexadecimal value
+		attr_accessor :background_color
+		# Id of the flavor params or the thumbnail params to be used as source for the thumbnail creation
+		attr_accessor :source_params_id
+		# The container format of the Flavor Params
+		attr_accessor :format
+		# The image density (dpi) for example: 72 or 96
+		attr_accessor :density
+		# Strip profiles and comments
+		attr_accessor :strip_profiles
+		# Create thumbnail from the videoLengthpercentage second
+		attr_accessor :video_offset_in_percentage
+
+		def crop_type=(val)
+			@crop_type = val.to_i
+		end
+		def quality=(val)
+			@quality = val.to_i
+		end
+		def crop_x=(val)
+			@crop_x = val.to_i
+		end
+		def crop_y=(val)
+			@crop_y = val.to_i
+		end
+		def crop_width=(val)
+			@crop_width = val.to_i
+		end
+		def crop_height=(val)
+			@crop_height = val.to_i
+		end
+		def video_offset=(val)
+			@video_offset = val.to_f
+		end
+		def width=(val)
+			@width = val.to_i
+		end
+		def height=(val)
+			@height = val.to_i
+		end
+		def scale_width=(val)
+			@scale_width = val.to_f
+		end
+		def scale_height=(val)
+			@scale_height = val.to_f
+		end
+		def source_params_id=(val)
+			@source_params_id = val.to_i
+		end
+		def density=(val)
+			@density = val.to_i
+		end
+		def strip_profiles=(val)
+			@strip_profiles = to_b(val)
+		end
+		def video_offset_in_percentage=(val)
+			@video_offset_in_percentage = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			self.crop_type = xml_element.elements['cropType'].text
+			self.quality = xml_element.elements['quality'].text
+			self.crop_x = xml_element.elements['cropX'].text
+			self.crop_y = xml_element.elements['cropY'].text
+			self.crop_width = xml_element.elements['cropWidth'].text
+			self.crop_height = xml_element.elements['cropHeight'].text
+			self.video_offset = xml_element.elements['videoOffset'].text
+			self.width = xml_element.elements['width'].text
+			self.height = xml_element.elements['height'].text
+			self.scale_width = xml_element.elements['scaleWidth'].text
+			self.scale_height = xml_element.elements['scaleHeight'].text
+			self.background_color = xml_element.elements['backgroundColor'].text
+			self.source_params_id = xml_element.elements['sourceParamsId'].text
+			self.format = xml_element.elements['format'].text
+			self.density = xml_element.elements['density'].text
+			self.strip_profiles = xml_element.elements['stripProfiles'].text
+			self.video_offset_in_percentage = xml_element.elements['videoOffsetInPercentage'].text
+		end
+
+	end
+
+	class KalturaThumbParamsOutput < KalturaThumbParams
+		attr_accessor :thumb_params_id
+		attr_accessor :thumb_params_version
+		attr_accessor :thumb_asset_id
+		attr_accessor :thumb_asset_version
+		attr_accessor :rotate
+
+		def thumb_params_id=(val)
+			@thumb_params_id = val.to_i
+		end
+		def rotate=(val)
+			@rotate = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			self.thumb_params_id = xml_element.elements['thumbParamsId'].text
+			self.thumb_params_version = xml_element.elements['thumbParamsVersion'].text
+			self.thumb_asset_id = xml_element.elements['thumbAssetId'].text
+			self.thumb_asset_version = xml_element.elements['thumbAssetVersion'].text
+			self.rotate = xml_element.elements['rotate'].text
+		end
+
+	end
+
+	class KalturaThumbParamsOutputListResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaThumbParamsOutput')
 		end
 
 	end
 
 	# A representation of a live stream configuration
-	#  
 	class KalturaLiveStreamConfiguration < KalturaObjectBase
 		attr_accessor :protocol
 		attr_accessor :url
@@ -3326,7 +3818,6 @@ module Kaltura
 	end
 
 	# Basic push-publish configuration for Kaltura live stream entry
-	#  
 	class KalturaLiveStreamPushPublishConfiguration < KalturaObjectBase
 		attr_accessor :publish_url
 		attr_accessor :backup_publish_url
@@ -3343,7 +3834,6 @@ module Kaltura
 	end
 
 	# A representation of a live stream recording entry configuration
-	#  
 	class KalturaLiveEntryRecordingOptions < KalturaObjectBase
 		attr_accessor :should_copy_entitlement
 		attr_accessor :should_copy_scheduling
@@ -3370,44 +3860,31 @@ module Kaltura
 
 	class KalturaLiveEntry < KalturaMediaEntry
 		# The message to be presented when the stream is offline
-		# 	 
 		attr_accessor :offline_message
 		# Recording Status Enabled/Disabled
-		# 	 
 		attr_accessor :record_status
 		# DVR Status Enabled/Disabled
-		# 	 
 		attr_accessor :dvr_status
 		# Window of time which the DVR allows for backwards scrubbing (in minutes)
-		# 	 
 		attr_accessor :dvr_window
 		# Elapsed recording time (in msec) up to the point where the live stream was last stopped (unpublished).
-		# 	 
 		attr_accessor :last_elapsed_recording_time
 		# Array of key value protocol->live stream url objects
-		# 	 
 		attr_accessor :live_stream_configurations
 		# Recorded entry id
-		# 	 
 		attr_accessor :recorded_entry_id
 		# Flag denoting whether entry should be published by the media server
-		# 	 
 		attr_accessor :push_publish_enabled
 		# Array of publish configurations
-		# 	 
 		attr_accessor :publish_configurations
 		# The first time in which the entry was broadcast
-		# 	 
 		attr_accessor :first_broadcast
 		# The Last time in which the entry was broadcast
-		# 	 
 		attr_accessor :last_broadcast
 		# The time (unix timestamp in milliseconds) in which the entry broadcast started or 0 when the entry is off the air
-		# 	 
 		attr_accessor :current_broadcast_start_time
 		attr_accessor :recording_options
 		# the status of the entry of type EntryServerNodeStatus
-		# 	 
 		attr_accessor :live_status
 
 		def record_status=(val)
@@ -3460,10 +3937,8 @@ module Kaltura
 
 	class KalturaLiveChannel < KalturaLiveEntry
 		# Playlist id to be played
-		# 	 
 		attr_accessor :playlist_id
 		# Indicates that the segments should be repeated for ever
-		# 	 
 		attr_accessor :repeat
 
 		def repeat=(val)
@@ -3480,45 +3955,32 @@ module Kaltura
 
 	class KalturaLiveChannelSegment < KalturaObjectBase
 		# Unique identifier
-		# 	 
 		attr_accessor :id
 		attr_accessor :partner_id
 		# Segment creation date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :created_at
 		# Segment update date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :updated_at
 		# Segment name
-		# 	 
 		attr_accessor :name
 		# Segment description
-		# 	 
 		attr_accessor :description
 		# Segment tags
-		# 	 
 		attr_accessor :tags
 		# Segment could be associated with the main stream, as additional stream or as overlay
-		# 	 
 		attr_accessor :type
 		attr_accessor :status
 		# Live channel id
-		# 	 
 		attr_accessor :channel_id
 		# Entry id to be played
-		# 	 
 		attr_accessor :entry_id
 		# Segment start time trigger type
-		# 	 
 		attr_accessor :trigger_type
 		# Live channel segment that the trigger relates to
-		# 	 
 		attr_accessor :trigger_segment_id
 		# Segment play start time, in mili-seconds, according to trigger type
-		# 	 
 		attr_accessor :start_time
 		# Segment play duration time, in mili-seconds
-		# 	 
 		attr_accessor :duration
 
 		def partner_id=(val)
@@ -3562,10 +4024,8 @@ module Kaltura
 		attr_accessor :entry_ids
 		attr_accessor :recpient_email
 		# Time zone offset in minutes (between client to UTC)
-		# 	 
 		attr_accessor :time_zone_offset
 		# Optional argument that allows controlling the prefix of the exported csv url
-		# 	 
 		attr_accessor :application_url_template
 
 		def time_zone_offset=(val)
@@ -3676,34 +4136,25 @@ module Kaltura
 	end
 
 	# Will hold data from the Kaltura Player components to be passed on to the live analytics system
-	#  
 	class KalturaLiveStatsEvent < KalturaObjectBase
 		attr_accessor :partner_id
 		attr_accessor :entry_id
 		# an integer representing the type of event being sent from the player
-		# 	 
 		attr_accessor :event_type
 		# a unique string generated by the client that will represent the client-side session: the primary component will pass it on to other components that sprout from it
-		# 	 
 		attr_accessor :session_id
 		# incremental sequence of the event
-		# 	 
 		attr_accessor :event_index
 		# buffer time in seconds from the last 10 seconds
-		# 	 
 		attr_accessor :buffer_time
 		# bitrate used in the last 10 seconds
-		# 	 
 		attr_accessor :bitrate
 		# the referrer of the client
-		# 	 
 		attr_accessor :referrer
 		attr_accessor :is_live
 		# the event start time as string
-		# 	 
 		attr_accessor :start_time
 		# delivery type used for this stream
-		# 	 
 		attr_accessor :delivery_type
 
 		def partner_id=(val)
@@ -3770,13 +4221,10 @@ module Kaltura
 
 	class KalturaLiveStreamEntry < KalturaLiveEntry
 		# The stream id as provided by the provider
-		# 	 
 		attr_accessor :stream_remote_id
 		# The backup stream id as provided by the provider
-		# 	 
 		attr_accessor :stream_remote_backup_id
 		# Array of supported bitrates
-		# 	 
 		attr_accessor :bitrates
 		attr_accessor :primary_broadcasting_url
 		attr_accessor :secondary_broadcasting_url
@@ -3784,28 +4232,20 @@ module Kaltura
 		attr_accessor :secondary_rtsp_broadcasting_url
 		attr_accessor :stream_name
 		# The stream url
-		# 	 
 		attr_accessor :stream_url
 		# HLS URL - URL for live stream playback on mobile device
-		# 	 
 		attr_accessor :hls_stream_url
 		# URL Manager to handle the live stream URL (for instance, add token)
-		# 	 
 		attr_accessor :url_manager
 		# The broadcast primary ip
-		# 	 
 		attr_accessor :encoding_ip1
 		# The broadcast secondary ip
-		# 	 
 		attr_accessor :encoding_ip2
 		# The broadcast password
-		# 	 
 		attr_accessor :stream_password
 		# The broadcast username
-		# 	 
 		attr_accessor :stream_username
-		# The Streams primary server node id 
-		# 	 
+		# The Streams primary server node id
 		attr_accessor :primary_server_node_id
 
 		def primary_server_node_id=(val)
@@ -3836,19 +4276,14 @@ module Kaltura
 
 	class KalturaLiveStreamParams < KalturaObjectBase
 		# Bit rate of the stream. (i.e. 900)
-		# 	 
 		attr_accessor :bitrate
 		# flavor asset id
-		# 	 
 		attr_accessor :flavor_id
 		# Stream's width
-		# 	 
 		attr_accessor :width
 		# Stream's height
-		# 	 
 		attr_accessor :height
 		# Live stream's codec
-		# 	 
 		attr_accessor :codec
 
 		def bitrate=(val)
@@ -3874,62 +4309,45 @@ module Kaltura
 
 	class KalturaBaseEntryBaseFilter < KalturaRelatedFilter
 		# This filter should be in use for retrieving only a specific entry (identified by its entryId).
-		# 	 
 		attr_accessor :id_equal
 		# This filter should be in use for retrieving few specific entries (string should include comma separated list of entryId strings).
-		# 	 
 		attr_accessor :id_in
 		attr_accessor :id_not_in
 		# This filter should be in use for retrieving specific entries. It should include only one string to search for in entry names (no wildcards, spaces are treated as part of the string).
-		# 	 
 		attr_accessor :name_like
 		# This filter should be in use for retrieving specific entries. It could include few (comma separated) strings for searching in entry names, while applying an OR logic to retrieve entries that contain at least one input string (no wildcards, spaces are treated as part of the string).
-		# 	 
 		attr_accessor :name_multi_like_or
 		# This filter should be in use for retrieving specific entries. It could include few (comma separated) strings for searching in entry names, while applying an AND logic to retrieve entries that contain all input strings (no wildcards, spaces are treated as part of the string).
-		# 	 
 		attr_accessor :name_multi_like_and
 		# This filter should be in use for retrieving entries with a specific name.
-		# 	 
 		attr_accessor :name_equal
 		# This filter should be in use for retrieving only entries which were uploaded by/assigned to users of a specific Kaltura Partner (identified by Partner ID).
-		# 	 
 		attr_accessor :partner_id_equal
 		# This filter should be in use for retrieving only entries within Kaltura network which were uploaded by/assigned to users of few Kaltura Partners  (string should include comma separated list of PartnerIDs)
-		# 	 
 		attr_accessor :partner_id_in
 		# This filter parameter should be in use for retrieving only entries, uploaded by/assigned to a specific user (identified by user Id).
-		# 	 
 		attr_accessor :user_id_equal
 		attr_accessor :user_id_in
 		attr_accessor :creator_id_equal
 		# This filter should be in use for retrieving specific entries. It should include only one string to search for in entry tags (no wildcards, spaces are treated as part of the string).
-		# 	 
 		attr_accessor :tags_like
 		# This filter should be in use for retrieving specific entries. It could include few (comma separated) strings for searching in entry tags, while applying an OR logic to retrieve entries that contain at least one input string (no wildcards, spaces are treated as part of the string).
-		# 	 
 		attr_accessor :tags_multi_like_or
 		# This filter should be in use for retrieving specific entries. It could include few (comma separated) strings for searching in entry tags, while applying an AND logic to retrieve entries that contain all input strings (no wildcards, spaces are treated as part of the string).
-		# 	 
 		attr_accessor :tags_multi_like_and
 		# This filter should be in use for retrieving specific entries. It should include only one string to search for in entry tags set by an ADMIN user (no wildcards, spaces are treated as part of the string).
-		# 	 
 		attr_accessor :admin_tags_like
 		# This filter should be in use for retrieving specific entries. It could include few (comma separated) strings for searching in entry tags, set by an ADMIN user, while applying an OR logic to retrieve entries that contain at least one input string (no wildcards, spaces are treated as part of the string).
-		# 	 
 		attr_accessor :admin_tags_multi_like_or
 		# This filter should be in use for retrieving specific entries. It could include few (comma separated) strings for searching in entry tags, set by an ADMIN user, while applying an AND logic to retrieve entries that contain all input strings (no wildcards, spaces are treated as part of the string).
-		# 	 
 		attr_accessor :admin_tags_multi_like_and
 		attr_accessor :categories_match_and
 		# All entries within these categories or their child categories.
-		# 	 
 		attr_accessor :categories_match_or
 		attr_accessor :categories_not_contains
 		attr_accessor :categories_ids_match_and
 		# All entries of the categories, excluding their child categories.
 		# 	 To include entries of the child categories, use categoryAncestorIdIn, or categoriesMatchOr.
-		# 	 
 		attr_accessor :categories_ids_match_or
 		attr_accessor :categories_ids_not_contains
 		attr_accessor :categories_ids_empty
@@ -3949,10 +4367,8 @@ module Kaltura
 		# This filter should be in use for retrieving entries of few {
 		attr_accessor :type_in
 		# This filter parameter should be in use for retrieving only entries which were created at Kaltura system after a specific time/date (standard timestamp format).
-		# 	 
 		attr_accessor :created_at_greater_than_or_equal
 		# This filter parameter should be in use for retrieving only entries which were created at Kaltura system before a specific time/date (standard timestamp format).
-		# 	 
 		attr_accessor :created_at_less_than_or_equal
 		attr_accessor :updated_at_greater_than_or_equal
 		attr_accessor :updated_at_less_than_or_equal
@@ -3960,10 +4376,8 @@ module Kaltura
 		attr_accessor :total_rank_greater_than_or_equal
 		attr_accessor :group_id_equal
 		# This filter should be in use for retrieving specific entries while search match the input string within all of the following metadata attributes: name, description, tags, adminTags.
-		# 	 
 		attr_accessor :search_text_match_and
 		# This filter should be in use for retrieving specific entries while search match the input string within at least one of the following metadata attributes: name, description, tags, adminTags.
-		# 	 
 		attr_accessor :search_text_match_or
 		attr_accessor :access_control_id_equal
 		attr_accessor :access_control_id_in
@@ -4153,11 +4567,9 @@ module Kaltura
 		attr_accessor :free_text
 		attr_accessor :is_root
 		attr_accessor :categories_full_name_in
-		# All entries within this categoy or in child categories  
-		# 	 
+		# All entries within this categoy or in child categories
 		attr_accessor :category_ancestor_id_in
 		# The id of the original entry
-		# 	 
 		attr_accessor :redirect_from_entry_id
 
 		def is_root=(val)
@@ -4286,204 +4698,12 @@ module Kaltura
 
 	end
 
-	class KalturaMediaInfo < KalturaObjectBase
-		# The id of the media info
-		# 	 
-		attr_accessor :id
-		# The id of the related flavor asset
-		# 	 
-		attr_accessor :flavor_asset_id
-		# The file size
-		# 	 
-		attr_accessor :file_size
-		# The container format
-		# 	 
-		attr_accessor :container_format
-		# The container id
-		# 	 
-		attr_accessor :container_id
-		# The container profile
-		# 	 
-		attr_accessor :container_profile
-		# The container duration
-		# 	 
-		attr_accessor :container_duration
-		# The container bit rate
-		# 	 
-		attr_accessor :container_bit_rate
-		# The video format
-		# 	 
-		attr_accessor :video_format
-		# The video codec id
-		# 	 
-		attr_accessor :video_codec_id
-		# The video duration
-		# 	 
-		attr_accessor :video_duration
-		# The video bit rate
-		# 	 
-		attr_accessor :video_bit_rate
-		# The video bit rate mode
-		# 	 
-		attr_accessor :video_bit_rate_mode
-		# The video width
-		# 	 
-		attr_accessor :video_width
-		# The video height
-		# 	 
-		attr_accessor :video_height
-		# The video frame rate
-		# 	 
-		attr_accessor :video_frame_rate
-		# The video display aspect ratio (dar)
-		# 	 
-		attr_accessor :video_dar
-		attr_accessor :video_rotation
-		# The audio format
-		# 	 
-		attr_accessor :audio_format
-		# The audio codec id
-		# 	 
-		attr_accessor :audio_codec_id
-		# The audio duration
-		# 	 
-		attr_accessor :audio_duration
-		# The audio bit rate
-		# 	 
-		attr_accessor :audio_bit_rate
-		# The audio bit rate mode
-		# 	 
-		attr_accessor :audio_bit_rate_mode
-		# The number of audio channels
-		# 	 
-		attr_accessor :audio_channels
-		# The audio sampling rate
-		# 	 
-		attr_accessor :audio_sampling_rate
-		# The audio resolution
-		# 	 
-		attr_accessor :audio_resolution
-		# The writing library
-		# 	 
-		attr_accessor :writing_lib
-		# The data as returned by the mediainfo command line
-		# 	 
-		attr_accessor :raw_data
-		attr_accessor :multi_stream_info
-		attr_accessor :scan_type
-		attr_accessor :multi_stream
-		attr_accessor :is_fast_start
-		attr_accessor :content_streams
-
-		def id=(val)
-			@id = val.to_i
-		end
-		def file_size=(val)
-			@file_size = val.to_i
-		end
-		def container_duration=(val)
-			@container_duration = val.to_i
-		end
-		def container_bit_rate=(val)
-			@container_bit_rate = val.to_i
-		end
-		def video_duration=(val)
-			@video_duration = val.to_i
-		end
-		def video_bit_rate=(val)
-			@video_bit_rate = val.to_i
-		end
-		def video_bit_rate_mode=(val)
-			@video_bit_rate_mode = val.to_i
-		end
-		def video_width=(val)
-			@video_width = val.to_i
-		end
-		def video_height=(val)
-			@video_height = val.to_i
-		end
-		def video_frame_rate=(val)
-			@video_frame_rate = val.to_f
-		end
-		def video_dar=(val)
-			@video_dar = val.to_f
-		end
-		def video_rotation=(val)
-			@video_rotation = val.to_i
-		end
-		def audio_duration=(val)
-			@audio_duration = val.to_i
-		end
-		def audio_bit_rate=(val)
-			@audio_bit_rate = val.to_i
-		end
-		def audio_bit_rate_mode=(val)
-			@audio_bit_rate_mode = val.to_i
-		end
-		def audio_channels=(val)
-			@audio_channels = val.to_i
-		end
-		def audio_sampling_rate=(val)
-			@audio_sampling_rate = val.to_i
-		end
-		def audio_resolution=(val)
-			@audio_resolution = val.to_i
-		end
-		def scan_type=(val)
-			@scan_type = val.to_i
-		end
-		def is_fast_start=(val)
-			@is_fast_start = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			self.id = xml_element.elements['id'].text
-			self.flavor_asset_id = xml_element.elements['flavorAssetId'].text
-			self.file_size = xml_element.elements['fileSize'].text
-			self.container_format = xml_element.elements['containerFormat'].text
-			self.container_id = xml_element.elements['containerId'].text
-			self.container_profile = xml_element.elements['containerProfile'].text
-			self.container_duration = xml_element.elements['containerDuration'].text
-			self.container_bit_rate = xml_element.elements['containerBitRate'].text
-			self.video_format = xml_element.elements['videoFormat'].text
-			self.video_codec_id = xml_element.elements['videoCodecId'].text
-			self.video_duration = xml_element.elements['videoDuration'].text
-			self.video_bit_rate = xml_element.elements['videoBitRate'].text
-			self.video_bit_rate_mode = xml_element.elements['videoBitRateMode'].text
-			self.video_width = xml_element.elements['videoWidth'].text
-			self.video_height = xml_element.elements['videoHeight'].text
-			self.video_frame_rate = xml_element.elements['videoFrameRate'].text
-			self.video_dar = xml_element.elements['videoDar'].text
-			self.video_rotation = xml_element.elements['videoRotation'].text
-			self.audio_format = xml_element.elements['audioFormat'].text
-			self.audio_codec_id = xml_element.elements['audioCodecId'].text
-			self.audio_duration = xml_element.elements['audioDuration'].text
-			self.audio_bit_rate = xml_element.elements['audioBitRate'].text
-			self.audio_bit_rate_mode = xml_element.elements['audioBitRateMode'].text
-			self.audio_channels = xml_element.elements['audioChannels'].text
-			self.audio_sampling_rate = xml_element.elements['audioSamplingRate'].text
-			self.audio_resolution = xml_element.elements['audioResolution'].text
-			self.writing_lib = xml_element.elements['writingLib'].text
-			self.raw_data = xml_element.elements['rawData'].text
-			self.multi_stream_info = xml_element.elements['multiStreamInfo'].text
-			self.scan_type = xml_element.elements['scanType'].text
-			self.multi_stream = xml_element.elements['multiStream'].text
-			self.is_fast_start = xml_element.elements['isFastStart'].text
-			self.content_streams = xml_element.elements['contentStreams'].text
-		end
-
-	end
-
 	class KalturaMixEntry < KalturaPlayableEntry
 		# Indicates whether the user has submited a real thumbnail to the mix (Not the one that was generated automaticaly)
-		# 	 
 		attr_accessor :has_real_thumbnail
 		# The editor type used to edit the metadata
-		# 	 
 		attr_accessor :editor_type
 		# The xml data of the mix
-		# 	 
 		attr_accessor :data_content
 
 		def has_real_thumbnail=(val)
@@ -4504,26 +4724,19 @@ module Kaltura
 
 	class KalturaModerationFlag < KalturaObjectBase
 		# Moderation flag id
-		# 	 
 		attr_accessor :id
 		attr_accessor :partner_id
 		# The user id that added the moderation flag
-		# 	 
 		attr_accessor :user_id
 		# The type of the moderation flag (entry or user)
-		# 	 
 		attr_accessor :moderation_object_type
 		# If moderation flag is set for entry, this is the flagged entry id
-		# 	 
 		attr_accessor :flagged_entry_id
 		# If moderation flag is set for user, this is the flagged user id
-		# 	 
 		attr_accessor :flagged_user_id
 		# The moderation flag status
-		# 	 
 		attr_accessor :status
 		# The comment that was added to the flag
-		# 	 
 		attr_accessor :comments
 		attr_accessor :flag_type
 		attr_accessor :created_at
@@ -4562,257 +4775,18 @@ module Kaltura
 
 	end
 
-	class KalturaPlayerDeliveryType < KalturaObjectBase
-		attr_accessor :id
-		attr_accessor :label
-		attr_accessor :flashvars
-		attr_accessor :min_version
-		attr_accessor :enabled_by_default
-
-		def enabled_by_default=(val)
-			@enabled_by_default = to_b(val)
-		end
-
-		def from_xml(xml_element)
-			super
-			self.id = xml_element.elements['id'].text
-			self.label = xml_element.elements['label'].text
-			self.flashvars = KalturaClientBase.object_from_xml(xml_element.elements['flashvars'], 'KalturaKeyValue')
-			self.min_version = xml_element.elements['minVersion'].text
-			self.enabled_by_default = xml_element.elements['enabledByDefault'].text
-		end
-
-	end
-
-	class KalturaPlayerEmbedCodeType < KalturaObjectBase
-		attr_accessor :id
-		attr_accessor :label
-		attr_accessor :entry_only
-		attr_accessor :min_version
-
-		def entry_only=(val)
-			@entry_only = to_b(val)
-		end
-
-		def from_xml(xml_element)
-			super
-			self.id = xml_element.elements['id'].text
-			self.label = xml_element.elements['label'].text
-			self.entry_only = xml_element.elements['entryOnly'].text
-			self.min_version = xml_element.elements['minVersion'].text
-		end
-
-	end
-
-	class KalturaPartner < KalturaObjectBase
-		attr_accessor :id
-		attr_accessor :name
-		attr_accessor :website
-		attr_accessor :notification_url
-		attr_accessor :appear_in_search
-		attr_accessor :created_at
-		# deprecated - lastName and firstName replaces this field
-		# 	 
-		attr_accessor :admin_name
-		attr_accessor :admin_email
-		attr_accessor :description
-		attr_accessor :commercial_use
-		attr_accessor :landing_page
-		attr_accessor :user_landing_page
-		attr_accessor :content_categories
-		attr_accessor :type
-		attr_accessor :phone
-		attr_accessor :describe_yourself
-		attr_accessor :adult_content
-		attr_accessor :def_conversion_profile_type
-		attr_accessor :notify
-		attr_accessor :status
-		attr_accessor :allow_quick_edit
-		attr_accessor :merge_entry_lists
-		attr_accessor :notifications_config
-		attr_accessor :max_upload_size
-		attr_accessor :partner_package
-		attr_accessor :secret
-		attr_accessor :admin_secret
-		attr_accessor :cms_password
-		attr_accessor :allow_multi_notification
-		attr_accessor :admin_login_users_quota
-		attr_accessor :admin_user_id
-		# firstName and lastName replace the old (deprecated) adminName
-		# 	 
-		attr_accessor :first_name
-		# lastName and firstName replace the old (deprecated) adminName
-		# 	 
-		attr_accessor :last_name
-		# country code (2char) - this field is optional
-		# 	 
-		attr_accessor :country
-		# state code (2char) - this field is optional
-		# 	 
-		attr_accessor :state
-		attr_accessor :additional_params
-		attr_accessor :publishers_quota
-		attr_accessor :partner_group_type
-		attr_accessor :default_entitlement_enforcement
-		attr_accessor :default_delivery_type
-		attr_accessor :default_embed_code_type
-		attr_accessor :delivery_types
-		attr_accessor :embed_code_types
-		attr_accessor :template_partner_id
-		attr_accessor :ignore_seo_links
-		attr_accessor :host
-		attr_accessor :cdn_host
-		attr_accessor :is_first_login
-		attr_accessor :logout_url
-		attr_accessor :partner_parent_id
-		attr_accessor :crm_id
-		attr_accessor :reference_id
-		attr_accessor :time_aligned_renditions
-
-		def id=(val)
-			@id = val.to_i
-		end
-		def appear_in_search=(val)
-			@appear_in_search = val.to_i
-		end
-		def created_at=(val)
-			@created_at = val.to_i
-		end
-		def commercial_use=(val)
-			@commercial_use = val.to_i
-		end
-		def type=(val)
-			@type = val.to_i
-		end
-		def adult_content=(val)
-			@adult_content = to_b(val)
-		end
-		def notify=(val)
-			@notify = val.to_i
-		end
-		def status=(val)
-			@status = val.to_i
-		end
-		def allow_quick_edit=(val)
-			@allow_quick_edit = val.to_i
-		end
-		def merge_entry_lists=(val)
-			@merge_entry_lists = val.to_i
-		end
-		def max_upload_size=(val)
-			@max_upload_size = val.to_i
-		end
-		def partner_package=(val)
-			@partner_package = val.to_i
-		end
-		def allow_multi_notification=(val)
-			@allow_multi_notification = val.to_i
-		end
-		def admin_login_users_quota=(val)
-			@admin_login_users_quota = val.to_i
-		end
-		def publishers_quota=(val)
-			@publishers_quota = val.to_i
-		end
-		def partner_group_type=(val)
-			@partner_group_type = val.to_i
-		end
-		def default_entitlement_enforcement=(val)
-			@default_entitlement_enforcement = to_b(val)
-		end
-		def template_partner_id=(val)
-			@template_partner_id = val.to_i
-		end
-		def ignore_seo_links=(val)
-			@ignore_seo_links = to_b(val)
-		end
-		def is_first_login=(val)
-			@is_first_login = to_b(val)
-		end
-		def partner_parent_id=(val)
-			@partner_parent_id = val.to_i
-		end
-		def time_aligned_renditions=(val)
-			@time_aligned_renditions = to_b(val)
-		end
-
-		def from_xml(xml_element)
-			super
-			self.id = xml_element.elements['id'].text
-			self.name = xml_element.elements['name'].text
-			self.website = xml_element.elements['website'].text
-			self.notification_url = xml_element.elements['notificationUrl'].text
-			self.appear_in_search = xml_element.elements['appearInSearch'].text
-			self.created_at = xml_element.elements['createdAt'].text
-			self.admin_name = xml_element.elements['adminName'].text
-			self.admin_email = xml_element.elements['adminEmail'].text
-			self.description = xml_element.elements['description'].text
-			self.commercial_use = xml_element.elements['commercialUse'].text
-			self.landing_page = xml_element.elements['landingPage'].text
-			self.user_landing_page = xml_element.elements['userLandingPage'].text
-			self.content_categories = xml_element.elements['contentCategories'].text
-			self.type = xml_element.elements['type'].text
-			self.phone = xml_element.elements['phone'].text
-			self.describe_yourself = xml_element.elements['describeYourself'].text
-			self.adult_content = xml_element.elements['adultContent'].text
-			self.def_conversion_profile_type = xml_element.elements['defConversionProfileType'].text
-			self.notify = xml_element.elements['notify'].text
-			self.status = xml_element.elements['status'].text
-			self.allow_quick_edit = xml_element.elements['allowQuickEdit'].text
-			self.merge_entry_lists = xml_element.elements['mergeEntryLists'].text
-			self.notifications_config = xml_element.elements['notificationsConfig'].text
-			self.max_upload_size = xml_element.elements['maxUploadSize'].text
-			self.partner_package = xml_element.elements['partnerPackage'].text
-			self.secret = xml_element.elements['secret'].text
-			self.admin_secret = xml_element.elements['adminSecret'].text
-			self.cms_password = xml_element.elements['cmsPassword'].text
-			self.allow_multi_notification = xml_element.elements['allowMultiNotification'].text
-			self.admin_login_users_quota = xml_element.elements['adminLoginUsersQuota'].text
-			self.admin_user_id = xml_element.elements['adminUserId'].text
-			self.first_name = xml_element.elements['firstName'].text
-			self.last_name = xml_element.elements['lastName'].text
-			self.country = xml_element.elements['country'].text
-			self.state = xml_element.elements['state'].text
-			self.additional_params = KalturaClientBase.object_from_xml(xml_element.elements['additionalParams'], 'KalturaKeyValue')
-			self.publishers_quota = xml_element.elements['publishersQuota'].text
-			self.partner_group_type = xml_element.elements['partnerGroupType'].text
-			self.default_entitlement_enforcement = xml_element.elements['defaultEntitlementEnforcement'].text
-			self.default_delivery_type = xml_element.elements['defaultDeliveryType'].text
-			self.default_embed_code_type = xml_element.elements['defaultEmbedCodeType'].text
-			self.delivery_types = KalturaClientBase.object_from_xml(xml_element.elements['deliveryTypes'], 'KalturaPlayerDeliveryType')
-			self.embed_code_types = KalturaClientBase.object_from_xml(xml_element.elements['embedCodeTypes'], 'KalturaPlayerEmbedCodeType')
-			self.template_partner_id = xml_element.elements['templatePartnerId'].text
-			self.ignore_seo_links = xml_element.elements['ignoreSeoLinks'].text
-			self.host = xml_element.elements['host'].text
-			self.cdn_host = xml_element.elements['cdnHost'].text
-			self.is_first_login = xml_element.elements['isFirstLogin'].text
-			self.logout_url = xml_element.elements['logoutUrl'].text
-			self.partner_parent_id = xml_element.elements['partnerParentId'].text
-			self.crm_id = xml_element.elements['crmId'].text
-			self.reference_id = xml_element.elements['referenceId'].text
-			self.time_aligned_renditions = xml_element.elements['timeAlignedRenditions'].text
-		end
-
-	end
-
 	class KalturaPartnerStatistics < KalturaObjectBase
 		# Package total allowed bandwidth and storage
-		# 	 
 		attr_accessor :package_bandwidth_and_storage
 		# Partner total hosting in GB on the disk
-		# 	 
 		attr_accessor :hosting
 		# Partner total bandwidth in GB
-		# 	 
 		attr_accessor :bandwidth
 		# total usage in GB - including bandwidth and storage
-		# 	 
 		attr_accessor :usage
 		# Percent of usage out of partner's package. if usage is 5GB and package is 10GB, this value will be 50
-		# 	 
 		attr_accessor :usage_percent
 		# date when partner reached the limit of his package (timestamp)
-		# 	 
 		attr_accessor :reached_limit_date
 
 		def package_bandwidth_and_storage=(val)
@@ -4848,24 +4822,18 @@ module Kaltura
 
 	class KalturaPartnerUsage < KalturaObjectBase
 		# Partner total hosting in GB on the disk
-		# 	 
 		attr_accessor :hosting_gb
 		# percent of usage out of partner's package. if usageGB is 5 and package is 10GB, this value will be 50
-		# 	 
 		attr_accessor :percent
 		# package total BW - actually this is usage, which represents BW+storage
-		# 	 
 		attr_accessor :package_bw
 		# total usage in GB - including bandwidth and storage
-		# 	 
 		attr_accessor :usage_gb
 		# date when partner reached the limit of his package (timestamp)
-		# 	 
 		attr_accessor :reached_limit_date
 		# a semi-colon separated list of comma-separated key-values to represent a usage graph.
 		# 	 keys could be 1-12 for a year view (1,1.2;2,1.1;3,0.9;...;12,1.4;)
 		# 	 keys could be 1-[28,29,30,31] depending on the requested month, for a daily view in a given month (1,0.4;2,0.2;...;31,0.1;)
-		# 	 
 		attr_accessor :usage_graph
 
 		def hosting_gb=(val)
@@ -4986,27 +4954,20 @@ module Kaltura
 		# Content of the playlist - 
 		# 	 XML if the playlistType is dynamic 
 		# 	 text if the playlistType is static 
-		# 	 url if the playlistType is mRss 
-		# 	 
+		# 	 url if the playlistType is mRss
 		attr_accessor :playlist_content
 		attr_accessor :filters
 		# Maximum count of results to be returned in playlist execution
-		# 	 
 		attr_accessor :total_results
 		# Type of playlist
-		# 	 
 		attr_accessor :playlist_type
 		# Number of plays
-		# 	 
 		attr_accessor :plays
 		# Number of views
-		# 	 
 		attr_accessor :views
 		# The duration in seconds
-		# 	 
 		attr_accessor :duration
 		# The url for this playlist
-		# 	 
 		attr_accessor :execute_url
 
 		def total_results=(val)
@@ -5065,13 +5026,10 @@ module Kaltura
 	end
 
 	# Used to ingest media that is available on remote server and accessible using the supplied URL, media file will be downloaded using import job in order to make the asset ready.
-	#  
 	class KalturaUrlResource < KalturaContentResource
-		# Remote URL, FTP, HTTP or HTTPS 
-		# 	 
+		# Remote URL, FTP, HTTP or HTTPS
 		attr_accessor :url
-		# Force Import Job 
-		# 	 
+		# Force Import Job
 		attr_accessor :force_async_download
 
 		def force_async_download=(val)
@@ -5087,10 +5045,8 @@ module Kaltura
 	end
 
 	# Used to ingest media that is available on remote server and accessible using the supplied URL, the media file won't be downloaded but a file sync object of URL type will point to the media URL.
-	#  
 	class KalturaRemoteStorageResource < KalturaUrlResource
-		# ID of storage profile to be associated with the created file sync, used for file serving URL composing. 
-		# 	 
+		# ID of storage profile to be associated with the created file sync, used for file serving URL composing.
 		attr_accessor :storage_profile_id
 
 		def storage_profile_id=(val)
@@ -5106,28 +5062,20 @@ module Kaltura
 
 	class KalturaReport < KalturaObjectBase
 		# Report id
-		# 	 
 		attr_accessor :id
 		# Partner id associated with the report
-		# 	 
 		attr_accessor :partner_id
 		# Report name
-		# 	 
 		attr_accessor :name
 		# Used to identify system reports in a friendly way
-		# 	 
 		attr_accessor :system_name
 		# Report description
-		# 	 
 		attr_accessor :description
 		# Report query
-		# 	 
 		attr_accessor :query
 		# Creation date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :created_at
 		# Last update date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :updated_at
 
 		def id=(val)
@@ -5185,16 +5133,12 @@ module Kaltura
 
 	class KalturaReportInputBaseFilter < KalturaObjectBase
 		# Start date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :from_date
 		# End date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :to_date
 		# Start day as string (YYYYMMDD)
-		# 	 
 		attr_accessor :from_day
 		# End date as string (YYYYMMDD)
-		# 	 
 		attr_accessor :to_day
 
 		def from_date=(val)
@@ -5258,45 +5202,15 @@ module Kaltura
 
 	end
 
-	# Define client request optional configurations
-	#  /
-	class KalturaRequestConfiguration < KalturaObjectBase
-		# Impersonated partner id
-		# 	 
-		attr_accessor :partner_id
-		# Kaltura API session
-		# 	 
-		attr_accessor :ks
-		# Response profile - this attribute will be automatically unset after every API call.
-		# 	 
-		attr_accessor :response_profile
-
-		def partner_id=(val)
-			@partner_id = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			self.partner_id = xml_element.elements['partnerId'].text
-			self.ks = xml_element.elements['ks'].text
-			self.response_profile = KalturaClientBase.object_from_xml(xml_element.elements['responseProfile'], 'KalturaBaseResponseProfile')
-		end
-
-	end
-
 	class KalturaResponseProfile < KalturaDetachedResponseProfile
 		# Auto generated numeric identifier
-		# 	 
 		attr_accessor :id
 		# Unique system name
-		# 	 
 		attr_accessor :system_name
 		attr_accessor :partner_id
-		# Creation time as Unix timestamp (In seconds) 
-		# 	 
+		# Creation time as Unix timestamp (In seconds)
 		attr_accessor :created_at
-		# Update time as Unix timestamp (In seconds) 
-		# 	 
+		# Update time as Unix timestamp (In seconds)
 		attr_accessor :updated_at
 		attr_accessor :status
 		attr_accessor :version
@@ -5335,10 +5249,8 @@ module Kaltura
 
 	class KalturaResponseProfileCacheRecalculateOptions < KalturaObjectBase
 		# Maximum number of keys to recalculate
-		# 	 
 		attr_accessor :limit
 		# Class name
-		# 	 
 		attr_accessor :cached_object_type
 		attr_accessor :object_id
 		attr_accessor :start_object_key
@@ -5371,10 +5283,8 @@ module Kaltura
 
 	class KalturaResponseProfileCacheRecalculateResults < KalturaObjectBase
 		# Last recalculated id
-		# 	 
 		attr_accessor :last_object_key
 		# Number of recalculated keys
-		# 	 
 		attr_accessor :recalculated
 
 		def recalculated=(val)
@@ -5385,295 +5295,6 @@ module Kaltura
 			super
 			self.last_object_key = xml_element.elements['lastObjectKey'].text
 			self.recalculated = xml_element.elements['recalculated'].text
-		end
-
-	end
-
-	class KalturaSchedulerStatus < KalturaObjectBase
-		# The id of the Category
-		# 	 
-		attr_accessor :id
-		# The configured id of the scheduler
-		# 	 
-		attr_accessor :scheduler_configured_id
-		# The configured id of the job worker
-		# 	 
-		attr_accessor :worker_configured_id
-		# The type of the job worker.
-		# 	 
-		attr_accessor :worker_type
-		# The status type
-		# 	 
-		attr_accessor :type
-		# The status value
-		# 	 
-		attr_accessor :value
-		# The id of the scheduler
-		# 	 
-		attr_accessor :scheduler_id
-		# The id of the worker
-		# 	 
-		attr_accessor :worker_id
-
-		def id=(val)
-			@id = val.to_i
-		end
-		def scheduler_configured_id=(val)
-			@scheduler_configured_id = val.to_i
-		end
-		def worker_configured_id=(val)
-			@worker_configured_id = val.to_i
-		end
-		def type=(val)
-			@type = val.to_i
-		end
-		def value=(val)
-			@value = val.to_i
-		end
-		def scheduler_id=(val)
-			@scheduler_id = val.to_i
-		end
-		def worker_id=(val)
-			@worker_id = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			self.id = xml_element.elements['id'].text
-			self.scheduler_configured_id = xml_element.elements['schedulerConfiguredId'].text
-			self.worker_configured_id = xml_element.elements['workerConfiguredId'].text
-			self.worker_type = xml_element.elements['workerType'].text
-			self.type = xml_element.elements['type'].text
-			self.value = xml_element.elements['value'].text
-			self.scheduler_id = xml_element.elements['schedulerId'].text
-			self.worker_id = xml_element.elements['workerId'].text
-		end
-
-	end
-
-	class KalturaSchedulerConfig < KalturaObjectBase
-		# The id of the Category
-		# 	 
-		attr_accessor :id
-		# Creator name
-		# 	 
-		attr_accessor :created_by
-		# Updater name
-		# 	 
-		attr_accessor :updated_by
-		# Id of the control panel command that created this config item 
-		# 	 
-		attr_accessor :command_id
-		# The status of the control panel command 
-		# 	 
-		attr_accessor :command_status
-		# The id of the scheduler 
-		# 	 
-		attr_accessor :scheduler_id
-		# The configured id of the scheduler 
-		# 	 
-		attr_accessor :scheduler_configured_id
-		# The name of the scheduler 
-		# 	 
-		attr_accessor :scheduler_name
-		# The id of the job worker
-		# 	 
-		attr_accessor :worker_id
-		# The configured id of the job worker
-		# 	 
-		attr_accessor :worker_configured_id
-		# The name of the job worker
-		# 	 
-		attr_accessor :worker_name
-		# The name of the variable
-		# 	 
-		attr_accessor :variable
-		# The part of the variable
-		# 	 
-		attr_accessor :variable_part
-		# The value of the variable
-		# 	 
-		attr_accessor :value
-
-		def id=(val)
-			@id = val.to_i
-		end
-		def scheduler_id=(val)
-			@scheduler_id = val.to_i
-		end
-		def scheduler_configured_id=(val)
-			@scheduler_configured_id = val.to_i
-		end
-		def worker_id=(val)
-			@worker_id = val.to_i
-		end
-		def worker_configured_id=(val)
-			@worker_configured_id = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			self.id = xml_element.elements['id'].text
-			self.created_by = xml_element.elements['createdBy'].text
-			self.updated_by = xml_element.elements['updatedBy'].text
-			self.command_id = xml_element.elements['commandId'].text
-			self.command_status = xml_element.elements['commandStatus'].text
-			self.scheduler_id = xml_element.elements['schedulerId'].text
-			self.scheduler_configured_id = xml_element.elements['schedulerConfiguredId'].text
-			self.scheduler_name = xml_element.elements['schedulerName'].text
-			self.worker_id = xml_element.elements['workerId'].text
-			self.worker_configured_id = xml_element.elements['workerConfiguredId'].text
-			self.worker_name = xml_element.elements['workerName'].text
-			self.variable = xml_element.elements['variable'].text
-			self.variable_part = xml_element.elements['variablePart'].text
-			self.value = xml_element.elements['value'].text
-		end
-
-	end
-
-	class KalturaSchedulerWorker < KalturaObjectBase
-		# The id of the Worker
-		# 	 
-		attr_accessor :id
-		# The id as configured in the batch config
-		# 	 
-		attr_accessor :configured_id
-		# The id of the Scheduler
-		# 	 
-		attr_accessor :scheduler_id
-		# The id of the scheduler as configured in the batch config
-		# 	 
-		attr_accessor :scheduler_configured_id
-		# The worker type
-		# 	 
-		attr_accessor :type
-		# The friendly name of the type
-		# 	 
-		attr_accessor :type_name
-		# The scheduler name
-		# 	 
-		attr_accessor :name
-		# Array of the last statuses
-		# 	 
-		attr_accessor :statuses
-		# Array of the last configs
-		# 	 
-		attr_accessor :configs
-		# Array of jobs that locked to this worker
-		# 	 
-		attr_accessor :locked_jobs
-		# Avarage time between creation and queue time
-		# 	 
-		attr_accessor :avg_wait
-		# Avarage time between queue time end finish time
-		# 	 
-		attr_accessor :avg_work
-		# last status time
-		# 	 
-		attr_accessor :last_status
-		# last status formated
-		# 	 
-		attr_accessor :last_status_str
-
-		def id=(val)
-			@id = val.to_i
-		end
-		def configured_id=(val)
-			@configured_id = val.to_i
-		end
-		def scheduler_id=(val)
-			@scheduler_id = val.to_i
-		end
-		def scheduler_configured_id=(val)
-			@scheduler_configured_id = val.to_i
-		end
-		def avg_wait=(val)
-			@avg_wait = val.to_i
-		end
-		def avg_work=(val)
-			@avg_work = val.to_i
-		end
-		def last_status=(val)
-			@last_status = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			self.id = xml_element.elements['id'].text
-			self.configured_id = xml_element.elements['configuredId'].text
-			self.scheduler_id = xml_element.elements['schedulerId'].text
-			self.scheduler_configured_id = xml_element.elements['schedulerConfiguredId'].text
-			self.type = xml_element.elements['type'].text
-			self.type_name = xml_element.elements['typeName'].text
-			self.name = xml_element.elements['name'].text
-			self.statuses = KalturaClientBase.object_from_xml(xml_element.elements['statuses'], 'KalturaSchedulerStatus')
-			self.configs = KalturaClientBase.object_from_xml(xml_element.elements['configs'], 'KalturaSchedulerConfig')
-			self.locked_jobs = KalturaClientBase.object_from_xml(xml_element.elements['lockedJobs'], 'KalturaBatchJob')
-			self.avg_wait = xml_element.elements['avgWait'].text
-			self.avg_work = xml_element.elements['avgWork'].text
-			self.last_status = xml_element.elements['lastStatus'].text
-			self.last_status_str = xml_element.elements['lastStatusStr'].text
-		end
-
-	end
-
-	class KalturaScheduler < KalturaObjectBase
-		# The id of the Scheduler
-		# 	 
-		attr_accessor :id
-		# The id as configured in the batch config
-		# 	 
-		attr_accessor :configured_id
-		# The scheduler name
-		# 	 
-		attr_accessor :name
-		# The host name
-		# 	 
-		attr_accessor :host
-		# Array of the last statuses
-		# 	 
-		attr_accessor :statuses
-		# Array of the last configs
-		# 	 
-		attr_accessor :configs
-		# Array of the workers
-		# 	 
-		attr_accessor :workers
-		# creation time
-		# 	 
-		attr_accessor :created_at
-		# last status time
-		# 	 
-		attr_accessor :last_status
-		# last status formated
-		# 	 
-		attr_accessor :last_status_str
-
-		def id=(val)
-			@id = val.to_i
-		end
-		def configured_id=(val)
-			@configured_id = val.to_i
-		end
-		def created_at=(val)
-			@created_at = val.to_i
-		end
-		def last_status=(val)
-			@last_status = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			self.id = xml_element.elements['id'].text
-			self.configured_id = xml_element.elements['configuredId'].text
-			self.name = xml_element.elements['name'].text
-			self.host = xml_element.elements['host'].text
-			self.statuses = KalturaClientBase.object_from_xml(xml_element.elements['statuses'], 'KalturaSchedulerStatus')
-			self.configs = KalturaClientBase.object_from_xml(xml_element.elements['configs'], 'KalturaSchedulerConfig')
-			self.workers = KalturaClientBase.object_from_xml(xml_element.elements['workers'], 'KalturaSchedulerWorker')
-			self.created_at = xml_element.elements['createdAt'].text
-			self.last_status = xml_element.elements['lastStatus'].text
-			self.last_status_str = xml_element.elements['lastStatusStr'].text
 		end
 
 	end
@@ -5694,7 +5315,6 @@ module Kaltura
 		# Use this field to pass dynamic data for searching
 		# 	 For example - if you set this field to "mymovies_$partner_id"
 		# 	 The $partner_id will be automatically replcaed with your real partner Id
-		# 	 
 		attr_accessor :extra_data
 		attr_accessor :auth_data
 
@@ -5718,13 +5338,10 @@ module Kaltura
 
 	class KalturaSearchAuthData < KalturaObjectBase
 		# The authentication data that further should be used for search
-		# 	 
 		attr_accessor :auth_data
 		# Login URL when user need to sign-in and authorize the search
-		# 	 
 		attr_accessor :login_url
 		# Information when there was an error
-		# 	 
 		attr_accessor :message
 
 
@@ -5794,25 +5411,19 @@ module Kaltura
 		attr_accessor :updated_at
 		attr_accessor :heartbeat_time
 		# serverNode name
-		# 	 
 		attr_accessor :name
 		# serverNode uniqe system name
-		# 	 
 		attr_accessor :system_name
 		attr_accessor :description
 		# serverNode hostName
-		# 	 
 		attr_accessor :host_name
 		attr_accessor :status
 		attr_accessor :type
 		# serverNode tags
-		# 	 
 		attr_accessor :tags
 		# DC where the serverNode is located
-		# 	 
 		attr_accessor :dc
 		# Id of the parent serverNode
-		# 	 
 		attr_accessor :parent_id
 
 		def id=(val)
@@ -5892,7 +5503,6 @@ module Kaltura
 
 	class KalturaSourceFileSyncDescriptor < KalturaFileSyncDescriptor
 		# The translated path as used by the scheduler
-		# 	 
 		attr_accessor :actual_file_sync_local_path
 		attr_accessor :asset_id
 		attr_accessor :asset_params_id
@@ -5929,55 +5539,40 @@ module Kaltura
 	end
 
 	# Will hold data from the Kaltura UI components to be passed on to the reports and analytics system
-	#  
 	class KalturaStatsEvent < KalturaObjectBase
 		attr_accessor :client_ver
 		attr_accessor :event_type
 		# the client's timestamp of this event
-		# 	 
 		attr_accessor :event_timestamp
 		# a unique string generated by the client that will represent the client-side session: the primary component will pass it on to other components that sprout from it
-		# 	 
 		attr_accessor :session_id
 		attr_accessor :partner_id
 		attr_accessor :entry_id
-		# the UV cookie - creates in the operational system and should be passed on ofr every event 
-		# 	 
+		# the UV cookie - creates in the operational system and should be passed on ofr every event
 		attr_accessor :unique_viewer
 		attr_accessor :widget_id
 		attr_accessor :uiconf_id
-		# the partner's user id 
-		# 	 
+		# the partner's user id
 		attr_accessor :user_id
-		# the timestamp along the video when the event happend 
-		# 	 
+		# the timestamp along the video when the event happend
 		attr_accessor :current_point
-		# the duration of the video in milliseconds - will make it much faster than quering the db for each entry 
-		# 	 
+		# the duration of the video in milliseconds - will make it much faster than quering the db for each entry
 		attr_accessor :duration
-		# will be retrieved from the request of the user 
-		# 	 
+		# will be retrieved from the request of the user
 		attr_accessor :user_ip
 		# the time in milliseconds the event took
-		# 	 
 		attr_accessor :process_duration
 		# the id of the GUI control - will be used in the future to better understand what the user clicked
-		# 	 
 		attr_accessor :control_id
-		# true if the user ever used seek in this session 
-		# 	 
+		# true if the user ever used seek in this session
 		attr_accessor :seek
-		# timestamp of the new point on the timeline of the video after the user seeks 
-		# 	 
+		# timestamp of the new point on the timeline of the video after the user seeks
 		attr_accessor :new_point
 		# the referrer of the client
-		# 	 
 		attr_accessor :referrer
 		# will indicate if the event is thrown for the first video in the session
-		# 	 
 		attr_accessor :is_first_in_session
-		# kaltura application name 
-		# 	 
+		# kaltura application name
 		attr_accessor :application_id
 		attr_accessor :context_id
 		attr_accessor :feature_type
@@ -6048,26 +5643,21 @@ module Kaltura
 	end
 
 	# Will hold data from the Kaltura UI components to be passed on to the reports and analytics system
-	#  
 	class KalturaStatsKmcEvent < KalturaObjectBase
 		attr_accessor :client_ver
 		attr_accessor :kmc_event_action_path
 		attr_accessor :kmc_event_type
 		# the client's timestamp of this event
-		# 	 
 		attr_accessor :event_timestamp
 		# a unique string generated by the client that will represent the client-side session: the primary component will pass it on to other components that sprout from it
-		# 	 
 		attr_accessor :session_id
 		attr_accessor :partner_id
 		attr_accessor :entry_id
 		attr_accessor :widget_id
 		attr_accessor :uiconf_id
-		# the partner's user id 
-		# 	 
+		# the partner's user id
 		attr_accessor :user_id
-		# will be retrieved from the request of the user 
-		# 	 
+		# will be retrieved from the request of the user
 		attr_accessor :user_ip
 
 		def kmc_event_type=(val)
@@ -6122,24 +5712,18 @@ module Kaltura
 		attr_accessor :path_manager_class
 		attr_accessor :path_manager_params
 		# No need to create enum for temp field
-		# 	 
 		attr_accessor :trigger
 		# Delivery Priority
-		# 	 
 		attr_accessor :delivery_priority
 		attr_accessor :delivery_status
 		attr_accessor :ready_behavior
 		# Flag sugnifying that the storage exported content should be deleted when soure entry is deleted
-		# 	 
 		attr_accessor :allow_auto_delete
 		# Indicates to the local file transfer manager to create a link to the file instead of copying it
-		# 	 
 		attr_accessor :create_file_link
 		# Holds storage profile export rules
-		# 	 
 		attr_accessor :rules
 		# Delivery profile ids
-		# 	 
 		attr_accessor :delivery_profile_ids
 		attr_accessor :private_key
 		attr_accessor :public_key
@@ -6230,13 +5814,10 @@ module Kaltura
 
 	class KalturaSyndicationFeedEntryCount < KalturaObjectBase
 		# the total count of entries that should appear in the feed without flavor filtering
-		# 	 
 		attr_accessor :total_entry_count
 		# count of entries that will appear in the feed (including all relevant filters)
-		# 	 
 		attr_accessor :actual_entry_count
 		# count of entries that requires transcoding in order to be included in feed
-		# 	 
 		attr_accessor :require_transcoding_count
 
 		def total_entry_count=(val)
@@ -6254,168 +5835,6 @@ module Kaltura
 			self.total_entry_count = xml_element.elements['totalEntryCount'].text
 			self.actual_entry_count = xml_element.elements['actualEntryCount'].text
 			self.require_transcoding_count = xml_element.elements['requireTranscodingCount'].text
-		end
-
-	end
-
-	class KalturaThumbAsset < KalturaAsset
-		# The Flavor Params used to create this Flavor Asset
-		# 	 
-		attr_accessor :thumb_params_id
-		# The width of the Flavor Asset 
-		# 	 
-		attr_accessor :width
-		# The height of the Flavor Asset
-		# 	 
-		attr_accessor :height
-		# The status of the asset
-		# 	 
-		attr_accessor :status
-
-		def thumb_params_id=(val)
-			@thumb_params_id = val.to_i
-		end
-		def width=(val)
-			@width = val.to_i
-		end
-		def height=(val)
-			@height = val.to_i
-		end
-		def status=(val)
-			@status = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			self.thumb_params_id = xml_element.elements['thumbParamsId'].text
-			self.width = xml_element.elements['width'].text
-			self.height = xml_element.elements['height'].text
-			self.status = xml_element.elements['status'].text
-		end
-
-	end
-
-	class KalturaThumbParams < KalturaAssetParams
-		attr_accessor :crop_type
-		attr_accessor :quality
-		attr_accessor :crop_x
-		attr_accessor :crop_y
-		attr_accessor :crop_width
-		attr_accessor :crop_height
-		attr_accessor :video_offset
-		attr_accessor :width
-		attr_accessor :height
-		attr_accessor :scale_width
-		attr_accessor :scale_height
-		# Hexadecimal value
-		# 	 
-		attr_accessor :background_color
-		# Id of the flavor params or the thumbnail params to be used as source for the thumbnail creation
-		# 	 
-		attr_accessor :source_params_id
-		# The container format of the Flavor Params
-		# 	 
-		attr_accessor :format
-		# The image density (dpi) for example: 72 or 96
-		# 	 
-		attr_accessor :density
-		# Strip profiles and comments
-		# 	 
-		attr_accessor :strip_profiles
-		# Create thumbnail from the videoLengthpercentage second
-		#      
-		attr_accessor :video_offset_in_percentage
-
-		def crop_type=(val)
-			@crop_type = val.to_i
-		end
-		def quality=(val)
-			@quality = val.to_i
-		end
-		def crop_x=(val)
-			@crop_x = val.to_i
-		end
-		def crop_y=(val)
-			@crop_y = val.to_i
-		end
-		def crop_width=(val)
-			@crop_width = val.to_i
-		end
-		def crop_height=(val)
-			@crop_height = val.to_i
-		end
-		def video_offset=(val)
-			@video_offset = val.to_f
-		end
-		def width=(val)
-			@width = val.to_i
-		end
-		def height=(val)
-			@height = val.to_i
-		end
-		def scale_width=(val)
-			@scale_width = val.to_f
-		end
-		def scale_height=(val)
-			@scale_height = val.to_f
-		end
-		def source_params_id=(val)
-			@source_params_id = val.to_i
-		end
-		def density=(val)
-			@density = val.to_i
-		end
-		def strip_profiles=(val)
-			@strip_profiles = to_b(val)
-		end
-		def video_offset_in_percentage=(val)
-			@video_offset_in_percentage = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			self.crop_type = xml_element.elements['cropType'].text
-			self.quality = xml_element.elements['quality'].text
-			self.crop_x = xml_element.elements['cropX'].text
-			self.crop_y = xml_element.elements['cropY'].text
-			self.crop_width = xml_element.elements['cropWidth'].text
-			self.crop_height = xml_element.elements['cropHeight'].text
-			self.video_offset = xml_element.elements['videoOffset'].text
-			self.width = xml_element.elements['width'].text
-			self.height = xml_element.elements['height'].text
-			self.scale_width = xml_element.elements['scaleWidth'].text
-			self.scale_height = xml_element.elements['scaleHeight'].text
-			self.background_color = xml_element.elements['backgroundColor'].text
-			self.source_params_id = xml_element.elements['sourceParamsId'].text
-			self.format = xml_element.elements['format'].text
-			self.density = xml_element.elements['density'].text
-			self.strip_profiles = xml_element.elements['stripProfiles'].text
-			self.video_offset_in_percentage = xml_element.elements['videoOffsetInPercentage'].text
-		end
-
-	end
-
-	class KalturaThumbParamsOutput < KalturaThumbParams
-		attr_accessor :thumb_params_id
-		attr_accessor :thumb_params_version
-		attr_accessor :thumb_asset_id
-		attr_accessor :thumb_asset_version
-		attr_accessor :rotate
-
-		def thumb_params_id=(val)
-			@thumb_params_id = val.to_i
-		end
-		def rotate=(val)
-			@rotate = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			self.thumb_params_id = xml_element.elements['thumbParamsId'].text
-			self.thumb_params_version = xml_element.elements['thumbParamsVersion'].text
-			self.thumb_asset_id = xml_element.elements['thumbAssetId'].text
-			self.thumb_asset_version = xml_element.elements['thumbAssetVersion'].text
-			self.rotate = xml_element.elements['rotate'].text
 		end
 
 	end
@@ -6439,7 +5858,6 @@ module Kaltura
 	class KalturaUiConf < KalturaObjectBase
 		attr_accessor :id
 		# Name of the uiConf, this is not a primary key
-		# 	 
 		attr_accessor :name
 		attr_accessor :description
 		attr_accessor :partner_id
@@ -6458,15 +5876,12 @@ module Kaltura
 		attr_accessor :tags
 		attr_accessor :swf_url_version
 		# Entry creation date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :created_at
 		# Entry creation date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :updated_at
 		attr_accessor :creation_mode
 		attr_accessor :html5url
 		# UiConf version
-		# 	 
 		attr_accessor :version
 		attr_accessor :partner_tags
 
@@ -6529,19 +5944,14 @@ module Kaltura
 	end
 
 	# Info about uiconf type
-	#  
 	class KalturaUiConfTypeInfo < KalturaObjectBase
 		# UiConf Type
-		# 	 
 		attr_accessor :type
 		# Available versions
-		#      
 		attr_accessor :versions
 		# The direcotry this type is saved at
-		#      
 		attr_accessor :directory
 		# Filename for this UiConf type
-		#      
 		attr_accessor :filename
 
 		def type=(val)
@@ -6583,31 +5993,22 @@ module Kaltura
 
 	class KalturaUploadToken < KalturaObjectBase
 		# Upload token unique ID
-		# 	 
 		attr_accessor :id
 		# Partner ID of the upload token
-		# 	 
 		attr_accessor :partner_id
 		# User id for the upload token
-		# 	 
 		attr_accessor :user_id
 		# Status of the upload token
-		# 	 
 		attr_accessor :status
 		# Name of the file for the upload token, can be empty when the upload token is created and will be updated internally after the file is uploaded
-		# 	 
 		attr_accessor :file_name
 		# File size in bytes, can be empty when the upload token is created and will be updated internally after the file is uploaded
-		# 	 
 		attr_accessor :file_size
 		# Uploaded file size in bytes, can be used to identify how many bytes were uploaded before resuming
-		# 	 
 		attr_accessor :uploaded_file_size
 		# Creation date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :created_at
 		# Last update date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :updated_at
 
 		def partner_id=(val)
@@ -6660,18 +6061,14 @@ module Kaltura
 		attr_accessor :description
 		attr_accessor :tags
 		# Admin tags can be updated only by using an admin session
-		# 	 
 		attr_accessor :admin_tags
 		attr_accessor :gender
 		attr_accessor :status
 		# Creation date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :created_at
 		# Last update date as Unix timestamp (In seconds)
-		# 	 
 		attr_accessor :updated_at
-		# Can be used to store various partner related data as a string 
-		# 	 
+		# Can be used to store various partner related data as a string
 		attr_accessor :partner_data
 		attr_accessor :indexed_partner_data_int
 		attr_accessor :indexed_partner_data_string
@@ -6782,7 +6179,6 @@ module Kaltura
 
 	class KalturaUserEntry < KalturaObjectBase
 		# unique auto-generated identifier
-		# 	 
 		attr_accessor :id
 		attr_accessor :entry_id
 		attr_accessor :user_id
@@ -6887,18 +6283,14 @@ module Kaltura
 		attr_accessor :security_policy
 		attr_accessor :created_at
 		attr_accessor :updated_at
-		# Can be used to store various partner related data as a string 
-		# 	 
+		# Can be used to store various partner related data as a string
 		attr_accessor :partner_data
 		attr_accessor :widget_ht_ml
 		# Should enforce entitlement on feed entries
-		# 	 
 		attr_accessor :enforce_entitlement
 		# Set privacy context for search entries that assiged to private and public categories within a category privacy context.
-		# 	 
 		attr_accessor :privacy_context
 		# Addes the HTML5 script line to the widget's embed code
-		# 	 
 		attr_accessor :add_embed_html5support
 		attr_accessor :roles
 
@@ -6945,339 +6337,6 @@ module Kaltura
 			self.privacy_context = xml_element.elements['privacyContext'].text
 			self.add_embed_html5support = xml_element.elements['addEmbedHtml5Support'].text
 			self.roles = xml_element.elements['roles'].text
-		end
-
-	end
-
-	class KalturaAccessControlBlockAction < KalturaRuleAction
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaAccessControlLimitDeliveryProfilesAction < KalturaRuleAction
-		# Comma separated list of delivery profile ids 
-		# 	 
-		attr_accessor :delivery_profile_ids
-		attr_accessor :is_blocked_list
-
-		def is_blocked_list=(val)
-			@is_blocked_list = to_b(val)
-		end
-
-		def from_xml(xml_element)
-			super
-			self.delivery_profile_ids = xml_element.elements['deliveryProfileIds'].text
-			self.is_blocked_list = xml_element.elements['isBlockedList'].text
-		end
-
-	end
-
-	class KalturaAccessControlLimitFlavorsAction < KalturaRuleAction
-		# Comma separated list of flavor ids 
-		# 	 
-		attr_accessor :flavor_params_ids
-		attr_accessor :is_blocked_list
-
-		def is_blocked_list=(val)
-			@is_blocked_list = to_b(val)
-		end
-
-		def from_xml(xml_element)
-			super
-			self.flavor_params_ids = xml_element.elements['flavorParamsIds'].text
-			self.is_blocked_list = xml_element.elements['isBlockedList'].text
-		end
-
-	end
-
-	class KalturaAccessControlListResponse < KalturaListResponse
-		attr_accessor :objects
-
-
-		def from_xml(xml_element)
-			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaAccessControl')
-		end
-
-	end
-
-	class KalturaAccessControlModifyRequestHostRegexAction < KalturaRuleAction
-		# Request host regex pattern
-		# 	 
-		attr_accessor :pattern
-		# Request host regex replacment
-		# 	 
-		attr_accessor :replacement
-
-
-		def from_xml(xml_element)
-			super
-			self.pattern = xml_element.elements['pattern'].text
-			self.replacement = xml_element.elements['replacement'].text
-		end
-
-	end
-
-	class KalturaAccessControlPreviewAction < KalturaRuleAction
-		attr_accessor :limit
-
-		def limit=(val)
-			@limit = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			self.limit = xml_element.elements['limit'].text
-		end
-
-	end
-
-	class KalturaAccessControlProfileListResponse < KalturaListResponse
-		attr_accessor :objects
-
-
-		def from_xml(xml_element)
-			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaAccessControlProfile')
-		end
-
-	end
-
-	class KalturaAccessControlServeRemoteEdgeServerAction < KalturaRuleAction
-		# Comma separated list of edge servers playBack should be done from
-		# 	 
-		attr_accessor :edge_server_ids
-
-
-		def from_xml(xml_element)
-			super
-			self.edge_server_ids = xml_element.elements['edgeServerIds'].text
-		end
-
-	end
-
-	class KalturaAdminUser < KalturaUser
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaAmazonS3StorageProfile < KalturaStorageProfile
-		attr_accessor :files_permission_in_s3
-		attr_accessor :s3region
-
-
-		def from_xml(xml_element)
-			super
-			self.files_permission_in_s3 = xml_element.elements['filesPermissionInS3'].text
-			self.s3region = xml_element.elements['s3Region'].text
-		end
-
-	end
-
-	class KalturaApiActionPermissionItem < KalturaPermissionItem
-		attr_accessor :service
-		attr_accessor :action
-
-
-		def from_xml(xml_element)
-			super
-			self.service = xml_element.elements['service'].text
-			self.action = xml_element.elements['action'].text
-		end
-
-	end
-
-	class KalturaApiParameterPermissionItem < KalturaPermissionItem
-		attr_accessor :object
-		attr_accessor :parameter
-		attr_accessor :action
-
-
-		def from_xml(xml_element)
-			super
-			self.object = xml_element.elements['object'].text
-			self.parameter = xml_element.elements['parameter'].text
-			self.action = xml_element.elements['action'].text
-		end
-
-	end
-
-	class KalturaAppTokenBaseFilter < KalturaFilter
-		attr_accessor :id_equal
-		attr_accessor :id_in
-		attr_accessor :created_at_greater_than_or_equal
-		attr_accessor :created_at_less_than_or_equal
-		attr_accessor :updated_at_greater_than_or_equal
-		attr_accessor :updated_at_less_than_or_equal
-
-		def id_equal=(val)
-			@id_equal = val.to_i
-		end
-		def created_at_greater_than_or_equal=(val)
-			@created_at_greater_than_or_equal = val.to_i
-		end
-		def created_at_less_than_or_equal=(val)
-			@created_at_less_than_or_equal = val.to_i
-		end
-		def updated_at_greater_than_or_equal=(val)
-			@updated_at_greater_than_or_equal = val.to_i
-		end
-		def updated_at_less_than_or_equal=(val)
-			@updated_at_less_than_or_equal = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			self.id_equal = xml_element.elements['idEqual'].text
-			self.id_in = xml_element.elements['idIn'].text
-			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
-			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
-			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
-			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
-		end
-
-	end
-
-	class KalturaAppTokenListResponse < KalturaListResponse
-		attr_accessor :objects
-
-
-		def from_xml(xml_element)
-			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaAppToken')
-		end
-
-	end
-
-	class KalturaAssetParamsOutput < KalturaAssetParams
-		attr_accessor :asset_params_id
-		attr_accessor :asset_params_version
-		attr_accessor :asset_id
-		attr_accessor :asset_version
-		attr_accessor :ready_behavior
-		# The container format of the Flavor Params
-		# 	 
-		attr_accessor :format
-
-		def asset_params_id=(val)
-			@asset_params_id = val.to_i
-		end
-		def ready_behavior=(val)
-			@ready_behavior = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			self.asset_params_id = xml_element.elements['assetParamsId'].text
-			self.asset_params_version = xml_element.elements['assetParamsVersion'].text
-			self.asset_id = xml_element.elements['assetId'].text
-			self.asset_version = xml_element.elements['assetVersion'].text
-			self.ready_behavior = xml_element.elements['readyBehavior'].text
-			self.format = xml_element.elements['format'].text
-		end
-
-	end
-
-	class KalturaAssetPropertiesCompareCondition < KalturaCondition
-		# Array of key/value objects that holds the property and the value to find and compare on an asset object
-		# 	 
-		attr_accessor :properties
-
-
-		def from_xml(xml_element)
-			super
-			self.properties = KalturaClientBase.object_from_xml(xml_element.elements['properties'], 'KalturaKeyValue')
-		end
-
-	end
-
-	class KalturaAssetsParamsResourceContainers < KalturaResource
-		# Array of resources associated with asset params ids
-		# 	 
-		attr_accessor :resources
-
-
-		def from_xml(xml_element)
-			super
-			self.resources = KalturaClientBase.object_from_xml(xml_element.elements['resources'], 'KalturaAssetParamsResourceContainer')
-		end
-
-	end
-
-	class KalturaAttributeCondition < KalturaSearchItem
-		attr_accessor :value
-
-
-		def from_xml(xml_element)
-			super
-			self.value = xml_element.elements['value'].text
-		end
-
-	end
-
-	class KalturaAuthenticatedCondition < KalturaCondition
-		# The privelege needed to remove the restriction
-		# 	 
-		attr_accessor :privileges
-
-
-		def from_xml(xml_element)
-			super
-			self.privileges = KalturaClientBase.object_from_xml(xml_element.elements['privileges'], 'KalturaStringValue')
-		end
-
-	end
-
-	class KalturaBaseEntryCloneOptionComponent < KalturaBaseEntryCloneOptionItem
-		attr_accessor :item_type
-		# condition rule (include/exclude)
-		#      
-		attr_accessor :rule
-
-
-		def from_xml(xml_element)
-			super
-			self.item_type = xml_element.elements['itemType'].text
-			self.rule = xml_element.elements['rule'].text
-		end
-
-	end
-
-	class KalturaBaseEntryListResponse < KalturaListResponse
-		attr_accessor :objects
-
-
-		def from_xml(xml_element)
-			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaBaseEntry')
-		end
-
-	end
-
-	class KalturaBaseSyndicationFeedBaseFilter < KalturaFilter
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaBaseSyndicationFeedListResponse < KalturaListResponse
-		attr_accessor :objects
-
-
-		def from_xml(xml_element)
-			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaBaseSyndicationFeed')
 		end
 
 	end
@@ -7468,25 +6527,273 @@ module Kaltura
 
 	end
 
-	class KalturaBatchJobListResponse < KalturaListResponse
+	class KalturaBatchJobFilter < KalturaBatchJobBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaAccessControlBlockAction < KalturaRuleAction
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaAccessControlLimitDeliveryProfilesAction < KalturaRuleAction
+		# Comma separated list of delivery profile ids
+		attr_accessor :delivery_profile_ids
+		attr_accessor :is_blocked_list
+
+		def is_blocked_list=(val)
+			@is_blocked_list = to_b(val)
+		end
+
+		def from_xml(xml_element)
+			super
+			self.delivery_profile_ids = xml_element.elements['deliveryProfileIds'].text
+			self.is_blocked_list = xml_element.elements['isBlockedList'].text
+		end
+
+	end
+
+	class KalturaAccessControlLimitFlavorsAction < KalturaRuleAction
+		# Comma separated list of flavor ids
+		attr_accessor :flavor_params_ids
+		attr_accessor :is_blocked_list
+
+		def is_blocked_list=(val)
+			@is_blocked_list = to_b(val)
+		end
+
+		def from_xml(xml_element)
+			super
+			self.flavor_params_ids = xml_element.elements['flavorParamsIds'].text
+			self.is_blocked_list = xml_element.elements['isBlockedList'].text
+		end
+
+	end
+
+	class KalturaAccessControlListResponse < KalturaListResponse
 		attr_accessor :objects
 
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaBatchJob')
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaAccessControl')
 		end
 
 	end
 
-	# A boolean representation to return an array of booleans
-	#  
-	class KalturaBooleanValue < KalturaValue
+	class KalturaAccessControlModifyRequestHostRegexAction < KalturaRuleAction
+		# Request host regex pattern
+		attr_accessor :pattern
+		# Request host regex replacment
+		attr_accessor :replacement
+
+
+		def from_xml(xml_element)
+			super
+			self.pattern = xml_element.elements['pattern'].text
+			self.replacement = xml_element.elements['replacement'].text
+		end
+
+	end
+
+	class KalturaAccessControlPreviewAction < KalturaRuleAction
+		attr_accessor :limit
+
+		def limit=(val)
+			@limit = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			self.limit = xml_element.elements['limit'].text
+		end
+
+	end
+
+	class KalturaAccessControlProfileListResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaAccessControlProfile')
+		end
+
+	end
+
+	class KalturaAccessControlServeRemoteEdgeServerAction < KalturaRuleAction
+		# Comma separated list of edge servers playBack should be done from
+		attr_accessor :edge_server_ids
+
+
+		def from_xml(xml_element)
+			super
+			self.edge_server_ids = xml_element.elements['edgeServerIds'].text
+		end
+
+	end
+
+	class KalturaAdminUser < KalturaUser
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaAmazonS3StorageProfile < KalturaStorageProfile
+		attr_accessor :files_permission_in_s3
+		attr_accessor :s3region
+
+
+		def from_xml(xml_element)
+			super
+			self.files_permission_in_s3 = xml_element.elements['filesPermissionInS3'].text
+			self.s3region = xml_element.elements['s3Region'].text
+		end
+
+	end
+
+	class KalturaApiActionPermissionItem < KalturaPermissionItem
+		attr_accessor :service
+		attr_accessor :action
+
+
+		def from_xml(xml_element)
+			super
+			self.service = xml_element.elements['service'].text
+			self.action = xml_element.elements['action'].text
+		end
+
+	end
+
+	class KalturaApiParameterPermissionItem < KalturaPermissionItem
+		attr_accessor :object
+		attr_accessor :parameter
+		attr_accessor :action
+
+
+		def from_xml(xml_element)
+			super
+			self.object = xml_element.elements['object'].text
+			self.parameter = xml_element.elements['parameter'].text
+			self.action = xml_element.elements['action'].text
+		end
+
+	end
+
+	class KalturaAppTokenBaseFilter < KalturaFilter
+		attr_accessor :id_equal
+		attr_accessor :id_in
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :created_at_less_than_or_equal
+		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
+
+		def id_equal=(val)
+			@id_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
+		def updated_at_greater_than_or_equal=(val)
+			@updated_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			self.id_equal = xml_element.elements['idEqual'].text
+			self.id_in = xml_element.elements['idIn'].text
+			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+		end
+
+	end
+
+	class KalturaAppTokenListResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaAppToken')
+		end
+
+	end
+
+	class KalturaAssetParamsOutput < KalturaAssetParams
+		attr_accessor :asset_params_id
+		attr_accessor :asset_params_version
+		attr_accessor :asset_id
+		attr_accessor :asset_version
+		attr_accessor :ready_behavior
+		# The container format of the Flavor Params
+		attr_accessor :format
+
+		def asset_params_id=(val)
+			@asset_params_id = val.to_i
+		end
+		def ready_behavior=(val)
+			@ready_behavior = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			self.asset_params_id = xml_element.elements['assetParamsId'].text
+			self.asset_params_version = xml_element.elements['assetParamsVersion'].text
+			self.asset_id = xml_element.elements['assetId'].text
+			self.asset_version = xml_element.elements['assetVersion'].text
+			self.ready_behavior = xml_element.elements['readyBehavior'].text
+			self.format = xml_element.elements['format'].text
+		end
+
+	end
+
+	class KalturaAssetPropertiesCompareCondition < KalturaCondition
+		# Array of key/value objects that holds the property and the value to find and compare on an asset object
+		attr_accessor :properties
+
+
+		def from_xml(xml_element)
+			super
+			self.properties = KalturaClientBase.object_from_xml(xml_element.elements['properties'], 'KalturaKeyValue')
+		end
+
+	end
+
+	class KalturaAssetsParamsResourceContainers < KalturaResource
+		# Array of resources associated with asset params ids
+		attr_accessor :resources
+
+
+		def from_xml(xml_element)
+			super
+			self.resources = KalturaClientBase.object_from_xml(xml_element.elements['resources'], 'KalturaAssetParamsResourceContainer')
+		end
+
+	end
+
+	class KalturaAttributeCondition < KalturaSearchItem
 		attr_accessor :value
 
-		def value=(val)
-			@value = to_b(val)
-		end
 
 		def from_xml(xml_element)
 			super
@@ -7495,15 +6802,69 @@ module Kaltura
 
 	end
 
+	class KalturaAuthenticatedCondition < KalturaCondition
+		# The privelege needed to remove the restriction
+		attr_accessor :privileges
+
+
+		def from_xml(xml_element)
+			super
+			self.privileges = KalturaClientBase.object_from_xml(xml_element.elements['privileges'], 'KalturaStringValue')
+		end
+
+	end
+
+	class KalturaBaseEntryCloneOptionComponent < KalturaBaseEntryCloneOptionItem
+		attr_accessor :item_type
+		# condition rule (include/exclude)
+		attr_accessor :rule
+
+
+		def from_xml(xml_element)
+			super
+			self.item_type = xml_element.elements['itemType'].text
+			self.rule = xml_element.elements['rule'].text
+		end
+
+	end
+
+	class KalturaBaseEntryListResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaBaseEntry')
+		end
+
+	end
+
+	class KalturaBaseSyndicationFeedBaseFilter < KalturaFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaBaseSyndicationFeedListResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaBaseSyndicationFeed')
+		end
+
+	end
+
 	class KalturaBulkDownloadJobData < KalturaJobData
 		# Comma separated list of entry ids
-		# 	 
 		attr_accessor :entry_ids
 		# Flavor params id to use for conversion
-		# 	 
 		attr_accessor :flavor_params_id
 		# The id of the requesting user
-		# 	 
 		attr_accessor :puser_id
 
 		def flavor_params_id=(val)
@@ -7556,7 +6917,6 @@ module Kaltura
 
 	# This class represents object-specific data passed to the 
 	#  bulk upload job.
-	#  
 	class KalturaBulkUploadCategoryData < KalturaBulkUploadObjectData
 
 
@@ -7568,7 +6928,6 @@ module Kaltura
 
 	# This class represents object-specific data passed to the 
 	#  bulk upload job.
-	#  
 	class KalturaBulkUploadCategoryEntryData < KalturaBulkUploadObjectData
 
 
@@ -7580,7 +6939,6 @@ module Kaltura
 
 	# This class represents object-specific data passed to the 
 	#  bulk upload job.
-	#  
 	class KalturaBulkUploadCategoryUserData < KalturaBulkUploadObjectData
 
 
@@ -7592,10 +6950,8 @@ module Kaltura
 
 	# This class represents object-specific data passed to the 
 	#  bulk upload job.
-	#  
 	class KalturaBulkUploadEntryData < KalturaBulkUploadObjectData
 		# Selected profile id for all bulk entries
-		#      
 		attr_accessor :conversion_profile_id
 
 		def conversion_profile_id=(val)
@@ -7612,43 +6968,30 @@ module Kaltura
 	class KalturaBulkUploadJobData < KalturaJobData
 		attr_accessor :user_id
 		# The screen name of the user
-		# 	 
 		attr_accessor :uploaded_by
 		# Selected profile id for all bulk entries
-		# 	 
 		attr_accessor :conversion_profile_id
 		# Created by the API
-		# 	 
 		attr_accessor :results_file_local_path
 		# Created by the API
-		# 	 
 		attr_accessor :results_file_url
 		# Number of created entries
-		# 	 
 		attr_accessor :num_of_entries
 		# Number of created objects
-		# 	 
 		attr_accessor :num_of_objects
 		# The bulk upload file path
-		# 	 
 		attr_accessor :file_path
 		# Type of object for bulk upload
-		# 	 
 		attr_accessor :bulk_upload_object_type
 		# Friendly name of the file, used to be recognized later in the logs.
-		# 	 
 		attr_accessor :file_name
 		# Data pertaining to the objects being uploaded
-		# 	 
 		attr_accessor :object_data
 		# Type of bulk upload
-		# 	 
 		attr_accessor :type
 		# Recipients of the email for bulk upload success/failure
-		# 	 
 		attr_accessor :email_recipients
 		# Number of objects that finished on error status
-		# 	 
 		attr_accessor :num_of_error_objects
 
 		def conversion_profile_id=(val)
@@ -7921,7 +7264,6 @@ module Kaltura
 
 	# This class represents object-specific data passed to the 
 	#  bulk upload job.
-	#  
 	class KalturaBulkUploadUserData < KalturaBulkUploadObjectData
 
 
@@ -7934,7 +7276,6 @@ module Kaltura
 	class KalturaCaptureThumbJobData < KalturaJobData
 		attr_accessor :src_file_sync_local_path
 		# The translated path as used by the scheduler
-		# 	 
 		attr_accessor :actual_src_file_sync_local_path
 		attr_accessor :src_file_sync_remote_url
 		attr_accessor :thumb_params_output_id
@@ -7994,7 +7335,6 @@ module Kaltura
 
 	class KalturaCategoryIdentifier < KalturaObjectIdentifier
 		# Identifier of the object
-		# 	 
 		attr_accessor :identifier
 
 
@@ -8045,13 +7385,10 @@ module Kaltura
 	end
 
 	# Clip operation attributes
-	#  
 	class KalturaClipAttributes < KalturaOperationAttributes
 		# Offset in milliseconds
-		# 	 
 		attr_accessor :offset
 		# Duration in milliseconds
-		# 	 
 		attr_accessor :duration
 
 		def offset=(val)
@@ -8071,10 +7408,8 @@ module Kaltura
 
 	class KalturaCompareCondition < KalturaCondition
 		# Value to evaluate against the field and operator
-		# 	 
 		attr_accessor :value
 		# Comparing operator
-		# 	 
 		attr_accessor :comparison
 
 
@@ -8096,10 +7431,8 @@ module Kaltura
 	end
 
 	# Concat operation attributes
-	#  
 	class KalturaConcatAttributes < KalturaOperationAttributes
 		# The resource to be concatenated
-		# 	 
 		attr_accessor :resource
 
 
@@ -8112,22 +7445,16 @@ module Kaltura
 
 	class KalturaConcatJobData < KalturaJobData
 		# Source files to be concatenated
-		# 	 
 		attr_accessor :src_files
 		# Output file
-		# 	 
 		attr_accessor :dest_file_path
 		# Flavor asset to be ingested with the output
-		# 	 
 		attr_accessor :flavor_asset_id
 		# Clipping offset in seconds
-		# 	 
 		attr_accessor :offset
 		# Clipping duration in seconds
-		# 	 
 		attr_accessor :duration
 		# duration of the concated video
-		# 	 
 		attr_accessor :concatenated_duration
 
 		def offset=(val)
@@ -8218,7 +7545,6 @@ module Kaltura
 	class KalturaConvartableJobData < KalturaJobData
 		attr_accessor :src_file_sync_local_path
 		# The translated path as used by the scheduler
-		# 	 
 		attr_accessor :actual_src_file_sync_local_path
 		attr_accessor :src_file_sync_remote_url
 		attr_accessor :src_file_syncs
@@ -8287,26 +7613,19 @@ module Kaltura
 
 	class KalturaConvertLiveSegmentJobData < KalturaJobData
 		# Live stream entry id
-		# 	 
 		attr_accessor :entry_id
 		attr_accessor :asset_id
 		# Primary or secondary media server
-		# 	 
 		attr_accessor :media_server_index
 		# The index of the file within the entry
-		# 	 
 		attr_accessor :file_index
 		# The recorded live media
-		# 	 
 		attr_accessor :src_file_path
 		# The output file
-		# 	 
 		attr_accessor :dest_file_path
 		# Duration of the live entry including all recorded segments including the current
-		# 	 
 		attr_accessor :end_time
 		# The data output file
-		# 	 
 		attr_accessor :dest_data_file_path
 
 		def file_index=(val)
@@ -8333,10 +7652,8 @@ module Kaltura
 	class KalturaConvertProfileJobData < KalturaJobData
 		attr_accessor :input_file_sync_local_path
 		# The height of last created thumbnail, will be used to comapare if this thumbnail is the best we can have
-		# 	 
 		attr_accessor :thumb_height
 		# The bit rate of last created thumbnail, will be used to comapare if this thumbnail is the best we can have
-		# 	 
 		attr_accessor :thumb_bitrate
 
 		def thumb_height=(val)
@@ -8355,12 +7672,31 @@ module Kaltura
 
 	end
 
+	class KalturaCopyJobData < KalturaJobData
+		# The filter should return the list of objects that need to be copied.
+		attr_accessor :filter
+		# Indicates the last id that copied, used when the batch crached, to re-run from the last crash point.
+		attr_accessor :last_copy_id
+		# Template object to overwrite attributes on the copied object
+		attr_accessor :template_object
+
+		def last_copy_id=(val)
+			@last_copy_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			self.filter = KalturaClientBase.object_from_xml(xml_element.elements['filter'], 'KalturaFilter')
+			self.last_copy_id = xml_element.elements['lastCopyId'].text
+			self.template_object = KalturaClientBase.object_from_xml(xml_element.elements['templateObject'], 'KalturaObjectBase')
+		end
+
+	end
+
 	class KalturaCopyPartnerJobData < KalturaJobData
 		# Id of the partner to copy from
-		# 	 
 		attr_accessor :from_partner_id
 		# Id of the partner to copy to
-		# 	 
 		attr_accessor :to_partner_id
 
 		def from_partner_id=(val)
@@ -8380,10 +7716,8 @@ module Kaltura
 
 	class KalturaCountryRestriction < KalturaBaseRestriction
 		# Country restriction type (Allow or deny)
-		# 	 
 		attr_accessor :country_restriction_type
-		# Comma separated list of country codes to allow to deny 
-		# 	 
+		# Comma separated list of country codes to allow to deny
 		attr_accessor :country_list
 
 		def country_restriction_type=(val)
@@ -8422,7 +7756,6 @@ module Kaltura
 
 	class KalturaDeleteJobData < KalturaJobData
 		# The filter should return the list of objects that need to be deleted.
-		# 	 
 		attr_accessor :filter
 
 
@@ -8435,7 +7768,6 @@ module Kaltura
 
 	class KalturaDeliveryProfileAkamaiAppleHttpManifest < KalturaDeliveryProfile
 		# Should we use timing parameters - clipTo / seekFrom
-		# 	 
 		attr_accessor :support_clipping
 
 		def support_clipping=(val)
@@ -8451,7 +7783,6 @@ module Kaltura
 
 	class KalturaDeliveryProfileAkamaiHds < KalturaDeliveryProfile
 		# Should we use timing parameters - clipTo / seekFrom
-		# 	 
 		attr_accessor :support_clipping
 
 		def support_clipping=(val)
@@ -8467,7 +7798,6 @@ module Kaltura
 
 	class KalturaDeliveryProfileAkamaiHttp < KalturaDeliveryProfile
 		# Should we use intelliseek
-		# 	 
 		attr_accessor :use_intelliseek
 
 		def use_intelliseek=(val)
@@ -8539,7 +7869,6 @@ module Kaltura
 
 	class KalturaDeliveryProfileCondition < KalturaCondition
 		# The delivery ids that are accepted by this condition
-		# 	 
 		attr_accessor :delivery_profile_ids
 
 
@@ -8553,10 +7882,8 @@ module Kaltura
 	class KalturaDeliveryProfileGenericAppleHttp < KalturaDeliveryProfile
 		attr_accessor :pattern
 		# rendererClass
-		# 	 
 		attr_accessor :renderer_class
 		# Enable to make playManifest redirect to the domain of the delivery profile
-		# 	 
 		attr_accessor :manifest_redirect
 
 		def manifest_redirect=(val)
@@ -8575,7 +7902,6 @@ module Kaltura
 	class KalturaDeliveryProfileGenericHds < KalturaDeliveryProfile
 		attr_accessor :pattern
 		# rendererClass
-		# 	 
 		attr_accessor :renderer_class
 
 
@@ -8641,10 +7967,8 @@ module Kaltura
 
 	class KalturaDeliveryProfileRtmp < KalturaDeliveryProfile
 		# enforceRtmpe
-		# 	 
 		attr_accessor :enforce_rtmpe
 		# a prefix that is added to all stream urls (replaces storageProfile::rtmpPrefix)
-		# 	 
 		attr_accessor :prefix
 
 		def enforce_rtmpe=(val)
@@ -8661,7 +7985,6 @@ module Kaltura
 
 	class KalturaDeliveryServerNode < KalturaServerNode
 		# Delivery server playback Domain
-		# 	 
 		attr_accessor :playback_domain
 
 
@@ -8674,7 +7997,6 @@ module Kaltura
 
 	class KalturaDirectoryRestriction < KalturaBaseRestriction
 		# Kaltura directory restriction type
-		# 	 
 		attr_accessor :directory_restriction_type
 
 		def directory_restriction_type=(val)
@@ -8691,7 +8013,6 @@ module Kaltura
 	class KalturaDrmEntryContextPluginData < KalturaPluginData
 		# For the uDRM we give the drm context data which is a json encoding of an array containing the uDRM data
 		#      for each flavor that is required from this getContextData request.
-		#      
 		attr_accessor :flavor_data
 
 
@@ -8775,13 +8096,10 @@ module Kaltura
 
 	class KalturaCategoryUserFilter < KalturaCategoryUserBaseFilter
 		# Return the list of categoryUser that are not inherited from parent category - only the direct categoryUsers.
-		# 	 
 		attr_accessor :category_direct_members
 		# Free text search on user id or screen name
-		# 	 
 		attr_accessor :free_text
 		# Return a list of categoryUser that related to the userId in this field by groups
-		# 	 
 		attr_accessor :related_groups_by_user_id
 
 		def category_direct_members=(val)
@@ -8866,10 +8184,8 @@ module Kaltura
 		attr_accessor :role_ids_in
 		attr_accessor :first_name_or_last_name_starts_with
 		# Permission names filter expression
-		# 	 
 		attr_accessor :permission_names_multi_like_or
 		# Permission names filter expression
-		# 	 
 		attr_accessor :permission_names_multi_like_and
 
 		def login_enabled_equal=(val)
@@ -8894,10 +8210,8 @@ module Kaltura
 
 	class KalturaEntryContext < KalturaContext
 		# The entry ID in the context of which the playlist should be built
-		#      
 		attr_accessor :entry_id
 		# Is this a redirected entry followup?
-		#      
 		attr_accessor :follow_entry_redirect
 
 		def follow_entry_redirect=(val)
@@ -8913,19 +8227,14 @@ module Kaltura
 	end
 
 	# Object which contains contextual entry-related data.
-	#  
 	class KalturaEntryContextDataParams < KalturaAccessControlScope
 		# Id of the current flavor.
-		# 	 
 		attr_accessor :flavor_asset_id
 		# The tags of the flavors that should be used for playback.
-		# 	 
 		attr_accessor :flavor_tags
 		# Playback streamer type: RTMP, HTTP, appleHttps, rtsp, sl.
-		# 	 
 		attr_accessor :streamer_type
 		# Protocol of the specific media object.
-		# 	 
 		attr_accessor :media_protocol
 
 
@@ -8949,26 +8258,19 @@ module Kaltura
 		attr_accessor :is_scheduled_now
 		attr_accessor :is_admin
 		# http/rtmp/hdnetwork
-		# 	 
 		attr_accessor :streamer_type
 		# http/https, rtmp/rtmpe
-		# 	 
 		attr_accessor :media_protocol
 		attr_accessor :storage_profiles_xml
 		# Array of messages as received from the access control rules that invalidated
-		# 	 
 		attr_accessor :access_control_messages
 		# Array of actions as received from the access control rules that invalidated
-		# 	 
 		attr_accessor :access_control_actions
 		# Array of allowed flavor assets according to access control limitations and requested tags
-		# 	 
 		attr_accessor :flavor_assets
 		# The duration of the entry in milliseconds
-		# 	 
 		attr_accessor :ms_duration
 		# Array of allowed flavor assets according to access control limitations and requested tags
-		#      
 		attr_accessor :plugin_data
 
 		def is_site_restricted=(val)
@@ -9041,7 +8343,6 @@ module Kaltura
 
 	class KalturaEntryIdentifier < KalturaObjectIdentifier
 		# Identifier of the object
-		# 	 
 		attr_accessor :identifier
 
 
@@ -9085,7 +8386,6 @@ module Kaltura
 	end
 
 	# A boolean representation to return evaluated dynamic value
-	#  
 	class KalturaBooleanField < KalturaBooleanValue
 
 
@@ -9148,23 +8448,10 @@ module Kaltura
 
 	end
 
-	class KalturaFlavorParamsOutputListResponse < KalturaListResponse
-		attr_accessor :objects
-
-
-		def from_xml(xml_element)
-			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaFlavorParamsOutput')
-		end
-
-	end
-
 	class KalturaGenericSyndicationFeed < KalturaBaseSyndicationFeed
 		# feed description
-		#     
 		attr_accessor :feed_description
 		# feed landing page (i.e publisher website)
-		# 	
 		attr_accessor :feed_landing_page
 
 
@@ -9200,10 +8487,8 @@ module Kaltura
 
 	class KalturaHashCondition < KalturaCondition
 		# hash name
-		# 	 
 		attr_accessor :hash_name
 		# hash secret
-		# 	 
 		attr_accessor :hash_secret
 
 
@@ -9217,28 +8502,21 @@ module Kaltura
 
 	class KalturaITunesSyndicationFeed < KalturaBaseSyndicationFeed
 		# feed description
-		#          
 		attr_accessor :feed_description
 		# feed language
-		#          
 		attr_accessor :language
 		# feed landing page (i.e publisher website)
-		#          
 		attr_accessor :feed_landing_page
 		# author/publisher name
-		#          
 		attr_accessor :owner_name
 		# publisher email
-		#          
 		attr_accessor :owner_email
 		# podcast thumbnail
-		#          
 		attr_accessor :feed_image_url
 		attr_accessor :category
 		attr_accessor :adult_content
 		attr_accessor :feed_author
-		# true in case you want to enfore the palylist order on the 
-		# 		 
+		# true in case you want to enfore the palylist order on the
 		attr_accessor :enforce_order
 
 		def enforce_order=(val)
@@ -9297,13 +8575,10 @@ module Kaltura
 
 	class KalturaIndexJobData < KalturaJobData
 		# The filter should return the list of objects that need to be reindexed.
-		# 	 
 		attr_accessor :filter
 		# Indicates the last id that reindexed, used when the batch crached, to re-run from the last crash point.
-		# 	 
 		attr_accessor :last_index_id
 		# Indicates that the object columns and attributes values should be recalculated before reindexed.
-		# 	 
 		attr_accessor :should_update
 
 		def last_index_id=(val)
@@ -9324,10 +8599,8 @@ module Kaltura
 
 	class KalturaIpAddressRestriction < KalturaBaseRestriction
 		# Ip address restriction type (Allow or deny)
-		# 	 
 		attr_accessor :ip_address_restriction_type
-		# Comma separated list of ip address to allow to deny 
-		# 	 
+		# Comma separated list of ip address to allow to deny
 		attr_accessor :ip_address_list
 
 		def ip_address_restriction_type=(val)
@@ -9344,10 +8617,8 @@ module Kaltura
 
 	class KalturaLimitFlavorsRestriction < KalturaBaseRestriction
 		# Limit flavors restriction type (Allow or deny)
-		# 	 
 		attr_accessor :limit_flavors_restriction_type
-		# Comma separated list of flavor params ids to allow to deny 
-		# 	 
+		# Comma separated list of flavor params ids to allow to deny
 		attr_accessor :flavor_params_ids
 
 		def limit_flavors_restriction_type=(val)
@@ -9386,7 +8657,6 @@ module Kaltura
 
 	class KalturaLiveEntryServerNode < KalturaEntryServerNode
 		# parameters of the stream we got
-		# 	 
 		attr_accessor :streams
 
 
@@ -9445,7 +8715,6 @@ module Kaltura
 	end
 
 	# A representation of an RTMP live stream configuration
-	#  
 	class KalturaLiveStreamPushPublishRTMPConfiguration < KalturaLiveStreamPushPublishConfiguration
 		attr_accessor :user_id
 		attr_accessor :password
@@ -9469,8 +8738,7 @@ module Kaltura
 		attr_accessor :status
 		attr_accessor :recipient_name
 		attr_accessor :recipient_email
-		# kuserId  
-		# 	 
+		# kuserId
 		attr_accessor :recipient_id
 		attr_accessor :from_name
 		attr_accessor :from_email
@@ -9546,17 +8814,6 @@ module Kaltura
 
 	end
 
-	class KalturaMediaInfoListResponse < KalturaListResponse
-		attr_accessor :objects
-
-
-		def from_xml(xml_element)
-			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaMediaInfo')
-		end
-
-	end
-
 	class KalturaMediaListResponse < KalturaListResponse
 		attr_accessor :objects
 
@@ -9592,28 +8849,21 @@ module Kaltura
 
 	class KalturaMoveCategoryEntriesJobData < KalturaJobData
 		# Source category id
-		# 	 
 		attr_accessor :src_category_id
 		# Destination category id
-		#      
 		attr_accessor :dest_category_id
 		# Saves the last category id that its entries moved completely
 		#      In case of crash the batch will restart from that point
-		#      
 		attr_accessor :last_moved_category_id
 		# Saves the last page index of the child categories filter pager
 		#      In case of crash the batch will restart from that point
-		#      
 		attr_accessor :last_moved_category_page_index
 		# Saves the last page index of the category entries filter pager
 		#      In case of crash the batch will restart from that point
-		#      
 		attr_accessor :last_moved_category_entry_page_index
 		# All entries from all child categories will be moved as well
-		#      
 		attr_accessor :move_from_children
 		# Destination categories fallback ids
-		#      
 		attr_accessor :dest_category_full_ids
 
 		def src_category_id=(val)
@@ -9914,22 +9164,16 @@ module Kaltura
 
 	class KalturaReportInputFilter < KalturaReportInputBaseFilter
 		# Search keywords to filter objects
-		# 	 
 		attr_accessor :keywords
 		# Search keywords in onjects tags
-		# 	 
 		attr_accessor :search_in_tags
 		# Search keywords in onjects admin tags
-		# 	 
 		attr_accessor :search_in_admin_tags
 		# Search onjects in specified categories
-		# 	 
 		attr_accessor :categories
 		# Time zone offset in minutes
-		# 	 
 		attr_accessor :time_zone_offset
 		# Aggregated results according to interval
-		# 	 
 		attr_accessor :interval
 
 		def search_in_tags=(val)
@@ -10014,10 +9258,8 @@ module Kaltura
 
 	class KalturaResponseProfileHolder < KalturaBaseResponseProfile
 		# Auto generated numeric identifier
-		# 	 
 		attr_accessor :id
 		# Unique system name
-		# 	 
 		attr_accessor :system_name
 
 		def id=(val)
@@ -10207,10 +9449,8 @@ module Kaltura
 
 	class KalturaSiteRestriction < KalturaBaseRestriction
 		# The site restriction type (allow or deny)
-		# 	 
 		attr_accessor :site_restriction_type
 		# Comma separated list of sites (domains) to allow or deny
-		# 	 
 		attr_accessor :site_list
 
 		def site_restriction_type=(val)
@@ -10337,15 +9577,12 @@ module Kaltura
 
 	class KalturaSyncCategoryPrivacyContextJobData < KalturaJobData
 		# category id
-		# 	 
 		attr_accessor :category_id
 		# Saves the last category entry creation date that was updated
 		#      In case of crash the batch will restart from that point
-		#      
 		attr_accessor :last_updated_category_entry_created_at
 		# Saves the last sub category creation date that was updated
 		#      In case of crash the batch will restart from that point
-		#      
 		attr_accessor :last_updated_category_created_at
 
 		def category_id=(val)
@@ -10385,17 +9622,6 @@ module Kaltura
 		def from_xml(xml_element)
 			super
 			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaThumbParams')
-		end
-
-	end
-
-	class KalturaThumbParamsOutputListResponse < KalturaListResponse
-		attr_accessor :objects
-
-
-		def from_xml(xml_element)
-			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaThumbParamsOutput')
 		end
 
 	end
@@ -10537,16 +9763,12 @@ module Kaltura
 
 	class KalturaUrlRecognizerAkamaiG2O < KalturaUrlRecognizer
 		# headerData
-		# 	 
 		attr_accessor :header_data
 		# headerSign
-		# 	 
 		attr_accessor :header_sign
 		# timeout
-		# 	 
 		attr_accessor :timeout
 		# salt
-		# 	 
 		attr_accessor :salt
 
 		def timeout=(val)
@@ -10565,7 +9787,6 @@ module Kaltura
 
 	class KalturaUrlTokenizerAkamaiHttp < KalturaUrlTokenizer
 		# param
-		# 	 
 		attr_accessor :param_name
 		attr_accessor :root_dir
 
@@ -10580,10 +9801,8 @@ module Kaltura
 
 	class KalturaUrlTokenizerAkamaiRtmp < KalturaUrlTokenizer
 		# profile
-		# 	 
 		attr_accessor :profile
 		# Type
-		# 	 
 		attr_accessor :type
 		attr_accessor :aifp
 		attr_accessor :use_prefix
@@ -10604,10 +9823,8 @@ module Kaltura
 
 	class KalturaUrlTokenizerAkamaiRtsp < KalturaUrlTokenizer
 		# host
-		# 	 
 		attr_accessor :host
 		# Cp-Code
-		# 	 
 		attr_accessor :cpcode
 
 		def cpcode=(val)
@@ -10643,7 +9860,6 @@ module Kaltura
 
 	class KalturaUrlTokenizerBitGravity < KalturaUrlTokenizer
 		# hashPatternRegex
-		# 	 
 		attr_accessor :hash_pattern_regex
 
 
@@ -10674,13 +9890,10 @@ module Kaltura
 
 	class KalturaUrlTokenizerLevel3 < KalturaUrlTokenizer
 		# paramName
-		# 	 
 		attr_accessor :param_name
 		# expiryName
-		# 	 
 		attr_accessor :expiry_name
 		# gen
-		# 	 
 		attr_accessor :gen
 
 
@@ -10704,13 +9917,10 @@ module Kaltura
 
 	class KalturaUrlTokenizerVelocix < KalturaUrlTokenizer
 		# hdsPaths
-		# 	 
 		attr_accessor :hds_paths
 		# tokenParamName
-		# 	 
 		attr_accessor :param_name
 		# secure URL prefix
-		# 	 
 		attr_accessor :auth_prefix
 
 
@@ -10739,10 +9949,8 @@ module Kaltura
 
 	class KalturaUserAgentRestriction < KalturaBaseRestriction
 		# User agent restriction type (Allow or deny)
-		# 	 
 		attr_accessor :user_agent_restriction_type
 		# A comma seperated list of user agent regular expressions
-		# 	 
 		attr_accessor :user_agent_regex_list
 
 		def user_agent_restriction_type=(val)
@@ -10846,7 +10054,6 @@ module Kaltura
 
 	class KalturaUserRoleCondition < KalturaCondition
 		# Comma separated list of role ids
-		# 	 
 		attr_accessor :role_ids
 
 
@@ -10870,7 +10077,6 @@ module Kaltura
 
 	class KalturaValidateActiveEdgeCondition < KalturaCondition
 		# Comma separated list of edge servers to validate are active
-		# 	 
 		attr_accessor :edge_server_ids
 
 
@@ -10947,10 +10153,8 @@ module Kaltura
 		attr_accessor :category
 		attr_accessor :adult_content
 		# feed description
-		#          
 		attr_accessor :feed_description
 		# feed landing page (i.e publisher website)
-		#          
 		attr_accessor :feed_landing_page
 
 
@@ -11193,10 +10397,8 @@ module Kaltura
 	end
 
 	# Used to ingest media that is already ingested to Kaltura system as a different flavor asset in the past, the new created flavor asset will be ready immediately using a file sync of link type that will point to the existing file sync of the existing flavor asset.
-	#  
 	class KalturaAssetResource < KalturaContentResource
-		# ID of the source asset 
-		# 	 
+		# ID of the source asset
 		attr_accessor :asset_id
 
 
@@ -11208,15 +10410,6 @@ module Kaltura
 	end
 
 	class KalturaBaseSyndicationFeedFilter < KalturaBaseSyndicationFeedBaseFilter
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaBatchJobFilter < KalturaBatchJobBaseFilter
 
 
 		def from_xml(xml_element)
@@ -11556,7 +10749,6 @@ module Kaltura
 
 	class KalturaCountryCondition < KalturaMatchCondition
 		# The ip geo coder engine to be used
-		# 	 
 		attr_accessor :geo_coder_type
 
 
@@ -11579,7 +10771,6 @@ module Kaltura
 	class KalturaDeliveryProfileGenericRtmp < KalturaDeliveryProfileRtmp
 		attr_accessor :pattern
 		# rendererClass
-		# 	 
 		attr_accessor :renderer_class
 
 
@@ -11593,10 +10784,8 @@ module Kaltura
 
 	class KalturaEdgeServerNode < KalturaDeliveryServerNode
 		# Delivery profile ids
-		# 	 
 		attr_accessor :delivery_profile_ids
 		# Overdie edge server default configuration - json format
-		# 	 
 		attr_accessor :config
 
 
@@ -11637,13 +10826,10 @@ module Kaltura
 	end
 
 	# Used to ingest media that is already ingested to Kaltura system as a different entry in the past, the new created flavor asset will be ready immediately using a file sync of link type that will point to the existing file sync of the existing entry.
-	#  
 	class KalturaEntryResource < KalturaContentResource
-		# ID of the source entry 
-		# 	 
+		# ID of the source entry
 		attr_accessor :entry_id
 		# ID of the source flavor params, set to null to use the source flavor
-		# 	 
 		attr_accessor :flavor_params_id
 
 		def flavor_params_id=(val)
@@ -11717,7 +10903,6 @@ module Kaltura
 	end
 
 	# An int representation to return evaluated dynamic value
-	#  
 	class KalturaIntegerField < KalturaIntegerValue
 
 
@@ -11729,7 +10914,6 @@ module Kaltura
 
 	class KalturaFieldCompareCondition < KalturaCompareCondition
 		# Field to evaluate
-		# 	 
 		attr_accessor :field
 
 
@@ -11741,7 +10925,6 @@ module Kaltura
 	end
 
 	# A string representation to return evaluated dynamic value
-	#  
 	class KalturaStringField < KalturaStringValue
 
 
@@ -11753,7 +10936,6 @@ module Kaltura
 
 	class KalturaFieldMatchCondition < KalturaMatchCondition
 		# Field to evaluate
-		# 	 
 		attr_accessor :field
 
 
@@ -11816,19 +10998,14 @@ module Kaltura
 	end
 
 	# Used to ingest media that is already ingested to Kaltura system as a different file in the past, the new created flavor asset will be ready immediately using a file sync of link type that will point to the existing file sync.
-	#  
 	class KalturaFileSyncResource < KalturaContentResource
-		# The object type of the file sync object 
-		# 	 
+		# The object type of the file sync object
 		attr_accessor :file_sync_object_type
-		# The object sub-type of the file sync object 
-		# 	 
+		# The object sub-type of the file sync object
 		attr_accessor :object_sub_type
-		# The object id of the file sync object 
-		# 	 
+		# The object id of the file sync object
 		attr_accessor :object_id
-		# The version of the file sync object 
-		# 	 
+		# The version of the file sync object
 		attr_accessor :version
 
 		def file_sync_object_type=(val)
@@ -11863,7 +11040,6 @@ module Kaltura
 
 	class KalturaGeoDistanceCondition < KalturaMatchCondition
 		# The ip geo coder engine to be used
-		# 	 
 		attr_accessor :geo_coder_type
 
 
@@ -11933,10 +11109,8 @@ module Kaltura
 
 	class KalturaIpAddressCondition < KalturaMatchCondition
 		# allow internal ips
-		# 	 
 		attr_accessor :accept_internal_ips
 		# http header name for extracting the ip
-		# 	 
 		attr_accessor :http_header
 
 		def accept_internal_ips=(val)
@@ -12016,7 +11190,6 @@ module Kaltura
 
 	class KalturaLiveParams < KalturaFlavorParams
 		# Suffix to be added to the stream name after the entry id {entry_id}_{stream_suffix}, e.g. for entry id 0_kjdu5jr6 and suffix 1, the stream name will be 0_kjdu5jr6_1
-		# 	 
 		attr_accessor :stream_suffix
 
 
@@ -12047,13 +11220,10 @@ module Kaltura
 
 	class KalturaMediaServerNode < KalturaDeliveryServerNode
 		# Media server application name
-		# 	 
 		attr_accessor :application_name
 		# Media server playback port configuration by protocol and format
-		# 	 
 		attr_accessor :media_server_port_config
 		# Media server playback Domain configuration by protocol and format
-		# 	 
 		attr_accessor :media_server_playback_domain_config
 
 
@@ -12067,14 +11237,11 @@ module Kaltura
 	end
 
 	# A resource that perform operation (transcoding, clipping, cropping) before the flavor is ready.
-	#  
 	class KalturaOperationResource < KalturaContentResource
 		# Only KalturaEntryResource and KalturaAssetResource are supported
-		# 	 
 		attr_accessor :resource
 		attr_accessor :operation_attributes
-		# ID of alternative asset params to be used instead of the system default flavor params 
-		# 	 
+		# ID of alternative asset params to be used instead of the system default flavor params
 		attr_accessor :asset_params_id
 
 		def asset_params_id=(val)
@@ -12226,19 +11393,14 @@ module Kaltura
 	class KalturaPostConvertJobData < KalturaConvartableJobData
 		attr_accessor :flavor_asset_id
 		# Indicates if a thumbnail should be created
-		# 	 
 		attr_accessor :create_thumb
 		# The path of the created thumbnail
-		# 	 
 		attr_accessor :thumb_path
 		# The position of the thumbnail in the media file
-		# 	 
 		attr_accessor :thumb_offset
 		# The height of the movie, will be used to comapare if this thumbnail is the best we can have
-		# 	 
 		attr_accessor :thumb_height
 		# The bit rate of the movie, will be used to comapare if this thumbnail is the best we can have
-		# 	 
 		attr_accessor :thumb_bitrate
 		attr_accessor :custom_data
 
@@ -12269,8 +11431,7 @@ module Kaltura
 	end
 
 	class KalturaPreviewRestriction < KalturaSessionRestriction
-		# The preview restriction length 
-		# 	 
+		# The preview restriction length
 		attr_accessor :preview_length
 
 		def preview_length=(val)
@@ -12286,12 +11447,10 @@ module Kaltura
 
 	class KalturaRecalculateResponseProfileCacheJobData < KalturaRecalculateCacheJobData
 		# http / https
-		# 	 
 		attr_accessor :protocol
 		attr_accessor :ks_type
 		attr_accessor :user_roles
 		# Class name
-		# 	 
 		attr_accessor :cached_object_type
 		attr_accessor :object_id
 		attr_accessor :start_object_key
@@ -12324,10 +11483,8 @@ module Kaltura
 	end
 
 	# Used to ingest media that is available on remote server and accessible using the supplied URL, the media file won't be downloaded but a file sync object of URL type will point to the media URL.
-	#  
 	class KalturaRemoteStorageResources < KalturaContentResource
-		# Array of remote stoage resources 
-		# 	 
+		# Array of remote stoage resources
 		attr_accessor :resources
 
 
@@ -12468,10 +11625,8 @@ module Kaltura
 	end
 
 	# Used to ingest string content.
-	#  
 	class KalturaStringResource < KalturaContentResource
 		# Textual content
-		# 	 
 		attr_accessor :content
 
 
@@ -12717,7 +11872,6 @@ module Kaltura
 		attr_accessor :member_equal
 		attr_accessor :full_name_starts_with_in
 		# not includes the category itself (only sub categories)
-		# 	 
 		attr_accessor :ancestor_id_in
 		attr_accessor :id_or_inherited_parent_id_in
 
@@ -12759,10 +11913,8 @@ module Kaltura
 	end
 
 	# Represents the current request country context as calculated based on the IP address
-	#  
 	class KalturaCoordinatesContextField < KalturaStringField
 		# The ip geo coder engine to be used
-		# 	 
 		attr_accessor :geo_coder_type
 
 
@@ -12774,10 +11926,8 @@ module Kaltura
 	end
 
 	# Represents the current request country context as calculated based on the IP address
-	#  
 	class KalturaCountryContextField < KalturaStringField
 		# The ip geo coder engine to be used
-		# 	 
 		attr_accessor :geo_coder_type
 
 
@@ -12950,10 +12100,8 @@ module Kaltura
 	end
 
 	# Evaluates PHP statement, depends on the execution context
-	#  
 	class KalturaEvalBooleanField < KalturaBooleanField
 		# PHP code
-		# 	 
 		attr_accessor :code
 
 
@@ -12965,10 +12113,8 @@ module Kaltura
 	end
 
 	# Evaluates PHP statement, depends on the execution context
-	#  
 	class KalturaEvalStringField < KalturaStringField
 		# PHP code
-		# 	 
 		attr_accessor :code
 
 
@@ -13052,8 +12198,7 @@ module Kaltura
 
 	end
 
-	# Represents the current request IP address context 
-	#  
+	# Represents the current request IP address context
 	class KalturaIpAddressContextField < KalturaStringField
 
 
@@ -13250,7 +12395,6 @@ module Kaltura
 	end
 
 	# Evaluates object ID according to given context
-	#  
 	class KalturaObjectIdField < KalturaStringField
 
 
@@ -13344,10 +12488,8 @@ module Kaltura
 	end
 
 	# Used to ingest media file that is already accessible on the shared disc.
-	#  
 	class KalturaServerFileResource < KalturaDataCenterContentResource
-		# Full path to the local file 
-		# 	 
+		# Full path to the local file
 		attr_accessor :local_file_path
 
 
@@ -13359,16 +12501,12 @@ module Kaltura
 	end
 
 	# Used to ingest media that is available on remote SSH server and accessible using the supplied URL, media file will be downloaded using import job in order to make the asset ready.
-	#  
 	class KalturaSshUrlResource < KalturaUrlResource
 		# SSH private key
-		# 	 
 		attr_accessor :private_key
 		# SSH public key
-		# 	 
 		attr_accessor :public_key
 		# Passphrase for SSH keys
-		# 	 
 		attr_accessor :key_passphrase
 
 
@@ -13382,10 +12520,8 @@ module Kaltura
 	end
 
 	# Represents the current time context on Kaltura servers
-	#  
 	class KalturaTimeContextField < KalturaIntegerField
 		# Time offset in seconds since current time
-		# 	 
 		attr_accessor :offset
 
 		def offset=(val)
@@ -13408,11 +12544,22 @@ module Kaltura
 
 	end
 
+	# sed to ingest media that uploaded as posted file in this http request, the file data represents the $_FILE
+	class KalturaUploadedFileResource < KalturaDataCenterContentResource
+		# Represents the $_FILE
+		attr_accessor :file_data
+
+
+		def from_xml(xml_element)
+			super
+			self.file_data = KalturaClientBase.object_from_xml(xml_element.elements['fileData'], 'file')
+		end
+
+	end
+
 	# Used to ingest media that uploaded to the system and represented by token that returned from upload.upload action or uploadToken.add action.
-	#  
 	class KalturaUploadedFileTokenResource < KalturaDataCenterContentResource
-		# Token that returned from upload.upload action or uploadToken.add action. 
-		# 	 
+		# Token that returned from upload.upload action or uploadToken.add action.
 		attr_accessor :token
 
 
@@ -13433,7 +12580,6 @@ module Kaltura
 	end
 
 	# Represents the current request user agent context
-	#  
 	class KalturaUserAgentContextField < KalturaStringField
 
 
@@ -13444,7 +12590,6 @@ module Kaltura
 	end
 
 	# Represents the current session user e-mail address context
-	#  
 	class KalturaUserEmailContextField < KalturaStringField
 
 
@@ -13473,10 +12618,8 @@ module Kaltura
 	end
 
 	# Used to ingest media that streamed to the system and represented by token that returned from media server such as FMS or red5.
-	#  
 	class KalturaWebcamTokenResource < KalturaDataCenterContentResource
 		# Token that returned from media server such as FMS or red5.
-		# 	 
 		attr_accessor :token
 
 

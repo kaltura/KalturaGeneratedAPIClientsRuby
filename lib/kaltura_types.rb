@@ -1648,6 +1648,10 @@ module Kaltura
 		attr_accessor :moderation
 		# Nunber of pending moderation entries
 		attr_accessor :pending_entries_count
+		# Flag indicating that the category is an aggregation category
+		attr_accessor :is_aggregation_category
+		# List of aggregation channels the category belongs to
+		attr_accessor :aggregation_categories
 
 		def id=(val)
 			@id = val.to_i
@@ -1715,6 +1719,9 @@ module Kaltura
 		def pending_entries_count=(val)
 			@pending_entries_count = val.to_i
 		end
+		def is_aggregation_category=(val)
+			@is_aggregation_category = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
@@ -1751,6 +1758,8 @@ module Kaltura
 			self.direct_sub_categories_count = xml_element.elements['directSubCategoriesCount'].text
 			self.moderation = xml_element.elements['moderation'].text
 			self.pending_entries_count = xml_element.elements['pendingEntriesCount'].text
+			self.is_aggregation_category = xml_element.elements['isAggregationCategory'].text
+			self.aggregation_categories = xml_element.elements['aggregationCategories'].text
 		end
 
 	end
@@ -7672,27 +7681,6 @@ module Kaltura
 
 	end
 
-	class KalturaCopyJobData < KalturaJobData
-		# The filter should return the list of objects that need to be copied.
-		attr_accessor :filter
-		# Indicates the last id that copied, used when the batch crached, to re-run from the last crash point.
-		attr_accessor :last_copy_id
-		# Template object to overwrite attributes on the copied object
-		attr_accessor :template_object
-
-		def last_copy_id=(val)
-			@last_copy_id = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			self.filter = KalturaClientBase.object_from_xml(xml_element.elements['filter'], 'KalturaFilter')
-			self.last_copy_id = xml_element.elements['lastCopyId'].text
-			self.template_object = KalturaClientBase.object_from_xml(xml_element.elements['templateObject'], 'KalturaObjectBase')
-		end
-
-	end
-
 	class KalturaCopyPartnerJobData < KalturaJobData
 		# Id of the partner to copy from
 		attr_accessor :from_partner_id
@@ -10465,6 +10453,8 @@ module Kaltura
 		attr_accessor :inherited_parent_id_in
 		attr_accessor :partner_sort_value_greater_than_or_equal
 		attr_accessor :partner_sort_value_less_than_or_equal
+		attr_accessor :aggregation_categories_multi_like_or
+		attr_accessor :aggregation_categories_multi_like_and
 
 		def id_equal=(val)
 			@id_equal = val.to_i
@@ -10566,6 +10556,8 @@ module Kaltura
 			self.inherited_parent_id_in = xml_element.elements['inheritedParentIdIn'].text
 			self.partner_sort_value_greater_than_or_equal = xml_element.elements['partnerSortValueGreaterThanOrEqual'].text
 			self.partner_sort_value_less_than_or_equal = xml_element.elements['partnerSortValueLessThanOrEqual'].text
+			self.aggregation_categories_multi_like_or = xml_element.elements['aggregationCategoriesMultiLikeOr'].text
+			self.aggregation_categories_multi_like_and = xml_element.elements['aggregationCategoriesMultiLikeAnd'].text
 		end
 
 	end
@@ -12540,19 +12532,6 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-		end
-
-	end
-
-	# sed to ingest media that uploaded as posted file in this http request, the file data represents the $_FILE
-	class KalturaUploadedFileResource < KalturaDataCenterContentResource
-		# Represents the $_FILE
-		attr_accessor :file_data
-
-
-		def from_xml(xml_element)
-			super
-			self.file_data = KalturaClientBase.object_from_xml(xml_element.elements['fileData'], 'file')
 		end
 
 	end

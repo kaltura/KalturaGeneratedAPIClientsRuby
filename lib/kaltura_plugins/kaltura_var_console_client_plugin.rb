@@ -186,27 +186,6 @@ module Kaltura
 
 	end
 
-	class KalturaVarConsolePartnerFilter < KalturaPartnerFilter
-		# Eq filter for the partner's group type
-		attr_accessor :group_type_eq
-		# In filter for the partner's group type
-		attr_accessor :group_type_in
-		# Filter for partner permissions- filter contains comma-separated string of permission names which the returned partners should have.
-		attr_accessor :partner_permissions_exist
-
-		def group_type_eq=(val)
-			@group_type_eq = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			self.group_type_eq = xml_element.elements['groupTypeEq'].text
-			self.group_type_in = xml_element.elements['groupTypeIn'].text
-			self.partner_permissions_exist = xml_element.elements['partnerPermissionsExist'].text
-		end
-
-	end
-
 
 	# Utility service for the Multi-publishers console
 	class KalturaVarConsoleService < KalturaServiceBase

@@ -1378,6 +1378,17 @@ module Kaltura
 			super(client)
 		end
 
+		def update(id, entry_server_node)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'entryServerNode', entry_server_node)
+			client.queue_service_action_call('entryservernode', 'update', 'KalturaEntryServerNode', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -5459,7 +5470,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:16-05-24'
+			self.client_tag = 'ruby:16-05-26'
 			self.api_version = '3.3.0'
 		end
 		

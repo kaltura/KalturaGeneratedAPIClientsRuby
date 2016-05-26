@@ -1648,10 +1648,6 @@ module Kaltura
 		attr_accessor :moderation
 		# Nunber of pending moderation entries
 		attr_accessor :pending_entries_count
-		# Flag indicating that the category is an aggregation category
-		attr_accessor :is_aggregation_category
-		# List of aggregation channels the category belongs to
-		attr_accessor :aggregation_categories
 
 		def id=(val)
 			@id = val.to_i
@@ -1719,9 +1715,6 @@ module Kaltura
 		def pending_entries_count=(val)
 			@pending_entries_count = val.to_i
 		end
-		def is_aggregation_category=(val)
-			@is_aggregation_category = val.to_i
-		end
 
 		def from_xml(xml_element)
 			super
@@ -1758,8 +1751,6 @@ module Kaltura
 			self.direct_sub_categories_count = xml_element.elements['directSubCategoriesCount'].text
 			self.moderation = xml_element.elements['moderation'].text
 			self.pending_entries_count = xml_element.elements['pendingEntriesCount'].text
-			self.is_aggregation_category = xml_element.elements['isAggregationCategory'].text
-			self.aggregation_categories = xml_element.elements['aggregationCategories'].text
 		end
 
 	end
@@ -1851,6 +1842,21 @@ module Kaltura
 			self.update_method = xml_element.elements['updateMethod'].text
 			self.category_full_ids = xml_element.elements['categoryFullIds'].text
 			self.permission_names = xml_element.elements['permissionNames'].text
+		end
+
+	end
+
+	# Define client optional configurations
+	#  /
+	class KalturaClientConfiguration < KalturaObjectBase
+		attr_accessor :client_tag
+		attr_accessor :api_version
+
+
+		def from_xml(xml_element)
+			super
+			self.client_tag = xml_element.elements['clientTag'].text
+			self.api_version = xml_element.elements['apiVersion'].text
 		end
 
 	end
@@ -2147,6 +2153,7 @@ module Kaltura
 		attr_accessor :force_none_complied
 		# Specifies how to treat the flavor after conversion is finished
 		attr_accessor :delete_policy
+		attr_accessor :is_encrypted
 
 		def conversion_profile_id=(val)
 			@conversion_profile_id = val.to_i
@@ -2166,6 +2173,9 @@ module Kaltura
 		def delete_policy=(val)
 			@delete_policy = val.to_i
 		end
+		def is_encrypted=(val)
+			@is_encrypted = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
@@ -2176,6 +2186,7 @@ module Kaltura
 			self.system_name = xml_element.elements['systemName'].text
 			self.force_none_complied = xml_element.elements['forceNoneComplied'].text
 			self.delete_policy = xml_element.elements['deletePolicy'].text
+			self.is_encrypted = xml_element.elements['isEncrypted'].text
 		end
 
 	end
@@ -5207,6 +5218,29 @@ module Kaltura
 			super
 			self.header = xml_element.elements['header'].text
 			self.data = xml_element.elements['data'].text
+		end
+
+	end
+
+	# Define client request optional configurations
+	#  /
+	class KalturaRequestConfiguration < KalturaObjectBase
+		# Impersonated partner id
+		attr_accessor :partner_id
+		# Kaltura API session
+		attr_accessor :ks
+		# Response profile - this attribute will be automatically unset after every API call.
+		attr_accessor :response_profile
+
+		def partner_id=(val)
+			@partner_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			self.partner_id = xml_element.elements['partnerId'].text
+			self.ks = xml_element.elements['ks'].text
+			self.response_profile = KalturaClientBase.object_from_xml(xml_element.elements['responseProfile'], 'KalturaBaseResponseProfile')
 		end
 
 	end
@@ -10453,8 +10487,6 @@ module Kaltura
 		attr_accessor :inherited_parent_id_in
 		attr_accessor :partner_sort_value_greater_than_or_equal
 		attr_accessor :partner_sort_value_less_than_or_equal
-		attr_accessor :aggregation_categories_multi_like_or
-		attr_accessor :aggregation_categories_multi_like_and
 
 		def id_equal=(val)
 			@id_equal = val.to_i
@@ -10556,8 +10588,6 @@ module Kaltura
 			self.inherited_parent_id_in = xml_element.elements['inheritedParentIdIn'].text
 			self.partner_sort_value_greater_than_or_equal = xml_element.elements['partnerSortValueGreaterThanOrEqual'].text
 			self.partner_sort_value_less_than_or_equal = xml_element.elements['partnerSortValueLessThanOrEqual'].text
-			self.aggregation_categories_multi_like_or = xml_element.elements['aggregationCategoriesMultiLikeOr'].text
-			self.aggregation_categories_multi_like_and = xml_element.elements['aggregationCategoriesMultiLikeAnd'].text
 		end
 
 	end

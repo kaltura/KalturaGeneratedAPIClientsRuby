@@ -1648,6 +1648,10 @@ module Kaltura
 		attr_accessor :moderation
 		# Nunber of pending moderation entries
 		attr_accessor :pending_entries_count
+		# Flag indicating that the category is an aggregation category
+		attr_accessor :is_aggregation_category
+		# List of aggregation channels the category belongs to
+		attr_accessor :aggregation_categories
 
 		def id=(val)
 			@id = val.to_i
@@ -1715,6 +1719,9 @@ module Kaltura
 		def pending_entries_count=(val)
 			@pending_entries_count = val.to_i
 		end
+		def is_aggregation_category=(val)
+			@is_aggregation_category = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
@@ -1751,6 +1758,8 @@ module Kaltura
 			self.direct_sub_categories_count = xml_element.elements['directSubCategoriesCount'].text
 			self.moderation = xml_element.elements['moderation'].text
 			self.pending_entries_count = xml_element.elements['pendingEntriesCount'].text
+			self.is_aggregation_category = xml_element.elements['isAggregationCategory'].text
+			self.aggregation_categories = xml_element.elements['aggregationCategories'].text
 		end
 
 	end
@@ -6742,10 +6751,9 @@ module Kaltura
 		attr_accessor :created_at_less_than_or_equal
 		attr_accessor :updated_at_greater_than_or_equal
 		attr_accessor :updated_at_less_than_or_equal
+		attr_accessor :status_equal
+		attr_accessor :status_in
 
-		def id_equal=(val)
-			@id_equal = val.to_i
-		end
 		def created_at_greater_than_or_equal=(val)
 			@created_at_greater_than_or_equal = val.to_i
 		end
@@ -6758,6 +6766,9 @@ module Kaltura
 		def updated_at_less_than_or_equal=(val)
 			@updated_at_less_than_or_equal = val.to_i
 		end
+		def status_equal=(val)
+			@status_equal = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
@@ -6767,6 +6778,8 @@ module Kaltura
 			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
 			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
 			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			self.status_equal = xml_element.elements['statusEqual'].text
+			self.status_in = xml_element.elements['statusIn'].text
 		end
 
 	end
@@ -9987,60 +10000,6 @@ module Kaltura
 
 	end
 
-	class KalturaUserEntryBaseFilter < KalturaFilter
-		attr_accessor :id_equal
-		attr_accessor :id_in
-		attr_accessor :id_not_in
-		attr_accessor :entry_id_equal
-		attr_accessor :entry_id_in
-		attr_accessor :entry_id_not_in
-		attr_accessor :user_id_equal
-		attr_accessor :user_id_in
-		attr_accessor :user_id_not_in
-		attr_accessor :status_equal
-		attr_accessor :created_at_less_than_or_equal
-		attr_accessor :created_at_greater_than_or_equal
-		attr_accessor :updated_at_less_than_or_equal
-		attr_accessor :updated_at_greater_than_or_equal
-		attr_accessor :type_equal
-
-		def id_equal=(val)
-			@id_equal = val.to_i
-		end
-		def created_at_less_than_or_equal=(val)
-			@created_at_less_than_or_equal = val.to_i
-		end
-		def created_at_greater_than_or_equal=(val)
-			@created_at_greater_than_or_equal = val.to_i
-		end
-		def updated_at_less_than_or_equal=(val)
-			@updated_at_less_than_or_equal = val.to_i
-		end
-		def updated_at_greater_than_or_equal=(val)
-			@updated_at_greater_than_or_equal = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			self.id_equal = xml_element.elements['idEqual'].text
-			self.id_in = xml_element.elements['idIn'].text
-			self.id_not_in = xml_element.elements['idNotIn'].text
-			self.entry_id_equal = xml_element.elements['entryIdEqual'].text
-			self.entry_id_in = xml_element.elements['entryIdIn'].text
-			self.entry_id_not_in = xml_element.elements['entryIdNotIn'].text
-			self.user_id_equal = xml_element.elements['userIdEqual'].text
-			self.user_id_in = xml_element.elements['userIdIn'].text
-			self.user_id_not_in = xml_element.elements['userIdNotIn'].text
-			self.status_equal = xml_element.elements['statusEqual'].text
-			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
-			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
-			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
-			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
-			self.type_equal = xml_element.elements['typeEqual'].text
-		end
-
-	end
-
 	class KalturaUserEntryListResponse < KalturaListResponse
 		attr_accessor :objects
 
@@ -10452,6 +10411,7 @@ module Kaltura
 	class KalturaCategoryBaseFilter < KalturaRelatedFilter
 		attr_accessor :id_equal
 		attr_accessor :id_in
+		attr_accessor :id_not_in
 		attr_accessor :parent_id_equal
 		attr_accessor :parent_id_in
 		attr_accessor :depth_equal
@@ -10487,6 +10447,8 @@ module Kaltura
 		attr_accessor :inherited_parent_id_in
 		attr_accessor :partner_sort_value_greater_than_or_equal
 		attr_accessor :partner_sort_value_less_than_or_equal
+		attr_accessor :aggregation_categories_multi_like_or
+		attr_accessor :aggregation_categories_multi_like_and
 
 		def id_equal=(val)
 			@id_equal = val.to_i
@@ -10553,6 +10515,7 @@ module Kaltura
 			super
 			self.id_equal = xml_element.elements['idEqual'].text
 			self.id_in = xml_element.elements['idIn'].text
+			self.id_not_in = xml_element.elements['idNotIn'].text
 			self.parent_id_equal = xml_element.elements['parentIdEqual'].text
 			self.parent_id_in = xml_element.elements['parentIdIn'].text
 			self.depth_equal = xml_element.elements['depthEqual'].text
@@ -10588,6 +10551,8 @@ module Kaltura
 			self.inherited_parent_id_in = xml_element.elements['inheritedParentIdIn'].text
 			self.partner_sort_value_greater_than_or_equal = xml_element.elements['partnerSortValueGreaterThanOrEqual'].text
 			self.partner_sort_value_less_than_or_equal = xml_element.elements['partnerSortValueLessThanOrEqual'].text
+			self.aggregation_categories_multi_like_or = xml_element.elements['aggregationCategoriesMultiLikeOr'].text
+			self.aggregation_categories_multi_like_and = xml_element.elements['aggregationCategoriesMultiLikeAnd'].text
 		end
 
 	end
@@ -11677,21 +11642,56 @@ module Kaltura
 
 	end
 
-	class KalturaUserEntryFilter < KalturaUserEntryBaseFilter
-		attr_accessor :user_id_equal_current
-		attr_accessor :is_anonymous
+	class KalturaUserEntryBaseFilter < KalturaRelatedFilter
+		attr_accessor :id_equal
+		attr_accessor :id_in
+		attr_accessor :id_not_in
+		attr_accessor :entry_id_equal
+		attr_accessor :entry_id_in
+		attr_accessor :entry_id_not_in
+		attr_accessor :user_id_equal
+		attr_accessor :user_id_in
+		attr_accessor :user_id_not_in
+		attr_accessor :status_equal
+		attr_accessor :created_at_less_than_or_equal
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
+		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :type_equal
 
-		def user_id_equal_current=(val)
-			@user_id_equal_current = val.to_i
+		def id_equal=(val)
+			@id_equal = val.to_i
 		end
-		def is_anonymous=(val)
-			@is_anonymous = val.to_i
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
+		end
+		def updated_at_greater_than_or_equal=(val)
+			@updated_at_greater_than_or_equal = val.to_i
 		end
 
 		def from_xml(xml_element)
 			super
-			self.user_id_equal_current = xml_element.elements['userIdEqualCurrent'].text
-			self.is_anonymous = xml_element.elements['isAnonymous'].text
+			self.id_equal = xml_element.elements['idEqual'].text
+			self.id_in = xml_element.elements['idIn'].text
+			self.id_not_in = xml_element.elements['idNotIn'].text
+			self.entry_id_equal = xml_element.elements['entryIdEqual'].text
+			self.entry_id_in = xml_element.elements['entryIdIn'].text
+			self.entry_id_not_in = xml_element.elements['entryIdNotIn'].text
+			self.user_id_equal = xml_element.elements['userIdEqual'].text
+			self.user_id_in = xml_element.elements['userIdIn'].text
+			self.user_id_not_in = xml_element.elements['userIdNotIn'].text
+			self.status_equal = xml_element.elements['statusEqual'].text
+			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			self.type_equal = xml_element.elements['typeEqual'].text
 		end
 
 	end
@@ -12500,15 +12500,6 @@ module Kaltura
 
 	end
 
-	class KalturaQuizUserEntryBaseFilter < KalturaUserEntryFilter
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
 	# Used to ingest media file that is already accessible on the shared disc.
 	class KalturaServerFileResource < KalturaDataCenterContentResource
 		# Full path to the local file
@@ -12604,6 +12595,25 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
+		end
+
+	end
+
+	class KalturaUserEntryFilter < KalturaUserEntryBaseFilter
+		attr_accessor :user_id_equal_current
+		attr_accessor :is_anonymous
+
+		def user_id_equal_current=(val)
+			@user_id_equal_current = val.to_i
+		end
+		def is_anonymous=(val)
+			@is_anonymous = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			self.user_id_equal_current = xml_element.elements['userIdEqualCurrent'].text
+			self.is_anonymous = xml_element.elements['isAnonymous'].text
 		end
 
 	end
@@ -12864,7 +12874,7 @@ module Kaltura
 
 	end
 
-	class KalturaQuizUserEntryFilter < KalturaQuizUserEntryBaseFilter
+	class KalturaQuizUserEntryBaseFilter < KalturaUserEntryFilter
 
 
 		def from_xml(xml_element)
@@ -13036,6 +13046,15 @@ module Kaltura
 	end
 
 	class KalturaPlaylistFilter < KalturaPlaylistBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaQuizUserEntryFilter < KalturaQuizUserEntryBaseFilter
 
 
 		def from_xml(xml_element)

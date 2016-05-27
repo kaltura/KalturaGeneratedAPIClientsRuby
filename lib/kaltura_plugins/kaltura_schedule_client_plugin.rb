@@ -493,7 +493,58 @@ module Kaltura
 
 	end
 
-	class KalturaScheduleEventBaseFilter < KalturaFilter
+	class KalturaScheduleEventListResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaScheduleEvent')
+		end
+
+	end
+
+	class KalturaScheduleEventResourceListResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaScheduleEventResource')
+		end
+
+	end
+
+	class KalturaScheduleResourceListResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaScheduleResource')
+		end
+
+	end
+
+	class KalturaLiveStreamScheduleEvent < KalturaEntryScheduleEvent
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaRecordScheduleEvent < KalturaEntryScheduleEvent
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaScheduleEventBaseFilter < KalturaRelatedFilter
 		attr_accessor :id_equal
 		attr_accessor :id_in
 		attr_accessor :id_not_in
@@ -605,18 +656,7 @@ module Kaltura
 
 	end
 
-	class KalturaScheduleEventListResponse < KalturaListResponse
-		attr_accessor :objects
-
-
-		def from_xml(xml_element)
-			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaScheduleEvent')
-		end
-
-	end
-
-	class KalturaScheduleEventResourceBaseFilter < KalturaFilter
+	class KalturaScheduleEventResourceBaseFilter < KalturaRelatedFilter
 		attr_accessor :event_id_equal
 		attr_accessor :event_id_in
 		attr_accessor :resource_id_equal
@@ -659,18 +699,7 @@ module Kaltura
 
 	end
 
-	class KalturaScheduleEventResourceListResponse < KalturaListResponse
-		attr_accessor :objects
-
-
-		def from_xml(xml_element)
-			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaScheduleEventResource')
-		end
-
-	end
-
-	class KalturaScheduleResourceBaseFilter < KalturaFilter
+	class KalturaScheduleResourceBaseFilter < KalturaRelatedFilter
 		attr_accessor :id_equal
 		attr_accessor :id_in
 		attr_accessor :id_not_in
@@ -728,35 +757,6 @@ module Kaltura
 			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
 			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
 			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
-		end
-
-	end
-
-	class KalturaScheduleResourceListResponse < KalturaListResponse
-		attr_accessor :objects
-
-
-		def from_xml(xml_element)
-			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaScheduleResource')
-		end
-
-	end
-
-	class KalturaLiveStreamScheduleEvent < KalturaEntryScheduleEvent
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaRecordScheduleEvent < KalturaEntryScheduleEvent
-
-
-		def from_xml(xml_element)
-			super
 		end
 
 	end

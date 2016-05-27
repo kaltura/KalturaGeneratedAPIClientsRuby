@@ -106,9 +106,6 @@ module Kaltura
 		attr_accessor :status_equal
 		attr_accessor :status_in
 
-		def id_equal=(val)
-			@id_equal = val.to_i
-		end
 		def created_at_greater_than_or_equal=(val)
 			@created_at_greater_than_or_equal = val.to_i
 		end

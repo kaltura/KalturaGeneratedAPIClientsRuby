@@ -9970,14 +9970,19 @@ module Kaltura
 
 	class KalturaUrlTokenizerVnpt < KalturaUrlTokenizer
 		attr_accessor :tokenization_format
+		attr_accessor :should_include_client_ip
 
 		def tokenization_format=(val)
 			@tokenization_format = val.to_i
+		end
+		def should_include_client_ip=(val)
+			@should_include_client_ip = to_b(val)
 		end
 
 		def from_xml(xml_element)
 			super
 			self.tokenization_format = xml_element.elements['tokenizationFormat'].text
+			self.should_include_client_ip = xml_element.elements['shouldIncludeClientIp'].text
 		end
 
 	end

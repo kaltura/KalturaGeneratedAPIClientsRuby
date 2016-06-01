@@ -5000,33 +5000,6 @@ module Kaltura
 		end
 	end
 
-	# Internal Service is used for actions that are used internally in Kaltura applications and might be changed in the future without any notice.
-	class KalturaXInternalService < KalturaServiceBase
-		def initialize(client)
-			super(client)
-		end
-
-		# Creates new download job for multiple entry ids (comma separated), an email will be sent when the job is done
-		# 	 This sevice support the following entries: 
-		# 	 - MediaEntry
-		# 	 - Video will be converted using the flavor params id
-		# 	 - Audio will be downloaded as MP3
-		# 	 - Image will be downloaded as Jpeg
-		# 	 - MixEntry will be flattened using the flavor params id
-		# 	 - Other entry types are not supported
-		# 	 Returns the admin email that the email message will be sent to
-		def x_add_bulk_download(entry_ids, flavor_params_id='')
-			kparams = {}
-			client.add_param(kparams, 'entryIds', entry_ids)
-			client.add_param(kparams, 'flavorParamsId', flavor_params_id)
-			client.queue_service_action_call('xinternal', 'xAddBulkDownload', 'string', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-	end
-
 	class KalturaClient < KalturaClientBase
 		attr_reader :access_control_profile_service
 		def access_control_profile_service
@@ -5460,17 +5433,9 @@ module Kaltura
 			return @widget_service
 		end
 		
-		attr_reader :x_internal_service
-		def x_internal_service
-			if (@x_internal_service == nil)
-				@x_internal_service = KalturaXInternalService.new(self)
-			end
-			return @x_internal_service
-		end
-		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:16-05-31'
+			self.client_tag = 'ruby:16-06-01'
 			self.api_version = '3.3.0'
 		end
 		

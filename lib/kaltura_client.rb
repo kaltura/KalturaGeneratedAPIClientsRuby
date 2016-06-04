@@ -1409,6 +1409,17 @@ module Kaltura
 			end
 			return client.do_queue()
 		end
+
+		# Validates server node still registered on entry
+		def validate_registered_entry_server_node(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('entryservernode', 'validateRegisteredEntryServerNode', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
 	end
 
 	# Manage file assets
@@ -5435,7 +5446,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:16-06-03'
+			self.client_tag = 'ruby:16-06-04'
 			self.api_version = '3.3.0'
 		end
 		

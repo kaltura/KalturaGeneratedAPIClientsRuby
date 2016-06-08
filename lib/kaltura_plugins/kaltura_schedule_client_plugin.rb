@@ -770,10 +770,11 @@ module Kaltura
 		attr_accessor :parent_resource_ids_multi_like_and
 		attr_accessor :template_entry_categories_ids_multi_like_and
 		attr_accessor :template_entry_categories_ids_multi_like_or
+		attr_accessor :resource_system_names_multi_like_or
 		attr_accessor :template_entry_categories_ids_like
-		attr_accessor :system_names_multi_like_or
-		attr_accessor :system_names_multi_like_and
-		attr_accessor :system_names_like
+		attr_accessor :resource_system_names_multi_like_and
+		attr_accessor :resource_system_names_like
+		attr_accessor :template_entry_id_equal
 
 
 		def from_xml(xml_element)
@@ -786,10 +787,11 @@ module Kaltura
 			self.parent_resource_ids_multi_like_and = xml_element.elements['parentResourceIdsMultiLikeAnd'].text
 			self.template_entry_categories_ids_multi_like_and = xml_element.elements['templateEntryCategoriesIdsMultiLikeAnd'].text
 			self.template_entry_categories_ids_multi_like_or = xml_element.elements['templateEntryCategoriesIdsMultiLikeOr'].text
+			self.resource_system_names_multi_like_or = xml_element.elements['resourceSystemNamesMultiLikeOr'].text
 			self.template_entry_categories_ids_like = xml_element.elements['templateEntryCategoriesIdsLike'].text
-			self.system_names_multi_like_or = xml_element.elements['systemNamesMultiLikeOr'].text
-			self.system_names_multi_like_and = xml_element.elements['systemNamesMultiLikeAnd'].text
-			self.system_names_like = xml_element.elements['systemNamesLike'].text
+			self.resource_system_names_multi_like_and = xml_element.elements['resourceSystemNamesMultiLikeAnd'].text
+			self.resource_system_names_like = xml_element.elements['resourceSystemNamesLike'].text
+			self.template_entry_id_equal = xml_element.elements['templateEntryIdEqual'].text
 		end
 
 	end
@@ -822,6 +824,7 @@ module Kaltura
 	end
 
 	class KalturaEntryScheduleEventBaseFilter < KalturaScheduleEventFilter
+		attr_accessor :template_entry_id_equal
 		attr_accessor :entry_ids_like
 		attr_accessor :entry_ids_multi_like_or
 		attr_accessor :entry_ids_multi_like_and
@@ -832,6 +835,7 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
+			self.template_entry_id_equal = xml_element.elements['templateEntryIdEqual'].text
 			self.entry_ids_like = xml_element.elements['entryIdsLike'].text
 			self.entry_ids_multi_like_or = xml_element.elements['entryIdsMultiLikeOr'].text
 			self.entry_ids_multi_like_and = xml_element.elements['entryIdsMultiLikeAnd'].text

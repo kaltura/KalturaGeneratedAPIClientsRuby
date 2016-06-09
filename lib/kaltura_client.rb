@@ -4267,6 +4267,18 @@ module Kaltura
 			end
 			return client.do_queue()
 		end
+
+		# manually export an asset
+		def export(asset_id, storage_profile_id)
+			kparams = {}
+			client.add_param(kparams, 'assetId', asset_id)
+			client.add_param(kparams, 'storageProfileId', storage_profile_id)
+			client.queue_service_action_call('thumbasset', 'export', 'KalturaFlavorAsset', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
 	end
 
 	# Thumbnail Params Output service
@@ -5446,7 +5458,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:16-06-08'
+			self.client_tag = 'ruby:16-06-09'
 			self.api_version = '3.3.0'
 		end
 		

@@ -6706,12 +6706,16 @@ module Kaltura
 	class KalturaAmazonS3StorageProfile < KalturaStorageProfile
 		attr_accessor :files_permission_in_s3
 		attr_accessor :s3region
+		attr_accessor :sse_type
+		attr_accessor :sse_kms_key_id
 
 
 		def from_xml(xml_element)
 			super
 			self.files_permission_in_s3 = xml_element.elements['filesPermissionInS3'].text
 			self.s3region = xml_element.elements['s3Region'].text
+			self.sse_type = xml_element.elements['sseType'].text
+			self.sse_kms_key_id = xml_element.elements['sseKmsKeyId'].text
 		end
 
 	end
@@ -11806,12 +11810,16 @@ module Kaltura
 	class KalturaAmazonS3StorageExportJobData < KalturaStorageExportJobData
 		attr_accessor :files_permission_in_s3
 		attr_accessor :s3region
+		attr_accessor :sse_type
+		attr_accessor :sse_kms_key_id
 
 
 		def from_xml(xml_element)
 			super
 			self.files_permission_in_s3 = xml_element.elements['filesPermissionInS3'].text
 			self.s3region = xml_element.elements['s3Region'].text
+			self.sse_type = xml_element.elements['sseType'].text
+			self.sse_kms_key_id = xml_element.elements['sseKmsKeyId'].text
 		end
 
 	end

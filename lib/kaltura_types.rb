@@ -2163,6 +2163,8 @@ module Kaltura
 		# Specifies how to treat the flavor after conversion is finished
 		attr_accessor :delete_policy
 		attr_accessor :is_encrypted
+		attr_accessor :content_awareness
+		attr_accessor :two_pass
 
 		def conversion_profile_id=(val)
 			@conversion_profile_id = val.to_i
@@ -2185,6 +2187,12 @@ module Kaltura
 		def is_encrypted=(val)
 			@is_encrypted = val.to_i
 		end
+		def content_awareness=(val)
+			@content_awareness = val.to_f
+		end
+		def two_pass=(val)
+			@two_pass = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
@@ -2196,6 +2204,8 @@ module Kaltura
 			self.force_none_complied = xml_element.elements['forceNoneComplied'].text
 			self.delete_policy = xml_element.elements['deletePolicy'].text
 			self.is_encrypted = xml_element.elements['isEncrypted'].text
+			self.content_awareness = xml_element.elements['contentAwareness'].text
+			self.two_pass = xml_element.elements['twoPass'].text
 		end
 
 	end
@@ -2988,6 +2998,7 @@ module Kaltura
 		attr_accessor :watermark_data
 		attr_accessor :subtitles_data
 		attr_accessor :is_encrypted
+		attr_accessor :content_awareness
 		attr_accessor :clip_offset
 		attr_accessor :clip_duration
 
@@ -3069,6 +3080,9 @@ module Kaltura
 		def is_encrypted=(val)
 			@is_encrypted = val.to_i
 		end
+		def content_awareness=(val)
+			@content_awareness = val.to_f
+		end
 		def clip_offset=(val)
 			@clip_offset = val.to_i
 		end
@@ -3113,6 +3127,7 @@ module Kaltura
 			self.watermark_data = xml_element.elements['watermarkData'].text
 			self.subtitles_data = xml_element.elements['subtitlesData'].text
 			self.is_encrypted = xml_element.elements['isEncrypted'].text
+			self.content_awareness = xml_element.elements['contentAwareness'].text
 			self.clip_offset = xml_element.elements['clipOffset'].text
 			self.clip_duration = xml_element.elements['clipDuration'].text
 		end
@@ -3540,6 +3555,7 @@ module Kaltura
 		attr_accessor :multi_stream
 		attr_accessor :is_fast_start
 		attr_accessor :content_streams
+		attr_accessor :complexity_value
 
 		def id=(val)
 			@id = val.to_i
@@ -3601,6 +3617,9 @@ module Kaltura
 		def is_fast_start=(val)
 			@is_fast_start = val.to_i
 		end
+		def complexity_value=(val)
+			@complexity_value = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
@@ -3637,6 +3656,7 @@ module Kaltura
 			self.multi_stream = xml_element.elements['multiStream'].text
 			self.is_fast_start = xml_element.elements['isFastStart'].text
 			self.content_streams = xml_element.elements['contentStreams'].text
+			self.complexity_value = xml_element.elements['complexityValue'].text
 		end
 
 	end

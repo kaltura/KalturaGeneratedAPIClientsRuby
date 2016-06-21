@@ -8620,14 +8620,19 @@ module Kaltura
 
 	class KalturaIndexAdvancedFilter < KalturaSearchItem
 		attr_accessor :index_id_greater_than
+		attr_accessor :depth_greater_than_equal
 
 		def index_id_greater_than=(val)
 			@index_id_greater_than = val.to_i
+		end
+		def depth_greater_than_equal=(val)
+			@depth_greater_than_equal = val.to_i
 		end
 
 		def from_xml(xml_element)
 			super
 			self.index_id_greater_than = xml_element.elements['indexIdGreaterThan'].text
+			self.depth_greater_than_equal = xml_element.elements['depthGreaterThanEqual'].text
 		end
 
 	end
@@ -8637,11 +8642,16 @@ module Kaltura
 		attr_accessor :filter
 		# Indicates the last id that reindexed, used when the batch crached, to re-run from the last crash point.
 		attr_accessor :last_index_id
+		# Indicates the last depth that reindexed, used when the batch crached, to re-run from the last crash point.
+		attr_accessor :last_index_depth
 		# Indicates that the object columns and attributes values should be recalculated before reindexed.
 		attr_accessor :should_update
 
 		def last_index_id=(val)
 			@last_index_id = val.to_i
+		end
+		def last_index_depth=(val)
+			@last_index_depth = val.to_i
 		end
 		def should_update=(val)
 			@should_update = to_b(val)
@@ -8651,6 +8661,7 @@ module Kaltura
 			super
 			self.filter = KalturaClientBase.object_from_xml(xml_element.elements['filter'], 'KalturaFilter')
 			self.last_index_id = xml_element.elements['lastIndexId'].text
+			self.last_index_depth = xml_element.elements['lastIndexDepth'].text
 			self.should_update = xml_element.elements['shouldUpdate'].text
 		end
 

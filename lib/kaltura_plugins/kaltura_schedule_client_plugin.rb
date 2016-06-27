@@ -774,7 +774,6 @@ module Kaltura
 		attr_accessor :template_entry_categories_ids_like
 		attr_accessor :resource_system_names_multi_like_and
 		attr_accessor :resource_system_names_like
-		attr_accessor :template_entry_id_equal
 
 
 		def from_xml(xml_element)
@@ -791,7 +790,6 @@ module Kaltura
 			self.template_entry_categories_ids_like = xml_element.elements['templateEntryCategoriesIdsLike'].text
 			self.resource_system_names_multi_like_and = xml_element.elements['resourceSystemNamesMultiLikeAnd'].text
 			self.resource_system_names_like = xml_element.elements['resourceSystemNamesLike'].text
-			self.template_entry_id_equal = xml_element.elements['templateEntryIdEqual'].text
 		end
 
 	end

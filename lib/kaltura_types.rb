@@ -6651,6 +6651,15 @@ module Kaltura
 
 	end
 
+	class KalturaAccessControlLimitThumbnailCaptureAction < KalturaRuleAction
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaAccessControlListResponse < KalturaListResponse
 		attr_accessor :objects
 

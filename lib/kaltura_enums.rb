@@ -2874,6 +2874,7 @@ module Kaltura
 		LIMIT_DELIVERY_PROFILES = "5"
 		SERVE_FROM_REMOTE_SERVER = "6"
 		REQUEST_HOST_REGEX = "7"
+		LIMIT_THUMBNAIL_CAPTURE = "8"
 	end
 
 	class KalturaSchemaType

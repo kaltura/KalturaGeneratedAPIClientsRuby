@@ -6676,12 +6676,18 @@ module Kaltura
 		attr_accessor :pattern
 		# Request host regex replacment
 		attr_accessor :replacement
+		# serverNodeId to generate replacment host from
+		attr_accessor :replacmen_server_node_id
 
+		def replacmen_server_node_id=(val)
+			@replacmen_server_node_id = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
 			self.pattern = xml_element.elements['pattern'].text
 			self.replacement = xml_element.elements['replacement'].text
+			self.replacmen_server_node_id = xml_element.elements['replacmenServerNodeId'].text
 		end
 
 	end

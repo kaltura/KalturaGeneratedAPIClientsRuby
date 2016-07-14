@@ -6743,6 +6743,8 @@ module Kaltura
 		attr_accessor :s3region
 		attr_accessor :sse_type
 		attr_accessor :sse_kms_key_id
+		attr_accessor :signature_type
+		attr_accessor :end_point
 
 
 		def from_xml(xml_element)
@@ -6751,6 +6753,8 @@ module Kaltura
 			self.s3region = xml_element.elements['s3Region'].text
 			self.sse_type = xml_element.elements['sseType'].text
 			self.sse_kms_key_id = xml_element.elements['sseKmsKeyId'].text
+			self.signature_type = xml_element.elements['signatureType'].text
+			self.end_point = xml_element.elements['endPoint'].text
 		end
 
 	end
@@ -11858,6 +11862,8 @@ module Kaltura
 		attr_accessor :s3region
 		attr_accessor :sse_type
 		attr_accessor :sse_kms_key_id
+		attr_accessor :signature_type
+		attr_accessor :end_point
 
 
 		def from_xml(xml_element)
@@ -11866,6 +11872,8 @@ module Kaltura
 			self.s3region = xml_element.elements['s3Region'].text
 			self.sse_type = xml_element.elements['sseType'].text
 			self.sse_kms_key_id = xml_element.elements['sseKmsKeyId'].text
+			self.signature_type = xml_element.elements['signatureType'].text
+			self.end_point = xml_element.elements['endPoint'].text
 		end
 
 	end

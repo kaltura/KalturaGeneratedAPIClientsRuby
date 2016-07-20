@@ -5800,6 +5800,7 @@ module Kaltura
 		attr_accessor :private_key
 		attr_accessor :public_key
 		attr_accessor :pass_phrase
+		attr_accessor :should_export_thumbs
 
 		def id=(val)
 			@id = val.to_i
@@ -5846,6 +5847,9 @@ module Kaltura
 		def create_file_link=(val)
 			@create_file_link = to_b(val)
 		end
+		def should_export_thumbs=(val)
+			@should_export_thumbs = to_b(val)
+		end
 
 		def from_xml(xml_element)
 			super
@@ -5880,6 +5884,7 @@ module Kaltura
 			self.private_key = xml_element.elements['privateKey'].text
 			self.public_key = xml_element.elements['publicKey'].text
 			self.pass_phrase = xml_element.elements['passPhrase'].text
+			self.should_export_thumbs = xml_element.elements['shouldExportThumbs'].text
 		end
 
 	end

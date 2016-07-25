@@ -2317,6 +2317,116 @@ module Kaltura
 
 	end
 
+	class KalturaSearchItem < KalturaObjectBase
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaFilter < KalturaObjectBase
+		attr_accessor :order_by
+		attr_accessor :advanced_search
+
+
+		def from_xml(xml_element)
+			super
+			self.order_by = xml_element.elements['orderBy'].text
+			self.advanced_search = KalturaClientBase.object_from_xml(xml_element.elements['advancedSearch'], 'KalturaSearchItem')
+		end
+
+	end
+
+	class KalturaRelatedFilter < KalturaFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaAssetBaseFilter < KalturaRelatedFilter
+		attr_accessor :id_equal
+		attr_accessor :id_in
+		attr_accessor :entry_id_equal
+		attr_accessor :entry_id_in
+		attr_accessor :partner_id_equal
+		attr_accessor :partner_id_in
+		attr_accessor :size_greater_than_or_equal
+		attr_accessor :size_less_than_or_equal
+		attr_accessor :tags_like
+		attr_accessor :tags_multi_like_or
+		attr_accessor :tags_multi_like_and
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :created_at_less_than_or_equal
+		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
+		attr_accessor :deleted_at_greater_than_or_equal
+		attr_accessor :deleted_at_less_than_or_equal
+
+		def partner_id_equal=(val)
+			@partner_id_equal = val.to_i
+		end
+		def size_greater_than_or_equal=(val)
+			@size_greater_than_or_equal = val.to_i
+		end
+		def size_less_than_or_equal=(val)
+			@size_less_than_or_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
+		def updated_at_greater_than_or_equal=(val)
+			@updated_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
+		end
+		def deleted_at_greater_than_or_equal=(val)
+			@deleted_at_greater_than_or_equal = val.to_i
+		end
+		def deleted_at_less_than_or_equal=(val)
+			@deleted_at_less_than_or_equal = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			self.id_equal = xml_element.elements['idEqual'].text
+			self.id_in = xml_element.elements['idIn'].text
+			self.entry_id_equal = xml_element.elements['entryIdEqual'].text
+			self.entry_id_in = xml_element.elements['entryIdIn'].text
+			self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
+			self.partner_id_in = xml_element.elements['partnerIdIn'].text
+			self.size_greater_than_or_equal = xml_element.elements['sizeGreaterThanOrEqual'].text
+			self.size_less_than_or_equal = xml_element.elements['sizeLessThanOrEqual'].text
+			self.tags_like = xml_element.elements['tagsLike'].text
+			self.tags_multi_like_or = xml_element.elements['tagsMultiLikeOr'].text
+			self.tags_multi_like_and = xml_element.elements['tagsMultiLikeAnd'].text
+			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			self.deleted_at_greater_than_or_equal = xml_element.elements['deletedAtGreaterThanOrEqual'].text
+			self.deleted_at_less_than_or_equal = xml_element.elements['deletedAtLessThanOrEqual'].text
+		end
+
+	end
+
+	class KalturaAssetFilter < KalturaAssetBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaDeliveryProfile < KalturaObjectBase
 		# The id of the Delivery
 		attr_accessor :id
@@ -2350,6 +2460,8 @@ module Kaltura
 		attr_accessor :priority
 		# Extra query string parameters that should be added to the url
 		attr_accessor :extra_params
+		# A filter that can be used to include additional assets in the URL (e.g. captions)
+		attr_accessor :supplementary_assets_filter
 
 		def id=(val)
 			@id = val.to_i
@@ -2397,6 +2509,7 @@ module Kaltura
 			self.media_protocols = xml_element.elements['mediaProtocols'].text
 			self.priority = xml_element.elements['priority'].text
 			self.extra_params = xml_element.elements['extraParams'].text
+			self.supplementary_assets_filter = KalturaClientBase.object_from_xml(xml_element.elements['supplementaryAssetsFilter'], 'KalturaAssetFilter')
 		end
 
 	end
@@ -2421,37 +2534,6 @@ module Kaltura
 	end
 
 	class KalturaDestFileSyncDescriptor < KalturaFileSyncDescriptor
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaSearchItem < KalturaObjectBase
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaFilter < KalturaObjectBase
-		attr_accessor :order_by
-		attr_accessor :advanced_search
-
-
-		def from_xml(xml_element)
-			super
-			self.order_by = xml_element.elements['orderBy'].text
-			self.advanced_search = KalturaClientBase.object_from_xml(xml_element.elements['advancedSearch'], 'KalturaSearchItem')
-		end
-
-	end
-
-	class KalturaRelatedFilter < KalturaFilter
 
 
 		def from_xml(xml_element)
@@ -10351,76 +10433,6 @@ module Kaltura
 
 	end
 
-	class KalturaAssetBaseFilter < KalturaRelatedFilter
-		attr_accessor :id_equal
-		attr_accessor :id_in
-		attr_accessor :entry_id_equal
-		attr_accessor :entry_id_in
-		attr_accessor :partner_id_equal
-		attr_accessor :partner_id_in
-		attr_accessor :size_greater_than_or_equal
-		attr_accessor :size_less_than_or_equal
-		attr_accessor :tags_like
-		attr_accessor :tags_multi_like_or
-		attr_accessor :tags_multi_like_and
-		attr_accessor :created_at_greater_than_or_equal
-		attr_accessor :created_at_less_than_or_equal
-		attr_accessor :updated_at_greater_than_or_equal
-		attr_accessor :updated_at_less_than_or_equal
-		attr_accessor :deleted_at_greater_than_or_equal
-		attr_accessor :deleted_at_less_than_or_equal
-
-		def partner_id_equal=(val)
-			@partner_id_equal = val.to_i
-		end
-		def size_greater_than_or_equal=(val)
-			@size_greater_than_or_equal = val.to_i
-		end
-		def size_less_than_or_equal=(val)
-			@size_less_than_or_equal = val.to_i
-		end
-		def created_at_greater_than_or_equal=(val)
-			@created_at_greater_than_or_equal = val.to_i
-		end
-		def created_at_less_than_or_equal=(val)
-			@created_at_less_than_or_equal = val.to_i
-		end
-		def updated_at_greater_than_or_equal=(val)
-			@updated_at_greater_than_or_equal = val.to_i
-		end
-		def updated_at_less_than_or_equal=(val)
-			@updated_at_less_than_or_equal = val.to_i
-		end
-		def deleted_at_greater_than_or_equal=(val)
-			@deleted_at_greater_than_or_equal = val.to_i
-		end
-		def deleted_at_less_than_or_equal=(val)
-			@deleted_at_less_than_or_equal = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			self.id_equal = xml_element.elements['idEqual'].text
-			self.id_in = xml_element.elements['idIn'].text
-			self.entry_id_equal = xml_element.elements['entryIdEqual'].text
-			self.entry_id_in = xml_element.elements['entryIdIn'].text
-			self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
-			self.partner_id_in = xml_element.elements['partnerIdIn'].text
-			self.size_greater_than_or_equal = xml_element.elements['sizeGreaterThanOrEqual'].text
-			self.size_less_than_or_equal = xml_element.elements['sizeLessThanOrEqual'].text
-			self.tags_like = xml_element.elements['tagsLike'].text
-			self.tags_multi_like_or = xml_element.elements['tagsMultiLikeOr'].text
-			self.tags_multi_like_and = xml_element.elements['tagsMultiLikeAnd'].text
-			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
-			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
-			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
-			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
-			self.deleted_at_greater_than_or_equal = xml_element.elements['deletedAtGreaterThanOrEqual'].text
-			self.deleted_at_less_than_or_equal = xml_element.elements['deletedAtLessThanOrEqual'].text
-		end
-
-	end
-
 	class KalturaAssetParamsBaseFilter < KalturaRelatedFilter
 		attr_accessor :system_name_equal
 		attr_accessor :system_name_in
@@ -11884,15 +11896,6 @@ module Kaltura
 	end
 
 	class KalturaAmazonS3StorageProfileBaseFilter < KalturaStorageProfileFilter
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaAssetFilter < KalturaAssetBaseFilter
 
 
 		def from_xml(xml_element)

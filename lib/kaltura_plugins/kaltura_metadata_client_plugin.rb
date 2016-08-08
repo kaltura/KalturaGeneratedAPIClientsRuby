@@ -341,6 +341,22 @@ module Kaltura
 
 	end
 
+	# Advanced metadata configuration for entry replacement process
+	class KalturaMetadataReplacementOptionsItem < KalturaPluginReplacementOptionsItem
+		# If true custom-metadata transferred to temp entry on entry replacement
+		attr_accessor :should_copy_metadata
+
+		def should_copy_metadata=(val)
+			@should_copy_metadata = to_b(val)
+		end
+
+		def from_xml(xml_element)
+			super
+			self.should_copy_metadata = xml_element.elements['shouldCopyMetadata'].text
+		end
+
+	end
+
 	class KalturaMetadataResponseProfileMapping < KalturaResponseProfileMapping
 
 

@@ -2419,10 +2419,12 @@ module Kaltura
 	end
 
 	class KalturaAssetFilter < KalturaAssetBaseFilter
+		attr_accessor :type_in
 
 
 		def from_xml(xml_element)
 			super
+			self.type_in = xml_element.elements['typeIn'].text
 		end
 
 	end
@@ -2684,10 +2686,21 @@ module Kaltura
 
 	end
 
+	class KalturaPluginReplacementOptionsItem < KalturaObjectBase
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	# Advanced configuration for entry replacement process
 	class KalturaEntryReplacementOptions < KalturaObjectBase
 		# If true manually created thumbnails will not be deleted on entry replacement
 		attr_accessor :keep_manual_thumbnails
+		# Array of plugin replacement options
+		attr_accessor :plugin_option_items
 
 		def keep_manual_thumbnails=(val)
 			@keep_manual_thumbnails = val.to_i
@@ -2696,6 +2709,7 @@ module Kaltura
 		def from_xml(xml_element)
 			super
 			self.keep_manual_thumbnails = xml_element.elements['keepManualThumbnails'].text
+			self.plugin_option_items = KalturaClientBase.object_from_xml(xml_element.elements['pluginOptionItems'], 'KalturaPluginReplacementOptionsItem')
 		end
 
 	end
@@ -8908,6 +8922,36 @@ module Kaltura
 
 	end
 
+	class KalturaLiveToVodJobData < KalturaJobData
+		# $vod Entry Id
+		attr_accessor :vod_entry_id
+		# live Entry Id
+		attr_accessor :live_entry_id
+		# total VOD Duration
+		attr_accessor :total_vod_duration
+		# last Segment Duration
+		attr_accessor :last_segment_duration
+		# amf Array File Path
+		attr_accessor :amf_array
+
+		def total_vod_duration=(val)
+			@total_vod_duration = val.to_f
+		end
+		def last_segment_duration=(val)
+			@last_segment_duration = val.to_f
+		end
+
+		def from_xml(xml_element)
+			super
+			self.vod_entry_id = xml_element.elements['vodEntryId'].text
+			self.live_entry_id = xml_element.elements['liveEntryId'].text
+			self.total_vod_duration = xml_element.elements['totalVodDuration'].text
+			self.last_segment_duration = xml_element.elements['lastSegmentDuration'].text
+			self.amf_array = xml_element.elements['amfArray'].text
+		end
+
+	end
+
 	class KalturaMailJobData < KalturaJobData
 		attr_accessor :mail_type
 		attr_accessor :mail_priority
@@ -13139,12 +13183,10 @@ module Kaltura
 	end
 
 	class KalturaThumbAssetFilter < KalturaThumbAssetBaseFilter
-		attr_accessor :type_in
 
 
 		def from_xml(xml_element)
 			super
-			self.type_in = xml_element.elements['typeIn'].text
 		end
 
 	end

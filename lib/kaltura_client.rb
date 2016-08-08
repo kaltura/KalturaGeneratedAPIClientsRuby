@@ -1709,6 +1709,18 @@ module Kaltura
 			end
 			return client.do_queue()
 		end
+
+		# serve cmd line to transcode the ad
+		def serve_ad_stitch_cmd(asset_id, media_info_json)
+			kparams = {}
+			client.add_param(kparams, 'assetId', asset_id)
+			client.add_param(kparams, 'mediaInfoJson', media_info_json)
+			client.queue_service_action_call('flavorasset', 'serveAdStitchCmd', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
 	end
 
 	# Flavor Params Output service
@@ -5458,7 +5470,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:16-08-07'
+			self.client_tag = 'ruby:16-08-08'
 			self.api_version = '3.3.0'
 		end
 		

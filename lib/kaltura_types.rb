@@ -8922,36 +8922,6 @@ module Kaltura
 
 	end
 
-	class KalturaLiveToVodJobData < KalturaJobData
-		# $vod Entry Id
-		attr_accessor :vod_entry_id
-		# live Entry Id
-		attr_accessor :live_entry_id
-		# total VOD Duration
-		attr_accessor :total_vod_duration
-		# last Segment Duration
-		attr_accessor :last_segment_duration
-		# amf Array File Path
-		attr_accessor :amf_array
-
-		def total_vod_duration=(val)
-			@total_vod_duration = val.to_f
-		end
-		def last_segment_duration=(val)
-			@last_segment_duration = val.to_f
-		end
-
-		def from_xml(xml_element)
-			super
-			self.vod_entry_id = xml_element.elements['vodEntryId'].text
-			self.live_entry_id = xml_element.elements['liveEntryId'].text
-			self.total_vod_duration = xml_element.elements['totalVodDuration'].text
-			self.last_segment_duration = xml_element.elements['lastSegmentDuration'].text
-			self.amf_array = xml_element.elements['amfArray'].text
-		end
-
-	end
-
 	class KalturaMailJobData < KalturaJobData
 		attr_accessor :mail_type
 		attr_accessor :mail_priority

@@ -841,6 +841,8 @@ module Kaltura
 		# Update date as Unix timestamp (In seconds)
 		attr_accessor :updated_at
 		attr_accessor :use_category_entries
+		# Feed content-type header value
+		attr_accessor :feed_content_type_header
 
 		def partner_id=(val)
 			@partner_id = val.to_i
@@ -905,6 +907,7 @@ module Kaltura
 			self.privacy_context = xml_element.elements['privacyContext'].text
 			self.updated_at = xml_element.elements['updatedAt'].text
 			self.use_category_entries = xml_element.elements['useCategoryEntries'].text
+			self.feed_content_type_header = xml_element.elements['feedContentTypeHeader'].text
 		end
 
 	end

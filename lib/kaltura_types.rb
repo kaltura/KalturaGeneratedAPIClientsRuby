@@ -8171,13 +8171,13 @@ module Kaltura
 	end
 
 	class KalturaDeliveryServerNode < KalturaServerNode
-		# Delivery server playback Domain
-		attr_accessor :playback_domain
+		# Delivery profile ids
+		attr_accessor :delivery_profile_ids
 
 
 		def from_xml(xml_element)
 			super
-			self.playback_domain = xml_element.elements['playbackDomain'].text
+			self.delivery_profile_ids = KalturaClientBase.object_from_xml(xml_element.elements['deliveryProfileIds'], 'KalturaKeyValue')
 		end
 
 	end
@@ -10840,10 +10840,15 @@ module Kaltura
 	end
 
 	class KalturaDeliveryProfileFilter < KalturaDeliveryProfileBaseFilter
+		attr_accessor :is_live
 
+		def is_live=(val)
+			@is_live = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
+			self.is_live = xml_element.elements['isLive'].text
 		end
 
 	end
@@ -10863,15 +10868,15 @@ module Kaltura
 	end
 
 	class KalturaEdgeServerNode < KalturaDeliveryServerNode
-		# Delivery profile ids
-		attr_accessor :delivery_profile_ids
+		# Delivery server playback Domain
+		attr_accessor :playback_domain
 		# Overdie edge server default configuration - json format
 		attr_accessor :config
 
 
 		def from_xml(xml_element)
 			super
-			self.delivery_profile_ids = KalturaClientBase.object_from_xml(xml_element.elements['deliveryProfileIds'], 'KalturaKeyValue')
+			self.playback_domain = xml_element.elements['playbackDomain'].text
 			self.config = xml_element.elements['config'].text
 		end
 

@@ -190,9 +190,6 @@ module Kaltura
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
-	class KalturaSyndicationDistributionProviderOrderBy
-	end
-
 	# Abstract class for asset distribution condition
 	class KalturaAssetDistributionCondition < KalturaObjectBase
 
@@ -1545,15 +1542,6 @@ module Kaltura
 	end
 
 	class KalturaSyndicationDistributionProfileFilter < KalturaSyndicationDistributionProfileBaseFilter
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaSyndicationDistributionProviderFilter < KalturaSyndicationDistributionProviderBaseFilter
 
 
 		def from_xml(xml_element)

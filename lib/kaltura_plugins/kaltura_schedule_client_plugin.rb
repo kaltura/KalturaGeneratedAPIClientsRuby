@@ -795,10 +795,16 @@ module Kaltura
 	end
 
 	class KalturaScheduleEventResourceFilter < KalturaScheduleEventResourceBaseFilter
+		# Find event-resource objects that associated with the event, if none found, find by its parent event
+		attr_accessor :event_id_or_its_parent_id_equal
 
+		def event_id_or_its_parent_id_equal=(val)
+			@event_id_or_its_parent_id_equal = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
+			self.event_id_or_its_parent_id_equal = xml_element.elements['eventIdOrItsParentIdEqual'].text
 		end
 
 	end

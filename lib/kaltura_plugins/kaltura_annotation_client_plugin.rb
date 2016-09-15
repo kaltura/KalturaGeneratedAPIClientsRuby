@@ -273,6 +273,18 @@ module Kaltura
 			end
 			return client.do_queue()
 		end
+
+		# Clone cuePoint with id to given entry
+		def clone(id, entry_id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('annotation_annotation', 'clone', 'KalturaCuePoint', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
 	end
 
 	class KalturaClient < KalturaClientBase

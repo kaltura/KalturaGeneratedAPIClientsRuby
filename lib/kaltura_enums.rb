@@ -169,6 +169,13 @@ module Kaltura
 		ACTIVE = 1
 	end
 
+	class KalturaEntryDisplayInSearchType
+		SYSTEM = -1
+		NONE = 0
+		PARTNER_ONLY = 1
+		KALTURA_NETWORK = 2
+	end
+
 	class KalturaEntryModerationStatus
 		PENDING_MODERATION = 1
 		APPROVED = 2
@@ -1015,6 +1022,7 @@ module Kaltura
 		SYNC_CATEGORY_PRIVACY_CONTEXT = "39"
 		LIVE_REPORT_EXPORT = "40"
 		RECALCULATE_CACHE = "41"
+		LIVE_TO_VOD = "42"
 	end
 
 	class KalturaBulkUploadAction

@@ -686,6 +686,8 @@ module Kaltura
 		attr_accessor :capabilities
 		# Template entry id
 		attr_accessor :template_entry_id
+		# should we display this entry in search
+		attr_accessor :display_in_search
 
 		def partner_id=(val)
 			@partner_id = val.to_i
@@ -735,6 +737,9 @@ module Kaltura
 		def conversion_profile_id=(val)
 			@conversion_profile_id = val.to_i
 		end
+		def display_in_search=(val)
+			@display_in_search = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
@@ -781,6 +786,7 @@ module Kaltura
 			self.entitled_users_publish = xml_element.elements['entitledUsersPublish'].text
 			self.capabilities = xml_element.elements['capabilities'].text
 			self.template_entry_id = xml_element.elements['templateEntryId'].text
+			self.display_in_search = xml_element.elements['displayInSearch'].text
 		end
 
 	end
@@ -3991,6 +3997,7 @@ module Kaltura
 		attr_accessor :should_copy_entitlement
 		attr_accessor :should_copy_scheduling
 		attr_accessor :should_copy_thumbnail
+		attr_accessor :should_make_hidden
 
 		def should_copy_entitlement=(val)
 			@should_copy_entitlement = val.to_i
@@ -4001,12 +4008,16 @@ module Kaltura
 		def should_copy_thumbnail=(val)
 			@should_copy_thumbnail = val.to_i
 		end
+		def should_make_hidden=(val)
+			@should_make_hidden = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
 			self.should_copy_entitlement = xml_element.elements['shouldCopyEntitlement'].text
 			self.should_copy_scheduling = xml_element.elements['shouldCopyScheduling'].text
 			self.should_copy_thumbnail = xml_element.elements['shouldCopyThumbnail'].text
+			self.should_make_hidden = xml_element.elements['shouldMakeHidden'].text
 		end
 
 	end
@@ -8926,6 +8937,36 @@ module Kaltura
 			self.password = xml_element.elements['password'].text
 			self.stream_name = xml_element.elements['streamName'].text
 			self.application_name = xml_element.elements['applicationName'].text
+		end
+
+	end
+
+	class KalturaLiveToVodJobData < KalturaJobData
+		# $vod Entry Id
+		attr_accessor :vod_entry_id
+		# live Entry Id
+		attr_accessor :live_entry_id
+		# total VOD Duration
+		attr_accessor :total_vod_duration
+		# last Segment Duration
+		attr_accessor :last_segment_duration
+		# amf Array File Path
+		attr_accessor :amf_array
+
+		def total_vod_duration=(val)
+			@total_vod_duration = val.to_f
+		end
+		def last_segment_duration=(val)
+			@last_segment_duration = val.to_f
+		end
+
+		def from_xml(xml_element)
+			super
+			self.vod_entry_id = xml_element.elements['vodEntryId'].text
+			self.live_entry_id = xml_element.elements['liveEntryId'].text
+			self.total_vod_duration = xml_element.elements['totalVodDuration'].text
+			self.last_segment_duration = xml_element.elements['lastSegmentDuration'].text
+			self.amf_array = xml_element.elements['amfArray'].text
 		end
 
 	end

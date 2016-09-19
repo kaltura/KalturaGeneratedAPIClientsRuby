@@ -7454,6 +7454,7 @@ module Kaltura
 		attr_accessor :gender
 		attr_accessor :first_name
 		attr_accessor :last_name
+		attr_accessor :group
 
 		def date_of_birth=(val)
 			@date_of_birth = val.to_i
@@ -7477,6 +7478,7 @@ module Kaltura
 			self.gender = xml_element.elements['gender'].text
 			self.first_name = xml_element.elements['firstName'].text
 			self.last_name = xml_element.elements['lastName'].text
+			self.group = xml_element.elements['group'].text
 		end
 
 	end

@@ -8183,6 +8183,20 @@ module Kaltura
 
 	end
 
+	class KalturaDeliveryProfileVodPackagerHls < KalturaDeliveryProfile
+		attr_accessor :allow_fairplay_offline
+
+		def allow_fairplay_offline=(val)
+			@allow_fairplay_offline = to_b(val)
+		end
+
+		def from_xml(xml_element)
+			super
+			self.allow_fairplay_offline = xml_element.elements['allowFairplayOffline'].text
+		end
+
+	end
+
 	class KalturaDeliveryServerNode < KalturaServerNode
 		# Delivery profile ids
 		attr_accessor :delivery_profile_ids

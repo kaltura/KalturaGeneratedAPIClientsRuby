@@ -2280,6 +2280,17 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Regenerate new secure token for liveStream
+		def regenrate_secure_token(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('livestream', 'regenrateSecureToken', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Append recorded video to live entry
 		def append_recording(entry_id, asset_id, media_server_index, resource, duration, is_last_chunk=false)
 			kparams = {}
@@ -5471,7 +5482,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:16-10-11'
+			self.client_tag = 'ruby:16-10-12'
 			self.api_version = '3.3.0'
 		end
 		

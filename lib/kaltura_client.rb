@@ -1716,7 +1716,7 @@ module Kaltura
 			client.add_param(kparams, 'assetId', asset_id)
 			client.add_param(kparams, 'ffprobeJson', ffprobe_json)
 			client.add_param(kparams, 'duration', duration)
-			client.queue_service_action_call('flavorasset', 'serveAdStitchCmd', '', kparams)
+			client.queue_service_action_call('flavorasset', 'serveAdStitchCmd', 'string', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -2063,6 +2063,20 @@ module Kaltura
 			end
 			return client.do_queue()
 		end
+
+		# Sey recorded video to live entry
+		def set_recorded_content(entry_id, media_server_index, resource, duration)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'mediaServerIndex', media_server_index)
+			client.add_param(kparams, 'resource', resource)
+			client.add_param(kparams, 'duration', duration)
+			client.queue_service_action_call('livechannel', 'setRecordedContent', 'KalturaLiveEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
 	end
 
 	class KalturaLiveReportsService < KalturaServiceBase
@@ -2340,6 +2354,20 @@ module Kaltura
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
 			client.queue_service_action_call('livestream', 'validateRegisteredMediaServers', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Sey recorded video to live entry
+		def set_recorded_content(entry_id, media_server_index, resource, duration)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'mediaServerIndex', media_server_index)
+			client.add_param(kparams, 'resource', resource)
+			client.add_param(kparams, 'duration', duration)
+			client.queue_service_action_call('livestream', 'setRecordedContent', 'KalturaLiveEntry', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -5483,7 +5511,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:16-11-01'
+			self.client_tag = 'ruby:16-11-02'
 			self.api_version = '3.3.0'
 		end
 		

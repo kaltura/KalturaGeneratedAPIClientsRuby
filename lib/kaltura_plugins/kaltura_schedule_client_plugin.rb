@@ -70,11 +70,13 @@ module Kaltura
 		END_DATE_ASC = "+endDate"
 		PRIORITY_ASC = "+priority"
 		START_DATE_ASC = "+startDate"
+		SUMMARY_ASC = "+summary"
 		UPDATED_AT_ASC = "+updatedAt"
 		CREATED_AT_DESC = "-createdAt"
 		END_DATE_DESC = "-endDate"
 		PRIORITY_DESC = "-priority"
 		START_DATE_DESC = "-startDate"
+		SUMMARY_DESC = "-summary"
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
@@ -90,11 +92,13 @@ module Kaltura
 		END_DATE_ASC = "+endDate"
 		PRIORITY_ASC = "+priority"
 		START_DATE_ASC = "+startDate"
+		SUMMARY_ASC = "+summary"
 		UPDATED_AT_ASC = "+updatedAt"
 		CREATED_AT_DESC = "-createdAt"
 		END_DATE_DESC = "-endDate"
 		PRIORITY_DESC = "-priority"
 		START_DATE_DESC = "-startDate"
+		SUMMARY_DESC = "-summary"
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
@@ -110,11 +114,13 @@ module Kaltura
 		END_DATE_ASC = "+endDate"
 		PRIORITY_ASC = "+priority"
 		START_DATE_ASC = "+startDate"
+		SUMMARY_ASC = "+summary"
 		UPDATED_AT_ASC = "+updatedAt"
 		CREATED_AT_DESC = "-createdAt"
 		END_DATE_DESC = "-endDate"
 		PRIORITY_DESC = "-priority"
 		START_DATE_DESC = "-startDate"
+		SUMMARY_DESC = "-summary"
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
@@ -123,11 +129,13 @@ module Kaltura
 		END_DATE_ASC = "+endDate"
 		PRIORITY_ASC = "+priority"
 		START_DATE_ASC = "+startDate"
+		SUMMARY_ASC = "+summary"
 		UPDATED_AT_ASC = "+updatedAt"
 		CREATED_AT_DESC = "-createdAt"
 		END_DATE_DESC = "-endDate"
 		PRIORITY_DESC = "-priority"
 		START_DATE_DESC = "-startDate"
+		SUMMARY_DESC = "-summary"
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
@@ -947,7 +955,7 @@ module Kaltura
 	end
 
 
-	# ScheduleEvent service lets you create and manage schedule events
+	# The ScheduleEvent service enables you to create and manage (update, delete, retrieve, etc.) scheduled recording events.
 	class KalturaScheduleEventService < KalturaServiceBase
 		def initialize(client)
 			super(client)
@@ -1035,7 +1043,7 @@ module Kaltura
 		end
 	end
 
-	# ScheduleResource service lets you create and manage schedule events
+	# The ScheduleResource service enables you to create and manage (update, delete, retrieve, etc.) the resources required for scheduled events (cameras, capture devices, etc.).
 	class KalturaScheduleResourceService < KalturaServiceBase
 		def initialize(client)
 			super(client)
@@ -1112,7 +1120,7 @@ module Kaltura
 		end
 	end
 
-	# ScheduleEventResource service lets you create and manage connections between events and resources
+	# The ScheduleEventResource service enables you create and manage (update, delete, retrieve, etc.) the connections between recording events and the resources required for these events (cameras, capture devices, etc.).
 	class KalturaScheduleEventResourceService < KalturaServiceBase
 		def initialize(client)
 			super(client)

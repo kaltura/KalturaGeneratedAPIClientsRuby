@@ -189,6 +189,7 @@ module Kaltura
 		PLAYABLE = 1
 		BROADCASTING = 2
 		AUTHENTICATED = 3
+		MARKED_FOR_DELETION = 4
 	end
 
 	class KalturaFeatureStatusType
@@ -2935,6 +2936,7 @@ module Kaltura
 		LIVE_CHANNEL = "33"
 		RECORDED_LIVE = "34"
 		CLIP = "35"
+		KALTURA_RECORDED_LIVE = "36"
 		LIVE_STREAM_ONTEXTDATA_CAPTIONS = "42"
 	end
 

@@ -2860,6 +2860,33 @@ module Kaltura
 
 	end
 
+	class KalturaStreamContainer < KalturaObjectBase
+		attr_accessor :type
+		attr_accessor :track_index
+		attr_accessor :language
+		attr_accessor :channel_index
+		attr_accessor :label
+		attr_accessor :channel_layout
+
+		def track_index=(val)
+			@track_index = val.to_i
+		end
+		def channel_index=(val)
+			@channel_index = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			self.type = xml_element.elements['type'].text
+			self.track_index = xml_element.elements['trackIndex'].text
+			self.language = xml_element.elements['language'].text
+			self.channel_index = xml_element.elements['channelIndex'].text
+			self.label = xml_element.elements['label'].text
+			self.channel_layout = xml_element.elements['channelLayout'].text
+		end
+
+	end
+
 	class KalturaMediaEntry < KalturaPlayableEntry
 		# The media type of the entry
 		attr_accessor :media_type
@@ -2883,6 +2910,8 @@ module Kaltura
 		attr_accessor :flavor_params_ids
 		# True if trim action is disabled for this entry
 		attr_accessor :is_trim_disabled
+		# Array of streams that exists on the entry
+		attr_accessor :streams
 
 		def media_type=(val)
 			@media_type = val.to_i
@@ -2910,6 +2939,7 @@ module Kaltura
 			self.data_url = xml_element.elements['dataUrl'].text
 			self.flavor_params_ids = xml_element.elements['flavorParamsIds'].text
 			self.is_trim_disabled = xml_element.elements['isTrimDisabled'].text
+			self.streams = KalturaClientBase.object_from_xml(xml_element.elements['streams'], 'KalturaStreamContainer')
 		end
 
 	end
@@ -3002,6 +3032,8 @@ module Kaltura
 		attr_accessor :status
 		# The language of the flavor asset
 		attr_accessor :language
+		# The label of the flavor asset
+		attr_accessor :label
 
 		def flavor_params_id=(val)
 			@flavor_params_id = val.to_i
@@ -3041,6 +3073,7 @@ module Kaltura
 			self.video_codec_id = xml_element.elements['videoCodecId'].text
 			self.status = xml_element.elements['status'].text
 			self.language = xml_element.elements['language'].text
+			self.label = xml_element.elements['label'].text
 		end
 
 	end
@@ -8183,16 +8216,16 @@ module Kaltura
 
 	end
 
-	class KalturaDeliveryProfileVodPackagerHls < KalturaDeliveryProfile
-		attr_accessor :allow_fairplay_offline
+	class KalturaDeliveryProfileVodPackagerPlayServer < KalturaDeliveryProfile
+		attr_accessor :ad_stitching_enabled
 
-		def allow_fairplay_offline=(val)
-			@allow_fairplay_offline = to_b(val)
+		def ad_stitching_enabled=(val)
+			@ad_stitching_enabled = to_b(val)
 		end
 
 		def from_xml(xml_element)
 			super
-			self.allow_fairplay_offline = xml_element.elements['allowFairplayOffline'].text
+			self.ad_stitching_enabled = xml_element.elements['adStitchingEnabled'].text
 		end
 
 	end
@@ -10920,6 +10953,20 @@ module Kaltura
 			super
 			self.pattern = xml_element.elements['pattern'].text
 			self.renderer_class = xml_element.elements['rendererClass'].text
+		end
+
+	end
+
+	class KalturaDeliveryProfileVodPackagerHls < KalturaDeliveryProfileVodPackagerPlayServer
+		attr_accessor :allow_fairplay_offline
+
+		def allow_fairplay_offline=(val)
+			@allow_fairplay_offline = to_b(val)
+		end
+
+		def from_xml(xml_element)
+			super
+			self.allow_fairplay_offline = xml_element.elements['allowFairplayOffline'].text
 		end
 
 	end

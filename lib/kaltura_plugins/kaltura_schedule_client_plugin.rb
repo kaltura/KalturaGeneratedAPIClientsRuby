@@ -177,6 +177,8 @@ module Kaltura
 		attr_accessor :name
 		attr_accessor :frequency
 		attr_accessor :until
+		# TimeZone String
+		attr_accessor :time_zone
 		attr_accessor :count
 		attr_accessor :interval
 		# Comma separated numbers between 0 to 59
@@ -231,6 +233,7 @@ module Kaltura
 			self.name = xml_element.elements['name'].text
 			self.frequency = xml_element.elements['frequency'].text
 			self.until = xml_element.elements['until'].text
+			self.time_zone = xml_element.elements['timeZone'].text
 			self.count = xml_element.elements['count'].text
 			self.interval = xml_element.elements['interval'].text
 			self.by_second = xml_element.elements['bySecond'].text

@@ -4525,6 +4525,7 @@ module Kaltura
 		# This filter parameter should be in use for retrieving only entries, uploaded by/assigned to a specific user (identified by user Id).
 		attr_accessor :user_id_equal
 		attr_accessor :user_id_in
+		attr_accessor :user_id_not_in
 		attr_accessor :creator_id_equal
 		# This filter should be in use for retrieving specific entries. It should include only one string to search for in entry tags (no wildcards, spaces are treated as part of the string).
 		attr_accessor :tags_like
@@ -4690,6 +4691,7 @@ module Kaltura
 			self.partner_id_in = xml_element.elements['partnerIdIn'].text
 			self.user_id_equal = xml_element.elements['userIdEqual'].text
 			self.user_id_in = xml_element.elements['userIdIn'].text
+			self.user_id_not_in = xml_element.elements['userIdNotIn'].text
 			self.creator_id_equal = xml_element.elements['creatorIdEqual'].text
 			self.tags_like = xml_element.elements['tagsLike'].text
 			self.tags_multi_like_or = xml_element.elements['tagsMultiLikeOr'].text

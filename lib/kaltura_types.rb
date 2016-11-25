@@ -1783,6 +1783,8 @@ module Kaltura
 		attr_accessor :category_full_ids
 		# CategroyEntry status
 		attr_accessor :status
+		# CategroyEntry creator puser ID
+		attr_accessor :creator_user_id
 
 		def category_id=(val)
 			@category_id = val.to_i
@@ -1801,6 +1803,7 @@ module Kaltura
 			self.created_at = xml_element.elements['createdAt'].text
 			self.category_full_ids = xml_element.elements['categoryFullIds'].text
 			self.status = xml_element.elements['status'].text
+			self.creator_user_id = xml_element.elements['creatorUserId'].text
 		end
 
 	end
@@ -4482,6 +4485,10 @@ module Kaltura
 		attr_accessor :height
 		# Live stream's codec
 		attr_accessor :codec
+		# Live stream's farme rate
+		attr_accessor :frame_rate
+		# Live stream's key frame interval
+		attr_accessor :key_frame_interval
 
 		def bitrate=(val)
 			@bitrate = val.to_i
@@ -4492,6 +4499,12 @@ module Kaltura
 		def height=(val)
 			@height = val.to_i
 		end
+		def frame_rate=(val)
+			@frame_rate = val.to_i
+		end
+		def key_frame_interval=(val)
+			@key_frame_interval = val.to_f
+		end
 
 		def from_xml(xml_element)
 			super
@@ -4500,6 +4513,8 @@ module Kaltura
 			self.width = xml_element.elements['width'].text
 			self.height = xml_element.elements['height'].text
 			self.codec = xml_element.elements['codec'].text
+			self.frame_rate = xml_element.elements['frameRate'].text
+			self.key_frame_interval = xml_element.elements['keyFrameInterval'].text
 		end
 
 	end
@@ -10752,6 +10767,8 @@ module Kaltura
 		attr_accessor :category_full_ids_starts_with
 		attr_accessor :status_equal
 		attr_accessor :status_in
+		attr_accessor :creator_user_id_equal
+		attr_accessor :creator_user_id_in
 
 		def category_id_equal=(val)
 			@category_id_equal = val.to_i
@@ -10777,6 +10794,8 @@ module Kaltura
 			self.category_full_ids_starts_with = xml_element.elements['categoryFullIdsStartsWith'].text
 			self.status_equal = xml_element.elements['statusEqual'].text
 			self.status_in = xml_element.elements['statusIn'].text
+			self.creator_user_id_equal = xml_element.elements['creatorUserIdEqual'].text
+			self.creator_user_id_in = xml_element.elements['creatorUserIdIn'].text
 		end
 
 	end

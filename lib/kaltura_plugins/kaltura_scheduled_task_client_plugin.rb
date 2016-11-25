@@ -62,6 +62,7 @@ module Kaltura
 		CONVERT_ENTRY_FLAVORS = "4"
 		DELETE_LOCAL_CONTENT = "5"
 		STORAGE_EXPORT = "6"
+		MODIFY_ENTRY = "7"
 	end
 
 	class KalturaScheduledTaskProfileOrderBy
@@ -219,6 +220,42 @@ module Kaltura
 			super
 			self.add_remove_type = xml_element.elements['addRemoveType'].text
 			self.category_ids = KalturaClientBase.object_from_xml(xml_element.elements['categoryIds'], 'KalturaIntegerValue')
+		end
+
+	end
+
+	class KalturaModifyEntryObjectTask < KalturaObjectTask
+		# The input metadata profile id
+		attr_accessor :input_metadata_profile_id
+		# array of {input metadata xpath location,entry field} objects
+		attr_accessor :input_metadata
+		# The output metadata profile id
+		attr_accessor :output_metadata_profile_id
+		# array of {output metadata xpath location,entry field} objects
+		attr_accessor :output_metadata
+		# The input user id to set on the entry
+		attr_accessor :input_user_id
+		# The input entitled users edit to set on the entry
+		attr_accessor :input_entitled_users_edit
+		# The input entitled users publish to set on the entry
+		attr_accessor :input_entitled_users_publish
+
+		def input_metadata_profile_id=(val)
+			@input_metadata_profile_id = val.to_i
+		end
+		def output_metadata_profile_id=(val)
+			@output_metadata_profile_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			self.input_metadata_profile_id = xml_element.elements['inputMetadataProfileId'].text
+			self.input_metadata = KalturaClientBase.object_from_xml(xml_element.elements['inputMetadata'], 'KalturaKeyValue')
+			self.output_metadata_profile_id = xml_element.elements['outputMetadataProfileId'].text
+			self.output_metadata = KalturaClientBase.object_from_xml(xml_element.elements['outputMetadata'], 'KalturaKeyValue')
+			self.input_user_id = xml_element.elements['inputUserId'].text
+			self.input_entitled_users_edit = xml_element.elements['inputEntitledUsersEdit'].text
+			self.input_entitled_users_publish = xml_element.elements['inputEntitledUsersPublish'].text
 		end
 
 	end

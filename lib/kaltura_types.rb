@@ -306,9 +306,9 @@ module Kaltura
 	end
 
 	class KalturaAnalyticsFilter < KalturaObjectBase
-		# Query start time (in local time)
+		# Query start time (in local time) MM/dd/yyyy HH:mi
 		attr_accessor :from_time
-		# Query end time (in local time)
+		# Query end time (in local time) MM/dd/yyyy HH:mi
 		attr_accessor :to_time
 		# Comma separated metrics list
 		attr_accessor :metrics
@@ -318,6 +318,8 @@ module Kaltura
 		attr_accessor :dimensions
 		# Array of filters
 		attr_accessor :filters
+		# Query order by metric/dimension
+		attr_accessor :order_by
 
 		def utc_offset=(val)
 			@utc_offset = val.to_f
@@ -331,6 +333,7 @@ module Kaltura
 			self.utc_offset = xml_element.elements['utcOffset'].text
 			self.dimensions = xml_element.elements['dimensions'].text
 			self.filters = KalturaClientBase.object_from_xml(xml_element.elements['filters'], 'KalturaReportFilter')
+			self.order_by = xml_element.elements['orderBy'].text
 		end
 
 	end
@@ -2108,6 +2111,8 @@ module Kaltura
 		attr_accessor :storage_profile_id
 		# Media parser type to be used for extract media
 		attr_accessor :media_parser_type
+		# Should calculate file conversion complexity
+		attr_accessor :calculate_complexity
 
 		def id=(val)
 			@id = val.to_i
@@ -2133,6 +2138,9 @@ module Kaltura
 		def storage_profile_id=(val)
 			@storage_profile_id = val.to_i
 		end
+		def calculate_complexity=(val)
+			@calculate_complexity = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
@@ -2155,6 +2163,7 @@ module Kaltura
 			self.xsl_transformation = xml_element.elements['xslTransformation'].text
 			self.storage_profile_id = xml_element.elements['storageProfileId'].text
 			self.media_parser_type = xml_element.elements['mediaParserType'].text
+			self.calculate_complexity = xml_element.elements['calculateComplexity'].text
 		end
 
 	end
@@ -9018,12 +9027,22 @@ module Kaltura
 		attr_accessor :last_segment_duration
 		# amf Array File Path
 		attr_accessor :amf_array
+		# last live to vod sync time
+		attr_accessor :last_cue_point_sync_time
+		# last segment drift
+		attr_accessor :last_segment_drift
 
 		def total_vod_duration=(val)
 			@total_vod_duration = val.to_f
 		end
 		def last_segment_duration=(val)
 			@last_segment_duration = val.to_f
+		end
+		def last_cue_point_sync_time=(val)
+			@last_cue_point_sync_time = val.to_i
+		end
+		def last_segment_drift=(val)
+			@last_segment_drift = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -9033,6 +9052,8 @@ module Kaltura
 			self.total_vod_duration = xml_element.elements['totalVodDuration'].text
 			self.last_segment_duration = xml_element.elements['lastSegmentDuration'].text
 			self.amf_array = xml_element.elements['amfArray'].text
+			self.last_cue_point_sync_time = xml_element.elements['lastCuePointSyncTime'].text
+			self.last_segment_drift = xml_element.elements['lastSegmentDrift'].text
 		end
 
 	end
@@ -11103,11 +11124,24 @@ module Kaltura
 
 	class KalturaExtractMediaJobData < KalturaConvartableJobData
 		attr_accessor :flavor_asset_id
+		attr_accessor :calculate_complexity
+		attr_accessor :extract_id3tags
+		# The data output file
+		attr_accessor :dest_data_file_path
 
+		def calculate_complexity=(val)
+			@calculate_complexity = to_b(val)
+		end
+		def extract_id3tags=(val)
+			@extract_id3tags = to_b(val)
+		end
 
 		def from_xml(xml_element)
 			super
 			self.flavor_asset_id = xml_element.elements['flavorAssetId'].text
+			self.calculate_complexity = xml_element.elements['calculateComplexity'].text
+			self.extract_id3tags = xml_element.elements['extractId3Tags'].text
+			self.dest_data_file_path = xml_element.elements['destDataFilePath'].text
 		end
 
 	end

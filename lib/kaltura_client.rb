@@ -224,9 +224,10 @@ module Kaltura
 		end
 
 		# report query action allows to get a analytics data for specific query dimensions, metrics and filters.
-		def query(filter)
+		def query(filter, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
 			client.queue_service_action_call('analytics', 'query', 'KalturaReportResponse', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -5511,7 +5512,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:16-11-29'
+			self.client_tag = 'ruby:16-11-30'
 			self.api_version = '3.3.0'
 		end
 		

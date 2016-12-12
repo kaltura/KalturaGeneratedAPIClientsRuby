@@ -161,6 +161,8 @@ module Kaltura
 		attr_accessor :rule_data
 		# Message to be thrown to the player in case the rule is fulfilled
 		attr_accessor :message
+		# Code to be thrown to the player in case the rule is fulfilled
+		attr_accessor :code
 		# Actions to be performed by the player in case the rule is fulfilled
 		attr_accessor :actions
 		# Conditions to validate the rule
@@ -184,6 +186,7 @@ module Kaltura
 			self.description = xml_element.elements['description'].text
 			self.rule_data = xml_element.elements['ruleData'].text
 			self.message = xml_element.elements['message'].text
+			self.code = xml_element.elements['code'].text
 			self.actions = KalturaClientBase.object_from_xml(xml_element.elements['actions'], 'KalturaRuleAction')
 			self.conditions = KalturaClientBase.object_from_xml(xml_element.elements['conditions'], 'KalturaCondition')
 			self.contexts = KalturaClientBase.object_from_xml(xml_element.elements['contexts'], 'KalturaContextTypeHolder')
@@ -5173,6 +5176,86 @@ module Kaltura
 
 	end
 
+	class KalturaPluginData < KalturaObjectBase
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaDrmEntryPlayingPluginData < KalturaPluginData
+		attr_accessor :scheme
+		attr_accessor :license_url
+
+
+		def from_xml(xml_element)
+			super
+			self.scheme = xml_element.elements['scheme'].text
+			self.license_url = xml_element.elements['licenseURL'].text
+		end
+
+	end
+
+	class KalturaPlaybackSource < KalturaObjectBase
+		attr_accessor :delivery_profile_id
+		attr_accessor :format
+		attr_accessor :priority
+		attr_accessor :protocols
+		attr_accessor :flavors
+		attr_accessor :url
+		attr_accessor :drm
+
+
+		def from_xml(xml_element)
+			super
+			self.delivery_profile_id = xml_element.elements['deliveryProfileId'].text
+			self.format = xml_element.elements['format'].text
+			self.priority = xml_element.elements['priority'].text
+			self.protocols = KalturaClientBase.object_from_xml(xml_element.elements['protocols'], 'KalturaString')
+			self.flavors = KalturaClientBase.object_from_xml(xml_element.elements['flavors'], 'KalturaString')
+			self.url = xml_element.elements['url'].text
+			self.drm = KalturaClientBase.object_from_xml(xml_element.elements['drm'], 'KalturaDrmEntryPlayingPluginData')
+		end
+
+	end
+
+	class KalturaPlaybackRestriction < KalturaObjectBase
+		attr_accessor :message
+		attr_accessor :code
+
+
+		def from_xml(xml_element)
+			super
+			self.message = xml_element.elements['message'].text
+			self.code = xml_element.elements['code'].text
+		end
+
+	end
+
+	class KalturaPlaybackContextResult < KalturaObjectBase
+		attr_accessor :sources
+		attr_accessor :flavor_assets
+		# Array of messages as received from the rules that invalidated
+		attr_accessor :messages
+		# Array of actions as received from the rules that invalidated
+		attr_accessor :actions
+		# Array of actions as received from the rules that invalidated
+		attr_accessor :restrictions
+
+
+		def from_xml(xml_element)
+			super
+			self.sources = KalturaClientBase.object_from_xml(xml_element.elements['sources'], 'KalturaPlaybackSource')
+			self.flavor_assets = KalturaClientBase.object_from_xml(xml_element.elements['flavorAssets'], 'KalturaFlavorAsset')
+			self.messages = KalturaClientBase.object_from_xml(xml_element.elements['messages'], 'KalturaString')
+			self.actions = KalturaClientBase.object_from_xml(xml_element.elements['actions'], 'KalturaRuleAction')
+			self.restrictions = KalturaClientBase.object_from_xml(xml_element.elements['restrictions'], 'KalturaPlaybackRestriction')
+		end
+
+	end
+
 	class KalturaPlaylist < KalturaBaseEntry
 		# Content of the playlist - 
 		# 	 XML if the playlistType is dynamic 
@@ -5219,15 +5302,6 @@ module Kaltura
 			self.views = xml_element.elements['views'].text
 			self.duration = xml_element.elements['duration'].text
 			self.execute_url = xml_element.elements['executeUrl'].text
-		end
-
-	end
-
-	class KalturaPluginData < KalturaObjectBase
-
-
-		def from_xml(xml_element)
-			super
 		end
 
 	end
@@ -10196,6 +10270,15 @@ module Kaltura
 
 	end
 
+	class KalturaUrlTokenizerCht < KalturaUrlTokenizer
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaUrlTokenizerCloudFront < KalturaUrlTokenizer
 		attr_accessor :key_pair_id
 		attr_accessor :root_dir
@@ -11142,6 +11225,17 @@ module Kaltura
 			self.calculate_complexity = xml_element.elements['calculateComplexity'].text
 			self.extract_id3tags = xml_element.elements['extractId3Tags'].text
 			self.dest_data_file_path = xml_element.elements['destDataFilePath'].text
+		end
+
+	end
+
+	class KalturaFairPlayEntryPlayingPluginData < KalturaDrmEntryPlayingPluginData
+		attr_accessor :certificate
+
+
+		def from_xml(xml_element)
+			super
+			self.certificate = xml_element.elements['certificate'].text
 		end
 
 	end

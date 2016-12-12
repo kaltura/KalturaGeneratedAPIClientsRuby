@@ -617,6 +617,18 @@ module Kaltura
 			end
 			return client.do_queue()
 		end
+
+		# This action delivers all data relevant for player
+		def get_playback_context(entry_id, context_data_params)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'contextDataParams', context_data_params)
+			client.queue_service_action_call('baseentry', 'getPlaybackContext', 'KalturaPlaybackContextResult', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
 	end
 
 	# Bulk upload service is used to upload & manage bulk uploads using CSV files.
@@ -2066,12 +2078,13 @@ module Kaltura
 		end
 
 		# Sey recorded video to live entry
-		def set_recorded_content(entry_id, media_server_index, resource, duration)
+		def set_recorded_content(entry_id, media_server_index, resource, duration, recorded_entry_id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
 			client.add_param(kparams, 'mediaServerIndex', media_server_index)
 			client.add_param(kparams, 'resource', resource)
 			client.add_param(kparams, 'duration', duration)
+			client.add_param(kparams, 'recordedEntryId', recorded_entry_id)
 			client.queue_service_action_call('livechannel', 'setRecordedContent', 'KalturaLiveEntry', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -2362,12 +2375,13 @@ module Kaltura
 		end
 
 		# Sey recorded video to live entry
-		def set_recorded_content(entry_id, media_server_index, resource, duration)
+		def set_recorded_content(entry_id, media_server_index, resource, duration, recorded_entry_id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
 			client.add_param(kparams, 'mediaServerIndex', media_server_index)
 			client.add_param(kparams, 'resource', resource)
 			client.add_param(kparams, 'duration', duration)
+			client.add_param(kparams, 'recordedEntryId', recorded_entry_id)
 			client.queue_service_action_call('livestream', 'setRecordedContent', 'KalturaLiveEntry', kparams)
 			if (client.is_multirequest)
 				return nil

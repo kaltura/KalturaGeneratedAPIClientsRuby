@@ -2765,6 +2765,7 @@ module Kaltura
 		RTMP = "rtmp"
 		RTSP = "rtsp"
 		SILVER_LIGHT = "sl"
+		URL = "url"
 	end
 
 	class KalturaPlaylistCompareAttribute

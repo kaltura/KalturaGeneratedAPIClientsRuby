@@ -5185,7 +5185,7 @@ module Kaltura
 
 	end
 
-	class KalturaDrmEntryPlayingPluginData < KalturaPluginData
+	class KalturaDrmPlaybackPluginData < KalturaPluginData
 		attr_accessor :scheme
 		attr_accessor :license_url
 
@@ -5194,64 +5194,6 @@ module Kaltura
 			super
 			self.scheme = xml_element.elements['scheme'].text
 			self.license_url = xml_element.elements['licenseURL'].text
-		end
-
-	end
-
-	class KalturaPlaybackSource < KalturaObjectBase
-		attr_accessor :delivery_profile_id
-		attr_accessor :format
-		attr_accessor :priority
-		attr_accessor :protocols
-		attr_accessor :flavors
-		attr_accessor :url
-		attr_accessor :drm
-
-
-		def from_xml(xml_element)
-			super
-			self.delivery_profile_id = xml_element.elements['deliveryProfileId'].text
-			self.format = xml_element.elements['format'].text
-			self.priority = xml_element.elements['priority'].text
-			self.protocols = KalturaClientBase.object_from_xml(xml_element.elements['protocols'], 'KalturaString')
-			self.flavors = KalturaClientBase.object_from_xml(xml_element.elements['flavors'], 'KalturaString')
-			self.url = xml_element.elements['url'].text
-			self.drm = KalturaClientBase.object_from_xml(xml_element.elements['drm'], 'KalturaDrmEntryPlayingPluginData')
-		end
-
-	end
-
-	class KalturaPlaybackRestriction < KalturaObjectBase
-		attr_accessor :message
-		attr_accessor :code
-
-
-		def from_xml(xml_element)
-			super
-			self.message = xml_element.elements['message'].text
-			self.code = xml_element.elements['code'].text
-		end
-
-	end
-
-	class KalturaPlaybackContextResult < KalturaObjectBase
-		attr_accessor :sources
-		attr_accessor :flavor_assets
-		# Array of messages as received from the rules that invalidated
-		attr_accessor :messages
-		# Array of actions as received from the rules that invalidated
-		attr_accessor :actions
-		# Array of actions as received from the rules that invalidated
-		attr_accessor :restrictions
-
-
-		def from_xml(xml_element)
-			super
-			self.sources = KalturaClientBase.object_from_xml(xml_element.elements['sources'], 'KalturaPlaybackSource')
-			self.flavor_assets = KalturaClientBase.object_from_xml(xml_element.elements['flavorAssets'], 'KalturaFlavorAsset')
-			self.messages = KalturaClientBase.object_from_xml(xml_element.elements['messages'], 'KalturaString')
-			self.actions = KalturaClientBase.object_from_xml(xml_element.elements['actions'], 'KalturaRuleAction')
-			self.restrictions = KalturaClientBase.object_from_xml(xml_element.elements['restrictions'], 'KalturaPlaybackRestriction')
 		end
 
 	end
@@ -11229,7 +11171,7 @@ module Kaltura
 
 	end
 
-	class KalturaFairPlayEntryPlayingPluginData < KalturaDrmEntryPlayingPluginData
+	class KalturaFairPlayPlaybackPluginData < KalturaDrmPlaybackPluginData
 		attr_accessor :certificate
 
 
@@ -11724,6 +11666,16 @@ module Kaltura
 			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
 			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
 			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+		end
+
+	end
+
+	# Object which contains contextual entry-related data.
+	class KalturaPlaybackContextOptions < KalturaEntryContextDataParams
+
+
+		def from_xml(xml_element)
+			super
 		end
 
 	end

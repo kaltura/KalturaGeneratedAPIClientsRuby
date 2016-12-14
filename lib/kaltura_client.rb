@@ -623,7 +623,7 @@ module Kaltura
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
 			client.add_param(kparams, 'contextDataParams', context_data_params)
-			client.queue_service_action_call('baseentry', 'getPlaybackContext', 'KalturaPlaybackContextResult', kparams)
+			client.queue_service_action_call('baseentry', 'getPlaybackContext', 'KalturaPlaybackContextOptions', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -5526,7 +5526,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:16-12-13'
+			self.client_tag = 'ruby:16-12-14'
 			self.api_version = '3.3.0'
 		end
 		

@@ -105,6 +105,7 @@ module Kaltura
 			super(client)
 		end
 
+		# @return [bool]
 		def like(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -115,6 +116,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# @return [bool]
 		def unlike(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -125,6 +127,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# @return [bool]
 		def check_like_exists(entry_id, user_id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -136,6 +139,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# @return [KalturaLikeListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)

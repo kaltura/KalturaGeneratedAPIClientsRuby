@@ -174,6 +174,7 @@ module Kaltura
 		end
 
 		# Allows you to add an annotation object associated with an entry
+		# @return [KalturaAnnotation]
 		def add(annotation)
 			kparams = {}
 			client.add_param(kparams, 'annotation', annotation)
@@ -185,6 +186,7 @@ module Kaltura
 		end
 
 		# Update annotation by id
+		# @return [KalturaAnnotation]
 		def update(id, annotation)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -197,6 +199,7 @@ module Kaltura
 		end
 
 		# List annotation objects by filter and pager
+		# @return [KalturaAnnotationListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -209,6 +212,7 @@ module Kaltura
 		end
 
 		# Allows you to add multiple cue points objects by uploading XML that contains multiple cue point definitions
+		# @return [KalturaCuePointListResponse]
 		def add_from_bulk(file_data)
 			kparams = {}
 			kfiles = {}
@@ -221,6 +225,7 @@ module Kaltura
 		end
 
 		# Download multiple cue points objects as XML definitions
+		# @return [file]
 		def serve_bulk(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -230,6 +235,7 @@ module Kaltura
 		end
 
 		# Retrieve an CuePoint object by id
+		# @return [KalturaCuePoint]
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -241,6 +247,7 @@ module Kaltura
 		end
 
 		# count cue point objects by filter
+		# @return [int]
 		def count(filter=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -252,6 +259,7 @@ module Kaltura
 		end
 
 		# delete cue point by id, and delete all children cue points
+		# @return []
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -263,6 +271,7 @@ module Kaltura
 		end
 
 		# Update cuePoint status by id
+		# @return []
 		def update_status(id, status)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -275,6 +284,7 @@ module Kaltura
 		end
 
 		# Clone cuePoint with id to given entry
+		# @return [KalturaCuePoint]
 		def clone(id, entry_id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)

@@ -965,6 +965,7 @@ module Kaltura
 		end
 
 		# Allows you to add a new KalturaScheduleEvent object
+		# @return [KalturaScheduleEvent]
 		def add(schedule_event)
 			kparams = {}
 			client.add_param(kparams, 'scheduleEvent', schedule_event)
@@ -976,6 +977,7 @@ module Kaltura
 		end
 
 		# Retrieve a KalturaScheduleEvent object by ID
+		# @return [KalturaScheduleEvent]
 		def get(schedule_event_id)
 			kparams = {}
 			client.add_param(kparams, 'scheduleEventId', schedule_event_id)
@@ -987,6 +989,7 @@ module Kaltura
 		end
 
 		# Update an existing KalturaScheduleEvent object
+		# @return [KalturaScheduleEvent]
 		def update(schedule_event_id, schedule_event)
 			kparams = {}
 			client.add_param(kparams, 'scheduleEventId', schedule_event_id)
@@ -999,6 +1002,7 @@ module Kaltura
 		end
 
 		# Mark the KalturaScheduleEvent object as deleted
+		# @return [KalturaScheduleEvent]
 		def delete(schedule_event_id)
 			kparams = {}
 			client.add_param(kparams, 'scheduleEventId', schedule_event_id)
@@ -1010,6 +1014,7 @@ module Kaltura
 		end
 
 		# Mark the KalturaScheduleEvent object as cancelled
+		# @return [KalturaScheduleEvent]
 		def cancel(schedule_event_id)
 			kparams = {}
 			client.add_param(kparams, 'scheduleEventId', schedule_event_id)
@@ -1021,6 +1026,7 @@ module Kaltura
 		end
 
 		# List KalturaScheduleEvent objects
+		# @return [KalturaScheduleEventListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -1033,6 +1039,7 @@ module Kaltura
 		end
 
 		# Add new bulk upload batch job
+		# @return [KalturaBulkUpload]
 		def add_from_bulk_upload(file_data, bulk_upload_data=KalturaNotImplemented)
 			kparams = {}
 			kfiles = {}
@@ -1053,6 +1060,7 @@ module Kaltura
 		end
 
 		# Allows you to add a new KalturaScheduleResource object
+		# @return [KalturaScheduleResource]
 		def add(schedule_resource)
 			kparams = {}
 			client.add_param(kparams, 'scheduleResource', schedule_resource)
@@ -1064,6 +1072,7 @@ module Kaltura
 		end
 
 		# Retrieve a KalturaScheduleResource object by ID
+		# @return [KalturaScheduleResource]
 		def get(schedule_resource_id)
 			kparams = {}
 			client.add_param(kparams, 'scheduleResourceId', schedule_resource_id)
@@ -1075,6 +1084,7 @@ module Kaltura
 		end
 
 		# Update an existing KalturaScheduleResource object
+		# @return [KalturaScheduleResource]
 		def update(schedule_resource_id, schedule_resource)
 			kparams = {}
 			client.add_param(kparams, 'scheduleResourceId', schedule_resource_id)
@@ -1087,6 +1097,7 @@ module Kaltura
 		end
 
 		# Mark the KalturaScheduleResource object as deleted
+		# @return [KalturaScheduleResource]
 		def delete(schedule_resource_id)
 			kparams = {}
 			client.add_param(kparams, 'scheduleResourceId', schedule_resource_id)
@@ -1098,6 +1109,7 @@ module Kaltura
 		end
 
 		# List KalturaScheduleResource objects
+		# @return [KalturaScheduleResourceListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -1110,6 +1122,7 @@ module Kaltura
 		end
 
 		# Add new bulk upload batch job
+		# @return [KalturaBulkUpload]
 		def add_from_bulk_upload(file_data, bulk_upload_data=KalturaNotImplemented)
 			kparams = {}
 			kfiles = {}
@@ -1130,6 +1143,7 @@ module Kaltura
 		end
 
 		# Allows you to add a new KalturaScheduleEventResource object
+		# @return [KalturaScheduleEventResource]
 		def add(schedule_event_resource)
 			kparams = {}
 			client.add_param(kparams, 'scheduleEventResource', schedule_event_resource)
@@ -1141,6 +1155,7 @@ module Kaltura
 		end
 
 		# Retrieve a KalturaScheduleEventResource object by ID
+		# @return [KalturaScheduleEventResource]
 		def get(schedule_event_id, schedule_resource_id)
 			kparams = {}
 			client.add_param(kparams, 'scheduleEventId', schedule_event_id)
@@ -1153,6 +1168,7 @@ module Kaltura
 		end
 
 		# Update an existing KalturaScheduleEventResource object
+		# @return [KalturaScheduleEventResource]
 		def update(schedule_event_id, schedule_resource_id, schedule_event_resource)
 			kparams = {}
 			client.add_param(kparams, 'scheduleEventId', schedule_event_id)
@@ -1166,6 +1182,7 @@ module Kaltura
 		end
 
 		# Mark the KalturaScheduleEventResource object as deleted
+		# @return []
 		def delete(schedule_event_id, schedule_resource_id)
 			kparams = {}
 			client.add_param(kparams, 'scheduleEventId', schedule_event_id)
@@ -1178,6 +1195,7 @@ module Kaltura
 		end
 
 		# List KalturaScheduleEventResource objects
+		# @return [KalturaScheduleEventResourceListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)

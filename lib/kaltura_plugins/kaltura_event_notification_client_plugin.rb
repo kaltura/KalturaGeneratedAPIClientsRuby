@@ -353,6 +353,7 @@ module Kaltura
 		end
 
 		# This action allows for the creation of new backend event types in the system. This action requires access to the Kaltura server Admin Console. If you're looking to register to existing event types, please use the clone action instead.
+		# @return [KalturaEventNotificationTemplate]
 		def add(event_notification_template)
 			kparams = {}
 			client.add_param(kparams, 'eventNotificationTemplate', event_notification_template)
@@ -364,6 +365,7 @@ module Kaltura
 		end
 
 		# This action allows registering to various backend event. Use this action to create notifications that will react to events such as new video was uploaded or metadata field was updated. To see the list of available event types, call the listTemplates action.
+		# @return [KalturaEventNotificationTemplate]
 		def clone(id, event_notification_template=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -376,6 +378,7 @@ module Kaltura
 		end
 
 		# Retrieve an event notification template object by id
+		# @return [KalturaEventNotificationTemplate]
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -387,6 +390,7 @@ module Kaltura
 		end
 
 		# Update an existing event notification template object
+		# @return [KalturaEventNotificationTemplate]
 		def update(id, event_notification_template)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -399,6 +403,7 @@ module Kaltura
 		end
 
 		# Update event notification template status by id
+		# @return [KalturaEventNotificationTemplate]
 		def update_status(id, status)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -411,6 +416,7 @@ module Kaltura
 		end
 
 		# Delete an event notification template object
+		# @return []
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -422,6 +428,7 @@ module Kaltura
 		end
 
 		# list event notification template objects
+		# @return [KalturaEventNotificationTemplateListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -433,6 +440,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# @return [KalturaEventNotificationTemplateListResponse]
 		def list_by_partner(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -445,6 +453,7 @@ module Kaltura
 		end
 
 		# Dispatch event notification object by id
+		# @return [int]
 		def dispatch(id, scope)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -457,6 +466,7 @@ module Kaltura
 		end
 
 		# Action lists the template partner event notification templates.
+		# @return [KalturaEventNotificationTemplateListResponse]
 		def list_templates(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)

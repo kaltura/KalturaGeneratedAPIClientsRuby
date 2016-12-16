@@ -10234,6 +10234,20 @@ module Kaltura
 
 	end
 
+	class KalturaUrlTokenizerKs < KalturaUrlTokenizer
+		attr_accessor :use_path
+
+		def use_path=(val)
+			@use_path = to_b(val)
+		end
+
+		def from_xml(xml_element)
+			super
+			self.use_path = xml_element.elements['usePath'].text
+		end
+
+	end
+
 	class KalturaUrlTokenizerLevel3 < KalturaUrlTokenizer
 		# paramName
 		attr_accessor :param_name

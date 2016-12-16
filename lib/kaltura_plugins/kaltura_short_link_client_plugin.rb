@@ -181,6 +181,7 @@ module Kaltura
 		end
 
 		# List short link objects by filter and pager
+		# @return [KalturaShortLinkListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -193,6 +194,7 @@ module Kaltura
 		end
 
 		# Allows you to add a short link object
+		# @return [KalturaShortLink]
 		def add(short_link)
 			kparams = {}
 			client.add_param(kparams, 'shortLink', short_link)
@@ -204,6 +206,7 @@ module Kaltura
 		end
 
 		# Retrieve an short link object by id
+		# @return [KalturaShortLink]
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -215,6 +218,7 @@ module Kaltura
 		end
 
 		# Update exisitng short link
+		# @return [KalturaShortLink]
 		def update(id, short_link)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -227,6 +231,7 @@ module Kaltura
 		end
 
 		# Mark the short link as deleted
+		# @return [KalturaShortLink]
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -238,6 +243,7 @@ module Kaltura
 		end
 
 		# Serves short link
+		# @return [file]
 		def goto(id, proxy=false)
 			kparams = {}
 			client.add_param(kparams, 'id', id)

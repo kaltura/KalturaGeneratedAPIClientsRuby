@@ -446,6 +446,7 @@ module Kaltura
 		end
 
 		# Add new document entry after the specific document file was uploaded and the upload token id exists
+		# @return [KalturaDocumentEntry]
 		def add_from_uploaded_file(document_entry, upload_token_id)
 			kparams = {}
 			client.add_param(kparams, 'documentEntry', document_entry)
@@ -458,6 +459,7 @@ module Kaltura
 		end
 
 		# Copy entry into new entry
+		# @return [KalturaDocumentEntry]
 		def add_from_entry(source_entry_id, document_entry=KalturaNotImplemented, source_flavor_params_id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'sourceEntryId', source_entry_id)
@@ -471,6 +473,7 @@ module Kaltura
 		end
 
 		# Copy flavor asset into new entry
+		# @return [KalturaDocumentEntry]
 		def add_from_flavor_asset(source_flavor_asset_id, document_entry=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'sourceFlavorAssetId', source_flavor_asset_id)
@@ -483,6 +486,7 @@ module Kaltura
 		end
 
 		# Convert entry
+		# @return [bigint]
 		def convert(entry_id, conversion_profile_id=KalturaNotImplemented, dynamic_conversion_attributes=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -496,6 +500,7 @@ module Kaltura
 		end
 
 		# Get document entry by ID.
+		# @return [KalturaDocumentEntry]
 		def get(entry_id, version=-1)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -508,6 +513,7 @@ module Kaltura
 		end
 
 		# Update document entry. Only the properties that were set will be updated.
+		# @return [KalturaDocumentEntry]
 		def update(entry_id, document_entry)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -520,6 +526,7 @@ module Kaltura
 		end
 
 		# Delete a document entry.
+		# @return []
 		def delete(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -531,6 +538,7 @@ module Kaltura
 		end
 
 		# List document entries by filter with paging support.
+		# @return [KalturaDocumentListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -543,6 +551,7 @@ module Kaltura
 		end
 
 		# Upload a document file to Kaltura, then the file can be used to create a document entry.
+		# @return [string]
 		def upload(file_data)
 			kparams = {}
 			kfiles = {}
@@ -556,6 +565,7 @@ module Kaltura
 
 		# This will queue a batch job for converting the document file to swf
 		# 	 Returns the URL where the new swf will be available
+		# @return [string]
 		def convert_ppt_to_swf(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -567,6 +577,7 @@ module Kaltura
 		end
 
 		# Serves the file content
+		# @return [file]
 		def serve(entry_id, flavor_asset_id=KalturaNotImplemented, force_proxy=false)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -577,6 +588,7 @@ module Kaltura
 		end
 
 		# Serves the file content
+		# @return [file]
 		def serve_by_flavor_params_id(entry_id, flavor_params_id=KalturaNotImplemented, force_proxy=false)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -587,6 +599,7 @@ module Kaltura
 		end
 
 		# Replace content associated with the given document entry.
+		# @return [KalturaDocumentEntry]
 		def update_content(entry_id, resource, conversion_profile_id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -600,6 +613,7 @@ module Kaltura
 		end
 
 		# Approves document replacement
+		# @return [KalturaDocumentEntry]
 		def approve_replace(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -611,6 +625,7 @@ module Kaltura
 		end
 
 		# Cancels document replacement
+		# @return [KalturaDocumentEntry]
 		def cancel_replace(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)

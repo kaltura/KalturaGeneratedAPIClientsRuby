@@ -190,9 +190,6 @@ module Kaltura
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
-	class KalturaSyndicationDistributionProviderOrderBy
-	end
-
 	# Abstract class for asset distribution condition
 	class KalturaAssetDistributionCondition < KalturaObjectBase
 
@@ -1553,15 +1550,6 @@ module Kaltura
 
 	end
 
-	class KalturaSyndicationDistributionProviderFilter < KalturaSyndicationDistributionProviderBaseFilter
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
 
 	# Distribution Profile service
 	class KalturaDistributionProfileService < KalturaServiceBase
@@ -1570,6 +1558,7 @@ module Kaltura
 		end
 
 		# Add new Distribution Profile
+		# @return [KalturaDistributionProfile]
 		def add(distribution_profile)
 			kparams = {}
 			client.add_param(kparams, 'distributionProfile', distribution_profile)
@@ -1581,6 +1570,7 @@ module Kaltura
 		end
 
 		# Get Distribution Profile by id
+		# @return [KalturaDistributionProfile]
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1592,6 +1582,7 @@ module Kaltura
 		end
 
 		# Update Distribution Profile by id
+		# @return [KalturaDistributionProfile]
 		def update(id, distribution_profile)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1604,6 +1595,7 @@ module Kaltura
 		end
 
 		# Update Distribution Profile status by id
+		# @return [KalturaDistributionProfile]
 		def update_status(id, status)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1616,6 +1608,7 @@ module Kaltura
 		end
 
 		# Delete Distribution Profile by id
+		# @return []
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1627,6 +1620,7 @@ module Kaltura
 		end
 
 		# List all distribution providers
+		# @return [KalturaDistributionProfileListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -1638,6 +1632,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# @return [KalturaDistributionProfileListResponse]
 		def list_by_partner(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -1657,6 +1652,7 @@ module Kaltura
 		end
 
 		# Add new Entry Distribution
+		# @return [KalturaEntryDistribution]
 		def add(entry_distribution)
 			kparams = {}
 			client.add_param(kparams, 'entryDistribution', entry_distribution)
@@ -1668,6 +1664,7 @@ module Kaltura
 		end
 
 		# Get Entry Distribution by id
+		# @return [KalturaEntryDistribution]
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1679,6 +1676,7 @@ module Kaltura
 		end
 
 		# Validates Entry Distribution by id for submission
+		# @return [KalturaEntryDistribution]
 		def validate(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1690,6 +1688,7 @@ module Kaltura
 		end
 
 		# Update Entry Distribution by id
+		# @return [KalturaEntryDistribution]
 		def update(id, entry_distribution)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1702,6 +1701,7 @@ module Kaltura
 		end
 
 		# Delete Entry Distribution by id
+		# @return []
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1713,6 +1713,7 @@ module Kaltura
 		end
 
 		# List all distribution providers
+		# @return [KalturaEntryDistributionListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -1725,6 +1726,7 @@ module Kaltura
 		end
 
 		# Submits Entry Distribution to the remote destination
+		# @return [KalturaEntryDistribution]
 		def submit_add(id, submit_when_ready=false)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1737,6 +1739,7 @@ module Kaltura
 		end
 
 		# Submits Entry Distribution changes to the remote destination
+		# @return [KalturaEntryDistribution]
 		def submit_update(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1748,6 +1751,7 @@ module Kaltura
 		end
 
 		# Submits Entry Distribution report request
+		# @return [KalturaEntryDistribution]
 		def submit_fetch_report(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1759,6 +1763,7 @@ module Kaltura
 		end
 
 		# Deletes Entry Distribution from the remote destination
+		# @return [KalturaEntryDistribution]
 		def submit_delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1770,6 +1775,7 @@ module Kaltura
 		end
 
 		# Retries last submit action
+		# @return [KalturaEntryDistribution]
 		def retry_submit(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1781,6 +1787,7 @@ module Kaltura
 		end
 
 		# Serves entry distribution sent data
+		# @return [file]
 		def serve_sent_data(id, action_type)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1790,6 +1797,7 @@ module Kaltura
 		end
 
 		# Serves entry distribution returned data
+		# @return [file]
 		def serve_returned_data(id, action_type)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1806,6 +1814,7 @@ module Kaltura
 		end
 
 		# List all distribution providers
+		# @return [KalturaDistributionProviderListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -1825,6 +1834,7 @@ module Kaltura
 		end
 
 		# Add new Generic Distribution Provider
+		# @return [KalturaGenericDistributionProvider]
 		def add(generic_distribution_provider)
 			kparams = {}
 			client.add_param(kparams, 'genericDistributionProvider', generic_distribution_provider)
@@ -1836,6 +1846,7 @@ module Kaltura
 		end
 
 		# Get Generic Distribution Provider by id
+		# @return [KalturaGenericDistributionProvider]
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1847,6 +1858,7 @@ module Kaltura
 		end
 
 		# Update Generic Distribution Provider by id
+		# @return [KalturaGenericDistributionProvider]
 		def update(id, generic_distribution_provider)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1859,6 +1871,7 @@ module Kaltura
 		end
 
 		# Delete Generic Distribution Provider by id
+		# @return []
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1870,6 +1883,7 @@ module Kaltura
 		end
 
 		# List all distribution providers
+		# @return [KalturaGenericDistributionProviderListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -1889,6 +1903,7 @@ module Kaltura
 		end
 
 		# Add new Generic Distribution Provider Action
+		# @return [KalturaGenericDistributionProviderAction]
 		def add(generic_distribution_provider_action)
 			kparams = {}
 			client.add_param(kparams, 'genericDistributionProviderAction', generic_distribution_provider_action)
@@ -1900,6 +1915,7 @@ module Kaltura
 		end
 
 		# Add MRSS transform file to generic distribution provider action
+		# @return [KalturaGenericDistributionProviderAction]
 		def add_mrss_transform(id, xsl_data)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1912,6 +1928,7 @@ module Kaltura
 		end
 
 		# Add MRSS transform file to generic distribution provider action
+		# @return [KalturaGenericDistributionProviderAction]
 		def add_mrss_transform_from_file(id, xsl_file)
 			kparams = {}
 			kfiles = {}
@@ -1925,6 +1942,7 @@ module Kaltura
 		end
 
 		# Add MRSS validate file to generic distribution provider action
+		# @return [KalturaGenericDistributionProviderAction]
 		def add_mrss_validate(id, xsd_data)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1937,6 +1955,7 @@ module Kaltura
 		end
 
 		# Add MRSS validate file to generic distribution provider action
+		# @return [KalturaGenericDistributionProviderAction]
 		def add_mrss_validate_from_file(id, xsd_file)
 			kparams = {}
 			kfiles = {}
@@ -1950,6 +1969,7 @@ module Kaltura
 		end
 
 		# Add results transform file to generic distribution provider action
+		# @return [KalturaGenericDistributionProviderAction]
 		def add_results_transform(id, transform_data)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1962,6 +1982,7 @@ module Kaltura
 		end
 
 		# Add MRSS transform file to generic distribution provider action
+		# @return [KalturaGenericDistributionProviderAction]
 		def add_results_transform_from_file(id, transform_file)
 			kparams = {}
 			kfiles = {}
@@ -1975,6 +1996,7 @@ module Kaltura
 		end
 
 		# Get Generic Distribution Provider Action by id
+		# @return [KalturaGenericDistributionProviderAction]
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -1986,6 +2008,7 @@ module Kaltura
 		end
 
 		# Get Generic Distribution Provider Action by provider id
+		# @return [KalturaGenericDistributionProviderAction]
 		def get_by_provider_id(generic_distribution_provider_id, action_type)
 			kparams = {}
 			client.add_param(kparams, 'genericDistributionProviderId', generic_distribution_provider_id)
@@ -1998,6 +2021,7 @@ module Kaltura
 		end
 
 		# Update Generic Distribution Provider Action by provider id
+		# @return [KalturaGenericDistributionProviderAction]
 		def update_by_provider_id(generic_distribution_provider_id, action_type, generic_distribution_provider_action)
 			kparams = {}
 			client.add_param(kparams, 'genericDistributionProviderId', generic_distribution_provider_id)
@@ -2011,6 +2035,7 @@ module Kaltura
 		end
 
 		# Update Generic Distribution Provider Action by id
+		# @return [KalturaGenericDistributionProviderAction]
 		def update(id, generic_distribution_provider_action)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -2023,6 +2048,7 @@ module Kaltura
 		end
 
 		# Delete Generic Distribution Provider Action by id
+		# @return []
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -2034,6 +2060,7 @@ module Kaltura
 		end
 
 		# Delete Generic Distribution Provider Action by provider id
+		# @return []
 		def delete_by_provider_id(generic_distribution_provider_id, action_type)
 			kparams = {}
 			client.add_param(kparams, 'genericDistributionProviderId', generic_distribution_provider_id)
@@ -2046,6 +2073,7 @@ module Kaltura
 		end
 
 		# List all distribution providers
+		# @return [KalturaGenericDistributionProviderActionListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)

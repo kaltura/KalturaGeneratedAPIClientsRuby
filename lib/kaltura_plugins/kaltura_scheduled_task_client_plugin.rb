@@ -385,6 +385,7 @@ module Kaltura
 		end
 
 		# Add a new scheduled task profile
+		# @return [KalturaScheduledTaskProfile]
 		def add(scheduled_task_profile)
 			kparams = {}
 			client.add_param(kparams, 'scheduledTaskProfile', scheduled_task_profile)
@@ -396,6 +397,7 @@ module Kaltura
 		end
 
 		# Retrieve a scheduled task profile by id
+		# @return [KalturaScheduledTaskProfile]
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -407,6 +409,7 @@ module Kaltura
 		end
 
 		# Update an existing scheduled task profile
+		# @return [KalturaScheduledTaskProfile]
 		def update(id, scheduled_task_profile)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -419,6 +422,7 @@ module Kaltura
 		end
 
 		# Delete a scheduled task profile
+		# @return []
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -430,6 +434,7 @@ module Kaltura
 		end
 
 		# List scheduled task profiles
+		# @return [KalturaScheduledTaskProfileListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -441,6 +446,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# @return [int]
 		def request_dry_run(scheduled_task_profile_id, max_results=500)
 			kparams = {}
 			client.add_param(kparams, 'scheduledTaskProfileId', scheduled_task_profile_id)
@@ -452,6 +458,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# @return [KalturaObjectListResponse]
 		def get_dry_run_results(request_id)
 			kparams = {}
 			client.add_param(kparams, 'requestId', request_id)

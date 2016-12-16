@@ -241,6 +241,7 @@ module Kaltura
 		end
 
 		# Add caption asset
+		# @return [KalturaCaptionAsset]
 		def add(entry_id, caption_asset)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -253,6 +254,7 @@ module Kaltura
 		end
 
 		# Update content of caption asset
+		# @return [KalturaCaptionAsset]
 		def set_content(id, content_resource)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -265,6 +267,7 @@ module Kaltura
 		end
 
 		# Update caption asset
+		# @return [KalturaCaptionAsset]
 		def update(id, caption_asset)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -277,6 +280,7 @@ module Kaltura
 		end
 
 		# Serves caption by entry id and thumnail params id
+		# @return [file]
 		def serve_by_entry_id(entry_id, caption_param_id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -286,6 +290,7 @@ module Kaltura
 		end
 
 		# Get download URL for the asset
+		# @return [string]
 		def get_url(id, storage_id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -298,6 +303,7 @@ module Kaltura
 		end
 
 		# Get remote storage existing paths for the asset
+		# @return [KalturaRemotePathListResponse]
 		def get_remote_paths(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -309,6 +315,7 @@ module Kaltura
 		end
 
 		# Serves caption by its id
+		# @return [file]
 		def serve(caption_asset_id)
 			kparams = {}
 			client.add_param(kparams, 'captionAssetId', caption_asset_id)
@@ -317,6 +324,7 @@ module Kaltura
 		end
 
 		# Serves caption by its id converting it to segmented WebVTT
+		# @return [file]
 		def serve_web_vtt(caption_asset_id, segment_duration=30, segment_index=KalturaNotImplemented, local_timestamp=10000)
 			kparams = {}
 			client.add_param(kparams, 'captionAssetId', caption_asset_id)
@@ -328,6 +336,7 @@ module Kaltura
 		end
 
 		# Markss the caption as default and removes that mark from all other caption assets of the entry.
+		# @return []
 		def set_as_default(caption_asset_id)
 			kparams = {}
 			client.add_param(kparams, 'captionAssetId', caption_asset_id)
@@ -338,6 +347,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# @return [KalturaCaptionAsset]
 		def get(caption_asset_id)
 			kparams = {}
 			client.add_param(kparams, 'captionAssetId', caption_asset_id)
@@ -349,6 +359,7 @@ module Kaltura
 		end
 
 		# List caption Assets by filter and pager
+		# @return [KalturaCaptionAssetListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -360,6 +371,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# @return []
 		def delete(caption_asset_id)
 			kparams = {}
 			client.add_param(kparams, 'captionAssetId', caption_asset_id)
@@ -378,6 +390,7 @@ module Kaltura
 		end
 
 		# Add new Caption Params
+		# @return [KalturaCaptionParams]
 		def add(caption_params)
 			kparams = {}
 			client.add_param(kparams, 'captionParams', caption_params)
@@ -389,6 +402,7 @@ module Kaltura
 		end
 
 		# Get Caption Params by ID
+		# @return [KalturaCaptionParams]
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -400,6 +414,7 @@ module Kaltura
 		end
 
 		# Update Caption Params by ID
+		# @return [KalturaCaptionParams]
 		def update(id, caption_params)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -412,6 +427,7 @@ module Kaltura
 		end
 
 		# Delete Caption Params by ID
+		# @return []
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -423,6 +439,7 @@ module Kaltura
 		end
 
 		# List Caption Params by filter with paging support (By default - all system default params will be listed too)
+		# @return [KalturaCaptionParamsListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)

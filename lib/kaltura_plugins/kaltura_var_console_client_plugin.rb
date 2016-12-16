@@ -194,6 +194,7 @@ module Kaltura
 		end
 
 		# Function which calulates partner usage of a group of a VAR's sub-publishers
+		# @return [KalturaPartnerUsageListResponse]
 		def get_partner_usage(partner_filter=KalturaNotImplemented, usage_filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'partnerFilter', partner_filter)
@@ -207,6 +208,7 @@ module Kaltura
 		end
 
 		# Function to change a sub-publisher's status
+		# @return []
 		def update_status(id, status)
 			kparams = {}
 			client.add_param(kparams, 'id', id)

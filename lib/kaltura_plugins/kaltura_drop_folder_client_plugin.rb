@@ -909,6 +909,7 @@ module Kaltura
 		end
 
 		# Allows you to add a new KalturaDropFolder object
+		# @return [KalturaDropFolder]
 		def add(drop_folder)
 			kparams = {}
 			client.add_param(kparams, 'dropFolder', drop_folder)
@@ -920,6 +921,7 @@ module Kaltura
 		end
 
 		# Retrieve a KalturaDropFolder object by ID
+		# @return [KalturaDropFolder]
 		def get(drop_folder_id)
 			kparams = {}
 			client.add_param(kparams, 'dropFolderId', drop_folder_id)
@@ -931,6 +933,7 @@ module Kaltura
 		end
 
 		# Update an existing KalturaDropFolder object
+		# @return [KalturaDropFolder]
 		def update(drop_folder_id, drop_folder)
 			kparams = {}
 			client.add_param(kparams, 'dropFolderId', drop_folder_id)
@@ -943,6 +946,7 @@ module Kaltura
 		end
 
 		# Mark the KalturaDropFolder object as deleted
+		# @return [KalturaDropFolder]
 		def delete(drop_folder_id)
 			kparams = {}
 			client.add_param(kparams, 'dropFolderId', drop_folder_id)
@@ -954,6 +958,7 @@ module Kaltura
 		end
 
 		# List KalturaDropFolder objects
+		# @return [KalturaDropFolderListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -973,6 +978,7 @@ module Kaltura
 		end
 
 		# Allows you to add a new KalturaDropFolderFile object
+		# @return [KalturaDropFolderFile]
 		def add(drop_folder_file)
 			kparams = {}
 			client.add_param(kparams, 'dropFolderFile', drop_folder_file)
@@ -984,6 +990,7 @@ module Kaltura
 		end
 
 		# Retrieve a KalturaDropFolderFile object by ID
+		# @return [KalturaDropFolderFile]
 		def get(drop_folder_file_id)
 			kparams = {}
 			client.add_param(kparams, 'dropFolderFileId', drop_folder_file_id)
@@ -995,6 +1002,7 @@ module Kaltura
 		end
 
 		# Update an existing KalturaDropFolderFile object
+		# @return [KalturaDropFolderFile]
 		def update(drop_folder_file_id, drop_folder_file)
 			kparams = {}
 			client.add_param(kparams, 'dropFolderFileId', drop_folder_file_id)
@@ -1007,6 +1015,7 @@ module Kaltura
 		end
 
 		# Update status of KalturaDropFolderFile
+		# @return [KalturaDropFolderFile]
 		def update_status(drop_folder_file_id, status)
 			kparams = {}
 			client.add_param(kparams, 'dropFolderFileId', drop_folder_file_id)
@@ -1019,6 +1028,7 @@ module Kaltura
 		end
 
 		# Mark the KalturaDropFolderFile object as deleted
+		# @return [KalturaDropFolderFile]
 		def delete(drop_folder_file_id)
 			kparams = {}
 			client.add_param(kparams, 'dropFolderFileId', drop_folder_file_id)
@@ -1030,6 +1040,7 @@ module Kaltura
 		end
 
 		# List KalturaDropFolderFile objects
+		# @return [KalturaDropFolderFileListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -1042,6 +1053,7 @@ module Kaltura
 		end
 
 		# Set the KalturaDropFolderFile status to ignore (KalturaDropFolderFileStatus::IGNORE)
+		# @return [KalturaDropFolderFile]
 		def ignore(drop_folder_file_id)
 			kparams = {}
 			client.add_param(kparams, 'dropFolderFileId', drop_folder_file_id)

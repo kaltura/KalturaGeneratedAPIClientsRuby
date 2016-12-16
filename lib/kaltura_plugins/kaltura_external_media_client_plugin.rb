@@ -129,6 +129,7 @@ module Kaltura
 		end
 
 		# Add external media entry
+		# @return [KalturaExternalMediaEntry]
 		def add(entry)
 			kparams = {}
 			client.add_param(kparams, 'entry', entry)
@@ -140,6 +141,7 @@ module Kaltura
 		end
 
 		# Get external media entry by ID.
+		# @return [KalturaExternalMediaEntry]
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -151,6 +153,7 @@ module Kaltura
 		end
 
 		# Update external media entry. Only the properties that were set will be updated.
+		# @return [KalturaExternalMediaEntry]
 		def update(id, entry)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -163,6 +166,7 @@ module Kaltura
 		end
 
 		# Delete a external media entry.
+		# @return []
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -174,6 +178,7 @@ module Kaltura
 		end
 
 		# List media entries by filter with paging support.
+		# @return [KalturaExternalMediaEntryListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -186,6 +191,7 @@ module Kaltura
 		end
 
 		# Count media entries by filter.
+		# @return [int]
 		def count(filter=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)

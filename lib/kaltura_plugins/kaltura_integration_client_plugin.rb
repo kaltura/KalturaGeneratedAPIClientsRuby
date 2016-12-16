@@ -86,6 +86,7 @@ module Kaltura
 		end
 
 		# Dispatch integration task
+		# @return [int]
 		def dispatch(data, object_type, object_id)
 			kparams = {}
 			client.add_param(kparams, 'data', data)
@@ -98,6 +99,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# @return []
 		def notify(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)

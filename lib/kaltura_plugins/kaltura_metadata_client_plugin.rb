@@ -591,6 +591,30 @@ module Kaltura
 
 	end
 
+	class KalturaMetadataField < KalturaStringField
+		# May contain the full xpath to the field in three formats
+		# 	 1. Slashed xPath, e.g. /metadata/myElementName
+		# 	 2. Using local-name function, e.g. /[local-name()='metadata']/[local-name()='myElementName']
+		# 	 3. Using only the field name, e.g. myElementName, it will be searched as //myElementName
+		attr_accessor :x_path
+		# Metadata profile id
+		attr_accessor :profile_id
+		# Metadata profile system name
+		attr_accessor :profile_system_name
+
+		def profile_id=(val)
+			@profile_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			self.x_path = xml_element.elements['xPath'].text
+			self.profile_id = xml_element.elements['profileId'].text
+			self.profile_system_name = xml_element.elements['profileSystemName'].text
+		end
+
+	end
+
 	class KalturaMetadataFilter < KalturaMetadataBaseFilter
 
 
@@ -608,6 +632,7 @@ module Kaltura
 		end
 
 		# Allows you to add a metadata object and metadata content associated with Kaltura object
+		# @return [KalturaMetadata]
 		def add(metadata_profile_id, object_type, object_id, xml_data)
 			kparams = {}
 			client.add_param(kparams, 'metadataProfileId', metadata_profile_id)
@@ -622,6 +647,7 @@ module Kaltura
 		end
 
 		# Allows you to add a metadata object and metadata file associated with Kaltura object
+		# @return [KalturaMetadata]
 		def add_from_file(metadata_profile_id, object_type, object_id, xml_file)
 			kparams = {}
 			kfiles = {}
@@ -637,6 +663,7 @@ module Kaltura
 		end
 
 		# Allows you to add a metadata xml data from remote URL
+		# @return [KalturaMetadata]
 		def add_from_url(metadata_profile_id, object_type, object_id, url)
 			kparams = {}
 			client.add_param(kparams, 'metadataProfileId', metadata_profile_id)
@@ -652,6 +679,7 @@ module Kaltura
 
 		# Allows you to add a metadata xml data from remote URL.
 		# 	 Enables different permissions than addFromUrl action.
+		# @return [KalturaMetadata]
 		def add_from_bulk(metadata_profile_id, object_type, object_id, url)
 			kparams = {}
 			client.add_param(kparams, 'metadataProfileId', metadata_profile_id)
@@ -666,6 +694,7 @@ module Kaltura
 		end
 
 		# Retrieve a metadata object by id
+		# @return [KalturaMetadata]
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -677,6 +706,7 @@ module Kaltura
 		end
 
 		# Update an existing metadata object with new XML content
+		# @return [KalturaMetadata]
 		def update(id, xml_data=KalturaNotImplemented, version=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -690,6 +720,7 @@ module Kaltura
 		end
 
 		# Update an existing metadata object with new XML file
+		# @return [KalturaMetadata]
 		def update_from_file(id, xml_file=KalturaNotImplemented)
 			kparams = {}
 			kfiles = {}
@@ -703,6 +734,7 @@ module Kaltura
 		end
 
 		# List metadata objects by filter and pager
+		# @return [KalturaMetadataListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -715,6 +747,7 @@ module Kaltura
 		end
 
 		# Delete an existing metadata
+		# @return []
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -727,6 +760,7 @@ module Kaltura
 
 		# Mark existing metadata as invalid
 		# 	 Used by batch metadata transform
+		# @return []
 		def invalidate(id, version=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -739,6 +773,7 @@ module Kaltura
 		end
 
 		# Index metadata by id, will also index the related object
+		# @return [int]
 		def index(id, should_update)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -751,6 +786,7 @@ module Kaltura
 		end
 
 		# Serves metadata XML file
+		# @return [file]
 		def serve(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -759,6 +795,7 @@ module Kaltura
 		end
 
 		# Action transforms current metadata object XML using a provided XSL.
+		# @return [KalturaMetadata]
 		def update_from_xsl(id, xsl_file)
 			kparams = {}
 			kfiles = {}
@@ -779,6 +816,7 @@ module Kaltura
 		end
 
 		# Allows you to add a metadata profile object and metadata profile content associated with Kaltura object type
+		# @return [KalturaMetadataProfile]
 		def add(metadata_profile, xsd_data, views_data=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'metadataProfile', metadata_profile)
@@ -792,6 +830,7 @@ module Kaltura
 		end
 
 		# Allows you to add a metadata profile object and metadata profile file associated with Kaltura object type
+		# @return [KalturaMetadataProfile]
 		def add_from_file(metadata_profile, xsd_file, views_file=KalturaNotImplemented)
 			kparams = {}
 			kfiles = {}
@@ -806,6 +845,7 @@ module Kaltura
 		end
 
 		# Retrieve a metadata profile object by id
+		# @return [KalturaMetadataProfile]
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -817,6 +857,7 @@ module Kaltura
 		end
 
 		# Update an existing metadata object
+		# @return [KalturaMetadataProfile]
 		def update(id, metadata_profile, xsd_data=KalturaNotImplemented, views_data=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -831,6 +872,7 @@ module Kaltura
 		end
 
 		# List metadata profile objects by filter and pager
+		# @return [KalturaMetadataProfileListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -843,6 +885,7 @@ module Kaltura
 		end
 
 		# List metadata profile fields by metadata profile id
+		# @return [KalturaMetadataProfileFieldListResponse]
 		def list_fields(metadata_profile_id)
 			kparams = {}
 			client.add_param(kparams, 'metadataProfileId', metadata_profile_id)
@@ -854,6 +897,7 @@ module Kaltura
 		end
 
 		# Delete an existing metadata profile
+		# @return []
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -865,6 +909,7 @@ module Kaltura
 		end
 
 		# Update an existing metadata object definition file
+		# @return [KalturaMetadataProfile]
 		def revert(id, to_version)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -877,6 +922,7 @@ module Kaltura
 		end
 
 		# Update an existing metadata object definition file
+		# @return [KalturaMetadataProfile]
 		def update_definition_from_file(id, xsd_file)
 			kparams = {}
 			kfiles = {}
@@ -890,6 +936,7 @@ module Kaltura
 		end
 
 		# Update an existing metadata object views file
+		# @return [KalturaMetadataProfile]
 		def update_views_from_file(id, views_file)
 			kparams = {}
 			kfiles = {}
@@ -903,6 +950,7 @@ module Kaltura
 		end
 
 		# Update an existing metadata object xslt file
+		# @return [KalturaMetadataProfile]
 		def update_transformation_from_file(id, xslt_file)
 			kparams = {}
 			kfiles = {}
@@ -916,6 +964,7 @@ module Kaltura
 		end
 
 		# Serves metadata profile XSD file
+		# @return [file]
 		def serve(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
@@ -924,6 +973,7 @@ module Kaltura
 		end
 
 		# Serves metadata profile view file
+		# @return [file]
 		def serve_view(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)

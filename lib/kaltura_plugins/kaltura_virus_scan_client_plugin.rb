@@ -225,6 +225,7 @@ module Kaltura
 		end
 
 		# List virus scan profile objects by filter and pager
+		# @return [KalturaVirusScanProfileListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -237,6 +238,7 @@ module Kaltura
 		end
 
 		# Allows you to add an virus scan profile object and virus scan profile content associated with Kaltura object
+		# @return [KalturaVirusScanProfile]
 		def add(virus_scan_profile)
 			kparams = {}
 			client.add_param(kparams, 'virusScanProfile', virus_scan_profile)
@@ -248,6 +250,7 @@ module Kaltura
 		end
 
 		# Retrieve an virus scan profile object by id
+		# @return [KalturaVirusScanProfile]
 		def get(virus_scan_profile_id)
 			kparams = {}
 			client.add_param(kparams, 'virusScanProfileId', virus_scan_profile_id)
@@ -259,6 +262,7 @@ module Kaltura
 		end
 
 		# Update exisitng virus scan profile, it is possible to update the virus scan profile id too
+		# @return [KalturaVirusScanProfile]
 		def update(virus_scan_profile_id, virus_scan_profile)
 			kparams = {}
 			client.add_param(kparams, 'virusScanProfileId', virus_scan_profile_id)
@@ -271,6 +275,7 @@ module Kaltura
 		end
 
 		# Mark the virus scan profile as deleted
+		# @return [KalturaVirusScanProfile]
 		def delete(virus_scan_profile_id)
 			kparams = {}
 			client.add_param(kparams, 'virusScanProfileId', virus_scan_profile_id)
@@ -282,6 +287,7 @@ module Kaltura
 		end
 
 		# Scan flavor asset according to virus scan profile
+		# @return [int]
 		def scan(flavor_asset_id, virus_scan_profile_id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'flavorAssetId', flavor_asset_id)

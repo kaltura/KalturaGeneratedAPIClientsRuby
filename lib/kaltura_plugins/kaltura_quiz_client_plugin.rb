@@ -268,6 +268,7 @@ module Kaltura
 		end
 
 		# Allows to add a quiz to an entry
+		# @return [KalturaQuiz]
 		def add(entry_id, quiz)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -280,6 +281,7 @@ module Kaltura
 		end
 
 		# Allows to update a quiz
+		# @return [KalturaQuiz]
 		def update(entry_id, quiz)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -292,6 +294,7 @@ module Kaltura
 		end
 
 		# Allows to get a quiz
+		# @return [KalturaQuiz]
 		def get(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -303,6 +306,7 @@ module Kaltura
 		end
 
 		# List quiz objects by filter and pager
+		# @return [KalturaQuizListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
@@ -317,6 +321,7 @@ module Kaltura
 		# creates a pdf from quiz object
 		# 	 The Output type defines the file format in which the quiz will be generated
 		# 	 Currently only PDF files are supported
+		# @return [file]
 		def serve(entry_id, quiz_output_type)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
@@ -326,6 +331,7 @@ module Kaltura
 		end
 
 		# sends a with an api request for pdf from quiz object
+		# @return [string]
 		def get_url(entry_id, quiz_output_type)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)

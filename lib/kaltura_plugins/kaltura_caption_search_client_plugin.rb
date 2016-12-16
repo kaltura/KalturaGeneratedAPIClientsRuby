@@ -140,6 +140,7 @@ module Kaltura
 		end
 
 		# Search caption asset items by filter, pager and free text
+		# @return [KalturaCaptionAssetItemListResponse]
 		def search(entry_filter=KalturaNotImplemented, caption_asset_item_filter=KalturaNotImplemented, caption_asset_item_pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryFilter', entry_filter)
@@ -153,6 +154,7 @@ module Kaltura
 		end
 
 		# Search caption asset items by filter, pager and free text
+		# @return [KalturaBaseEntryListResponse]
 		def search_entries(entry_filter=KalturaNotImplemented, caption_asset_item_filter=KalturaNotImplemented, caption_asset_item_pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryFilter', entry_filter)

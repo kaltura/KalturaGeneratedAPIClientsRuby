@@ -123,6 +123,19 @@ module Kaltura
 
 	end
 
+	class KalturaAccessControlMessage < KalturaObjectBase
+		attr_accessor :message
+		attr_accessor :code
+
+
+		def from_xml(xml_element)
+			super
+			self.message = xml_element.elements['message'].text
+			self.code = xml_element.elements['code'].text
+		end
+
+	end
+
 	class KalturaRuleAction < KalturaObjectBase
 		# The type of the action
 		attr_accessor :type
@@ -2116,6 +2129,9 @@ module Kaltura
 		attr_accessor :media_parser_type
 		# Should calculate file conversion complexity
 		attr_accessor :calculate_complexity
+		# Defines the tags that should be used to define 'collective'/group/multi-flavor processing,
+		# 	 like 'mbr' or 'ism'
+		attr_accessor :collection_tags
 
 		def id=(val)
 			@id = val.to_i
@@ -2167,6 +2183,7 @@ module Kaltura
 			self.storage_profile_id = xml_element.elements['storageProfileId'].text
 			self.media_parser_type = xml_element.elements['mediaParserType'].text
 			self.calculate_complexity = xml_element.elements['calculateComplexity'].text
+			self.collection_tags = xml_element.elements['collectionTags'].text
 		end
 
 	end
@@ -2189,6 +2206,7 @@ module Kaltura
 		attr_accessor :is_encrypted
 		attr_accessor :content_awareness
 		attr_accessor :two_pass
+		attr_accessor :tags
 
 		def conversion_profile_id=(val)
 			@conversion_profile_id = val.to_i
@@ -2230,6 +2248,7 @@ module Kaltura
 			self.is_encrypted = xml_element.elements['isEncrypted'].text
 			self.content_awareness = xml_element.elements['contentAwareness'].text
 			self.two_pass = xml_element.elements['twoPass'].text
+			self.tags = xml_element.elements['tags'].text
 		end
 
 	end
@@ -5194,6 +5213,50 @@ module Kaltura
 			super
 			self.scheme = xml_element.elements['scheme'].text
 			self.license_url = xml_element.elements['licenseURL'].text
+		end
+
+	end
+
+	class KalturaPlaybackSource < KalturaObjectBase
+		attr_accessor :delivery_profile_id
+		# source format according to delivery profile streamer type (applehttp, mpegdash etc.)
+		attr_accessor :format
+		# comma separated string according to deliveryProfile media protocols ('http,https' etc.)
+		attr_accessor :protocols
+		# comma separated string of flavor ids
+		attr_accessor :flavor_ids
+		attr_accessor :url
+		# drm data object containing relevant license url ,scheme name and certificate
+		attr_accessor :drm
+
+
+		def from_xml(xml_element)
+			super
+			self.delivery_profile_id = xml_element.elements['deliveryProfileId'].text
+			self.format = xml_element.elements['format'].text
+			self.protocols = xml_element.elements['protocols'].text
+			self.flavor_ids = xml_element.elements['flavorIds'].text
+			self.url = xml_element.elements['url'].text
+			self.drm = KalturaClientBase.object_from_xml(xml_element.elements['drm'], 'KalturaDrmPlaybackPluginData')
+		end
+
+	end
+
+	class KalturaPlaybackContext < KalturaObjectBase
+		attr_accessor :sources
+		attr_accessor :flavor_assets
+		# Array of actions as received from the rules that invalidated
+		attr_accessor :actions
+		# Array of actions as received from the rules that invalidated
+		attr_accessor :messages
+
+
+		def from_xml(xml_element)
+			super
+			self.sources = KalturaClientBase.object_from_xml(xml_element.elements['sources'], 'KalturaPlaybackSource')
+			self.flavor_assets = KalturaClientBase.object_from_xml(xml_element.elements['flavorAssets'], 'KalturaFlavorAsset')
+			self.actions = KalturaClientBase.object_from_xml(xml_element.elements['actions'], 'KalturaRuleAction')
+			self.messages = KalturaClientBase.object_from_xml(xml_element.elements['messages'], 'KalturaAccessControlMessage')
 		end
 
 	end

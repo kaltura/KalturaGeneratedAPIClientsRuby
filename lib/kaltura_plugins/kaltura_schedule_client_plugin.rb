@@ -1038,6 +1038,19 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# List conflicting events for resourcesIds by event's dates
+		# @return [array]
+		def get_conflicts(resource_ids, schedule_event)
+			kparams = {}
+			client.add_param(kparams, 'resourceIds', resource_ids)
+			client.add_param(kparams, 'scheduleEvent', schedule_event)
+			client.queue_service_action_call('schedule_scheduleevent', 'getConflicts', 'array', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Add new bulk upload batch job
 		# @return [KalturaBulkUpload]
 		def add_from_bulk_upload(file_data, bulk_upload_data=KalturaNotImplemented)

@@ -56,15 +56,33 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.entry_id = xml_element.elements['entryId'].text
-			self.flavor_asset_id = xml_element.elements['flavorAssetId'].text
-			self.transcript_id = xml_element.elements['transcriptId'].text
-			self.caption_asset_formats = xml_element.elements['captionAssetFormats'].text
-			self.api_key = xml_element.elements['apiKey'].text
-			self.api_password = xml_element.elements['apiPassword'].text
-			self.spoken_language = xml_element.elements['spokenLanguage'].text
-			self.file_location = xml_element.elements['fileLocation'].text
-			self.replace_media_content = xml_element.elements['replaceMediaContent'].text
+			if xml_element.elements['entryId'] != nil
+				self.entry_id = xml_element.elements['entryId'].text
+			end
+			if xml_element.elements['flavorAssetId'] != nil
+				self.flavor_asset_id = xml_element.elements['flavorAssetId'].text
+			end
+			if xml_element.elements['transcriptId'] != nil
+				self.transcript_id = xml_element.elements['transcriptId'].text
+			end
+			if xml_element.elements['captionAssetFormats'] != nil
+				self.caption_asset_formats = xml_element.elements['captionAssetFormats'].text
+			end
+			if xml_element.elements['apiKey'] != nil
+				self.api_key = xml_element.elements['apiKey'].text
+			end
+			if xml_element.elements['apiPassword'] != nil
+				self.api_password = xml_element.elements['apiPassword'].text
+			end
+			if xml_element.elements['spokenLanguage'] != nil
+				self.spoken_language = xml_element.elements['spokenLanguage'].text
+			end
+			if xml_element.elements['fileLocation'] != nil
+				self.file_location = xml_element.elements['fileLocation'].text
+			end
+			if xml_element.elements['replaceMediaContent'] != nil
+				self.replace_media_content = xml_element.elements['replaceMediaContent'].text
+			end
 		end
 
 	end

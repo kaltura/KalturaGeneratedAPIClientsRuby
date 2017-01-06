@@ -67,10 +67,18 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.asset_id = xml_element.elements['assetId'].text
-			self.description = xml_element.elements['description'].text
-			self.title = xml_element.elements['title'].text
-			self.sub_type = xml_element.elements['subType'].text
+			if xml_element.elements['assetId'] != nil
+				self.asset_id = xml_element.elements['assetId'].text
+			end
+			if xml_element.elements['description'] != nil
+				self.description = xml_element.elements['description'].text
+			end
+			if xml_element.elements['title'] != nil
+				self.title = xml_element.elements['title'].text
+			end
+			if xml_element.elements['subType'] != nil
+				self.sub_type = xml_element.elements['subType'].text
+			end
 		end
 
 	end
@@ -82,7 +90,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.cue_point_id = xml_element.elements['cuePointId'].text
+			if xml_element.elements['cuePointId'] != nil
+				self.cue_point_id = xml_element.elements['cuePointId'].text
+			end
 		end
 
 	end
@@ -103,14 +113,30 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.description_like = xml_element.elements['descriptionLike'].text
-			self.description_multi_like_or = xml_element.elements['descriptionMultiLikeOr'].text
-			self.description_multi_like_and = xml_element.elements['descriptionMultiLikeAnd'].text
-			self.title_like = xml_element.elements['titleLike'].text
-			self.title_multi_like_or = xml_element.elements['titleMultiLikeOr'].text
-			self.title_multi_like_and = xml_element.elements['titleMultiLikeAnd'].text
-			self.sub_type_equal = xml_element.elements['subTypeEqual'].text
-			self.sub_type_in = xml_element.elements['subTypeIn'].text
+			if xml_element.elements['descriptionLike'] != nil
+				self.description_like = xml_element.elements['descriptionLike'].text
+			end
+			if xml_element.elements['descriptionMultiLikeOr'] != nil
+				self.description_multi_like_or = xml_element.elements['descriptionMultiLikeOr'].text
+			end
+			if xml_element.elements['descriptionMultiLikeAnd'] != nil
+				self.description_multi_like_and = xml_element.elements['descriptionMultiLikeAnd'].text
+			end
+			if xml_element.elements['titleLike'] != nil
+				self.title_like = xml_element.elements['titleLike'].text
+			end
+			if xml_element.elements['titleMultiLikeOr'] != nil
+				self.title_multi_like_or = xml_element.elements['titleMultiLikeOr'].text
+			end
+			if xml_element.elements['titleMultiLikeAnd'] != nil
+				self.title_multi_like_and = xml_element.elements['titleMultiLikeAnd'].text
+			end
+			if xml_element.elements['subTypeEqual'] != nil
+				self.sub_type_equal = xml_element.elements['subTypeEqual'].text
+			end
+			if xml_element.elements['subTypeIn'] != nil
+				self.sub_type_in = xml_element.elements['subTypeIn'].text
+			end
 		end
 
 	end

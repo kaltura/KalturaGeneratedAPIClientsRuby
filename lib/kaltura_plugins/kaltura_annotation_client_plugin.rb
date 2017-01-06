@@ -89,15 +89,33 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.parent_id = xml_element.elements['parentId'].text
-			self.text = xml_element.elements['text'].text
-			self.end_time = xml_element.elements['endTime'].text
-			self.duration = xml_element.elements['duration'].text
-			self.depth = xml_element.elements['depth'].text
-			self.children_count = xml_element.elements['childrenCount'].text
-			self.direct_children_count = xml_element.elements['directChildrenCount'].text
-			self.is_public = xml_element.elements['isPublic'].text
-			self.searchable_on_entry = xml_element.elements['searchableOnEntry'].text
+			if xml_element.elements['parentId'] != nil
+				self.parent_id = xml_element.elements['parentId'].text
+			end
+			if xml_element.elements['text'] != nil
+				self.text = xml_element.elements['text'].text
+			end
+			if xml_element.elements['endTime'] != nil
+				self.end_time = xml_element.elements['endTime'].text
+			end
+			if xml_element.elements['duration'] != nil
+				self.duration = xml_element.elements['duration'].text
+			end
+			if xml_element.elements['depth'] != nil
+				self.depth = xml_element.elements['depth'].text
+			end
+			if xml_element.elements['childrenCount'] != nil
+				self.children_count = xml_element.elements['childrenCount'].text
+			end
+			if xml_element.elements['directChildrenCount'] != nil
+				self.direct_children_count = xml_element.elements['directChildrenCount'].text
+			end
+			if xml_element.elements['isPublic'] != nil
+				self.is_public = xml_element.elements['isPublic'].text
+			end
+			if xml_element.elements['searchableOnEntry'] != nil
+				self.searchable_on_entry = xml_element.elements['searchableOnEntry'].text
+			end
 		end
 
 	end
@@ -108,7 +126,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaAnnotation')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaAnnotation')
+			end
 		end
 
 	end
@@ -143,16 +163,36 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.parent_id_equal = xml_element.elements['parentIdEqual'].text
-			self.parent_id_in = xml_element.elements['parentIdIn'].text
-			self.text_like = xml_element.elements['textLike'].text
-			self.text_multi_like_or = xml_element.elements['textMultiLikeOr'].text
-			self.text_multi_like_and = xml_element.elements['textMultiLikeAnd'].text
-			self.end_time_greater_than_or_equal = xml_element.elements['endTimeGreaterThanOrEqual'].text
-			self.end_time_less_than_or_equal = xml_element.elements['endTimeLessThanOrEqual'].text
-			self.duration_greater_than_or_equal = xml_element.elements['durationGreaterThanOrEqual'].text
-			self.duration_less_than_or_equal = xml_element.elements['durationLessThanOrEqual'].text
-			self.is_public_equal = xml_element.elements['isPublicEqual'].text
+			if xml_element.elements['parentIdEqual'] != nil
+				self.parent_id_equal = xml_element.elements['parentIdEqual'].text
+			end
+			if xml_element.elements['parentIdIn'] != nil
+				self.parent_id_in = xml_element.elements['parentIdIn'].text
+			end
+			if xml_element.elements['textLike'] != nil
+				self.text_like = xml_element.elements['textLike'].text
+			end
+			if xml_element.elements['textMultiLikeOr'] != nil
+				self.text_multi_like_or = xml_element.elements['textMultiLikeOr'].text
+			end
+			if xml_element.elements['textMultiLikeAnd'] != nil
+				self.text_multi_like_and = xml_element.elements['textMultiLikeAnd'].text
+			end
+			if xml_element.elements['endTimeGreaterThanOrEqual'] != nil
+				self.end_time_greater_than_or_equal = xml_element.elements['endTimeGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['endTimeLessThanOrEqual'] != nil
+				self.end_time_less_than_or_equal = xml_element.elements['endTimeLessThanOrEqual'].text
+			end
+			if xml_element.elements['durationGreaterThanOrEqual'] != nil
+				self.duration_greater_than_or_equal = xml_element.elements['durationGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['durationLessThanOrEqual'] != nil
+				self.duration_less_than_or_equal = xml_element.elements['durationLessThanOrEqual'].text
+			end
+			if xml_element.elements['isPublicEqual'] != nil
+				self.is_public_equal = xml_element.elements['isPublicEqual'].text
+			end
 		end
 
 	end

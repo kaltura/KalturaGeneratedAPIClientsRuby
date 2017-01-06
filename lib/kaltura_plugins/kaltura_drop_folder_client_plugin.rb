@@ -205,7 +205,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.handler_type = xml_element.elements['handlerType'].text
+			if xml_element.elements['handlerType'] != nil
+				self.handler_type = xml_element.elements['handlerType'].text
+			end
 		end
 
 	end
@@ -292,34 +294,90 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.id = xml_element.elements['id'].text
-			self.partner_id = xml_element.elements['partnerId'].text
-			self.name = xml_element.elements['name'].text
-			self.description = xml_element.elements['description'].text
-			self.type = xml_element.elements['type'].text
-			self.status = xml_element.elements['status'].text
-			self.conversion_profile_id = xml_element.elements['conversionProfileId'].text
-			self.dc = xml_element.elements['dc'].text
-			self.path = xml_element.elements['path'].text
-			self.file_size_check_interval = xml_element.elements['fileSizeCheckInterval'].text
-			self.file_delete_policy = xml_element.elements['fileDeletePolicy'].text
-			self.auto_file_delete_days = xml_element.elements['autoFileDeleteDays'].text
-			self.file_handler_type = xml_element.elements['fileHandlerType'].text
-			self.file_name_patterns = xml_element.elements['fileNamePatterns'].text
-			self.file_handler_config = KalturaClientBase.object_from_xml(xml_element.elements['fileHandlerConfig'], 'KalturaDropFolderFileHandlerConfig')
-			self.tags = xml_element.elements['tags'].text
-			self.error_code = xml_element.elements['errorCode'].text
-			self.error_description = xml_element.elements['errorDescription'].text
-			self.ignore_file_name_patterns = xml_element.elements['ignoreFileNamePatterns'].text
-			self.created_at = xml_element.elements['createdAt'].text
-			self.updated_at = xml_element.elements['updatedAt'].text
-			self.last_accessed_at = xml_element.elements['lastAccessedAt'].text
-			self.incremental = xml_element.elements['incremental'].text
-			self.last_file_timestamp = xml_element.elements['lastFileTimestamp'].text
-			self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
-			self.categories_metadata_field_name = xml_element.elements['categoriesMetadataFieldName'].text
-			self.enforce_entitlement = xml_element.elements['enforceEntitlement'].text
-			self.should_validate_ks = xml_element.elements['shouldValidateKS'].text
+			if xml_element.elements['id'] != nil
+				self.id = xml_element.elements['id'].text
+			end
+			if xml_element.elements['partnerId'] != nil
+				self.partner_id = xml_element.elements['partnerId'].text
+			end
+			if xml_element.elements['name'] != nil
+				self.name = xml_element.elements['name'].text
+			end
+			if xml_element.elements['description'] != nil
+				self.description = xml_element.elements['description'].text
+			end
+			if xml_element.elements['type'] != nil
+				self.type = xml_element.elements['type'].text
+			end
+			if xml_element.elements['status'] != nil
+				self.status = xml_element.elements['status'].text
+			end
+			if xml_element.elements['conversionProfileId'] != nil
+				self.conversion_profile_id = xml_element.elements['conversionProfileId'].text
+			end
+			if xml_element.elements['dc'] != nil
+				self.dc = xml_element.elements['dc'].text
+			end
+			if xml_element.elements['path'] != nil
+				self.path = xml_element.elements['path'].text
+			end
+			if xml_element.elements['fileSizeCheckInterval'] != nil
+				self.file_size_check_interval = xml_element.elements['fileSizeCheckInterval'].text
+			end
+			if xml_element.elements['fileDeletePolicy'] != nil
+				self.file_delete_policy = xml_element.elements['fileDeletePolicy'].text
+			end
+			if xml_element.elements['autoFileDeleteDays'] != nil
+				self.auto_file_delete_days = xml_element.elements['autoFileDeleteDays'].text
+			end
+			if xml_element.elements['fileHandlerType'] != nil
+				self.file_handler_type = xml_element.elements['fileHandlerType'].text
+			end
+			if xml_element.elements['fileNamePatterns'] != nil
+				self.file_name_patterns = xml_element.elements['fileNamePatterns'].text
+			end
+			if xml_element.elements['fileHandlerConfig'] != nil
+				self.file_handler_config = KalturaClientBase.object_from_xml(xml_element.elements['fileHandlerConfig'], 'KalturaDropFolderFileHandlerConfig')
+			end
+			if xml_element.elements['tags'] != nil
+				self.tags = xml_element.elements['tags'].text
+			end
+			if xml_element.elements['errorCode'] != nil
+				self.error_code = xml_element.elements['errorCode'].text
+			end
+			if xml_element.elements['errorDescription'] != nil
+				self.error_description = xml_element.elements['errorDescription'].text
+			end
+			if xml_element.elements['ignoreFileNamePatterns'] != nil
+				self.ignore_file_name_patterns = xml_element.elements['ignoreFileNamePatterns'].text
+			end
+			if xml_element.elements['createdAt'] != nil
+				self.created_at = xml_element.elements['createdAt'].text
+			end
+			if xml_element.elements['updatedAt'] != nil
+				self.updated_at = xml_element.elements['updatedAt'].text
+			end
+			if xml_element.elements['lastAccessedAt'] != nil
+				self.last_accessed_at = xml_element.elements['lastAccessedAt'].text
+			end
+			if xml_element.elements['incremental'] != nil
+				self.incremental = xml_element.elements['incremental'].text
+			end
+			if xml_element.elements['lastFileTimestamp'] != nil
+				self.last_file_timestamp = xml_element.elements['lastFileTimestamp'].text
+			end
+			if xml_element.elements['metadataProfileId'] != nil
+				self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
+			end
+			if xml_element.elements['categoriesMetadataFieldName'] != nil
+				self.categories_metadata_field_name = xml_element.elements['categoriesMetadataFieldName'].text
+			end
+			if xml_element.elements['enforceEntitlement'] != nil
+				self.enforce_entitlement = xml_element.elements['enforceEntitlement'].text
+			end
+			if xml_element.elements['shouldValidateKS'] != nil
+				self.should_validate_ks = xml_element.elements['shouldValidateKS'].text
+			end
 		end
 
 	end
@@ -398,30 +456,78 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.id = xml_element.elements['id'].text
-			self.partner_id = xml_element.elements['partnerId'].text
-			self.drop_folder_id = xml_element.elements['dropFolderId'].text
-			self.file_name = xml_element.elements['fileName'].text
-			self.file_size = xml_element.elements['fileSize'].text
-			self.file_size_last_set_at = xml_element.elements['fileSizeLastSetAt'].text
-			self.status = xml_element.elements['status'].text
-			self.type = xml_element.elements['type'].text
-			self.parsed_slug = xml_element.elements['parsedSlug'].text
-			self.parsed_flavor = xml_element.elements['parsedFlavor'].text
-			self.parsed_user_id = xml_element.elements['parsedUserId'].text
-			self.lead_drop_folder_file_id = xml_element.elements['leadDropFolderFileId'].text
-			self.deleted_drop_folder_file_id = xml_element.elements['deletedDropFolderFileId'].text
-			self.entry_id = xml_element.elements['entryId'].text
-			self.error_code = xml_element.elements['errorCode'].text
-			self.error_description = xml_element.elements['errorDescription'].text
-			self.last_modification_time = xml_element.elements['lastModificationTime'].text
-			self.created_at = xml_element.elements['createdAt'].text
-			self.updated_at = xml_element.elements['updatedAt'].text
-			self.upload_start_detected_at = xml_element.elements['uploadStartDetectedAt'].text
-			self.upload_end_detected_at = xml_element.elements['uploadEndDetectedAt'].text
-			self.import_started_at = xml_element.elements['importStartedAt'].text
-			self.import_ended_at = xml_element.elements['importEndedAt'].text
-			self.batch_job_id = xml_element.elements['batchJobId'].text
+			if xml_element.elements['id'] != nil
+				self.id = xml_element.elements['id'].text
+			end
+			if xml_element.elements['partnerId'] != nil
+				self.partner_id = xml_element.elements['partnerId'].text
+			end
+			if xml_element.elements['dropFolderId'] != nil
+				self.drop_folder_id = xml_element.elements['dropFolderId'].text
+			end
+			if xml_element.elements['fileName'] != nil
+				self.file_name = xml_element.elements['fileName'].text
+			end
+			if xml_element.elements['fileSize'] != nil
+				self.file_size = xml_element.elements['fileSize'].text
+			end
+			if xml_element.elements['fileSizeLastSetAt'] != nil
+				self.file_size_last_set_at = xml_element.elements['fileSizeLastSetAt'].text
+			end
+			if xml_element.elements['status'] != nil
+				self.status = xml_element.elements['status'].text
+			end
+			if xml_element.elements['type'] != nil
+				self.type = xml_element.elements['type'].text
+			end
+			if xml_element.elements['parsedSlug'] != nil
+				self.parsed_slug = xml_element.elements['parsedSlug'].text
+			end
+			if xml_element.elements['parsedFlavor'] != nil
+				self.parsed_flavor = xml_element.elements['parsedFlavor'].text
+			end
+			if xml_element.elements['parsedUserId'] != nil
+				self.parsed_user_id = xml_element.elements['parsedUserId'].text
+			end
+			if xml_element.elements['leadDropFolderFileId'] != nil
+				self.lead_drop_folder_file_id = xml_element.elements['leadDropFolderFileId'].text
+			end
+			if xml_element.elements['deletedDropFolderFileId'] != nil
+				self.deleted_drop_folder_file_id = xml_element.elements['deletedDropFolderFileId'].text
+			end
+			if xml_element.elements['entryId'] != nil
+				self.entry_id = xml_element.elements['entryId'].text
+			end
+			if xml_element.elements['errorCode'] != nil
+				self.error_code = xml_element.elements['errorCode'].text
+			end
+			if xml_element.elements['errorDescription'] != nil
+				self.error_description = xml_element.elements['errorDescription'].text
+			end
+			if xml_element.elements['lastModificationTime'] != nil
+				self.last_modification_time = xml_element.elements['lastModificationTime'].text
+			end
+			if xml_element.elements['createdAt'] != nil
+				self.created_at = xml_element.elements['createdAt'].text
+			end
+			if xml_element.elements['updatedAt'] != nil
+				self.updated_at = xml_element.elements['updatedAt'].text
+			end
+			if xml_element.elements['uploadStartDetectedAt'] != nil
+				self.upload_start_detected_at = xml_element.elements['uploadStartDetectedAt'].text
+			end
+			if xml_element.elements['uploadEndDetectedAt'] != nil
+				self.upload_end_detected_at = xml_element.elements['uploadEndDetectedAt'].text
+			end
+			if xml_element.elements['importStartedAt'] != nil
+				self.import_started_at = xml_element.elements['importStartedAt'].text
+			end
+			if xml_element.elements['importEndedAt'] != nil
+				self.import_ended_at = xml_element.elements['importEndedAt'].text
+			end
+			if xml_element.elements['batchJobId'] != nil
+				self.batch_job_id = xml_element.elements['batchJobId'].text
+			end
 		end
 
 	end
@@ -487,35 +593,93 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.id_equal = xml_element.elements['idEqual'].text
-			self.id_in = xml_element.elements['idIn'].text
-			self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
-			self.partner_id_in = xml_element.elements['partnerIdIn'].text
-			self.name_like = xml_element.elements['nameLike'].text
-			self.type_equal = xml_element.elements['typeEqual'].text
-			self.type_in = xml_element.elements['typeIn'].text
-			self.status_equal = xml_element.elements['statusEqual'].text
-			self.status_in = xml_element.elements['statusIn'].text
-			self.conversion_profile_id_equal = xml_element.elements['conversionProfileIdEqual'].text
-			self.conversion_profile_id_in = xml_element.elements['conversionProfileIdIn'].text
-			self.dc_equal = xml_element.elements['dcEqual'].text
-			self.dc_in = xml_element.elements['dcIn'].text
-			self.path_equal = xml_element.elements['pathEqual'].text
-			self.path_like = xml_element.elements['pathLike'].text
-			self.file_handler_type_equal = xml_element.elements['fileHandlerTypeEqual'].text
-			self.file_handler_type_in = xml_element.elements['fileHandlerTypeIn'].text
-			self.file_name_patterns_like = xml_element.elements['fileNamePatternsLike'].text
-			self.file_name_patterns_multi_like_or = xml_element.elements['fileNamePatternsMultiLikeOr'].text
-			self.file_name_patterns_multi_like_and = xml_element.elements['fileNamePatternsMultiLikeAnd'].text
-			self.tags_like = xml_element.elements['tagsLike'].text
-			self.tags_multi_like_or = xml_element.elements['tagsMultiLikeOr'].text
-			self.tags_multi_like_and = xml_element.elements['tagsMultiLikeAnd'].text
-			self.error_code_equal = xml_element.elements['errorCodeEqual'].text
-			self.error_code_in = xml_element.elements['errorCodeIn'].text
-			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
-			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
-			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
-			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			if xml_element.elements['idEqual'] != nil
+				self.id_equal = xml_element.elements['idEqual'].text
+			end
+			if xml_element.elements['idIn'] != nil
+				self.id_in = xml_element.elements['idIn'].text
+			end
+			if xml_element.elements['partnerIdEqual'] != nil
+				self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
+			end
+			if xml_element.elements['partnerIdIn'] != nil
+				self.partner_id_in = xml_element.elements['partnerIdIn'].text
+			end
+			if xml_element.elements['nameLike'] != nil
+				self.name_like = xml_element.elements['nameLike'].text
+			end
+			if xml_element.elements['typeEqual'] != nil
+				self.type_equal = xml_element.elements['typeEqual'].text
+			end
+			if xml_element.elements['typeIn'] != nil
+				self.type_in = xml_element.elements['typeIn'].text
+			end
+			if xml_element.elements['statusEqual'] != nil
+				self.status_equal = xml_element.elements['statusEqual'].text
+			end
+			if xml_element.elements['statusIn'] != nil
+				self.status_in = xml_element.elements['statusIn'].text
+			end
+			if xml_element.elements['conversionProfileIdEqual'] != nil
+				self.conversion_profile_id_equal = xml_element.elements['conversionProfileIdEqual'].text
+			end
+			if xml_element.elements['conversionProfileIdIn'] != nil
+				self.conversion_profile_id_in = xml_element.elements['conversionProfileIdIn'].text
+			end
+			if xml_element.elements['dcEqual'] != nil
+				self.dc_equal = xml_element.elements['dcEqual'].text
+			end
+			if xml_element.elements['dcIn'] != nil
+				self.dc_in = xml_element.elements['dcIn'].text
+			end
+			if xml_element.elements['pathEqual'] != nil
+				self.path_equal = xml_element.elements['pathEqual'].text
+			end
+			if xml_element.elements['pathLike'] != nil
+				self.path_like = xml_element.elements['pathLike'].text
+			end
+			if xml_element.elements['fileHandlerTypeEqual'] != nil
+				self.file_handler_type_equal = xml_element.elements['fileHandlerTypeEqual'].text
+			end
+			if xml_element.elements['fileHandlerTypeIn'] != nil
+				self.file_handler_type_in = xml_element.elements['fileHandlerTypeIn'].text
+			end
+			if xml_element.elements['fileNamePatternsLike'] != nil
+				self.file_name_patterns_like = xml_element.elements['fileNamePatternsLike'].text
+			end
+			if xml_element.elements['fileNamePatternsMultiLikeOr'] != nil
+				self.file_name_patterns_multi_like_or = xml_element.elements['fileNamePatternsMultiLikeOr'].text
+			end
+			if xml_element.elements['fileNamePatternsMultiLikeAnd'] != nil
+				self.file_name_patterns_multi_like_and = xml_element.elements['fileNamePatternsMultiLikeAnd'].text
+			end
+			if xml_element.elements['tagsLike'] != nil
+				self.tags_like = xml_element.elements['tagsLike'].text
+			end
+			if xml_element.elements['tagsMultiLikeOr'] != nil
+				self.tags_multi_like_or = xml_element.elements['tagsMultiLikeOr'].text
+			end
+			if xml_element.elements['tagsMultiLikeAnd'] != nil
+				self.tags_multi_like_and = xml_element.elements['tagsMultiLikeAnd'].text
+			end
+			if xml_element.elements['errorCodeEqual'] != nil
+				self.error_code_equal = xml_element.elements['errorCodeEqual'].text
+			end
+			if xml_element.elements['errorCodeIn'] != nil
+				self.error_code_in = xml_element.elements['errorCodeIn'].text
+			end
+			if xml_element.elements['createdAtGreaterThanOrEqual'] != nil
+				self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['createdAtLessThanOrEqual'] != nil
+				self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtGreaterThanOrEqual'] != nil
+				self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtLessThanOrEqual'] != nil
+				self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			end
 		end
 
 	end
@@ -534,8 +698,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.content_match_policy = xml_element.elements['contentMatchPolicy'].text
-			self.slug_regex = xml_element.elements['slugRegex'].text
+			if xml_element.elements['contentMatchPolicy'] != nil
+				self.content_match_policy = xml_element.elements['contentMatchPolicy'].text
+			end
+			if xml_element.elements['slugRegex'] != nil
+				self.slug_regex = xml_element.elements['slugRegex'].text
+			end
 		end
 
 	end
@@ -560,12 +728,24 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.drop_folder_id = xml_element.elements['dropFolderId'].text
-			self.drop_folder_file_ids = xml_element.elements['dropFolderFileIds'].text
-			self.parsed_slug = xml_element.elements['parsedSlug'].text
-			self.content_match_policy = xml_element.elements['contentMatchPolicy'].text
-			self.conversion_profile_id = xml_element.elements['conversionProfileId'].text
-			self.parsed_user_id = xml_element.elements['parsedUserId'].text
+			if xml_element.elements['dropFolderId'] != nil
+				self.drop_folder_id = xml_element.elements['dropFolderId'].text
+			end
+			if xml_element.elements['dropFolderFileIds'] != nil
+				self.drop_folder_file_ids = xml_element.elements['dropFolderFileIds'].text
+			end
+			if xml_element.elements['parsedSlug'] != nil
+				self.parsed_slug = xml_element.elements['parsedSlug'].text
+			end
+			if xml_element.elements['contentMatchPolicy'] != nil
+				self.content_match_policy = xml_element.elements['contentMatchPolicy'].text
+			end
+			if xml_element.elements['conversionProfileId'] != nil
+				self.conversion_profile_id = xml_element.elements['conversionProfileId'].text
+			end
+			if xml_element.elements['parsedUserId'] != nil
+				self.parsed_user_id = xml_element.elements['parsedUserId'].text
+			end
 		end
 
 	end
@@ -632,33 +812,87 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.id_equal = xml_element.elements['idEqual'].text
-			self.id_in = xml_element.elements['idIn'].text
-			self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
-			self.partner_id_in = xml_element.elements['partnerIdIn'].text
-			self.drop_folder_id_equal = xml_element.elements['dropFolderIdEqual'].text
-			self.drop_folder_id_in = xml_element.elements['dropFolderIdIn'].text
-			self.file_name_equal = xml_element.elements['fileNameEqual'].text
-			self.file_name_in = xml_element.elements['fileNameIn'].text
-			self.file_name_like = xml_element.elements['fileNameLike'].text
-			self.status_equal = xml_element.elements['statusEqual'].text
-			self.status_in = xml_element.elements['statusIn'].text
-			self.status_not_in = xml_element.elements['statusNotIn'].text
-			self.parsed_slug_equal = xml_element.elements['parsedSlugEqual'].text
-			self.parsed_slug_in = xml_element.elements['parsedSlugIn'].text
-			self.parsed_slug_like = xml_element.elements['parsedSlugLike'].text
-			self.parsed_flavor_equal = xml_element.elements['parsedFlavorEqual'].text
-			self.parsed_flavor_in = xml_element.elements['parsedFlavorIn'].text
-			self.parsed_flavor_like = xml_element.elements['parsedFlavorLike'].text
-			self.lead_drop_folder_file_id_equal = xml_element.elements['leadDropFolderFileIdEqual'].text
-			self.deleted_drop_folder_file_id_equal = xml_element.elements['deletedDropFolderFileIdEqual'].text
-			self.entry_id_equal = xml_element.elements['entryIdEqual'].text
-			self.error_code_equal = xml_element.elements['errorCodeEqual'].text
-			self.error_code_in = xml_element.elements['errorCodeIn'].text
-			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
-			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
-			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
-			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			if xml_element.elements['idEqual'] != nil
+				self.id_equal = xml_element.elements['idEqual'].text
+			end
+			if xml_element.elements['idIn'] != nil
+				self.id_in = xml_element.elements['idIn'].text
+			end
+			if xml_element.elements['partnerIdEqual'] != nil
+				self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
+			end
+			if xml_element.elements['partnerIdIn'] != nil
+				self.partner_id_in = xml_element.elements['partnerIdIn'].text
+			end
+			if xml_element.elements['dropFolderIdEqual'] != nil
+				self.drop_folder_id_equal = xml_element.elements['dropFolderIdEqual'].text
+			end
+			if xml_element.elements['dropFolderIdIn'] != nil
+				self.drop_folder_id_in = xml_element.elements['dropFolderIdIn'].text
+			end
+			if xml_element.elements['fileNameEqual'] != nil
+				self.file_name_equal = xml_element.elements['fileNameEqual'].text
+			end
+			if xml_element.elements['fileNameIn'] != nil
+				self.file_name_in = xml_element.elements['fileNameIn'].text
+			end
+			if xml_element.elements['fileNameLike'] != nil
+				self.file_name_like = xml_element.elements['fileNameLike'].text
+			end
+			if xml_element.elements['statusEqual'] != nil
+				self.status_equal = xml_element.elements['statusEqual'].text
+			end
+			if xml_element.elements['statusIn'] != nil
+				self.status_in = xml_element.elements['statusIn'].text
+			end
+			if xml_element.elements['statusNotIn'] != nil
+				self.status_not_in = xml_element.elements['statusNotIn'].text
+			end
+			if xml_element.elements['parsedSlugEqual'] != nil
+				self.parsed_slug_equal = xml_element.elements['parsedSlugEqual'].text
+			end
+			if xml_element.elements['parsedSlugIn'] != nil
+				self.parsed_slug_in = xml_element.elements['parsedSlugIn'].text
+			end
+			if xml_element.elements['parsedSlugLike'] != nil
+				self.parsed_slug_like = xml_element.elements['parsedSlugLike'].text
+			end
+			if xml_element.elements['parsedFlavorEqual'] != nil
+				self.parsed_flavor_equal = xml_element.elements['parsedFlavorEqual'].text
+			end
+			if xml_element.elements['parsedFlavorIn'] != nil
+				self.parsed_flavor_in = xml_element.elements['parsedFlavorIn'].text
+			end
+			if xml_element.elements['parsedFlavorLike'] != nil
+				self.parsed_flavor_like = xml_element.elements['parsedFlavorLike'].text
+			end
+			if xml_element.elements['leadDropFolderFileIdEqual'] != nil
+				self.lead_drop_folder_file_id_equal = xml_element.elements['leadDropFolderFileIdEqual'].text
+			end
+			if xml_element.elements['deletedDropFolderFileIdEqual'] != nil
+				self.deleted_drop_folder_file_id_equal = xml_element.elements['deletedDropFolderFileIdEqual'].text
+			end
+			if xml_element.elements['entryIdEqual'] != nil
+				self.entry_id_equal = xml_element.elements['entryIdEqual'].text
+			end
+			if xml_element.elements['errorCodeEqual'] != nil
+				self.error_code_equal = xml_element.elements['errorCodeEqual'].text
+			end
+			if xml_element.elements['errorCodeIn'] != nil
+				self.error_code_in = xml_element.elements['errorCodeIn'].text
+			end
+			if xml_element.elements['createdAtGreaterThanOrEqual'] != nil
+				self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['createdAtLessThanOrEqual'] != nil
+				self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtGreaterThanOrEqual'] != nil
+				self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtLessThanOrEqual'] != nil
+				self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			end
 		end
 
 	end
@@ -669,7 +903,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaDropFolderFile')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaDropFolderFile')
+			end
 		end
 
 	end
@@ -680,7 +916,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaDropFolder')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaDropFolder')
+			end
 		end
 
 	end
@@ -712,7 +950,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.current_dc = xml_element.elements['currentDc'].text
+			if xml_element.elements['currentDc'] != nil
+				self.current_dc = xml_element.elements['currentDc'].text
+			end
 		end
 
 	end
@@ -729,10 +969,18 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.host = xml_element.elements['host'].text
-			self.port = xml_element.elements['port'].text
-			self.username = xml_element.elements['username'].text
-			self.password = xml_element.elements['password'].text
+			if xml_element.elements['host'] != nil
+				self.host = xml_element.elements['host'].text
+			end
+			if xml_element.elements['port'] != nil
+				self.port = xml_element.elements['port'].text
+			end
+			if xml_element.elements['username'] != nil
+				self.username = xml_element.elements['username'].text
+			end
+			if xml_element.elements['password'] != nil
+				self.password = xml_element.elements['password'].text
+			end
 		end
 
 	end
@@ -752,13 +1000,27 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.host = xml_element.elements['host'].text
-			self.port = xml_element.elements['port'].text
-			self.username = xml_element.elements['username'].text
-			self.password = xml_element.elements['password'].text
-			self.private_key = xml_element.elements['privateKey'].text
-			self.public_key = xml_element.elements['publicKey'].text
-			self.pass_phrase = xml_element.elements['passPhrase'].text
+			if xml_element.elements['host'] != nil
+				self.host = xml_element.elements['host'].text
+			end
+			if xml_element.elements['port'] != nil
+				self.port = xml_element.elements['port'].text
+			end
+			if xml_element.elements['username'] != nil
+				self.username = xml_element.elements['username'].text
+			end
+			if xml_element.elements['password'] != nil
+				self.password = xml_element.elements['password'].text
+			end
+			if xml_element.elements['privateKey'] != nil
+				self.private_key = xml_element.elements['privateKey'].text
+			end
+			if xml_element.elements['publicKey'] != nil
+				self.public_key = xml_element.elements['publicKey'].text
+			end
+			if xml_element.elements['passPhrase'] != nil
+				self.pass_phrase = xml_element.elements['passPhrase'].text
+			end
 		end
 
 	end
@@ -774,7 +1036,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.drop_folder_file_id = xml_element.elements['dropFolderFileId'].text
+			if xml_element.elements['dropFolderFileId'] != nil
+				self.drop_folder_file_id = xml_element.elements['dropFolderFileId'].text
+			end
 		end
 
 	end
@@ -788,7 +1052,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.drop_folder_file_id = xml_element.elements['dropFolderFileId'].text
+			if xml_element.elements['dropFolderFileId'] != nil
+				self.drop_folder_file_id = xml_element.elements['dropFolderFileId'].text
+			end
 		end
 
 	end

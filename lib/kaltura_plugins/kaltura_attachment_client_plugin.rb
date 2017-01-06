@@ -71,10 +71,18 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.filename = xml_element.elements['filename'].text
-			self.title = xml_element.elements['title'].text
-			self.format = xml_element.elements['format'].text
-			self.status = xml_element.elements['status'].text
+			if xml_element.elements['filename'] != nil
+				self.filename = xml_element.elements['filename'].text
+			end
+			if xml_element.elements['title'] != nil
+				self.title = xml_element.elements['title'].text
+			end
+			if xml_element.elements['format'] != nil
+				self.format = xml_element.elements['format'].text
+			end
+			if xml_element.elements['status'] != nil
+				self.status = xml_element.elements['status'].text
+			end
 		end
 
 	end
@@ -85,7 +93,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaAttachmentAsset')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaAttachmentAsset')
+			end
 		end
 
 	end
@@ -103,11 +113,21 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.format_equal = xml_element.elements['formatEqual'].text
-			self.format_in = xml_element.elements['formatIn'].text
-			self.status_equal = xml_element.elements['statusEqual'].text
-			self.status_in = xml_element.elements['statusIn'].text
-			self.status_not_in = xml_element.elements['statusNotIn'].text
+			if xml_element.elements['formatEqual'] != nil
+				self.format_equal = xml_element.elements['formatEqual'].text
+			end
+			if xml_element.elements['formatIn'] != nil
+				self.format_in = xml_element.elements['formatIn'].text
+			end
+			if xml_element.elements['statusEqual'] != nil
+				self.status_equal = xml_element.elements['statusEqual'].text
+			end
+			if xml_element.elements['statusIn'] != nil
+				self.status_in = xml_element.elements['statusIn'].text
+			end
+			if xml_element.elements['statusNotIn'] != nil
+				self.status_not_in = xml_element.elements['statusNotIn'].text
+			end
 		end
 
 	end

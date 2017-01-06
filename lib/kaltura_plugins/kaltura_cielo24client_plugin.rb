@@ -67,16 +67,36 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.entry_id = xml_element.elements['entryId'].text
-			self.flavor_asset_id = xml_element.elements['flavorAssetId'].text
-			self.caption_asset_formats = xml_element.elements['captionAssetFormats'].text
-			self.priority = xml_element.elements['priority'].text
-			self.fidelity = xml_element.elements['fidelity'].text
-			self.username = xml_element.elements['username'].text
-			self.password = xml_element.elements['password'].text
-			self.base_url = xml_element.elements['baseUrl'].text
-			self.spoken_language = xml_element.elements['spokenLanguage'].text
-			self.replace_media_content = xml_element.elements['replaceMediaContent'].text
+			if xml_element.elements['entryId'] != nil
+				self.entry_id = xml_element.elements['entryId'].text
+			end
+			if xml_element.elements['flavorAssetId'] != nil
+				self.flavor_asset_id = xml_element.elements['flavorAssetId'].text
+			end
+			if xml_element.elements['captionAssetFormats'] != nil
+				self.caption_asset_formats = xml_element.elements['captionAssetFormats'].text
+			end
+			if xml_element.elements['priority'] != nil
+				self.priority = xml_element.elements['priority'].text
+			end
+			if xml_element.elements['fidelity'] != nil
+				self.fidelity = xml_element.elements['fidelity'].text
+			end
+			if xml_element.elements['username'] != nil
+				self.username = xml_element.elements['username'].text
+			end
+			if xml_element.elements['password'] != nil
+				self.password = xml_element.elements['password'].text
+			end
+			if xml_element.elements['baseUrl'] != nil
+				self.base_url = xml_element.elements['baseUrl'].text
+			end
+			if xml_element.elements['spokenLanguage'] != nil
+				self.spoken_language = xml_element.elements['spokenLanguage'].text
+			end
+			if xml_element.elements['replaceMediaContent'] != nil
+				self.replace_media_content = xml_element.elements['replaceMediaContent'].text
+			end
 		end
 
 	end

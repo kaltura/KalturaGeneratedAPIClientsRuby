@@ -117,17 +117,39 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.id = xml_element.elements['id'].text
-			self.partner_id = xml_element.elements['partnerId'].text
-			self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
-			self.metadata_profile_version = xml_element.elements['metadataProfileVersion'].text
-			self.metadata_object_type = xml_element.elements['metadataObjectType'].text
-			self.object_id = xml_element.elements['objectId'].text
-			self.version = xml_element.elements['version'].text
-			self.created_at = xml_element.elements['createdAt'].text
-			self.updated_at = xml_element.elements['updatedAt'].text
-			self.status = xml_element.elements['status'].text
-			self.xml = xml_element.elements['xml'].text
+			if xml_element.elements['id'] != nil
+				self.id = xml_element.elements['id'].text
+			end
+			if xml_element.elements['partnerId'] != nil
+				self.partner_id = xml_element.elements['partnerId'].text
+			end
+			if xml_element.elements['metadataProfileId'] != nil
+				self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
+			end
+			if xml_element.elements['metadataProfileVersion'] != nil
+				self.metadata_profile_version = xml_element.elements['metadataProfileVersion'].text
+			end
+			if xml_element.elements['metadataObjectType'] != nil
+				self.metadata_object_type = xml_element.elements['metadataObjectType'].text
+			end
+			if xml_element.elements['objectId'] != nil
+				self.object_id = xml_element.elements['objectId'].text
+			end
+			if xml_element.elements['version'] != nil
+				self.version = xml_element.elements['version'].text
+			end
+			if xml_element.elements['createdAt'] != nil
+				self.created_at = xml_element.elements['createdAt'].text
+			end
+			if xml_element.elements['updatedAt'] != nil
+				self.updated_at = xml_element.elements['updatedAt'].text
+			end
+			if xml_element.elements['status'] != nil
+				self.status = xml_element.elements['status'].text
+			end
+			if xml_element.elements['xml'] != nil
+				self.xml = xml_element.elements['xml'].text
+			end
 		end
 
 	end
@@ -176,21 +198,51 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.id = xml_element.elements['id'].text
-			self.partner_id = xml_element.elements['partnerId'].text
-			self.metadata_object_type = xml_element.elements['metadataObjectType'].text
-			self.version = xml_element.elements['version'].text
-			self.name = xml_element.elements['name'].text
-			self.system_name = xml_element.elements['systemName'].text
-			self.description = xml_element.elements['description'].text
-			self.created_at = xml_element.elements['createdAt'].text
-			self.updated_at = xml_element.elements['updatedAt'].text
-			self.status = xml_element.elements['status'].text
-			self.xsd = xml_element.elements['xsd'].text
-			self.views = xml_element.elements['views'].text
-			self.xslt = xml_element.elements['xslt'].text
-			self.create_mode = xml_element.elements['createMode'].text
-			self.disable_re_indexing = xml_element.elements['disableReIndexing'].text
+			if xml_element.elements['id'] != nil
+				self.id = xml_element.elements['id'].text
+			end
+			if xml_element.elements['partnerId'] != nil
+				self.partner_id = xml_element.elements['partnerId'].text
+			end
+			if xml_element.elements['metadataObjectType'] != nil
+				self.metadata_object_type = xml_element.elements['metadataObjectType'].text
+			end
+			if xml_element.elements['version'] != nil
+				self.version = xml_element.elements['version'].text
+			end
+			if xml_element.elements['name'] != nil
+				self.name = xml_element.elements['name'].text
+			end
+			if xml_element.elements['systemName'] != nil
+				self.system_name = xml_element.elements['systemName'].text
+			end
+			if xml_element.elements['description'] != nil
+				self.description = xml_element.elements['description'].text
+			end
+			if xml_element.elements['createdAt'] != nil
+				self.created_at = xml_element.elements['createdAt'].text
+			end
+			if xml_element.elements['updatedAt'] != nil
+				self.updated_at = xml_element.elements['updatedAt'].text
+			end
+			if xml_element.elements['status'] != nil
+				self.status = xml_element.elements['status'].text
+			end
+			if xml_element.elements['xsd'] != nil
+				self.xsd = xml_element.elements['xsd'].text
+			end
+			if xml_element.elements['views'] != nil
+				self.views = xml_element.elements['views'].text
+			end
+			if xml_element.elements['xslt'] != nil
+				self.xslt = xml_element.elements['xslt'].text
+			end
+			if xml_element.elements['createMode'] != nil
+				self.create_mode = xml_element.elements['createMode'].text
+			end
+			if xml_element.elements['disableReIndexing'] != nil
+				self.disable_re_indexing = xml_element.elements['disableReIndexing'].text
+			end
 		end
 
 	end
@@ -207,10 +259,18 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.id = xml_element.elements['id'].text
-			self.x_path = xml_element.elements['xPath'].text
-			self.key = xml_element.elements['key'].text
-			self.label = xml_element.elements['label'].text
+			if xml_element.elements['id'] != nil
+				self.id = xml_element.elements['id'].text
+			end
+			if xml_element.elements['xPath'] != nil
+				self.x_path = xml_element.elements['xPath'].text
+			end
+			if xml_element.elements['key'] != nil
+				self.key = xml_element.elements['key'].text
+			end
+			if xml_element.elements['label'] != nil
+				self.label = xml_element.elements['label'].text
+			end
 		end
 
 	end
@@ -226,9 +286,15 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.src_file_url = xml_element.elements['srcFileUrl'].text
-			self.dest_file_local_path = xml_element.elements['destFileLocalPath'].text
-			self.metadata_id = xml_element.elements['metadataId'].text
+			if xml_element.elements['srcFileUrl'] != nil
+				self.src_file_url = xml_element.elements['srcFileUrl'].text
+			end
+			if xml_element.elements['destFileLocalPath'] != nil
+				self.dest_file_local_path = xml_element.elements['destFileLocalPath'].text
+			end
+			if xml_element.elements['metadataId'] != nil
+				self.metadata_id = xml_element.elements['metadataId'].text
+			end
 		end
 
 	end
@@ -239,7 +305,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaMetadata')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaMetadata')
+			end
 		end
 
 	end
@@ -297,24 +365,60 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.id_equal = xml_element.elements['idEqual'].text
-			self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
-			self.metadata_object_type_equal = xml_element.elements['metadataObjectTypeEqual'].text
-			self.metadata_object_type_in = xml_element.elements['metadataObjectTypeIn'].text
-			self.version_equal = xml_element.elements['versionEqual'].text
-			self.name_equal = xml_element.elements['nameEqual'].text
-			self.system_name_equal = xml_element.elements['systemNameEqual'].text
-			self.system_name_in = xml_element.elements['systemNameIn'].text
-			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
-			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
-			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
-			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
-			self.status_equal = xml_element.elements['statusEqual'].text
-			self.status_in = xml_element.elements['statusIn'].text
-			self.create_mode_equal = xml_element.elements['createModeEqual'].text
-			self.create_mode_not_equal = xml_element.elements['createModeNotEqual'].text
-			self.create_mode_in = xml_element.elements['createModeIn'].text
-			self.create_mode_not_in = xml_element.elements['createModeNotIn'].text
+			if xml_element.elements['idEqual'] != nil
+				self.id_equal = xml_element.elements['idEqual'].text
+			end
+			if xml_element.elements['partnerIdEqual'] != nil
+				self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
+			end
+			if xml_element.elements['metadataObjectTypeEqual'] != nil
+				self.metadata_object_type_equal = xml_element.elements['metadataObjectTypeEqual'].text
+			end
+			if xml_element.elements['metadataObjectTypeIn'] != nil
+				self.metadata_object_type_in = xml_element.elements['metadataObjectTypeIn'].text
+			end
+			if xml_element.elements['versionEqual'] != nil
+				self.version_equal = xml_element.elements['versionEqual'].text
+			end
+			if xml_element.elements['nameEqual'] != nil
+				self.name_equal = xml_element.elements['nameEqual'].text
+			end
+			if xml_element.elements['systemNameEqual'] != nil
+				self.system_name_equal = xml_element.elements['systemNameEqual'].text
+			end
+			if xml_element.elements['systemNameIn'] != nil
+				self.system_name_in = xml_element.elements['systemNameIn'].text
+			end
+			if xml_element.elements['createdAtGreaterThanOrEqual'] != nil
+				self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['createdAtLessThanOrEqual'] != nil
+				self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtGreaterThanOrEqual'] != nil
+				self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtLessThanOrEqual'] != nil
+				self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['statusEqual'] != nil
+				self.status_equal = xml_element.elements['statusEqual'].text
+			end
+			if xml_element.elements['statusIn'] != nil
+				self.status_in = xml_element.elements['statusIn'].text
+			end
+			if xml_element.elements['createModeEqual'] != nil
+				self.create_mode_equal = xml_element.elements['createModeEqual'].text
+			end
+			if xml_element.elements['createModeNotEqual'] != nil
+				self.create_mode_not_equal = xml_element.elements['createModeNotEqual'].text
+			end
+			if xml_element.elements['createModeIn'] != nil
+				self.create_mode_in = xml_element.elements['createModeIn'].text
+			end
+			if xml_element.elements['createModeNotIn'] != nil
+				self.create_mode_not_in = xml_element.elements['createModeNotIn'].text
+			end
 		end
 
 	end
@@ -325,7 +429,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaMetadataProfileField')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaMetadataProfileField')
+			end
 		end
 
 	end
@@ -336,7 +442,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaMetadataProfile')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaMetadataProfile')
+			end
 		end
 
 	end
@@ -352,7 +460,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.should_copy_metadata = xml_element.elements['shouldCopyMetadata'].text
+			if xml_element.elements['shouldCopyMetadata'] != nil
+				self.should_copy_metadata = xml_element.elements['shouldCopyMetadata'].text
+			end
 		end
 
 	end
@@ -385,11 +495,21 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.src_xsl_path = xml_element.elements['srcXslPath'].text
-			self.src_version = xml_element.elements['srcVersion'].text
-			self.dest_version = xml_element.elements['destVersion'].text
-			self.dest_xsd_path = xml_element.elements['destXsdPath'].text
-			self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
+			if xml_element.elements['srcXslPath'] != nil
+				self.src_xsl_path = xml_element.elements['srcXslPath'].text
+			end
+			if xml_element.elements['srcVersion'] != nil
+				self.src_version = xml_element.elements['srcVersion'].text
+			end
+			if xml_element.elements['destVersion'] != nil
+				self.dest_version = xml_element.elements['destVersion'].text
+			end
+			if xml_element.elements['destXsdPath'] != nil
+				self.dest_xsd_path = xml_element.elements['destXsdPath'].text
+			end
+			if xml_element.elements['metadataProfileId'] != nil
+				self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
+			end
 		end
 
 	end
@@ -411,9 +531,15 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.x_path = xml_element.elements['xPath'].text
-			self.profile_id = xml_element.elements['profileId'].text
-			self.profile_system_name = xml_element.elements['profileSystemName'].text
+			if xml_element.elements['xPath'] != nil
+				self.x_path = xml_element.elements['xPath'].text
+			end
+			if xml_element.elements['profileId'] != nil
+				self.profile_id = xml_element.elements['profileId'].text
+			end
+			if xml_element.elements['profileSystemName'] != nil
+				self.profile_system_name = xml_element.elements['profileSystemName'].text
+			end
 		end
 
 	end
@@ -424,7 +550,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.field = xml_element.elements['field'].text
+			if xml_element.elements['field'] != nil
+				self.field = xml_element.elements['field'].text
+			end
 		end
 
 	end
@@ -446,9 +574,15 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.x_path = xml_element.elements['xPath'].text
-			self.profile_id = xml_element.elements['profileId'].text
-			self.profile_system_name = xml_element.elements['profileSystemName'].text
+			if xml_element.elements['xPath'] != nil
+				self.x_path = xml_element.elements['xPath'].text
+			end
+			if xml_element.elements['profileId'] != nil
+				self.profile_id = xml_element.elements['profileId'].text
+			end
+			if xml_element.elements['profileSystemName'] != nil
+				self.profile_system_name = xml_element.elements['profileSystemName'].text
+			end
 		end
 
 	end
@@ -516,24 +650,60 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
-			self.metadata_profile_id_equal = xml_element.elements['metadataProfileIdEqual'].text
-			self.metadata_profile_id_in = xml_element.elements['metadataProfileIdIn'].text
-			self.metadata_profile_version_equal = xml_element.elements['metadataProfileVersionEqual'].text
-			self.metadata_profile_version_greater_than_or_equal = xml_element.elements['metadataProfileVersionGreaterThanOrEqual'].text
-			self.metadata_profile_version_less_than_or_equal = xml_element.elements['metadataProfileVersionLessThanOrEqual'].text
-			self.metadata_object_type_equal = xml_element.elements['metadataObjectTypeEqual'].text
-			self.object_id_equal = xml_element.elements['objectIdEqual'].text
-			self.object_id_in = xml_element.elements['objectIdIn'].text
-			self.version_equal = xml_element.elements['versionEqual'].text
-			self.version_greater_than_or_equal = xml_element.elements['versionGreaterThanOrEqual'].text
-			self.version_less_than_or_equal = xml_element.elements['versionLessThanOrEqual'].text
-			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
-			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
-			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
-			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
-			self.status_equal = xml_element.elements['statusEqual'].text
-			self.status_in = xml_element.elements['statusIn'].text
+			if xml_element.elements['partnerIdEqual'] != nil
+				self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
+			end
+			if xml_element.elements['metadataProfileIdEqual'] != nil
+				self.metadata_profile_id_equal = xml_element.elements['metadataProfileIdEqual'].text
+			end
+			if xml_element.elements['metadataProfileIdIn'] != nil
+				self.metadata_profile_id_in = xml_element.elements['metadataProfileIdIn'].text
+			end
+			if xml_element.elements['metadataProfileVersionEqual'] != nil
+				self.metadata_profile_version_equal = xml_element.elements['metadataProfileVersionEqual'].text
+			end
+			if xml_element.elements['metadataProfileVersionGreaterThanOrEqual'] != nil
+				self.metadata_profile_version_greater_than_or_equal = xml_element.elements['metadataProfileVersionGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['metadataProfileVersionLessThanOrEqual'] != nil
+				self.metadata_profile_version_less_than_or_equal = xml_element.elements['metadataProfileVersionLessThanOrEqual'].text
+			end
+			if xml_element.elements['metadataObjectTypeEqual'] != nil
+				self.metadata_object_type_equal = xml_element.elements['metadataObjectTypeEqual'].text
+			end
+			if xml_element.elements['objectIdEqual'] != nil
+				self.object_id_equal = xml_element.elements['objectIdEqual'].text
+			end
+			if xml_element.elements['objectIdIn'] != nil
+				self.object_id_in = xml_element.elements['objectIdIn'].text
+			end
+			if xml_element.elements['versionEqual'] != nil
+				self.version_equal = xml_element.elements['versionEqual'].text
+			end
+			if xml_element.elements['versionGreaterThanOrEqual'] != nil
+				self.version_greater_than_or_equal = xml_element.elements['versionGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['versionLessThanOrEqual'] != nil
+				self.version_less_than_or_equal = xml_element.elements['versionLessThanOrEqual'].text
+			end
+			if xml_element.elements['createdAtGreaterThanOrEqual'] != nil
+				self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['createdAtLessThanOrEqual'] != nil
+				self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtGreaterThanOrEqual'] != nil
+				self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtLessThanOrEqual'] != nil
+				self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['statusEqual'] != nil
+				self.status_equal = xml_element.elements['statusEqual'].text
+			end
+			if xml_element.elements['statusIn'] != nil
+				self.status_in = xml_element.elements['statusIn'].text
+			end
 		end
 
 	end
@@ -557,11 +727,21 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.x_path = xml_element.elements['xPath'].text
-			self.profile_id = xml_element.elements['profileId'].text
-			self.profile_system_name = xml_element.elements['profileSystemName'].text
-			self.version_a = xml_element.elements['versionA'].text
-			self.version_b = xml_element.elements['versionB'].text
+			if xml_element.elements['xPath'] != nil
+				self.x_path = xml_element.elements['xPath'].text
+			end
+			if xml_element.elements['profileId'] != nil
+				self.profile_id = xml_element.elements['profileId'].text
+			end
+			if xml_element.elements['profileSystemName'] != nil
+				self.profile_system_name = xml_element.elements['profileSystemName'].text
+			end
+			if xml_element.elements['versionA'] != nil
+				self.version_a = xml_element.elements['versionA'].text
+			end
+			if xml_element.elements['versionB'] != nil
+				self.version_b = xml_element.elements['versionB'].text
+			end
 		end
 
 	end
@@ -585,8 +765,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
-			self.order_by = xml_element.elements['orderBy'].text
+			if xml_element.elements['metadataProfileId'] != nil
+				self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
+			end
+			if xml_element.elements['orderBy'] != nil
+				self.order_by = xml_element.elements['orderBy'].text
+			end
 		end
 
 	end
@@ -608,9 +792,15 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.x_path = xml_element.elements['xPath'].text
-			self.profile_id = xml_element.elements['profileId'].text
-			self.profile_system_name = xml_element.elements['profileSystemName'].text
+			if xml_element.elements['xPath'] != nil
+				self.x_path = xml_element.elements['xPath'].text
+			end
+			if xml_element.elements['profileId'] != nil
+				self.profile_id = xml_element.elements['profileId'].text
+			end
+			if xml_element.elements['profileSystemName'] != nil
+				self.profile_system_name = xml_element.elements['profileSystemName'].text
+			end
 		end
 
 	end

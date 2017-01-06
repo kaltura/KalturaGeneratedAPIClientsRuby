@@ -48,11 +48,21 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.asset = KalturaClientBase.object_from_xml(xml_element.elements['asset'], 'KalturaCaptionAsset')
-			self.entry = KalturaClientBase.object_from_xml(xml_element.elements['entry'], 'KalturaBaseEntry')
-			self.start_time = xml_element.elements['startTime'].text
-			self.end_time = xml_element.elements['endTime'].text
-			self.content = xml_element.elements['content'].text
+			if xml_element.elements['asset'] != nil
+				self.asset = KalturaClientBase.object_from_xml(xml_element.elements['asset'], 'KalturaCaptionAsset')
+			end
+			if xml_element.elements['entry'] != nil
+				self.entry = KalturaClientBase.object_from_xml(xml_element.elements['entry'], 'KalturaBaseEntry')
+			end
+			if xml_element.elements['startTime'] != nil
+				self.start_time = xml_element.elements['startTime'].text
+			end
+			if xml_element.elements['endTime'] != nil
+				self.end_time = xml_element.elements['endTime'].text
+			end
+			if xml_element.elements['content'] != nil
+				self.content = xml_element.elements['content'].text
+			end
 		end
 
 	end
@@ -63,7 +73,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaCaptionAssetItem')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaCaptionAssetItem')
+			end
 		end
 
 	end
@@ -76,9 +88,15 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.content_like = xml_element.elements['contentLike'].text
-			self.content_multi_like_or = xml_element.elements['contentMultiLikeOr'].text
-			self.content_multi_like_and = xml_element.elements['contentMultiLikeAnd'].text
+			if xml_element.elements['contentLike'] != nil
+				self.content_like = xml_element.elements['contentLike'].text
+			end
+			if xml_element.elements['contentMultiLikeOr'] != nil
+				self.content_multi_like_or = xml_element.elements['contentMultiLikeOr'].text
+			end
+			if xml_element.elements['contentMultiLikeAnd'] != nil
+				self.content_multi_like_and = xml_element.elements['contentMultiLikeAnd'].text
+			end
 		end
 
 	end
@@ -114,20 +132,48 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.content_like = xml_element.elements['contentLike'].text
-			self.content_multi_like_or = xml_element.elements['contentMultiLikeOr'].text
-			self.content_multi_like_and = xml_element.elements['contentMultiLikeAnd'].text
-			self.partner_description_like = xml_element.elements['partnerDescriptionLike'].text
-			self.partner_description_multi_like_or = xml_element.elements['partnerDescriptionMultiLikeOr'].text
-			self.partner_description_multi_like_and = xml_element.elements['partnerDescriptionMultiLikeAnd'].text
-			self.language_equal = xml_element.elements['languageEqual'].text
-			self.language_in = xml_element.elements['languageIn'].text
-			self.label_equal = xml_element.elements['labelEqual'].text
-			self.label_in = xml_element.elements['labelIn'].text
-			self.start_time_greater_than_or_equal = xml_element.elements['startTimeGreaterThanOrEqual'].text
-			self.start_time_less_than_or_equal = xml_element.elements['startTimeLessThanOrEqual'].text
-			self.end_time_greater_than_or_equal = xml_element.elements['endTimeGreaterThanOrEqual'].text
-			self.end_time_less_than_or_equal = xml_element.elements['endTimeLessThanOrEqual'].text
+			if xml_element.elements['contentLike'] != nil
+				self.content_like = xml_element.elements['contentLike'].text
+			end
+			if xml_element.elements['contentMultiLikeOr'] != nil
+				self.content_multi_like_or = xml_element.elements['contentMultiLikeOr'].text
+			end
+			if xml_element.elements['contentMultiLikeAnd'] != nil
+				self.content_multi_like_and = xml_element.elements['contentMultiLikeAnd'].text
+			end
+			if xml_element.elements['partnerDescriptionLike'] != nil
+				self.partner_description_like = xml_element.elements['partnerDescriptionLike'].text
+			end
+			if xml_element.elements['partnerDescriptionMultiLikeOr'] != nil
+				self.partner_description_multi_like_or = xml_element.elements['partnerDescriptionMultiLikeOr'].text
+			end
+			if xml_element.elements['partnerDescriptionMultiLikeAnd'] != nil
+				self.partner_description_multi_like_and = xml_element.elements['partnerDescriptionMultiLikeAnd'].text
+			end
+			if xml_element.elements['languageEqual'] != nil
+				self.language_equal = xml_element.elements['languageEqual'].text
+			end
+			if xml_element.elements['languageIn'] != nil
+				self.language_in = xml_element.elements['languageIn'].text
+			end
+			if xml_element.elements['labelEqual'] != nil
+				self.label_equal = xml_element.elements['labelEqual'].text
+			end
+			if xml_element.elements['labelIn'] != nil
+				self.label_in = xml_element.elements['labelIn'].text
+			end
+			if xml_element.elements['startTimeGreaterThanOrEqual'] != nil
+				self.start_time_greater_than_or_equal = xml_element.elements['startTimeGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['startTimeLessThanOrEqual'] != nil
+				self.start_time_less_than_or_equal = xml_element.elements['startTimeLessThanOrEqual'].text
+			end
+			if xml_element.elements['endTimeGreaterThanOrEqual'] != nil
+				self.end_time_greater_than_or_equal = xml_element.elements['endTimeGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['endTimeLessThanOrEqual'] != nil
+				self.end_time_less_than_or_equal = xml_element.elements['endTimeLessThanOrEqual'].text
+			end
 		end
 
 	end

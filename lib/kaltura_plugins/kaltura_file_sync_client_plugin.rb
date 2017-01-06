@@ -139,31 +139,81 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.id = xml_element.elements['id'].text
-			self.partner_id = xml_element.elements['partnerId'].text
-			self.file_object_type = xml_element.elements['fileObjectType'].text
-			self.object_id = xml_element.elements['objectId'].text
-			self.version = xml_element.elements['version'].text
-			self.object_sub_type = xml_element.elements['objectSubType'].text
-			self.dc = xml_element.elements['dc'].text
-			self.original = xml_element.elements['original'].text
-			self.created_at = xml_element.elements['createdAt'].text
-			self.updated_at = xml_element.elements['updatedAt'].text
-			self.ready_at = xml_element.elements['readyAt'].text
-			self.sync_time = xml_element.elements['syncTime'].text
-			self.status = xml_element.elements['status'].text
-			self.file_type = xml_element.elements['fileType'].text
-			self.linked_id = xml_element.elements['linkedId'].text
-			self.link_count = xml_element.elements['linkCount'].text
-			self.file_root = xml_element.elements['fileRoot'].text
-			self.file_path = xml_element.elements['filePath'].text
-			self.file_size = xml_element.elements['fileSize'].text
-			self.file_url = xml_element.elements['fileUrl'].text
-			self.file_content = xml_element.elements['fileContent'].text
-			self.file_disc_size = xml_element.elements['fileDiscSize'].text
-			self.is_current_dc = xml_element.elements['isCurrentDc'].text
-			self.is_dir = xml_element.elements['isDir'].text
-			self.original_id = xml_element.elements['originalId'].text
+			if xml_element.elements['id'] != nil
+				self.id = xml_element.elements['id'].text
+			end
+			if xml_element.elements['partnerId'] != nil
+				self.partner_id = xml_element.elements['partnerId'].text
+			end
+			if xml_element.elements['fileObjectType'] != nil
+				self.file_object_type = xml_element.elements['fileObjectType'].text
+			end
+			if xml_element.elements['objectId'] != nil
+				self.object_id = xml_element.elements['objectId'].text
+			end
+			if xml_element.elements['version'] != nil
+				self.version = xml_element.elements['version'].text
+			end
+			if xml_element.elements['objectSubType'] != nil
+				self.object_sub_type = xml_element.elements['objectSubType'].text
+			end
+			if xml_element.elements['dc'] != nil
+				self.dc = xml_element.elements['dc'].text
+			end
+			if xml_element.elements['original'] != nil
+				self.original = xml_element.elements['original'].text
+			end
+			if xml_element.elements['createdAt'] != nil
+				self.created_at = xml_element.elements['createdAt'].text
+			end
+			if xml_element.elements['updatedAt'] != nil
+				self.updated_at = xml_element.elements['updatedAt'].text
+			end
+			if xml_element.elements['readyAt'] != nil
+				self.ready_at = xml_element.elements['readyAt'].text
+			end
+			if xml_element.elements['syncTime'] != nil
+				self.sync_time = xml_element.elements['syncTime'].text
+			end
+			if xml_element.elements['status'] != nil
+				self.status = xml_element.elements['status'].text
+			end
+			if xml_element.elements['fileType'] != nil
+				self.file_type = xml_element.elements['fileType'].text
+			end
+			if xml_element.elements['linkedId'] != nil
+				self.linked_id = xml_element.elements['linkedId'].text
+			end
+			if xml_element.elements['linkCount'] != nil
+				self.link_count = xml_element.elements['linkCount'].text
+			end
+			if xml_element.elements['fileRoot'] != nil
+				self.file_root = xml_element.elements['fileRoot'].text
+			end
+			if xml_element.elements['filePath'] != nil
+				self.file_path = xml_element.elements['filePath'].text
+			end
+			if xml_element.elements['fileSize'] != nil
+				self.file_size = xml_element.elements['fileSize'].text
+			end
+			if xml_element.elements['fileUrl'] != nil
+				self.file_url = xml_element.elements['fileUrl'].text
+			end
+			if xml_element.elements['fileContent'] != nil
+				self.file_content = xml_element.elements['fileContent'].text
+			end
+			if xml_element.elements['fileDiscSize'] != nil
+				self.file_disc_size = xml_element.elements['fileDiscSize'].text
+			end
+			if xml_element.elements['isCurrentDc'] != nil
+				self.is_current_dc = xml_element.elements['isCurrentDc'].text
+			end
+			if xml_element.elements['isDir'] != nil
+				self.is_dir = xml_element.elements['isDir'].text
+			end
+			if xml_element.elements['originalId'] != nil
+				self.original_id = xml_element.elements['originalId'].text
+			end
 		end
 
 	end
@@ -174,7 +224,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaFileSync')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaFileSync')
+			end
 		end
 
 	end
@@ -267,35 +319,93 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
-			self.file_object_type_equal = xml_element.elements['fileObjectTypeEqual'].text
-			self.file_object_type_in = xml_element.elements['fileObjectTypeIn'].text
-			self.object_id_equal = xml_element.elements['objectIdEqual'].text
-			self.object_id_in = xml_element.elements['objectIdIn'].text
-			self.version_equal = xml_element.elements['versionEqual'].text
-			self.version_in = xml_element.elements['versionIn'].text
-			self.object_sub_type_equal = xml_element.elements['objectSubTypeEqual'].text
-			self.object_sub_type_in = xml_element.elements['objectSubTypeIn'].text
-			self.dc_equal = xml_element.elements['dcEqual'].text
-			self.dc_in = xml_element.elements['dcIn'].text
-			self.original_equal = xml_element.elements['originalEqual'].text
-			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
-			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
-			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
-			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
-			self.ready_at_greater_than_or_equal = xml_element.elements['readyAtGreaterThanOrEqual'].text
-			self.ready_at_less_than_or_equal = xml_element.elements['readyAtLessThanOrEqual'].text
-			self.sync_time_greater_than_or_equal = xml_element.elements['syncTimeGreaterThanOrEqual'].text
-			self.sync_time_less_than_or_equal = xml_element.elements['syncTimeLessThanOrEqual'].text
-			self.status_equal = xml_element.elements['statusEqual'].text
-			self.status_in = xml_element.elements['statusIn'].text
-			self.file_type_equal = xml_element.elements['fileTypeEqual'].text
-			self.file_type_in = xml_element.elements['fileTypeIn'].text
-			self.linked_id_equal = xml_element.elements['linkedIdEqual'].text
-			self.link_count_greater_than_or_equal = xml_element.elements['linkCountGreaterThanOrEqual'].text
-			self.link_count_less_than_or_equal = xml_element.elements['linkCountLessThanOrEqual'].text
-			self.file_size_greater_than_or_equal = xml_element.elements['fileSizeGreaterThanOrEqual'].text
-			self.file_size_less_than_or_equal = xml_element.elements['fileSizeLessThanOrEqual'].text
+			if xml_element.elements['partnerIdEqual'] != nil
+				self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
+			end
+			if xml_element.elements['fileObjectTypeEqual'] != nil
+				self.file_object_type_equal = xml_element.elements['fileObjectTypeEqual'].text
+			end
+			if xml_element.elements['fileObjectTypeIn'] != nil
+				self.file_object_type_in = xml_element.elements['fileObjectTypeIn'].text
+			end
+			if xml_element.elements['objectIdEqual'] != nil
+				self.object_id_equal = xml_element.elements['objectIdEqual'].text
+			end
+			if xml_element.elements['objectIdIn'] != nil
+				self.object_id_in = xml_element.elements['objectIdIn'].text
+			end
+			if xml_element.elements['versionEqual'] != nil
+				self.version_equal = xml_element.elements['versionEqual'].text
+			end
+			if xml_element.elements['versionIn'] != nil
+				self.version_in = xml_element.elements['versionIn'].text
+			end
+			if xml_element.elements['objectSubTypeEqual'] != nil
+				self.object_sub_type_equal = xml_element.elements['objectSubTypeEqual'].text
+			end
+			if xml_element.elements['objectSubTypeIn'] != nil
+				self.object_sub_type_in = xml_element.elements['objectSubTypeIn'].text
+			end
+			if xml_element.elements['dcEqual'] != nil
+				self.dc_equal = xml_element.elements['dcEqual'].text
+			end
+			if xml_element.elements['dcIn'] != nil
+				self.dc_in = xml_element.elements['dcIn'].text
+			end
+			if xml_element.elements['originalEqual'] != nil
+				self.original_equal = xml_element.elements['originalEqual'].text
+			end
+			if xml_element.elements['createdAtGreaterThanOrEqual'] != nil
+				self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['createdAtLessThanOrEqual'] != nil
+				self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtGreaterThanOrEqual'] != nil
+				self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtLessThanOrEqual'] != nil
+				self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['readyAtGreaterThanOrEqual'] != nil
+				self.ready_at_greater_than_or_equal = xml_element.elements['readyAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['readyAtLessThanOrEqual'] != nil
+				self.ready_at_less_than_or_equal = xml_element.elements['readyAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['syncTimeGreaterThanOrEqual'] != nil
+				self.sync_time_greater_than_or_equal = xml_element.elements['syncTimeGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['syncTimeLessThanOrEqual'] != nil
+				self.sync_time_less_than_or_equal = xml_element.elements['syncTimeLessThanOrEqual'].text
+			end
+			if xml_element.elements['statusEqual'] != nil
+				self.status_equal = xml_element.elements['statusEqual'].text
+			end
+			if xml_element.elements['statusIn'] != nil
+				self.status_in = xml_element.elements['statusIn'].text
+			end
+			if xml_element.elements['fileTypeEqual'] != nil
+				self.file_type_equal = xml_element.elements['fileTypeEqual'].text
+			end
+			if xml_element.elements['fileTypeIn'] != nil
+				self.file_type_in = xml_element.elements['fileTypeIn'].text
+			end
+			if xml_element.elements['linkedIdEqual'] != nil
+				self.linked_id_equal = xml_element.elements['linkedIdEqual'].text
+			end
+			if xml_element.elements['linkCountGreaterThanOrEqual'] != nil
+				self.link_count_greater_than_or_equal = xml_element.elements['linkCountGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['linkCountLessThanOrEqual'] != nil
+				self.link_count_less_than_or_equal = xml_element.elements['linkCountLessThanOrEqual'].text
+			end
+			if xml_element.elements['fileSizeGreaterThanOrEqual'] != nil
+				self.file_size_greater_than_or_equal = xml_element.elements['fileSizeGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['fileSizeLessThanOrEqual'] != nil
+				self.file_size_less_than_or_equal = xml_element.elements['fileSizeLessThanOrEqual'].text
+			end
 		end
 
 	end
@@ -309,7 +419,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.current_dc = xml_element.elements['currentDc'].text
+			if xml_element.elements['currentDc'] != nil
+				self.current_dc = xml_element.elements['currentDc'].text
+			end
 		end
 
 	end

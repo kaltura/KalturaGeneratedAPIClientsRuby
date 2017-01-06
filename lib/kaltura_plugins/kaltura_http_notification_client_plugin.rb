@@ -98,13 +98,27 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.object = KalturaClientBase.object_from_xml(xml_element.elements['object'], 'KalturaObjectBase')
-			self.event_object_type = xml_element.elements['eventObjectType'].text
-			self.event_notification_job_id = xml_element.elements['eventNotificationJobId'].text
-			self.template_id = xml_element.elements['templateId'].text
-			self.template_name = xml_element.elements['templateName'].text
-			self.template_system_name = xml_element.elements['templateSystemName'].text
-			self.event_type = xml_element.elements['eventType'].text
+			if xml_element.elements['object'] != nil
+				self.object = KalturaClientBase.object_from_xml(xml_element.elements['object'], 'KalturaObjectBase')
+			end
+			if xml_element.elements['eventObjectType'] != nil
+				self.event_object_type = xml_element.elements['eventObjectType'].text
+			end
+			if xml_element.elements['eventNotificationJobId'] != nil
+				self.event_notification_job_id = xml_element.elements['eventNotificationJobId'].text
+			end
+			if xml_element.elements['templateId'] != nil
+				self.template_id = xml_element.elements['templateId'].text
+			end
+			if xml_element.elements['templateName'] != nil
+				self.template_name = xml_element.elements['templateName'].text
+			end
+			if xml_element.elements['templateSystemName'] != nil
+				self.template_system_name = xml_element.elements['templateSystemName'].text
+			end
+			if xml_element.elements['eventType'] != nil
+				self.event_type = xml_element.elements['eventType'].text
+			end
 		end
 
 	end
@@ -134,7 +148,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.content = KalturaClientBase.object_from_xml(xml_element.elements['content'], 'KalturaStringValue')
+			if xml_element.elements['content'] != nil
+				self.content = KalturaClientBase.object_from_xml(xml_element.elements['content'], 'KalturaStringValue')
+			end
 		end
 
 	end
@@ -159,10 +175,18 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.api_object_type = xml_element.elements['apiObjectType'].text
-			self.format = xml_element.elements['format'].text
-			self.ignore_null = xml_element.elements['ignoreNull'].text
-			self.code = xml_element.elements['code'].text
+			if xml_element.elements['apiObjectType'] != nil
+				self.api_object_type = xml_element.elements['apiObjectType'].text
+			end
+			if xml_element.elements['format'] != nil
+				self.format = xml_element.elements['format'].text
+			end
+			if xml_element.elements['ignoreNull'] != nil
+				self.ignore_null = xml_element.elements['ignoreNull'].text
+			end
+			if xml_element.elements['code'] != nil
+				self.code = xml_element.elements['code'].text
+			end
 		end
 
 	end
@@ -225,24 +249,60 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.url = xml_element.elements['url'].text
-			self.method = xml_element.elements['method'].text
-			self.data = KalturaClientBase.object_from_xml(xml_element.elements['data'], 'KalturaHttpNotificationData')
-			self.timeout = xml_element.elements['timeout'].text
-			self.connect_timeout = xml_element.elements['connectTimeout'].text
-			self.username = xml_element.elements['username'].text
-			self.password = xml_element.elements['password'].text
-			self.authentication_method = xml_element.elements['authenticationMethod'].text
-			self.ssl_version = xml_element.elements['sslVersion'].text
-			self.ssl_certificate = xml_element.elements['sslCertificate'].text
-			self.ssl_certificate_type = xml_element.elements['sslCertificateType'].text
-			self.ssl_certificate_password = xml_element.elements['sslCertificatePassword'].text
-			self.ssl_engine = xml_element.elements['sslEngine'].text
-			self.ssl_engine_default = xml_element.elements['sslEngineDefault'].text
-			self.ssl_key_type = xml_element.elements['sslKeyType'].text
-			self.ssl_key = xml_element.elements['sslKey'].text
-			self.ssl_key_password = xml_element.elements['sslKeyPassword'].text
-			self.custom_headers = KalturaClientBase.object_from_xml(xml_element.elements['customHeaders'], 'KalturaKeyValue')
+			if xml_element.elements['url'] != nil
+				self.url = xml_element.elements['url'].text
+			end
+			if xml_element.elements['method'] != nil
+				self.method = xml_element.elements['method'].text
+			end
+			if xml_element.elements['data'] != nil
+				self.data = KalturaClientBase.object_from_xml(xml_element.elements['data'], 'KalturaHttpNotificationData')
+			end
+			if xml_element.elements['timeout'] != nil
+				self.timeout = xml_element.elements['timeout'].text
+			end
+			if xml_element.elements['connectTimeout'] != nil
+				self.connect_timeout = xml_element.elements['connectTimeout'].text
+			end
+			if xml_element.elements['username'] != nil
+				self.username = xml_element.elements['username'].text
+			end
+			if xml_element.elements['password'] != nil
+				self.password = xml_element.elements['password'].text
+			end
+			if xml_element.elements['authenticationMethod'] != nil
+				self.authentication_method = xml_element.elements['authenticationMethod'].text
+			end
+			if xml_element.elements['sslVersion'] != nil
+				self.ssl_version = xml_element.elements['sslVersion'].text
+			end
+			if xml_element.elements['sslCertificate'] != nil
+				self.ssl_certificate = xml_element.elements['sslCertificate'].text
+			end
+			if xml_element.elements['sslCertificateType'] != nil
+				self.ssl_certificate_type = xml_element.elements['sslCertificateType'].text
+			end
+			if xml_element.elements['sslCertificatePassword'] != nil
+				self.ssl_certificate_password = xml_element.elements['sslCertificatePassword'].text
+			end
+			if xml_element.elements['sslEngine'] != nil
+				self.ssl_engine = xml_element.elements['sslEngine'].text
+			end
+			if xml_element.elements['sslEngineDefault'] != nil
+				self.ssl_engine_default = xml_element.elements['sslEngineDefault'].text
+			end
+			if xml_element.elements['sslKeyType'] != nil
+				self.ssl_key_type = xml_element.elements['sslKeyType'].text
+			end
+			if xml_element.elements['sslKey'] != nil
+				self.ssl_key = xml_element.elements['sslKey'].text
+			end
+			if xml_element.elements['sslKeyPassword'] != nil
+				self.ssl_key_password = xml_element.elements['sslKeyPassword'].text
+			end
+			if xml_element.elements['customHeaders'] != nil
+				self.custom_headers = KalturaClientBase.object_from_xml(xml_element.elements['customHeaders'], 'KalturaKeyValue')
+			end
 		end
 
 	end
@@ -307,25 +367,63 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.url = xml_element.elements['url'].text
-			self.method = xml_element.elements['method'].text
-			self.data = xml_element.elements['data'].text
-			self.timeout = xml_element.elements['timeout'].text
-			self.connect_timeout = xml_element.elements['connectTimeout'].text
-			self.username = xml_element.elements['username'].text
-			self.password = xml_element.elements['password'].text
-			self.authentication_method = xml_element.elements['authenticationMethod'].text
-			self.ssl_version = xml_element.elements['sslVersion'].text
-			self.ssl_certificate = xml_element.elements['sslCertificate'].text
-			self.ssl_certificate_type = xml_element.elements['sslCertificateType'].text
-			self.ssl_certificate_password = xml_element.elements['sslCertificatePassword'].text
-			self.ssl_engine = xml_element.elements['sslEngine'].text
-			self.ssl_engine_default = xml_element.elements['sslEngineDefault'].text
-			self.ssl_key_type = xml_element.elements['sslKeyType'].text
-			self.ssl_key = xml_element.elements['sslKey'].text
-			self.ssl_key_password = xml_element.elements['sslKeyPassword'].text
-			self.custom_headers = KalturaClientBase.object_from_xml(xml_element.elements['customHeaders'], 'KalturaKeyValue')
-			self.sign_secret = xml_element.elements['signSecret'].text
+			if xml_element.elements['url'] != nil
+				self.url = xml_element.elements['url'].text
+			end
+			if xml_element.elements['method'] != nil
+				self.method = xml_element.elements['method'].text
+			end
+			if xml_element.elements['data'] != nil
+				self.data = xml_element.elements['data'].text
+			end
+			if xml_element.elements['timeout'] != nil
+				self.timeout = xml_element.elements['timeout'].text
+			end
+			if xml_element.elements['connectTimeout'] != nil
+				self.connect_timeout = xml_element.elements['connectTimeout'].text
+			end
+			if xml_element.elements['username'] != nil
+				self.username = xml_element.elements['username'].text
+			end
+			if xml_element.elements['password'] != nil
+				self.password = xml_element.elements['password'].text
+			end
+			if xml_element.elements['authenticationMethod'] != nil
+				self.authentication_method = xml_element.elements['authenticationMethod'].text
+			end
+			if xml_element.elements['sslVersion'] != nil
+				self.ssl_version = xml_element.elements['sslVersion'].text
+			end
+			if xml_element.elements['sslCertificate'] != nil
+				self.ssl_certificate = xml_element.elements['sslCertificate'].text
+			end
+			if xml_element.elements['sslCertificateType'] != nil
+				self.ssl_certificate_type = xml_element.elements['sslCertificateType'].text
+			end
+			if xml_element.elements['sslCertificatePassword'] != nil
+				self.ssl_certificate_password = xml_element.elements['sslCertificatePassword'].text
+			end
+			if xml_element.elements['sslEngine'] != nil
+				self.ssl_engine = xml_element.elements['sslEngine'].text
+			end
+			if xml_element.elements['sslEngineDefault'] != nil
+				self.ssl_engine_default = xml_element.elements['sslEngineDefault'].text
+			end
+			if xml_element.elements['sslKeyType'] != nil
+				self.ssl_key_type = xml_element.elements['sslKeyType'].text
+			end
+			if xml_element.elements['sslKey'] != nil
+				self.ssl_key = xml_element.elements['sslKey'].text
+			end
+			if xml_element.elements['sslKeyPassword'] != nil
+				self.ssl_key_password = xml_element.elements['sslKeyPassword'].text
+			end
+			if xml_element.elements['customHeaders'] != nil
+				self.custom_headers = KalturaClientBase.object_from_xml(xml_element.elements['customHeaders'], 'KalturaKeyValue')
+			end
+			if xml_element.elements['signSecret'] != nil
+				self.sign_secret = xml_element.elements['signSecret'].text
+			end
 		end
 
 	end

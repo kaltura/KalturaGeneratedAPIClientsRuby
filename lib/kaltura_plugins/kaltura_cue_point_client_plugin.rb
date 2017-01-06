@@ -117,22 +117,54 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.id = xml_element.elements['id'].text
-			self.cue_point_type = xml_element.elements['cuePointType'].text
-			self.status = xml_element.elements['status'].text
-			self.entry_id = xml_element.elements['entryId'].text
-			self.partner_id = xml_element.elements['partnerId'].text
-			self.created_at = xml_element.elements['createdAt'].text
-			self.updated_at = xml_element.elements['updatedAt'].text
-			self.triggered_at = xml_element.elements['triggeredAt'].text
-			self.tags = xml_element.elements['tags'].text
-			self.start_time = xml_element.elements['startTime'].text
-			self.user_id = xml_element.elements['userId'].text
-			self.partner_data = xml_element.elements['partnerData'].text
-			self.partner_sort_value = xml_element.elements['partnerSortValue'].text
-			self.force_stop = xml_element.elements['forceStop'].text
-			self.thumb_offset = xml_element.elements['thumbOffset'].text
-			self.system_name = xml_element.elements['systemName'].text
+			if xml_element.elements['id'] != nil
+				self.id = xml_element.elements['id'].text
+			end
+			if xml_element.elements['cuePointType'] != nil
+				self.cue_point_type = xml_element.elements['cuePointType'].text
+			end
+			if xml_element.elements['status'] != nil
+				self.status = xml_element.elements['status'].text
+			end
+			if xml_element.elements['entryId'] != nil
+				self.entry_id = xml_element.elements['entryId'].text
+			end
+			if xml_element.elements['partnerId'] != nil
+				self.partner_id = xml_element.elements['partnerId'].text
+			end
+			if xml_element.elements['createdAt'] != nil
+				self.created_at = xml_element.elements['createdAt'].text
+			end
+			if xml_element.elements['updatedAt'] != nil
+				self.updated_at = xml_element.elements['updatedAt'].text
+			end
+			if xml_element.elements['triggeredAt'] != nil
+				self.triggered_at = xml_element.elements['triggeredAt'].text
+			end
+			if xml_element.elements['tags'] != nil
+				self.tags = xml_element.elements['tags'].text
+			end
+			if xml_element.elements['startTime'] != nil
+				self.start_time = xml_element.elements['startTime'].text
+			end
+			if xml_element.elements['userId'] != nil
+				self.user_id = xml_element.elements['userId'].text
+			end
+			if xml_element.elements['partnerData'] != nil
+				self.partner_data = xml_element.elements['partnerData'].text
+			end
+			if xml_element.elements['partnerSortValue'] != nil
+				self.partner_sort_value = xml_element.elements['partnerSortValue'].text
+			end
+			if xml_element.elements['forceStop'] != nil
+				self.force_stop = xml_element.elements['forceStop'].text
+			end
+			if xml_element.elements['thumbOffset'] != nil
+				self.thumb_offset = xml_element.elements['thumbOffset'].text
+			end
+			if xml_element.elements['systemName'] != nil
+				self.system_name = xml_element.elements['systemName'].text
+			end
 		end
 
 	end
@@ -143,7 +175,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaCuePoint')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaCuePoint')
+			end
 		end
 
 	end
@@ -220,34 +254,90 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.id_equal = xml_element.elements['idEqual'].text
-			self.id_in = xml_element.elements['idIn'].text
-			self.cue_point_type_equal = xml_element.elements['cuePointTypeEqual'].text
-			self.cue_point_type_in = xml_element.elements['cuePointTypeIn'].text
-			self.status_equal = xml_element.elements['statusEqual'].text
-			self.status_in = xml_element.elements['statusIn'].text
-			self.entry_id_equal = xml_element.elements['entryIdEqual'].text
-			self.entry_id_in = xml_element.elements['entryIdIn'].text
-			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
-			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
-			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
-			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
-			self.triggered_at_greater_than_or_equal = xml_element.elements['triggeredAtGreaterThanOrEqual'].text
-			self.triggered_at_less_than_or_equal = xml_element.elements['triggeredAtLessThanOrEqual'].text
-			self.tags_like = xml_element.elements['tagsLike'].text
-			self.tags_multi_like_or = xml_element.elements['tagsMultiLikeOr'].text
-			self.tags_multi_like_and = xml_element.elements['tagsMultiLikeAnd'].text
-			self.start_time_greater_than_or_equal = xml_element.elements['startTimeGreaterThanOrEqual'].text
-			self.start_time_less_than_or_equal = xml_element.elements['startTimeLessThanOrEqual'].text
-			self.user_id_equal = xml_element.elements['userIdEqual'].text
-			self.user_id_in = xml_element.elements['userIdIn'].text
-			self.partner_sort_value_equal = xml_element.elements['partnerSortValueEqual'].text
-			self.partner_sort_value_in = xml_element.elements['partnerSortValueIn'].text
-			self.partner_sort_value_greater_than_or_equal = xml_element.elements['partnerSortValueGreaterThanOrEqual'].text
-			self.partner_sort_value_less_than_or_equal = xml_element.elements['partnerSortValueLessThanOrEqual'].text
-			self.force_stop_equal = xml_element.elements['forceStopEqual'].text
-			self.system_name_equal = xml_element.elements['systemNameEqual'].text
-			self.system_name_in = xml_element.elements['systemNameIn'].text
+			if xml_element.elements['idEqual'] != nil
+				self.id_equal = xml_element.elements['idEqual'].text
+			end
+			if xml_element.elements['idIn'] != nil
+				self.id_in = xml_element.elements['idIn'].text
+			end
+			if xml_element.elements['cuePointTypeEqual'] != nil
+				self.cue_point_type_equal = xml_element.elements['cuePointTypeEqual'].text
+			end
+			if xml_element.elements['cuePointTypeIn'] != nil
+				self.cue_point_type_in = xml_element.elements['cuePointTypeIn'].text
+			end
+			if xml_element.elements['statusEqual'] != nil
+				self.status_equal = xml_element.elements['statusEqual'].text
+			end
+			if xml_element.elements['statusIn'] != nil
+				self.status_in = xml_element.elements['statusIn'].text
+			end
+			if xml_element.elements['entryIdEqual'] != nil
+				self.entry_id_equal = xml_element.elements['entryIdEqual'].text
+			end
+			if xml_element.elements['entryIdIn'] != nil
+				self.entry_id_in = xml_element.elements['entryIdIn'].text
+			end
+			if xml_element.elements['createdAtGreaterThanOrEqual'] != nil
+				self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['createdAtLessThanOrEqual'] != nil
+				self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtGreaterThanOrEqual'] != nil
+				self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtLessThanOrEqual'] != nil
+				self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['triggeredAtGreaterThanOrEqual'] != nil
+				self.triggered_at_greater_than_or_equal = xml_element.elements['triggeredAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['triggeredAtLessThanOrEqual'] != nil
+				self.triggered_at_less_than_or_equal = xml_element.elements['triggeredAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['tagsLike'] != nil
+				self.tags_like = xml_element.elements['tagsLike'].text
+			end
+			if xml_element.elements['tagsMultiLikeOr'] != nil
+				self.tags_multi_like_or = xml_element.elements['tagsMultiLikeOr'].text
+			end
+			if xml_element.elements['tagsMultiLikeAnd'] != nil
+				self.tags_multi_like_and = xml_element.elements['tagsMultiLikeAnd'].text
+			end
+			if xml_element.elements['startTimeGreaterThanOrEqual'] != nil
+				self.start_time_greater_than_or_equal = xml_element.elements['startTimeGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['startTimeLessThanOrEqual'] != nil
+				self.start_time_less_than_or_equal = xml_element.elements['startTimeLessThanOrEqual'].text
+			end
+			if xml_element.elements['userIdEqual'] != nil
+				self.user_id_equal = xml_element.elements['userIdEqual'].text
+			end
+			if xml_element.elements['userIdIn'] != nil
+				self.user_id_in = xml_element.elements['userIdIn'].text
+			end
+			if xml_element.elements['partnerSortValueEqual'] != nil
+				self.partner_sort_value_equal = xml_element.elements['partnerSortValueEqual'].text
+			end
+			if xml_element.elements['partnerSortValueIn'] != nil
+				self.partner_sort_value_in = xml_element.elements['partnerSortValueIn'].text
+			end
+			if xml_element.elements['partnerSortValueGreaterThanOrEqual'] != nil
+				self.partner_sort_value_greater_than_or_equal = xml_element.elements['partnerSortValueGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['partnerSortValueLessThanOrEqual'] != nil
+				self.partner_sort_value_less_than_or_equal = xml_element.elements['partnerSortValueLessThanOrEqual'].text
+			end
+			if xml_element.elements['forceStopEqual'] != nil
+				self.force_stop_equal = xml_element.elements['forceStopEqual'].text
+			end
+			if xml_element.elements['systemNameEqual'] != nil
+				self.system_name_equal = xml_element.elements['systemNameEqual'].text
+			end
+			if xml_element.elements['systemNameIn'] != nil
+				self.system_name_in = xml_element.elements['systemNameIn'].text
+			end
 		end
 
 	end
@@ -266,9 +356,15 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.free_text = xml_element.elements['freeText'].text
-			self.user_id_equal_current = xml_element.elements['userIdEqualCurrent'].text
-			self.user_id_current = xml_element.elements['userIdCurrent'].text
+			if xml_element.elements['freeText'] != nil
+				self.free_text = xml_element.elements['freeText'].text
+			end
+			if xml_element.elements['userIdEqualCurrent'] != nil
+				self.user_id_equal_current = xml_element.elements['userIdEqualCurrent'].text
+			end
+			if xml_element.elements['userIdCurrent'] != nil
+				self.user_id_current = xml_element.elements['userIdCurrent'].text
+			end
 		end
 
 	end

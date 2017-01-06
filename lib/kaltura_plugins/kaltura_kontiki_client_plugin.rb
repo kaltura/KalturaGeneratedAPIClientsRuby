@@ -42,7 +42,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.service_token = xml_element.elements['serviceToken'].text
+			if xml_element.elements['serviceToken'] != nil
+				self.service_token = xml_element.elements['serviceToken'].text
+			end
 		end
 
 	end
@@ -55,8 +57,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.content_moid = xml_element.elements['contentMoid'].text
-			self.service_token = xml_element.elements['serviceToken'].text
+			if xml_element.elements['contentMoid'] != nil
+				self.content_moid = xml_element.elements['contentMoid'].text
+			end
+			if xml_element.elements['serviceToken'] != nil
+				self.service_token = xml_element.elements['serviceToken'].text
+			end
 		end
 
 	end
@@ -71,9 +77,15 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.flavor_asset_id = xml_element.elements['flavorAssetId'].text
-			self.content_moid = xml_element.elements['contentMoid'].text
-			self.service_token = xml_element.elements['serviceToken'].text
+			if xml_element.elements['flavorAssetId'] != nil
+				self.flavor_asset_id = xml_element.elements['flavorAssetId'].text
+			end
+			if xml_element.elements['contentMoid'] != nil
+				self.content_moid = xml_element.elements['contentMoid'].text
+			end
+			if xml_element.elements['serviceToken'] != nil
+				self.service_token = xml_element.elements['serviceToken'].text
+			end
 		end
 
 	end

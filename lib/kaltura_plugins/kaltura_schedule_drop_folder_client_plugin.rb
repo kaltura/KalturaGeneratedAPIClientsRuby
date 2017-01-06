@@ -41,7 +41,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.events_type = xml_element.elements['eventsType'].text
+			if xml_element.elements['eventsType'] != nil
+				self.events_type = xml_element.elements['eventsType'].text
+			end
 		end
 
 	end

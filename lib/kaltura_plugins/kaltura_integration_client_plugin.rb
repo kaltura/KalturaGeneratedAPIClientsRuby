@@ -69,11 +69,21 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.callback_notification_url = xml_element.elements['callbackNotificationUrl'].text
-			self.provider_type = xml_element.elements['providerType'].text
-			self.provider_data = KalturaClientBase.object_from_xml(xml_element.elements['providerData'], 'KalturaIntegrationJobProviderData')
-			self.trigger_type = xml_element.elements['triggerType'].text
-			self.trigger_data = KalturaClientBase.object_from_xml(xml_element.elements['triggerData'], 'KalturaIntegrationJobTriggerData')
+			if xml_element.elements['callbackNotificationUrl'] != nil
+				self.callback_notification_url = xml_element.elements['callbackNotificationUrl'].text
+			end
+			if xml_element.elements['providerType'] != nil
+				self.provider_type = xml_element.elements['providerType'].text
+			end
+			if xml_element.elements['providerData'] != nil
+				self.provider_data = KalturaClientBase.object_from_xml(xml_element.elements['providerData'], 'KalturaIntegrationJobProviderData')
+			end
+			if xml_element.elements['triggerType'] != nil
+				self.trigger_type = xml_element.elements['triggerType'].text
+			end
+			if xml_element.elements['triggerData'] != nil
+				self.trigger_data = KalturaClientBase.object_from_xml(xml_element.elements['triggerData'], 'KalturaIntegrationJobTriggerData')
+			end
 		end
 
 	end

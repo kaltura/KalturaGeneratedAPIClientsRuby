@@ -212,8 +212,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.validation_error = xml_element.elements['validationError'].text
-			self.asset_distribution_conditions = KalturaClientBase.object_from_xml(xml_element.elements['assetDistributionConditions'], 'KalturaAssetDistributionCondition')
+			if xml_element.elements['validationError'] != nil
+				self.validation_error = xml_element.elements['validationError'].text
+			end
+			if xml_element.elements['assetDistributionConditions'] != nil
+				self.asset_distribution_conditions = KalturaClientBase.object_from_xml(xml_element.elements['assetDistributionConditions'], 'KalturaAssetDistributionCondition')
+			end
 		end
 
 	end
@@ -253,14 +257,30 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.field_name = xml_element.elements['fieldName'].text
-			self.user_friendly_field_name = xml_element.elements['userFriendlyFieldName'].text
-			self.entry_mrss_xslt = xml_element.elements['entryMrssXslt'].text
-			self.is_required = xml_element.elements['isRequired'].text
-			self.update_on_change = xml_element.elements['updateOnChange'].text
-			self.update_params = KalturaClientBase.object_from_xml(xml_element.elements['updateParams'], 'KalturaString')
-			self.is_default = xml_element.elements['isDefault'].text
-			self.trigger_delete_on_error = xml_element.elements['triggerDeleteOnError'].text
+			if xml_element.elements['fieldName'] != nil
+				self.field_name = xml_element.elements['fieldName'].text
+			end
+			if xml_element.elements['userFriendlyFieldName'] != nil
+				self.user_friendly_field_name = xml_element.elements['userFriendlyFieldName'].text
+			end
+			if xml_element.elements['entryMrssXslt'] != nil
+				self.entry_mrss_xslt = xml_element.elements['entryMrssXslt'].text
+			end
+			if xml_element.elements['isRequired'] != nil
+				self.is_required = xml_element.elements['isRequired'].text
+			end
+			if xml_element.elements['updateOnChange'] != nil
+				self.update_on_change = xml_element.elements['updateOnChange'].text
+			end
+			if xml_element.elements['updateParams'] != nil
+				self.update_params = KalturaClientBase.object_from_xml(xml_element.elements['updateParams'], 'KalturaString')
+			end
+			if xml_element.elements['isDefault'] != nil
+				self.is_default = xml_element.elements['isDefault'].text
+			end
+			if xml_element.elements['triggerDeleteOnError'] != nil
+				self.trigger_delete_on_error = xml_element.elements['triggerDeleteOnError'].text
+			end
 		end
 
 	end
@@ -287,8 +307,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.width = xml_element.elements['width'].text
-			self.height = xml_element.elements['height'].text
+			if xml_element.elements['width'] != nil
+				self.width = xml_element.elements['width'].text
+			end
+			if xml_element.elements['height'] != nil
+				self.height = xml_element.elements['height'].text
+			end
 		end
 
 	end
@@ -380,30 +404,78 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.id = xml_element.elements['id'].text
-			self.created_at = xml_element.elements['createdAt'].text
-			self.updated_at = xml_element.elements['updatedAt'].text
-			self.partner_id = xml_element.elements['partnerId'].text
-			self.provider_type = xml_element.elements['providerType'].text
-			self.name = xml_element.elements['name'].text
-			self.status = xml_element.elements['status'].text
-			self.submit_enabled = xml_element.elements['submitEnabled'].text
-			self.update_enabled = xml_element.elements['updateEnabled'].text
-			self.delete_enabled = xml_element.elements['deleteEnabled'].text
-			self.report_enabled = xml_element.elements['reportEnabled'].text
-			self.auto_create_flavors = xml_element.elements['autoCreateFlavors'].text
-			self.auto_create_thumb = xml_element.elements['autoCreateThumb'].text
-			self.optional_flavor_params_ids = xml_element.elements['optionalFlavorParamsIds'].text
-			self.required_flavor_params_ids = xml_element.elements['requiredFlavorParamsIds'].text
-			self.optional_thumb_dimensions = KalturaClientBase.object_from_xml(xml_element.elements['optionalThumbDimensions'], 'KalturaDistributionThumbDimensions')
-			self.required_thumb_dimensions = KalturaClientBase.object_from_xml(xml_element.elements['requiredThumbDimensions'], 'KalturaDistributionThumbDimensions')
-			self.optional_asset_distribution_rules = KalturaClientBase.object_from_xml(xml_element.elements['optionalAssetDistributionRules'], 'KalturaAssetDistributionRule')
-			self.required_asset_distribution_rules = KalturaClientBase.object_from_xml(xml_element.elements['requiredAssetDistributionRules'], 'KalturaAssetDistributionRule')
-			self.sunrise_default_offset = xml_element.elements['sunriseDefaultOffset'].text
-			self.sunset_default_offset = xml_element.elements['sunsetDefaultOffset'].text
-			self.recommended_storage_profile_for_download = xml_element.elements['recommendedStorageProfileForDownload'].text
-			self.recommended_dc_for_download = xml_element.elements['recommendedDcForDownload'].text
-			self.recommended_dc_for_execute = xml_element.elements['recommendedDcForExecute'].text
+			if xml_element.elements['id'] != nil
+				self.id = xml_element.elements['id'].text
+			end
+			if xml_element.elements['createdAt'] != nil
+				self.created_at = xml_element.elements['createdAt'].text
+			end
+			if xml_element.elements['updatedAt'] != nil
+				self.updated_at = xml_element.elements['updatedAt'].text
+			end
+			if xml_element.elements['partnerId'] != nil
+				self.partner_id = xml_element.elements['partnerId'].text
+			end
+			if xml_element.elements['providerType'] != nil
+				self.provider_type = xml_element.elements['providerType'].text
+			end
+			if xml_element.elements['name'] != nil
+				self.name = xml_element.elements['name'].text
+			end
+			if xml_element.elements['status'] != nil
+				self.status = xml_element.elements['status'].text
+			end
+			if xml_element.elements['submitEnabled'] != nil
+				self.submit_enabled = xml_element.elements['submitEnabled'].text
+			end
+			if xml_element.elements['updateEnabled'] != nil
+				self.update_enabled = xml_element.elements['updateEnabled'].text
+			end
+			if xml_element.elements['deleteEnabled'] != nil
+				self.delete_enabled = xml_element.elements['deleteEnabled'].text
+			end
+			if xml_element.elements['reportEnabled'] != nil
+				self.report_enabled = xml_element.elements['reportEnabled'].text
+			end
+			if xml_element.elements['autoCreateFlavors'] != nil
+				self.auto_create_flavors = xml_element.elements['autoCreateFlavors'].text
+			end
+			if xml_element.elements['autoCreateThumb'] != nil
+				self.auto_create_thumb = xml_element.elements['autoCreateThumb'].text
+			end
+			if xml_element.elements['optionalFlavorParamsIds'] != nil
+				self.optional_flavor_params_ids = xml_element.elements['optionalFlavorParamsIds'].text
+			end
+			if xml_element.elements['requiredFlavorParamsIds'] != nil
+				self.required_flavor_params_ids = xml_element.elements['requiredFlavorParamsIds'].text
+			end
+			if xml_element.elements['optionalThumbDimensions'] != nil
+				self.optional_thumb_dimensions = KalturaClientBase.object_from_xml(xml_element.elements['optionalThumbDimensions'], 'KalturaDistributionThumbDimensions')
+			end
+			if xml_element.elements['requiredThumbDimensions'] != nil
+				self.required_thumb_dimensions = KalturaClientBase.object_from_xml(xml_element.elements['requiredThumbDimensions'], 'KalturaDistributionThumbDimensions')
+			end
+			if xml_element.elements['optionalAssetDistributionRules'] != nil
+				self.optional_asset_distribution_rules = KalturaClientBase.object_from_xml(xml_element.elements['optionalAssetDistributionRules'], 'KalturaAssetDistributionRule')
+			end
+			if xml_element.elements['requiredAssetDistributionRules'] != nil
+				self.required_asset_distribution_rules = KalturaClientBase.object_from_xml(xml_element.elements['requiredAssetDistributionRules'], 'KalturaAssetDistributionRule')
+			end
+			if xml_element.elements['sunriseDefaultOffset'] != nil
+				self.sunrise_default_offset = xml_element.elements['sunriseDefaultOffset'].text
+			end
+			if xml_element.elements['sunsetDefaultOffset'] != nil
+				self.sunset_default_offset = xml_element.elements['sunsetDefaultOffset'].text
+			end
+			if xml_element.elements['recommendedStorageProfileForDownload'] != nil
+				self.recommended_storage_profile_for_download = xml_element.elements['recommendedStorageProfileForDownload'].text
+			end
+			if xml_element.elements['recommendedDcForDownload'] != nil
+				self.recommended_dc_for_download = xml_element.elements['recommendedDcForDownload'].text
+			end
+			if xml_element.elements['recommendedDcForExecute'] != nil
+				self.recommended_dc_for_execute = xml_element.elements['recommendedDcForExecute'].text
+			end
 		end
 
 	end
@@ -437,15 +509,33 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.type = xml_element.elements['type'].text
-			self.name = xml_element.elements['name'].text
-			self.schedule_update_enabled = xml_element.elements['scheduleUpdateEnabled'].text
-			self.availability_update_enabled = xml_element.elements['availabilityUpdateEnabled'].text
-			self.delete_instead_update = xml_element.elements['deleteInsteadUpdate'].text
-			self.interval_before_sunrise = xml_element.elements['intervalBeforeSunrise'].text
-			self.interval_before_sunset = xml_element.elements['intervalBeforeSunset'].text
-			self.update_required_entry_fields = xml_element.elements['updateRequiredEntryFields'].text
-			self.update_required_metadata_xpaths = xml_element.elements['updateRequiredMetadataXPaths'].text
+			if xml_element.elements['type'] != nil
+				self.type = xml_element.elements['type'].text
+			end
+			if xml_element.elements['name'] != nil
+				self.name = xml_element.elements['name'].text
+			end
+			if xml_element.elements['scheduleUpdateEnabled'] != nil
+				self.schedule_update_enabled = xml_element.elements['scheduleUpdateEnabled'].text
+			end
+			if xml_element.elements['availabilityUpdateEnabled'] != nil
+				self.availability_update_enabled = xml_element.elements['availabilityUpdateEnabled'].text
+			end
+			if xml_element.elements['deleteInsteadUpdate'] != nil
+				self.delete_instead_update = xml_element.elements['deleteInsteadUpdate'].text
+			end
+			if xml_element.elements['intervalBeforeSunrise'] != nil
+				self.interval_before_sunrise = xml_element.elements['intervalBeforeSunrise'].text
+			end
+			if xml_element.elements['intervalBeforeSunset'] != nil
+				self.interval_before_sunset = xml_element.elements['intervalBeforeSunset'].text
+			end
+			if xml_element.elements['updateRequiredEntryFields'] != nil
+				self.update_required_entry_fields = xml_element.elements['updateRequiredEntryFields'].text
+			end
+			if xml_element.elements['updateRequiredMetadataXPaths'] != nil
+				self.update_required_metadata_xpaths = xml_element.elements['updateRequiredMetadataXPaths'].text
+			end
 		end
 
 	end
@@ -458,9 +548,15 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.version = xml_element.elements['version'].text
-			self.asset_id = xml_element.elements['assetId'].text
-			self.remote_id = xml_element.elements['remoteId'].text
+			if xml_element.elements['version'] != nil
+				self.version = xml_element.elements['version'].text
+			end
+			if xml_element.elements['assetId'] != nil
+				self.asset_id = xml_element.elements['assetId'].text
+			end
+			if xml_element.elements['remoteId'] != nil
+				self.remote_id = xml_element.elements['remoteId'].text
+			end
 		end
 
 	end
@@ -479,9 +575,15 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.action = xml_element.elements['action'].text
-			self.error_type = xml_element.elements['errorType'].text
-			self.description = xml_element.elements['description'].text
+			if xml_element.elements['action'] != nil
+				self.action = xml_element.elements['action'].text
+			end
+			if xml_element.elements['errorType'] != nil
+				self.error_type = xml_element.elements['errorType'].text
+			end
+			if xml_element.elements['description'] != nil
+				self.description = xml_element.elements['description'].text
+			end
 		end
 
 	end
@@ -594,34 +696,90 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.id = xml_element.elements['id'].text
-			self.created_at = xml_element.elements['createdAt'].text
-			self.updated_at = xml_element.elements['updatedAt'].text
-			self.submitted_at = xml_element.elements['submittedAt'].text
-			self.entry_id = xml_element.elements['entryId'].text
-			self.partner_id = xml_element.elements['partnerId'].text
-			self.distribution_profile_id = xml_element.elements['distributionProfileId'].text
-			self.status = xml_element.elements['status'].text
-			self.sun_status = xml_element.elements['sunStatus'].text
-			self.dirty_status = xml_element.elements['dirtyStatus'].text
-			self.thumb_asset_ids = xml_element.elements['thumbAssetIds'].text
-			self.flavor_asset_ids = xml_element.elements['flavorAssetIds'].text
-			self.asset_ids = xml_element.elements['assetIds'].text
-			self.sunrise = xml_element.elements['sunrise'].text
-			self.sunset = xml_element.elements['sunset'].text
-			self.remote_id = xml_element.elements['remoteId'].text
-			self.plays = xml_element.elements['plays'].text
-			self.views = xml_element.elements['views'].text
-			self.validation_errors = KalturaClientBase.object_from_xml(xml_element.elements['validationErrors'], 'KalturaDistributionValidationError')
-			self.error_type = xml_element.elements['errorType'].text
-			self.error_number = xml_element.elements['errorNumber'].text
-			self.error_description = xml_element.elements['errorDescription'].text
-			self.has_submit_results_log = xml_element.elements['hasSubmitResultsLog'].text
-			self.has_submit_sent_data_log = xml_element.elements['hasSubmitSentDataLog'].text
-			self.has_update_results_log = xml_element.elements['hasUpdateResultsLog'].text
-			self.has_update_sent_data_log = xml_element.elements['hasUpdateSentDataLog'].text
-			self.has_delete_results_log = xml_element.elements['hasDeleteResultsLog'].text
-			self.has_delete_sent_data_log = xml_element.elements['hasDeleteSentDataLog'].text
+			if xml_element.elements['id'] != nil
+				self.id = xml_element.elements['id'].text
+			end
+			if xml_element.elements['createdAt'] != nil
+				self.created_at = xml_element.elements['createdAt'].text
+			end
+			if xml_element.elements['updatedAt'] != nil
+				self.updated_at = xml_element.elements['updatedAt'].text
+			end
+			if xml_element.elements['submittedAt'] != nil
+				self.submitted_at = xml_element.elements['submittedAt'].text
+			end
+			if xml_element.elements['entryId'] != nil
+				self.entry_id = xml_element.elements['entryId'].text
+			end
+			if xml_element.elements['partnerId'] != nil
+				self.partner_id = xml_element.elements['partnerId'].text
+			end
+			if xml_element.elements['distributionProfileId'] != nil
+				self.distribution_profile_id = xml_element.elements['distributionProfileId'].text
+			end
+			if xml_element.elements['status'] != nil
+				self.status = xml_element.elements['status'].text
+			end
+			if xml_element.elements['sunStatus'] != nil
+				self.sun_status = xml_element.elements['sunStatus'].text
+			end
+			if xml_element.elements['dirtyStatus'] != nil
+				self.dirty_status = xml_element.elements['dirtyStatus'].text
+			end
+			if xml_element.elements['thumbAssetIds'] != nil
+				self.thumb_asset_ids = xml_element.elements['thumbAssetIds'].text
+			end
+			if xml_element.elements['flavorAssetIds'] != nil
+				self.flavor_asset_ids = xml_element.elements['flavorAssetIds'].text
+			end
+			if xml_element.elements['assetIds'] != nil
+				self.asset_ids = xml_element.elements['assetIds'].text
+			end
+			if xml_element.elements['sunrise'] != nil
+				self.sunrise = xml_element.elements['sunrise'].text
+			end
+			if xml_element.elements['sunset'] != nil
+				self.sunset = xml_element.elements['sunset'].text
+			end
+			if xml_element.elements['remoteId'] != nil
+				self.remote_id = xml_element.elements['remoteId'].text
+			end
+			if xml_element.elements['plays'] != nil
+				self.plays = xml_element.elements['plays'].text
+			end
+			if xml_element.elements['views'] != nil
+				self.views = xml_element.elements['views'].text
+			end
+			if xml_element.elements['validationErrors'] != nil
+				self.validation_errors = KalturaClientBase.object_from_xml(xml_element.elements['validationErrors'], 'KalturaDistributionValidationError')
+			end
+			if xml_element.elements['errorType'] != nil
+				self.error_type = xml_element.elements['errorType'].text
+			end
+			if xml_element.elements['errorNumber'] != nil
+				self.error_number = xml_element.elements['errorNumber'].text
+			end
+			if xml_element.elements['errorDescription'] != nil
+				self.error_description = xml_element.elements['errorDescription'].text
+			end
+			if xml_element.elements['hasSubmitResultsLog'] != nil
+				self.has_submit_results_log = xml_element.elements['hasSubmitResultsLog'].text
+			end
+			if xml_element.elements['hasSubmitSentDataLog'] != nil
+				self.has_submit_sent_data_log = xml_element.elements['hasSubmitSentDataLog'].text
+			end
+			if xml_element.elements['hasUpdateResultsLog'] != nil
+				self.has_update_results_log = xml_element.elements['hasUpdateResultsLog'].text
+			end
+			if xml_element.elements['hasUpdateSentDataLog'] != nil
+				self.has_update_sent_data_log = xml_element.elements['hasUpdateSentDataLog'].text
+			end
+			if xml_element.elements['hasDeleteResultsLog'] != nil
+				self.has_delete_results_log = xml_element.elements['hasDeleteResultsLog'].text
+			end
+			if xml_element.elements['hasDeleteSentDataLog'] != nil
+				self.has_delete_sent_data_log = xml_element.elements['hasDeleteSentDataLog'].text
+			end
 		end
 
 	end
@@ -645,14 +803,30 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.protocol = xml_element.elements['protocol'].text
-			self.server_url = xml_element.elements['serverUrl'].text
-			self.server_path = xml_element.elements['serverPath'].text
-			self.username = xml_element.elements['username'].text
-			self.password = xml_element.elements['password'].text
-			self.ftp_passive_mode = xml_element.elements['ftpPassiveMode'].text
-			self.http_field_name = xml_element.elements['httpFieldName'].text
-			self.http_file_name = xml_element.elements['httpFileName'].text
+			if xml_element.elements['protocol'] != nil
+				self.protocol = xml_element.elements['protocol'].text
+			end
+			if xml_element.elements['serverUrl'] != nil
+				self.server_url = xml_element.elements['serverUrl'].text
+			end
+			if xml_element.elements['serverPath'] != nil
+				self.server_path = xml_element.elements['serverPath'].text
+			end
+			if xml_element.elements['username'] != nil
+				self.username = xml_element.elements['username'].text
+			end
+			if xml_element.elements['password'] != nil
+				self.password = xml_element.elements['password'].text
+			end
+			if xml_element.elements['ftpPassiveMode'] != nil
+				self.ftp_passive_mode = xml_element.elements['ftpPassiveMode'].text
+			end
+			if xml_element.elements['httpFieldName'] != nil
+				self.http_field_name = xml_element.elements['httpFieldName'].text
+			end
+			if xml_element.elements['httpFileName'] != nil
+				self.http_file_name = xml_element.elements['httpFileName'].text
+			end
 		end
 
 	end
@@ -706,23 +880,57 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.id = xml_element.elements['id'].text
-			self.created_at = xml_element.elements['createdAt'].text
-			self.updated_at = xml_element.elements['updatedAt'].text
-			self.generic_distribution_provider_id = xml_element.elements['genericDistributionProviderId'].text
-			self.action = xml_element.elements['action'].text
-			self.status = xml_element.elements['status'].text
-			self.results_parser = xml_element.elements['resultsParser'].text
-			self.protocol = xml_element.elements['protocol'].text
-			self.server_address = xml_element.elements['serverAddress'].text
-			self.remote_path = xml_element.elements['remotePath'].text
-			self.remote_username = xml_element.elements['remoteUsername'].text
-			self.remote_password = xml_element.elements['remotePassword'].text
-			self.editable_fields = xml_element.elements['editableFields'].text
-			self.mandatory_fields = xml_element.elements['mandatoryFields'].text
-			self.mrss_transformer = xml_element.elements['mrssTransformer'].text
-			self.mrss_validator = xml_element.elements['mrssValidator'].text
-			self.results_transformer = xml_element.elements['resultsTransformer'].text
+			if xml_element.elements['id'] != nil
+				self.id = xml_element.elements['id'].text
+			end
+			if xml_element.elements['createdAt'] != nil
+				self.created_at = xml_element.elements['createdAt'].text
+			end
+			if xml_element.elements['updatedAt'] != nil
+				self.updated_at = xml_element.elements['updatedAt'].text
+			end
+			if xml_element.elements['genericDistributionProviderId'] != nil
+				self.generic_distribution_provider_id = xml_element.elements['genericDistributionProviderId'].text
+			end
+			if xml_element.elements['action'] != nil
+				self.action = xml_element.elements['action'].text
+			end
+			if xml_element.elements['status'] != nil
+				self.status = xml_element.elements['status'].text
+			end
+			if xml_element.elements['resultsParser'] != nil
+				self.results_parser = xml_element.elements['resultsParser'].text
+			end
+			if xml_element.elements['protocol'] != nil
+				self.protocol = xml_element.elements['protocol'].text
+			end
+			if xml_element.elements['serverAddress'] != nil
+				self.server_address = xml_element.elements['serverAddress'].text
+			end
+			if xml_element.elements['remotePath'] != nil
+				self.remote_path = xml_element.elements['remotePath'].text
+			end
+			if xml_element.elements['remoteUsername'] != nil
+				self.remote_username = xml_element.elements['remoteUsername'].text
+			end
+			if xml_element.elements['remotePassword'] != nil
+				self.remote_password = xml_element.elements['remotePassword'].text
+			end
+			if xml_element.elements['editableFields'] != nil
+				self.editable_fields = xml_element.elements['editableFields'].text
+			end
+			if xml_element.elements['mandatoryFields'] != nil
+				self.mandatory_fields = xml_element.elements['mandatoryFields'].text
+			end
+			if xml_element.elements['mrssTransformer'] != nil
+				self.mrss_transformer = xml_element.elements['mrssTransformer'].text
+			end
+			if xml_element.elements['mrssValidator'] != nil
+				self.mrss_validator = xml_element.elements['mrssValidator'].text
+			end
+			if xml_element.elements['resultsTransformer'] != nil
+				self.results_transformer = xml_element.elements['resultsTransformer'].text
+			end
 		end
 
 	end
@@ -765,18 +973,42 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.id = xml_element.elements['id'].text
-			self.created_at = xml_element.elements['createdAt'].text
-			self.updated_at = xml_element.elements['updatedAt'].text
-			self.partner_id = xml_element.elements['partnerId'].text
-			self.is_default = xml_element.elements['isDefault'].text
-			self.status = xml_element.elements['status'].text
-			self.optional_flavor_params_ids = xml_element.elements['optionalFlavorParamsIds'].text
-			self.required_flavor_params_ids = xml_element.elements['requiredFlavorParamsIds'].text
-			self.optional_thumb_dimensions = KalturaClientBase.object_from_xml(xml_element.elements['optionalThumbDimensions'], 'KalturaDistributionThumbDimensions')
-			self.required_thumb_dimensions = KalturaClientBase.object_from_xml(xml_element.elements['requiredThumbDimensions'], 'KalturaDistributionThumbDimensions')
-			self.editable_fields = xml_element.elements['editableFields'].text
-			self.mandatory_fields = xml_element.elements['mandatoryFields'].text
+			if xml_element.elements['id'] != nil
+				self.id = xml_element.elements['id'].text
+			end
+			if xml_element.elements['createdAt'] != nil
+				self.created_at = xml_element.elements['createdAt'].text
+			end
+			if xml_element.elements['updatedAt'] != nil
+				self.updated_at = xml_element.elements['updatedAt'].text
+			end
+			if xml_element.elements['partnerId'] != nil
+				self.partner_id = xml_element.elements['partnerId'].text
+			end
+			if xml_element.elements['isDefault'] != nil
+				self.is_default = xml_element.elements['isDefault'].text
+			end
+			if xml_element.elements['status'] != nil
+				self.status = xml_element.elements['status'].text
+			end
+			if xml_element.elements['optionalFlavorParamsIds'] != nil
+				self.optional_flavor_params_ids = xml_element.elements['optionalFlavorParamsIds'].text
+			end
+			if xml_element.elements['requiredFlavorParamsIds'] != nil
+				self.required_flavor_params_ids = xml_element.elements['requiredFlavorParamsIds'].text
+			end
+			if xml_element.elements['optionalThumbDimensions'] != nil
+				self.optional_thumb_dimensions = KalturaClientBase.object_from_xml(xml_element.elements['optionalThumbDimensions'], 'KalturaDistributionThumbDimensions')
+			end
+			if xml_element.elements['requiredThumbDimensions'] != nil
+				self.required_thumb_dimensions = KalturaClientBase.object_from_xml(xml_element.elements['requiredThumbDimensions'], 'KalturaDistributionThumbDimensions')
+			end
+			if xml_element.elements['editableFields'] != nil
+				self.editable_fields = xml_element.elements['editableFields'].text
+			end
+			if xml_element.elements['mandatoryFields'] != nil
+				self.mandatory_fields = xml_element.elements['mandatoryFields'].text
+			end
 		end
 
 	end
@@ -792,8 +1024,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.property_name = xml_element.elements['propertyName'].text
-			self.property_value = xml_element.elements['propertyValue'].text
+			if xml_element.elements['propertyName'] != nil
+				self.property_name = xml_element.elements['propertyName'].text
+			end
+			if xml_element.elements['propertyValue'] != nil
+				self.property_value = xml_element.elements['propertyValue'].text
+			end
 		end
 
 	end
@@ -804,7 +1040,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.field_values = xml_element.elements['fieldValues'].text
+			if xml_element.elements['fieldValues'] != nil
+				self.field_values = xml_element.elements['fieldValues'].text
+			end
 		end
 
 	end
@@ -821,9 +1059,15 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.field_config_array = KalturaClientBase.object_from_xml(xml_element.elements['fieldConfigArray'], 'KalturaDistributionFieldConfig')
-			self.item_xpaths_to_extend = KalturaClientBase.object_from_xml(xml_element.elements['itemXpathsToExtend'], 'KalturaExtendingItemMrssParameter')
-			self.use_category_entries = xml_element.elements['useCategoryEntries'].text
+			if xml_element.elements['fieldConfigArray'] != nil
+				self.field_config_array = KalturaClientBase.object_from_xml(xml_element.elements['fieldConfigArray'], 'KalturaDistributionFieldConfig')
+			end
+			if xml_element.elements['itemXpathsToExtend'] != nil
+				self.item_xpaths_to_extend = KalturaClientBase.object_from_xml(xml_element.elements['itemXpathsToExtend'], 'KalturaExtendingItemMrssParameter')
+			end
+			if xml_element.elements['useCategoryEntries'] != nil
+				self.use_category_entries = xml_element.elements['useCategoryEntries'].text
+			end
 		end
 
 	end
@@ -859,13 +1103,27 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.no_distribution_profiles = xml_element.elements['noDistributionProfiles'].text
-			self.distribution_profile_id = xml_element.elements['distributionProfileId'].text
-			self.distribution_sun_status = xml_element.elements['distributionSunStatus'].text
-			self.entry_distribution_flag = xml_element.elements['entryDistributionFlag'].text
-			self.entry_distribution_status = xml_element.elements['entryDistributionStatus'].text
-			self.has_entry_distribution_validation_errors = xml_element.elements['hasEntryDistributionValidationErrors'].text
-			self.entry_distribution_validation_errors = xml_element.elements['entryDistributionValidationErrors'].text
+			if xml_element.elements['noDistributionProfiles'] != nil
+				self.no_distribution_profiles = xml_element.elements['noDistributionProfiles'].text
+			end
+			if xml_element.elements['distributionProfileId'] != nil
+				self.distribution_profile_id = xml_element.elements['distributionProfileId'].text
+			end
+			if xml_element.elements['distributionSunStatus'] != nil
+				self.distribution_sun_status = xml_element.elements['distributionSunStatus'].text
+			end
+			if xml_element.elements['entryDistributionFlag'] != nil
+				self.entry_distribution_flag = xml_element.elements['entryDistributionFlag'].text
+			end
+			if xml_element.elements['entryDistributionStatus'] != nil
+				self.entry_distribution_status = xml_element.elements['entryDistributionStatus'].text
+			end
+			if xml_element.elements['hasEntryDistributionValidationErrors'] != nil
+				self.has_entry_distribution_validation_errors = xml_element.elements['hasEntryDistributionValidationErrors'].text
+			end
+			if xml_element.elements['entryDistributionValidationErrors'] != nil
+				self.entry_distribution_validation_errors = xml_element.elements['entryDistributionValidationErrors'].text
+			end
 		end
 
 	end
@@ -897,16 +1155,36 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.distribution_profile_id = xml_element.elements['distributionProfileId'].text
-			self.distribution_profile = KalturaClientBase.object_from_xml(xml_element.elements['distributionProfile'], 'KalturaDistributionProfile')
-			self.entry_distribution_id = xml_element.elements['entryDistributionId'].text
-			self.entry_distribution = KalturaClientBase.object_from_xml(xml_element.elements['entryDistribution'], 'KalturaEntryDistribution')
-			self.remote_id = xml_element.elements['remoteId'].text
-			self.provider_type = xml_element.elements['providerType'].text
-			self.provider_data = KalturaClientBase.object_from_xml(xml_element.elements['providerData'], 'KalturaDistributionJobProviderData')
-			self.results = xml_element.elements['results'].text
-			self.sent_data = xml_element.elements['sentData'].text
-			self.media_files = KalturaClientBase.object_from_xml(xml_element.elements['mediaFiles'], 'KalturaDistributionRemoteMediaFile')
+			if xml_element.elements['distributionProfileId'] != nil
+				self.distribution_profile_id = xml_element.elements['distributionProfileId'].text
+			end
+			if xml_element.elements['distributionProfile'] != nil
+				self.distribution_profile = KalturaClientBase.object_from_xml(xml_element.elements['distributionProfile'], 'KalturaDistributionProfile')
+			end
+			if xml_element.elements['entryDistributionId'] != nil
+				self.entry_distribution_id = xml_element.elements['entryDistributionId'].text
+			end
+			if xml_element.elements['entryDistribution'] != nil
+				self.entry_distribution = KalturaClientBase.object_from_xml(xml_element.elements['entryDistribution'], 'KalturaEntryDistribution')
+			end
+			if xml_element.elements['remoteId'] != nil
+				self.remote_id = xml_element.elements['remoteId'].text
+			end
+			if xml_element.elements['providerType'] != nil
+				self.provider_type = xml_element.elements['providerType'].text
+			end
+			if xml_element.elements['providerData'] != nil
+				self.provider_data = KalturaClientBase.object_from_xml(xml_element.elements['providerData'], 'KalturaDistributionJobProviderData')
+			end
+			if xml_element.elements['results'] != nil
+				self.results = xml_element.elements['results'].text
+			end
+			if xml_element.elements['sentData'] != nil
+				self.sent_data = xml_element.elements['sentData'].text
+			end
+			if xml_element.elements['mediaFiles'] != nil
+				self.media_files = KalturaClientBase.object_from_xml(xml_element.elements['mediaFiles'], 'KalturaDistributionRemoteMediaFile')
+			end
 		end
 
 	end
@@ -942,14 +1220,30 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.id_equal = xml_element.elements['idEqual'].text
-			self.id_in = xml_element.elements['idIn'].text
-			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
-			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
-			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
-			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
-			self.status_equal = xml_element.elements['statusEqual'].text
-			self.status_in = xml_element.elements['statusIn'].text
+			if xml_element.elements['idEqual'] != nil
+				self.id_equal = xml_element.elements['idEqual'].text
+			end
+			if xml_element.elements['idIn'] != nil
+				self.id_in = xml_element.elements['idIn'].text
+			end
+			if xml_element.elements['createdAtGreaterThanOrEqual'] != nil
+				self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['createdAtLessThanOrEqual'] != nil
+				self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtGreaterThanOrEqual'] != nil
+				self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtLessThanOrEqual'] != nil
+				self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['statusEqual'] != nil
+				self.status_equal = xml_element.elements['statusEqual'].text
+			end
+			if xml_element.elements['statusIn'] != nil
+				self.status_in = xml_element.elements['statusIn'].text
+			end
 		end
 
 	end
@@ -960,7 +1254,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaDistributionProfile')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaDistributionProfile')
+			end
 		end
 
 	end
@@ -972,8 +1268,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.type_equal = xml_element.elements['typeEqual'].text
-			self.type_in = xml_element.elements['typeIn'].text
+			if xml_element.elements['typeEqual'] != nil
+				self.type_equal = xml_element.elements['typeEqual'].text
+			end
+			if xml_element.elements['typeIn'] != nil
+				self.type_in = xml_element.elements['typeIn'].text
+			end
 		end
 
 	end
@@ -984,7 +1284,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaDistributionProvider')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaDistributionProvider')
+			end
 		end
 
 	end
@@ -995,7 +1297,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.condition_name = xml_element.elements['conditionName'].text
+			if xml_element.elements['conditionName'] != nil
+				self.condition_name = xml_element.elements['conditionName'].text
+			end
 		end
 
 	end
@@ -1013,9 +1317,15 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.field_name = xml_element.elements['fieldName'].text
-			self.validation_error_type = xml_element.elements['validationErrorType'].text
-			self.validation_error_param = xml_element.elements['validationErrorParam'].text
+			if xml_element.elements['fieldName'] != nil
+				self.field_name = xml_element.elements['fieldName'].text
+			end
+			if xml_element.elements['validationErrorType'] != nil
+				self.validation_error_type = xml_element.elements['validationErrorType'].text
+			end
+			if xml_element.elements['validationErrorParam'] != nil
+				self.validation_error_param = xml_element.elements['validationErrorParam'].text
+			end
 		end
 
 	end
@@ -1026,7 +1336,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.data = xml_element.elements['data'].text
+			if xml_element.elements['data'] != nil
+				self.data = xml_element.elements['data'].text
+			end
 		end
 
 	end
@@ -1037,7 +1349,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.flavor_params_id = xml_element.elements['flavorParamsId'].text
+			if xml_element.elements['flavorParamsId'] != nil
+				self.flavor_params_id = xml_element.elements['flavorParamsId'].text
+			end
 		end
 
 	end
@@ -1048,7 +1362,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.field_name = xml_element.elements['fieldName'].text
+			if xml_element.elements['fieldName'] != nil
+				self.field_name = xml_element.elements['fieldName'].text
+			end
 		end
 
 	end
@@ -1059,7 +1375,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.dimensions = KalturaClientBase.object_from_xml(xml_element.elements['dimensions'], 'KalturaDistributionThumbDimensions')
+			if xml_element.elements['dimensions'] != nil
+				self.dimensions = KalturaClientBase.object_from_xml(xml_element.elements['dimensions'], 'KalturaDistributionThumbDimensions')
+			end
 		end
 
 	end
@@ -1070,7 +1388,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaEntryDistribution')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaEntryDistribution')
+			end
 		end
 
 	end
@@ -1086,9 +1406,15 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.xml = xml_element.elements['xml'].text
-			self.result_parse_data = xml_element.elements['resultParseData'].text
-			self.result_parser_type = xml_element.elements['resultParserType'].text
+			if xml_element.elements['xml'] != nil
+				self.xml = xml_element.elements['xml'].text
+			end
+			if xml_element.elements['resultParseData'] != nil
+				self.result_parse_data = xml_element.elements['resultParseData'].text
+			end
+			if xml_element.elements['resultParserType'] != nil
+				self.result_parser_type = xml_element.elements['resultParserType'].text
+			end
 		end
 
 	end
@@ -1108,13 +1434,27 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.generic_provider_id = xml_element.elements['genericProviderId'].text
-			self.submit_action = KalturaClientBase.object_from_xml(xml_element.elements['submitAction'], 'KalturaGenericDistributionProfileAction')
-			self.update_action = KalturaClientBase.object_from_xml(xml_element.elements['updateAction'], 'KalturaGenericDistributionProfileAction')
-			self.delete_action = KalturaClientBase.object_from_xml(xml_element.elements['deleteAction'], 'KalturaGenericDistributionProfileAction')
-			self.fetch_report_action = KalturaClientBase.object_from_xml(xml_element.elements['fetchReportAction'], 'KalturaGenericDistributionProfileAction')
-			self.update_required_entry_fields = xml_element.elements['updateRequiredEntryFields'].text
-			self.update_required_metadata_xpaths = xml_element.elements['updateRequiredMetadataXPaths'].text
+			if xml_element.elements['genericProviderId'] != nil
+				self.generic_provider_id = xml_element.elements['genericProviderId'].text
+			end
+			if xml_element.elements['submitAction'] != nil
+				self.submit_action = KalturaClientBase.object_from_xml(xml_element.elements['submitAction'], 'KalturaGenericDistributionProfileAction')
+			end
+			if xml_element.elements['updateAction'] != nil
+				self.update_action = KalturaClientBase.object_from_xml(xml_element.elements['updateAction'], 'KalturaGenericDistributionProfileAction')
+			end
+			if xml_element.elements['deleteAction'] != nil
+				self.delete_action = KalturaClientBase.object_from_xml(xml_element.elements['deleteAction'], 'KalturaGenericDistributionProfileAction')
+			end
+			if xml_element.elements['fetchReportAction'] != nil
+				self.fetch_report_action = KalturaClientBase.object_from_xml(xml_element.elements['fetchReportAction'], 'KalturaGenericDistributionProfileAction')
+			end
+			if xml_element.elements['updateRequiredEntryFields'] != nil
+				self.update_required_entry_fields = xml_element.elements['updateRequiredEntryFields'].text
+			end
+			if xml_element.elements['updateRequiredMetadataXPaths'] != nil
+				self.update_required_metadata_xpaths = xml_element.elements['updateRequiredMetadataXPaths'].text
+			end
 		end
 
 	end
@@ -1155,16 +1495,36 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.id_equal = xml_element.elements['idEqual'].text
-			self.id_in = xml_element.elements['idIn'].text
-			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
-			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
-			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
-			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
-			self.generic_distribution_provider_id_equal = xml_element.elements['genericDistributionProviderIdEqual'].text
-			self.generic_distribution_provider_id_in = xml_element.elements['genericDistributionProviderIdIn'].text
-			self.action_equal = xml_element.elements['actionEqual'].text
-			self.action_in = xml_element.elements['actionIn'].text
+			if xml_element.elements['idEqual'] != nil
+				self.id_equal = xml_element.elements['idEqual'].text
+			end
+			if xml_element.elements['idIn'] != nil
+				self.id_in = xml_element.elements['idIn'].text
+			end
+			if xml_element.elements['createdAtGreaterThanOrEqual'] != nil
+				self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['createdAtLessThanOrEqual'] != nil
+				self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtGreaterThanOrEqual'] != nil
+				self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtLessThanOrEqual'] != nil
+				self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['genericDistributionProviderIdEqual'] != nil
+				self.generic_distribution_provider_id_equal = xml_element.elements['genericDistributionProviderIdEqual'].text
+			end
+			if xml_element.elements['genericDistributionProviderIdIn'] != nil
+				self.generic_distribution_provider_id_in = xml_element.elements['genericDistributionProviderIdIn'].text
+			end
+			if xml_element.elements['actionEqual'] != nil
+				self.action_equal = xml_element.elements['actionEqual'].text
+			end
+			if xml_element.elements['actionIn'] != nil
+				self.action_in = xml_element.elements['actionIn'].text
+			end
 		end
 
 	end
@@ -1175,7 +1535,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaGenericDistributionProviderAction')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaGenericDistributionProviderAction')
+			end
 		end
 
 	end
@@ -1186,7 +1548,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaGenericDistributionProvider')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaGenericDistributionProvider')
+			end
 		end
 
 	end
@@ -1198,8 +1562,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.xsl = xml_element.elements['xsl'].text
-			self.feed_id = xml_element.elements['feedId'].text
+			if xml_element.elements['xsl'] != nil
+				self.xsl = xml_element.elements['xsl'].text
+			end
+			if xml_element.elements['feedId'] != nil
+				self.feed_id = xml_element.elements['feedId'].text
+			end
 		end
 
 	end
@@ -1223,7 +1591,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.keep_distribution_item = xml_element.elements['keepDistributionItem'].text
+			if xml_element.elements['keepDistributionItem'] != nil
+				self.keep_distribution_item = xml_element.elements['keepDistributionItem'].text
+			end
 		end
 
 	end
@@ -1241,8 +1611,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.plays = xml_element.elements['plays'].text
-			self.views = xml_element.elements['views'].text
+			if xml_element.elements['plays'] != nil
+				self.plays = xml_element.elements['plays'].text
+			end
+			if xml_element.elements['views'] != nil
+				self.views = xml_element.elements['views'].text
+			end
 		end
 
 	end
@@ -1292,7 +1666,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
+			if xml_element.elements['metadataProfileId'] != nil
+				self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
+			end
 		end
 
 	end
@@ -1364,26 +1740,66 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.id_equal = xml_element.elements['idEqual'].text
-			self.id_in = xml_element.elements['idIn'].text
-			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
-			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
-			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
-			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
-			self.submitted_at_greater_than_or_equal = xml_element.elements['submittedAtGreaterThanOrEqual'].text
-			self.submitted_at_less_than_or_equal = xml_element.elements['submittedAtLessThanOrEqual'].text
-			self.entry_id_equal = xml_element.elements['entryIdEqual'].text
-			self.entry_id_in = xml_element.elements['entryIdIn'].text
-			self.distribution_profile_id_equal = xml_element.elements['distributionProfileIdEqual'].text
-			self.distribution_profile_id_in = xml_element.elements['distributionProfileIdIn'].text
-			self.status_equal = xml_element.elements['statusEqual'].text
-			self.status_in = xml_element.elements['statusIn'].text
-			self.dirty_status_equal = xml_element.elements['dirtyStatusEqual'].text
-			self.dirty_status_in = xml_element.elements['dirtyStatusIn'].text
-			self.sunrise_greater_than_or_equal = xml_element.elements['sunriseGreaterThanOrEqual'].text
-			self.sunrise_less_than_or_equal = xml_element.elements['sunriseLessThanOrEqual'].text
-			self.sunset_greater_than_or_equal = xml_element.elements['sunsetGreaterThanOrEqual'].text
-			self.sunset_less_than_or_equal = xml_element.elements['sunsetLessThanOrEqual'].text
+			if xml_element.elements['idEqual'] != nil
+				self.id_equal = xml_element.elements['idEqual'].text
+			end
+			if xml_element.elements['idIn'] != nil
+				self.id_in = xml_element.elements['idIn'].text
+			end
+			if xml_element.elements['createdAtGreaterThanOrEqual'] != nil
+				self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['createdAtLessThanOrEqual'] != nil
+				self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtGreaterThanOrEqual'] != nil
+				self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtLessThanOrEqual'] != nil
+				self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['submittedAtGreaterThanOrEqual'] != nil
+				self.submitted_at_greater_than_or_equal = xml_element.elements['submittedAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['submittedAtLessThanOrEqual'] != nil
+				self.submitted_at_less_than_or_equal = xml_element.elements['submittedAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['entryIdEqual'] != nil
+				self.entry_id_equal = xml_element.elements['entryIdEqual'].text
+			end
+			if xml_element.elements['entryIdIn'] != nil
+				self.entry_id_in = xml_element.elements['entryIdIn'].text
+			end
+			if xml_element.elements['distributionProfileIdEqual'] != nil
+				self.distribution_profile_id_equal = xml_element.elements['distributionProfileIdEqual'].text
+			end
+			if xml_element.elements['distributionProfileIdIn'] != nil
+				self.distribution_profile_id_in = xml_element.elements['distributionProfileIdIn'].text
+			end
+			if xml_element.elements['statusEqual'] != nil
+				self.status_equal = xml_element.elements['statusEqual'].text
+			end
+			if xml_element.elements['statusIn'] != nil
+				self.status_in = xml_element.elements['statusIn'].text
+			end
+			if xml_element.elements['dirtyStatusEqual'] != nil
+				self.dirty_status_equal = xml_element.elements['dirtyStatusEqual'].text
+			end
+			if xml_element.elements['dirtyStatusIn'] != nil
+				self.dirty_status_in = xml_element.elements['dirtyStatusIn'].text
+			end
+			if xml_element.elements['sunriseGreaterThanOrEqual'] != nil
+				self.sunrise_greater_than_or_equal = xml_element.elements['sunriseGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['sunriseLessThanOrEqual'] != nil
+				self.sunrise_less_than_or_equal = xml_element.elements['sunriseLessThanOrEqual'].text
+			end
+			if xml_element.elements['sunsetGreaterThanOrEqual'] != nil
+				self.sunset_greater_than_or_equal = xml_element.elements['sunsetGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['sunsetLessThanOrEqual'] != nil
+				self.sunset_less_than_or_equal = xml_element.elements['sunsetLessThanOrEqual'].text
+			end
 		end
 
 	end
@@ -1483,18 +1899,42 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.id_equal = xml_element.elements['idEqual'].text
-			self.id_in = xml_element.elements['idIn'].text
-			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
-			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
-			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
-			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
-			self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
-			self.partner_id_in = xml_element.elements['partnerIdIn'].text
-			self.is_default_equal = xml_element.elements['isDefaultEqual'].text
-			self.is_default_in = xml_element.elements['isDefaultIn'].text
-			self.status_equal = xml_element.elements['statusEqual'].text
-			self.status_in = xml_element.elements['statusIn'].text
+			if xml_element.elements['idEqual'] != nil
+				self.id_equal = xml_element.elements['idEqual'].text
+			end
+			if xml_element.elements['idIn'] != nil
+				self.id_in = xml_element.elements['idIn'].text
+			end
+			if xml_element.elements['createdAtGreaterThanOrEqual'] != nil
+				self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['createdAtLessThanOrEqual'] != nil
+				self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtGreaterThanOrEqual'] != nil
+				self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtLessThanOrEqual'] != nil
+				self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['partnerIdEqual'] != nil
+				self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
+			end
+			if xml_element.elements['partnerIdIn'] != nil
+				self.partner_id_in = xml_element.elements['partnerIdIn'].text
+			end
+			if xml_element.elements['isDefaultEqual'] != nil
+				self.is_default_equal = xml_element.elements['isDefaultEqual'].text
+			end
+			if xml_element.elements['isDefaultIn'] != nil
+				self.is_default_in = xml_element.elements['isDefaultIn'].text
+			end
+			if xml_element.elements['statusEqual'] != nil
+				self.status_equal = xml_element.elements['statusEqual'].text
+			end
+			if xml_element.elements['statusIn'] != nil
+				self.status_in = xml_element.elements['statusIn'].text
+			end
 		end
 
 	end

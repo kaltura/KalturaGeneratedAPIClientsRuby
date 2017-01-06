@@ -46,9 +46,15 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.entry_id = xml_element.elements['entryId'].text
-			self.user_id = xml_element.elements['userId'].text
-			self.created_at = xml_element.elements['createdAt'].text
+			if xml_element.elements['entryId'] != nil
+				self.entry_id = xml_element.elements['entryId'].text
+			end
+			if xml_element.elements['userId'] != nil
+				self.user_id = xml_element.elements['userId'].text
+			end
+			if xml_element.elements['createdAt'] != nil
+				self.created_at = xml_element.elements['createdAt'].text
+			end
 		end
 
 	end
@@ -59,7 +65,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaLike')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaLike')
+			end
 		end
 
 	end
@@ -80,11 +88,21 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.entry_id_equal = xml_element.elements['entryIdEqual'].text
-			self.entry_id_in = xml_element.elements['entryIdIn'].text
-			self.user_id_equal = xml_element.elements['userIdEqual'].text
-			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
-			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			if xml_element.elements['entryIdEqual'] != nil
+				self.entry_id_equal = xml_element.elements['entryIdEqual'].text
+			end
+			if xml_element.elements['entryIdIn'] != nil
+				self.entry_id_in = xml_element.elements['entryIdIn'].text
+			end
+			if xml_element.elements['userIdEqual'] != nil
+				self.user_id_equal = xml_element.elements['userIdEqual'].text
+			end
+			if xml_element.elements['createdAtGreaterThanOrEqual'] != nil
+				self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['createdAtLessThanOrEqual'] != nil
+				self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			end
 		end
 
 	end

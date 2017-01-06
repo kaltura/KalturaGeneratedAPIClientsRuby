@@ -136,27 +136,69 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.partner_id = xml_element.elements['partnerId'].text
-			self.partner_name = xml_element.elements['partnerName'].text
-			self.partner_status = xml_element.elements['partnerStatus'].text
-			self.partner_package = xml_element.elements['partnerPackage'].text
-			self.partner_created_at = xml_element.elements['partnerCreatedAt'].text
-			self.views = xml_element.elements['views'].text
-			self.plays = xml_element.elements['plays'].text
-			self.entries_count = xml_element.elements['entriesCount'].text
-			self.total_entries_count = xml_element.elements['totalEntriesCount'].text
-			self.video_entries_count = xml_element.elements['videoEntriesCount'].text
-			self.image_entries_count = xml_element.elements['imageEntriesCount'].text
-			self.audio_entries_count = xml_element.elements['audioEntriesCount'].text
-			self.mix_entries_count = xml_element.elements['mixEntriesCount'].text
-			self.bandwidth = xml_element.elements['bandwidth'].text
-			self.total_storage = xml_element.elements['totalStorage'].text
-			self.storage = xml_element.elements['storage'].text
-			self.peak_storage = xml_element.elements['peakStorage'].text
-			self.avg_storage = xml_element.elements['avgStorage'].text
-			self.combined_bandwidth_storage = xml_element.elements['combinedBandwidthStorage'].text
-			self.deleted_storage = xml_element.elements['deletedStorage'].text
-			self.transcoding_usage = xml_element.elements['transcodingUsage'].text
+			if xml_element.elements['partnerId'] != nil
+				self.partner_id = xml_element.elements['partnerId'].text
+			end
+			if xml_element.elements['partnerName'] != nil
+				self.partner_name = xml_element.elements['partnerName'].text
+			end
+			if xml_element.elements['partnerStatus'] != nil
+				self.partner_status = xml_element.elements['partnerStatus'].text
+			end
+			if xml_element.elements['partnerPackage'] != nil
+				self.partner_package = xml_element.elements['partnerPackage'].text
+			end
+			if xml_element.elements['partnerCreatedAt'] != nil
+				self.partner_created_at = xml_element.elements['partnerCreatedAt'].text
+			end
+			if xml_element.elements['views'] != nil
+				self.views = xml_element.elements['views'].text
+			end
+			if xml_element.elements['plays'] != nil
+				self.plays = xml_element.elements['plays'].text
+			end
+			if xml_element.elements['entriesCount'] != nil
+				self.entries_count = xml_element.elements['entriesCount'].text
+			end
+			if xml_element.elements['totalEntriesCount'] != nil
+				self.total_entries_count = xml_element.elements['totalEntriesCount'].text
+			end
+			if xml_element.elements['videoEntriesCount'] != nil
+				self.video_entries_count = xml_element.elements['videoEntriesCount'].text
+			end
+			if xml_element.elements['imageEntriesCount'] != nil
+				self.image_entries_count = xml_element.elements['imageEntriesCount'].text
+			end
+			if xml_element.elements['audioEntriesCount'] != nil
+				self.audio_entries_count = xml_element.elements['audioEntriesCount'].text
+			end
+			if xml_element.elements['mixEntriesCount'] != nil
+				self.mix_entries_count = xml_element.elements['mixEntriesCount'].text
+			end
+			if xml_element.elements['bandwidth'] != nil
+				self.bandwidth = xml_element.elements['bandwidth'].text
+			end
+			if xml_element.elements['totalStorage'] != nil
+				self.total_storage = xml_element.elements['totalStorage'].text
+			end
+			if xml_element.elements['storage'] != nil
+				self.storage = xml_element.elements['storage'].text
+			end
+			if xml_element.elements['peakStorage'] != nil
+				self.peak_storage = xml_element.elements['peakStorage'].text
+			end
+			if xml_element.elements['avgStorage'] != nil
+				self.avg_storage = xml_element.elements['avgStorage'].text
+			end
+			if xml_element.elements['combinedBandwidthStorage'] != nil
+				self.combined_bandwidth_storage = xml_element.elements['combinedBandwidthStorage'].text
+			end
+			if xml_element.elements['deletedStorage'] != nil
+				self.deleted_storage = xml_element.elements['deletedStorage'].text
+			end
+			if xml_element.elements['transcodingUsage'] != nil
+				self.transcoding_usage = xml_element.elements['transcodingUsage'].text
+			end
 		end
 
 	end
@@ -181,9 +223,15 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.from_date = xml_element.elements['fromDate'].text
-			self.to_date = xml_element.elements['toDate'].text
-			self.timezone_offset = xml_element.elements['timezoneOffset'].text
+			if xml_element.elements['fromDate'] != nil
+				self.from_date = xml_element.elements['fromDate'].text
+			end
+			if xml_element.elements['toDate'] != nil
+				self.to_date = xml_element.elements['toDate'].text
+			end
+			if xml_element.elements['timezoneOffset'] != nil
+				self.timezone_offset = xml_element.elements['timezoneOffset'].text
+			end
 		end
 
 	end
@@ -194,7 +242,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaSystemPartnerUsageItem')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaSystemPartnerUsageItem')
+			end
 		end
 
 	end
@@ -209,8 +259,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.partner_parent_id_equal = xml_element.elements['partnerParentIdEqual'].text
-			self.partner_parent_id_in = xml_element.elements['partnerParentIdIn'].text
+			if xml_element.elements['partnerParentIdEqual'] != nil
+				self.partner_parent_id_equal = xml_element.elements['partnerParentIdEqual'].text
+			end
+			if xml_element.elements['partnerParentIdIn'] != nil
+				self.partner_parent_id_in = xml_element.elements['partnerParentIdIn'].text
+			end
 		end
 
 	end

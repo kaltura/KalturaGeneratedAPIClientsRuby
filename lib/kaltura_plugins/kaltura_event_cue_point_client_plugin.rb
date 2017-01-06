@@ -54,7 +54,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.event_type = xml_element.elements['eventType'].text
+			if xml_element.elements['eventType'] != nil
+				self.event_type = xml_element.elements['eventType'].text
+			end
 		end
 
 	end
@@ -66,8 +68,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.event_type_equal = xml_element.elements['eventTypeEqual'].text
-			self.event_type_in = xml_element.elements['eventTypeIn'].text
+			if xml_element.elements['eventTypeEqual'] != nil
+				self.event_type_equal = xml_element.elements['eventTypeEqual'].text
+			end
+			if xml_element.elements['eventTypeIn'] != nil
+				self.event_type_in = xml_element.elements['eventTypeIn'].text
+			end
 		end
 
 	end

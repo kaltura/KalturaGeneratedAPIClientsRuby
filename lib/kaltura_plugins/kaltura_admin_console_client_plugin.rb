@@ -83,23 +83,57 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.id = xml_element.elements['id'].text
-			self.track_event_type = xml_element.elements['trackEventType'].text
-			self.ps_version = xml_element.elements['psVersion'].text
-			self.context = xml_element.elements['context'].text
-			self.partner_id = xml_element.elements['partnerId'].text
-			self.entry_id = xml_element.elements['entryId'].text
-			self.host_name = xml_element.elements['hostName'].text
-			self.user_id = xml_element.elements['userId'].text
-			self.changed_properties = xml_element.elements['changedProperties'].text
-			self.param_str1 = xml_element.elements['paramStr1'].text
-			self.param_str2 = xml_element.elements['paramStr2'].text
-			self.param_str3 = xml_element.elements['paramStr3'].text
-			self.ks = xml_element.elements['ks'].text
-			self.description = xml_element.elements['description'].text
-			self.created_at = xml_element.elements['createdAt'].text
-			self.updated_at = xml_element.elements['updatedAt'].text
-			self.user_ip = xml_element.elements['userIp'].text
+			if xml_element.elements['id'] != nil
+				self.id = xml_element.elements['id'].text
+			end
+			if xml_element.elements['trackEventType'] != nil
+				self.track_event_type = xml_element.elements['trackEventType'].text
+			end
+			if xml_element.elements['psVersion'] != nil
+				self.ps_version = xml_element.elements['psVersion'].text
+			end
+			if xml_element.elements['context'] != nil
+				self.context = xml_element.elements['context'].text
+			end
+			if xml_element.elements['partnerId'] != nil
+				self.partner_id = xml_element.elements['partnerId'].text
+			end
+			if xml_element.elements['entryId'] != nil
+				self.entry_id = xml_element.elements['entryId'].text
+			end
+			if xml_element.elements['hostName'] != nil
+				self.host_name = xml_element.elements['hostName'].text
+			end
+			if xml_element.elements['userId'] != nil
+				self.user_id = xml_element.elements['userId'].text
+			end
+			if xml_element.elements['changedProperties'] != nil
+				self.changed_properties = xml_element.elements['changedProperties'].text
+			end
+			if xml_element.elements['paramStr1'] != nil
+				self.param_str1 = xml_element.elements['paramStr1'].text
+			end
+			if xml_element.elements['paramStr2'] != nil
+				self.param_str2 = xml_element.elements['paramStr2'].text
+			end
+			if xml_element.elements['paramStr3'] != nil
+				self.param_str3 = xml_element.elements['paramStr3'].text
+			end
+			if xml_element.elements['ks'] != nil
+				self.ks = xml_element.elements['ks'].text
+			end
+			if xml_element.elements['description'] != nil
+				self.description = xml_element.elements['description'].text
+			end
+			if xml_element.elements['createdAt'] != nil
+				self.created_at = xml_element.elements['createdAt'].text
+			end
+			if xml_element.elements['updatedAt'] != nil
+				self.updated_at = xml_element.elements['updatedAt'].text
+			end
+			if xml_element.elements['userIp'] != nil
+				self.user_ip = xml_element.elements['userIp'].text
+			end
 		end
 
 	end
@@ -113,7 +147,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.is_public = xml_element.elements['isPublic'].text
+			if xml_element.elements['isPublic'] != nil
+				self.is_public = xml_element.elements['isPublic'].text
+			end
 		end
 
 	end
@@ -124,7 +160,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaTrackEntry')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaTrackEntry')
+			end
 		end
 
 	end
@@ -135,7 +173,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaUiConfAdmin')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaUiConfAdmin')
+			end
 		end
 
 	end

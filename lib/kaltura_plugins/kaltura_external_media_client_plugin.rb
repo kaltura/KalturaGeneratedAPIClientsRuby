@@ -78,8 +78,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.external_source_type = xml_element.elements['externalSourceType'].text
-			self.asset_params_ids = xml_element.elements['assetParamsIds'].text
+			if xml_element.elements['externalSourceType'] != nil
+				self.external_source_type = xml_element.elements['externalSourceType'].text
+			end
+			if xml_element.elements['assetParamsIds'] != nil
+				self.asset_params_ids = xml_element.elements['assetParamsIds'].text
+			end
 		end
 
 	end
@@ -90,7 +94,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaExternalMediaEntry')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaExternalMediaEntry')
+			end
 		end
 
 	end
@@ -104,10 +110,18 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.external_source_type_equal = xml_element.elements['externalSourceTypeEqual'].text
-			self.external_source_type_in = xml_element.elements['externalSourceTypeIn'].text
-			self.asset_params_ids_match_or = xml_element.elements['assetParamsIdsMatchOr'].text
-			self.asset_params_ids_match_and = xml_element.elements['assetParamsIdsMatchAnd'].text
+			if xml_element.elements['externalSourceTypeEqual'] != nil
+				self.external_source_type_equal = xml_element.elements['externalSourceTypeEqual'].text
+			end
+			if xml_element.elements['externalSourceTypeIn'] != nil
+				self.external_source_type_in = xml_element.elements['externalSourceTypeIn'].text
+			end
+			if xml_element.elements['assetParamsIdsMatchOr'] != nil
+				self.asset_params_ids_match_or = xml_element.elements['assetParamsIdsMatchOr'].text
+			end
+			if xml_element.elements['assetParamsIdsMatchAnd'] != nil
+				self.asset_params_ids_match_and = xml_element.elements['assetParamsIdsMatchAnd'].text
+			end
 		end
 
 	end

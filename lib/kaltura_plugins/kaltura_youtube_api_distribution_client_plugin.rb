@@ -61,13 +61,27 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.language = xml_element.elements['language'].text
-			self.label = xml_element.elements['label'].text
-			self.file_path = xml_element.elements['filePath'].text
-			self.remote_id = xml_element.elements['remoteId'].text
-			self.action = xml_element.elements['action'].text
-			self.version = xml_element.elements['version'].text
-			self.asset_id = xml_element.elements['assetId'].text
+			if xml_element.elements['language'] != nil
+				self.language = xml_element.elements['language'].text
+			end
+			if xml_element.elements['label'] != nil
+				self.label = xml_element.elements['label'].text
+			end
+			if xml_element.elements['filePath'] != nil
+				self.file_path = xml_element.elements['filePath'].text
+			end
+			if xml_element.elements['remoteId'] != nil
+				self.remote_id = xml_element.elements['remoteId'].text
+			end
+			if xml_element.elements['action'] != nil
+				self.action = xml_element.elements['action'].text
+			end
+			if xml_element.elements['version'] != nil
+				self.version = xml_element.elements['version'].text
+			end
+			if xml_element.elements['assetId'] != nil
+				self.asset_id = xml_element.elements['assetId'].text
+			end
 		end
 
 	end
@@ -89,9 +103,15 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.video_asset_file_path = xml_element.elements['videoAssetFilePath'].text
-			self.thumb_asset_file_path = xml_element.elements['thumbAssetFilePath'].text
-			self.captions_info = KalturaClientBase.object_from_xml(xml_element.elements['captionsInfo'], 'KalturaYouTubeApiCaptionDistributionInfo')
+			if xml_element.elements['videoAssetFilePath'] != nil
+				self.video_asset_file_path = xml_element.elements['videoAssetFilePath'].text
+			end
+			if xml_element.elements['thumbAssetFilePath'] != nil
+				self.thumb_asset_file_path = xml_element.elements['thumbAssetFilePath'].text
+			end
+			if xml_element.elements['captionsInfo'] != nil
+				self.captions_info = KalturaClientBase.object_from_xml(xml_element.elements['captionsInfo'], 'KalturaYouTubeApiCaptionDistributionInfo')
+			end
 		end
 
 	end
@@ -119,18 +139,42 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.username = xml_element.elements['username'].text
-			self.default_category = xml_element.elements['defaultCategory'].text
-			self.allow_comments = xml_element.elements['allowComments'].text
-			self.allow_embedding = xml_element.elements['allowEmbedding'].text
-			self.allow_ratings = xml_element.elements['allowRatings'].text
-			self.allow_responses = xml_element.elements['allowResponses'].text
-			self.api_authorize_url = xml_element.elements['apiAuthorizeUrl'].text
-			self.google_client_id = xml_element.elements['googleClientId'].text
-			self.google_client_secret = xml_element.elements['googleClientSecret'].text
-			self.google_token_data = xml_element.elements['googleTokenData'].text
-			self.assume_success = xml_element.elements['assumeSuccess'].text
-			self.privacy_status = xml_element.elements['privacyStatus'].text
+			if xml_element.elements['username'] != nil
+				self.username = xml_element.elements['username'].text
+			end
+			if xml_element.elements['defaultCategory'] != nil
+				self.default_category = xml_element.elements['defaultCategory'].text
+			end
+			if xml_element.elements['allowComments'] != nil
+				self.allow_comments = xml_element.elements['allowComments'].text
+			end
+			if xml_element.elements['allowEmbedding'] != nil
+				self.allow_embedding = xml_element.elements['allowEmbedding'].text
+			end
+			if xml_element.elements['allowRatings'] != nil
+				self.allow_ratings = xml_element.elements['allowRatings'].text
+			end
+			if xml_element.elements['allowResponses'] != nil
+				self.allow_responses = xml_element.elements['allowResponses'].text
+			end
+			if xml_element.elements['apiAuthorizeUrl'] != nil
+				self.api_authorize_url = xml_element.elements['apiAuthorizeUrl'].text
+			end
+			if xml_element.elements['googleClientId'] != nil
+				self.google_client_id = xml_element.elements['googleClientId'].text
+			end
+			if xml_element.elements['googleClientSecret'] != nil
+				self.google_client_secret = xml_element.elements['googleClientSecret'].text
+			end
+			if xml_element.elements['googleTokenData'] != nil
+				self.google_token_data = xml_element.elements['googleTokenData'].text
+			end
+			if xml_element.elements['assumeSuccess'] != nil
+				self.assume_success = xml_element.elements['assumeSuccess'].text
+			end
+			if xml_element.elements['privacyStatus'] != nil
+				self.privacy_status = xml_element.elements['privacyStatus'].text
+			end
 		end
 
 	end

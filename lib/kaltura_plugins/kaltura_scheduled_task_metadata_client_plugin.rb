@@ -45,9 +45,15 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
-			self.metadata_object_type = xml_element.elements['metadataObjectType'].text
-			self.xslt = xml_element.elements['xslt'].text
+			if xml_element.elements['metadataProfileId'] != nil
+				self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
+			end
+			if xml_element.elements['metadataObjectType'] != nil
+				self.metadata_object_type = xml_element.elements['metadataObjectType'].text
+			end
+			if xml_element.elements['xslt'] != nil
+				self.xslt = xml_element.elements['xslt'].text
+			end
 		end
 
 	end

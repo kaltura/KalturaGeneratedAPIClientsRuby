@@ -77,12 +77,24 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.protocol_type = xml_element.elements['protocolType'].text
-			self.source_url = xml_element.elements['sourceUrl'].text
-			self.ad_type = xml_element.elements['adType'].text
-			self.title = xml_element.elements['title'].text
-			self.end_time = xml_element.elements['endTime'].text
-			self.duration = xml_element.elements['duration'].text
+			if xml_element.elements['protocolType'] != nil
+				self.protocol_type = xml_element.elements['protocolType'].text
+			end
+			if xml_element.elements['sourceUrl'] != nil
+				self.source_url = xml_element.elements['sourceUrl'].text
+			end
+			if xml_element.elements['adType'] != nil
+				self.ad_type = xml_element.elements['adType'].text
+			end
+			if xml_element.elements['title'] != nil
+				self.title = xml_element.elements['title'].text
+			end
+			if xml_element.elements['endTime'] != nil
+				self.end_time = xml_element.elements['endTime'].text
+			end
+			if xml_element.elements['duration'] != nil
+				self.duration = xml_element.elements['duration'].text
+			end
 		end
 
 	end
@@ -113,15 +125,33 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.protocol_type_equal = xml_element.elements['protocolTypeEqual'].text
-			self.protocol_type_in = xml_element.elements['protocolTypeIn'].text
-			self.title_like = xml_element.elements['titleLike'].text
-			self.title_multi_like_or = xml_element.elements['titleMultiLikeOr'].text
-			self.title_multi_like_and = xml_element.elements['titleMultiLikeAnd'].text
-			self.end_time_greater_than_or_equal = xml_element.elements['endTimeGreaterThanOrEqual'].text
-			self.end_time_less_than_or_equal = xml_element.elements['endTimeLessThanOrEqual'].text
-			self.duration_greater_than_or_equal = xml_element.elements['durationGreaterThanOrEqual'].text
-			self.duration_less_than_or_equal = xml_element.elements['durationLessThanOrEqual'].text
+			if xml_element.elements['protocolTypeEqual'] != nil
+				self.protocol_type_equal = xml_element.elements['protocolTypeEqual'].text
+			end
+			if xml_element.elements['protocolTypeIn'] != nil
+				self.protocol_type_in = xml_element.elements['protocolTypeIn'].text
+			end
+			if xml_element.elements['titleLike'] != nil
+				self.title_like = xml_element.elements['titleLike'].text
+			end
+			if xml_element.elements['titleMultiLikeOr'] != nil
+				self.title_multi_like_or = xml_element.elements['titleMultiLikeOr'].text
+			end
+			if xml_element.elements['titleMultiLikeAnd'] != nil
+				self.title_multi_like_and = xml_element.elements['titleMultiLikeAnd'].text
+			end
+			if xml_element.elements['endTimeGreaterThanOrEqual'] != nil
+				self.end_time_greater_than_or_equal = xml_element.elements['endTimeGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['endTimeLessThanOrEqual'] != nil
+				self.end_time_less_than_or_equal = xml_element.elements['endTimeLessThanOrEqual'].text
+			end
+			if xml_element.elements['durationGreaterThanOrEqual'] != nil
+				self.duration_greater_than_or_equal = xml_element.elements['durationGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['durationLessThanOrEqual'] != nil
+				self.duration_less_than_or_equal = xml_element.elements['durationLessThanOrEqual'].text
+			end
 		end
 
 	end

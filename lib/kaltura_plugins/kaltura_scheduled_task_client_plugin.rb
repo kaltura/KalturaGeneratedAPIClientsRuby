@@ -86,8 +86,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.type = xml_element.elements['type'].text
-			self.stop_processing_on_error = xml_element.elements['stopProcessingOnError'].text
+			if xml_element.elements['type'] != nil
+				self.type = xml_element.elements['type'].text
+			end
+			if xml_element.elements['stopProcessingOnError'] != nil
+				self.stop_processing_on_error = xml_element.elements['stopProcessingOnError'].text
+			end
 		end
 
 	end
@@ -135,19 +139,45 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.id = xml_element.elements['id'].text
-			self.partner_id = xml_element.elements['partnerId'].text
-			self.name = xml_element.elements['name'].text
-			self.system_name = xml_element.elements['systemName'].text
-			self.description = xml_element.elements['description'].text
-			self.status = xml_element.elements['status'].text
-			self.object_filter_engine_type = xml_element.elements['objectFilterEngineType'].text
-			self.object_filter = KalturaClientBase.object_from_xml(xml_element.elements['objectFilter'], 'KalturaFilter')
-			self.object_tasks = KalturaClientBase.object_from_xml(xml_element.elements['objectTasks'], 'KalturaObjectTask')
-			self.created_at = xml_element.elements['createdAt'].text
-			self.updated_at = xml_element.elements['updatedAt'].text
-			self.last_execution_started_at = xml_element.elements['lastExecutionStartedAt'].text
-			self.max_total_count_allowed = xml_element.elements['maxTotalCountAllowed'].text
+			if xml_element.elements['id'] != nil
+				self.id = xml_element.elements['id'].text
+			end
+			if xml_element.elements['partnerId'] != nil
+				self.partner_id = xml_element.elements['partnerId'].text
+			end
+			if xml_element.elements['name'] != nil
+				self.name = xml_element.elements['name'].text
+			end
+			if xml_element.elements['systemName'] != nil
+				self.system_name = xml_element.elements['systemName'].text
+			end
+			if xml_element.elements['description'] != nil
+				self.description = xml_element.elements['description'].text
+			end
+			if xml_element.elements['status'] != nil
+				self.status = xml_element.elements['status'].text
+			end
+			if xml_element.elements['objectFilterEngineType'] != nil
+				self.object_filter_engine_type = xml_element.elements['objectFilterEngineType'].text
+			end
+			if xml_element.elements['objectFilter'] != nil
+				self.object_filter = KalturaClientBase.object_from_xml(xml_element.elements['objectFilter'], 'KalturaFilter')
+			end
+			if xml_element.elements['objectTasks'] != nil
+				self.object_tasks = KalturaClientBase.object_from_xml(xml_element.elements['objectTasks'], 'KalturaObjectTask')
+			end
+			if xml_element.elements['createdAt'] != nil
+				self.created_at = xml_element.elements['createdAt'].text
+			end
+			if xml_element.elements['updatedAt'] != nil
+				self.updated_at = xml_element.elements['updatedAt'].text
+			end
+			if xml_element.elements['lastExecutionStartedAt'] != nil
+				self.last_execution_started_at = xml_element.elements['lastExecutionStartedAt'].text
+			end
+			if xml_element.elements['maxTotalCountAllowed'] != nil
+				self.max_total_count_allowed = xml_element.elements['maxTotalCountAllowed'].text
+			end
 		end
 
 	end
@@ -164,8 +194,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.flavor_params_ids = xml_element.elements['flavorParamsIds'].text
-			self.reconvert = xml_element.elements['reconvert'].text
+			if xml_element.elements['flavorParamsIds'] != nil
+				self.flavor_params_ids = xml_element.elements['flavorParamsIds'].text
+			end
+			if xml_element.elements['reconvert'] != nil
+				self.reconvert = xml_element.elements['reconvert'].text
+			end
 		end
 
 	end
@@ -182,8 +216,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.delete_type = xml_element.elements['deleteType'].text
-			self.flavor_params_ids = xml_element.elements['flavorParamsIds'].text
+			if xml_element.elements['deleteType'] != nil
+				self.delete_type = xml_element.elements['deleteType'].text
+			end
+			if xml_element.elements['flavorParamsIds'] != nil
+				self.flavor_params_ids = xml_element.elements['flavorParamsIds'].text
+			end
 		end
 
 	end
@@ -218,8 +256,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.add_remove_type = xml_element.elements['addRemoveType'].text
-			self.category_ids = KalturaClientBase.object_from_xml(xml_element.elements['categoryIds'], 'KalturaIntegerValue')
+			if xml_element.elements['addRemoveType'] != nil
+				self.add_remove_type = xml_element.elements['addRemoveType'].text
+			end
+			if xml_element.elements['categoryIds'] != nil
+				self.category_ids = KalturaClientBase.object_from_xml(xml_element.elements['categoryIds'], 'KalturaIntegerValue')
+			end
 		end
 
 	end
@@ -249,13 +291,27 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.input_metadata_profile_id = xml_element.elements['inputMetadataProfileId'].text
-			self.input_metadata = KalturaClientBase.object_from_xml(xml_element.elements['inputMetadata'], 'KalturaKeyValue')
-			self.output_metadata_profile_id = xml_element.elements['outputMetadataProfileId'].text
-			self.output_metadata = KalturaClientBase.object_from_xml(xml_element.elements['outputMetadata'], 'KalturaKeyValue')
-			self.input_user_id = xml_element.elements['inputUserId'].text
-			self.input_entitled_users_edit = xml_element.elements['inputEntitledUsersEdit'].text
-			self.input_entitled_users_publish = xml_element.elements['inputEntitledUsersPublish'].text
+			if xml_element.elements['inputMetadataProfileId'] != nil
+				self.input_metadata_profile_id = xml_element.elements['inputMetadataProfileId'].text
+			end
+			if xml_element.elements['inputMetadata'] != nil
+				self.input_metadata = KalturaClientBase.object_from_xml(xml_element.elements['inputMetadata'], 'KalturaKeyValue')
+			end
+			if xml_element.elements['outputMetadataProfileId'] != nil
+				self.output_metadata_profile_id = xml_element.elements['outputMetadataProfileId'].text
+			end
+			if xml_element.elements['outputMetadata'] != nil
+				self.output_metadata = KalturaClientBase.object_from_xml(xml_element.elements['outputMetadata'], 'KalturaKeyValue')
+			end
+			if xml_element.elements['inputUserId'] != nil
+				self.input_user_id = xml_element.elements['inputUserId'].text
+			end
+			if xml_element.elements['inputEntitledUsersEdit'] != nil
+				self.input_entitled_users_edit = xml_element.elements['inputEntitledUsersEdit'].text
+			end
+			if xml_element.elements['inputEntitledUsersPublish'] != nil
+				self.input_entitled_users_publish = xml_element.elements['inputEntitledUsersPublish'].text
+			end
 		end
 
 	end
@@ -274,9 +330,15 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.max_results = xml_element.elements['maxResults'].text
-			self.results_file_path = xml_element.elements['resultsFilePath'].text
-			self.reference_time = xml_element.elements['referenceTime'].text
+			if xml_element.elements['maxResults'] != nil
+				self.max_results = xml_element.elements['maxResults'].text
+			end
+			if xml_element.elements['resultsFilePath'] != nil
+				self.results_file_path = xml_element.elements['resultsFilePath'].text
+			end
+			if xml_element.elements['referenceTime'] != nil
+				self.reference_time = xml_element.elements['referenceTime'].text
+			end
 		end
 
 	end
@@ -327,20 +389,48 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.id_equal = xml_element.elements['idEqual'].text
-			self.id_in = xml_element.elements['idIn'].text
-			self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
-			self.partner_id_in = xml_element.elements['partnerIdIn'].text
-			self.system_name_equal = xml_element.elements['systemNameEqual'].text
-			self.system_name_in = xml_element.elements['systemNameIn'].text
-			self.status_equal = xml_element.elements['statusEqual'].text
-			self.status_in = xml_element.elements['statusIn'].text
-			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
-			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
-			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
-			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
-			self.last_execution_started_at_greater_than_or_equal = xml_element.elements['lastExecutionStartedAtGreaterThanOrEqual'].text
-			self.last_execution_started_at_less_than_or_equal = xml_element.elements['lastExecutionStartedAtLessThanOrEqual'].text
+			if xml_element.elements['idEqual'] != nil
+				self.id_equal = xml_element.elements['idEqual'].text
+			end
+			if xml_element.elements['idIn'] != nil
+				self.id_in = xml_element.elements['idIn'].text
+			end
+			if xml_element.elements['partnerIdEqual'] != nil
+				self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
+			end
+			if xml_element.elements['partnerIdIn'] != nil
+				self.partner_id_in = xml_element.elements['partnerIdIn'].text
+			end
+			if xml_element.elements['systemNameEqual'] != nil
+				self.system_name_equal = xml_element.elements['systemNameEqual'].text
+			end
+			if xml_element.elements['systemNameIn'] != nil
+				self.system_name_in = xml_element.elements['systemNameIn'].text
+			end
+			if xml_element.elements['statusEqual'] != nil
+				self.status_equal = xml_element.elements['statusEqual'].text
+			end
+			if xml_element.elements['statusIn'] != nil
+				self.status_in = xml_element.elements['statusIn'].text
+			end
+			if xml_element.elements['createdAtGreaterThanOrEqual'] != nil
+				self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['createdAtLessThanOrEqual'] != nil
+				self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtGreaterThanOrEqual'] != nil
+				self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtLessThanOrEqual'] != nil
+				self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['lastExecutionStartedAtGreaterThanOrEqual'] != nil
+				self.last_execution_started_at_greater_than_or_equal = xml_element.elements['lastExecutionStartedAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['lastExecutionStartedAtLessThanOrEqual'] != nil
+				self.last_execution_started_at_less_than_or_equal = xml_element.elements['lastExecutionStartedAtLessThanOrEqual'].text
+			end
 		end
 
 	end
@@ -351,7 +441,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaScheduledTaskProfile')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaScheduledTaskProfile')
+			end
 		end
 
 	end
@@ -363,7 +455,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.storage_id = xml_element.elements['storageId'].text
+			if xml_element.elements['storageId'] != nil
+				self.storage_id = xml_element.elements['storageId'].text
+			end
 		end
 
 	end

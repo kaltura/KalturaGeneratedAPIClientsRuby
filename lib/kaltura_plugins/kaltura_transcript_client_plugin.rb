@@ -58,9 +58,15 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.accuracy = xml_element.elements['accuracy'].text
-			self.human_verified = xml_element.elements['humanVerified'].text
-			self.language = xml_element.elements['language'].text
+			if xml_element.elements['accuracy'] != nil
+				self.accuracy = xml_element.elements['accuracy'].text
+			end
+			if xml_element.elements['humanVerified'] != nil
+				self.human_verified = xml_element.elements['humanVerified'].text
+			end
+			if xml_element.elements['language'] != nil
+				self.language = xml_element.elements['language'].text
+			end
 		end
 
 	end
@@ -73,9 +79,15 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.content_like = xml_element.elements['contentLike'].text
-			self.content_multi_like_or = xml_element.elements['contentMultiLikeOr'].text
-			self.content_multi_like_and = xml_element.elements['contentMultiLikeAnd'].text
+			if xml_element.elements['contentLike'] != nil
+				self.content_like = xml_element.elements['contentLike'].text
+			end
+			if xml_element.elements['contentMultiLikeOr'] != nil
+				self.content_multi_like_or = xml_element.elements['contentMultiLikeOr'].text
+			end
+			if xml_element.elements['contentMultiLikeAnd'] != nil
+				self.content_multi_like_and = xml_element.elements['contentMultiLikeAnd'].text
+			end
 		end
 
 	end
@@ -86,7 +98,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaTranscriptAsset')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaTranscriptAsset')
+			end
 		end
 
 	end

@@ -37,7 +37,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.reference_id = xml_element.elements['referenceId'].text
+			if xml_element.elements['referenceId'] != nil
+				self.reference_id = xml_element.elements['referenceId'].text
+			end
 		end
 
 	end
@@ -55,14 +57,30 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.resource_id = xml_element.elements['resourceId'].text
-			self.name = xml_element.elements['name'].text
-			self.type = xml_element.elements['type'].text
-			self.system_name = xml_element.elements['systemName'].text
-			self.description = xml_element.elements['description'].text
-			self.tags = xml_element.elements['tags'].text
-			self.parent_type = xml_element.elements['parentType'].text
-			self.parent_system_name = xml_element.elements['parentSystemName'].text
+			if xml_element.elements['resourceId'] != nil
+				self.resource_id = xml_element.elements['resourceId'].text
+			end
+			if xml_element.elements['name'] != nil
+				self.name = xml_element.elements['name'].text
+			end
+			if xml_element.elements['type'] != nil
+				self.type = xml_element.elements['type'].text
+			end
+			if xml_element.elements['systemName'] != nil
+				self.system_name = xml_element.elements['systemName'].text
+			end
+			if xml_element.elements['description'] != nil
+				self.description = xml_element.elements['description'].text
+			end
+			if xml_element.elements['tags'] != nil
+				self.tags = xml_element.elements['tags'].text
+			end
+			if xml_element.elements['parentType'] != nil
+				self.parent_type = xml_element.elements['parentType'].text
+			end
+			if xml_element.elements['parentSystemName'] != nil
+				self.parent_system_name = xml_element.elements['parentSystemName'].text
+			end
 		end
 
 	end
@@ -78,7 +96,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.events_type = xml_element.elements['eventsType'].text
+			if xml_element.elements['eventsType'] != nil
+				self.events_type = xml_element.elements['eventsType'].text
+			end
 		end
 
 	end

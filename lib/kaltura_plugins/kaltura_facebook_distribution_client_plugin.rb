@@ -51,12 +51,24 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.language = xml_element.elements['language'].text
-			self.label = xml_element.elements['label'].text
-			self.file_path = xml_element.elements['filePath'].text
-			self.remote_id = xml_element.elements['remoteId'].text
-			self.version = xml_element.elements['version'].text
-			self.asset_id = xml_element.elements['assetId'].text
+			if xml_element.elements['language'] != nil
+				self.language = xml_element.elements['language'].text
+			end
+			if xml_element.elements['label'] != nil
+				self.label = xml_element.elements['label'].text
+			end
+			if xml_element.elements['filePath'] != nil
+				self.file_path = xml_element.elements['filePath'].text
+			end
+			if xml_element.elements['remoteId'] != nil
+				self.remote_id = xml_element.elements['remoteId'].text
+			end
+			if xml_element.elements['version'] != nil
+				self.version = xml_element.elements['version'].text
+			end
+			if xml_element.elements['assetId'] != nil
+				self.asset_id = xml_element.elements['assetId'].text
+			end
 		end
 
 	end
@@ -78,9 +90,15 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.video_asset_file_path = xml_element.elements['videoAssetFilePath'].text
-			self.thumb_asset_file_path = xml_element.elements['thumbAssetFilePath'].text
-			self.captions_info = KalturaClientBase.object_from_xml(xml_element.elements['captionsInfo'], 'KalturaFacebookCaptionDistributionInfo')
+			if xml_element.elements['videoAssetFilePath'] != nil
+				self.video_asset_file_path = xml_element.elements['videoAssetFilePath'].text
+			end
+			if xml_element.elements['thumbAssetFilePath'] != nil
+				self.thumb_asset_file_path = xml_element.elements['thumbAssetFilePath'].text
+			end
+			if xml_element.elements['captionsInfo'] != nil
+				self.captions_info = KalturaClientBase.object_from_xml(xml_element.elements['captionsInfo'], 'KalturaFacebookCaptionDistributionInfo')
+			end
 		end
 
 	end
@@ -100,13 +118,27 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.api_authorize_url = xml_element.elements['apiAuthorizeUrl'].text
-			self.page_id = xml_element.elements['pageId'].text
-			self.page_access_token = xml_element.elements['pageAccessToken'].text
-			self.user_access_token = xml_element.elements['userAccessToken'].text
-			self.state = xml_element.elements['state'].text
-			self.permissions = xml_element.elements['permissions'].text
-			self.re_request_permissions = xml_element.elements['reRequestPermissions'].text
+			if xml_element.elements['apiAuthorizeUrl'] != nil
+				self.api_authorize_url = xml_element.elements['apiAuthorizeUrl'].text
+			end
+			if xml_element.elements['pageId'] != nil
+				self.page_id = xml_element.elements['pageId'].text
+			end
+			if xml_element.elements['pageAccessToken'] != nil
+				self.page_access_token = xml_element.elements['pageAccessToken'].text
+			end
+			if xml_element.elements['userAccessToken'] != nil
+				self.user_access_token = xml_element.elements['userAccessToken'].text
+			end
+			if xml_element.elements['state'] != nil
+				self.state = xml_element.elements['state'].text
+			end
+			if xml_element.elements['permissions'] != nil
+				self.permissions = xml_element.elements['permissions'].text
+			end
+			if xml_element.elements['reRequestPermissions'] != nil
+				self.re_request_permissions = xml_element.elements['reRequestPermissions'].text
+			end
 		end
 
 	end

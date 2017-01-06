@@ -41,7 +41,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.event_notification_template_id = xml_element.elements['eventNotificationTemplateId'].text
+			if xml_element.elements['eventNotificationTemplateId'] != nil
+				self.event_notification_template_id = xml_element.elements['eventNotificationTemplateId'].text
+			end
 		end
 
 	end

@@ -37,9 +37,15 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.provisioning_params = KalturaClientBase.object_from_xml(xml_element.elements['provisioningParams'], 'KalturaKeyValue')
-			self.user_name = xml_element.elements['userName'].text
-			self.password = xml_element.elements['password'].text
+			if xml_element.elements['provisioningParams'] != nil
+				self.provisioning_params = KalturaClientBase.object_from_xml(xml_element.elements['provisioningParams'], 'KalturaKeyValue')
+			end
+			if xml_element.elements['userName'] != nil
+				self.user_name = xml_element.elements['userName'].text
+			end
+			if xml_element.elements['password'] != nil
+				self.password = xml_element.elements['password'].text
+			end
 		end
 
 	end

@@ -61,12 +61,24 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.app_prefix = xml_element.elements['appPrefix'].text
-			self.transcoder = xml_element.elements['transcoder'].text
-			self.gpu_id = xml_element.elements['GPUID'].text
-			self.live_service_port = xml_element.elements['liveServicePort'].text
-			self.live_service_protocol = xml_element.elements['liveServiceProtocol'].text
-			self.live_service_internal_domain = xml_element.elements['liveServiceInternalDomain'].text
+			if xml_element.elements['appPrefix'] != nil
+				self.app_prefix = xml_element.elements['appPrefix'].text
+			end
+			if xml_element.elements['transcoder'] != nil
+				self.transcoder = xml_element.elements['transcoder'].text
+			end
+			if xml_element.elements['GPUID'] != nil
+				self.gpu_id = xml_element.elements['GPUID'].text
+			end
+			if xml_element.elements['liveServicePort'] != nil
+				self.live_service_port = xml_element.elements['liveServicePort'].text
+			end
+			if xml_element.elements['liveServiceProtocol'] != nil
+				self.live_service_protocol = xml_element.elements['liveServiceProtocol'].text
+			end
+			if xml_element.elements['liveServiceInternalDomain'] != nil
+				self.live_service_internal_domain = xml_element.elements['liveServiceInternalDomain'].text
+			end
 		end
 
 	end

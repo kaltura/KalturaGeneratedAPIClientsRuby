@@ -49,8 +49,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.csv_version = xml_element.elements['csvVersion'].text
-			self.columns = KalturaClientBase.object_from_xml(xml_element.elements['columns'], 'KalturaString')
+			if xml_element.elements['csvVersion'] != nil
+				self.csv_version = xml_element.elements['csvVersion'].text
+			end
+			if xml_element.elements['columns'] != nil
+				self.columns = KalturaClientBase.object_from_xml(xml_element.elements['columns'], 'KalturaString')
+			end
 		end
 
 	end

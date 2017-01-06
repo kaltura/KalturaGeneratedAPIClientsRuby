@@ -56,8 +56,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.thumbnail_url = xml_element.elements['thumbnailUrl'].text
-			self.flavor_asset_url = xml_element.elements['flavorAssetUrl'].text
+			if xml_element.elements['thumbnailUrl'] != nil
+				self.thumbnail_url = xml_element.elements['thumbnailUrl'].text
+			end
+			if xml_element.elements['flavorAssetUrl'] != nil
+				self.flavor_asset_url = xml_element.elements['flavorAssetUrl'].text
+			end
 		end
 
 	end
@@ -71,10 +75,18 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.ftp_path = xml_element.elements['ftpPath'].text
-			self.username = xml_element.elements['username'].text
-			self.password = xml_element.elements['password'].text
-			self.domain = xml_element.elements['domain'].text
+			if xml_element.elements['ftpPath'] != nil
+				self.ftp_path = xml_element.elements['ftpPath'].text
+			end
+			if xml_element.elements['username'] != nil
+				self.username = xml_element.elements['username'].text
+			end
+			if xml_element.elements['password'] != nil
+				self.password = xml_element.elements['password'].text
+			end
+			if xml_element.elements['domain'] != nil
+				self.domain = xml_element.elements['domain'].text
+			end
 		end
 
 	end

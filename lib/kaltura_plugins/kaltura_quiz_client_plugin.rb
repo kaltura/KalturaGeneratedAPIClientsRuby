@@ -72,10 +72,18 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.key = xml_element.elements['key'].text
-			self.text = xml_element.elements['text'].text
-			self.weight = xml_element.elements['weight'].text
-			self.is_correct = xml_element.elements['isCorrect'].text
+			if xml_element.elements['key'] != nil
+				self.key = xml_element.elements['key'].text
+			end
+			if xml_element.elements['text'] != nil
+				self.text = xml_element.elements['text'].text
+			end
+			if xml_element.elements['weight'] != nil
+				self.weight = xml_element.elements['weight'].text
+			end
+			if xml_element.elements['isCorrect'] != nil
+				self.is_correct = xml_element.elements['isCorrect'].text
+			end
 		end
 
 	end
@@ -115,14 +123,30 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.version = xml_element.elements['version'].text
-			self.ui_attributes = KalturaClientBase.object_from_xml(xml_element.elements['uiAttributes'], 'KalturaKeyValue')
-			self.show_result_on_answer = xml_element.elements['showResultOnAnswer'].text
-			self.show_correct_key_on_answer = xml_element.elements['showCorrectKeyOnAnswer'].text
-			self.allow_answer_update = xml_element.elements['allowAnswerUpdate'].text
-			self.show_correct_after_submission = xml_element.elements['showCorrectAfterSubmission'].text
-			self.allow_download = xml_element.elements['allowDownload'].text
-			self.show_grade_after_submission = xml_element.elements['showGradeAfterSubmission'].text
+			if xml_element.elements['version'] != nil
+				self.version = xml_element.elements['version'].text
+			end
+			if xml_element.elements['uiAttributes'] != nil
+				self.ui_attributes = KalturaClientBase.object_from_xml(xml_element.elements['uiAttributes'], 'KalturaKeyValue')
+			end
+			if xml_element.elements['showResultOnAnswer'] != nil
+				self.show_result_on_answer = xml_element.elements['showResultOnAnswer'].text
+			end
+			if xml_element.elements['showCorrectKeyOnAnswer'] != nil
+				self.show_correct_key_on_answer = xml_element.elements['showCorrectKeyOnAnswer'].text
+			end
+			if xml_element.elements['allowAnswerUpdate'] != nil
+				self.allow_answer_update = xml_element.elements['allowAnswerUpdate'].text
+			end
+			if xml_element.elements['showCorrectAfterSubmission'] != nil
+				self.show_correct_after_submission = xml_element.elements['showCorrectAfterSubmission'].text
+			end
+			if xml_element.elements['allowDownload'] != nil
+				self.allow_download = xml_element.elements['allowDownload'].text
+			end
+			if xml_element.elements['showGradeAfterSubmission'] != nil
+				self.show_grade_after_submission = xml_element.elements['showGradeAfterSubmission'].text
+			end
 		end
 
 	end
@@ -142,12 +166,24 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.parent_id = xml_element.elements['parentId'].text
-			self.quiz_user_entry_id = xml_element.elements['quizUserEntryId'].text
-			self.answer_key = xml_element.elements['answerKey'].text
-			self.is_correct = xml_element.elements['isCorrect'].text
-			self.correct_answer_keys = KalturaClientBase.object_from_xml(xml_element.elements['correctAnswerKeys'], 'KalturaString')
-			self.explanation = xml_element.elements['explanation'].text
+			if xml_element.elements['parentId'] != nil
+				self.parent_id = xml_element.elements['parentId'].text
+			end
+			if xml_element.elements['quizUserEntryId'] != nil
+				self.quiz_user_entry_id = xml_element.elements['quizUserEntryId'].text
+			end
+			if xml_element.elements['answerKey'] != nil
+				self.answer_key = xml_element.elements['answerKey'].text
+			end
+			if xml_element.elements['isCorrect'] != nil
+				self.is_correct = xml_element.elements['isCorrect'].text
+			end
+			if xml_element.elements['correctAnswerKeys'] != nil
+				self.correct_answer_keys = KalturaClientBase.object_from_xml(xml_element.elements['correctAnswerKeys'], 'KalturaString')
+			end
+			if xml_element.elements['explanation'] != nil
+				self.explanation = xml_element.elements['explanation'].text
+			end
 		end
 
 	end
@@ -162,10 +198,18 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.optional_answers = KalturaClientBase.object_from_xml(xml_element.elements['optionalAnswers'], 'KalturaOptionalAnswer')
-			self.hint = xml_element.elements['hint'].text
-			self.question = xml_element.elements['question'].text
-			self.explanation = xml_element.elements['explanation'].text
+			if xml_element.elements['optionalAnswers'] != nil
+				self.optional_answers = KalturaClientBase.object_from_xml(xml_element.elements['optionalAnswers'], 'KalturaOptionalAnswer')
+			end
+			if xml_element.elements['hint'] != nil
+				self.hint = xml_element.elements['hint'].text
+			end
+			if xml_element.elements['question'] != nil
+				self.question = xml_element.elements['question'].text
+			end
+			if xml_element.elements['explanation'] != nil
+				self.explanation = xml_element.elements['explanation'].text
+			end
 		end
 
 	end
@@ -179,7 +223,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.is_quiz = xml_element.elements['isQuiz'].text
+			if xml_element.elements['isQuiz'] != nil
+				self.is_quiz = xml_element.elements['isQuiz'].text
+			end
 		end
 
 	end
@@ -190,7 +236,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaQuiz')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaQuiz')
+			end
 		end
 
 	end
@@ -204,8 +252,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.entry_id_equal = xml_element.elements['entryIdEqual'].text
-			self.entry_id_in = xml_element.elements['entryIdIn'].text
+			if xml_element.elements['entryIdEqual'] != nil
+				self.entry_id_equal = xml_element.elements['entryIdEqual'].text
+			end
+			if xml_element.elements['entryIdIn'] != nil
+				self.entry_id_in = xml_element.elements['entryIdIn'].text
+			end
 		end
 
 	end
@@ -219,10 +271,18 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.parent_id_equal = xml_element.elements['parentIdEqual'].text
-			self.parent_id_in = xml_element.elements['parentIdIn'].text
-			self.quiz_user_entry_id_equal = xml_element.elements['quizUserEntryIdEqual'].text
-			self.quiz_user_entry_id_in = xml_element.elements['quizUserEntryIdIn'].text
+			if xml_element.elements['parentIdEqual'] != nil
+				self.parent_id_equal = xml_element.elements['parentIdEqual'].text
+			end
+			if xml_element.elements['parentIdIn'] != nil
+				self.parent_id_in = xml_element.elements['parentIdIn'].text
+			end
+			if xml_element.elements['quizUserEntryIdEqual'] != nil
+				self.quiz_user_entry_id_equal = xml_element.elements['quizUserEntryIdEqual'].text
+			end
+			if xml_element.elements['quizUserEntryIdIn'] != nil
+				self.quiz_user_entry_id_in = xml_element.elements['quizUserEntryIdIn'].text
+			end
 		end
 
 	end
@@ -235,9 +295,15 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.question_like = xml_element.elements['questionLike'].text
-			self.question_multi_like_or = xml_element.elements['questionMultiLikeOr'].text
-			self.question_multi_like_and = xml_element.elements['questionMultiLikeAnd'].text
+			if xml_element.elements['questionLike'] != nil
+				self.question_like = xml_element.elements['questionLike'].text
+			end
+			if xml_element.elements['questionMultiLikeOr'] != nil
+				self.question_multi_like_or = xml_element.elements['questionMultiLikeOr'].text
+			end
+			if xml_element.elements['questionMultiLikeAnd'] != nil
+				self.question_multi_like_and = xml_element.elements['questionMultiLikeAnd'].text
+			end
 		end
 
 	end

@@ -93,15 +93,33 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.caption_params_id = xml_element.elements['captionParamsId'].text
-			self.language = xml_element.elements['language'].text
-			self.language_code = xml_element.elements['languageCode'].text
-			self.is_default = xml_element.elements['isDefault'].text
-			self.label = xml_element.elements['label'].text
-			self.format = xml_element.elements['format'].text
-			self.status = xml_element.elements['status'].text
-			self.parent_id = xml_element.elements['parentId'].text
-			self.accuracy = xml_element.elements['accuracy'].text
+			if xml_element.elements['captionParamsId'] != nil
+				self.caption_params_id = xml_element.elements['captionParamsId'].text
+			end
+			if xml_element.elements['language'] != nil
+				self.language = xml_element.elements['language'].text
+			end
+			if xml_element.elements['languageCode'] != nil
+				self.language_code = xml_element.elements['languageCode'].text
+			end
+			if xml_element.elements['isDefault'] != nil
+				self.is_default = xml_element.elements['isDefault'].text
+			end
+			if xml_element.elements['label'] != nil
+				self.label = xml_element.elements['label'].text
+			end
+			if xml_element.elements['format'] != nil
+				self.format = xml_element.elements['format'].text
+			end
+			if xml_element.elements['status'] != nil
+				self.status = xml_element.elements['status'].text
+			end
+			if xml_element.elements['parentId'] != nil
+				self.parent_id = xml_element.elements['parentId'].text
+			end
+			if xml_element.elements['accuracy'] != nil
+				self.accuracy = xml_element.elements['accuracy'].text
+			end
 		end
 
 	end
@@ -127,11 +145,21 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.language = xml_element.elements['language'].text
-			self.is_default = xml_element.elements['isDefault'].text
-			self.label = xml_element.elements['label'].text
-			self.format = xml_element.elements['format'].text
-			self.source_params_id = xml_element.elements['sourceParamsId'].text
+			if xml_element.elements['language'] != nil
+				self.language = xml_element.elements['language'].text
+			end
+			if xml_element.elements['isDefault'] != nil
+				self.is_default = xml_element.elements['isDefault'].text
+			end
+			if xml_element.elements['label'] != nil
+				self.label = xml_element.elements['label'].text
+			end
+			if xml_element.elements['format'] != nil
+				self.format = xml_element.elements['format'].text
+			end
+			if xml_element.elements['sourceParamsId'] != nil
+				self.source_params_id = xml_element.elements['sourceParamsId'].text
+			end
 		end
 
 	end
@@ -142,7 +170,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaCaptionAsset')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaCaptionAsset')
+			end
 		end
 
 	end
@@ -153,7 +183,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaCaptionParams')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaCaptionParams')
+			end
 		end
 
 	end
@@ -166,9 +198,15 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.multi_lanaguage_caption_asset_id = xml_element.elements['multiLanaguageCaptionAssetId'].text
-			self.entry_id = xml_element.elements['entryId'].text
-			self.file_location = xml_element.elements['fileLocation'].text
+			if xml_element.elements['multiLanaguageCaptionAssetId'] != nil
+				self.multi_lanaguage_caption_asset_id = xml_element.elements['multiLanaguageCaptionAssetId'].text
+			end
+			if xml_element.elements['entryId'] != nil
+				self.entry_id = xml_element.elements['entryId'].text
+			end
+			if xml_element.elements['fileLocation'] != nil
+				self.file_location = xml_element.elements['fileLocation'].text
+			end
 		end
 
 	end
@@ -191,13 +229,27 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.caption_params_id_equal = xml_element.elements['captionParamsIdEqual'].text
-			self.caption_params_id_in = xml_element.elements['captionParamsIdIn'].text
-			self.format_equal = xml_element.elements['formatEqual'].text
-			self.format_in = xml_element.elements['formatIn'].text
-			self.status_equal = xml_element.elements['statusEqual'].text
-			self.status_in = xml_element.elements['statusIn'].text
-			self.status_not_in = xml_element.elements['statusNotIn'].text
+			if xml_element.elements['captionParamsIdEqual'] != nil
+				self.caption_params_id_equal = xml_element.elements['captionParamsIdEqual'].text
+			end
+			if xml_element.elements['captionParamsIdIn'] != nil
+				self.caption_params_id_in = xml_element.elements['captionParamsIdIn'].text
+			end
+			if xml_element.elements['formatEqual'] != nil
+				self.format_equal = xml_element.elements['formatEqual'].text
+			end
+			if xml_element.elements['formatIn'] != nil
+				self.format_in = xml_element.elements['formatIn'].text
+			end
+			if xml_element.elements['statusEqual'] != nil
+				self.status_equal = xml_element.elements['statusEqual'].text
+			end
+			if xml_element.elements['statusIn'] != nil
+				self.status_in = xml_element.elements['statusIn'].text
+			end
+			if xml_element.elements['statusNotIn'] != nil
+				self.status_not_in = xml_element.elements['statusNotIn'].text
+			end
 		end
 
 	end
@@ -209,8 +261,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.format_equal = xml_element.elements['formatEqual'].text
-			self.format_in = xml_element.elements['formatIn'].text
+			if xml_element.elements['formatEqual'] != nil
+				self.format_equal = xml_element.elements['formatEqual'].text
+			end
+			if xml_element.elements['formatIn'] != nil
+				self.format_in = xml_element.elements['formatIn'].text
+			end
 		end
 
 	end

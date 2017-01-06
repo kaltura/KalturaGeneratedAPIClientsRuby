@@ -56,13 +56,27 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.id = xml_element.elements['id'].text
-			self.tag = xml_element.elements['tag'].text
-			self.tagged_object_type = xml_element.elements['taggedObjectType'].text
-			self.partner_id = xml_element.elements['partnerId'].text
-			self.instance_count = xml_element.elements['instanceCount'].text
-			self.created_at = xml_element.elements['createdAt'].text
-			self.updated_at = xml_element.elements['updatedAt'].text
+			if xml_element.elements['id'] != nil
+				self.id = xml_element.elements['id'].text
+			end
+			if xml_element.elements['tag'] != nil
+				self.tag = xml_element.elements['tag'].text
+			end
+			if xml_element.elements['taggedObjectType'] != nil
+				self.tagged_object_type = xml_element.elements['taggedObjectType'].text
+			end
+			if xml_element.elements['partnerId'] != nil
+				self.partner_id = xml_element.elements['partnerId'].text
+			end
+			if xml_element.elements['instanceCount'] != nil
+				self.instance_count = xml_element.elements['instanceCount'].text
+			end
+			if xml_element.elements['createdAt'] != nil
+				self.created_at = xml_element.elements['createdAt'].text
+			end
+			if xml_element.elements['updatedAt'] != nil
+				self.updated_at = xml_element.elements['updatedAt'].text
+			end
 		end
 
 	end
@@ -78,9 +92,15 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.changed_category_id = xml_element.elements['changedCategoryId'].text
-			self.deleted_privacy_contexts = xml_element.elements['deletedPrivacyContexts'].text
-			self.added_privacy_contexts = xml_element.elements['addedPrivacyContexts'].text
+			if xml_element.elements['changedCategoryId'] != nil
+				self.changed_category_id = xml_element.elements['changedCategoryId'].text
+			end
+			if xml_element.elements['deletedPrivacyContexts'] != nil
+				self.deleted_privacy_contexts = xml_element.elements['deletedPrivacyContexts'].text
+			end
+			if xml_element.elements['addedPrivacyContexts'] != nil
+				self.added_privacy_contexts = xml_element.elements['addedPrivacyContexts'].text
+			end
 		end
 
 	end
@@ -101,11 +121,21 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.object_type_equal = xml_element.elements['objectTypeEqual'].text
-			self.tag_equal = xml_element.elements['tagEqual'].text
-			self.tag_starts_with = xml_element.elements['tagStartsWith'].text
-			self.instance_count_equal = xml_element.elements['instanceCountEqual'].text
-			self.instance_count_in = xml_element.elements['instanceCountIn'].text
+			if xml_element.elements['objectTypeEqual'] != nil
+				self.object_type_equal = xml_element.elements['objectTypeEqual'].text
+			end
+			if xml_element.elements['tagEqual'] != nil
+				self.tag_equal = xml_element.elements['tagEqual'].text
+			end
+			if xml_element.elements['tagStartsWith'] != nil
+				self.tag_starts_with = xml_element.elements['tagStartsWith'].text
+			end
+			if xml_element.elements['instanceCountEqual'] != nil
+				self.instance_count_equal = xml_element.elements['instanceCountEqual'].text
+			end
+			if xml_element.elements['instanceCountIn'] != nil
+				self.instance_count_in = xml_element.elements['instanceCountIn'].text
+			end
 		end
 
 	end
@@ -116,7 +146,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaTag')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaTag')
+			end
 		end
 
 	end

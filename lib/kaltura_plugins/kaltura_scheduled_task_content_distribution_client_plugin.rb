@@ -38,7 +38,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.distribution_profile_id = xml_element.elements['distributionProfileId'].text
+			if xml_element.elements['distributionProfileId'] != nil
+				self.distribution_profile_id = xml_element.elements['distributionProfileId'].text
+			end
 		end
 
 	end

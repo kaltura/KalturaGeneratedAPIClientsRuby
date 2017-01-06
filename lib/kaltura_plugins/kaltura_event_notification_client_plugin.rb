@@ -123,9 +123,15 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.key = xml_element.elements['key'].text
-			self.description = xml_element.elements['description'].text
-			self.value = KalturaClientBase.object_from_xml(xml_element.elements['value'], 'KalturaStringValue')
+			if xml_element.elements['key'] != nil
+				self.key = xml_element.elements['key'].text
+			end
+			if xml_element.elements['description'] != nil
+				self.description = xml_element.elements['description'].text
+			end
+			if xml_element.elements['value'] != nil
+				self.value = KalturaClientBase.object_from_xml(xml_element.elements['value'], 'KalturaStringValue')
+			end
 		end
 
 	end
@@ -179,22 +185,54 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.id = xml_element.elements['id'].text
-			self.partner_id = xml_element.elements['partnerId'].text
-			self.name = xml_element.elements['name'].text
-			self.system_name = xml_element.elements['systemName'].text
-			self.description = xml_element.elements['description'].text
-			self.type = xml_element.elements['type'].text
-			self.status = xml_element.elements['status'].text
-			self.created_at = xml_element.elements['createdAt'].text
-			self.updated_at = xml_element.elements['updatedAt'].text
-			self.manual_dispatch_enabled = xml_element.elements['manualDispatchEnabled'].text
-			self.automatic_dispatch_enabled = xml_element.elements['automaticDispatchEnabled'].text
-			self.event_type = xml_element.elements['eventType'].text
-			self.event_object_type = xml_element.elements['eventObjectType'].text
-			self.event_conditions = KalturaClientBase.object_from_xml(xml_element.elements['eventConditions'], 'KalturaCondition')
-			self.content_parameters = KalturaClientBase.object_from_xml(xml_element.elements['contentParameters'], 'KalturaEventNotificationParameter')
-			self.user_parameters = KalturaClientBase.object_from_xml(xml_element.elements['userParameters'], 'KalturaEventNotificationParameter')
+			if xml_element.elements['id'] != nil
+				self.id = xml_element.elements['id'].text
+			end
+			if xml_element.elements['partnerId'] != nil
+				self.partner_id = xml_element.elements['partnerId'].text
+			end
+			if xml_element.elements['name'] != nil
+				self.name = xml_element.elements['name'].text
+			end
+			if xml_element.elements['systemName'] != nil
+				self.system_name = xml_element.elements['systemName'].text
+			end
+			if xml_element.elements['description'] != nil
+				self.description = xml_element.elements['description'].text
+			end
+			if xml_element.elements['type'] != nil
+				self.type = xml_element.elements['type'].text
+			end
+			if xml_element.elements['status'] != nil
+				self.status = xml_element.elements['status'].text
+			end
+			if xml_element.elements['createdAt'] != nil
+				self.created_at = xml_element.elements['createdAt'].text
+			end
+			if xml_element.elements['updatedAt'] != nil
+				self.updated_at = xml_element.elements['updatedAt'].text
+			end
+			if xml_element.elements['manualDispatchEnabled'] != nil
+				self.manual_dispatch_enabled = xml_element.elements['manualDispatchEnabled'].text
+			end
+			if xml_element.elements['automaticDispatchEnabled'] != nil
+				self.automatic_dispatch_enabled = xml_element.elements['automaticDispatchEnabled'].text
+			end
+			if xml_element.elements['eventType'] != nil
+				self.event_type = xml_element.elements['eventType'].text
+			end
+			if xml_element.elements['eventObjectType'] != nil
+				self.event_object_type = xml_element.elements['eventObjectType'].text
+			end
+			if xml_element.elements['eventConditions'] != nil
+				self.event_conditions = KalturaClientBase.object_from_xml(xml_element.elements['eventConditions'], 'KalturaCondition')
+			end
+			if xml_element.elements['contentParameters'] != nil
+				self.content_parameters = KalturaClientBase.object_from_xml(xml_element.elements['contentParameters'], 'KalturaEventNotificationParameter')
+			end
+			if xml_element.elements['userParameters'] != nil
+				self.user_parameters = KalturaClientBase.object_from_xml(xml_element.elements['userParameters'], 'KalturaEventNotificationParameter')
+			end
 		end
 
 	end
@@ -206,7 +244,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.field = KalturaClientBase.object_from_xml(xml_element.elements['field'], 'KalturaBooleanField')
+			if xml_element.elements['field'] != nil
+				self.field = KalturaClientBase.object_from_xml(xml_element.elements['field'], 'KalturaBooleanField')
+			end
 		end
 
 	end
@@ -219,8 +259,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.values = KalturaClientBase.object_from_xml(xml_element.elements['values'], 'KalturaString')
-			self.allowed_values = KalturaClientBase.object_from_xml(xml_element.elements['allowedValues'], 'KalturaStringValue')
+			if xml_element.elements['values'] != nil
+				self.values = KalturaClientBase.object_from_xml(xml_element.elements['values'], 'KalturaString')
+			end
+			if xml_element.elements['allowedValues'] != nil
+				self.allowed_values = KalturaClientBase.object_from_xml(xml_element.elements['allowedValues'], 'KalturaStringValue')
+			end
 		end
 
 	end
@@ -236,8 +280,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.template_id = xml_element.elements['templateId'].text
-			self.content_parameters = KalturaClientBase.object_from_xml(xml_element.elements['contentParameters'], 'KalturaKeyValue')
+			if xml_element.elements['templateId'] != nil
+				self.template_id = xml_element.elements['templateId'].text
+			end
+			if xml_element.elements['contentParameters'] != nil
+				self.content_parameters = KalturaClientBase.object_from_xml(xml_element.elements['contentParameters'], 'KalturaKeyValue')
+			end
 		end
 
 	end
@@ -249,8 +297,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.object_id = xml_element.elements['objectId'].text
-			self.scope_object_type = xml_element.elements['scopeObjectType'].text
+			if xml_element.elements['objectId'] != nil
+				self.object_id = xml_element.elements['objectId'].text
+			end
+			if xml_element.elements['scopeObjectType'] != nil
+				self.scope_object_type = xml_element.elements['scopeObjectType'].text
+			end
 		end
 
 	end
@@ -295,20 +347,48 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.id_equal = xml_element.elements['idEqual'].text
-			self.id_in = xml_element.elements['idIn'].text
-			self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
-			self.partner_id_in = xml_element.elements['partnerIdIn'].text
-			self.system_name_equal = xml_element.elements['systemNameEqual'].text
-			self.system_name_in = xml_element.elements['systemNameIn'].text
-			self.type_equal = xml_element.elements['typeEqual'].text
-			self.type_in = xml_element.elements['typeIn'].text
-			self.status_equal = xml_element.elements['statusEqual'].text
-			self.status_in = xml_element.elements['statusIn'].text
-			self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
-			self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
-			self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
-			self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			if xml_element.elements['idEqual'] != nil
+				self.id_equal = xml_element.elements['idEqual'].text
+			end
+			if xml_element.elements['idIn'] != nil
+				self.id_in = xml_element.elements['idIn'].text
+			end
+			if xml_element.elements['partnerIdEqual'] != nil
+				self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
+			end
+			if xml_element.elements['partnerIdIn'] != nil
+				self.partner_id_in = xml_element.elements['partnerIdIn'].text
+			end
+			if xml_element.elements['systemNameEqual'] != nil
+				self.system_name_equal = xml_element.elements['systemNameEqual'].text
+			end
+			if xml_element.elements['systemNameIn'] != nil
+				self.system_name_in = xml_element.elements['systemNameIn'].text
+			end
+			if xml_element.elements['typeEqual'] != nil
+				self.type_equal = xml_element.elements['typeEqual'].text
+			end
+			if xml_element.elements['typeIn'] != nil
+				self.type_in = xml_element.elements['typeIn'].text
+			end
+			if xml_element.elements['statusEqual'] != nil
+				self.status_equal = xml_element.elements['statusEqual'].text
+			end
+			if xml_element.elements['statusIn'] != nil
+				self.status_in = xml_element.elements['statusIn'].text
+			end
+			if xml_element.elements['createdAtGreaterThanOrEqual'] != nil
+				self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['createdAtLessThanOrEqual'] != nil
+				self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtGreaterThanOrEqual'] != nil
+				self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtLessThanOrEqual'] != nil
+				self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			end
 		end
 
 	end
@@ -319,7 +399,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaEventNotificationTemplate')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaEventNotificationTemplate')
+			end
 		end
 
 	end
@@ -331,7 +413,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.modified_columns = xml_element.elements['modifiedColumns'].text
+			if xml_element.elements['modifiedColumns'] != nil
+				self.modified_columns = xml_element.elements['modifiedColumns'].text
+			end
 		end
 
 	end

@@ -96,8 +96,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.document_type = xml_element.elements['documentType'].text
-			self.asset_params_ids = xml_element.elements['assetParamsIds'].text
+			if xml_element.elements['documentType'] != nil
+				self.document_type = xml_element.elements['documentType'].text
+			end
+			if xml_element.elements['assetParamsIds'] != nil
+				self.asset_params_ids = xml_element.elements['assetParamsIds'].text
+			end
 		end
 
 	end
@@ -108,7 +112,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaDocumentEntry')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaDocumentEntry')
+			end
 		end
 
 	end
@@ -147,11 +153,21 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.density_width = xml_element.elements['densityWidth'].text
-			self.density_height = xml_element.elements['densityHeight'].text
-			self.size_width = xml_element.elements['sizeWidth'].text
-			self.size_height = xml_element.elements['sizeHeight'].text
-			self.depth = xml_element.elements['depth'].text
+			if xml_element.elements['densityWidth'] != nil
+				self.density_width = xml_element.elements['densityWidth'].text
+			end
+			if xml_element.elements['densityHeight'] != nil
+				self.density_height = xml_element.elements['densityHeight'].text
+			end
+			if xml_element.elements['sizeWidth'] != nil
+				self.size_width = xml_element.elements['sizeWidth'].text
+			end
+			if xml_element.elements['sizeHeight'] != nil
+				self.size_height = xml_element.elements['sizeHeight'].text
+			end
+			if xml_element.elements['depth'] != nil
+				self.depth = xml_element.elements['depth'].text
+			end
 		end
 
 	end
@@ -165,7 +181,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.readonly = xml_element.elements['readonly'].text
+			if xml_element.elements['readonly'] != nil
+				self.readonly = xml_element.elements['readonly'].text
+			end
 		end
 
 	end
@@ -183,8 +201,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.flash_version = xml_element.elements['flashVersion'].text
-			self.poly2bitmap = xml_element.elements['poly2Bitmap'].text
+			if xml_element.elements['flashVersion'] != nil
+				self.flash_version = xml_element.elements['flashVersion'].text
+			end
+			if xml_element.elements['poly2Bitmap'] != nil
+				self.poly2bitmap = xml_element.elements['poly2Bitmap'].text
+			end
 		end
 
 	end
@@ -223,11 +245,21 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.density_width = xml_element.elements['densityWidth'].text
-			self.density_height = xml_element.elements['densityHeight'].text
-			self.size_width = xml_element.elements['sizeWidth'].text
-			self.size_height = xml_element.elements['sizeHeight'].text
-			self.depth = xml_element.elements['depth'].text
+			if xml_element.elements['densityWidth'] != nil
+				self.density_width = xml_element.elements['densityWidth'].text
+			end
+			if xml_element.elements['densityHeight'] != nil
+				self.density_height = xml_element.elements['densityHeight'].text
+			end
+			if xml_element.elements['sizeWidth'] != nil
+				self.size_width = xml_element.elements['sizeWidth'].text
+			end
+			if xml_element.elements['sizeHeight'] != nil
+				self.size_height = xml_element.elements['sizeHeight'].text
+			end
+			if xml_element.elements['depth'] != nil
+				self.depth = xml_element.elements['depth'].text
+			end
 		end
 
 	end
@@ -241,7 +273,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.readonly = xml_element.elements['readonly'].text
+			if xml_element.elements['readonly'] != nil
+				self.readonly = xml_element.elements['readonly'].text
+			end
 		end
 
 	end
@@ -259,8 +293,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.flash_version = xml_element.elements['flashVersion'].text
-			self.poly2bitmap = xml_element.elements['poly2Bitmap'].text
+			if xml_element.elements['flashVersion'] != nil
+				self.flash_version = xml_element.elements['flashVersion'].text
+			end
+			if xml_element.elements['poly2Bitmap'] != nil
+				self.poly2bitmap = xml_element.elements['poly2Bitmap'].text
+			end
 		end
 
 	end
@@ -277,10 +315,18 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.document_type_equal = xml_element.elements['documentTypeEqual'].text
-			self.document_type_in = xml_element.elements['documentTypeIn'].text
-			self.asset_params_ids_match_or = xml_element.elements['assetParamsIdsMatchOr'].text
-			self.asset_params_ids_match_and = xml_element.elements['assetParamsIdsMatchAnd'].text
+			if xml_element.elements['documentTypeEqual'] != nil
+				self.document_type_equal = xml_element.elements['documentTypeEqual'].text
+			end
+			if xml_element.elements['documentTypeIn'] != nil
+				self.document_type_in = xml_element.elements['documentTypeIn'].text
+			end
+			if xml_element.elements['assetParamsIdsMatchOr'] != nil
+				self.asset_params_ids_match_or = xml_element.elements['assetParamsIdsMatchOr'].text
+			end
+			if xml_element.elements['assetParamsIdsMatchAnd'] != nil
+				self.asset_params_ids_match_and = xml_element.elements['assetParamsIdsMatchAnd'].text
+			end
 		end
 
 	end

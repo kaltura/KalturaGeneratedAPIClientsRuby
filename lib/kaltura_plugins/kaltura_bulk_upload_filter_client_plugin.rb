@@ -40,8 +40,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.filter = KalturaClientBase.object_from_xml(xml_element.elements['filter'], 'KalturaFilter')
-			self.template_object = KalturaClientBase.object_from_xml(xml_element.elements['templateObject'], 'KalturaObjectBase')
+			if xml_element.elements['filter'] != nil
+				self.filter = KalturaClientBase.object_from_xml(xml_element.elements['filter'], 'KalturaFilter')
+			end
+			if xml_element.elements['templateObject'] != nil
+				self.template_object = KalturaClientBase.object_from_xml(xml_element.elements['templateObject'], 'KalturaObjectBase')
+			end
 		end
 
 	end
@@ -56,8 +60,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			self.filter = KalturaClientBase.object_from_xml(xml_element.elements['filter'], 'KalturaFilter')
-			self.template_object = KalturaClientBase.object_from_xml(xml_element.elements['templateObject'], 'KalturaObjectBase')
+			if xml_element.elements['filter'] != nil
+				self.filter = KalturaClientBase.object_from_xml(xml_element.elements['filter'], 'KalturaFilter')
+			end
+			if xml_element.elements['templateObject'] != nil
+				self.template_object = KalturaClientBase.object_from_xml(xml_element.elements['templateObject'], 'KalturaObjectBase')
+			end
 		end
 
 	end

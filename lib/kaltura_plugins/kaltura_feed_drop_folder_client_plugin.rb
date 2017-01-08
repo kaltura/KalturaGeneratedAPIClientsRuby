@@ -30,36 +30,6 @@ require File.dirname(__FILE__) + '/kaltura_drop_folder_client_plugin.rb'
 
 module Kaltura
 
-	class KalturaFeedDropFolderFileOrderBy
-		CREATED_AT_ASC = "+createdAt"
-		FILE_NAME_ASC = "+fileName"
-		FILE_SIZE_ASC = "+fileSize"
-		FILE_SIZE_LAST_SET_AT_ASC = "+fileSizeLastSetAt"
-		ID_ASC = "+id"
-		PARSED_FLAVOR_ASC = "+parsedFlavor"
-		PARSED_SLUG_ASC = "+parsedSlug"
-		UPDATED_AT_ASC = "+updatedAt"
-		CREATED_AT_DESC = "-createdAt"
-		FILE_NAME_DESC = "-fileName"
-		FILE_SIZE_DESC = "-fileSize"
-		FILE_SIZE_LAST_SET_AT_DESC = "-fileSizeLastSetAt"
-		ID_DESC = "-id"
-		PARSED_FLAVOR_DESC = "-parsedFlavor"
-		PARSED_SLUG_DESC = "-parsedSlug"
-		UPDATED_AT_DESC = "-updatedAt"
-	end
-
-	class KalturaFeedDropFolderOrderBy
-		CREATED_AT_ASC = "+createdAt"
-		ID_ASC = "+id"
-		NAME_ASC = "+name"
-		UPDATED_AT_ASC = "+updatedAt"
-		CREATED_AT_DESC = "-createdAt"
-		ID_DESC = "-id"
-		NAME_DESC = "-name"
-		UPDATED_AT_DESC = "-updatedAt"
-	end
-
 	class KalturaFeedItemInfo < KalturaObjectBase
 		attr_accessor :item_xpath
 		attr_accessor :item_publish_date_xpath
@@ -140,42 +110,6 @@ module Kaltura
 			if xml_element.elements['feedXmlPath'] != nil
 				self.feed_xml_path = xml_element.elements['feedXmlPath'].text
 			end
-		end
-
-	end
-
-	class KalturaFeedDropFolderBaseFilter < KalturaDropFolderFilter
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaFeedDropFolderFileBaseFilter < KalturaDropFolderFileFilter
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaFeedDropFolderFileFilter < KalturaFeedDropFolderFileBaseFilter
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaFeedDropFolderFilter < KalturaFeedDropFolderBaseFilter
-
-
-		def from_xml(xml_element)
-			super
 		end
 
 	end

@@ -440,7 +440,7 @@ module Kaltura
 		def get_by_ids(entry_ids)
 			kparams = {}
 			client.add_param(kparams, 'entryIds', entry_ids)
-			client.queue_service_action_call('baseentry', 'getByIds', 'array', kparams)
+			client.queue_service_action_call('baseentry', 'getByIds', 'KalturaBaseEntry', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1698,7 +1698,7 @@ module Kaltura
 		def get_by_entry_id(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('flavorasset', 'getByEntryId', 'array', kparams)
+			client.queue_service_action_call('flavorasset', 'getByEntryId', 'KalturaFlavorAsset', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1723,7 +1723,7 @@ module Kaltura
 		def get_web_playable_by_entry_id(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('flavorasset', 'getWebPlayableByEntryId', 'array', kparams)
+			client.queue_service_action_call('flavorasset', 'getWebPlayableByEntryId', 'KalturaFlavorAsset', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1813,7 +1813,7 @@ module Kaltura
 		def get_flavor_assets_with_params(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('flavorasset', 'getFlavorAssetsWithParams', 'array', kparams)
+			client.queue_service_action_call('flavorasset', 'getFlavorAssetsWithParams', 'KalturaFlavorAssetWithParams', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1977,7 +1977,7 @@ module Kaltura
 		def get_by_conversion_profile_id(conversion_profile_id)
 			kparams = {}
 			client.add_param(kparams, 'conversionProfileId', conversion_profile_id)
-			client.queue_service_action_call('flavorparams', 'getByConversionProfileId', 'array', kparams)
+			client.queue_service_action_call('flavorparams', 'getByConversionProfileId', 'KalturaFlavorParams', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -2266,7 +2266,7 @@ module Kaltura
 			client.add_param(kparams, 'reportType', report_type)
 			client.add_param(kparams, 'filter', filter)
 			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('livereports', 'getEvents', 'array', kparams)
+			client.queue_service_action_call('livereports', 'getEvents', 'KalturaReportGraph', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3146,7 +3146,7 @@ module Kaltura
 		def get_mixes_by_media_id(media_entry_id)
 			kparams = {}
 			client.add_param(kparams, 'mediaEntryId', media_entry_id)
-			client.queue_service_action_call('mixing', 'getMixesByMediaId', 'array', kparams)
+			client.queue_service_action_call('mixing', 'getMixesByMediaId', 'KalturaMixEntry', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3159,7 +3159,7 @@ module Kaltura
 			kparams = {}
 			client.add_param(kparams, 'mixId', mix_id)
 			client.add_param(kparams, 'version', version)
-			client.queue_service_action_call('mixing', 'getReadyMediaEntries', 'array', kparams)
+			client.queue_service_action_call('mixing', 'getReadyMediaEntries', 'KalturaMediaEntry', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3603,7 +3603,7 @@ module Kaltura
 			client.add_param(kparams, 'playlistContext', playlist_context)
 			client.add_param(kparams, 'filter', filter)
 			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('playlist', 'execute', 'array', kparams)
+			client.queue_service_action_call('playlist', 'execute', 'KalturaBaseEntry', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3618,7 +3618,7 @@ module Kaltura
 			client.add_param(kparams, 'playlistContent', playlist_content)
 			client.add_param(kparams, 'detailed', detailed)
 			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('playlist', 'executeFromContent', 'array', kparams)
+			client.queue_service_action_call('playlist', 'executeFromContent', 'KalturaBaseEntry', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3633,7 +3633,7 @@ module Kaltura
 			client.add_param(kparams, 'totalResults', total_results)
 			client.add_param(kparams, 'detailed', detailed)
 			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('playlist', 'executeFromFilters', 'array', kparams)
+			client.queue_service_action_call('playlist', 'executeFromFilters', 'KalturaBaseEntry', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3668,7 +3668,7 @@ module Kaltura
 			client.add_param(kparams, 'reportInputFilter', report_input_filter)
 			client.add_param(kparams, 'dimension', dimension)
 			client.add_param(kparams, 'objectIds', object_ids)
-			client.queue_service_action_call('report', 'getGraphs', 'array', kparams)
+			client.queue_service_action_call('report', 'getGraphs', 'KalturaReportGraph', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3696,7 +3696,7 @@ module Kaltura
 			client.add_param(kparams, 'reportType', report_type)
 			client.add_param(kparams, 'reportInputFilter', report_input_filter)
 			client.add_param(kparams, 'objectIds', object_ids)
-			client.queue_service_action_call('report', 'getBaseTotal', 'array', kparams)
+			client.queue_service_action_call('report', 'getBaseTotal', 'KalturaReportBaseTotal', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -4587,7 +4587,7 @@ module Kaltura
 		def get_by_entry_id(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('thumbasset', 'getByEntryId', 'array', kparams)
+			client.queue_service_action_call('thumbasset', 'getByEntryId', 'KalturaThumbAsset', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -4788,7 +4788,7 @@ module Kaltura
 		def get_by_conversion_profile_id(conversion_profile_id)
 			kparams = {}
 			client.add_param(kparams, 'conversionProfileId', conversion_profile_id)
-			client.queue_service_action_call('thumbparams', 'getByConversionProfileId', 'array', kparams)
+			client.queue_service_action_call('thumbparams', 'getByConversionProfileId', 'KalturaThumbParams', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -4894,7 +4894,7 @@ module Kaltura
 		# @return [array]
 		def get_available_types()
 			kparams = {}
-			client.queue_service_action_call('uiconf', 'getAvailableTypes', 'array', kparams)
+			client.queue_service_action_call('uiconf', 'getAvailableTypes', 'KalturaUiConfTypeInfo', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

@@ -1324,7 +1324,7 @@ module Kaltura
 			kparams = {}
 			client.add_param(kparams, 'resourceIds', resource_ids)
 			client.add_param(kparams, 'scheduleEvent', schedule_event)
-			client.queue_service_action_call('schedule_scheduleevent', 'getConflicts', 'array', kparams)
+			client.queue_service_action_call('schedule_scheduleevent', 'getConflicts', 'KalturaScheduleEvent', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

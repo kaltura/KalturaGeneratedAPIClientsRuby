@@ -27,6 +27,7 @@
 # ===================================================================================================
 require 'kaltura_client.rb'
 require File.dirname(__FILE__) + '/kaltura_integration_client_plugin.rb'
+require File.dirname(__FILE__) + '/kaltura_transcript_client_plugin.rb'
 
 module Kaltura
 

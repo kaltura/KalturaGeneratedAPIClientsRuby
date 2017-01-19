@@ -41,6 +41,11 @@ module Kaltura
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
+	class KalturaTranscriptProviderType
+		CIELO24 = "cielo24.Cielo24"
+		VOICEBASE = "voicebase.Voicebase"
+	end
+
 	class KalturaTranscriptAsset < KalturaAttachmentAsset
 		# The accuracy of the transcript - values between 0 and 1
 		attr_accessor :accuracy
@@ -48,6 +53,8 @@ module Kaltura
 		attr_accessor :human_verified
 		# The language of the transcript
 		attr_accessor :language
+		# The provider of the transcript
+		attr_accessor :provider_type
 
 		def accuracy=(val)
 			@accuracy = val.to_f
@@ -66,6 +73,9 @@ module Kaltura
 			end
 			if xml_element.elements['language'] != nil
 				self.language = xml_element.elements['language'].text
+			end
+			if xml_element.elements['providerType'] != nil
+				self.provider_type = xml_element.elements['providerType'].text
 			end
 		end
 

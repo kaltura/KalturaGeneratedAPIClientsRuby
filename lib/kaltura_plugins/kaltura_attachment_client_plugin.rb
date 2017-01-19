@@ -53,6 +53,7 @@ module Kaltura
 		TEXT = "1"
 		MEDIA = "2"
 		DOCUMENT = "3"
+		JSON = "4"
 	end
 
 	class KalturaAttachmentAsset < KalturaAsset

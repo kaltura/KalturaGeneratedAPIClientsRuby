@@ -861,6 +861,7 @@ module Kaltura
 		THUMB_CUE_POINTS = "thumbCuePoint.THUMB_CUE_POINTS"
 		USERS = "1"
 		CATEGORIES = "2"
+		CHILD_ENTRIES = "3"
 	end
 
 	class KalturaBaseEntryCompareAttribute

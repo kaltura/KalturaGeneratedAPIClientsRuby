@@ -101,6 +101,15 @@ module Kaltura
 
 	end
 
+	class KalturaAttachmentServeOptions < KalturaAssetServeOptions
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaAttachmentAssetBaseFilter < KalturaAssetFilter
 		attr_accessor :format_equal
 		attr_accessor :format_in
@@ -215,9 +224,10 @@ module Kaltura
 
 		# Serves attachment by its id
 		# @return [file]
-		def serve(attachment_asset_id)
+		def serve(attachment_asset_id, serve_options=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'attachmentAssetId', attachment_asset_id)
+			client.add_param(kparams, 'serveOptions', serve_options)
 			client.queue_service_action_call('attachment_attachmentasset', 'serve', 'file', kparams)
 			return client.get_serve_url()
 		end

@@ -805,6 +805,26 @@ module Kaltura
 
 	end
 
+	class KalturaAssetServeOptions < KalturaObjectBase
+		attr_accessor :download
+		attr_accessor :referrer
+
+		def download=(val)
+			@download = to_b(val)
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['download'] != nil
+				self.download = xml_element.elements['download'].text
+			end
+			if xml_element.elements['referrer'] != nil
+				self.referrer = xml_element.elements['referrer'].text
+			end
+		end
+
+	end
+
 	# Base class to all operation attributes types
 	class KalturaOperationAttributes < KalturaObjectBase
 
@@ -8533,26 +8553,6 @@ module Kaltura
 
 	end
 
-	class KalturaThumbnailServeOptions < KalturaObjectBase
-		attr_accessor :download
-		attr_accessor :referrer
-
-		def download=(val)
-			@download = to_b(val)
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['download'] != nil
-				self.download = xml_element.elements['download'].text
-			end
-			if xml_element.elements['referrer'] != nil
-				self.referrer = xml_element.elements['referrer'].text
-			end
-		end
-
-	end
-
 	class KalturaUiConf < KalturaObjectBase
 		attr_accessor :id
 		# Name of the uiConf, this is not a primary key
@@ -13781,6 +13781,15 @@ module Kaltura
 			if xml_element.elements['objects'] != nil
 				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaThumbParams')
 			end
+		end
+
+	end
+
+	class KalturaThumbnailServeOptions < KalturaAssetServeOptions
+
+
+		def from_xml(xml_element)
+			super
 		end
 
 	end

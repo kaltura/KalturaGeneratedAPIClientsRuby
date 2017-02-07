@@ -61,6 +61,8 @@ module Kaltura
 		attr_accessor :spoken_language
 		# should replace remote media content
 		attr_accessor :replace_media_content
+		# additional parameters to send to Cielo24
+		attr_accessor :additional_parameters
 
 		def replace_media_content=(val)
 			@replace_media_content = to_b(val)
@@ -97,6 +99,9 @@ module Kaltura
 			end
 			if xml_element.elements['replaceMediaContent'] != nil
 				self.replace_media_content = xml_element.elements['replaceMediaContent'].text
+			end
+			if xml_element.elements['additionalParameters'] != nil
+				self.additional_parameters = xml_element.elements['additionalParameters'].text
 			end
 		end
 

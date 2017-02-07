@@ -5669,6 +5669,8 @@ module Kaltura
 		attr_accessor :recording_options
 		# the status of the entry of type EntryServerNodeStatus
 		attr_accessor :live_status
+		# The chunk duration value in milliseconds
+		attr_accessor :segment_duration
 
 		def record_status=(val)
 			@record_status = val.to_i
@@ -5696,6 +5698,9 @@ module Kaltura
 		end
 		def live_status=(val)
 			@live_status = val.to_i
+		end
+		def segment_duration=(val)
+			@segment_duration = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -5741,6 +5746,9 @@ module Kaltura
 			end
 			if xml_element.elements['liveStatus'] != nil
 				self.live_status = xml_element.elements['liveStatus'].text
+			end
+			if xml_element.elements['segmentDuration'] != nil
+				self.segment_duration = xml_element.elements['segmentDuration'].text
 			end
 		end
 

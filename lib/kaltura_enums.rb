@@ -862,6 +862,7 @@ module Kaltura
 		USERS = "1"
 		CATEGORIES = "2"
 		CHILD_ENTRIES = "3"
+		ACCESS_CONTROL = "4"
 	end
 
 	class KalturaBaseEntryCompareAttribute

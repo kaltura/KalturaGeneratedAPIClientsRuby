@@ -225,32 +225,6 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Update annotation by id
-		# @return [KalturaAnnotation]
-		def update(id, annotation)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'annotation', annotation)
-			client.queue_service_action_call('annotation_annotation', 'update', 'KalturaAnnotation', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# List annotation objects by filter and pager
-		# @return [KalturaAnnotationListResponse]
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('annotation_annotation', 'list', 'KalturaAnnotationListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Allows you to add multiple cue points objects by uploading XML that contains multiple cue point definitions
 		# @return [KalturaCuePointListResponse]
 		def add_from_bulk(file_data)
@@ -264,22 +238,13 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Download multiple cue points objects as XML definitions
-		# @return [file]
-		def serve_bulk(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('annotation_annotation', 'serveBulk', 'file', kparams)
-			return client.get_serve_url()
-		end
-
-		# Retrieve an CuePoint object by id
+		# Clone cuePoint with id to given entry
 		# @return [KalturaCuePoint]
-		def get(id)
+		def clone(id, entry_id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('annotation_annotation', 'get', 'KalturaCuePoint', kparams)
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('annotation_annotation', 'clone', 'KalturaCuePoint', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -310,6 +275,54 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Retrieve an CuePoint object by id
+		# @return [KalturaCuePoint]
+		def get(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('annotation_annotation', 'get', 'KalturaCuePoint', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# List annotation objects by filter and pager
+		# @return [KalturaAnnotationListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('annotation_annotation', 'list', 'KalturaAnnotationListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Download multiple cue points objects as XML definitions
+		# @return [file]
+		def serve_bulk(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('annotation_annotation', 'serveBulk', 'file', kparams)
+			return client.get_serve_url()
+		end
+
+		# Update annotation by id
+		# @return [KalturaAnnotation]
+		def update(id, annotation)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'annotation', annotation)
+			client.queue_service_action_call('annotation_annotation', 'update', 'KalturaAnnotation', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Update cuePoint status by id
 		# @return []
 		def update_status(id, status)
@@ -317,19 +330,6 @@ module Kaltura
 			client.add_param(kparams, 'id', id)
 			client.add_param(kparams, 'status', status)
 			client.queue_service_action_call('annotation_annotation', 'updateStatus', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Clone cuePoint with id to given entry
-		# @return [KalturaCuePoint]
-		def clone(id, entry_id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('annotation_annotation', 'clone', 'KalturaCuePoint', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

@@ -160,18 +160,6 @@ module Kaltura
 			super(client)
 		end
 
-		# @return [KalturaTagListResponse]
-		def search(tag_filter, pager=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'tagFilter', tag_filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('tagsearch_tag', 'search', 'KalturaTagListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Action goes over all tags with instanceCount==0 and checks whether they need to be removed from the DB. Returns number of removed tags.
 		# @return [int]
 		def delete_pending()
@@ -190,6 +178,18 @@ module Kaltura
 			client.add_param(kparams, 'pcToDecrement', pc_to_decrement)
 			client.add_param(kparams, 'pcToIncrement', pc_to_increment)
 			client.queue_service_action_call('tagsearch_tag', 'indexCategoryEntryTags', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# @return [KalturaTagListResponse]
+		def search(tag_filter, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'tagFilter', tag_filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('tagsearch_tag', 'search', 'KalturaTagListResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

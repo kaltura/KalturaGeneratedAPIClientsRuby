@@ -234,50 +234,12 @@ module Kaltura
 			super(client)
 		end
 
-		# List short link objects by filter and pager
-		# @return [KalturaShortLinkListResponse]
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('shortlink_shortlink', 'list', 'KalturaShortLinkListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Allows you to add a short link object
 		# @return [KalturaShortLink]
 		def add(short_link)
 			kparams = {}
 			client.add_param(kparams, 'shortLink', short_link)
 			client.queue_service_action_call('shortlink_shortlink', 'add', 'KalturaShortLink', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Retrieve an short link object by id
-		# @return [KalturaShortLink]
-		def get(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('shortlink_shortlink', 'get', 'KalturaShortLink', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update exisitng short link
-		# @return [KalturaShortLink]
-		def update(id, short_link)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'shortLink', short_link)
-			client.queue_service_action_call('shortlink_shortlink', 'update', 'KalturaShortLink', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -296,6 +258,18 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Retrieve an short link object by id
+		# @return [KalturaShortLink]
+		def get(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('shortlink_shortlink', 'get', 'KalturaShortLink', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Serves short link
 		# @return [file]
 		def goto(id, proxy=false)
@@ -304,6 +278,32 @@ module Kaltura
 			client.add_param(kparams, 'proxy', proxy)
 			client.queue_service_action_call('shortlink_shortlink', 'goto', 'file', kparams)
 			return client.get_serve_url()
+		end
+
+		# List short link objects by filter and pager
+		# @return [KalturaShortLinkListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('shortlink_shortlink', 'list', 'KalturaShortLinkListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update exisitng short link
+		# @return [KalturaShortLink]
+		def update(id, short_link)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'shortLink', short_link)
+			client.queue_service_action_call('shortlink_shortlink', 'update', 'KalturaShortLink', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
 		end
 	end
 

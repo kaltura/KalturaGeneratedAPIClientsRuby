@@ -282,50 +282,12 @@ module Kaltura
 			super(client)
 		end
 
-		# List virus scan profile objects by filter and pager
-		# @return [KalturaVirusScanProfileListResponse]
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('virusscan_virusscanprofile', 'list', 'KalturaVirusScanProfileListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Allows you to add an virus scan profile object and virus scan profile content associated with Kaltura object
 		# @return [KalturaVirusScanProfile]
 		def add(virus_scan_profile)
 			kparams = {}
 			client.add_param(kparams, 'virusScanProfile', virus_scan_profile)
 			client.queue_service_action_call('virusscan_virusscanprofile', 'add', 'KalturaVirusScanProfile', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Retrieve an virus scan profile object by id
-		# @return [KalturaVirusScanProfile]
-		def get(virus_scan_profile_id)
-			kparams = {}
-			client.add_param(kparams, 'virusScanProfileId', virus_scan_profile_id)
-			client.queue_service_action_call('virusscan_virusscanprofile', 'get', 'KalturaVirusScanProfile', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update exisitng virus scan profile, it is possible to update the virus scan profile id too
-		# @return [KalturaVirusScanProfile]
-		def update(virus_scan_profile_id, virus_scan_profile)
-			kparams = {}
-			client.add_param(kparams, 'virusScanProfileId', virus_scan_profile_id)
-			client.add_param(kparams, 'virusScanProfile', virus_scan_profile)
-			client.queue_service_action_call('virusscan_virusscanprofile', 'update', 'KalturaVirusScanProfile', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -344,6 +306,31 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Retrieve an virus scan profile object by id
+		# @return [KalturaVirusScanProfile]
+		def get(virus_scan_profile_id)
+			kparams = {}
+			client.add_param(kparams, 'virusScanProfileId', virus_scan_profile_id)
+			client.queue_service_action_call('virusscan_virusscanprofile', 'get', 'KalturaVirusScanProfile', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# List virus scan profile objects by filter and pager
+		# @return [KalturaVirusScanProfileListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('virusscan_virusscanprofile', 'list', 'KalturaVirusScanProfileListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Scan flavor asset according to virus scan profile
 		# @return [int]
 		def scan(flavor_asset_id, virus_scan_profile_id=KalturaNotImplemented)
@@ -351,6 +338,19 @@ module Kaltura
 			client.add_param(kparams, 'flavorAssetId', flavor_asset_id)
 			client.add_param(kparams, 'virusScanProfileId', virus_scan_profile_id)
 			client.queue_service_action_call('virusscan_virusscanprofile', 'scan', 'int', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update exisitng virus scan profile, it is possible to update the virus scan profile id too
+		# @return [KalturaVirusScanProfile]
+		def update(virus_scan_profile_id, virus_scan_profile)
+			kparams = {}
+			client.add_param(kparams, 'virusScanProfileId', virus_scan_profile_id)
+			client.add_param(kparams, 'virusScanProfile', virus_scan_profile)
+			client.queue_service_action_call('virusscan_virusscanprofile', 'update', 'KalturaVirusScanProfile', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

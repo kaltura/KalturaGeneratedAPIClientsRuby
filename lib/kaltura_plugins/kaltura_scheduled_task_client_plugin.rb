@@ -490,6 +490,18 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Delete a scheduled task profile
+		# @return []
+		def delete(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('scheduledtask_scheduledtaskprofile', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Retrieve a scheduled task profile by id
 		# @return [KalturaScheduledTaskProfile]
 		def get(id)
@@ -502,25 +514,11 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Update an existing scheduled task profile
-		# @return [KalturaScheduledTaskProfile]
-		def update(id, scheduled_task_profile)
+		# @return [KalturaObjectListResponse]
+		def get_dry_run_results(request_id)
 			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'scheduledTaskProfile', scheduled_task_profile)
-			client.queue_service_action_call('scheduledtask_scheduledtaskprofile', 'update', 'KalturaScheduledTaskProfile', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Delete a scheduled task profile
-		# @return []
-		def delete(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('scheduledtask_scheduledtaskprofile', 'delete', '', kparams)
+			client.add_param(kparams, 'requestId', request_id)
+			client.queue_service_action_call('scheduledtask_scheduledtaskprofile', 'getDryRunResults', 'KalturaObjectListResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -552,11 +550,13 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# @return [KalturaObjectListResponse]
-		def get_dry_run_results(request_id)
+		# Update an existing scheduled task profile
+		# @return [KalturaScheduledTaskProfile]
+		def update(id, scheduled_task_profile)
 			kparams = {}
-			client.add_param(kparams, 'requestId', request_id)
-			client.queue_service_action_call('scheduledtask_scheduledtaskprofile', 'getDryRunResults', 'KalturaObjectListResponse', kparams)
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'scheduledTaskProfile', scheduled_task_profile)
+			client.queue_service_action_call('scheduledtask_scheduledtaskprofile', 'update', 'KalturaScheduledTaskProfile', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

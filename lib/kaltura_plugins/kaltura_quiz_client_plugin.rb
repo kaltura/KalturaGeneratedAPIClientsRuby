@@ -346,25 +346,25 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Allows to update a quiz
-		# @return [KalturaQuiz]
-		def update(entry_id, quiz)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'quiz', quiz)
-			client.queue_service_action_call('quiz_quiz', 'update', 'KalturaQuiz', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Allows to get a quiz
 		# @return [KalturaQuiz]
 		def get(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
 			client.queue_service_action_call('quiz_quiz', 'get', 'KalturaQuiz', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# sends a with an api request for pdf from quiz object
+		# @return [string]
+		def get_url(entry_id, quiz_output_type)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'quizOutputType', quiz_output_type)
+			client.queue_service_action_call('quiz_quiz', 'getUrl', 'string', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -396,13 +396,13 @@ module Kaltura
 			return client.get_serve_url()
 		end
 
-		# sends a with an api request for pdf from quiz object
-		# @return [string]
-		def get_url(entry_id, quiz_output_type)
+		# Allows to update a quiz
+		# @return [KalturaQuiz]
+		def update(entry_id, quiz)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'quizOutputType', quiz_output_type)
-			client.queue_service_action_call('quiz_quiz', 'getUrl', 'string', kparams)
+			client.add_param(kparams, 'quiz', quiz)
+			client.queue_service_action_call('quiz_quiz', 'update', 'KalturaQuiz', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

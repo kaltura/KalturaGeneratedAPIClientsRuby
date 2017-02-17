@@ -401,14 +401,41 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Download multiple cue points objects as XML definitions
-		# @return [file]
-		def serve_bulk(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+		# Clone cuePoint with id to given entry
+		# @return [KalturaCuePoint]
+		def clone(id, entry_id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('cuepoint_cuepoint', 'clone', 'KalturaCuePoint', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# count cue point objects by filter
+		# @return [int]
+		def count(filter=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('cuepoint_cuepoint', 'serveBulk', 'file', kparams)
-			return client.get_serve_url()
+			client.queue_service_action_call('cuepoint_cuepoint', 'count', 'int', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# delete cue point by id, and delete all children cue points
+		# @return []
+		def delete(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('cuepoint_cuepoint', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
 		end
 
 		# Retrieve an CuePoint object by id
@@ -436,16 +463,14 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# count cue point objects by filter
-		# @return [int]
-		def count(filter=KalturaNotImplemented)
+		# Download multiple cue points objects as XML definitions
+		# @return [file]
+		def serve_bulk(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
-			client.queue_service_action_call('cuepoint_cuepoint', 'count', 'int', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('cuepoint_cuepoint', 'serveBulk', 'file', kparams)
+			return client.get_serve_url()
 		end
 
 		# Update cue point by id
@@ -461,18 +486,6 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# delete cue point by id, and delete all children cue points
-		# @return []
-		def delete(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('cuepoint_cuepoint', 'delete', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Update cuePoint status by id
 		# @return []
 		def update_status(id, status)
@@ -480,19 +493,6 @@ module Kaltura
 			client.add_param(kparams, 'id', id)
 			client.add_param(kparams, 'status', status)
 			client.queue_service_action_call('cuepoint_cuepoint', 'updateStatus', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Clone cuePoint with id to given entry
-		# @return [KalturaCuePoint]
-		def clone(id, entry_id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('cuepoint_cuepoint', 'clone', 'KalturaCuePoint', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

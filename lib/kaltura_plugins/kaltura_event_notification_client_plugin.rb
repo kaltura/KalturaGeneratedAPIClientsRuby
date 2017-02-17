@@ -461,50 +461,37 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Retrieve an event notification template object by id
-		# @return [KalturaEventNotificationTemplate]
-		def get(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'get', 'KalturaEventNotificationTemplate', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update an existing event notification template object
-		# @return [KalturaEventNotificationTemplate]
-		def update(id, event_notification_template)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'eventNotificationTemplate', event_notification_template)
-			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'update', 'KalturaEventNotificationTemplate', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update event notification template status by id
-		# @return [KalturaEventNotificationTemplate]
-		def update_status(id, status)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'status', status)
-			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'updateStatus', 'KalturaEventNotificationTemplate', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Delete an event notification template object
 		# @return []
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
 			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Dispatch event notification object by id
+		# @return [int]
+		def dispatch(id, scope)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'scope', scope)
+			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'dispatch', 'int', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Retrieve an event notification template object by id
+		# @return [KalturaEventNotificationTemplate]
+		def get(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'get', 'KalturaEventNotificationTemplate', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -536,19 +523,6 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Dispatch event notification object by id
-		# @return [int]
-		def dispatch(id, scope)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'scope', scope)
-			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'dispatch', 'int', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Action lists the template partner event notification templates.
 		# @return [KalturaEventNotificationTemplateListResponse]
 		def list_templates(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
@@ -556,6 +530,32 @@ module Kaltura
 			client.add_param(kparams, 'filter', filter)
 			client.add_param(kparams, 'pager', pager)
 			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'listTemplates', 'KalturaEventNotificationTemplateListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update an existing event notification template object
+		# @return [KalturaEventNotificationTemplate]
+		def update(id, event_notification_template)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'eventNotificationTemplate', event_notification_template)
+			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'update', 'KalturaEventNotificationTemplate', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update event notification template status by id
+		# @return [KalturaEventNotificationTemplate]
+		def update_status(id, status)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'status', status)
+			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'updateStatus', 'KalturaEventNotificationTemplate', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

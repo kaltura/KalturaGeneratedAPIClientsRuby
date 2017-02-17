@@ -2009,12 +2009,49 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Delete Distribution Profile by id
+		# @return []
+		def delete(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('contentdistribution_distributionprofile', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Get Distribution Profile by id
 		# @return [KalturaDistributionProfile]
 		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
 			client.queue_service_action_call('contentdistribution_distributionprofile', 'get', 'KalturaDistributionProfile', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# List all distribution providers
+		# @return [KalturaDistributionProfileListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('contentdistribution_distributionprofile', 'list', 'KalturaDistributionProfileListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# @return [KalturaDistributionProfileListResponse]
+		def list_by_partner(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('contentdistribution_distributionprofile', 'listByPartner', 'KalturaDistributionProfileListResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -2046,43 +2083,6 @@ module Kaltura
 			end
 			return client.do_queue()
 		end
-
-		# Delete Distribution Profile by id
-		# @return []
-		def delete(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('contentdistribution_distributionprofile', 'delete', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# List all distribution providers
-		# @return [KalturaDistributionProfileListResponse]
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('contentdistribution_distributionprofile', 'list', 'KalturaDistributionProfileListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# @return [KalturaDistributionProfileListResponse]
-		def list_by_partner(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('contentdistribution_distributionprofile', 'listByPartner', 'KalturaDistributionProfileListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
 	end
 
 	# Entry Distribution service
@@ -2103,49 +2103,24 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Get Entry Distribution by id
-		# @return [KalturaEntryDistribution]
-		def get(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('contentdistribution_entrydistribution', 'get', 'KalturaEntryDistribution', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Validates Entry Distribution by id for submission
-		# @return [KalturaEntryDistribution]
-		def validate(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('contentdistribution_entrydistribution', 'validate', 'KalturaEntryDistribution', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update Entry Distribution by id
-		# @return [KalturaEntryDistribution]
-		def update(id, entry_distribution)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'entryDistribution', entry_distribution)
-			client.queue_service_action_call('contentdistribution_entrydistribution', 'update', 'KalturaEntryDistribution', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Delete Entry Distribution by id
 		# @return []
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
 			client.queue_service_action_call('contentdistribution_entrydistribution', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Get Entry Distribution by id
+		# @return [KalturaEntryDistribution]
+		def get(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('contentdistribution_entrydistribution', 'get', 'KalturaEntryDistribution', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -2165,6 +2140,38 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Retries last submit action
+		# @return [KalturaEntryDistribution]
+		def retry_submit(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('contentdistribution_entrydistribution', 'retrySubmit', 'KalturaEntryDistribution', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Serves entry distribution returned data
+		# @return [file]
+		def serve_returned_data(id, action_type)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'actionType', action_type)
+			client.queue_service_action_call('contentdistribution_entrydistribution', 'serveReturnedData', 'file', kparams)
+			return client.get_serve_url()
+		end
+
+		# Serves entry distribution sent data
+		# @return [file]
+		def serve_sent_data(id, action_type)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'actionType', action_type)
+			client.queue_service_action_call('contentdistribution_entrydistribution', 'serveSentData', 'file', kparams)
+			return client.get_serve_url()
+		end
+
 		# Submits Entry Distribution to the remote destination
 		# @return [KalturaEntryDistribution]
 		def submit_add(id, submit_when_ready=false)
@@ -2172,30 +2179,6 @@ module Kaltura
 			client.add_param(kparams, 'id', id)
 			client.add_param(kparams, 'submitWhenReady', submit_when_ready)
 			client.queue_service_action_call('contentdistribution_entrydistribution', 'submitAdd', 'KalturaEntryDistribution', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Submits Entry Distribution changes to the remote destination
-		# @return [KalturaEntryDistribution]
-		def submit_update(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('contentdistribution_entrydistribution', 'submitUpdate', 'KalturaEntryDistribution', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Submits Entry Distribution report request
-		# @return [KalturaEntryDistribution]
-		def submit_fetch_report(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('contentdistribution_entrydistribution', 'submitFetchReport', 'KalturaEntryDistribution', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -2214,36 +2197,53 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Retries last submit action
+		# Submits Entry Distribution report request
 		# @return [KalturaEntryDistribution]
-		def retry_submit(id)
+		def submit_fetch_report(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('contentdistribution_entrydistribution', 'retrySubmit', 'KalturaEntryDistribution', kparams)
+			client.queue_service_action_call('contentdistribution_entrydistribution', 'submitFetchReport', 'KalturaEntryDistribution', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
 			return client.do_queue()
 		end
 
-		# Serves entry distribution sent data
-		# @return [file]
-		def serve_sent_data(id, action_type)
+		# Submits Entry Distribution changes to the remote destination
+		# @return [KalturaEntryDistribution]
+		def submit_update(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'actionType', action_type)
-			client.queue_service_action_call('contentdistribution_entrydistribution', 'serveSentData', 'file', kparams)
-			return client.get_serve_url()
+			client.queue_service_action_call('contentdistribution_entrydistribution', 'submitUpdate', 'KalturaEntryDistribution', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
 		end
 
-		# Serves entry distribution returned data
-		# @return [file]
-		def serve_returned_data(id, action_type)
+		# Update Entry Distribution by id
+		# @return [KalturaEntryDistribution]
+		def update(id, entry_distribution)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'actionType', action_type)
-			client.queue_service_action_call('contentdistribution_entrydistribution', 'serveReturnedData', 'file', kparams)
-			return client.get_serve_url()
+			client.add_param(kparams, 'entryDistribution', entry_distribution)
+			client.queue_service_action_call('contentdistribution_entrydistribution', 'update', 'KalturaEntryDistribution', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Validates Entry Distribution by id for submission
+		# @return [KalturaEntryDistribution]
+		def validate(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('contentdistribution_entrydistribution', 'validate', 'KalturaEntryDistribution', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
 		end
 	end
 
@@ -2285,37 +2285,24 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Get Generic Distribution Provider by id
-		# @return [KalturaGenericDistributionProvider]
-		def get(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('contentdistribution_genericdistributionprovider', 'get', 'KalturaGenericDistributionProvider', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update Generic Distribution Provider by id
-		# @return [KalturaGenericDistributionProvider]
-		def update(id, generic_distribution_provider)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'genericDistributionProvider', generic_distribution_provider)
-			client.queue_service_action_call('contentdistribution_genericdistributionprovider', 'update', 'KalturaGenericDistributionProvider', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Delete Generic Distribution Provider by id
 		# @return []
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
 			client.queue_service_action_call('contentdistribution_genericdistributionprovider', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Get Generic Distribution Provider by id
+		# @return [KalturaGenericDistributionProvider]
+		def get(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('contentdistribution_genericdistributionprovider', 'get', 'KalturaGenericDistributionProvider', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -2329,6 +2316,19 @@ module Kaltura
 			client.add_param(kparams, 'filter', filter)
 			client.add_param(kparams, 'pager', pager)
 			client.queue_service_action_call('contentdistribution_genericdistributionprovider', 'list', 'KalturaGenericDistributionProviderListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update Generic Distribution Provider by id
+		# @return [KalturaGenericDistributionProvider]
+		def update(id, generic_distribution_provider)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'genericDistributionProvider', generic_distribution_provider)
+			client.queue_service_action_call('contentdistribution_genericdistributionprovider', 'update', 'KalturaGenericDistributionProvider', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -2435,58 +2435,6 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Get Generic Distribution Provider Action by id
-		# @return [KalturaGenericDistributionProviderAction]
-		def get(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'get', 'KalturaGenericDistributionProviderAction', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Get Generic Distribution Provider Action by provider id
-		# @return [KalturaGenericDistributionProviderAction]
-		def get_by_provider_id(generic_distribution_provider_id, action_type)
-			kparams = {}
-			client.add_param(kparams, 'genericDistributionProviderId', generic_distribution_provider_id)
-			client.add_param(kparams, 'actionType', action_type)
-			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'getByProviderId', 'KalturaGenericDistributionProviderAction', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update Generic Distribution Provider Action by provider id
-		# @return [KalturaGenericDistributionProviderAction]
-		def update_by_provider_id(generic_distribution_provider_id, action_type, generic_distribution_provider_action)
-			kparams = {}
-			client.add_param(kparams, 'genericDistributionProviderId', generic_distribution_provider_id)
-			client.add_param(kparams, 'actionType', action_type)
-			client.add_param(kparams, 'genericDistributionProviderAction', generic_distribution_provider_action)
-			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'updateByProviderId', 'KalturaGenericDistributionProviderAction', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update Generic Distribution Provider Action by id
-		# @return [KalturaGenericDistributionProviderAction]
-		def update(id, generic_distribution_provider_action)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'genericDistributionProviderAction', generic_distribution_provider_action)
-			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'update', 'KalturaGenericDistributionProviderAction', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Delete Generic Distribution Provider Action by id
 		# @return []
 		def delete(id)
@@ -2512,6 +2460,31 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Get Generic Distribution Provider Action by id
+		# @return [KalturaGenericDistributionProviderAction]
+		def get(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'get', 'KalturaGenericDistributionProviderAction', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Get Generic Distribution Provider Action by provider id
+		# @return [KalturaGenericDistributionProviderAction]
+		def get_by_provider_id(generic_distribution_provider_id, action_type)
+			kparams = {}
+			client.add_param(kparams, 'genericDistributionProviderId', generic_distribution_provider_id)
+			client.add_param(kparams, 'actionType', action_type)
+			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'getByProviderId', 'KalturaGenericDistributionProviderAction', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# List all distribution providers
 		# @return [KalturaGenericDistributionProviderActionListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
@@ -2519,6 +2492,33 @@ module Kaltura
 			client.add_param(kparams, 'filter', filter)
 			client.add_param(kparams, 'pager', pager)
 			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'list', 'KalturaGenericDistributionProviderActionListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update Generic Distribution Provider Action by id
+		# @return [KalturaGenericDistributionProviderAction]
+		def update(id, generic_distribution_provider_action)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'genericDistributionProviderAction', generic_distribution_provider_action)
+			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'update', 'KalturaGenericDistributionProviderAction', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update Generic Distribution Provider Action by provider id
+		# @return [KalturaGenericDistributionProviderAction]
+		def update_by_provider_id(generic_distribution_provider_id, action_type, generic_distribution_provider_action)
+			kparams = {}
+			client.add_param(kparams, 'genericDistributionProviderId', generic_distribution_provider_id)
+			client.add_param(kparams, 'actionType', action_type)
+			client.add_param(kparams, 'genericDistributionProviderAction', generic_distribution_provider_action)
+			client.queue_service_action_call('contentdistribution_genericdistributionprovideraction', 'updateByProviderId', 'KalturaGenericDistributionProviderAction', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

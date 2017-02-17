@@ -1256,37 +1256,14 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Retrieve a KalturaScheduleEvent object by ID
-		# @return [KalturaScheduleEvent]
-		def get(schedule_event_id)
+		# Add new bulk upload batch job
+		# @return [KalturaBulkUpload]
+		def add_from_bulk_upload(file_data, bulk_upload_data=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'scheduleEventId', schedule_event_id)
-			client.queue_service_action_call('schedule_scheduleevent', 'get', 'KalturaScheduleEvent', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update an existing KalturaScheduleEvent object
-		# @return [KalturaScheduleEvent]
-		def update(schedule_event_id, schedule_event)
-			kparams = {}
-			client.add_param(kparams, 'scheduleEventId', schedule_event_id)
-			client.add_param(kparams, 'scheduleEvent', schedule_event)
-			client.queue_service_action_call('schedule_scheduleevent', 'update', 'KalturaScheduleEvent', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Mark the KalturaScheduleEvent object as deleted
-		# @return [KalturaScheduleEvent]
-		def delete(schedule_event_id)
-			kparams = {}
-			client.add_param(kparams, 'scheduleEventId', schedule_event_id)
-			client.queue_service_action_call('schedule_scheduleevent', 'delete', 'KalturaScheduleEvent', kparams)
+			kfiles = {}
+			client.add_param(kfiles, 'fileData', file_data)
+			client.add_param(kparams, 'bulkUploadData', bulk_upload_data)
+			client.queue_service_action_call('schedule_scheduleevent', 'addFromBulkUpload', 'KalturaBulkUpload', kparams, kfiles)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1305,13 +1282,24 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# List KalturaScheduleEvent objects
-		# @return [KalturaScheduleEventListResponse]
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+		# Mark the KalturaScheduleEvent object as deleted
+		# @return [KalturaScheduleEvent]
+		def delete(schedule_event_id)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('schedule_scheduleevent', 'list', 'KalturaScheduleEventListResponse', kparams)
+			client.add_param(kparams, 'scheduleEventId', schedule_event_id)
+			client.queue_service_action_call('schedule_scheduleevent', 'delete', 'KalturaScheduleEvent', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Retrieve a KalturaScheduleEvent object by ID
+		# @return [KalturaScheduleEvent]
+		def get(schedule_event_id)
+			kparams = {}
+			client.add_param(kparams, 'scheduleEventId', schedule_event_id)
+			client.queue_service_action_call('schedule_scheduleevent', 'get', 'KalturaScheduleEvent', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1331,14 +1319,26 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Add new bulk upload batch job
-		# @return [KalturaBulkUpload]
-		def add_from_bulk_upload(file_data, bulk_upload_data=KalturaNotImplemented)
+		# List KalturaScheduleEvent objects
+		# @return [KalturaScheduleEventListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			kfiles = {}
-			client.add_param(kfiles, 'fileData', file_data)
-			client.add_param(kparams, 'bulkUploadData', bulk_upload_data)
-			client.queue_service_action_call('schedule_scheduleevent', 'addFromBulkUpload', 'KalturaBulkUpload', kparams, kfiles)
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('schedule_scheduleevent', 'list', 'KalturaScheduleEventListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update an existing KalturaScheduleEvent object
+		# @return [KalturaScheduleEvent]
+		def update(schedule_event_id, schedule_event)
+			kparams = {}
+			client.add_param(kparams, 'scheduleEventId', schedule_event_id)
+			client.add_param(kparams, 'scheduleEvent', schedule_event)
+			client.queue_service_action_call('schedule_scheduleevent', 'update', 'KalturaScheduleEvent', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1364,25 +1364,14 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Retrieve a KalturaScheduleResource object by ID
-		# @return [KalturaScheduleResource]
-		def get(schedule_resource_id)
+		# Add new bulk upload batch job
+		# @return [KalturaBulkUpload]
+		def add_from_bulk_upload(file_data, bulk_upload_data=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'scheduleResourceId', schedule_resource_id)
-			client.queue_service_action_call('schedule_scheduleresource', 'get', 'KalturaScheduleResource', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update an existing KalturaScheduleResource object
-		# @return [KalturaScheduleResource]
-		def update(schedule_resource_id, schedule_resource)
-			kparams = {}
-			client.add_param(kparams, 'scheduleResourceId', schedule_resource_id)
-			client.add_param(kparams, 'scheduleResource', schedule_resource)
-			client.queue_service_action_call('schedule_scheduleresource', 'update', 'KalturaScheduleResource', kparams)
+			kfiles = {}
+			client.add_param(kfiles, 'fileData', file_data)
+			client.add_param(kparams, 'bulkUploadData', bulk_upload_data)
+			client.queue_service_action_call('schedule_scheduleresource', 'addFromBulkUpload', 'KalturaBulkUpload', kparams, kfiles)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1395,6 +1384,18 @@ module Kaltura
 			kparams = {}
 			client.add_param(kparams, 'scheduleResourceId', schedule_resource_id)
 			client.queue_service_action_call('schedule_scheduleresource', 'delete', 'KalturaScheduleResource', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Retrieve a KalturaScheduleResource object by ID
+		# @return [KalturaScheduleResource]
+		def get(schedule_resource_id)
+			kparams = {}
+			client.add_param(kparams, 'scheduleResourceId', schedule_resource_id)
+			client.queue_service_action_call('schedule_scheduleresource', 'get', 'KalturaScheduleResource', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1414,14 +1415,13 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Add new bulk upload batch job
-		# @return [KalturaBulkUpload]
-		def add_from_bulk_upload(file_data, bulk_upload_data=KalturaNotImplemented)
+		# Update an existing KalturaScheduleResource object
+		# @return [KalturaScheduleResource]
+		def update(schedule_resource_id, schedule_resource)
 			kparams = {}
-			kfiles = {}
-			client.add_param(kfiles, 'fileData', file_data)
-			client.add_param(kparams, 'bulkUploadData', bulk_upload_data)
-			client.queue_service_action_call('schedule_scheduleresource', 'addFromBulkUpload', 'KalturaBulkUpload', kparams, kfiles)
+			client.add_param(kparams, 'scheduleResourceId', schedule_resource_id)
+			client.add_param(kparams, 'scheduleResource', schedule_resource)
+			client.queue_service_action_call('schedule_scheduleresource', 'update', 'KalturaScheduleResource', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1447,6 +1447,19 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Mark the KalturaScheduleEventResource object as deleted
+		# @return []
+		def delete(schedule_event_id, schedule_resource_id)
+			kparams = {}
+			client.add_param(kparams, 'scheduleEventId', schedule_event_id)
+			client.add_param(kparams, 'scheduleResourceId', schedule_resource_id)
+			client.queue_service_action_call('schedule_scheduleeventresource', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Retrieve a KalturaScheduleEventResource object by ID
 		# @return [KalturaScheduleEventResource]
 		def get(schedule_event_id, schedule_resource_id)
@@ -1454,6 +1467,19 @@ module Kaltura
 			client.add_param(kparams, 'scheduleEventId', schedule_event_id)
 			client.add_param(kparams, 'scheduleResourceId', schedule_resource_id)
 			client.queue_service_action_call('schedule_scheduleeventresource', 'get', 'KalturaScheduleEventResource', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# List KalturaScheduleEventResource objects
+		# @return [KalturaScheduleEventResourceListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('schedule_scheduleeventresource', 'list', 'KalturaScheduleEventResourceListResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1468,32 +1494,6 @@ module Kaltura
 			client.add_param(kparams, 'scheduleResourceId', schedule_resource_id)
 			client.add_param(kparams, 'scheduleEventResource', schedule_event_resource)
 			client.queue_service_action_call('schedule_scheduleeventresource', 'update', 'KalturaScheduleEventResource', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Mark the KalturaScheduleEventResource object as deleted
-		# @return []
-		def delete(schedule_event_id, schedule_resource_id)
-			kparams = {}
-			client.add_param(kparams, 'scheduleEventId', schedule_event_id)
-			client.add_param(kparams, 'scheduleResourceId', schedule_resource_id)
-			client.queue_service_action_call('schedule_scheduleeventresource', 'delete', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# List KalturaScheduleEventResource objects
-		# @return [KalturaScheduleEventResourceListResponse]
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('schedule_scheduleeventresource', 'list', 'KalturaScheduleEventResourceListResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

@@ -491,19 +491,6 @@ module Kaltura
 			super(client)
 		end
 
-		# Add new document entry after the specific document file was uploaded and the upload token id exists
-		# @return [KalturaDocumentEntry]
-		def add_from_uploaded_file(document_entry, upload_token_id)
-			kparams = {}
-			client.add_param(kparams, 'documentEntry', document_entry)
-			client.add_param(kparams, 'uploadTokenId', upload_token_id)
-			client.queue_service_action_call('document_documents', 'addFromUploadedFile', 'KalturaDocumentEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Copy entry into new entry
 		# @return [KalturaDocumentEntry]
 		def add_from_entry(source_entry_id, document_entry=KalturaNotImplemented, source_flavor_params_id=KalturaNotImplemented)
@@ -531,6 +518,43 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Add new document entry after the specific document file was uploaded and the upload token id exists
+		# @return [KalturaDocumentEntry]
+		def add_from_uploaded_file(document_entry, upload_token_id)
+			kparams = {}
+			client.add_param(kparams, 'documentEntry', document_entry)
+			client.add_param(kparams, 'uploadTokenId', upload_token_id)
+			client.queue_service_action_call('document_documents', 'addFromUploadedFile', 'KalturaDocumentEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Approves document replacement
+		# @return [KalturaDocumentEntry]
+		def approve_replace(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('document_documents', 'approveReplace', 'KalturaDocumentEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Cancels document replacement
+		# @return [KalturaDocumentEntry]
+		def cancel_replace(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('document_documents', 'cancelReplace', 'KalturaDocumentEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Convert entry
 		# @return [bigint]
 		def convert(entry_id, conversion_profile_id=KalturaNotImplemented, dynamic_conversion_attributes=KalturaNotImplemented)
@@ -539,6 +563,31 @@ module Kaltura
 			client.add_param(kparams, 'conversionProfileId', conversion_profile_id)
 			client.add_param(kparams, 'dynamicConversionAttributes', dynamic_conversion_attributes)
 			client.queue_service_action_call('document_documents', 'convert', 'bigint', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# This will queue a batch job for converting the document file to swf
+		# 	 Returns the URL where the new swf will be available
+		# @return [string]
+		def convert_ppt_to_swf(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('document_documents', 'convertPptToSwf', 'string', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Delete a document entry.
+		# @return []
+		def delete(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('document_documents', 'delete', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -558,31 +607,6 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Update document entry. Only the properties that were set will be updated.
-		# @return [KalturaDocumentEntry]
-		def update(entry_id, document_entry)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'documentEntry', document_entry)
-			client.queue_service_action_call('document_documents', 'update', 'KalturaDocumentEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Delete a document entry.
-		# @return []
-		def delete(entry_id)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('document_documents', 'delete', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# List document entries by filter with paging support.
 		# @return [KalturaDocumentListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
@@ -590,32 +614,6 @@ module Kaltura
 			client.add_param(kparams, 'filter', filter)
 			client.add_param(kparams, 'pager', pager)
 			client.queue_service_action_call('document_documents', 'list', 'KalturaDocumentListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Upload a document file to Kaltura, then the file can be used to create a document entry.
-		# @return [string]
-		def upload(file_data)
-			kparams = {}
-			kfiles = {}
-			client.add_param(kfiles, 'fileData', file_data)
-			client.queue_service_action_call('document_documents', 'upload', 'string', kparams, kfiles)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# This will queue a batch job for converting the document file to swf
-		# 	 Returns the URL where the new swf will be available
-		# @return [string]
-		def convert_ppt_to_swf(entry_id)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('document_documents', 'convertPptToSwf', 'string', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -644,6 +642,19 @@ module Kaltura
 			return client.get_serve_url()
 		end
 
+		# Update document entry. Only the properties that were set will be updated.
+		# @return [KalturaDocumentEntry]
+		def update(entry_id, document_entry)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'documentEntry', document_entry)
+			client.queue_service_action_call('document_documents', 'update', 'KalturaDocumentEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Replace content associated with the given document entry.
 		# @return [KalturaDocumentEntry]
 		def update_content(entry_id, resource, conversion_profile_id=KalturaNotImplemented)
@@ -658,24 +669,13 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Approves document replacement
-		# @return [KalturaDocumentEntry]
-		def approve_replace(entry_id)
+		# Upload a document file to Kaltura, then the file can be used to create a document entry.
+		# @return [string]
+		def upload(file_data)
 			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('document_documents', 'approveReplace', 'KalturaDocumentEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Cancels document replacement
-		# @return [KalturaDocumentEntry]
-		def cancel_replace(entry_id)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('document_documents', 'cancelReplace', 'KalturaDocumentEntry', kparams)
+			kfiles = {}
+			client.add_param(kfiles, 'fileData', file_data)
+			client.queue_service_action_call('document_documents', 'upload', 'string', kparams, kfiles)
 			if (client.is_multirequest)
 				return nil
 			end

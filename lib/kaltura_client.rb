@@ -50,37 +50,24 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Get access control profile by id
-		# @return [KalturaAccessControlProfile]
-		def get(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('accesscontrolprofile', 'get', 'KalturaAccessControlProfile', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update access control profile by id
-		# @return [KalturaAccessControlProfile]
-		def update(id, access_control_profile)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'accessControlProfile', access_control_profile)
-			client.queue_service_action_call('accesscontrolprofile', 'update', 'KalturaAccessControlProfile', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Delete access control profile by id
 		# @return []
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
 			client.queue_service_action_call('accesscontrolprofile', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Get access control profile by id
+		# @return [KalturaAccessControlProfile]
+		def get(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('accesscontrolprofile', 'get', 'KalturaAccessControlProfile', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -94,6 +81,19 @@ module Kaltura
 			client.add_param(kparams, 'filter', filter)
 			client.add_param(kparams, 'pager', pager)
 			client.queue_service_action_call('accesscontrolprofile', 'list', 'KalturaAccessControlProfileListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update access control profile by id
+		# @return [KalturaAccessControlProfile]
+		def update(id, access_control_profile)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'accessControlProfile', access_control_profile)
+			client.queue_service_action_call('accesscontrolprofile', 'update', 'KalturaAccessControlProfile', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -119,37 +119,24 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Get Access Control Profile by id
-		# @return [KalturaAccessControl]
-		def get(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('accesscontrol', 'get', 'KalturaAccessControl', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update Access Control Profile by id
-		# @return [KalturaAccessControl]
-		def update(id, access_control)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'accessControl', access_control)
-			client.queue_service_action_call('accesscontrol', 'update', 'KalturaAccessControl', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Delete Access Control Profile by id
 		# @return []
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
 			client.queue_service_action_call('accesscontrol', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Get Access Control Profile by id
+		# @return [KalturaAccessControl]
+		def get(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('accesscontrol', 'get', 'KalturaAccessControl', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -168,6 +155,19 @@ module Kaltura
 			end
 			return client.do_queue()
 		end
+
+		# Update Access Control Profile by id
+		# @return [KalturaAccessControl]
+		def update(id, access_control)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'accessControl', access_control)
+			client.queue_service_action_call('accesscontrol', 'update', 'KalturaAccessControl', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
 	end
 
 	# Manage details for the administrative user
@@ -176,15 +176,14 @@ module Kaltura
 			super(client)
 		end
 
-		# Update admin user password and email
-		# @return [KalturaAdminUser]
-		def update_password(email, password, new_email='', new_password='')
+		# Get an admin session using admin email and password (Used for login to the KMC application)
+		# @return [string]
+		def login(email, password, partner_id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'email', email)
 			client.add_param(kparams, 'password', password)
-			client.add_param(kparams, 'newEmail', new_email)
-			client.add_param(kparams, 'newPassword', new_password)
-			client.queue_service_action_call('adminuser', 'updatePassword', 'KalturaAdminUser', kparams)
+			client.add_param(kparams, 'partnerId', partner_id)
+			client.queue_service_action_call('adminuser', 'login', 'string', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -203,20 +202,6 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Get an admin session using admin email and password (Used for login to the KMC application)
-		# @return [string]
-		def login(email, password, partner_id=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'email', email)
-			client.add_param(kparams, 'password', password)
-			client.add_param(kparams, 'partnerId', partner_id)
-			client.queue_service_action_call('adminuser', 'login', 'string', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Set initial users password
 		# @return []
 		def set_initial_password(hash_key, new_password)
@@ -224,6 +209,21 @@ module Kaltura
 			client.add_param(kparams, 'hashKey', hash_key)
 			client.add_param(kparams, 'newPassword', new_password)
 			client.queue_service_action_call('adminuser', 'setInitialPassword', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update admin user password and email
+		# @return [KalturaAdminUser]
+		def update_password(email, password, new_email='', new_password='')
+			kparams = {}
+			client.add_param(kparams, 'email', email)
+			client.add_param(kparams, 'password', password)
+			client.add_param(kparams, 'newEmail', new_email)
+			client.add_param(kparams, 'newPassword', new_password)
+			client.queue_service_action_call('adminuser', 'updatePassword', 'KalturaAdminUser', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -269,37 +269,24 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Get application authentication token by id
-		# @return [KalturaAppToken]
-		def get(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('apptoken', 'get', 'KalturaAppToken', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update application authentication token by id
-		# @return [KalturaAppToken]
-		def update(id, app_token)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'appToken', app_token)
-			client.queue_service_action_call('apptoken', 'update', 'KalturaAppToken', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Delete application authentication token by id
 		# @return []
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
 			client.queue_service_action_call('apptoken', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Get application authentication token by id
+		# @return [KalturaAppToken]
+		def get(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('apptoken', 'get', 'KalturaAppToken', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -329,6 +316,19 @@ module Kaltura
 			client.add_param(kparams, 'type', type)
 			client.add_param(kparams, 'expiry', expiry)
 			client.queue_service_action_call('apptoken', 'startSession', 'KalturaSessionInfo', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update application authentication token by id
+		# @return [KalturaAppToken]
+		def update(id, app_token)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'appToken', app_token)
+			client.queue_service_action_call('apptoken', 'update', 'KalturaAppToken', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -382,6 +382,92 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Anonymously rank an entry, no validation is done on duplicate rankings.
+		# @return []
+		def anonymous_rank(entry_id, rank)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'rank', rank)
+			client.queue_service_action_call('baseentry', 'anonymousRank', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Approve the entry and mark the pending flags (if any) as moderated (this will make the entry playable).
+		# @return []
+		def approve(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('baseentry', 'approve', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Clone an entry with optional attributes to apply to the clone
+		# @return [KalturaBaseEntry]
+		def clone(entry_id, clone_options=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'cloneOptions', clone_options)
+			client.queue_service_action_call('baseentry', 'clone', 'KalturaBaseEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Count base entries by filter.
+		# @return [int]
+		def count(filter=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.queue_service_action_call('baseentry', 'count', 'int', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Delete an entry.
+		# @return []
+		def delete(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('baseentry', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# @return [KalturaBaseEntry]
+		def export(entry_id, storage_profile_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'storageProfileId', storage_profile_id)
+			client.queue_service_action_call('baseentry', 'export', 'KalturaBaseEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Flag inappropriate entry for moderation.
+		# @return []
+		def flag(moderation_flag)
+			kparams = {}
+			client.add_param(kparams, 'moderationFlag', moderation_flag)
+			client.queue_service_action_call('baseentry', 'flag', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Get base entry by ID.
 		# @return [KalturaBaseEntry]
 		def get(entry_id, version=-1)
@@ -395,12 +481,114 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Get an array of KalturaBaseEntry objects by a comma-separated list of ids.
+		# @return [array]
+		def get_by_ids(entry_ids)
+			kparams = {}
+			client.add_param(kparams, 'entryIds', entry_ids)
+			client.queue_service_action_call('baseentry', 'getByIds', 'KalturaBaseEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# This action delivers entry-related data, based on the user's context: access control, restriction, playback format and storage information.
+		# @return [KalturaEntryContextDataResult]
+		def get_context_data(entry_id, context_data_params)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'contextDataParams', context_data_params)
+			client.queue_service_action_call('baseentry', 'getContextData', 'KalturaEntryContextDataResult', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# This action delivers all data relevant for player
+		# @return [KalturaPlaybackContext]
+		def get_playback_context(entry_id, context_data_params)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'contextDataParams', context_data_params)
+			client.queue_service_action_call('baseentry', 'getPlaybackContext', 'KalturaPlaybackContext', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Get remote storage existing paths for the asset.
 		# @return [KalturaRemotePathListResponse]
 		def get_remote_paths(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
 			client.queue_service_action_call('baseentry', 'getRemotePaths', 'KalturaRemotePathListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Index an entry by id.
+		# @return [int]
+		def index(id, should_update=true)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'shouldUpdate', should_update)
+			client.queue_service_action_call('baseentry', 'index', 'int', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# List base entries by filter with paging support.
+		# @return [KalturaBaseEntryListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('baseentry', 'list', 'KalturaBaseEntryListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# List base entries by filter according to reference id
+		# @return [KalturaBaseEntryListResponse]
+		def list_by_reference_id(ref_id, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'refId', ref_id)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('baseentry', 'listByReferenceId', 'KalturaBaseEntryListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# List all pending flags for the entry.
+		# @return [KalturaModerationFlagListResponse]
+		def list_flags(entry_id, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('baseentry', 'listFlags', 'KalturaModerationFlagListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Reject the entry and mark the pending flags (if any) as moderated (this will make the entry non-playable).
+		# @return []
+		def reject(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('baseentry', 'reject', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -435,75 +623,27 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Get an array of KalturaBaseEntry objects by a comma-separated list of ids.
-		# @return [array]
-		def get_by_ids(entry_ids)
-			kparams = {}
-			client.add_param(kparams, 'entryIds', entry_ids)
-			client.queue_service_action_call('baseentry', 'getByIds', 'KalturaBaseEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Delete an entry.
-		# @return []
-		def delete(entry_id)
+		# Update entry thumbnail from a different entry by a specified time offset (in seconds).
+		# @return [KalturaBaseEntry]
+		def update_thumbnail_from_source_entry(entry_id, source_entry_id, time_offset)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('baseentry', 'delete', '', kparams)
+			client.add_param(kparams, 'sourceEntryId', source_entry_id)
+			client.add_param(kparams, 'timeOffset', time_offset)
+			client.queue_service_action_call('baseentry', 'updateThumbnailFromSourceEntry', 'KalturaBaseEntry', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
 			return client.do_queue()
 		end
 
-		# List base entries by filter with paging support.
-		# @return [KalturaBaseEntryListResponse]
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+		# Update entry thumbnail using url.
+		# @return [KalturaBaseEntry]
+		def update_thumbnail_from_url(entry_id, url)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('baseentry', 'list', 'KalturaBaseEntryListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# List base entries by filter according to reference id
-		# @return [KalturaBaseEntryListResponse]
-		def list_by_reference_id(ref_id, pager=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'refId', ref_id)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('baseentry', 'listByReferenceId', 'KalturaBaseEntryListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Count base entries by filter.
-		# @return [int]
-		def count(filter=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.queue_service_action_call('baseentry', 'count', 'int', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Upload a file to Kaltura, that can be used to create an entry.
-		# @return [string]
-		def upload(file_data)
-			kparams = {}
-			kfiles = {}
-			client.add_param(kfiles, 'fileData', file_data)
-			client.queue_service_action_call('baseentry', 'upload', 'string', kparams, kfiles)
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'url', url)
+			client.queue_service_action_call('baseentry', 'updateThumbnailFromUrl', 'KalturaBaseEntry', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -524,153 +664,13 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Update entry thumbnail using url.
-		# @return [KalturaBaseEntry]
-		def update_thumbnail_from_url(entry_id, url)
+		# Upload a file to Kaltura, that can be used to create an entry.
+		# @return [string]
+		def upload(file_data)
 			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'url', url)
-			client.queue_service_action_call('baseentry', 'updateThumbnailFromUrl', 'KalturaBaseEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update entry thumbnail from a different entry by a specified time offset (in seconds).
-		# @return [KalturaBaseEntry]
-		def update_thumbnail_from_source_entry(entry_id, source_entry_id, time_offset)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'sourceEntryId', source_entry_id)
-			client.add_param(kparams, 'timeOffset', time_offset)
-			client.queue_service_action_call('baseentry', 'updateThumbnailFromSourceEntry', 'KalturaBaseEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Flag inappropriate entry for moderation.
-		# @return []
-		def flag(moderation_flag)
-			kparams = {}
-			client.add_param(kparams, 'moderationFlag', moderation_flag)
-			client.queue_service_action_call('baseentry', 'flag', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Reject the entry and mark the pending flags (if any) as moderated (this will make the entry non-playable).
-		# @return []
-		def reject(entry_id)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('baseentry', 'reject', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Approve the entry and mark the pending flags (if any) as moderated (this will make the entry playable).
-		# @return []
-		def approve(entry_id)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('baseentry', 'approve', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# List all pending flags for the entry.
-		# @return [KalturaModerationFlagListResponse]
-		def list_flags(entry_id, pager=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('baseentry', 'listFlags', 'KalturaModerationFlagListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Anonymously rank an entry, no validation is done on duplicate rankings.
-		# @return []
-		def anonymous_rank(entry_id, rank)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'rank', rank)
-			client.queue_service_action_call('baseentry', 'anonymousRank', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# This action delivers entry-related data, based on the user's context: access control, restriction, playback format and storage information.
-		# @return [KalturaEntryContextDataResult]
-		def get_context_data(entry_id, context_data_params)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'contextDataParams', context_data_params)
-			client.queue_service_action_call('baseentry', 'getContextData', 'KalturaEntryContextDataResult', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# @return [KalturaBaseEntry]
-		def export(entry_id, storage_profile_id)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'storageProfileId', storage_profile_id)
-			client.queue_service_action_call('baseentry', 'export', 'KalturaBaseEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Index an entry by id.
-		# @return [int]
-		def index(id, should_update=true)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'shouldUpdate', should_update)
-			client.queue_service_action_call('baseentry', 'index', 'int', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Clone an entry with optional attributes to apply to the clone
-		# @return [KalturaBaseEntry]
-		def clone(entry_id, clone_options=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'cloneOptions', clone_options)
-			client.queue_service_action_call('baseentry', 'clone', 'KalturaBaseEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# This action delivers all data relevant for player
-		# @return [KalturaPlaybackContext]
-		def get_playback_context(entry_id, context_data_params)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'contextDataParams', context_data_params)
-			client.queue_service_action_call('baseentry', 'getPlaybackContext', 'KalturaPlaybackContext', kparams)
+			kfiles = {}
+			client.add_param(kfiles, 'fileData', file_data)
+			client.queue_service_action_call('baseentry', 'upload', 'string', kparams, kfiles)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -683,6 +683,18 @@ module Kaltura
 	class KalturaBulkUploadService < KalturaServiceBase
 		def initialize(client)
 			super(client)
+		end
+
+		# Aborts the bulk upload and all its child jobs
+		# @return [KalturaBulkUpload]
+		def abort(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('bulkupload', 'abort', 'KalturaBulkUpload', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
 		end
 
 		# Add new bulk upload batch job
@@ -745,24 +757,25 @@ module Kaltura
 			client.queue_service_action_call('bulkupload', 'serveLog', 'file', kparams)
 			return client.get_serve_url()
 		end
-
-		# Aborts the bulk upload and all its child jobs
-		# @return [KalturaBulkUpload]
-		def abort(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('bulkupload', 'abort', 'KalturaBulkUpload', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
 	end
 
 	# Add & Manage CategoryEntry - assign entry to category
 	class KalturaCategoryEntryService < KalturaServiceBase
 		def initialize(client)
 			super(client)
+		end
+
+		# activate CategoryEntry when it is pending moderation
+		# @return []
+		def activate(entry_id, category_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'categoryId', category_id)
+			client.queue_service_action_call('categoryentry', 'activate', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
 		end
 
 		# Add new CategoryEntry
@@ -777,6 +790,18 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# @return [KalturaBulkUpload]
+		def add_from_bulk_upload(bulk_upload_data, bulk_upload_category_entry_data=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'bulkUploadData', bulk_upload_data)
+			client.add_param(kparams, 'bulkUploadCategoryEntryData', bulk_upload_category_entry_data)
+			client.queue_service_action_call('categoryentry', 'addFromBulkUpload', 'KalturaBulkUpload', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Delete CategoryEntry
 		# @return []
 		def delete(entry_id, category_id)
@@ -784,19 +809,6 @@ module Kaltura
 			client.add_param(kparams, 'entryId', entry_id)
 			client.add_param(kparams, 'categoryId', category_id)
 			client.queue_service_action_call('categoryentry', 'delete', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# List all categoryEntry
-		# @return [KalturaCategoryEntryListResponse]
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('categoryentry', 'list', 'KalturaCategoryEntryListResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -817,13 +829,13 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# activate CategoryEntry when it is pending moderation
-		# @return []
-		def activate(entry_id, category_id)
+		# List all categoryEntry
+		# @return [KalturaCategoryEntryListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'categoryId', category_id)
-			client.queue_service_action_call('categoryentry', 'activate', '', kparams)
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('categoryentry', 'list', 'KalturaCategoryEntryListResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -855,18 +867,6 @@ module Kaltura
 			end
 			return client.do_queue()
 		end
-
-		# @return [KalturaBulkUpload]
-		def add_from_bulk_upload(bulk_upload_data, bulk_upload_category_entry_data=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'bulkUploadData', bulk_upload_data)
-			client.add_param(kparams, 'bulkUploadCategoryEntryData', bulk_upload_category_entry_data)
-			client.queue_service_action_call('categoryentry', 'addFromBulkUpload', 'KalturaBulkUpload', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
 	end
 
 	# Add & Manage Categories
@@ -887,25 +887,14 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Get Category by id
-		# @return [KalturaCategory]
-		def get(id)
+		# @return [KalturaBulkUpload]
+		def add_from_bulk_upload(file_data, bulk_upload_data=KalturaNotImplemented, bulk_upload_category_data=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('category', 'get', 'KalturaCategory', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update Category
-		# @return [KalturaCategory]
-		def update(id, category)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'category', category)
-			client.queue_service_action_call('category', 'update', 'KalturaCategory', kparams)
+			kfiles = {}
+			client.add_param(kfiles, 'fileData', file_data)
+			client.add_param(kparams, 'bulkUploadData', bulk_upload_data)
+			client.add_param(kparams, 'bulkUploadCategoryData', bulk_upload_category_data)
+			client.queue_service_action_call('category', 'addFromBulkUpload', 'KalturaBulkUpload', kparams, kfiles)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -925,13 +914,12 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# List all categories
-		# @return [KalturaCategoryListResponse]
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+		# Get Category by id
+		# @return [KalturaCategory]
+		def get(id)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('category', 'list', 'KalturaCategoryListResponse', kparams)
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('category', 'get', 'KalturaCategory', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -945,6 +933,19 @@ module Kaltura
 			client.add_param(kparams, 'id', id)
 			client.add_param(kparams, 'shouldUpdate', should_update)
 			client.queue_service_action_call('category', 'index', 'int', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# List all categories
+		# @return [KalturaCategoryListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('category', 'list', 'KalturaCategoryListResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -975,14 +976,13 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# @return [KalturaBulkUpload]
-		def add_from_bulk_upload(file_data, bulk_upload_data=KalturaNotImplemented, bulk_upload_category_data=KalturaNotImplemented)
+		# Update Category
+		# @return [KalturaCategory]
+		def update(id, category)
 			kparams = {}
-			kfiles = {}
-			client.add_param(kfiles, 'fileData', file_data)
-			client.add_param(kparams, 'bulkUploadData', bulk_upload_data)
-			client.add_param(kparams, 'bulkUploadCategoryData', bulk_upload_category_data)
-			client.queue_service_action_call('category', 'addFromBulkUpload', 'KalturaBulkUpload', kparams, kfiles)
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'category', category)
+			client.queue_service_action_call('category', 'update', 'KalturaCategory', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -994,6 +994,19 @@ module Kaltura
 	class KalturaCategoryUserService < KalturaServiceBase
 		def initialize(client)
 			super(client)
+		end
+
+		# activate CategoryUser
+		# @return [KalturaCategoryUser]
+		def activate(category_id, user_id)
+			kparams = {}
+			client.add_param(kparams, 'categoryId', category_id)
+			client.add_param(kparams, 'userId', user_id)
+			client.queue_service_action_call('categoryuser', 'activate', 'KalturaCategoryUser', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
 		end
 
 		# Add new CategoryUser
@@ -1008,54 +1021,26 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Get CategoryUser by id
-		# @return [KalturaCategoryUser]
-		def get(category_id, user_id)
+		# @return [KalturaBulkUpload]
+		def add_from_bulk_upload(file_data, bulk_upload_data=KalturaNotImplemented, bulk_upload_category_user_data=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'categoryId', category_id)
-			client.add_param(kparams, 'userId', user_id)
-			client.queue_service_action_call('categoryuser', 'get', 'KalturaCategoryUser', kparams)
+			kfiles = {}
+			client.add_param(kfiles, 'fileData', file_data)
+			client.add_param(kparams, 'bulkUploadData', bulk_upload_data)
+			client.add_param(kparams, 'bulkUploadCategoryUserData', bulk_upload_category_user_data)
+			client.queue_service_action_call('categoryuser', 'addFromBulkUpload', 'KalturaBulkUpload', kparams, kfiles)
 			if (client.is_multirequest)
 				return nil
 			end
 			return client.do_queue()
 		end
 
-		# Update CategoryUser by id
-		# @return [KalturaCategoryUser]
-		def update(category_id, user_id, category_user, override=false)
-			kparams = {}
-			client.add_param(kparams, 'categoryId', category_id)
-			client.add_param(kparams, 'userId', user_id)
-			client.add_param(kparams, 'categoryUser', category_user)
-			client.add_param(kparams, 'override', override)
-			client.queue_service_action_call('categoryuser', 'update', 'KalturaCategoryUser', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Delete a CategoryUser
+		# Copy all memeber from parent category
 		# @return []
-		def delete(category_id, user_id)
+		def copy_from_category(category_id)
 			kparams = {}
 			client.add_param(kparams, 'categoryId', category_id)
-			client.add_param(kparams, 'userId', user_id)
-			client.queue_service_action_call('categoryuser', 'delete', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# activate CategoryUser
-		# @return [KalturaCategoryUser]
-		def activate(category_id, user_id)
-			kparams = {}
-			client.add_param(kparams, 'categoryId', category_id)
-			client.add_param(kparams, 'userId', user_id)
-			client.queue_service_action_call('categoryuser', 'activate', 'KalturaCategoryUser', kparams)
+			client.queue_service_action_call('categoryuser', 'copyFromCategory', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1075,25 +1060,26 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# List all categories
-		# @return [KalturaCategoryUserListResponse]
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+		# Delete a CategoryUser
+		# @return []
+		def delete(category_id, user_id)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('categoryuser', 'list', 'KalturaCategoryUserListResponse', kparams)
+			client.add_param(kparams, 'categoryId', category_id)
+			client.add_param(kparams, 'userId', user_id)
+			client.queue_service_action_call('categoryuser', 'delete', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
 			return client.do_queue()
 		end
 
-		# Copy all memeber from parent category
-		# @return []
-		def copy_from_category(category_id)
+		# Get CategoryUser by id
+		# @return [KalturaCategoryUser]
+		def get(category_id, user_id)
 			kparams = {}
 			client.add_param(kparams, 'categoryId', category_id)
-			client.queue_service_action_call('categoryuser', 'copyFromCategory', '', kparams)
+			client.add_param(kparams, 'userId', user_id)
+			client.queue_service_action_call('categoryuser', 'get', 'KalturaCategoryUser', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1114,14 +1100,28 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# @return [KalturaBulkUpload]
-		def add_from_bulk_upload(file_data, bulk_upload_data=KalturaNotImplemented, bulk_upload_category_user_data=KalturaNotImplemented)
+		# List all categories
+		# @return [KalturaCategoryUserListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			kfiles = {}
-			client.add_param(kfiles, 'fileData', file_data)
-			client.add_param(kparams, 'bulkUploadData', bulk_upload_data)
-			client.add_param(kparams, 'bulkUploadCategoryUserData', bulk_upload_category_user_data)
-			client.queue_service_action_call('categoryuser', 'addFromBulkUpload', 'KalturaBulkUpload', kparams, kfiles)
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('categoryuser', 'list', 'KalturaCategoryUserListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update CategoryUser by id
+		# @return [KalturaCategoryUser]
+		def update(category_id, user_id, category_user, override=false)
+			kparams = {}
+			client.add_param(kparams, 'categoryId', category_id)
+			client.add_param(kparams, 'userId', user_id)
+			client.add_param(kparams, 'categoryUser', category_user)
+			client.add_param(kparams, 'override', override)
+			client.queue_service_action_call('categoryuser', 'update', 'KalturaCategoryUser', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1169,61 +1169,12 @@ module Kaltura
 			super(client)
 		end
 
-		# Set Conversion Profile to be the partner default
-		# @return [KalturaConversionProfile]
-		def set_as_default(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('conversionprofile', 'setAsDefault', 'KalturaConversionProfile', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Get the partner's default conversion profile
-		# @return [KalturaConversionProfile]
-		def get_default(type=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'type', type)
-			client.queue_service_action_call('conversionprofile', 'getDefault', 'KalturaConversionProfile', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Add new Conversion Profile
 		# @return [KalturaConversionProfile]
 		def add(conversion_profile)
 			kparams = {}
 			client.add_param(kparams, 'conversionProfile', conversion_profile)
 			client.queue_service_action_call('conversionprofile', 'add', 'KalturaConversionProfile', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Get Conversion Profile by ID
-		# @return [KalturaConversionProfile]
-		def get(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('conversionprofile', 'get', 'KalturaConversionProfile', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update Conversion Profile by ID
-		# @return [KalturaConversionProfile]
-		def update(id, conversion_profile)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'conversionProfile', conversion_profile)
-			client.queue_service_action_call('conversionprofile', 'update', 'KalturaConversionProfile', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1242,6 +1193,30 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Get Conversion Profile by ID
+		# @return [KalturaConversionProfile]
+		def get(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('conversionprofile', 'get', 'KalturaConversionProfile', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Get the partner's default conversion profile
+		# @return [KalturaConversionProfile]
+		def get_default(type=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'type', type)
+			client.queue_service_action_call('conversionprofile', 'getDefault', 'KalturaConversionProfile', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# List Conversion Profiles by filter with paging support
 		# @return [KalturaConversionProfileListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
@@ -1249,6 +1224,31 @@ module Kaltura
 			client.add_param(kparams, 'filter', filter)
 			client.add_param(kparams, 'pager', pager)
 			client.queue_service_action_call('conversionprofile', 'list', 'KalturaConversionProfileListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Set Conversion Profile to be the partner default
+		# @return [KalturaConversionProfile]
+		def set_as_default(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('conversionprofile', 'setAsDefault', 'KalturaConversionProfile', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update Conversion Profile by ID
+		# @return [KalturaConversionProfile]
+		def update(id, conversion_profile)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'conversionProfile', conversion_profile)
+			client.queue_service_action_call('conversionprofile', 'update', 'KalturaConversionProfile', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1274,6 +1274,18 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Delete a data entry.
+		# @return []
+		def delete(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('data', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Get data entry by ID.
 		# @return [KalturaDataEntry]
 		def get(entry_id, version=-1)
@@ -1281,31 +1293,6 @@ module Kaltura
 			client.add_param(kparams, 'entryId', entry_id)
 			client.add_param(kparams, 'version', version)
 			client.queue_service_action_call('data', 'get', 'KalturaDataEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update data entry. Only the properties that were set will be updated.
-		# @return [KalturaDataEntry]
-		def update(entry_id, document_entry)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'documentEntry', document_entry)
-			client.queue_service_action_call('data', 'update', 'KalturaDataEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Delete a data entry.
-		# @return []
-		def delete(entry_id)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('data', 'delete', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1335,6 +1322,19 @@ module Kaltura
 			client.queue_service_action_call('data', 'serve', 'file', kparams)
 			return client.get_serve_url()
 		end
+
+		# Update data entry. Only the properties that were set will be updated.
+		# @return [KalturaDataEntry]
+		def update(entry_id, document_entry)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'documentEntry', document_entry)
+			client.queue_service_action_call('data', 'update', 'KalturaDataEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
 	end
 
 	# delivery service is used to control delivery objects
@@ -1355,13 +1355,13 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Update exisiting delivery
+		# Add delivery based on existing delivery.
+		# 	Must provide valid sourceDeliveryId
 		# @return [KalturaDeliveryProfile]
-		def update(id, delivery)
+		def clone(delivery_id)
 			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'delivery', delivery)
-			client.queue_service_action_call('deliveryprofile', 'update', 'KalturaDeliveryProfile', kparams)
+			client.add_param(kparams, 'deliveryId', delivery_id)
+			client.queue_service_action_call('deliveryprofile', 'clone', 'KalturaDeliveryProfile', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1380,19 +1380,6 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Add delivery based on existing delivery.
-		# 	Must provide valid sourceDeliveryId
-		# @return [KalturaDeliveryProfile]
-		def clone(delivery_id)
-			kparams = {}
-			client.add_param(kparams, 'deliveryId', delivery_id)
-			client.queue_service_action_call('deliveryprofile', 'clone', 'KalturaDeliveryProfile', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Retrieve a list of available delivery depends on the filter given
 		# @return [KalturaDeliveryProfileListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
@@ -1400,6 +1387,19 @@ module Kaltura
 			client.add_param(kparams, 'filter', filter)
 			client.add_param(kparams, 'pager', pager)
 			client.queue_service_action_call('deliveryprofile', 'list', 'KalturaDeliveryProfileListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update exisiting delivery
+		# @return [KalturaDeliveryProfile]
+		def update(id, delivery)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'delivery', delivery)
+			client.queue_service_action_call('deliveryprofile', 'update', 'KalturaDeliveryProfile', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1425,37 +1425,16 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Retrieve a EmailIngestionProfile by email address
-		# @return [KalturaEmailIngestionProfile]
-		def get_by_email_address(email_address)
+		# add KalturaMediaEntry from email ingestion
+		# @return [KalturaMediaEntry]
+		def add_media_entry(media_entry, upload_token_id, email_prof_id, from_address, email_msg_id)
 			kparams = {}
-			client.add_param(kparams, 'emailAddress', email_address)
-			client.queue_service_action_call('emailingestionprofile', 'getByEmailAddress', 'KalturaEmailIngestionProfile', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Retrieve a EmailIngestionProfile by id
-		# @return [KalturaEmailIngestionProfile]
-		def get(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('emailingestionprofile', 'get', 'KalturaEmailIngestionProfile', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update an existing EmailIngestionProfile
-		# @return [KalturaEmailIngestionProfile]
-		def update(id, email_ip)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'EmailIP', email_ip)
-			client.queue_service_action_call('emailingestionprofile', 'update', 'KalturaEmailIngestionProfile', kparams)
+			client.add_param(kparams, 'mediaEntry', media_entry)
+			client.add_param(kparams, 'uploadTokenId', upload_token_id)
+			client.add_param(kparams, 'emailProfId', email_prof_id)
+			client.add_param(kparams, 'fromAddress', from_address)
+			client.add_param(kparams, 'emailMsgId', email_msg_id)
+			client.queue_service_action_call('emailingestionprofile', 'addMediaEntry', 'KalturaMediaEntry', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1474,16 +1453,37 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# add KalturaMediaEntry from email ingestion
-		# @return [KalturaMediaEntry]
-		def add_media_entry(media_entry, upload_token_id, email_prof_id, from_address, email_msg_id)
+		# Retrieve a EmailIngestionProfile by id
+		# @return [KalturaEmailIngestionProfile]
+		def get(id)
 			kparams = {}
-			client.add_param(kparams, 'mediaEntry', media_entry)
-			client.add_param(kparams, 'uploadTokenId', upload_token_id)
-			client.add_param(kparams, 'emailProfId', email_prof_id)
-			client.add_param(kparams, 'fromAddress', from_address)
-			client.add_param(kparams, 'emailMsgId', email_msg_id)
-			client.queue_service_action_call('emailingestionprofile', 'addMediaEntry', 'KalturaMediaEntry', kparams)
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('emailingestionprofile', 'get', 'KalturaEmailIngestionProfile', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Retrieve a EmailIngestionProfile by email address
+		# @return [KalturaEmailIngestionProfile]
+		def get_by_email_address(email_address)
+			kparams = {}
+			client.add_param(kparams, 'emailAddress', email_address)
+			client.queue_service_action_call('emailingestionprofile', 'getByEmailAddress', 'KalturaEmailIngestionProfile', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update an existing EmailIngestionProfile
+		# @return [KalturaEmailIngestionProfile]
+		def update(id, email_ip)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'EmailIP', email_ip)
+			client.queue_service_action_call('emailingestionprofile', 'update', 'KalturaEmailIngestionProfile', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1498,11 +1498,10 @@ module Kaltura
 		end
 
 		# @return [KalturaEntryServerNode]
-		def update(id, entry_server_node)
+		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'entryServerNode', entry_server_node)
-			client.queue_service_action_call('entryservernode', 'update', 'KalturaEntryServerNode', kparams)
+			client.queue_service_action_call('entryservernode', 'get', 'KalturaEntryServerNode', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1522,10 +1521,11 @@ module Kaltura
 		end
 
 		# @return [KalturaEntryServerNode]
-		def get(id)
+		def update(id, entry_server_node)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('entryservernode', 'get', 'KalturaEntryServerNode', kparams)
+			client.add_param(kparams, 'entryServerNode', entry_server_node)
+			client.queue_service_action_call('entryservernode', 'update', 'KalturaEntryServerNode', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1563,6 +1563,18 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Delete file asset by id
+		# @return []
+		def delete(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('fileasset', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Get file asset by id
 		# @return [KalturaFileAsset]
 		def get(id)
@@ -1575,25 +1587,13 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Update file asset by id
-		# @return [KalturaFileAsset]
-		def update(id, file_asset)
+		# List file assets by filter and pager
+		# @return [KalturaFileAssetListResponse]
+		def list(filter, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'fileAsset', file_asset)
-			client.queue_service_action_call('fileasset', 'update', 'KalturaFileAsset', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Delete file asset by id
-		# @return []
-		def delete(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('fileasset', 'delete', '', kparams)
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('fileasset', 'list', 'KalturaFileAssetListResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1622,13 +1622,13 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# List file assets by filter and pager
-		# @return [KalturaFileAssetListResponse]
-		def list(filter, pager=KalturaNotImplemented)
+		# Update file asset by id
+		# @return [KalturaFileAsset]
+		def update(id, file_asset)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('fileasset', 'list', 'KalturaFileAssetListResponse', kparams)
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'fileAsset', file_asset)
+			client.queue_service_action_call('fileasset', 'update', 'KalturaFileAsset', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1655,26 +1655,51 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Update flavor asset
-		# @return [KalturaFlavorAsset]
-		def update(id, flavor_asset)
+		# Add and convert new Flavor Asset for Entry with specific Flavor Params
+		# @return []
+		def convert(entry_id, flavor_params_id, priority=0)
 			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'flavorAsset', flavor_asset)
-			client.queue_service_action_call('flavorasset', 'update', 'KalturaFlavorAsset', kparams)
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'flavorParamsId', flavor_params_id)
+			client.add_param(kparams, 'priority', priority)
+			client.queue_service_action_call('flavorasset', 'convert', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
 			return client.do_queue()
 		end
 
-		# Update content of flavor asset
-		# @return [KalturaFlavorAsset]
-		def set_content(id, content_resource)
+		# Delete Flavor Asset by ID
+		# @return []
+		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'contentResource', content_resource)
-			client.queue_service_action_call('flavorasset', 'setContent', 'KalturaFlavorAsset', kparams)
+			client.queue_service_action_call('flavorasset', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# delete all local file syncs for this asset
+		# @return []
+		def delete_local_content(asset_id)
+			kparams = {}
+			client.add_param(kparams, 'assetId', asset_id)
+			client.queue_service_action_call('flavorasset', 'deleteLocalContent', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# manually export an asset
+		# @return [KalturaFlavorAsset]
+		def export(asset_id, storage_profile_id)
+			kparams = {}
+			client.add_param(kparams, 'assetId', asset_id)
+			client.add_param(kparams, 'storageProfileId', storage_profile_id)
+			client.queue_service_action_call('flavorasset', 'export', 'KalturaFlavorAsset', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1699,96 +1724,6 @@ module Kaltura
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
 			client.queue_service_action_call('flavorasset', 'getByEntryId', 'KalturaFlavorAsset', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# List Flavor Assets by filter and pager
-		# @return [KalturaFlavorAssetListResponse]
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('flavorasset', 'list', 'KalturaFlavorAssetListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Get web playable Flavor Assets for Entry
-		# @return [array]
-		def get_web_playable_by_entry_id(entry_id)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('flavorasset', 'getWebPlayableByEntryId', 'KalturaFlavorAsset', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Add and convert new Flavor Asset for Entry with specific Flavor Params
-		# @return []
-		def convert(entry_id, flavor_params_id, priority=0)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'flavorParamsId', flavor_params_id)
-			client.add_param(kparams, 'priority', priority)
-			client.queue_service_action_call('flavorasset', 'convert', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Reconvert Flavor Asset by ID
-		# @return []
-		def reconvert(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('flavorasset', 'reconvert', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Delete Flavor Asset by ID
-		# @return []
-		def delete(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('flavorasset', 'delete', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Get download URL for the asset
-		# @return [string]
-		def get_url(id, storage_id=KalturaNotImplemented, force_proxy=false, options=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'storageId', storage_id)
-			client.add_param(kparams, 'forceProxy', force_proxy)
-			client.add_param(kparams, 'options', options)
-			client.queue_service_action_call('flavorasset', 'getUrl', 'string', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Get remote storage existing paths for the asset
-		# @return [KalturaRemotePathListResponse]
-		def get_remote_paths(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('flavorasset', 'getRemotePaths', 'KalturaRemotePathListResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1820,13 +1755,78 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# manually export an asset
-		# @return [KalturaFlavorAsset]
-		def export(asset_id, storage_profile_id)
+		# Get remote storage existing paths for the asset
+		# @return [KalturaRemotePathListResponse]
+		def get_remote_paths(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('flavorasset', 'getRemotePaths', 'KalturaRemotePathListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Get download URL for the asset
+		# @return [string]
+		def get_url(id, storage_id=KalturaNotImplemented, force_proxy=false, options=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'storageId', storage_id)
+			client.add_param(kparams, 'forceProxy', force_proxy)
+			client.add_param(kparams, 'options', options)
+			client.queue_service_action_call('flavorasset', 'getUrl', 'string', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Get web playable Flavor Assets for Entry
+		# @return [array]
+		def get_web_playable_by_entry_id(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('flavorasset', 'getWebPlayableByEntryId', 'KalturaFlavorAsset', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# List Flavor Assets by filter and pager
+		# @return [KalturaFlavorAssetListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('flavorasset', 'list', 'KalturaFlavorAssetListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Reconvert Flavor Asset by ID
+		# @return []
+		def reconvert(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('flavorasset', 'reconvert', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# serve cmd line to transcode the ad
+		# @return [string]
+		def serve_ad_stitch_cmd(asset_id, ffprobe_json=KalturaNotImplemented, duration=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'assetId', asset_id)
-			client.add_param(kparams, 'storageProfileId', storage_profile_id)
-			client.queue_service_action_call('flavorasset', 'export', 'KalturaFlavorAsset', kparams)
+			client.add_param(kparams, 'ffprobeJson', ffprobe_json)
+			client.add_param(kparams, 'duration', duration)
+			client.queue_service_action_call('flavorasset', 'serveAdStitchCmd', 'string', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1845,26 +1845,26 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# delete all local file syncs for this asset
-		# @return []
-		def delete_local_content(asset_id)
+		# Update content of flavor asset
+		# @return [KalturaFlavorAsset]
+		def set_content(id, content_resource)
 			kparams = {}
-			client.add_param(kparams, 'assetId', asset_id)
-			client.queue_service_action_call('flavorasset', 'deleteLocalContent', '', kparams)
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'contentResource', content_resource)
+			client.queue_service_action_call('flavorasset', 'setContent', 'KalturaFlavorAsset', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
 			return client.do_queue()
 		end
 
-		# serve cmd line to transcode the ad
-		# @return [string]
-		def serve_ad_stitch_cmd(asset_id, ffprobe_json=KalturaNotImplemented, duration=KalturaNotImplemented)
+		# Update flavor asset
+		# @return [KalturaFlavorAsset]
+		def update(id, flavor_asset)
 			kparams = {}
-			client.add_param(kparams, 'assetId', asset_id)
-			client.add_param(kparams, 'ffprobeJson', ffprobe_json)
-			client.add_param(kparams, 'duration', duration)
-			client.queue_service_action_call('flavorasset', 'serveAdStitchCmd', 'string', kparams)
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'flavorAsset', flavor_asset)
+			client.queue_service_action_call('flavorasset', 'update', 'KalturaFlavorAsset', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1922,6 +1922,18 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Delete Flavor Params by ID
+		# @return []
+		def delete(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('flavorparams', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Get Flavor Params by ID
 		# @return [KalturaFlavorParams]
 		def get(id)
@@ -1934,25 +1946,12 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Update Flavor Params by ID
-		# @return [KalturaFlavorParams]
-		def update(id, flavor_params)
+		# Get Flavor Params by Conversion Profile ID
+		# @return [array]
+		def get_by_conversion_profile_id(conversion_profile_id)
 			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'flavorParams', flavor_params)
-			client.queue_service_action_call('flavorparams', 'update', 'KalturaFlavorParams', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Delete Flavor Params by ID
-		# @return []
-		def delete(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('flavorparams', 'delete', '', kparams)
+			client.add_param(kparams, 'conversionProfileId', conversion_profile_id)
+			client.queue_service_action_call('flavorparams', 'getByConversionProfileId', 'KalturaFlavorParams', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1972,12 +1971,13 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Get Flavor Params by Conversion Profile ID
-		# @return [array]
-		def get_by_conversion_profile_id(conversion_profile_id)
+		# Update Flavor Params by ID
+		# @return [KalturaFlavorParams]
+		def update(id, flavor_params)
 			kparams = {}
-			client.add_param(kparams, 'conversionProfileId', conversion_profile_id)
-			client.queue_service_action_call('flavorparams', 'getByConversionProfileId', 'KalturaFlavorParams', kparams)
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'flavorParams', flavor_params)
+			client.queue_service_action_call('flavorparams', 'update', 'KalturaFlavorParams', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -2048,37 +2048,24 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Get live channel segment by id
-		# @return [KalturaLiveChannelSegment]
-		def get(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('livechannelsegment', 'get', 'KalturaLiveChannelSegment', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update live channel segment by id
-		# @return [KalturaLiveChannelSegment]
-		def update(id, live_channel_segment)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'liveChannelSegment', live_channel_segment)
-			client.queue_service_action_call('livechannelsegment', 'update', 'KalturaLiveChannelSegment', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Delete live channel segment by id
 		# @return []
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
 			client.queue_service_action_call('livechannelsegment', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Get live channel segment by id
+		# @return [KalturaLiveChannelSegment]
+		def get(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('livechannelsegment', 'get', 'KalturaLiveChannelSegment', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -2092,6 +2079,19 @@ module Kaltura
 			client.add_param(kparams, 'filter', filter)
 			client.add_param(kparams, 'pager', pager)
 			client.queue_service_action_call('livechannelsegment', 'list', 'KalturaLiveChannelSegmentListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update live channel segment by id
+		# @return [KalturaLiveChannelSegment]
+		def update(id, live_channel_segment)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'liveChannelSegment', live_channel_segment)
+			client.queue_service_action_call('livechannelsegment', 'update', 'KalturaLiveChannelSegment', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -2117,25 +2117,17 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Get live channel by ID.
-		# @return [KalturaLiveChannel]
-		def get(id)
+		# Append recorded video to live entry
+		# @return [KalturaLiveEntry]
+		def append_recording(entry_id, asset_id, media_server_index, resource, duration, is_last_chunk=false)
 			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('livechannel', 'get', 'KalturaLiveChannel', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update live channel. Only the properties that were set will be updated.
-		# @return [KalturaLiveChannel]
-		def update(id, live_channel)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'liveChannel', live_channel)
-			client.queue_service_action_call('livechannel', 'update', 'KalturaLiveChannel', kparams)
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'assetId', asset_id)
+			client.add_param(kparams, 'mediaServerIndex', media_server_index)
+			client.add_param(kparams, 'resource', resource)
+			client.add_param(kparams, 'duration', duration)
+			client.add_param(kparams, 'isLastChunk', is_last_chunk)
+			client.queue_service_action_call('livechannel', 'appendRecording', 'KalturaLiveEntry', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -2154,13 +2146,12 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# List live channels by filter with paging support.
-		# @return [KalturaLiveChannelListResponse]
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+		# Get live channel by ID.
+		# @return [KalturaLiveChannel]
+		def get(id)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('livechannel', 'list', 'KalturaLiveChannelListResponse', kparams)
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('livechannel', 'get', 'KalturaLiveChannel', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -2179,17 +2170,13 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Append recorded video to live entry
-		# @return [KalturaLiveEntry]
-		def append_recording(entry_id, asset_id, media_server_index, resource, duration, is_last_chunk=false)
+		# List live channels by filter with paging support.
+		# @return [KalturaLiveChannelListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'assetId', asset_id)
-			client.add_param(kparams, 'mediaServerIndex', media_server_index)
-			client.add_param(kparams, 'resource', resource)
-			client.add_param(kparams, 'duration', duration)
-			client.add_param(kparams, 'isLastChunk', is_last_chunk)
-			client.queue_service_action_call('livechannel', 'appendRecording', 'KalturaLiveEntry', kparams)
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('livechannel', 'list', 'KalturaLiveChannelListResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -2212,6 +2199,22 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Sey recorded video to live entry
+		# @return [KalturaLiveEntry]
+		def set_recorded_content(entry_id, media_server_index, resource, duration, recorded_entry_id=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'mediaServerIndex', media_server_index)
+			client.add_param(kparams, 'resource', resource)
+			client.add_param(kparams, 'duration', duration)
+			client.add_param(kparams, 'recordedEntryId', recorded_entry_id)
+			client.queue_service_action_call('livechannel', 'setRecordedContent', 'KalturaLiveEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Unregister media server from live entry
 		# @return [KalturaLiveEntry]
 		def unregister_media_server(entry_id, hostname, media_server_index)
@@ -2220,6 +2223,19 @@ module Kaltura
 			client.add_param(kparams, 'hostname', hostname)
 			client.add_param(kparams, 'mediaServerIndex', media_server_index)
 			client.queue_service_action_call('livechannel', 'unregisterMediaServer', 'KalturaLiveEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update live channel. Only the properties that were set will be updated.
+		# @return [KalturaLiveChannel]
+		def update(id, live_channel)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'liveChannel', live_channel)
+			client.queue_service_action_call('livechannel', 'update', 'KalturaLiveChannel', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -2237,27 +2253,23 @@ module Kaltura
 			end
 			return client.do_queue()
 		end
-
-		# Sey recorded video to live entry
-		# @return [KalturaLiveEntry]
-		def set_recorded_content(entry_id, media_server_index, resource, duration, recorded_entry_id=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'mediaServerIndex', media_server_index)
-			client.add_param(kparams, 'resource', resource)
-			client.add_param(kparams, 'duration', duration)
-			client.add_param(kparams, 'recordedEntryId', recorded_entry_id)
-			client.queue_service_action_call('livechannel', 'setRecordedContent', 'KalturaLiveEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
 	end
 
 	class KalturaLiveReportsService < KalturaServiceBase
 		def initialize(client)
 			super(client)
+		end
+
+		# @return [KalturaLiveReportExportResponse]
+		def export_to_csv(report_type, params)
+			kparams = {}
+			client.add_param(kparams, 'reportType', report_type)
+			client.add_param(kparams, 'params', params)
+			client.queue_service_action_call('livereports', 'exportToCsv', 'KalturaLiveReportExportResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
 		end
 
 		# @return [array]
@@ -2280,18 +2292,6 @@ module Kaltura
 			client.add_param(kparams, 'filter', filter)
 			client.add_param(kparams, 'pager', pager)
 			client.queue_service_action_call('livereports', 'getReport', 'KalturaLiveStatsListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# @return [KalturaLiveReportExportResponse]
-		def export_to_csv(report_type, params)
-			kparams = {}
-			client.add_param(kparams, 'reportType', report_type)
-			client.add_param(kparams, 'params', params)
-			client.queue_service_action_call('livereports', 'exportToCsv', 'KalturaLiveReportExportResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -2351,113 +2351,6 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Get live stream entry by ID.
-		# @return [KalturaLiveStreamEntry]
-		def get(entry_id, version=-1)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'version', version)
-			client.queue_service_action_call('livestream', 'get', 'KalturaLiveStreamEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Authenticate live-stream entry against stream token and partner limitations
-		# @return [KalturaLiveStreamEntry]
-		def authenticate(entry_id, token, hostname=KalturaNotImplemented, media_server_index=KalturaNotImplemented, application_name=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'token', token)
-			client.add_param(kparams, 'hostname', hostname)
-			client.add_param(kparams, 'mediaServerIndex', media_server_index)
-			client.add_param(kparams, 'applicationName', application_name)
-			client.queue_service_action_call('livestream', 'authenticate', 'KalturaLiveStreamEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update live stream entry. Only the properties that were set will be updated.
-		# @return [KalturaLiveStreamEntry]
-		def update(entry_id, live_stream_entry)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'liveStreamEntry', live_stream_entry)
-			client.queue_service_action_call('livestream', 'update', 'KalturaLiveStreamEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Delete a live stream entry.
-		# @return []
-		def delete(entry_id)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('livestream', 'delete', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# List live stream entries by filter with paging support.
-		# @return [KalturaLiveStreamListResponse]
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('livestream', 'list', 'KalturaLiveStreamListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update live stream entry thumbnail using a raw jpeg file
-		# @return [KalturaLiveStreamEntry]
-		def update_offline_thumbnail_jpeg(entry_id, file_data)
-			kparams = {}
-			kfiles = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kfiles, 'fileData', file_data)
-			client.queue_service_action_call('livestream', 'updateOfflineThumbnailJpeg', 'KalturaLiveStreamEntry', kparams, kfiles)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update entry thumbnail using url
-		# @return [KalturaLiveStreamEntry]
-		def update_offline_thumbnail_from_url(entry_id, url)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'url', url)
-			client.queue_service_action_call('livestream', 'updateOfflineThumbnailFromUrl', 'KalturaLiveStreamEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Delivering the status of a live stream (on-air/offline) if it is possible
-		# @return [bool]
-		def is_live(id, protocol)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'protocol', protocol)
-			client.queue_service_action_call('livestream', 'isLive', 'bool', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Add new pushPublish configuration to entry
 		# @return [KalturaLiveStreamEntry]
 		def add_live_stream_push_publish_configuration(entry_id, protocol, url=KalturaNotImplemented, live_stream_configuration=KalturaNotImplemented)
@@ -2467,31 +2360,6 @@ module Kaltura
 			client.add_param(kparams, 'url', url)
 			client.add_param(kparams, 'liveStreamConfiguration', live_stream_configuration)
 			client.queue_service_action_call('livestream', 'addLiveStreamPushPublishConfiguration', 'KalturaLiveStreamEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Remove push publish configuration from entry
-		# @return [KalturaLiveStreamEntry]
-		def remove_live_stream_push_publish_configuration(entry_id, protocol)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'protocol', protocol)
-			client.queue_service_action_call('livestream', 'removeLiveStreamPushPublishConfiguration', 'KalturaLiveStreamEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Regenerate new secure token for liveStream
-		# @return []
-		def regenerate_stream_token(entry_id)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('livestream', 'regenerateStreamToken', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -2515,6 +2383,99 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Authenticate live-stream entry against stream token and partner limitations
+		# @return [KalturaLiveStreamEntry]
+		def authenticate(entry_id, token, hostname=KalturaNotImplemented, media_server_index=KalturaNotImplemented, application_name=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'token', token)
+			client.add_param(kparams, 'hostname', hostname)
+			client.add_param(kparams, 'mediaServerIndex', media_server_index)
+			client.add_param(kparams, 'applicationName', application_name)
+			client.queue_service_action_call('livestream', 'authenticate', 'KalturaLiveStreamEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Creates perioding metadata sync-point events on a live stream
+		# @return []
+		def create_periodic_sync_points(entry_id, interval, duration)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'interval', interval)
+			client.add_param(kparams, 'duration', duration)
+			client.queue_service_action_call('livestream', 'createPeriodicSyncPoints', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Delete a live stream entry.
+		# @return []
+		def delete(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('livestream', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Get live stream entry by ID.
+		# @return [KalturaLiveStreamEntry]
+		def get(entry_id, version=-1)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'version', version)
+			client.queue_service_action_call('livestream', 'get', 'KalturaLiveStreamEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Delivering the status of a live stream (on-air/offline) if it is possible
+		# @return [bool]
+		def is_live(id, protocol)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'protocol', protocol)
+			client.queue_service_action_call('livestream', 'isLive', 'bool', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# List live stream entries by filter with paging support.
+		# @return [KalturaLiveStreamListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('livestream', 'list', 'KalturaLiveStreamListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Regenerate new secure token for liveStream
+		# @return []
+		def regenerate_stream_token(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('livestream', 'regenerateStreamToken', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Register media server to live entry
 		# @return [KalturaLiveEntry]
 		def register_media_server(entry_id, hostname, media_server_index, application_name=KalturaNotImplemented, live_entry_status=1)
@@ -2531,26 +2492,13 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Unregister media server from live entry
-		# @return [KalturaLiveEntry]
-		def unregister_media_server(entry_id, hostname, media_server_index)
+		# Remove push publish configuration from entry
+		# @return [KalturaLiveStreamEntry]
+		def remove_live_stream_push_publish_configuration(entry_id, protocol)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'hostname', hostname)
-			client.add_param(kparams, 'mediaServerIndex', media_server_index)
-			client.queue_service_action_call('livestream', 'unregisterMediaServer', 'KalturaLiveEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Validates all registered media servers
-		# @return []
-		def validate_registered_media_servers(entry_id)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('livestream', 'validateRegisteredMediaServers', '', kparams)
+			client.add_param(kparams, 'protocol', protocol)
+			client.queue_service_action_call('livestream', 'removeLiveStreamPushPublishConfiguration', 'KalturaLiveStreamEntry', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -2573,14 +2521,66 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Creates perioding metadata sync-point events on a live stream
-		# @return []
-		def create_periodic_sync_points(entry_id, interval, duration)
+		# Unregister media server from live entry
+		# @return [KalturaLiveEntry]
+		def unregister_media_server(entry_id, hostname, media_server_index)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'interval', interval)
-			client.add_param(kparams, 'duration', duration)
-			client.queue_service_action_call('livestream', 'createPeriodicSyncPoints', '', kparams)
+			client.add_param(kparams, 'hostname', hostname)
+			client.add_param(kparams, 'mediaServerIndex', media_server_index)
+			client.queue_service_action_call('livestream', 'unregisterMediaServer', 'KalturaLiveEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update live stream entry. Only the properties that were set will be updated.
+		# @return [KalturaLiveStreamEntry]
+		def update(entry_id, live_stream_entry)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'liveStreamEntry', live_stream_entry)
+			client.queue_service_action_call('livestream', 'update', 'KalturaLiveStreamEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update entry thumbnail using url
+		# @return [KalturaLiveStreamEntry]
+		def update_offline_thumbnail_from_url(entry_id, url)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'url', url)
+			client.queue_service_action_call('livestream', 'updateOfflineThumbnailFromUrl', 'KalturaLiveStreamEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update live stream entry thumbnail using a raw jpeg file
+		# @return [KalturaLiveStreamEntry]
+		def update_offline_thumbnail_jpeg(entry_id, file_data)
+			kparams = {}
+			kfiles = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kfiles, 'fileData', file_data)
+			client.queue_service_action_call('livestream', 'updateOfflineThumbnailJpeg', 'KalturaLiveStreamEntry', kparams, kfiles)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Validates all registered media servers
+		# @return []
+		def validate_registered_media_servers(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('livestream', 'validateRegisteredMediaServers', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -2656,14 +2656,40 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Adds new media entry by importing an HTTP or FTP URL.
-		# 	 The entry will be queued for import and then for conversion.
+		# Copy entry into new entry
 		# @return [KalturaMediaEntry]
-		def add_from_url(media_entry, url)
+		def add_from_entry(source_entry_id, media_entry=KalturaNotImplemented, source_flavor_params_id=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'sourceEntryId', source_entry_id)
+			client.add_param(kparams, 'mediaEntry', media_entry)
+			client.add_param(kparams, 'sourceFlavorParamsId', source_flavor_params_id)
+			client.queue_service_action_call('media', 'addFromEntry', 'KalturaMediaEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Copy flavor asset into new entry
+		# @return [KalturaMediaEntry]
+		def add_from_flavor_asset(source_flavor_asset_id, media_entry=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'sourceFlavorAssetId', source_flavor_asset_id)
+			client.add_param(kparams, 'mediaEntry', media_entry)
+			client.queue_service_action_call('media', 'addFromFlavorAsset', 'KalturaMediaEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Add new entry after the file was recored on the server and the token id exists
+		# @return [KalturaMediaEntry]
+		def add_from_recorded_webcam(media_entry, webcam_token_id)
 			kparams = {}
 			client.add_param(kparams, 'mediaEntry', media_entry)
-			client.add_param(kparams, 'url', url)
-			client.queue_service_action_call('media', 'addFromUrl', 'KalturaMediaEntry', kparams)
+			client.add_param(kparams, 'webcamTokenId', webcam_token_id)
+			client.queue_service_action_call('media', 'addFromRecordedWebcam', 'KalturaMediaEntry', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -2697,40 +2723,80 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Add new entry after the file was recored on the server and the token id exists
+		# Adds new media entry by importing an HTTP or FTP URL.
+		# 	 The entry will be queued for import and then for conversion.
 		# @return [KalturaMediaEntry]
-		def add_from_recorded_webcam(media_entry, webcam_token_id)
+		def add_from_url(media_entry, url)
 			kparams = {}
 			client.add_param(kparams, 'mediaEntry', media_entry)
-			client.add_param(kparams, 'webcamTokenId', webcam_token_id)
-			client.queue_service_action_call('media', 'addFromRecordedWebcam', 'KalturaMediaEntry', kparams)
+			client.add_param(kparams, 'url', url)
+			client.queue_service_action_call('media', 'addFromUrl', 'KalturaMediaEntry', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
 			return client.do_queue()
 		end
 
-		# Copy entry into new entry
-		# @return [KalturaMediaEntry]
-		def add_from_entry(source_entry_id, media_entry=KalturaNotImplemented, source_flavor_params_id=KalturaNotImplemented)
+		# Anonymously rank a media entry, no validation is done on duplicate rankings
+		# @return []
+		def anonymous_rank(entry_id, rank)
 			kparams = {}
-			client.add_param(kparams, 'sourceEntryId', source_entry_id)
-			client.add_param(kparams, 'mediaEntry', media_entry)
-			client.add_param(kparams, 'sourceFlavorParamsId', source_flavor_params_id)
-			client.queue_service_action_call('media', 'addFromEntry', 'KalturaMediaEntry', kparams)
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'rank', rank)
+			client.queue_service_action_call('media', 'anonymousRank', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
 			return client.do_queue()
 		end
 
-		# Copy flavor asset into new entry
-		# @return [KalturaMediaEntry]
-		def add_from_flavor_asset(source_flavor_asset_id, media_entry=KalturaNotImplemented)
+		# Approve the media entry and mark the pending flags (if any) as moderated (this will make the entry playable)
+		# @return []
+		def approve(entry_id)
 			kparams = {}
-			client.add_param(kparams, 'sourceFlavorAssetId', source_flavor_asset_id)
-			client.add_param(kparams, 'mediaEntry', media_entry)
-			client.queue_service_action_call('media', 'addFromFlavorAsset', 'KalturaMediaEntry', kparams)
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('media', 'approve', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Approves media replacement
+		# @return [KalturaMediaEntry]
+		def approve_replace(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('media', 'approveReplace', 'KalturaMediaEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Add new bulk upload batch job
+		# 	 Conversion profile id can be specified in the API or in the CSV file, the one in the CSV file will be stronger.
+		# 	 If no conversion profile was specified, partner's default will be used
+		# @return [KalturaBulkUpload]
+		def bulk_upload_add(file_data, bulk_upload_data=KalturaNotImplemented, bulk_upload_entry_data=KalturaNotImplemented)
+			kparams = {}
+			kfiles = {}
+			client.add_param(kfiles, 'fileData', file_data)
+			client.add_param(kparams, 'bulkUploadData', bulk_upload_data)
+			client.add_param(kparams, 'bulkUploadEntryData', bulk_upload_entry_data)
+			client.queue_service_action_call('media', 'bulkUploadAdd', 'KalturaBulkUpload', kparams, kfiles)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Cancels media replacement
+		# @return [KalturaMediaEntry]
+		def cancel_replace(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('media', 'cancelReplace', 'KalturaMediaEntry', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -2745,6 +2811,42 @@ module Kaltura
 			client.add_param(kparams, 'conversionProfileId', conversion_profile_id)
 			client.add_param(kparams, 'dynamicConversionAttributes', dynamic_conversion_attributes)
 			client.queue_service_action_call('media', 'convert', 'bigint', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Count media entries by filter.
+		# @return [int]
+		def count(filter=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.queue_service_action_call('media', 'count', 'int', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Delete a media entry.
+		# @return []
+		def delete(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('media', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Flag inappropriate media entry for moderation
+		# @return []
+		def flag(moderation_flag)
+			kparams = {}
+			client.add_param(kparams, 'moderationFlag', moderation_flag)
+			client.queue_service_action_call('media', 'flag', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -2779,6 +2881,57 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# List media entries by filter with paging support.
+		# @return [KalturaMediaListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('media', 'list', 'KalturaMediaListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# List all pending flags for the media entry
+		# @return [KalturaModerationFlagListResponse]
+		def list_flags(entry_id, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('media', 'listFlags', 'KalturaModerationFlagListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Reject the media entry and mark the pending flags (if any) as moderated (this will make the entry non playable)
+		# @return []
+		def reject(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('media', 'reject', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Request a new conversion job, this can be used to convert the media entry to a different format
+		# @return [int]
+		def request_conversion(entry_id, file_format)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'fileFormat', file_format)
+			client.queue_service_action_call('media', 'requestConversion', 'int', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Update media entry. Only the properties that were set will be updated.
 		# @return [KalturaMediaEntry]
 		def update(entry_id, media_entry)
@@ -2801,80 +2954,6 @@ module Kaltura
 			client.add_param(kparams, 'conversionProfileId', conversion_profile_id)
 			client.add_param(kparams, 'advancedOptions', advanced_options)
 			client.queue_service_action_call('media', 'updateContent', 'KalturaMediaEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Delete a media entry.
-		# @return []
-		def delete(entry_id)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('media', 'delete', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Approves media replacement
-		# @return [KalturaMediaEntry]
-		def approve_replace(entry_id)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('media', 'approveReplace', 'KalturaMediaEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Cancels media replacement
-		# @return [KalturaMediaEntry]
-		def cancel_replace(entry_id)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('media', 'cancelReplace', 'KalturaMediaEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# List media entries by filter with paging support.
-		# @return [KalturaMediaListResponse]
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('media', 'list', 'KalturaMediaListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Count media entries by filter.
-		# @return [int]
-		def count(filter=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.queue_service_action_call('media', 'count', 'int', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Upload a media file to Kaltura, then the file can be used to create a media entry.
-		# @return [string]
-		def upload(file_data)
-			kparams = {}
-			kfiles = {}
-			client.add_param(kfiles, 'fileData', file_data)
-			client.queue_service_action_call('media', 'upload', 'string', kparams, kfiles)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -2912,6 +2991,19 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Update entry thumbnail using url
+		# @return [KalturaBaseEntry]
+		def update_thumbnail_from_url(entry_id, url)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'url', url)
+			client.queue_service_action_call('media', 'updateThumbnailFromUrl', 'KalturaBaseEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Update media entry thumbnail using a raw jpeg file
 		# @return [KalturaMediaEntry]
 		def update_thumbnail_jpeg(entry_id, file_data)
@@ -2926,105 +3018,13 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Update entry thumbnail using url
-		# @return [KalturaBaseEntry]
-		def update_thumbnail_from_url(entry_id, url)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'url', url)
-			client.queue_service_action_call('media', 'updateThumbnailFromUrl', 'KalturaBaseEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Request a new conversion job, this can be used to convert the media entry to a different format
-		# @return [int]
-		def request_conversion(entry_id, file_format)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'fileFormat', file_format)
-			client.queue_service_action_call('media', 'requestConversion', 'int', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Flag inappropriate media entry for moderation
-		# @return []
-		def flag(moderation_flag)
-			kparams = {}
-			client.add_param(kparams, 'moderationFlag', moderation_flag)
-			client.queue_service_action_call('media', 'flag', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Reject the media entry and mark the pending flags (if any) as moderated (this will make the entry non playable)
-		# @return []
-		def reject(entry_id)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('media', 'reject', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Approve the media entry and mark the pending flags (if any) as moderated (this will make the entry playable)
-		# @return []
-		def approve(entry_id)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('media', 'approve', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# List all pending flags for the media entry
-		# @return [KalturaModerationFlagListResponse]
-		def list_flags(entry_id, pager=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('media', 'listFlags', 'KalturaModerationFlagListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Anonymously rank a media entry, no validation is done on duplicate rankings
-		# @return []
-		def anonymous_rank(entry_id, rank)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'rank', rank)
-			client.queue_service_action_call('media', 'anonymousRank', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Add new bulk upload batch job
-		# 	 Conversion profile id can be specified in the API or in the CSV file, the one in the CSV file will be stronger.
-		# 	 If no conversion profile was specified, partner's default will be used
-		# @return [KalturaBulkUpload]
-		def bulk_upload_add(file_data, bulk_upload_data=KalturaNotImplemented, bulk_upload_entry_data=KalturaNotImplemented)
+		# Upload a media file to Kaltura, then the file can be used to create a media entry.
+		# @return [string]
+		def upload(file_data)
 			kparams = {}
 			kfiles = {}
 			client.add_param(kfiles, 'fileData', file_data)
-			client.add_param(kparams, 'bulkUploadData', bulk_upload_data)
-			client.add_param(kparams, 'bulkUploadEntryData', bulk_upload_entry_data)
-			client.queue_service_action_call('media', 'bulkUploadAdd', 'KalturaBulkUpload', kparams, kfiles)
+			client.queue_service_action_call('media', 'upload', 'string', kparams, kfiles)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3052,64 +3052,26 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Get mix entry by id.
-		# @return [KalturaMixEntry]
-		def get(entry_id, version=-1)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'version', version)
-			client.queue_service_action_call('mixing', 'get', 'KalturaMixEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update mix entry. Only the properties that were set will be updated.
-		# @return [KalturaMixEntry]
-		def update(entry_id, mix_entry)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'mixEntry', mix_entry)
-			client.queue_service_action_call('mixing', 'update', 'KalturaMixEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Delete a mix entry.
+		# Anonymously rank a mix entry, no validation is done on duplicate rankings
 		# @return []
-		def delete(entry_id)
+		def anonymous_rank(entry_id, rank)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('mixing', 'delete', '', kparams)
+			client.add_param(kparams, 'rank', rank)
+			client.queue_service_action_call('mixing', 'anonymousRank', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
 			return client.do_queue()
 		end
 
-		# List entries by filter with paging support.
-		# 	 Return parameter is an array of mix entries.
-		# @return [KalturaMixListResponse]
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+		# Appends a media entry to a the end of the mix timeline, this will save the mix timeline as a new version.
+		# @return [KalturaMixEntry]
+		def append_media_entry(mix_entry_id, media_entry_id)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('mixing', 'list', 'KalturaMixListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Count mix entries by filter.
-		# @return [int]
-		def count(filter=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.queue_service_action_call('mixing', 'count', 'int', kparams)
+			client.add_param(kparams, 'mixEntryId', mix_entry_id)
+			client.add_param(kparams, 'mediaEntryId', media_entry_id)
+			client.queue_service_action_call('mixing', 'appendMediaEntry', 'KalturaMixEntry', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3128,13 +3090,37 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Appends a media entry to a the end of the mix timeline, this will save the mix timeline as a new version.
-		# @return [KalturaMixEntry]
-		def append_media_entry(mix_entry_id, media_entry_id)
+		# Count mix entries by filter.
+		# @return [int]
+		def count(filter=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'mixEntryId', mix_entry_id)
-			client.add_param(kparams, 'mediaEntryId', media_entry_id)
-			client.queue_service_action_call('mixing', 'appendMediaEntry', 'KalturaMixEntry', kparams)
+			client.add_param(kparams, 'filter', filter)
+			client.queue_service_action_call('mixing', 'count', 'int', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Delete a mix entry.
+		# @return []
+		def delete(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('mixing', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Get mix entry by id.
+		# @return [KalturaMixEntry]
+		def get(entry_id, version=-1)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'version', version)
+			client.queue_service_action_call('mixing', 'get', 'KalturaMixEntry', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3166,13 +3152,27 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Anonymously rank a mix entry, no validation is done on duplicate rankings
-		# @return []
-		def anonymous_rank(entry_id, rank)
+		# List entries by filter with paging support.
+		# 	 Return parameter is an array of mix entries.
+		# @return [KalturaMixListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('mixing', 'list', 'KalturaMixListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update mix entry. Only the properties that were set will be updated.
+		# @return [KalturaMixEntry]
+		def update(entry_id, mix_entry)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'rank', rank)
-			client.queue_service_action_call('mixing', 'anonymousRank', '', kparams)
+			client.add_param(kparams, 'mixEntry', mix_entry)
+			client.queue_service_action_call('mixing', 'update', 'KalturaMixEntry', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3206,28 +3206,12 @@ module Kaltura
 			super(client)
 		end
 
-		# Create a new Partner object
-		# @return [KalturaPartner]
-		def register(partner, cms_password='', template_partner_id=KalturaNotImplemented, silent=false)
+		# Count partner's existing sub-publishers (count includes the partner itself).
+		# @return [int]
+		def count(filter=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'partner', partner)
-			client.add_param(kparams, 'cmsPassword', cms_password)
-			client.add_param(kparams, 'templatePartnerId', template_partner_id)
-			client.add_param(kparams, 'silent', silent)
-			client.queue_service_action_call('partner', 'register', 'KalturaPartner', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update details and settings of an existing partner
-		# @return [KalturaPartner]
-		def update(partner, allow_empty=false)
-			kparams = {}
-			client.add_param(kparams, 'partner', partner)
-			client.add_param(kparams, 'allowEmpty', allow_empty)
-			client.queue_service_action_call('partner', 'update', 'KalturaPartner', kparams)
+			client.add_param(kparams, 'filter', filter)
+			client.queue_service_action_call('partner', 'count', 'int', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3240,6 +3224,18 @@ module Kaltura
 			kparams = {}
 			client.add_param(kparams, 'id', id)
 			client.queue_service_action_call('partner', 'get', 'KalturaPartner', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Retrieve all info attributed to the partner
+		# 	 This action expects no parameters. It returns information for the current KS partnerId.
+		# @return [KalturaPartner]
+		def get_info()
+			kparams = {}
+			client.queue_service_action_call('partner', 'getInfo', 'KalturaPartner', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3260,12 +3256,12 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Retrieve all info attributed to the partner
-		# 	 This action expects no parameters. It returns information for the current KS partnerId.
-		# @return [KalturaPartner]
-		def get_info()
+		# Get usage statistics for a partner
+		# 	 Calculation is done according to partner's package
+		# @return [KalturaPartnerStatistics]
+		def get_statistics()
 			kparams = {}
-			client.queue_service_action_call('partner', 'getInfo', 'KalturaPartner', kparams)
+			client.queue_service_action_call('partner', 'getStatistics', 'KalturaPartnerStatistics', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3283,31 +3279,6 @@ module Kaltura
 			client.add_param(kparams, 'month', month)
 			client.add_param(kparams, 'resolution', resolution)
 			client.queue_service_action_call('partner', 'getUsage', 'KalturaPartnerUsage', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Get usage statistics for a partner
-		# 	 Calculation is done according to partner's package
-		# @return [KalturaPartnerStatistics]
-		def get_statistics()
-			kparams = {}
-			client.queue_service_action_call('partner', 'getStatistics', 'KalturaPartnerStatistics', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Retrieve a list of partner objects which the current user is allowed to access.
-		# @return [KalturaPartnerListResponse]
-		def list_partners_for_user(partner_filter=KalturaNotImplemented, pager=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'partnerFilter', partner_filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('partner', 'listPartnersForUser', 'KalturaPartnerListResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3340,12 +3311,41 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Count partner's existing sub-publishers (count includes the partner itself).
-		# @return [int]
-		def count(filter=KalturaNotImplemented)
+		# Retrieve a list of partner objects which the current user is allowed to access.
+		# @return [KalturaPartnerListResponse]
+		def list_partners_for_user(partner_filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.queue_service_action_call('partner', 'count', 'int', kparams)
+			client.add_param(kparams, 'partnerFilter', partner_filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('partner', 'listPartnersForUser', 'KalturaPartnerListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Create a new Partner object
+		# @return [KalturaPartner]
+		def register(partner, cms_password='', template_partner_id=KalturaNotImplemented, silent=false)
+			kparams = {}
+			client.add_param(kparams, 'partner', partner)
+			client.add_param(kparams, 'cmsPassword', cms_password)
+			client.add_param(kparams, 'templatePartnerId', template_partner_id)
+			client.add_param(kparams, 'silent', silent)
+			client.queue_service_action_call('partner', 'register', 'KalturaPartner', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update details and settings of an existing partner
+		# @return [KalturaPartner]
+		def update(partner, allow_empty=false)
+			kparams = {}
+			client.add_param(kparams, 'partner', partner)
+			client.add_param(kparams, 'allowEmpty', allow_empty)
+			client.queue_service_action_call('partner', 'update', 'KalturaPartner', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3372,12 +3372,38 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Deletes an existing permission item object.
+		# 	 This action is available only to Kaltura system administrators.
+		# @return [KalturaPermissionItem]
+		def delete(permission_item_id)
+			kparams = {}
+			client.add_param(kparams, 'permissionItemId', permission_item_id)
+			client.queue_service_action_call('permissionitem', 'delete', 'KalturaPermissionItem', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Retrieves a permission item object using its ID.
 		# @return [KalturaPermissionItem]
 		def get(permission_item_id)
 			kparams = {}
 			client.add_param(kparams, 'permissionItemId', permission_item_id)
 			client.queue_service_action_call('permissionitem', 'get', 'KalturaPermissionItem', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Lists permission item objects that are associated with an account.
+		# @return [KalturaPermissionItemListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('permissionitem', 'list', 'KalturaPermissionItemListResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3392,32 +3418,6 @@ module Kaltura
 			client.add_param(kparams, 'permissionItemId', permission_item_id)
 			client.add_param(kparams, 'permissionItem', permission_item)
 			client.queue_service_action_call('permissionitem', 'update', 'KalturaPermissionItem', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Deletes an existing permission item object.
-		# 	 This action is available only to Kaltura system administrators.
-		# @return [KalturaPermissionItem]
-		def delete(permission_item_id)
-			kparams = {}
-			client.add_param(kparams, 'permissionItemId', permission_item_id)
-			client.queue_service_action_call('permissionitem', 'delete', 'KalturaPermissionItem', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Lists permission item objects that are associated with an account.
-		# @return [KalturaPermissionItemListResponse]
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('permissionitem', 'list', 'KalturaPermissionItemListResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3443,6 +3443,18 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Deletes an existing permission object.
+		# @return [KalturaPermission]
+		def delete(permission_name)
+			kparams = {}
+			client.add_param(kparams, 'permissionName', permission_name)
+			client.queue_service_action_call('permission', 'delete', 'KalturaPermission', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Retrieves a permission object using its ID.
 		# @return [KalturaPermission]
 		def get(permission_name)
@@ -3455,25 +3467,11 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Updates an existing permission object.
-		# @return [KalturaPermission]
-		def update(permission_name, permission)
+		# Retrieves a list of permissions that apply to the current KS.
+		# @return [string]
+		def get_current_permissions()
 			kparams = {}
-			client.add_param(kparams, 'permissionName', permission_name)
-			client.add_param(kparams, 'permission', permission)
-			client.queue_service_action_call('permission', 'update', 'KalturaPermission', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Deletes an existing permission object.
-		# @return [KalturaPermission]
-		def delete(permission_name)
-			kparams = {}
-			client.add_param(kparams, 'permissionName', permission_name)
-			client.queue_service_action_call('permission', 'delete', 'KalturaPermission', kparams)
+			client.queue_service_action_call('permission', 'getCurrentPermissions', 'string', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3495,11 +3493,13 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Retrieves a list of permissions that apply to the current KS.
-		# @return [string]
-		def get_current_permissions()
+		# Updates an existing permission object.
+		# @return [KalturaPermission]
+		def update(permission_name, permission)
 			kparams = {}
-			client.queue_service_action_call('permission', 'getCurrentPermissions', 'string', kparams)
+			client.add_param(kparams, 'permissionName', permission_name)
+			client.add_param(kparams, 'permission', permission)
+			client.queue_service_action_call('permission', 'update', 'KalturaPermission', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3528,46 +3528,6 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Retrieve a playlist
-		# @return [KalturaPlaylist]
-		def get(id, version=-1)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'version', version)
-			client.queue_service_action_call('playlist', 'get', 'KalturaPlaylist', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update existing playlist
-		# 	 Note - you cannot change playlist type. updated playlist must be of the same type.
-		# @return [KalturaPlaylist]
-		def update(id, playlist, update_stats=false)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'playlist', playlist)
-			client.add_param(kparams, 'updateStats', update_stats)
-			client.queue_service_action_call('playlist', 'update', 'KalturaPlaylist', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Delete existing playlist
-		# @return []
-		def delete(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('playlist', 'delete', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Clone an existing playlist
 		# @return [KalturaPlaylist]
 		def clone(id, new_playlist=KalturaNotImplemented)
@@ -3581,13 +3541,12 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# List available playlists
-		# @return [KalturaPlaylistListResponse]
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+		# Delete existing playlist
+		# @return []
+		def delete(id)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('playlist', 'list', 'KalturaPlaylistListResponse', kparams)
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('playlist', 'delete', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3640,6 +3599,19 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Retrieve a playlist
+		# @return [KalturaPlaylist]
+		def get(id, version=-1)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'version', version)
+			client.queue_service_action_call('playlist', 'get', 'KalturaPlaylist', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Retrieve playlist statistics
 		# @return [KalturaPlaylist]
 		def get_stats_from_content(playlist_type, playlist_content)
@@ -3647,6 +3619,34 @@ module Kaltura
 			client.add_param(kparams, 'playlistType', playlist_type)
 			client.add_param(kparams, 'playlistContent', playlist_content)
 			client.queue_service_action_call('playlist', 'getStatsFromContent', 'KalturaPlaylist', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# List available playlists
+		# @return [KalturaPlaylistListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('playlist', 'list', 'KalturaPlaylistListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update existing playlist
+		# 	 Note - you cannot change playlist type. updated playlist must be of the same type.
+		# @return [KalturaPlaylist]
+		def update(id, playlist, update_stats=false)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'playlist', playlist)
+			client.add_param(kparams, 'updateStats', update_stats)
+			client.queue_service_action_call('playlist', 'update', 'KalturaPlaylist', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3660,29 +3660,12 @@ module Kaltura
 			super(client)
 		end
 
-		# report getGraphs action allows to get a graph data for a specific report.
-		# @return [array]
-		def get_graphs(report_type, report_input_filter, dimension=KalturaNotImplemented, object_ids=KalturaNotImplemented)
+		# @return [KalturaReportResponse]
+		def execute(id, params=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'reportType', report_type)
-			client.add_param(kparams, 'reportInputFilter', report_input_filter)
-			client.add_param(kparams, 'dimension', dimension)
-			client.add_param(kparams, 'objectIds', object_ids)
-			client.queue_service_action_call('report', 'getGraphs', 'KalturaReportGraph', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# report getTotal action allows to get a graph data for a specific report.
-		# @return [KalturaReportTotal]
-		def get_total(report_type, report_input_filter, object_ids=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'reportType', report_type)
-			client.add_param(kparams, 'reportInputFilter', report_input_filter)
-			client.add_param(kparams, 'objectIds', object_ids)
-			client.queue_service_action_call('report', 'getTotal', 'KalturaReportTotal', kparams)
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'params', params)
+			client.queue_service_action_call('report', 'execute', 'KalturaReportResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3703,6 +3686,40 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# @return [file]
+		def get_csv(id, params=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'params', params)
+			client.queue_service_action_call('report', 'getCsv', 'file', kparams)
+			return client.get_serve_url()
+		end
+
+		# Returns report CSV file executed by string params with the following convention: param1=value1;param2=value2
+		# @return [file]
+		def get_csv_from_string_params(id, params=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'params', params)
+			client.queue_service_action_call('report', 'getCsvFromStringParams', 'file', kparams)
+			return client.get_serve_url()
+		end
+
+		# report getGraphs action allows to get a graph data for a specific report.
+		# @return [array]
+		def get_graphs(report_type, report_input_filter, dimension=KalturaNotImplemented, object_ids=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'reportType', report_type)
+			client.add_param(kparams, 'reportInputFilter', report_input_filter)
+			client.add_param(kparams, 'dimension', dimension)
+			client.add_param(kparams, 'objectIds', object_ids)
+			client.queue_service_action_call('report', 'getGraphs', 'KalturaReportGraph', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# report getTable action allows to get a graph data for a specific report.
 		# @return [KalturaReportTable]
 		def get_table(report_type, report_input_filter, pager, order=KalturaNotImplemented, object_ids=KalturaNotImplemented)
@@ -3713,6 +3730,20 @@ module Kaltura
 			client.add_param(kparams, 'order', order)
 			client.add_param(kparams, 'objectIds', object_ids)
 			client.queue_service_action_call('report', 'getTable', 'KalturaReportTable', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# report getTotal action allows to get a graph data for a specific report.
+		# @return [KalturaReportTotal]
+		def get_total(report_type, report_input_filter, object_ids=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'reportType', report_type)
+			client.add_param(kparams, 'reportInputFilter', report_input_filter)
+			client.add_param(kparams, 'objectIds', object_ids)
+			client.queue_service_action_call('report', 'getTotal', 'KalturaReportTotal', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3750,37 +3781,6 @@ module Kaltura
 			end
 			return client.do_queue()
 		end
-
-		# @return [KalturaReportResponse]
-		def execute(id, params=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'params', params)
-			client.queue_service_action_call('report', 'execute', 'KalturaReportResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# @return [file]
-		def get_csv(id, params=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'params', params)
-			client.queue_service_action_call('report', 'getCsv', 'file', kparams)
-			return client.get_serve_url()
-		end
-
-		# Returns report CSV file executed by string params with the following convention: param1=value1;param2=value2
-		# @return [file]
-		def get_csv_from_string_params(id, params=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'params', params)
-			client.queue_service_action_call('report', 'getCsvFromStringParams', 'file', kparams)
-			return client.get_serve_url()
-		end
 	end
 
 	# Manage response profiles
@@ -3801,38 +3801,13 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Get response profile by id
+		# Clone an existing response profile
 		# @return [KalturaResponseProfile]
-		def get(id)
+		def clone(id, profile)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('responseprofile', 'get', 'KalturaResponseProfile', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update response profile by id
-		# @return [KalturaResponseProfile]
-		def update(id, update_response_profile)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'updateResponseProfile', update_response_profile)
-			client.queue_service_action_call('responseprofile', 'update', 'KalturaResponseProfile', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update response profile status by id
-		# @return [KalturaResponseProfile]
-		def update_status(id, status)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'status', status)
-			client.queue_service_action_call('responseprofile', 'updateStatus', 'KalturaResponseProfile', kparams)
+			client.add_param(kparams, 'profile', profile)
+			client.queue_service_action_call('responseprofile', 'clone', 'KalturaResponseProfile', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3845,6 +3820,18 @@ module Kaltura
 			kparams = {}
 			client.add_param(kparams, 'id', id)
 			client.queue_service_action_call('responseprofile', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Get response profile by id
+		# @return [KalturaResponseProfile]
+		def get(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('responseprofile', 'get', 'KalturaResponseProfile', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3876,13 +3863,26 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Clone an existing response profile
+		# Update response profile by id
 		# @return [KalturaResponseProfile]
-		def clone(id, profile)
+		def update(id, update_response_profile)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'profile', profile)
-			client.queue_service_action_call('responseprofile', 'clone', 'KalturaResponseProfile', kparams)
+			client.add_param(kparams, 'updateResponseProfile', update_response_profile)
+			client.queue_service_action_call('responseprofile', 'update', 'KalturaResponseProfile', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update response profile status by id
+		# @return [KalturaResponseProfile]
+		def update_status(id, status)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'status', status)
+			client.queue_service_action_call('responseprofile', 'updateStatus', 'KalturaResponseProfile', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3913,13 +3913,13 @@ module Kaltura
 			super(client)
 		end
 
-		# Search for media in one of the supported media providers
-		# @return [KalturaSearchResultResponse]
-		def search(search, pager=KalturaNotImplemented)
+		# @return [KalturaSearchAuthData]
+		def external_login(search_source, user_name, password)
 			kparams = {}
-			client.add_param(kparams, 'search', search)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('search', 'search', 'KalturaSearchResultResponse', kparams)
+			client.add_param(kparams, 'searchSource', search_source)
+			client.add_param(kparams, 'userName', user_name)
+			client.add_param(kparams, 'password', password)
+			client.queue_service_action_call('search', 'externalLogin', 'KalturaSearchAuthData', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3933,6 +3933,19 @@ module Kaltura
 			kparams = {}
 			client.add_param(kparams, 'searchResult', search_result)
 			client.queue_service_action_call('search', 'getMediaInfo', 'KalturaSearchResult', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Search for media in one of the supported media providers
+		# @return [KalturaSearchResultResponse]
+		def search(search, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'search', search)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('search', 'search', 'KalturaSearchResultResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -3953,19 +3966,6 @@ module Kaltura
 			end
 			return client.do_queue()
 		end
-
-		# @return [KalturaSearchAuthData]
-		def external_login(search_source, user_name, password)
-			kparams = {}
-			client.add_param(kparams, 'searchSource', search_source)
-			client.add_param(kparams, 'userName', user_name)
-			client.add_param(kparams, 'password', password)
-			client.queue_service_action_call('search', 'externalLogin', 'KalturaSearchAuthData', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
 	end
 
 	# Server Node service
@@ -3980,31 +3980,6 @@ module Kaltura
 			kparams = {}
 			client.add_param(kparams, 'serverNode', server_node)
 			client.queue_service_action_call('servernode', 'add', 'KalturaServerNode', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Get server node by id
-		# @return [KalturaServerNode]
-		def get(server_node_id)
-			kparams = {}
-			client.add_param(kparams, 'serverNodeId', server_node_id)
-			client.queue_service_action_call('servernode', 'get', 'KalturaServerNode', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update server node by id
-		# @return [KalturaServerNode]
-		def update(server_node_id, server_node)
-			kparams = {}
-			client.add_param(kparams, 'serverNodeId', server_node_id)
-			client.add_param(kparams, 'serverNode', server_node)
-			client.queue_service_action_call('servernode', 'update', 'KalturaServerNode', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -4047,6 +4022,18 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Get server node by id
+		# @return [KalturaServerNode]
+		def get(server_node_id)
+			kparams = {}
+			client.add_param(kparams, 'serverNodeId', server_node_id)
+			client.queue_service_action_call('servernode', 'get', 'KalturaServerNode', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# @return [KalturaServerNodeListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
@@ -4071,6 +4058,19 @@ module Kaltura
 			end
 			return client.do_queue()
 		end
+
+		# Update server node by id
+		# @return [KalturaServerNode]
+		def update(server_node_id, server_node)
+			kparams = {}
+			client.add_param(kparams, 'serverNodeId', server_node_id)
+			client.add_param(kparams, 'serverNode', server_node)
+			client.queue_service_action_call('servernode', 'update', 'KalturaServerNode', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
 	end
 
 	# Session service
@@ -4079,29 +4079,23 @@ module Kaltura
 			super(client)
 		end
 
-		# Start a session with Kaltura's server.
-		# 	 The result KS is the session key that you should pass to all services that requires a ticket.
-		# @return [string]
-		def start(secret, user_id='', type=0, partner_id=KalturaNotImplemented, expiry=86400, privileges=KalturaNotImplemented)
+		# End a session with the Kaltura server, making the current KS invalid.
+		# @return []
+		def end()
 			kparams = {}
-			client.add_param(kparams, 'secret', secret)
-			client.add_param(kparams, 'userId', user_id)
-			client.add_param(kparams, 'type', type)
-			client.add_param(kparams, 'partnerId', partner_id)
-			client.add_param(kparams, 'expiry', expiry)
-			client.add_param(kparams, 'privileges', privileges)
-			client.queue_service_action_call('session', 'start', 'string', kparams)
+			client.queue_service_action_call('session', 'end', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
 			return client.do_queue()
 		end
 
-		# End a session with the Kaltura server, making the current KS invalid.
-		# @return []
-		def end()
+		# Parse session key and return its info
+		# @return [KalturaSessionInfo]
+		def get(session=KalturaNotImplemented)
 			kparams = {}
-			client.queue_service_action_call('session', 'end', '', kparams)
+			client.add_param(kparams, 'session', session)
+			client.queue_service_action_call('session', 'get', 'KalturaSessionInfo', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -4144,12 +4138,18 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Parse session key and return its info
-		# @return [KalturaSessionInfo]
-		def get(session=KalturaNotImplemented)
+		# Start a session with Kaltura's server.
+		# 	 The result KS is the session key that you should pass to all services that requires a ticket.
+		# @return [string]
+		def start(secret, user_id='', type=0, partner_id=KalturaNotImplemented, expiry=86400, privileges=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'session', session)
-			client.queue_service_action_call('session', 'get', 'KalturaSessionInfo', kparams)
+			client.add_param(kparams, 'secret', secret)
+			client.add_param(kparams, 'userId', user_id)
+			client.add_param(kparams, 'type', type)
+			client.add_param(kparams, 'partnerId', partner_id)
+			client.add_param(kparams, 'expiry', expiry)
+			client.add_param(kparams, 'privileges', privileges)
+			client.queue_service_action_call('session', 'start', 'string', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -4222,17 +4222,6 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# @return [KalturaCEError]
-		def report_kce_error(kaltura_ce_error)
-			kparams = {}
-			client.add_param(kparams, 'kalturaCEError', kaltura_ce_error)
-			client.queue_service_action_call('stats', 'reportKceError', 'KalturaCEError', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Use this action to report errors to the kaltura server.
 		# @return []
 		def report_error(error_code, error_message)
@@ -4240,6 +4229,17 @@ module Kaltura
 			client.add_param(kparams, 'errorCode', error_code)
 			client.add_param(kparams, 'errorMessage', error_message)
 			client.queue_service_action_call('stats', 'reportError', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# @return [KalturaCEError]
+		def report_kce_error(kaltura_ce_error)
+			kparams = {}
+			client.add_param(kparams, 'kalturaCEError', kaltura_ce_error)
+			client.queue_service_action_call('stats', 'reportKceError', 'KalturaCEError', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -4265,24 +4265,24 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# @return []
-		def update_status(storage_id, status)
-			kparams = {}
-			client.add_param(kparams, 'storageId', storage_id)
-			client.add_param(kparams, 'status', status)
-			client.queue_service_action_call('storageprofile', 'updateStatus', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Get storage profile by id
 		# @return [KalturaStorageProfile]
 		def get(storage_profile_id)
 			kparams = {}
 			client.add_param(kparams, 'storageProfileId', storage_profile_id)
 			client.queue_service_action_call('storageprofile', 'get', 'KalturaStorageProfile', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# @return [KalturaStorageProfileListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('storageprofile', 'list', 'KalturaStorageProfileListResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -4302,12 +4302,12 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# @return [KalturaStorageProfileListResponse]
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+		# @return []
+		def update_status(storage_id, status)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('storageprofile', 'list', 'KalturaStorageProfileListResponse', kparams)
+			client.add_param(kparams, 'storageId', storage_id)
+			client.add_param(kparams, 'status', status)
+			client.queue_service_action_call('storageprofile', 'updateStatus', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -4333,6 +4333,18 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Delete Syndication Feed by ID
+		# @return []
+		def delete(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('syndicationfeed', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Get Syndication Feed by ID
 		# @return [KalturaBaseSyndicationFeed]
 		def get(id)
@@ -4345,25 +4357,12 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Update Syndication Feed by ID
-		# @return [KalturaBaseSyndicationFeed]
-		def update(id, syndication_feed)
+		# get entry count for a syndication feed
+		# @return [KalturaSyndicationFeedEntryCount]
+		def get_entry_count(feed_id)
 			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'syndicationFeed', syndication_feed)
-			client.queue_service_action_call('syndicationfeed', 'update', 'KalturaBaseSyndicationFeed', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Delete Syndication Feed by ID
-		# @return []
-		def delete(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('syndicationfeed', 'delete', '', kparams)
+			client.add_param(kparams, 'feedId', feed_id)
+			client.queue_service_action_call('syndicationfeed', 'getEntryCount', 'KalturaSyndicationFeedEntryCount', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -4383,18 +4382,6 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# get entry count for a syndication feed
-		# @return [KalturaSyndicationFeedEntryCount]
-		def get_entry_count(feed_id)
-			kparams = {}
-			client.add_param(kparams, 'feedId', feed_id)
-			client.queue_service_action_call('syndicationfeed', 'getEntryCount', 'KalturaSyndicationFeedEntryCount', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# request conversion for all entries that doesnt have the required flavor param
 		# 	 returns a comma-separated ids of conversion jobs
 		# @return [string]
@@ -4407,32 +4394,25 @@ module Kaltura
 			end
 			return client.do_queue()
 		end
+
+		# Update Syndication Feed by ID
+		# @return [KalturaBaseSyndicationFeed]
+		def update(id, syndication_feed)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'syndicationFeed', syndication_feed)
+			client.queue_service_action_call('syndicationfeed', 'update', 'KalturaBaseSyndicationFeed', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
 	end
 
 	# System service is used for internal system helpers & to retrieve system level information
 	class KalturaSystemService < KalturaServiceBase
 		def initialize(client)
 			super(client)
-		end
-
-		# @return [bool]
-		def ping()
-			kparams = {}
-			client.queue_service_action_call('system', 'ping', 'bool', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# @return [bool]
-		def ping_database()
-			kparams = {}
-			client.queue_service_action_call('system', 'pingDatabase', 'bool', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
 		end
 
 		# @return [int]
@@ -4449,6 +4429,26 @@ module Kaltura
 		def get_version()
 			kparams = {}
 			client.queue_service_action_call('system', 'getVersion', 'string', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# @return [bool]
+		def ping()
+			kparams = {}
+			client.queue_service_action_call('system', 'ping', 'bool', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# @return [bool]
+		def ping_database()
+			kparams = {}
+			client.queue_service_action_call('system', 'pingDatabase', 'bool', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -4475,73 +4475,49 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Update content of thumbnail asset
 		# @return [KalturaThumbAsset]
-		def set_content(id, content_resource)
+		def add_from_image(entry_id, file_data)
 			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'contentResource', content_resource)
-			client.queue_service_action_call('thumbasset', 'setContent', 'KalturaThumbAsset', kparams)
+			kfiles = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kfiles, 'fileData', file_data)
+			client.queue_service_action_call('thumbasset', 'addFromImage', 'KalturaThumbAsset', kparams, kfiles)
 			if (client.is_multirequest)
 				return nil
 			end
 			return client.do_queue()
 		end
 
-		# Update thumbnail asset
 		# @return [KalturaThumbAsset]
-		def update(id, thumb_asset)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'thumbAsset', thumb_asset)
-			client.queue_service_action_call('thumbasset', 'update', 'KalturaThumbAsset', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Serves thumbnail by entry id and thumnail params id
-		# @return [file]
-		def serve_by_entry_id(entry_id, thumb_param_id=KalturaNotImplemented)
+		def add_from_url(entry_id, url)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'thumbParamId', thumb_param_id)
-			client.queue_service_action_call('thumbasset', 'serveByEntryId', 'file', kparams)
-			return client.get_serve_url()
+			client.add_param(kparams, 'url', url)
+			client.queue_service_action_call('thumbasset', 'addFromUrl', 'KalturaThumbAsset', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
 		end
 
-		# Serves thumbnail by its id
-		# @return [file]
-		def serve(thumb_asset_id, version=KalturaNotImplemented, thumb_params=KalturaNotImplemented, options=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'thumbAssetId', thumb_asset_id)
-			client.add_param(kparams, 'version', version)
-			client.add_param(kparams, 'thumbParams', thumb_params)
-			client.add_param(kparams, 'options', options)
-			client.queue_service_action_call('thumbasset', 'serve', 'file', kparams)
-			return client.get_serve_url()
-		end
-
-		# Tags the thumbnail as DEFAULT_THUMB and removes that tag from all other thumbnail assets of the entry.
-		# 	 Create a new file sync link on the entry thumbnail that points to the thumbnail asset file sync.
 		# @return []
-		def set_as_default(thumb_asset_id)
+		def delete(thumb_asset_id)
 			kparams = {}
 			client.add_param(kparams, 'thumbAssetId', thumb_asset_id)
-			client.queue_service_action_call('thumbasset', 'setAsDefault', '', kparams)
+			client.queue_service_action_call('thumbasset', 'delete', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
 			return client.do_queue()
 		end
 
-		# @return [KalturaThumbAsset]
-		def generate_by_entry_id(entry_id, dest_thumb_params_id)
+		# manually export an asset
+		# @return [KalturaFlavorAsset]
+		def export(asset_id, storage_profile_id)
 			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'destThumbParamsId', dest_thumb_params_id)
-			client.queue_service_action_call('thumbasset', 'generateByEntryId', 'KalturaThumbAsset', kparams)
+			client.add_param(kparams, 'assetId', asset_id)
+			client.add_param(kparams, 'storageProfileId', storage_profile_id)
+			client.queue_service_action_call('thumbasset', 'export', 'KalturaFlavorAsset', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -4562,10 +4538,11 @@ module Kaltura
 		end
 
 		# @return [KalturaThumbAsset]
-		def regenerate(thumb_asset_id)
+		def generate_by_entry_id(entry_id, dest_thumb_params_id)
 			kparams = {}
-			client.add_param(kparams, 'thumbAssetId', thumb_asset_id)
-			client.queue_service_action_call('thumbasset', 'regenerate', 'KalturaThumbAsset', kparams)
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'destThumbParamsId', dest_thumb_params_id)
+			client.queue_service_action_call('thumbasset', 'generateByEntryId', 'KalturaThumbAsset', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -4594,49 +4571,12 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# List Thumbnail Assets by filter and pager
-		# @return [KalturaThumbAssetListResponse]
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+		# Get remote storage existing paths for the asset
+		# @return [KalturaRemotePathListResponse]
+		def get_remote_paths(id)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('thumbasset', 'list', 'KalturaThumbAssetListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# @return [KalturaThumbAsset]
-		def add_from_url(entry_id, url)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'url', url)
-			client.queue_service_action_call('thumbasset', 'addFromUrl', 'KalturaThumbAsset', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# @return [KalturaThumbAsset]
-		def add_from_image(entry_id, file_data)
-			kparams = {}
-			kfiles = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kfiles, 'fileData', file_data)
-			client.queue_service_action_call('thumbasset', 'addFromImage', 'KalturaThumbAsset', kparams, kfiles)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# @return []
-		def delete(thumb_asset_id)
-			kparams = {}
-			client.add_param(kparams, 'thumbAssetId', thumb_asset_id)
-			client.queue_service_action_call('thumbasset', 'delete', '', kparams)
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('thumbasset', 'getRemotePaths', 'KalturaRemotePathListResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -4657,25 +4597,85 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Get remote storage existing paths for the asset
-		# @return [KalturaRemotePathListResponse]
-		def get_remote_paths(id)
+		# List Thumbnail Assets by filter and pager
+		# @return [KalturaThumbAssetListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('thumbasset', 'getRemotePaths', 'KalturaRemotePathListResponse', kparams)
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('thumbasset', 'list', 'KalturaThumbAssetListResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
 			return client.do_queue()
 		end
 
-		# manually export an asset
-		# @return [KalturaFlavorAsset]
-		def export(asset_id, storage_profile_id)
+		# @return [KalturaThumbAsset]
+		def regenerate(thumb_asset_id)
 			kparams = {}
-			client.add_param(kparams, 'assetId', asset_id)
-			client.add_param(kparams, 'storageProfileId', storage_profile_id)
-			client.queue_service_action_call('thumbasset', 'export', 'KalturaFlavorAsset', kparams)
+			client.add_param(kparams, 'thumbAssetId', thumb_asset_id)
+			client.queue_service_action_call('thumbasset', 'regenerate', 'KalturaThumbAsset', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Serves thumbnail by its id
+		# @return [file]
+		def serve(thumb_asset_id, version=KalturaNotImplemented, thumb_params=KalturaNotImplemented, options=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'thumbAssetId', thumb_asset_id)
+			client.add_param(kparams, 'version', version)
+			client.add_param(kparams, 'thumbParams', thumb_params)
+			client.add_param(kparams, 'options', options)
+			client.queue_service_action_call('thumbasset', 'serve', 'file', kparams)
+			return client.get_serve_url()
+		end
+
+		# Serves thumbnail by entry id and thumnail params id
+		# @return [file]
+		def serve_by_entry_id(entry_id, thumb_param_id=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'thumbParamId', thumb_param_id)
+			client.queue_service_action_call('thumbasset', 'serveByEntryId', 'file', kparams)
+			return client.get_serve_url()
+		end
+
+		# Tags the thumbnail as DEFAULT_THUMB and removes that tag from all other thumbnail assets of the entry.
+		# 	 Create a new file sync link on the entry thumbnail that points to the thumbnail asset file sync.
+		# @return []
+		def set_as_default(thumb_asset_id)
+			kparams = {}
+			client.add_param(kparams, 'thumbAssetId', thumb_asset_id)
+			client.queue_service_action_call('thumbasset', 'setAsDefault', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update content of thumbnail asset
+		# @return [KalturaThumbAsset]
+		def set_content(id, content_resource)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'contentResource', content_resource)
+			client.queue_service_action_call('thumbasset', 'setContent', 'KalturaThumbAsset', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update thumbnail asset
+		# @return [KalturaThumbAsset]
+		def update(id, thumb_asset)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'thumbAsset', thumb_asset)
+			client.queue_service_action_call('thumbasset', 'update', 'KalturaThumbAsset', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -4733,6 +4733,18 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Delete Thumb Params by ID
+		# @return []
+		def delete(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('thumbparams', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Get Thumb Params by ID
 		# @return [KalturaThumbParams]
 		def get(id)
@@ -4745,25 +4757,12 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Update Thumb Params by ID
-		# @return [KalturaThumbParams]
-		def update(id, thumb_params)
+		# Get Thumb Params by Conversion Profile ID
+		# @return [array]
+		def get_by_conversion_profile_id(conversion_profile_id)
 			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'thumbParams', thumb_params)
-			client.queue_service_action_call('thumbparams', 'update', 'KalturaThumbParams', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Delete Thumb Params by ID
-		# @return []
-		def delete(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('thumbparams', 'delete', '', kparams)
+			client.add_param(kparams, 'conversionProfileId', conversion_profile_id)
+			client.queue_service_action_call('thumbparams', 'getByConversionProfileId', 'KalturaThumbParams', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -4783,12 +4782,13 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Get Thumb Params by Conversion Profile ID
-		# @return [array]
-		def get_by_conversion_profile_id(conversion_profile_id)
+		# Update Thumb Params by ID
+		# @return [KalturaThumbParams]
+		def update(id, thumb_params)
 			kparams = {}
-			client.add_param(kparams, 'conversionProfileId', conversion_profile_id)
-			client.queue_service_action_call('thumbparams', 'getByConversionProfileId', 'KalturaThumbParams', kparams)
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'thumbParams', thumb_params)
+			client.queue_service_action_call('thumbparams', 'update', 'KalturaThumbParams', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -4815,25 +4815,12 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Update an existing UIConf
+		# Clone an existing UIConf
 		# @return [KalturaUiConf]
-		def update(id, ui_conf)
+		def clone(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'uiConf', ui_conf)
-			client.queue_service_action_call('uiconf', 'update', 'KalturaUiConf', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Retrieve a UIConf by id
-		# @return [KalturaUiConf]
-		def get(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('uiconf', 'get', 'KalturaUiConf', kparams)
+			client.queue_service_action_call('uiconf', 'clone', 'KalturaUiConf', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -4852,25 +4839,23 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Clone an existing UIConf
+		# Retrieve a UIConf by id
 		# @return [KalturaUiConf]
-		def clone(id)
+		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('uiconf', 'clone', 'KalturaUiConf', kparams)
+			client.queue_service_action_call('uiconf', 'get', 'KalturaUiConf', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
 			return client.do_queue()
 		end
 
-		# retrieve a list of available template UIConfs
-		# @return [KalturaUiConfListResponse]
-		def list_templates(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+		# Retrieve a list of all available versions by object type
+		# @return [array]
+		def get_available_types()
 			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('uiconf', 'listTemplates', 'KalturaUiConfListResponse', kparams)
+			client.queue_service_action_call('uiconf', 'getAvailableTypes', 'KalturaUiConfTypeInfo', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -4890,11 +4875,26 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Retrieve a list of all available versions by object type
-		# @return [array]
-		def get_available_types()
+		# retrieve a list of available template UIConfs
+		# @return [KalturaUiConfListResponse]
+		def list_templates(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
-			client.queue_service_action_call('uiconf', 'getAvailableTypes', 'KalturaUiConfTypeInfo', kparams)
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('uiconf', 'listTemplates', 'KalturaUiConfListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update an existing UIConf
+		# @return [KalturaUiConf]
+		def update(id, ui_conf)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'uiConf', ui_conf)
+			client.queue_service_action_call('uiconf', 'update', 'KalturaUiConf', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -4907,23 +4907,23 @@ module Kaltura
 			super(client)
 		end
 
-		# @return [string]
-		def upload(file_data)
+		# @return [KalturaUploadResponse]
+		def get_uploaded_file_token_by_file_name(file_name)
 			kparams = {}
-			kfiles = {}
-			client.add_param(kfiles, 'fileData', file_data)
-			client.queue_service_action_call('upload', 'upload', 'string', kparams, kfiles)
+			client.add_param(kparams, 'fileName', file_name)
+			client.queue_service_action_call('upload', 'getUploadedFileTokenByFileName', 'KalturaUploadResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
 			return client.do_queue()
 		end
 
-		# @return [KalturaUploadResponse]
-		def get_uploaded_file_token_by_file_name(file_name)
+		# @return [string]
+		def upload(file_data)
 			kparams = {}
-			client.add_param(kparams, 'fileName', file_name)
-			client.queue_service_action_call('upload', 'getUploadedFileTokenByFileName', 'KalturaUploadResponse', kparams)
+			kfiles = {}
+			client.add_param(kfiles, 'fileData', file_data)
+			client.queue_service_action_call('upload', 'upload', 'string', kparams, kfiles)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -4948,12 +4948,38 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Deletes the upload token by upload token id
+		# @return []
+		def delete(upload_token_id)
+			kparams = {}
+			client.add_param(kparams, 'uploadTokenId', upload_token_id)
+			client.queue_service_action_call('uploadtoken', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Get upload token by id
 		# @return [KalturaUploadToken]
 		def get(upload_token_id)
 			kparams = {}
 			client.add_param(kparams, 'uploadTokenId', upload_token_id)
 			client.queue_service_action_call('uploadtoken', 'get', 'KalturaUploadToken', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# List upload token by filter with pager support. 
+		# 	 When using a user session the service will be restricted to users objects only.
+		# @return [KalturaUploadTokenListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('uploadtoken', 'list', 'KalturaUploadTokenListResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -4984,32 +5010,6 @@ module Kaltura
 			end
 			return client.do_queue()
 		end
-
-		# Deletes the upload token by upload token id
-		# @return []
-		def delete(upload_token_id)
-			kparams = {}
-			client.add_param(kparams, 'uploadTokenId', upload_token_id)
-			client.queue_service_action_call('uploadtoken', 'delete', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# List upload token by filter with pager support. 
-		# 	 When using a user session the service will be restricted to users objects only.
-		# @return [KalturaUploadTokenListResponse]
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('uploadtoken', 'list', 'KalturaUploadTokenListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
 	end
 
 	class KalturaUserEntryService < KalturaServiceBase
@@ -5029,12 +5029,11 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# @return []
-		def update(id, user_entry)
+		# @return [KalturaUserEntry]
+		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'userEntry', user_entry)
-			client.queue_service_action_call('userentry', 'update', '', kparams)
+			client.queue_service_action_call('userentry', 'delete', 'KalturaUserEntry', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -5042,10 +5041,10 @@ module Kaltura
 		end
 
 		# @return [KalturaUserEntry]
-		def delete(id)
+		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('userentry', 'delete', 'KalturaUserEntry', kparams)
+			client.queue_service_action_call('userentry', 'get', 'KalturaUserEntry', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -5064,23 +5063,24 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# @return [KalturaUserEntry]
-		def get(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('userentry', 'get', 'KalturaUserEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Submits the quiz so that it's status will be submitted and calculates the score for the quiz
 		# @return [KalturaQuizUserEntry]
 		def submit_quiz(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
 			client.queue_service_action_call('userentry', 'submitQuiz', 'KalturaQuizUserEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# @return []
+		def update(id, user_entry)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'userEntry', user_entry)
+			client.queue_service_action_call('userentry', 'update', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -5106,25 +5106,12 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Retrieves a user role object using its ID.
+		# Creates a new user role object that is a duplicate of an existing role.
 		# @return [KalturaUserRole]
-		def get(user_role_id)
+		def clone(user_role_id)
 			kparams = {}
 			client.add_param(kparams, 'userRoleId', user_role_id)
-			client.queue_service_action_call('userrole', 'get', 'KalturaUserRole', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Updates an existing user role object.
-		# @return [KalturaUserRole]
-		def update(user_role_id, user_role)
-			kparams = {}
-			client.add_param(kparams, 'userRoleId', user_role_id)
-			client.add_param(kparams, 'userRole', user_role)
-			client.queue_service_action_call('userrole', 'update', 'KalturaUserRole', kparams)
+			client.queue_service_action_call('userrole', 'clone', 'KalturaUserRole', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -5137,6 +5124,18 @@ module Kaltura
 			kparams = {}
 			client.add_param(kparams, 'userRoleId', user_role_id)
 			client.queue_service_action_call('userrole', 'delete', 'KalturaUserRole', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Retrieves a user role object using its ID.
+		# @return [KalturaUserRole]
+		def get(user_role_id)
+			kparams = {}
+			client.add_param(kparams, 'userRoleId', user_role_id)
+			client.queue_service_action_call('userrole', 'get', 'KalturaUserRole', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -5158,12 +5157,13 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Creates a new user role object that is a duplicate of an existing role.
+		# Updates an existing user role object.
 		# @return [KalturaUserRole]
-		def clone(user_role_id)
+		def update(user_role_id, user_role)
 			kparams = {}
 			client.add_param(kparams, 'userRoleId', user_role_id)
-			client.queue_service_action_call('userrole', 'clone', 'KalturaUserRole', kparams)
+			client.add_param(kparams, 'userRole', user_role)
+			client.queue_service_action_call('userrole', 'update', 'KalturaUserRole', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -5191,14 +5191,66 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Updates an existing user object.
-		# 	 You can also use this action to update the userId.
+		# @return [KalturaBulkUpload]
+		def add_from_bulk_upload(file_data, bulk_upload_data=KalturaNotImplemented, bulk_upload_user_data=KalturaNotImplemented)
+			kparams = {}
+			kfiles = {}
+			client.add_param(kfiles, 'fileData', file_data)
+			client.add_param(kparams, 'bulkUploadData', bulk_upload_data)
+			client.add_param(kparams, 'bulkUploadUserData', bulk_upload_user_data)
+			client.queue_service_action_call('user', 'addFromBulkUpload', 'KalturaBulkUpload', kparams, kfiles)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Action which checks whther user login
+		# @return [bool]
+		def check_login_data_exists(filter)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.queue_service_action_call('user', 'checkLoginDataExists', 'bool', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Deletes a user from a partner account.
 		# @return [KalturaUser]
-		def update(user_id, user)
+		def delete(user_id)
 			kparams = {}
 			client.add_param(kparams, 'userId', user_id)
-			client.add_param(kparams, 'user', user)
-			client.queue_service_action_call('user', 'update', 'KalturaUser', kparams)
+			client.queue_service_action_call('user', 'delete', 'KalturaUser', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Disables a user's ability to log into a partner account using an email address and a password.
+		# 	 You may use either a userId or a loginId parameter for this action.
+		# @return [KalturaUser]
+		def disable_login(user_id=KalturaNotImplemented, login_id=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'userId', user_id)
+			client.add_param(kparams, 'loginId', login_id)
+			client.queue_service_action_call('user', 'disableLogin', 'KalturaUser', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Enables a user to log into a partner account using an email address and a password
+		# @return [KalturaUser]
+		def enable_login(user_id, login_id, password=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'userId', user_id)
+			client.add_param(kparams, 'loginId', login_id)
+			client.add_param(kparams, 'password', password)
+			client.queue_service_action_call('user', 'enableLogin', 'KalturaUser', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -5230,12 +5282,13 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Deletes a user from a partner account.
-		# @return [KalturaUser]
-		def delete(user_id)
+		# Index an entry by id.
+		# @return [string]
+		def index(id, should_update=true)
 			kparams = {}
-			client.add_param(kparams, 'userId', user_id)
-			client.queue_service_action_call('user', 'delete', 'KalturaUser', kparams)
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'shouldUpdate', should_update)
+			client.queue_service_action_call('user', 'index', 'string', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -5251,18 +5304,6 @@ module Kaltura
 			client.add_param(kparams, 'filter', filter)
 			client.add_param(kparams, 'pager', pager)
 			client.queue_service_action_call('user', 'list', 'KalturaUserListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Notifies that a user is banned from an account.
-		# @return []
-		def notify_ban(user_id)
-			kparams = {}
-			client.add_param(kparams, 'userId', user_id)
-			client.queue_service_action_call('user', 'notifyBan', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -5302,17 +5343,12 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Updates a user's login data: email, password, name.
+		# Notifies that a user is banned from an account.
 		# @return []
-		def update_login_data(old_login_id, password, new_login_id='', new_password='', new_first_name=KalturaNotImplemented, new_last_name=KalturaNotImplemented)
+		def notify_ban(user_id)
 			kparams = {}
-			client.add_param(kparams, 'oldLoginId', old_login_id)
-			client.add_param(kparams, 'password', password)
-			client.add_param(kparams, 'newLoginId', new_login_id)
-			client.add_param(kparams, 'newPassword', new_password)
-			client.add_param(kparams, 'newFirstName', new_first_name)
-			client.add_param(kparams, 'newLastName', new_last_name)
-			client.queue_service_action_call('user', 'updateLoginData', '', kparams)
+			client.add_param(kparams, 'userId', user_id)
+			client.queue_service_action_call('user', 'notifyBan', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -5344,67 +5380,31 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Enables a user to log into a partner account using an email address and a password
+		# Updates an existing user object.
+		# 	 You can also use this action to update the userId.
 		# @return [KalturaUser]
-		def enable_login(user_id, login_id, password=KalturaNotImplemented)
+		def update(user_id, user)
 			kparams = {}
 			client.add_param(kparams, 'userId', user_id)
-			client.add_param(kparams, 'loginId', login_id)
+			client.add_param(kparams, 'user', user)
+			client.queue_service_action_call('user', 'update', 'KalturaUser', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Updates a user's login data: email, password, name.
+		# @return []
+		def update_login_data(old_login_id, password, new_login_id='', new_password='', new_first_name=KalturaNotImplemented, new_last_name=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'oldLoginId', old_login_id)
 			client.add_param(kparams, 'password', password)
-			client.queue_service_action_call('user', 'enableLogin', 'KalturaUser', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Disables a user's ability to log into a partner account using an email address and a password.
-		# 	 You may use either a userId or a loginId parameter for this action.
-		# @return [KalturaUser]
-		def disable_login(user_id=KalturaNotImplemented, login_id=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'userId', user_id)
-			client.add_param(kparams, 'loginId', login_id)
-			client.queue_service_action_call('user', 'disableLogin', 'KalturaUser', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Index an entry by id.
-		# @return [string]
-		def index(id, should_update=true)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'shouldUpdate', should_update)
-			client.queue_service_action_call('user', 'index', 'string', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# @return [KalturaBulkUpload]
-		def add_from_bulk_upload(file_data, bulk_upload_data=KalturaNotImplemented, bulk_upload_user_data=KalturaNotImplemented)
-			kparams = {}
-			kfiles = {}
-			client.add_param(kfiles, 'fileData', file_data)
-			client.add_param(kparams, 'bulkUploadData', bulk_upload_data)
-			client.add_param(kparams, 'bulkUploadUserData', bulk_upload_user_data)
-			client.queue_service_action_call('user', 'addFromBulkUpload', 'KalturaBulkUpload', kparams, kfiles)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Action which checks whther user login
-		# @return [bool]
-		def check_login_data_exists(filter)
-			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.queue_service_action_call('user', 'checkLoginDataExists', 'bool', kparams)
+			client.add_param(kparams, 'newLoginId', new_login_id)
+			client.add_param(kparams, 'newPassword', new_password)
+			client.add_param(kparams, 'newFirstName', new_first_name)
+			client.add_param(kparams, 'newLastName', new_last_name)
+			client.queue_service_action_call('user', 'updateLoginData', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -5431,13 +5431,13 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Update exisiting widget
+		# Add widget based on existing widget.
+		# 	 Must provide valid sourceWidgetId
 		# @return [KalturaWidget]
-		def update(id, widget)
+		def clone(widget)
 			kparams = {}
-			client.add_param(kparams, 'id', id)
 			client.add_param(kparams, 'widget', widget)
-			client.queue_service_action_call('widget', 'update', 'KalturaWidget', kparams)
+			client.queue_service_action_call('widget', 'clone', 'KalturaWidget', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -5456,19 +5456,6 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Add widget based on existing widget.
-		# 	 Must provide valid sourceWidgetId
-		# @return [KalturaWidget]
-		def clone(widget)
-			kparams = {}
-			client.add_param(kparams, 'widget', widget)
-			client.queue_service_action_call('widget', 'clone', 'KalturaWidget', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Retrieve a list of available widget depends on the filter given
 		# @return [KalturaWidgetListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
@@ -5476,6 +5463,19 @@ module Kaltura
 			client.add_param(kparams, 'filter', filter)
 			client.add_param(kparams, 'pager', pager)
 			client.queue_service_action_call('widget', 'list', 'KalturaWidgetListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update exisiting widget
+		# @return [KalturaWidget]
+		def update(id, widget)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'widget', widget)
+			client.queue_service_action_call('widget', 'update', 'KalturaWidget', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -5918,7 +5918,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:17-02-16'
+			self.client_tag = 'ruby:17-02-17'
 			self.api_version = '3.3.0'
 		end
 		

@@ -171,6 +171,76 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# @return []
+		def delete(attachment_asset_id)
+			kparams = {}
+			client.add_param(kparams, 'attachmentAssetId', attachment_asset_id)
+			client.queue_service_action_call('attachment_attachmentasset', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# @return [KalturaAttachmentAsset]
+		def get(attachment_asset_id)
+			kparams = {}
+			client.add_param(kparams, 'attachmentAssetId', attachment_asset_id)
+			client.queue_service_action_call('attachment_attachmentasset', 'get', 'KalturaAttachmentAsset', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Get remote storage existing paths for the asset
+		# @return [KalturaRemotePathListResponse]
+		def get_remote_paths(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('attachment_attachmentasset', 'getRemotePaths', 'KalturaRemotePathListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Get download URL for the asset
+		# @return [string]
+		def get_url(id, storage_id=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'storageId', storage_id)
+			client.queue_service_action_call('attachment_attachmentasset', 'getUrl', 'string', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# List attachment Assets by filter and pager
+		# @return [KalturaAttachmentAssetListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('attachment_attachmentasset', 'list', 'KalturaAttachmentAssetListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Serves attachment by its id
+		# @return [file]
+		def serve(attachment_asset_id, serve_options=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'attachmentAssetId', attachment_asset_id)
+			client.add_param(kparams, 'serveOptions', serve_options)
+			client.queue_service_action_call('attachment_attachmentasset', 'serve', 'file', kparams)
+			return client.get_serve_url()
+		end
+
 		# Update content of attachment asset
 		# @return [KalturaAttachmentAsset]
 		def set_content(id, content_resource)
@@ -191,76 +261,6 @@ module Kaltura
 			client.add_param(kparams, 'id', id)
 			client.add_param(kparams, 'attachmentAsset', attachment_asset)
 			client.queue_service_action_call('attachment_attachmentasset', 'update', 'KalturaAttachmentAsset', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Get download URL for the asset
-		# @return [string]
-		def get_url(id, storage_id=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'storageId', storage_id)
-			client.queue_service_action_call('attachment_attachmentasset', 'getUrl', 'string', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Get remote storage existing paths for the asset
-		# @return [KalturaRemotePathListResponse]
-		def get_remote_paths(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('attachment_attachmentasset', 'getRemotePaths', 'KalturaRemotePathListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Serves attachment by its id
-		# @return [file]
-		def serve(attachment_asset_id, serve_options=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'attachmentAssetId', attachment_asset_id)
-			client.add_param(kparams, 'serveOptions', serve_options)
-			client.queue_service_action_call('attachment_attachmentasset', 'serve', 'file', kparams)
-			return client.get_serve_url()
-		end
-
-		# @return [KalturaAttachmentAsset]
-		def get(attachment_asset_id)
-			kparams = {}
-			client.add_param(kparams, 'attachmentAssetId', attachment_asset_id)
-			client.queue_service_action_call('attachment_attachmentasset', 'get', 'KalturaAttachmentAsset', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# List attachment Assets by filter and pager
-		# @return [KalturaAttachmentAssetListResponse]
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('attachment_attachmentasset', 'list', 'KalturaAttachmentAssetListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# @return []
-		def delete(attachment_asset_id)
-			kparams = {}
-			client.add_param(kparams, 'attachmentAssetId', attachment_asset_id)
-			client.queue_service_action_call('attachment_attachmentasset', 'delete', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

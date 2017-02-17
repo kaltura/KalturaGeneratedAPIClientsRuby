@@ -309,49 +309,22 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Update content of caption asset
-		# @return [KalturaCaptionAsset]
-		def set_content(id, content_resource)
+		# @return []
+		def delete(caption_asset_id)
 			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'contentResource', content_resource)
-			client.queue_service_action_call('caption_captionasset', 'setContent', 'KalturaCaptionAsset', kparams)
+			client.add_param(kparams, 'captionAssetId', caption_asset_id)
+			client.queue_service_action_call('caption_captionasset', 'delete', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
 			return client.do_queue()
 		end
 
-		# Update caption asset
 		# @return [KalturaCaptionAsset]
-		def update(id, caption_asset)
+		def get(caption_asset_id)
 			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'captionAsset', caption_asset)
-			client.queue_service_action_call('caption_captionasset', 'update', 'KalturaCaptionAsset', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Serves caption by entry id and thumnail params id
-		# @return [file]
-		def serve_by_entry_id(entry_id, caption_param_id=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'captionParamId', caption_param_id)
-			client.queue_service_action_call('caption_captionasset', 'serveByEntryId', 'file', kparams)
-			return client.get_serve_url()
-		end
-
-		# Get download URL for the asset
-		# @return [string]
-		def get_url(id, storage_id=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'storageId', storage_id)
-			client.queue_service_action_call('caption_captionasset', 'getUrl', 'string', kparams)
+			client.add_param(kparams, 'captionAssetId', caption_asset_id)
+			client.queue_service_action_call('caption_captionasset', 'get', 'KalturaCaptionAsset', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -370,12 +343,48 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Get download URL for the asset
+		# @return [string]
+		def get_url(id, storage_id=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'storageId', storage_id)
+			client.queue_service_action_call('caption_captionasset', 'getUrl', 'string', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# List caption Assets by filter and pager
+		# @return [KalturaCaptionAssetListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('caption_captionasset', 'list', 'KalturaCaptionAssetListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Serves caption by its id
 		# @return [file]
 		def serve(caption_asset_id)
 			kparams = {}
 			client.add_param(kparams, 'captionAssetId', caption_asset_id)
 			client.queue_service_action_call('caption_captionasset', 'serve', 'file', kparams)
+			return client.get_serve_url()
+		end
+
+		# Serves caption by entry id and thumnail params id
+		# @return [file]
+		def serve_by_entry_id(entry_id, caption_param_id=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'captionParamId', caption_param_id)
+			client.queue_service_action_call('caption_captionasset', 'serveByEntryId', 'file', kparams)
 			return client.get_serve_url()
 		end
 
@@ -403,35 +412,26 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Update content of caption asset
 		# @return [KalturaCaptionAsset]
-		def get(caption_asset_id)
+		def set_content(id, content_resource)
 			kparams = {}
-			client.add_param(kparams, 'captionAssetId', caption_asset_id)
-			client.queue_service_action_call('caption_captionasset', 'get', 'KalturaCaptionAsset', kparams)
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'contentResource', content_resource)
+			client.queue_service_action_call('caption_captionasset', 'setContent', 'KalturaCaptionAsset', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
 			return client.do_queue()
 		end
 
-		# List caption Assets by filter and pager
-		# @return [KalturaCaptionAssetListResponse]
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+		# Update caption asset
+		# @return [KalturaCaptionAsset]
+		def update(id, caption_asset)
 			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('caption_captionasset', 'list', 'KalturaCaptionAssetListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# @return []
-		def delete(caption_asset_id)
-			kparams = {}
-			client.add_param(kparams, 'captionAssetId', caption_asset_id)
-			client.queue_service_action_call('caption_captionasset', 'delete', '', kparams)
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'captionAsset', caption_asset)
+			client.queue_service_action_call('caption_captionasset', 'update', 'KalturaCaptionAsset', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -457,37 +457,24 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Get Caption Params by ID
-		# @return [KalturaCaptionParams]
-		def get(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('caption_captionparams', 'get', 'KalturaCaptionParams', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update Caption Params by ID
-		# @return [KalturaCaptionParams]
-		def update(id, caption_params)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'captionParams', caption_params)
-			client.queue_service_action_call('caption_captionparams', 'update', 'KalturaCaptionParams', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Delete Caption Params by ID
 		# @return []
 		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
 			client.queue_service_action_call('caption_captionparams', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Get Caption Params by ID
+		# @return [KalturaCaptionParams]
+		def get(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('caption_captionparams', 'get', 'KalturaCaptionParams', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -501,6 +488,19 @@ module Kaltura
 			client.add_param(kparams, 'filter', filter)
 			client.add_param(kparams, 'pager', pager)
 			client.queue_service_action_call('caption_captionparams', 'list', 'KalturaCaptionParamsListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update Caption Params by ID
+		# @return [KalturaCaptionParams]
+		def update(id, caption_params)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'captionParams', caption_params)
+			client.queue_service_action_call('caption_captionparams', 'update', 'KalturaCaptionParams', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

@@ -124,33 +124,22 @@ module Kaltura
 		end
 
 		# @return [bool]
-		def like(entry_id)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('like_like', 'like', 'bool', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# @return [bool]
-		def unlike(entry_id)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('like_like', 'unlike', 'bool', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# @return [bool]
 		def check_like_exists(entry_id, user_id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
 			client.add_param(kparams, 'userId', user_id)
 			client.queue_service_action_call('like_like', 'checkLikeExists', 'bool', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# @return [bool]
+		def like(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('like_like', 'like', 'bool', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -163,6 +152,17 @@ module Kaltura
 			client.add_param(kparams, 'filter', filter)
 			client.add_param(kparams, 'pager', pager)
 			client.queue_service_action_call('like_like', 'list', 'KalturaLikeListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# @return [bool]
+		def unlike(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('like_like', 'unlike', 'bool', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

@@ -836,6 +836,22 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Allows you to add a metadata xml data from remote URL.
+		# 	 Enables different permissions than addFromUrl action.
+		# @return [KalturaMetadata]
+		def add_from_bulk(metadata_profile_id, object_type, object_id, url)
+			kparams = {}
+			client.add_param(kparams, 'metadataProfileId', metadata_profile_id)
+			client.add_param(kparams, 'objectType', object_type)
+			client.add_param(kparams, 'objectId', object_id)
+			client.add_param(kparams, 'url', url)
+			client.queue_service_action_call('metadata_metadata', 'addFromBulk', 'KalturaMetadata', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Allows you to add a metadata object and metadata file associated with Kaltura object
 		# @return [KalturaMetadata]
 		def add_from_file(metadata_profile_id, object_type, object_id, xml_file)
@@ -867,16 +883,12 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Allows you to add a metadata xml data from remote URL.
-		# 	 Enables different permissions than addFromUrl action.
-		# @return [KalturaMetadata]
-		def add_from_bulk(metadata_profile_id, object_type, object_id, url)
+		# Delete an existing metadata
+		# @return []
+		def delete(id)
 			kparams = {}
-			client.add_param(kparams, 'metadataProfileId', metadata_profile_id)
-			client.add_param(kparams, 'objectType', object_type)
-			client.add_param(kparams, 'objectId', object_id)
-			client.add_param(kparams, 'url', url)
-			client.queue_service_action_call('metadata_metadata', 'addFromBulk', 'KalturaMetadata', kparams)
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('metadata_metadata', 'delete', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -893,6 +905,55 @@ module Kaltura
 				return nil
 			end
 			return client.do_queue()
+		end
+
+		# Index metadata by id, will also index the related object
+		# @return [int]
+		def index(id, should_update)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'shouldUpdate', should_update)
+			client.queue_service_action_call('metadata_metadata', 'index', 'int', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Mark existing metadata as invalid
+		# 	 Used by batch metadata transform
+		# @return []
+		def invalidate(id, version=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'version', version)
+			client.queue_service_action_call('metadata_metadata', 'invalidate', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# List metadata objects by filter and pager
+		# @return [KalturaMetadataListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('metadata_metadata', 'list', 'KalturaMetadataListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Serves metadata XML file
+		# @return [file]
+		def serve(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('metadata_metadata', 'serve', 'file', kparams)
+			return client.get_serve_url()
 		end
 
 		# Update an existing metadata object with new XML content
@@ -921,67 +982,6 @@ module Kaltura
 				return nil
 			end
 			return client.do_queue()
-		end
-
-		# List metadata objects by filter and pager
-		# @return [KalturaMetadataListResponse]
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('metadata_metadata', 'list', 'KalturaMetadataListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Delete an existing metadata
-		# @return []
-		def delete(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('metadata_metadata', 'delete', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Mark existing metadata as invalid
-		# 	 Used by batch metadata transform
-		# @return []
-		def invalidate(id, version=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'version', version)
-			client.queue_service_action_call('metadata_metadata', 'invalidate', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Index metadata by id, will also index the related object
-		# @return [int]
-		def index(id, should_update)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'shouldUpdate', should_update)
-			client.queue_service_action_call('metadata_metadata', 'index', 'int', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Serves metadata XML file
-		# @return [file]
-		def serve(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('metadata_metadata', 'serve', 'file', kparams)
-			return client.get_serve_url()
 		end
 
 		# Action transforms current metadata object XML using a provided XSL.
@@ -1034,27 +1034,24 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Retrieve a metadata profile object by id
-		# @return [KalturaMetadataProfile]
-		def get(id)
+		# Delete an existing metadata profile
+		# @return []
+		def delete(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('metadata_metadataprofile', 'get', 'KalturaMetadataProfile', kparams)
+			client.queue_service_action_call('metadata_metadataprofile', 'delete', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
 			return client.do_queue()
 		end
 
-		# Update an existing metadata object
+		# Retrieve a metadata profile object by id
 		# @return [KalturaMetadataProfile]
-		def update(id, metadata_profile, xsd_data=KalturaNotImplemented, views_data=KalturaNotImplemented)
+		def get(id)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
-			client.add_param(kparams, 'metadataProfile', metadata_profile)
-			client.add_param(kparams, 'xsdData', xsd_data)
-			client.add_param(kparams, 'viewsData', views_data)
-			client.queue_service_action_call('metadata_metadataprofile', 'update', 'KalturaMetadataProfile', kparams)
+			client.queue_service_action_call('metadata_metadataprofile', 'get', 'KalturaMetadataProfile', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1086,18 +1083,6 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Delete an existing metadata profile
-		# @return []
-		def delete(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('metadata_metadataprofile', 'delete', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Update an existing metadata object definition file
 		# @return [KalturaMetadataProfile]
 		def revert(id, to_version)
@@ -1105,48 +1090,6 @@ module Kaltura
 			client.add_param(kparams, 'id', id)
 			client.add_param(kparams, 'toVersion', to_version)
 			client.queue_service_action_call('metadata_metadataprofile', 'revert', 'KalturaMetadataProfile', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update an existing metadata object definition file
-		# @return [KalturaMetadataProfile]
-		def update_definition_from_file(id, xsd_file)
-			kparams = {}
-			kfiles = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kfiles, 'xsdFile', xsd_file)
-			client.queue_service_action_call('metadata_metadataprofile', 'updateDefinitionFromFile', 'KalturaMetadataProfile', kparams, kfiles)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update an existing metadata object views file
-		# @return [KalturaMetadataProfile]
-		def update_views_from_file(id, views_file)
-			kparams = {}
-			kfiles = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kfiles, 'viewsFile', views_file)
-			client.queue_service_action_call('metadata_metadataprofile', 'updateViewsFromFile', 'KalturaMetadataProfile', kparams, kfiles)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update an existing metadata object xslt file
-		# @return [KalturaMetadataProfile]
-		def update_transformation_from_file(id, xslt_file)
-			kparams = {}
-			kfiles = {}
-			client.add_param(kparams, 'id', id)
-			client.add_param(kfiles, 'xsltFile', xslt_file)
-			client.queue_service_action_call('metadata_metadataprofile', 'updateTransformationFromFile', 'KalturaMetadataProfile', kparams, kfiles)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1169,6 +1112,63 @@ module Kaltura
 			client.add_param(kparams, 'id', id)
 			client.queue_service_action_call('metadata_metadataprofile', 'serveView', 'file', kparams)
 			return client.get_serve_url()
+		end
+
+		# Update an existing metadata object
+		# @return [KalturaMetadataProfile]
+		def update(id, metadata_profile, xsd_data=KalturaNotImplemented, views_data=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'metadataProfile', metadata_profile)
+			client.add_param(kparams, 'xsdData', xsd_data)
+			client.add_param(kparams, 'viewsData', views_data)
+			client.queue_service_action_call('metadata_metadataprofile', 'update', 'KalturaMetadataProfile', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update an existing metadata object definition file
+		# @return [KalturaMetadataProfile]
+		def update_definition_from_file(id, xsd_file)
+			kparams = {}
+			kfiles = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kfiles, 'xsdFile', xsd_file)
+			client.queue_service_action_call('metadata_metadataprofile', 'updateDefinitionFromFile', 'KalturaMetadataProfile', kparams, kfiles)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update an existing metadata object xslt file
+		# @return [KalturaMetadataProfile]
+		def update_transformation_from_file(id, xslt_file)
+			kparams = {}
+			kfiles = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kfiles, 'xsltFile', xslt_file)
+			client.queue_service_action_call('metadata_metadataprofile', 'updateTransformationFromFile', 'KalturaMetadataProfile', kparams, kfiles)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update an existing metadata object views file
+		# @return [KalturaMetadataProfile]
+		def update_views_from_file(id, views_file)
+			kparams = {}
+			kfiles = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kfiles, 'viewsFile', views_file)
+			client.queue_service_action_call('metadata_metadataprofile', 'updateViewsFromFile', 'KalturaMetadataProfile', kparams, kfiles)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
 		end
 	end
 

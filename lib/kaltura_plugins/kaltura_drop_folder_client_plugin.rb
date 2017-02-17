@@ -1186,37 +1186,24 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Retrieve a KalturaDropFolder object by ID
-		# @return [KalturaDropFolder]
-		def get(drop_folder_id)
-			kparams = {}
-			client.add_param(kparams, 'dropFolderId', drop_folder_id)
-			client.queue_service_action_call('dropfolder_dropfolder', 'get', 'KalturaDropFolder', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Update an existing KalturaDropFolder object
-		# @return [KalturaDropFolder]
-		def update(drop_folder_id, drop_folder)
-			kparams = {}
-			client.add_param(kparams, 'dropFolderId', drop_folder_id)
-			client.add_param(kparams, 'dropFolder', drop_folder)
-			client.queue_service_action_call('dropfolder_dropfolder', 'update', 'KalturaDropFolder', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Mark the KalturaDropFolder object as deleted
 		# @return [KalturaDropFolder]
 		def delete(drop_folder_id)
 			kparams = {}
 			client.add_param(kparams, 'dropFolderId', drop_folder_id)
 			client.queue_service_action_call('dropfolder_dropfolder', 'delete', 'KalturaDropFolder', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Retrieve a KalturaDropFolder object by ID
+		# @return [KalturaDropFolder]
+		def get(drop_folder_id)
+			kparams = {}
+			client.add_param(kparams, 'dropFolderId', drop_folder_id)
+			client.queue_service_action_call('dropfolder_dropfolder', 'get', 'KalturaDropFolder', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1230,6 +1217,19 @@ module Kaltura
 			client.add_param(kparams, 'filter', filter)
 			client.add_param(kparams, 'pager', pager)
 			client.queue_service_action_call('dropfolder_dropfolder', 'list', 'KalturaDropFolderListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update an existing KalturaDropFolder object
+		# @return [KalturaDropFolder]
+		def update(drop_folder_id, drop_folder)
+			kparams = {}
+			client.add_param(kparams, 'dropFolderId', drop_folder_id)
+			client.add_param(kparams, 'dropFolder', drop_folder)
+			client.queue_service_action_call('dropfolder_dropfolder', 'update', 'KalturaDropFolder', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1255,12 +1255,49 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Mark the KalturaDropFolderFile object as deleted
+		# @return [KalturaDropFolderFile]
+		def delete(drop_folder_file_id)
+			kparams = {}
+			client.add_param(kparams, 'dropFolderFileId', drop_folder_file_id)
+			client.queue_service_action_call('dropfolder_dropfolderfile', 'delete', 'KalturaDropFolderFile', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Retrieve a KalturaDropFolderFile object by ID
 		# @return [KalturaDropFolderFile]
 		def get(drop_folder_file_id)
 			kparams = {}
 			client.add_param(kparams, 'dropFolderFileId', drop_folder_file_id)
 			client.queue_service_action_call('dropfolder_dropfolderfile', 'get', 'KalturaDropFolderFile', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Set the KalturaDropFolderFile status to ignore (KalturaDropFolderFileStatus::IGNORE)
+		# @return [KalturaDropFolderFile]
+		def ignore(drop_folder_file_id)
+			kparams = {}
+			client.add_param(kparams, 'dropFolderFileId', drop_folder_file_id)
+			client.queue_service_action_call('dropfolder_dropfolderfile', 'ignore', 'KalturaDropFolderFile', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# List KalturaDropFolderFile objects
+		# @return [KalturaDropFolderFileListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('dropfolder_dropfolderfile', 'list', 'KalturaDropFolderFileListResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1287,43 +1324,6 @@ module Kaltura
 			client.add_param(kparams, 'dropFolderFileId', drop_folder_file_id)
 			client.add_param(kparams, 'status', status)
 			client.queue_service_action_call('dropfolder_dropfolderfile', 'updateStatus', 'KalturaDropFolderFile', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Mark the KalturaDropFolderFile object as deleted
-		# @return [KalturaDropFolderFile]
-		def delete(drop_folder_file_id)
-			kparams = {}
-			client.add_param(kparams, 'dropFolderFileId', drop_folder_file_id)
-			client.queue_service_action_call('dropfolder_dropfolderfile', 'delete', 'KalturaDropFolderFile', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# List KalturaDropFolderFile objects
-		# @return [KalturaDropFolderFileListResponse]
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('dropfolder_dropfolderfile', 'list', 'KalturaDropFolderFileListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Set the KalturaDropFolderFile status to ignore (KalturaDropFolderFileStatus::IGNORE)
-		# @return [KalturaDropFolderFile]
-		def ignore(drop_folder_file_id)
-			kparams = {}
-			client.add_param(kparams, 'dropFolderFileId', drop_folder_file_id)
-			client.queue_service_action_call('dropfolder_dropfolderfile', 'ignore', 'KalturaDropFolderFile', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

@@ -1198,12 +1198,40 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# freeExclusive KalturaDropFolder object
+		# @return [KalturaDropFolder]
+		def free_exclusive_drop_folder(drop_folder_id, status, error_code=KalturaNotImplemented, error_description=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'dropFolderId', drop_folder_id)
+			client.add_param(kparams, 'status', status)
+			client.add_param(kparams, 'errorCode', error_code)
+			client.add_param(kparams, 'errorDescription', error_description)
+			client.queue_service_action_call('dropfolder_dropfolder', 'freeExclusiveDropFolder', 'KalturaDropFolder', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Retrieve a KalturaDropFolder object by ID
 		# @return [KalturaDropFolder]
 		def get(drop_folder_id)
 			kparams = {}
 			client.add_param(kparams, 'dropFolderId', drop_folder_id)
 			client.queue_service_action_call('dropfolder_dropfolder', 'get', 'KalturaDropFolder', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# getExclusive KalturaDropFolder object
+		# @return [KalturaDropFolder]
+		def get_exclusive_drop_folder(tag, max_time)
+			kparams = {}
+			client.add_param(kparams, 'tag', tag)
+			client.add_param(kparams, 'maxTime', max_time)
+			client.queue_service_action_call('dropfolder_dropfolder', 'getExclusiveDropFolder', 'KalturaDropFolder', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

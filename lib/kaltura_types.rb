@@ -2954,6 +2954,10 @@ module Kaltura
 		# Defines the tags that should be used to define 'collective'/group/multi-flavor processing,
 		# 	 like 'mbr' or 'ism'
 		attr_accessor :collection_tags
+		# JSON string with array of "condition,profile-id" pairs.
+		attr_accessor :conditional_profiles
+		# When set, the ExtractMedia job should detect the source file GOP using this value as the max calculated period
+		attr_accessor :detect_gop
 
 		def id=(val)
 			@id = val.to_i
@@ -2981,6 +2985,9 @@ module Kaltura
 		end
 		def calculate_complexity=(val)
 			@calculate_complexity = val.to_i
+		end
+		def detect_gop=(val)
+			@detect_gop = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -3047,6 +3054,12 @@ module Kaltura
 			end
 			if xml_element.elements['collectionTags'] != nil
 				self.collection_tags = xml_element.elements['collectionTags'].text
+			end
+			if xml_element.elements['conditionalProfiles'] != nil
+				self.conditional_profiles = xml_element.elements['conditionalProfiles'].text
+			end
+			if xml_element.elements['detectGOP'] != nil
+				self.detect_gop = xml_element.elements['detectGOP'].text
 			end
 		end
 
@@ -4365,6 +4378,7 @@ module Kaltura
 		attr_accessor :multi_stream
 		attr_accessor :anamorphic_pixels
 		attr_accessor :is_avoid_forced_key_frames
+		attr_accessor :forced_key_frames_mode
 		attr_accessor :is_crop_imx
 		attr_accessor :optimization_policy
 		attr_accessor :max_frame_rate
@@ -4436,6 +4450,9 @@ module Kaltura
 		end
 		def is_avoid_forced_key_frames=(val)
 			@is_avoid_forced_key_frames = val.to_i
+		end
+		def forced_key_frames_mode=(val)
+			@forced_key_frames_mode = val.to_i
 		end
 		def is_crop_imx=(val)
 			@is_crop_imx = val.to_i
@@ -4547,6 +4564,9 @@ module Kaltura
 			end
 			if xml_element.elements['isAvoidForcedKeyFrames'] != nil
 				self.is_avoid_forced_key_frames = xml_element.elements['isAvoidForcedKeyFrames'].text
+			end
+			if xml_element.elements['forcedKeyFramesMode'] != nil
+				self.forced_key_frames_mode = xml_element.elements['forcedKeyFramesMode'].text
 			end
 			if xml_element.elements['isCropIMX'] != nil
 				self.is_crop_imx = xml_element.elements['isCropIMX'].text
@@ -5135,6 +5155,7 @@ module Kaltura
 		attr_accessor :is_fast_start
 		attr_accessor :content_streams
 		attr_accessor :complexity_value
+		attr_accessor :max_gop
 
 		def id=(val)
 			@id = val.to_i
@@ -5198,6 +5219,9 @@ module Kaltura
 		end
 		def complexity_value=(val)
 			@complexity_value = val.to_i
+		end
+		def max_gop=(val)
+			@max_gop = val.to_f
 		end
 
 		def from_xml(xml_element)
@@ -5303,6 +5327,9 @@ module Kaltura
 			end
 			if xml_element.elements['complexityValue'] != nil
 				self.complexity_value = xml_element.elements['complexityValue'].text
+			end
+			if xml_element.elements['maxGOP'] != nil
+				self.max_gop = xml_element.elements['maxGOP'].text
 			end
 		end
 
@@ -15467,12 +15494,16 @@ module Kaltura
 		attr_accessor :extract_id3tags
 		# The data output file
 		attr_accessor :dest_data_file_path
+		attr_accessor :detect_gop
 
 		def calculate_complexity=(val)
 			@calculate_complexity = to_b(val)
 		end
 		def extract_id3tags=(val)
 			@extract_id3tags = to_b(val)
+		end
+		def detect_gop=(val)
+			@detect_gop = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -15488,6 +15519,9 @@ module Kaltura
 			end
 			if xml_element.elements['destDataFilePath'] != nil
 				self.dest_data_file_path = xml_element.elements['destDataFilePath'].text
+			end
+			if xml_element.elements['detectGOP'] != nil
+				self.detect_gop = xml_element.elements['detectGOP'].text
 			end
 		end
 

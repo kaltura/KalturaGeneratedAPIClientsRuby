@@ -14197,6 +14197,7 @@ module Kaltura
 
 	class KalturaUrlTokenizerKs < KalturaUrlTokenizer
 		attr_accessor :use_path
+		attr_accessor :additional_uris
 
 		def use_path=(val)
 			@use_path = to_b(val)
@@ -14206,6 +14207,9 @@ module Kaltura
 			super
 			if xml_element.elements['usePath'] != nil
 				self.use_path = xml_element.elements['usePath'].text
+			end
+			if xml_element.elements['additionalUris'] != nil
+				self.additional_uris = xml_element.elements['additionalUris'].text
 			end
 		end
 

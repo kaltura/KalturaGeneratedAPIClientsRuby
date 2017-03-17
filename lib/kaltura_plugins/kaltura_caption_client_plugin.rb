@@ -56,6 +56,7 @@ module Kaltura
 		SRT = "1"
 		DFXP = "2"
 		WEBVTT = "3"
+		CAP = "4"
 	end
 
 	class KalturaCaptionAsset < KalturaAsset

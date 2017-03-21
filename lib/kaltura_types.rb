@@ -12164,7 +12164,14 @@ module Kaltura
 		attr_accessor :feed_description
 		# feed landing page (i.e publisher website)
 		attr_accessor :feed_landing_page
+		# entry filter
+		attr_accessor :entry_filter
+		# page size
+		attr_accessor :page_size
 
+		def page_size=(val)
+			@page_size = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
@@ -12173,6 +12180,12 @@ module Kaltura
 			end
 			if xml_element.elements['feedLandingPage'] != nil
 				self.feed_landing_page = xml_element.elements['feedLandingPage'].text
+			end
+			if xml_element.elements['entryFilter'] != nil
+				self.entry_filter = KalturaClientBase.object_from_xml(xml_element.elements['entryFilter'], 'KalturaBaseEntryFilter')
+			end
+			if xml_element.elements['pageSize'] != nil
+				self.page_size = xml_element.elements['pageSize'].text
 			end
 		end
 

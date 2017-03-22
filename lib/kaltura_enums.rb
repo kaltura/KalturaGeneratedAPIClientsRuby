@@ -629,6 +629,8 @@ module Kaltura
 		TUBE_MOGUL = 4
 		KALTURA = 5
 		KALTURA_XSLT = 6
+		ROKU_DIRECT_PUBLISHER = 7
+		OPERA_TV_SNAP = 8
 	end
 
 	class KalturaThumbAssetStatus

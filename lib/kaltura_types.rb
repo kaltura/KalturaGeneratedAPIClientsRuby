@@ -16913,6 +16913,15 @@ module Kaltura
 
 	end
 
+	class KalturaConstantXsltSyndicationFeed < KalturaGenericXsltSyndicationFeed
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaConversionProfileFilter < KalturaConversionProfileBaseFilter
 
 
@@ -17567,12 +17576,20 @@ module Kaltura
 	class KalturaServerFileResource < KalturaDataCenterContentResource
 		# Full path to the local file
 		attr_accessor :local_file_path
+		# Should keep original file (false = mv, true = cp)
+		attr_accessor :keep_original_file
 
+		def keep_original_file=(val)
+			@keep_original_file = to_b(val)
+		end
 
 		def from_xml(xml_element)
 			super
 			if xml_element.elements['localFilePath'] != nil
 				self.local_file_path = xml_element.elements['localFilePath'].text
+			end
+			if xml_element.elements['keepOriginalFile'] != nil
+				self.keep_original_file = xml_element.elements['keepOriginalFile'].text
 			end
 		end
 
@@ -17958,6 +17975,15 @@ module Kaltura
 
 	end
 
+	class KalturaOperaSyndicationFeed < KalturaConstantXsltSyndicationFeed
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaPlaylistBaseFilter < KalturaBaseEntryFilter
 
 
@@ -17968,6 +17994,15 @@ module Kaltura
 	end
 
 	class KalturaQuizUserEntryBaseFilter < KalturaUserEntryFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaRokuSyndicationFeed < KalturaConstantXsltSyndicationFeed
 
 
 		def from_xml(xml_element)

@@ -14724,17 +14724,28 @@ module Kaltura
 	end
 
 	class KalturaAssetParamsBaseFilter < KalturaRelatedFilter
+		attr_accessor :id_equal
+		attr_accessor :id_in
 		attr_accessor :system_name_equal
 		attr_accessor :system_name_in
 		attr_accessor :is_system_default_equal
 		attr_accessor :tags_equal
 
+		def id_equal=(val)
+			@id_equal = val.to_i
+		end
 		def is_system_default_equal=(val)
 			@is_system_default_equal = val.to_i
 		end
 
 		def from_xml(xml_element)
 			super
+			if xml_element.elements['idEqual'] != nil
+				self.id_equal = xml_element.elements['idEqual'].text
+			end
+			if xml_element.elements['idIn'] != nil
+				self.id_in = xml_element.elements['idIn'].text
+			end
 			if xml_element.elements['systemNameEqual'] != nil
 				self.system_name_equal = xml_element.elements['systemNameEqual'].text
 			end

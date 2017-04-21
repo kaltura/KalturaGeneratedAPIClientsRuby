@@ -8,7 +8,7 @@
 # to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2016  Kaltura Inc.
+# Copyright (C) 2006-2017  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -14177,6 +14177,29 @@ module Kaltura
 			super
 			if xml_element.elements['hashPatternRegex'] != nil
 				self.hash_pattern_regex = xml_element.elements['hashPatternRegex'].text
+			end
+		end
+
+	end
+
+	class KalturaUrlTokenizerChinaCache < KalturaUrlTokenizer
+		attr_accessor :algorithm_id
+		attr_accessor :key_id
+
+		def algorithm_id=(val)
+			@algorithm_id = val.to_i
+		end
+		def key_id=(val)
+			@key_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['algorithmId'] != nil
+				self.algorithm_id = xml_element.elements['algorithmId'].text
+			end
+			if xml_element.elements['keyId'] != nil
+				self.key_id = xml_element.elements['keyId'].text
 			end
 		end
 

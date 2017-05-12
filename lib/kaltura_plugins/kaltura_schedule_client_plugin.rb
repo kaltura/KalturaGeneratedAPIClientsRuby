@@ -1307,12 +1307,12 @@ module Kaltura
 		end
 
 		# List conflicting events for resourcesIds by event's dates
-		# @return [array]
+		# @return [KalturaScheduleEventListResponse]
 		def get_conflicts(resource_ids, schedule_event)
 			kparams = {}
 			client.add_param(kparams, 'resourceIds', resource_ids)
 			client.add_param(kparams, 'scheduleEvent', schedule_event)
-			client.queue_service_action_call('schedule_scheduleevent', 'getConflicts', 'KalturaScheduleEvent', kparams)
+			client.queue_service_action_call('schedule_scheduleevent', 'getConflicts', 'KalturaScheduleEventListResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

@@ -63,6 +63,7 @@ module Kaltura
 		DELETE_LOCAL_CONTENT = "5"
 		STORAGE_EXPORT = "6"
 		MODIFY_ENTRY = "7"
+		MAIL_NOTIFICATION = "8"
 	end
 
 	class KalturaScheduledTaskProfileOrderBy
@@ -240,6 +241,33 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
+		end
+
+	end
+
+	class KalturaMailNotificationObjectTask < KalturaObjectTask
+		# The mail to send the notification to
+		attr_accessor :mail_address
+		# The message to send in the notification mail
+		attr_accessor :message
+		# Send the mail to each user
+		attr_accessor :send_to_users
+
+		def send_to_users=(val)
+			@send_to_users = to_b(val)
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['mailAddress'] != nil
+				self.mail_address = xml_element.elements['mailAddress'].text
+			end
+			if xml_element.elements['message'] != nil
+				self.message = xml_element.elements['message'].text
+			end
+			if xml_element.elements['sendToUsers'] != nil
+				self.send_to_users = xml_element.elements['sendToUsers'].text
+			end
 		end
 
 	end

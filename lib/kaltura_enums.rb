@@ -185,6 +185,7 @@ module Kaltura
 		PENDING_MODERATION = 1
 		APPROVED = 2
 		REJECTED = 3
+		DELETED = 4
 		FLAGGED_FOR_REVIEW = 5
 		AUTO_APPROVED = 6
 	end
@@ -1145,6 +1146,7 @@ module Kaltura
 		HASH = "12"
 		DELIVERY_PROFILE = "13"
 		ACTIVE_EDGE_VALIDATE = "14"
+		ANONYMOUS_IP = "15"
 	end
 
 	class KalturaContainerFormat
@@ -1634,6 +1636,7 @@ module Kaltura
 
 	class KalturaGeoCoderType
 		KALTURA = "1"
+		MAX_MIND = "2"
 	end
 
 	class KalturaGoogleSyndicationFeedAdultValues
@@ -2468,6 +2471,11 @@ module Kaltura
 		MAIL_TYPE_LIVE_REPORT_EXPORT_ABORT = "132"
 	end
 
+	class KalturaMatchConditionType
+		MATCH_ANY = "1"
+		MATCH_ALL = "2"
+	end
+
 	class KalturaMediaEntryCompareAttribute
 		ACCESS_CONTROL_ID = "accessControlId"
 		CREATED_AT = "createdAt"
@@ -3039,6 +3047,12 @@ module Kaltura
 		CREATED_AT_DESC = "-createdAt"
 	end
 
+	class KalturaUserEntryExtendedStatus
+		PLAYBACK_COMPLETE = "viewHistory.PLAYBACK_COMPLETE"
+		PLAYBACK_STARTED = "viewHistory.PLAYBACK_STARTED"
+		VIEWED = "viewHistory.VIEWED"
+	end
+
 	class KalturaUserEntryOrderBy
 		CREATED_AT_ASC = "+createdAt"
 		UPDATED_AT_ASC = "+updatedAt"
@@ -3054,6 +3068,7 @@ module Kaltura
 
 	class KalturaUserEntryType
 		QUIZ = "quiz.QUIZ"
+		VIEW_HISTORY = "viewHistory.VIEW_HISTORY"
 	end
 
 	class KalturaUserLoginDataOrderBy

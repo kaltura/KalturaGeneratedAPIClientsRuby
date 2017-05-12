@@ -6269,6 +6269,8 @@ module Kaltura
 		attr_accessor :frame_rate
 		# Live stream's key frame interval
 		attr_accessor :key_frame_interval
+		# Live stream's language
+		attr_accessor :language
 
 		def bitrate=(val)
 			@bitrate = val.to_i
@@ -6308,6 +6310,9 @@ module Kaltura
 			end
 			if xml_element.elements['keyFrameInterval'] != nil
 				self.key_frame_interval = xml_element.elements['keyFrameInterval'].text
+			end
+			if xml_element.elements['language'] != nil
+				self.language = xml_element.elements['language'].text
 			end
 		end
 
@@ -9076,6 +9081,7 @@ module Kaltura
 		attr_accessor :created_at
 		attr_accessor :updated_at
 		attr_accessor :type
+		attr_accessor :extended_status
 
 		def id=(val)
 			@id = val.to_i
@@ -9115,6 +9121,9 @@ module Kaltura
 			end
 			if xml_element.elements['type'] != nil
 				self.type = xml_element.elements['type'].text
+			end
+			if xml_element.elements['extendedStatus'] != nil
+				self.extended_status = xml_element.elements['extendedStatus'].text
 			end
 		end
 
@@ -12705,12 +12714,16 @@ module Kaltura
 
 	class KalturaMatchCondition < KalturaCondition
 		attr_accessor :values
+		attr_accessor :match_type
 
 
 		def from_xml(xml_element)
 			super
 			if xml_element.elements['values'] != nil
 				self.values = KalturaClientBase.object_from_xml(xml_element.elements['values'], 'KalturaStringValue')
+			end
+			if xml_element.elements['matchType'] != nil
+				self.match_type = xml_element.elements['matchType'].text
 			end
 		end
 
@@ -14737,6 +14750,20 @@ module Kaltura
 
 	end
 
+	class KalturaAnonymousIPCondition < KalturaMatchCondition
+		# The ip geo coder engine to be used
+		attr_accessor :geo_coder_type
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['geoCoderType'] != nil
+				self.geo_coder_type = xml_element.elements['geoCoderType'].text
+			end
+		end
+
+	end
+
 	class KalturaAppTokenFilter < KalturaAppTokenBaseFilter
 
 
@@ -16594,6 +16621,9 @@ module Kaltura
 		attr_accessor :updated_at_less_than_or_equal
 		attr_accessor :updated_at_greater_than_or_equal
 		attr_accessor :type_equal
+		attr_accessor :extended_status_equal
+		attr_accessor :extended_status_in
+		attr_accessor :extended_status_not_in
 
 		def id_equal=(val)
 			@id_equal = val.to_i
@@ -16657,6 +16687,15 @@ module Kaltura
 			end
 			if xml_element.elements['typeEqual'] != nil
 				self.type_equal = xml_element.elements['typeEqual'].text
+			end
+			if xml_element.elements['extendedStatusEqual'] != nil
+				self.extended_status_equal = xml_element.elements['extendedStatusEqual'].text
+			end
+			if xml_element.elements['extendedStatusIn'] != nil
+				self.extended_status_in = xml_element.elements['extendedStatusIn'].text
+			end
+			if xml_element.elements['extendedStatusNotIn'] != nil
+				self.extended_status_not_in = xml_element.elements['extendedStatusNotIn'].text
 			end
 		end
 
@@ -16838,6 +16877,21 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
+		end
+
+	end
+
+	# Represents the current request country context as calculated based on the IP address
+	class KalturaAnonymousIPContextField < KalturaStringField
+		# The ip geo coder engine to be used
+		attr_accessor :geo_coder_type
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['geoCoderType'] != nil
+				self.geo_coder_type = xml_element.elements['geoCoderType'].text
+			end
 		end
 
 	end
@@ -17728,6 +17782,8 @@ module Kaltura
 	class KalturaUserEntryFilter < KalturaUserEntryBaseFilter
 		attr_accessor :user_id_equal_current
 		attr_accessor :is_anonymous
+		attr_accessor :privacy_context_equal
+		attr_accessor :privacy_context_in
 
 		def user_id_equal_current=(val)
 			@user_id_equal_current = val.to_i
@@ -17743,6 +17799,12 @@ module Kaltura
 			end
 			if xml_element.elements['isAnonymous'] != nil
 				self.is_anonymous = xml_element.elements['isAnonymous'].text
+			end
+			if xml_element.elements['privacyContextEqual'] != nil
+				self.privacy_context_equal = xml_element.elements['privacyContextEqual'].text
+			end
+			if xml_element.elements['privacyContextIn'] != nil
+				self.privacy_context_in = xml_element.elements['privacyContextIn'].text
 			end
 		end
 
@@ -18220,15 +18282,6 @@ module Kaltura
 	end
 
 	class KalturaPlaylistFilter < KalturaPlaylistBaseFilter
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaQuizUserEntryFilter < KalturaQuizUserEntryBaseFilter
 
 
 		def from_xml(xml_element)

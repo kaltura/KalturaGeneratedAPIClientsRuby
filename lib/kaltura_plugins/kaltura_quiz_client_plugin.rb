@@ -326,6 +326,15 @@ module Kaltura
 
 	end
 
+	class KalturaQuizUserEntryFilter < KalturaQuizUserEntryBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 
 	# Allows user to handle quizzes
 	class KalturaQuizService < KalturaServiceBase

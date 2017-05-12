@@ -2201,13 +2201,14 @@ module Kaltura
 
 		# Sey recorded video to live entry
 		# @return [KalturaLiveEntry]
-		def set_recorded_content(entry_id, media_server_index, resource, duration, recorded_entry_id=KalturaNotImplemented)
+		def set_recorded_content(entry_id, media_server_index, resource, duration, recorded_entry_id=KalturaNotImplemented, flavor_params_id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
 			client.add_param(kparams, 'mediaServerIndex', media_server_index)
 			client.add_param(kparams, 'resource', resource)
 			client.add_param(kparams, 'duration', duration)
 			client.add_param(kparams, 'recordedEntryId', recorded_entry_id)
+			client.add_param(kparams, 'flavorParamsId', flavor_params_id)
 			client.queue_service_action_call('livechannel', 'setRecordedContent', 'KalturaLiveEntry', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -2507,13 +2508,14 @@ module Kaltura
 
 		# Sey recorded video to live entry
 		# @return [KalturaLiveEntry]
-		def set_recorded_content(entry_id, media_server_index, resource, duration, recorded_entry_id=KalturaNotImplemented)
+		def set_recorded_content(entry_id, media_server_index, resource, duration, recorded_entry_id=KalturaNotImplemented, flavor_params_id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
 			client.add_param(kparams, 'mediaServerIndex', media_server_index)
 			client.add_param(kparams, 'resource', resource)
 			client.add_param(kparams, 'duration', duration)
 			client.add_param(kparams, 'recordedEntryId', recorded_entry_id)
+			client.add_param(kparams, 'flavorParamsId', flavor_params_id)
 			client.queue_service_action_call('livestream', 'setRecordedContent', 'KalturaLiveEntry', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -5029,6 +5031,17 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# @return [int]
+		def bulk_delete(filter)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.queue_service_action_call('userentry', 'bulkDelete', 'int', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# @return [KalturaUserEntry]
 		def delete(id)
 			kparams = {}
@@ -5918,7 +5931,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:17-05-11'
+			self.client_tag = 'ruby:17-05-12'
 			self.api_version = '3.3.0'
 		end
 		

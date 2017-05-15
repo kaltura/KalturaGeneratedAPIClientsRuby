@@ -8,7 +8,7 @@
 # to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2011  Kaltura Inc.
+# Copyright (C) 2006-2017  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -31,20 +31,20 @@ module Kaltura
 
 
 	# Aspera service
-	#  
 	class KalturaAsperaService < KalturaServiceBase
 		def initialize(client)
 			super(client)
 		end
 
+		# @return [string]
 		def get_fasp_url(flavor_asset_id)
 			kparams = {}
-			client.add_param(kparams, 'flavorAssetId', flavor_asset_id);
-			client.queue_service_action_call('aspera_aspera', 'getFaspUrl', kparams);
+			client.add_param(kparams, 'flavorAssetId', flavor_asset_id)
+			client.queue_service_action_call('aspera_aspera', 'getFaspUrl', 'string', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 	end
 
@@ -56,6 +56,7 @@ module Kaltura
 			end
 			return @aspera_service
 		end
+		
 	end
 
 end

@@ -8,7 +8,7 @@
 # to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2011  Kaltura Inc.
+# Copyright (C) 2006-2017  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -71,6 +71,29 @@ module Kaltura
 		def webex_site_id=(val)
 			@webex_site_id = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['webexUserId'] != nil
+				self.webex_user_id = xml_element.elements['webexUserId'].text
+			end
+			if xml_element.elements['webexPassword'] != nil
+				self.webex_password = xml_element.elements['webexPassword'].text
+			end
+			if xml_element.elements['webexSiteId'] != nil
+				self.webex_site_id = xml_element.elements['webexSiteId'].text
+			end
+			if xml_element.elements['webexPartnerId'] != nil
+				self.webex_partner_id = xml_element.elements['webexPartnerId'].text
+			end
+			if xml_element.elements['webexServiceUrl'] != nil
+				self.webex_service_url = xml_element.elements['webexServiceUrl'].text
+			end
+			if xml_element.elements['webexHostIdMetadataFieldName'] != nil
+				self.webex_host_id_metadata_field_name = xml_element.elements['webexHostIdMetadataFieldName'].text
+			end
+		end
+
 	end
 
 	class KalturaWebexDropFolderFile < KalturaDropFolderFile
@@ -83,27 +106,78 @@ module Kaltura
 		def recording_id=(val)
 			@recording_id = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['recordingId'] != nil
+				self.recording_id = xml_element.elements['recordingId'].text
+			end
+			if xml_element.elements['webexHostId'] != nil
+				self.webex_host_id = xml_element.elements['webexHostId'].text
+			end
+			if xml_element.elements['description'] != nil
+				self.description = xml_element.elements['description'].text
+			end
+			if xml_element.elements['confId'] != nil
+				self.conf_id = xml_element.elements['confId'].text
+			end
+			if xml_element.elements['contentUrl'] != nil
+				self.content_url = xml_element.elements['contentUrl'].text
+			end
+		end
+
 	end
 
 	class KalturaWebexDropFolderContentProcessorJobData < KalturaDropFolderContentProcessorJobData
 		attr_accessor :description
 		attr_accessor :webex_host_id
 
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['description'] != nil
+				self.description = xml_element.elements['description'].text
+			end
+			if xml_element.elements['webexHostId'] != nil
+				self.webex_host_id = xml_element.elements['webexHostId'].text
+			end
+		end
+
 	end
 
 	class KalturaWebexDropFolderBaseFilter < KalturaDropFolderFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
 	class KalturaWebexDropFolderFileBaseFilter < KalturaDropFolderFileFilter
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaWebexDropFolderFileFilter < KalturaWebexDropFolderFileBaseFilter
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaWebexDropFolderFilter < KalturaWebexDropFolderBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 

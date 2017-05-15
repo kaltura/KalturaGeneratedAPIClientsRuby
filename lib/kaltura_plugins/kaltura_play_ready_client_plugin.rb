@@ -8,7 +8,7 @@
 # to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2011  Kaltura Inc.
+# Copyright (C) 2006-2017  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -116,36 +116,71 @@ module Kaltura
 
 	class KalturaPlayReadyAnalogVideoOPIdHolder < KalturaObjectBase
 		# The type of the play enabler
-		# 	 
 		attr_accessor :type
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['type'] != nil
+				self.type = xml_element.elements['type'].text
+			end
+		end
 
 	end
 
 	class KalturaPlayReadyContentKey < KalturaObjectBase
-		# Guid - key id of the specific content 
-		# 	 
+		# Guid - key id of the specific content
 		attr_accessor :key_id
 		# License content key 64 bit encoded
-		# 	 
 		attr_accessor :content_key
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['keyId'] != nil
+				self.key_id = xml_element.elements['keyId'].text
+			end
+			if xml_element.elements['contentKey'] != nil
+				self.content_key = xml_element.elements['contentKey'].text
+			end
+		end
 
 	end
 
 	class KalturaPlayReadyCopyEnablerHolder < KalturaObjectBase
 		# The type of the copy enabler
-		# 	 
 		attr_accessor :type
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['type'] != nil
+				self.type = xml_element.elements['type'].text
+			end
+		end
 
 	end
 
 	class KalturaPlayReadyDigitalAudioOPIdHolder < KalturaObjectBase
 		# The type of the play enabler
-		# 	 
 		attr_accessor :type
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['type'] != nil
+				self.type = xml_element.elements['type'].text
+			end
+		end
 
 	end
 
 	class KalturaPlayReadyRight < KalturaObjectBase
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
@@ -168,20 +203,36 @@ module Kaltura
 		def min_security_level=(val)
 			@min_security_level = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['gracePeriod'] != nil
+				self.grace_period = xml_element.elements['gracePeriod'].text
+			end
+			if xml_element.elements['licenseRemovalPolicy'] != nil
+				self.license_removal_policy = xml_element.elements['licenseRemovalPolicy'].text
+			end
+			if xml_element.elements['licenseRemovalDuration'] != nil
+				self.license_removal_duration = xml_element.elements['licenseRemovalDuration'].text
+			end
+			if xml_element.elements['minSecurityLevel'] != nil
+				self.min_security_level = xml_element.elements['minSecurityLevel'].text
+			end
+			if xml_element.elements['rights'] != nil
+				self.rights = KalturaClientBase.object_from_xml(xml_element.elements['rights'], 'KalturaPlayReadyRight')
+			end
+		end
+
 	end
 
 	class KalturaPlayReadyLicenseDetails < KalturaObjectBase
 		# PlayReady policy object
-		# 	 
 		attr_accessor :policy
 		# License begin date
-		# 	 
 		attr_accessor :begin_date
 		# License expiration date
-		# 	 
 		attr_accessor :expiration_date
 		# License removal date
-		# 	 
 		attr_accessor :removal_date
 
 		def begin_date=(val)
@@ -193,23 +244,37 @@ module Kaltura
 		def removal_date=(val)
 			@removal_date = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['policy'] != nil
+				self.policy = KalturaClientBase.object_from_xml(xml_element.elements['policy'], 'KalturaPlayReadyPolicy')
+			end
+			if xml_element.elements['beginDate'] != nil
+				self.begin_date = xml_element.elements['beginDate'].text
+			end
+			if xml_element.elements['expirationDate'] != nil
+				self.expiration_date = xml_element.elements['expirationDate'].text
+			end
+			if xml_element.elements['removalDate'] != nil
+				self.removal_date = xml_element.elements['removalDate'].text
+			end
+		end
+
 	end
 
 	class KalturaPlayReadyPlayEnablerHolder < KalturaObjectBase
 		# The type of the play enabler
-		# 	 
 		attr_accessor :type
 
-	end
 
-	class KalturaAccessControlPlayReadyPolicyAction < KalturaRuleAction
-		# Play ready policy id 
-		# 	 
-		attr_accessor :policy_id
-
-		def policy_id=(val)
-			@policy_id = val.to_i
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['type'] != nil
+				self.type = xml_element.elements['type'].text
+			end
 		end
+
 	end
 
 	class KalturaPlayReadyCopyRight < KalturaPlayReadyRight
@@ -219,6 +284,17 @@ module Kaltura
 		def copy_count=(val)
 			@copy_count = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['copyCount'] != nil
+				self.copy_count = xml_element.elements['copyCount'].text
+			end
+			if xml_element.elements['copyEnablers'] != nil
+				self.copy_enablers = KalturaClientBase.object_from_xml(xml_element.elements['copyEnablers'], 'KalturaPlayReadyCopyEnablerHolder')
+			end
+		end
+
 	end
 
 	class KalturaPlayReadyPlayRight < KalturaPlayReadyRight
@@ -250,26 +326,86 @@ module Kaltura
 		def first_play_expiration=(val)
 			@first_play_expiration = val.to_i
 		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['analogVideoOPL'] != nil
+				self.analog_video_opl = xml_element.elements['analogVideoOPL'].text
+			end
+			if xml_element.elements['analogVideoOutputProtectionList'] != nil
+				self.analog_video_output_protection_list = KalturaClientBase.object_from_xml(xml_element.elements['analogVideoOutputProtectionList'], 'KalturaPlayReadyAnalogVideoOPIdHolder')
+			end
+			if xml_element.elements['compressedDigitalAudioOPL'] != nil
+				self.compressed_digital_audio_opl = xml_element.elements['compressedDigitalAudioOPL'].text
+			end
+			if xml_element.elements['compressedDigitalVideoOPL'] != nil
+				self.compressed_digital_video_opl = xml_element.elements['compressedDigitalVideoOPL'].text
+			end
+			if xml_element.elements['digitalAudioOutputProtectionList'] != nil
+				self.digital_audio_output_protection_list = KalturaClientBase.object_from_xml(xml_element.elements['digitalAudioOutputProtectionList'], 'KalturaPlayReadyDigitalAudioOPIdHolder')
+			end
+			if xml_element.elements['uncompressedDigitalAudioOPL'] != nil
+				self.uncompressed_digital_audio_opl = xml_element.elements['uncompressedDigitalAudioOPL'].text
+			end
+			if xml_element.elements['uncompressedDigitalVideoOPL'] != nil
+				self.uncompressed_digital_video_opl = xml_element.elements['uncompressedDigitalVideoOPL'].text
+			end
+			if xml_element.elements['firstPlayExpiration'] != nil
+				self.first_play_expiration = xml_element.elements['firstPlayExpiration'].text
+			end
+			if xml_element.elements['playEnablers'] != nil
+				self.play_enablers = KalturaClientBase.object_from_xml(xml_element.elements['playEnablers'], 'KalturaPlayReadyPlayEnablerHolder')
+			end
+		end
+
 	end
 
 	class KalturaPlayReadyProfile < KalturaDrmProfile
 		attr_accessor :key_seed
 
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['keySeed'] != nil
+				self.key_seed = xml_element.elements['keySeed'].text
+			end
+		end
+
 	end
 
 	class KalturaPlayReadyPolicyBaseFilter < KalturaDrmPolicyFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
 	class KalturaPlayReadyProfileBaseFilter < KalturaDrmProfileFilter
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaPlayReadyPolicyFilter < KalturaPlayReadyPolicyBaseFilter
 
+
+		def from_xml(xml_element)
+			super
+		end
+
 	end
 
 	class KalturaPlayReadyProfileFilter < KalturaPlayReadyProfileBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
 
 	end
 
@@ -280,57 +416,55 @@ module Kaltura
 		end
 
 		# Generate key id and content key for PlayReady encryption
-		# 	 
+		# @return [KalturaPlayReadyContentKey]
 		def generate_key()
 			kparams = {}
-			client.queue_service_action_call('playready_playreadydrm', 'generateKey', kparams);
+			client.queue_service_action_call('playready_playreadydrm', 'generateKey', 'KalturaPlayReadyContentKey', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Get content keys for input key ids
-		# 	 
+		# @return [array]
 		def get_content_keys(key_ids)
 			kparams = {}
-			# - comma separated key id's 
-			client.add_param(kparams, 'keyIds', key_ids);
-			client.queue_service_action_call('playready_playreadydrm', 'getContentKeys', kparams);
+			client.add_param(kparams, 'keyIds', key_ids)
+			client.queue_service_action_call('playready_playreadydrm', 'getContentKeys', 'KalturaPlayReadyContentKey', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Get content key and key id for the given entry
-		# 	 
+		# @return [KalturaPlayReadyContentKey]
 		def get_entry_content_key(entry_id, create_if_missing=false)
 			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id);
-			client.add_param(kparams, 'createIfMissing', create_if_missing);
-			client.queue_service_action_call('playready_playreadydrm', 'getEntryContentKey', kparams);
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'createIfMissing', create_if_missing)
+			client.queue_service_action_call('playready_playreadydrm', 'getEntryContentKey', 'KalturaPlayReadyContentKey', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 
 		# Get Play Ready policy and dates for license creation
-		# 	 
+		# @return [KalturaPlayReadyLicenseDetails]
 		def get_license_details(key_id, device_id, device_type, entry_id=KalturaNotImplemented, referrer=KalturaNotImplemented)
 			kparams = {}
-			client.add_param(kparams, 'keyId', key_id);
-			client.add_param(kparams, 'deviceId', device_id);
-			client.add_param(kparams, 'deviceType', device_type);
-			client.add_param(kparams, 'entryId', entry_id);
-			# 64base encoded  
-			client.add_param(kparams, 'referrer', referrer);
-			client.queue_service_action_call('playready_playreadydrm', 'getLicenseDetails', kparams);
+			client.add_param(kparams, 'keyId', key_id)
+			client.add_param(kparams, 'deviceId', device_id)
+			client.add_param(kparams, 'deviceType', device_type)
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'referrer', referrer)
+			client.queue_service_action_call('playready_playreadydrm', 'getLicenseDetails', 'KalturaPlayReadyLicenseDetails', kparams)
 			if (client.is_multirequest)
-				return nil;
+				return nil
 			end
-			return client.do_queue();
+			return client.do_queue()
 		end
 	end
 
@@ -342,6 +476,7 @@ module Kaltura
 			end
 			return @play_ready_drm_service
 		end
+		
 	end
 
 end

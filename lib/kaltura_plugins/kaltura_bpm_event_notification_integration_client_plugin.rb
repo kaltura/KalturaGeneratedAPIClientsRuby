@@ -26,11 +26,36 @@
 # @ignore
 # ===================================================================================================
 require 'kaltura_client.rb'
+require File.dirname(__FILE__) + '/kaltura_integration_client_plugin.rb'
+require File.dirname(__FILE__) + '/kaltura_business_process_notification_client_plugin.rb'
 
 module Kaltura
 
+	class KalturaBpmEventNotificationIntegrationJobTriggerData < KalturaIntegrationJobTriggerData
+		# KalturaBusinessProcessNotificationTemplate id
+		attr_accessor :template_id
+		attr_accessor :business_process_id
+		# Execution unique id
+		attr_accessor :case_id
 
-	class KalturaClient < KalturaClientBase
+		def template_id=(val)
+			@template_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['templateId'] != nil
+				self.template_id = xml_element.elements['templateId'].text
+			end
+			if xml_element.elements['businessProcessId'] != nil
+				self.business_process_id = xml_element.elements['businessProcessId'].text
+			end
+			if xml_element.elements['caseId'] != nil
+				self.case_id = xml_element.elements['caseId'].text
+			end
+		end
+
 	end
+
 
 end

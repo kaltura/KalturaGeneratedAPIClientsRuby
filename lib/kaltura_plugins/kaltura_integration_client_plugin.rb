@@ -32,10 +32,12 @@ module Kaltura
 
 	class KalturaIntegrationProviderType
 		CIELO24 = "cielo24.Cielo24"
+		EXAMPLE = "exampleIntegration.Example"
 		VOICEBASE = "voicebase.Voicebase"
 	end
 
 	class KalturaIntegrationTriggerType
+		BPM_EVENT_NOTIFICATION = "bpmEventNotificationIntegration.BpmEventNotification"
 		MANUAL = "1"
 	end
 

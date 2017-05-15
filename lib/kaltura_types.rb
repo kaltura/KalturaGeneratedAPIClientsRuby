@@ -3703,6 +3703,32 @@ module Kaltura
 
 	end
 
+	class KalturaPluginData < KalturaObjectBase
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaDrmPlaybackPluginData < KalturaPluginData
+		attr_accessor :scheme
+		attr_accessor :license_url
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['scheme'] != nil
+				self.scheme = xml_element.elements['scheme'].text
+			end
+			if xml_element.elements['licenseURL'] != nil
+				self.license_url = xml_element.elements['licenseURL'].text
+			end
+		end
+
+	end
+
 	class KalturaEmailIngestionProfile < KalturaObjectBase
 		attr_accessor :id
 		attr_accessor :name
@@ -5080,504 +5106,6 @@ module Kaltura
 
 	end
 
-	class KalturaBatchJobListResponse < KalturaListResponse
-		attr_accessor :objects
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['objects'] != nil
-				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaBatchJob')
-			end
-		end
-
-	end
-
-	class KalturaMediaInfo < KalturaObjectBase
-		# The id of the media info
-		attr_accessor :id
-		# The id of the related flavor asset
-		attr_accessor :flavor_asset_id
-		# The file size
-		attr_accessor :file_size
-		# The container format
-		attr_accessor :container_format
-		# The container id
-		attr_accessor :container_id
-		# The container profile
-		attr_accessor :container_profile
-		# The container duration
-		attr_accessor :container_duration
-		# The container bit rate
-		attr_accessor :container_bit_rate
-		# The video format
-		attr_accessor :video_format
-		# The video codec id
-		attr_accessor :video_codec_id
-		# The video duration
-		attr_accessor :video_duration
-		# The video bit rate
-		attr_accessor :video_bit_rate
-		# The video bit rate mode
-		attr_accessor :video_bit_rate_mode
-		# The video width
-		attr_accessor :video_width
-		# The video height
-		attr_accessor :video_height
-		# The video frame rate
-		attr_accessor :video_frame_rate
-		# The video display aspect ratio (dar)
-		attr_accessor :video_dar
-		attr_accessor :video_rotation
-		# The audio format
-		attr_accessor :audio_format
-		# The audio codec id
-		attr_accessor :audio_codec_id
-		# The audio duration
-		attr_accessor :audio_duration
-		# The audio bit rate
-		attr_accessor :audio_bit_rate
-		# The audio bit rate mode
-		attr_accessor :audio_bit_rate_mode
-		# The number of audio channels
-		attr_accessor :audio_channels
-		# The audio sampling rate
-		attr_accessor :audio_sampling_rate
-		# The audio resolution
-		attr_accessor :audio_resolution
-		# The writing library
-		attr_accessor :writing_lib
-		# The data as returned by the mediainfo command line
-		attr_accessor :raw_data
-		attr_accessor :multi_stream_info
-		attr_accessor :scan_type
-		attr_accessor :multi_stream
-		attr_accessor :is_fast_start
-		attr_accessor :content_streams
-		attr_accessor :complexity_value
-		attr_accessor :max_gop
-
-		def id=(val)
-			@id = val.to_i
-		end
-		def file_size=(val)
-			@file_size = val.to_i
-		end
-		def container_duration=(val)
-			@container_duration = val.to_i
-		end
-		def container_bit_rate=(val)
-			@container_bit_rate = val.to_i
-		end
-		def video_duration=(val)
-			@video_duration = val.to_i
-		end
-		def video_bit_rate=(val)
-			@video_bit_rate = val.to_i
-		end
-		def video_bit_rate_mode=(val)
-			@video_bit_rate_mode = val.to_i
-		end
-		def video_width=(val)
-			@video_width = val.to_i
-		end
-		def video_height=(val)
-			@video_height = val.to_i
-		end
-		def video_frame_rate=(val)
-			@video_frame_rate = val.to_f
-		end
-		def video_dar=(val)
-			@video_dar = val.to_f
-		end
-		def video_rotation=(val)
-			@video_rotation = val.to_i
-		end
-		def audio_duration=(val)
-			@audio_duration = val.to_i
-		end
-		def audio_bit_rate=(val)
-			@audio_bit_rate = val.to_i
-		end
-		def audio_bit_rate_mode=(val)
-			@audio_bit_rate_mode = val.to_i
-		end
-		def audio_channels=(val)
-			@audio_channels = val.to_i
-		end
-		def audio_sampling_rate=(val)
-			@audio_sampling_rate = val.to_i
-		end
-		def audio_resolution=(val)
-			@audio_resolution = val.to_i
-		end
-		def scan_type=(val)
-			@scan_type = val.to_i
-		end
-		def is_fast_start=(val)
-			@is_fast_start = val.to_i
-		end
-		def complexity_value=(val)
-			@complexity_value = val.to_i
-		end
-		def max_gop=(val)
-			@max_gop = val.to_f
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['id'] != nil
-				self.id = xml_element.elements['id'].text
-			end
-			if xml_element.elements['flavorAssetId'] != nil
-				self.flavor_asset_id = xml_element.elements['flavorAssetId'].text
-			end
-			if xml_element.elements['fileSize'] != nil
-				self.file_size = xml_element.elements['fileSize'].text
-			end
-			if xml_element.elements['containerFormat'] != nil
-				self.container_format = xml_element.elements['containerFormat'].text
-			end
-			if xml_element.elements['containerId'] != nil
-				self.container_id = xml_element.elements['containerId'].text
-			end
-			if xml_element.elements['containerProfile'] != nil
-				self.container_profile = xml_element.elements['containerProfile'].text
-			end
-			if xml_element.elements['containerDuration'] != nil
-				self.container_duration = xml_element.elements['containerDuration'].text
-			end
-			if xml_element.elements['containerBitRate'] != nil
-				self.container_bit_rate = xml_element.elements['containerBitRate'].text
-			end
-			if xml_element.elements['videoFormat'] != nil
-				self.video_format = xml_element.elements['videoFormat'].text
-			end
-			if xml_element.elements['videoCodecId'] != nil
-				self.video_codec_id = xml_element.elements['videoCodecId'].text
-			end
-			if xml_element.elements['videoDuration'] != nil
-				self.video_duration = xml_element.elements['videoDuration'].text
-			end
-			if xml_element.elements['videoBitRate'] != nil
-				self.video_bit_rate = xml_element.elements['videoBitRate'].text
-			end
-			if xml_element.elements['videoBitRateMode'] != nil
-				self.video_bit_rate_mode = xml_element.elements['videoBitRateMode'].text
-			end
-			if xml_element.elements['videoWidth'] != nil
-				self.video_width = xml_element.elements['videoWidth'].text
-			end
-			if xml_element.elements['videoHeight'] != nil
-				self.video_height = xml_element.elements['videoHeight'].text
-			end
-			if xml_element.elements['videoFrameRate'] != nil
-				self.video_frame_rate = xml_element.elements['videoFrameRate'].text
-			end
-			if xml_element.elements['videoDar'] != nil
-				self.video_dar = xml_element.elements['videoDar'].text
-			end
-			if xml_element.elements['videoRotation'] != nil
-				self.video_rotation = xml_element.elements['videoRotation'].text
-			end
-			if xml_element.elements['audioFormat'] != nil
-				self.audio_format = xml_element.elements['audioFormat'].text
-			end
-			if xml_element.elements['audioCodecId'] != nil
-				self.audio_codec_id = xml_element.elements['audioCodecId'].text
-			end
-			if xml_element.elements['audioDuration'] != nil
-				self.audio_duration = xml_element.elements['audioDuration'].text
-			end
-			if xml_element.elements['audioBitRate'] != nil
-				self.audio_bit_rate = xml_element.elements['audioBitRate'].text
-			end
-			if xml_element.elements['audioBitRateMode'] != nil
-				self.audio_bit_rate_mode = xml_element.elements['audioBitRateMode'].text
-			end
-			if xml_element.elements['audioChannels'] != nil
-				self.audio_channels = xml_element.elements['audioChannels'].text
-			end
-			if xml_element.elements['audioSamplingRate'] != nil
-				self.audio_sampling_rate = xml_element.elements['audioSamplingRate'].text
-			end
-			if xml_element.elements['audioResolution'] != nil
-				self.audio_resolution = xml_element.elements['audioResolution'].text
-			end
-			if xml_element.elements['writingLib'] != nil
-				self.writing_lib = xml_element.elements['writingLib'].text
-			end
-			if xml_element.elements['rawData'] != nil
-				self.raw_data = xml_element.elements['rawData'].text
-			end
-			if xml_element.elements['multiStreamInfo'] != nil
-				self.multi_stream_info = xml_element.elements['multiStreamInfo'].text
-			end
-			if xml_element.elements['scanType'] != nil
-				self.scan_type = xml_element.elements['scanType'].text
-			end
-			if xml_element.elements['multiStream'] != nil
-				self.multi_stream = xml_element.elements['multiStream'].text
-			end
-			if xml_element.elements['isFastStart'] != nil
-				self.is_fast_start = xml_element.elements['isFastStart'].text
-			end
-			if xml_element.elements['contentStreams'] != nil
-				self.content_streams = xml_element.elements['contentStreams'].text
-			end
-			if xml_element.elements['complexityValue'] != nil
-				self.complexity_value = xml_element.elements['complexityValue'].text
-			end
-			if xml_element.elements['maxGOP'] != nil
-				self.max_gop = xml_element.elements['maxGOP'].text
-			end
-		end
-
-	end
-
-	class KalturaMediaInfoListResponse < KalturaListResponse
-		attr_accessor :objects
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['objects'] != nil
-				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaMediaInfo')
-			end
-		end
-
-	end
-
-	class KalturaFlavorParamsOutputListResponse < KalturaListResponse
-		attr_accessor :objects
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['objects'] != nil
-				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaFlavorParamsOutput')
-			end
-		end
-
-	end
-
-	class KalturaThumbAsset < KalturaAsset
-		# The Flavor Params used to create this Flavor Asset
-		attr_accessor :thumb_params_id
-		# The width of the Flavor Asset
-		attr_accessor :width
-		# The height of the Flavor Asset
-		attr_accessor :height
-		# The status of the asset
-		attr_accessor :status
-
-		def thumb_params_id=(val)
-			@thumb_params_id = val.to_i
-		end
-		def width=(val)
-			@width = val.to_i
-		end
-		def height=(val)
-			@height = val.to_i
-		end
-		def status=(val)
-			@status = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['thumbParamsId'] != nil
-				self.thumb_params_id = xml_element.elements['thumbParamsId'].text
-			end
-			if xml_element.elements['width'] != nil
-				self.width = xml_element.elements['width'].text
-			end
-			if xml_element.elements['height'] != nil
-				self.height = xml_element.elements['height'].text
-			end
-			if xml_element.elements['status'] != nil
-				self.status = xml_element.elements['status'].text
-			end
-		end
-
-	end
-
-	class KalturaThumbParams < KalturaAssetParams
-		attr_accessor :crop_type
-		attr_accessor :quality
-		attr_accessor :crop_x
-		attr_accessor :crop_y
-		attr_accessor :crop_width
-		attr_accessor :crop_height
-		attr_accessor :video_offset
-		attr_accessor :width
-		attr_accessor :height
-		attr_accessor :scale_width
-		attr_accessor :scale_height
-		# Hexadecimal value
-		attr_accessor :background_color
-		# Id of the flavor params or the thumbnail params to be used as source for the thumbnail creation
-		attr_accessor :source_params_id
-		# The container format of the Flavor Params
-		attr_accessor :format
-		# The image density (dpi) for example: 72 or 96
-		attr_accessor :density
-		# Strip profiles and comments
-		attr_accessor :strip_profiles
-		# Create thumbnail from the videoLengthpercentage second
-		attr_accessor :video_offset_in_percentage
-
-		def crop_type=(val)
-			@crop_type = val.to_i
-		end
-		def quality=(val)
-			@quality = val.to_i
-		end
-		def crop_x=(val)
-			@crop_x = val.to_i
-		end
-		def crop_y=(val)
-			@crop_y = val.to_i
-		end
-		def crop_width=(val)
-			@crop_width = val.to_i
-		end
-		def crop_height=(val)
-			@crop_height = val.to_i
-		end
-		def video_offset=(val)
-			@video_offset = val.to_f
-		end
-		def width=(val)
-			@width = val.to_i
-		end
-		def height=(val)
-			@height = val.to_i
-		end
-		def scale_width=(val)
-			@scale_width = val.to_f
-		end
-		def scale_height=(val)
-			@scale_height = val.to_f
-		end
-		def source_params_id=(val)
-			@source_params_id = val.to_i
-		end
-		def density=(val)
-			@density = val.to_i
-		end
-		def strip_profiles=(val)
-			@strip_profiles = to_b(val)
-		end
-		def video_offset_in_percentage=(val)
-			@video_offset_in_percentage = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['cropType'] != nil
-				self.crop_type = xml_element.elements['cropType'].text
-			end
-			if xml_element.elements['quality'] != nil
-				self.quality = xml_element.elements['quality'].text
-			end
-			if xml_element.elements['cropX'] != nil
-				self.crop_x = xml_element.elements['cropX'].text
-			end
-			if xml_element.elements['cropY'] != nil
-				self.crop_y = xml_element.elements['cropY'].text
-			end
-			if xml_element.elements['cropWidth'] != nil
-				self.crop_width = xml_element.elements['cropWidth'].text
-			end
-			if xml_element.elements['cropHeight'] != nil
-				self.crop_height = xml_element.elements['cropHeight'].text
-			end
-			if xml_element.elements['videoOffset'] != nil
-				self.video_offset = xml_element.elements['videoOffset'].text
-			end
-			if xml_element.elements['width'] != nil
-				self.width = xml_element.elements['width'].text
-			end
-			if xml_element.elements['height'] != nil
-				self.height = xml_element.elements['height'].text
-			end
-			if xml_element.elements['scaleWidth'] != nil
-				self.scale_width = xml_element.elements['scaleWidth'].text
-			end
-			if xml_element.elements['scaleHeight'] != nil
-				self.scale_height = xml_element.elements['scaleHeight'].text
-			end
-			if xml_element.elements['backgroundColor'] != nil
-				self.background_color = xml_element.elements['backgroundColor'].text
-			end
-			if xml_element.elements['sourceParamsId'] != nil
-				self.source_params_id = xml_element.elements['sourceParamsId'].text
-			end
-			if xml_element.elements['format'] != nil
-				self.format = xml_element.elements['format'].text
-			end
-			if xml_element.elements['density'] != nil
-				self.density = xml_element.elements['density'].text
-			end
-			if xml_element.elements['stripProfiles'] != nil
-				self.strip_profiles = xml_element.elements['stripProfiles'].text
-			end
-			if xml_element.elements['videoOffsetInPercentage'] != nil
-				self.video_offset_in_percentage = xml_element.elements['videoOffsetInPercentage'].text
-			end
-		end
-
-	end
-
-	class KalturaThumbParamsOutput < KalturaThumbParams
-		attr_accessor :thumb_params_id
-		attr_accessor :thumb_params_version
-		attr_accessor :thumb_asset_id
-		attr_accessor :thumb_asset_version
-		attr_accessor :rotate
-
-		def thumb_params_id=(val)
-			@thumb_params_id = val.to_i
-		end
-		def rotate=(val)
-			@rotate = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['thumbParamsId'] != nil
-				self.thumb_params_id = xml_element.elements['thumbParamsId'].text
-			end
-			if xml_element.elements['thumbParamsVersion'] != nil
-				self.thumb_params_version = xml_element.elements['thumbParamsVersion'].text
-			end
-			if xml_element.elements['thumbAssetId'] != nil
-				self.thumb_asset_id = xml_element.elements['thumbAssetId'].text
-			end
-			if xml_element.elements['thumbAssetVersion'] != nil
-				self.thumb_asset_version = xml_element.elements['thumbAssetVersion'].text
-			end
-			if xml_element.elements['rotate'] != nil
-				self.rotate = xml_element.elements['rotate'].text
-			end
-		end
-
-	end
-
-	class KalturaThumbParamsOutputListResponse < KalturaListResponse
-		attr_accessor :objects
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['objects'] != nil
-				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaThumbParamsOutput')
-			end
-		end
-
-	end
-
 	# A representation of a live stream configuration
 	class KalturaLiveStreamConfiguration < KalturaObjectBase
 		attr_accessor :protocol
@@ -6913,6 +6441,248 @@ module Kaltura
 
 	end
 
+	class KalturaMediaInfo < KalturaObjectBase
+		# The id of the media info
+		attr_accessor :id
+		# The id of the related flavor asset
+		attr_accessor :flavor_asset_id
+		# The file size
+		attr_accessor :file_size
+		# The container format
+		attr_accessor :container_format
+		# The container id
+		attr_accessor :container_id
+		# The container profile
+		attr_accessor :container_profile
+		# The container duration
+		attr_accessor :container_duration
+		# The container bit rate
+		attr_accessor :container_bit_rate
+		# The video format
+		attr_accessor :video_format
+		# The video codec id
+		attr_accessor :video_codec_id
+		# The video duration
+		attr_accessor :video_duration
+		# The video bit rate
+		attr_accessor :video_bit_rate
+		# The video bit rate mode
+		attr_accessor :video_bit_rate_mode
+		# The video width
+		attr_accessor :video_width
+		# The video height
+		attr_accessor :video_height
+		# The video frame rate
+		attr_accessor :video_frame_rate
+		# The video display aspect ratio (dar)
+		attr_accessor :video_dar
+		attr_accessor :video_rotation
+		# The audio format
+		attr_accessor :audio_format
+		# The audio codec id
+		attr_accessor :audio_codec_id
+		# The audio duration
+		attr_accessor :audio_duration
+		# The audio bit rate
+		attr_accessor :audio_bit_rate
+		# The audio bit rate mode
+		attr_accessor :audio_bit_rate_mode
+		# The number of audio channels
+		attr_accessor :audio_channels
+		# The audio sampling rate
+		attr_accessor :audio_sampling_rate
+		# The audio resolution
+		attr_accessor :audio_resolution
+		# The writing library
+		attr_accessor :writing_lib
+		# The data as returned by the mediainfo command line
+		attr_accessor :raw_data
+		attr_accessor :multi_stream_info
+		attr_accessor :scan_type
+		attr_accessor :multi_stream
+		attr_accessor :is_fast_start
+		attr_accessor :content_streams
+		attr_accessor :complexity_value
+		attr_accessor :max_gop
+
+		def id=(val)
+			@id = val.to_i
+		end
+		def file_size=(val)
+			@file_size = val.to_i
+		end
+		def container_duration=(val)
+			@container_duration = val.to_i
+		end
+		def container_bit_rate=(val)
+			@container_bit_rate = val.to_i
+		end
+		def video_duration=(val)
+			@video_duration = val.to_i
+		end
+		def video_bit_rate=(val)
+			@video_bit_rate = val.to_i
+		end
+		def video_bit_rate_mode=(val)
+			@video_bit_rate_mode = val.to_i
+		end
+		def video_width=(val)
+			@video_width = val.to_i
+		end
+		def video_height=(val)
+			@video_height = val.to_i
+		end
+		def video_frame_rate=(val)
+			@video_frame_rate = val.to_f
+		end
+		def video_dar=(val)
+			@video_dar = val.to_f
+		end
+		def video_rotation=(val)
+			@video_rotation = val.to_i
+		end
+		def audio_duration=(val)
+			@audio_duration = val.to_i
+		end
+		def audio_bit_rate=(val)
+			@audio_bit_rate = val.to_i
+		end
+		def audio_bit_rate_mode=(val)
+			@audio_bit_rate_mode = val.to_i
+		end
+		def audio_channels=(val)
+			@audio_channels = val.to_i
+		end
+		def audio_sampling_rate=(val)
+			@audio_sampling_rate = val.to_i
+		end
+		def audio_resolution=(val)
+			@audio_resolution = val.to_i
+		end
+		def scan_type=(val)
+			@scan_type = val.to_i
+		end
+		def is_fast_start=(val)
+			@is_fast_start = val.to_i
+		end
+		def complexity_value=(val)
+			@complexity_value = val.to_i
+		end
+		def max_gop=(val)
+			@max_gop = val.to_f
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['id'] != nil
+				self.id = xml_element.elements['id'].text
+			end
+			if xml_element.elements['flavorAssetId'] != nil
+				self.flavor_asset_id = xml_element.elements['flavorAssetId'].text
+			end
+			if xml_element.elements['fileSize'] != nil
+				self.file_size = xml_element.elements['fileSize'].text
+			end
+			if xml_element.elements['containerFormat'] != nil
+				self.container_format = xml_element.elements['containerFormat'].text
+			end
+			if xml_element.elements['containerId'] != nil
+				self.container_id = xml_element.elements['containerId'].text
+			end
+			if xml_element.elements['containerProfile'] != nil
+				self.container_profile = xml_element.elements['containerProfile'].text
+			end
+			if xml_element.elements['containerDuration'] != nil
+				self.container_duration = xml_element.elements['containerDuration'].text
+			end
+			if xml_element.elements['containerBitRate'] != nil
+				self.container_bit_rate = xml_element.elements['containerBitRate'].text
+			end
+			if xml_element.elements['videoFormat'] != nil
+				self.video_format = xml_element.elements['videoFormat'].text
+			end
+			if xml_element.elements['videoCodecId'] != nil
+				self.video_codec_id = xml_element.elements['videoCodecId'].text
+			end
+			if xml_element.elements['videoDuration'] != nil
+				self.video_duration = xml_element.elements['videoDuration'].text
+			end
+			if xml_element.elements['videoBitRate'] != nil
+				self.video_bit_rate = xml_element.elements['videoBitRate'].text
+			end
+			if xml_element.elements['videoBitRateMode'] != nil
+				self.video_bit_rate_mode = xml_element.elements['videoBitRateMode'].text
+			end
+			if xml_element.elements['videoWidth'] != nil
+				self.video_width = xml_element.elements['videoWidth'].text
+			end
+			if xml_element.elements['videoHeight'] != nil
+				self.video_height = xml_element.elements['videoHeight'].text
+			end
+			if xml_element.elements['videoFrameRate'] != nil
+				self.video_frame_rate = xml_element.elements['videoFrameRate'].text
+			end
+			if xml_element.elements['videoDar'] != nil
+				self.video_dar = xml_element.elements['videoDar'].text
+			end
+			if xml_element.elements['videoRotation'] != nil
+				self.video_rotation = xml_element.elements['videoRotation'].text
+			end
+			if xml_element.elements['audioFormat'] != nil
+				self.audio_format = xml_element.elements['audioFormat'].text
+			end
+			if xml_element.elements['audioCodecId'] != nil
+				self.audio_codec_id = xml_element.elements['audioCodecId'].text
+			end
+			if xml_element.elements['audioDuration'] != nil
+				self.audio_duration = xml_element.elements['audioDuration'].text
+			end
+			if xml_element.elements['audioBitRate'] != nil
+				self.audio_bit_rate = xml_element.elements['audioBitRate'].text
+			end
+			if xml_element.elements['audioBitRateMode'] != nil
+				self.audio_bit_rate_mode = xml_element.elements['audioBitRateMode'].text
+			end
+			if xml_element.elements['audioChannels'] != nil
+				self.audio_channels = xml_element.elements['audioChannels'].text
+			end
+			if xml_element.elements['audioSamplingRate'] != nil
+				self.audio_sampling_rate = xml_element.elements['audioSamplingRate'].text
+			end
+			if xml_element.elements['audioResolution'] != nil
+				self.audio_resolution = xml_element.elements['audioResolution'].text
+			end
+			if xml_element.elements['writingLib'] != nil
+				self.writing_lib = xml_element.elements['writingLib'].text
+			end
+			if xml_element.elements['rawData'] != nil
+				self.raw_data = xml_element.elements['rawData'].text
+			end
+			if xml_element.elements['multiStreamInfo'] != nil
+				self.multi_stream_info = xml_element.elements['multiStreamInfo'].text
+			end
+			if xml_element.elements['scanType'] != nil
+				self.scan_type = xml_element.elements['scanType'].text
+			end
+			if xml_element.elements['multiStream'] != nil
+				self.multi_stream = xml_element.elements['multiStream'].text
+			end
+			if xml_element.elements['isFastStart'] != nil
+				self.is_fast_start = xml_element.elements['isFastStart'].text
+			end
+			if xml_element.elements['contentStreams'] != nil
+				self.content_streams = xml_element.elements['contentStreams'].text
+			end
+			if xml_element.elements['complexityValue'] != nil
+				self.complexity_value = xml_element.elements['complexityValue'].text
+			end
+			if xml_element.elements['maxGOP'] != nil
+				self.max_gop = xml_element.elements['maxGOP'].text
+			end
+		end
+
+	end
+
 	class KalturaMixEntry < KalturaPlayableEntry
 		# Indicates whether the user has submited a real thumbnail to the mix (Not the one that was generated automaticaly)
 		attr_accessor :has_real_thumbnail
@@ -7250,32 +7020,6 @@ module Kaltura
 			end
 			if xml_element.elements['updatedAt'] != nil
 				self.updated_at = xml_element.elements['updatedAt'].text
-			end
-		end
-
-	end
-
-	class KalturaPluginData < KalturaObjectBase
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaDrmPlaybackPluginData < KalturaPluginData
-		attr_accessor :scheme
-		attr_accessor :license_url
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['scheme'] != nil
-				self.scheme = xml_element.elements['scheme'].text
-			end
-			if xml_element.elements['licenseURL'] != nil
-				self.license_url = xml_element.elements['licenseURL'].text
 			end
 		end
 
@@ -8588,6 +8332,210 @@ module Kaltura
 			end
 			if xml_element.elements['requireTranscodingCount'] != nil
 				self.require_transcoding_count = xml_element.elements['requireTranscodingCount'].text
+			end
+		end
+
+	end
+
+	class KalturaThumbAsset < KalturaAsset
+		# The Flavor Params used to create this Flavor Asset
+		attr_accessor :thumb_params_id
+		# The width of the Flavor Asset
+		attr_accessor :width
+		# The height of the Flavor Asset
+		attr_accessor :height
+		# The status of the asset
+		attr_accessor :status
+
+		def thumb_params_id=(val)
+			@thumb_params_id = val.to_i
+		end
+		def width=(val)
+			@width = val.to_i
+		end
+		def height=(val)
+			@height = val.to_i
+		end
+		def status=(val)
+			@status = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['thumbParamsId'] != nil
+				self.thumb_params_id = xml_element.elements['thumbParamsId'].text
+			end
+			if xml_element.elements['width'] != nil
+				self.width = xml_element.elements['width'].text
+			end
+			if xml_element.elements['height'] != nil
+				self.height = xml_element.elements['height'].text
+			end
+			if xml_element.elements['status'] != nil
+				self.status = xml_element.elements['status'].text
+			end
+		end
+
+	end
+
+	class KalturaThumbParams < KalturaAssetParams
+		attr_accessor :crop_type
+		attr_accessor :quality
+		attr_accessor :crop_x
+		attr_accessor :crop_y
+		attr_accessor :crop_width
+		attr_accessor :crop_height
+		attr_accessor :video_offset
+		attr_accessor :width
+		attr_accessor :height
+		attr_accessor :scale_width
+		attr_accessor :scale_height
+		# Hexadecimal value
+		attr_accessor :background_color
+		# Id of the flavor params or the thumbnail params to be used as source for the thumbnail creation
+		attr_accessor :source_params_id
+		# The container format of the Flavor Params
+		attr_accessor :format
+		# The image density (dpi) for example: 72 or 96
+		attr_accessor :density
+		# Strip profiles and comments
+		attr_accessor :strip_profiles
+		# Create thumbnail from the videoLengthpercentage second
+		attr_accessor :video_offset_in_percentage
+
+		def crop_type=(val)
+			@crop_type = val.to_i
+		end
+		def quality=(val)
+			@quality = val.to_i
+		end
+		def crop_x=(val)
+			@crop_x = val.to_i
+		end
+		def crop_y=(val)
+			@crop_y = val.to_i
+		end
+		def crop_width=(val)
+			@crop_width = val.to_i
+		end
+		def crop_height=(val)
+			@crop_height = val.to_i
+		end
+		def video_offset=(val)
+			@video_offset = val.to_f
+		end
+		def width=(val)
+			@width = val.to_i
+		end
+		def height=(val)
+			@height = val.to_i
+		end
+		def scale_width=(val)
+			@scale_width = val.to_f
+		end
+		def scale_height=(val)
+			@scale_height = val.to_f
+		end
+		def source_params_id=(val)
+			@source_params_id = val.to_i
+		end
+		def density=(val)
+			@density = val.to_i
+		end
+		def strip_profiles=(val)
+			@strip_profiles = to_b(val)
+		end
+		def video_offset_in_percentage=(val)
+			@video_offset_in_percentage = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['cropType'] != nil
+				self.crop_type = xml_element.elements['cropType'].text
+			end
+			if xml_element.elements['quality'] != nil
+				self.quality = xml_element.elements['quality'].text
+			end
+			if xml_element.elements['cropX'] != nil
+				self.crop_x = xml_element.elements['cropX'].text
+			end
+			if xml_element.elements['cropY'] != nil
+				self.crop_y = xml_element.elements['cropY'].text
+			end
+			if xml_element.elements['cropWidth'] != nil
+				self.crop_width = xml_element.elements['cropWidth'].text
+			end
+			if xml_element.elements['cropHeight'] != nil
+				self.crop_height = xml_element.elements['cropHeight'].text
+			end
+			if xml_element.elements['videoOffset'] != nil
+				self.video_offset = xml_element.elements['videoOffset'].text
+			end
+			if xml_element.elements['width'] != nil
+				self.width = xml_element.elements['width'].text
+			end
+			if xml_element.elements['height'] != nil
+				self.height = xml_element.elements['height'].text
+			end
+			if xml_element.elements['scaleWidth'] != nil
+				self.scale_width = xml_element.elements['scaleWidth'].text
+			end
+			if xml_element.elements['scaleHeight'] != nil
+				self.scale_height = xml_element.elements['scaleHeight'].text
+			end
+			if xml_element.elements['backgroundColor'] != nil
+				self.background_color = xml_element.elements['backgroundColor'].text
+			end
+			if xml_element.elements['sourceParamsId'] != nil
+				self.source_params_id = xml_element.elements['sourceParamsId'].text
+			end
+			if xml_element.elements['format'] != nil
+				self.format = xml_element.elements['format'].text
+			end
+			if xml_element.elements['density'] != nil
+				self.density = xml_element.elements['density'].text
+			end
+			if xml_element.elements['stripProfiles'] != nil
+				self.strip_profiles = xml_element.elements['stripProfiles'].text
+			end
+			if xml_element.elements['videoOffsetInPercentage'] != nil
+				self.video_offset_in_percentage = xml_element.elements['videoOffsetInPercentage'].text
+			end
+		end
+
+	end
+
+	class KalturaThumbParamsOutput < KalturaThumbParams
+		attr_accessor :thumb_params_id
+		attr_accessor :thumb_params_version
+		attr_accessor :thumb_asset_id
+		attr_accessor :thumb_asset_version
+		attr_accessor :rotate
+
+		def thumb_params_id=(val)
+			@thumb_params_id = val.to_i
+		end
+		def rotate=(val)
+			@rotate = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['thumbParamsId'] != nil
+				self.thumb_params_id = xml_element.elements['thumbParamsId'].text
+			end
+			if xml_element.elements['thumbParamsVersion'] != nil
+				self.thumb_params_version = xml_element.elements['thumbParamsVersion'].text
+			end
+			if xml_element.elements['thumbAssetId'] != nil
+				self.thumb_asset_id = xml_element.elements['thumbAssetId'].text
+			end
+			if xml_element.elements['thumbAssetVersion'] != nil
+				self.thumb_asset_version = xml_element.elements['thumbAssetVersion'].text
+			end
+			if xml_element.elements['rotate'] != nil
+				self.rotate = xml_element.elements['rotate'].text
 			end
 		end
 
@@ -10031,6 +9979,19 @@ module Kaltura
 			super
 			if xml_element.elements['objects'] != nil
 				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaBaseSyndicationFeed')
+			end
+		end
+
+	end
+
+	class KalturaBatchJobListResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaBatchJob')
 			end
 		end
 
@@ -12168,6 +12129,19 @@ module Kaltura
 
 	end
 
+	class KalturaFlavorParamsOutputListResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaFlavorParamsOutput')
+			end
+		end
+
+	end
+
 	class KalturaGenericSyndicationFeed < KalturaBaseSyndicationFeed
 		# feed description
 		attr_accessor :feed_description
@@ -12737,6 +12711,19 @@ module Kaltura
 			super
 			if xml_element.elements['flavorAssetIdEqual'] != nil
 				self.flavor_asset_id_equal = xml_element.elements['flavorAssetIdEqual'].text
+			end
+		end
+
+	end
+
+	class KalturaMediaInfoListResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaMediaInfo')
 			end
 		end
 
@@ -13841,6 +13828,19 @@ module Kaltura
 			super
 			if xml_element.elements['objects'] != nil
 				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaThumbParams')
+			end
+		end
+
+	end
+
+	class KalturaThumbParamsOutputListResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaThumbParamsOutput')
 			end
 		end
 

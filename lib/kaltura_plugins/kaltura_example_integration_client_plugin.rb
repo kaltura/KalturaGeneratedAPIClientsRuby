@@ -26,11 +26,23 @@
 # @ignore
 # ===================================================================================================
 require 'kaltura_client.rb'
+require File.dirname(__FILE__) + '/kaltura_integration_client_plugin.rb'
 
 module Kaltura
 
+	class KalturaExampleIntegrationJobProviderData < KalturaIntegrationJobProviderData
+		# Just an example
+		attr_accessor :example_url
 
-	class KalturaClient < KalturaClientBase
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['exampleUrl'] != nil
+				self.example_url = xml_element.elements['exampleUrl'].text
+			end
+		end
+
 	end
+
 
 end

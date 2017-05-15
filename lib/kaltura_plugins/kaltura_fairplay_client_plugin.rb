@@ -26,11 +26,37 @@
 # @ignore
 # ===================================================================================================
 require 'kaltura_client.rb'
+require File.dirname(__FILE__) + '/kaltura_drm_client_plugin.rb'
 
 module Kaltura
 
+	class KalturaFairplayDrmProfile < KalturaDrmProfile
+		attr_accessor :public_certificate
 
-	class KalturaClient < KalturaClientBase
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['publicCertificate'] != nil
+				self.public_certificate = xml_element.elements['publicCertificate'].text
+			end
+		end
+
 	end
+
+	class KalturaFairplayEntryContextPluginData < KalturaPluginData
+		# For fairplay (and maybe in the future other drm providers) we need to return a public certificate to encrypt
+		# 	 the request from the player to the server.
+		attr_accessor :public_certificate
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['publicCertificate'] != nil
+				self.public_certificate = xml_element.elements['publicCertificate'].text
+			end
+		end
+
+	end
+
 
 end

@@ -218,6 +218,19 @@ module Kaltura
 
 	end
 
+	class KalturaFileSyncListResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaFileSync')
+			end
+		end
+
+	end
+
 	class KalturaFileSyncBaseFilter < KalturaFilter
 		attr_accessor :partner_id_equal
 		attr_accessor :file_object_type_equal
@@ -392,19 +405,6 @@ module Kaltura
 			end
 			if xml_element.elements['fileSizeLessThanOrEqual'] != nil
 				self.file_size_less_than_or_equal = xml_element.elements['fileSizeLessThanOrEqual'].text
-			end
-		end
-
-	end
-
-	class KalturaFileSyncListResponse < KalturaListResponse
-		attr_accessor :objects
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['objects'] != nil
-				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaFileSync')
 			end
 		end
 

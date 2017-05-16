@@ -137,7 +137,6 @@ module Kaltura
 
 	class KalturaDropFolderType
 		FEED = "FeedDropFolder.FEED"
-		WEBEX = "WebexDropFolder.WEBEX"
 		LOCAL = "1"
 		FTP = "2"
 		SCP = "3"

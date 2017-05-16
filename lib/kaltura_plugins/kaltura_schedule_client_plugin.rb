@@ -918,6 +918,7 @@ module Kaltura
 		attr_accessor :id_not_in
 		attr_accessor :parent_id_equal
 		attr_accessor :parent_id_in
+		attr_accessor :name_equal
 		attr_accessor :system_name_equal
 		attr_accessor :system_name_in
 		attr_accessor :status_equal
@@ -969,6 +970,9 @@ module Kaltura
 			if xml_element.elements['parentIdIn'] != nil
 				self.parent_id_in = xml_element.elements['parentIdIn'].text
 			end
+			if xml_element.elements['nameEqual'] != nil
+				self.name_equal = xml_element.elements['nameEqual'].text
+			end
 			if xml_element.elements['systemNameEqual'] != nil
 				self.system_name_equal = xml_element.elements['systemNameEqual'].text
 			end
@@ -1019,6 +1023,7 @@ module Kaltura
 		attr_accessor :template_entry_categories_ids_like
 		attr_accessor :resource_system_names_multi_like_and
 		attr_accessor :resource_system_names_like
+		attr_accessor :resource_id_equal
 
 
 		def from_xml(xml_element)
@@ -1058,6 +1063,9 @@ module Kaltura
 			end
 			if xml_element.elements['resourceSystemNamesLike'] != nil
 				self.resource_system_names_like = xml_element.elements['resourceSystemNamesLike'].text
+			end
+			if xml_element.elements['resourceIdEqual'] != nil
+				self.resource_id_equal = xml_element.elements['resourceIdEqual'].text
 			end
 		end
 

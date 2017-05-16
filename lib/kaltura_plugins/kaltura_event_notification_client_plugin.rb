@@ -84,7 +84,6 @@ module Kaltura
 	end
 
 	class KalturaEventNotificationEventType
-		INTEGRATION_JOB_CLOSED = "integrationEventNotifications.INTEGRATION_JOB_CLOSED"
 		BATCH_JOB_STATUS = "1"
 		OBJECT_ADDED = "2"
 		OBJECT_CHANGED = "3"
@@ -110,12 +109,8 @@ module Kaltura
 	end
 
 	class KalturaEventNotificationTemplateType
-		BPM_ABORT = "businessProcessNotification.BusinessProcessAbort"
-		BPM_SIGNAL = "businessProcessNotification.BusinessProcessSignal"
-		BPM_START = "businessProcessNotification.BusinessProcessStart"
 		EMAIL = "emailNotification.Email"
 		HTTP = "httpNotification.Http"
-		PUSH = "pushNotification.Push"
 	end
 
 	class KalturaEventNotificationParameter < KalturaObjectBase
@@ -535,33 +530,6 @@ module Kaltura
 			client.add_param(kparams, 'filter', filter)
 			client.add_param(kparams, 'pager', pager)
 			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'listTemplates', 'KalturaEventNotificationTemplateListResponse', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Register to a queue from which event messages will be provided according to given template. Queue will be created if not already exists
-		# @return [KalturaPushNotificationData]
-		def register(notification_template_system_name, push_notification_params)
-			kparams = {}
-			client.add_param(kparams, 'notificationTemplateSystemName', notification_template_system_name)
-			client.add_param(kparams, 'pushNotificationParams', push_notification_params)
-			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'register', 'KalturaPushNotificationData', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Clear queue messages
-		# @return []
-		def send_command(notification_template_system_name, push_notification_params, command)
-			kparams = {}
-			client.add_param(kparams, 'notificationTemplateSystemName', notification_template_system_name)
-			client.add_param(kparams, 'pushNotificationParams', push_notification_params)
-			client.add_param(kparams, 'command', command)
-			client.queue_service_action_call('eventnotification_eventnotificationtemplate', 'sendCommand', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

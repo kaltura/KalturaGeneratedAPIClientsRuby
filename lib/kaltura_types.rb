@@ -2958,6 +2958,8 @@ module Kaltura
 		attr_accessor :conditional_profiles
 		# When set, the ExtractMedia job should detect the source file GOP using this value as the max calculated period
 		attr_accessor :detect_gop
+		# XSL to transform ingestion Media Info XML
+		attr_accessor :media_info_xsl_transformation
 
 		def id=(val)
 			@id = val.to_i
@@ -3060,6 +3062,9 @@ module Kaltura
 			end
 			if xml_element.elements['detectGOP'] != nil
 				self.detect_gop = xml_element.elements['detectGOP'].text
+			end
+			if xml_element.elements['mediaInfoXslTransformation'] != nil
+				self.media_info_xsl_transformation = xml_element.elements['mediaInfoXslTransformation'].text
 			end
 		end
 

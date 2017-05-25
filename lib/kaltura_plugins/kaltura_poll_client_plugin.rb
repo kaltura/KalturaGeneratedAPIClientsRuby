@@ -30,4 +30,63 @@ require 'kaltura_client.rb'
 module Kaltura
 
 
+	# Poll service
+	#  The poll service works against the cache entirely no DB instance should be used here
+	class KalturaPollService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		# Add Action
+		# @return [string]
+		def add(poll_type='SINGLE_ANONYMOUS')
+			kparams = {}
+			client.add_param(kparams, 'pollType', poll_type)
+			client.queue_service_action_call('poll_poll', 'add', 'string', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Get Votes Action
+		# @return [string]
+		def get_votes(poll_id, answer_ids, other_dc_votes=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'pollId', poll_id)
+			client.add_param(kparams, 'answerIds', answer_ids)
+			client.add_param(kparams, 'otherDCVotes', other_dc_votes)
+			client.queue_service_action_call('poll_poll', 'getVotes', 'string', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Vote Action
+		# @return [string]
+		def vote(poll_id, user_id, answer_ids)
+			kparams = {}
+			client.add_param(kparams, 'pollId', poll_id)
+			client.add_param(kparams, 'userId', user_id)
+			client.add_param(kparams, 'answerIds', answer_ids)
+			client.queue_service_action_call('poll_poll', 'vote', 'string', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+	end
+
+	class KalturaClient < KalturaClientBase
+		attr_reader :poll_service
+		def poll_service
+			if (@poll_service == nil)
+				@poll_service = KalturaPollService.new(self)
+			end
+			return @poll_service
+		end
+		
+	end
+
 end

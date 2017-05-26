@@ -1316,10 +1316,11 @@ module Kaltura
 
 		# List conflicting events for resourcesIds by event's dates
 		# @return [KalturaScheduleEventListResponse]
-		def get_conflicts(resource_ids, schedule_event)
+		def get_conflicts(resource_ids, schedule_event, schedule_event_id_to_ignore=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'resourceIds', resource_ids)
 			client.add_param(kparams, 'scheduleEvent', schedule_event)
+			client.add_param(kparams, 'scheduleEventIdToIgnore', schedule_event_id_to_ignore)
 			client.queue_service_action_call('schedule_scheduleevent', 'getConflicts', 'KalturaScheduleEventListResponse', kparams)
 			if (client.is_multirequest)
 				return nil

@@ -5939,6 +5939,10 @@ module Kaltura
 			@client_configuration['clientTag'] = value
 		end
 		
+		def set_client_tag(value)
+			self.client_tag = value
+		end
+		
 		def client_tag()
 			if(@client_configuration.has_key?('clientTag'))
 				return @client_configuration['clientTag']
@@ -5947,9 +5951,17 @@ module Kaltura
 			return KalturaNotImplemented
 		end
 		
+		def get_client_tag()
+			return self.client_tag
+		end
+		
 	
 		def api_version=(value)
 			@client_configuration['apiVersion'] = value
+		end
+		
+		def set_api_version(value)
+			self.api_version = value
 		end
 		
 		def api_version()
@@ -5960,9 +5972,17 @@ module Kaltura
 			return KalturaNotImplemented
 		end
 		
+		def get_api_version()
+			return self.api_version
+		end
+		
 	
 		def partner_id=(value)
 			@request_configuration['partnerId'] = value
+		end
+		
+		def set_partner_id(value)
+			self.partner_id = value
 		end
 		
 		def partner_id()
@@ -5973,9 +5993,17 @@ module Kaltura
 			return KalturaNotImplemented
 		end
 		
+		def get_partner_id()
+			return self.partner_id
+		end
+		
 	
 		def ks=(value)
 			@request_configuration['ks'] = value
+		end
+		
+		def set_ks(value)
+			self.ks = value
 		end
 		
 		def ks()
@@ -5986,9 +6014,17 @@ module Kaltura
 			return KalturaNotImplemented
 		end
 		
+		def get_ks()
+			return self.ks
+		end
+		
 	
 		def session_id=(value)
 			@request_configuration['ks'] = value
+		end
+		
+		def set_session_id(value)
+			self.session_id = value
 		end
 		
 		def session_id()
@@ -5999,9 +6035,17 @@ module Kaltura
 			return KalturaNotImplemented
 		end
 		
+		def get_session_id()
+			return self.session_id
+		end
+		
 	
 		def response_profile=(value)
 			@request_configuration['responseProfile'] = value
+		end
+		
+		def set_response_profile(value)
+			self.response_profile = value
 		end
 		
 		def response_profile()
@@ -6010,6 +6054,10 @@ module Kaltura
 			end
 			
 			return KalturaNotImplemented
+		end
+		
+		def get_response_profile()
+			return self.response_profile
 		end
 		
 	

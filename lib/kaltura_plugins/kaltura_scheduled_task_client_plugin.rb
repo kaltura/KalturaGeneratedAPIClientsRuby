@@ -38,6 +38,7 @@ module Kaltura
 	class KalturaScheduledTaskAddOrRemoveType
 		ADD = 1
 		REMOVE = 2
+		MOVE = 3
 	end
 
 	class KalturaScheduledTaskProfileStatus

@@ -8013,9 +8013,6 @@ module Kaltura
 		def dc=(val)
 			@dc = val.to_i
 		end
-		def parent_id=(val)
-			@parent_id = val.to_i
-		end
 
 		def from_xml(xml_element)
 			super
@@ -12089,6 +12086,73 @@ module Kaltura
 
 	end
 
+	class KalturaEntryServerNodeBaseFilter < KalturaFilter
+		attr_accessor :entry_id_equal
+		attr_accessor :entry_id_in
+		attr_accessor :server_node_id_equal
+		attr_accessor :created_at_less_than_or_equal
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
+		attr_accessor :status_equal
+		attr_accessor :status_in
+		attr_accessor :server_type_equal
+
+		def server_node_id_equal=(val)
+			@server_node_id_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_greater_than_or_equal=(val)
+			@updated_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
+		end
+		def status_equal=(val)
+			@status_equal = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['entryIdEqual'] != nil
+				self.entry_id_equal = xml_element.elements['entryIdEqual'].text
+			end
+			if xml_element.elements['entryIdIn'] != nil
+				self.entry_id_in = xml_element.elements['entryIdIn'].text
+			end
+			if xml_element.elements['serverNodeIdEqual'] != nil
+				self.server_node_id_equal = xml_element.elements['serverNodeIdEqual'].text
+			end
+			if xml_element.elements['createdAtLessThanOrEqual'] != nil
+				self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['createdAtGreaterThanOrEqual'] != nil
+				self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtGreaterThanOrEqual'] != nil
+				self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtLessThanOrEqual'] != nil
+				self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['statusEqual'] != nil
+				self.status_equal = xml_element.elements['statusEqual'].text
+			end
+			if xml_element.elements['statusIn'] != nil
+				self.status_in = xml_element.elements['statusIn'].text
+			end
+			if xml_element.elements['serverTypeEqual'] != nil
+				self.server_type_equal = xml_element.elements['serverTypeEqual'].text
+			end
+		end
+
+	end
+
 	class KalturaEntryServerNodeListResponse < KalturaListResponse
 		attr_accessor :objects
 
@@ -13468,8 +13532,9 @@ module Kaltura
 		attr_accessor :tags_multi_like_and
 		attr_accessor :dc_equal
 		attr_accessor :dc_in
-		attr_accessor :parent_id_equal
-		attr_accessor :parent_id_in
+		attr_accessor :parent_id_like
+		attr_accessor :parent_id_multi_like_or
+		attr_accessor :parent_id_multi_like_and
 
 		def id_equal=(val)
 			@id_equal = val.to_i
@@ -13497,9 +13562,6 @@ module Kaltura
 		end
 		def dc_equal=(val)
 			@dc_equal = val.to_i
-		end
-		def parent_id_equal=(val)
-			@parent_id_equal = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -13576,11 +13638,14 @@ module Kaltura
 			if xml_element.elements['dcIn'] != nil
 				self.dc_in = xml_element.elements['dcIn'].text
 			end
-			if xml_element.elements['parentIdEqual'] != nil
-				self.parent_id_equal = xml_element.elements['parentIdEqual'].text
+			if xml_element.elements['parentIdLike'] != nil
+				self.parent_id_like = xml_element.elements['parentIdLike'].text
 			end
-			if xml_element.elements['parentIdIn'] != nil
-				self.parent_id_in = xml_element.elements['parentIdIn'].text
+			if xml_element.elements['parentIdMultiLikeOr'] != nil
+				self.parent_id_multi_like_or = xml_element.elements['parentIdMultiLikeOr'].text
+			end
+			if xml_element.elements['parentIdMultiLikeAnd'] != nil
+				self.parent_id_multi_like_and = xml_element.elements['parentIdMultiLikeAnd'].text
 			end
 		end
 
@@ -15504,69 +15569,11 @@ module Kaltura
 
 	end
 
-	class KalturaEntryServerNodeBaseFilter < KalturaRelatedFilter
-		attr_accessor :entry_id_equal
-		attr_accessor :entry_id_in
-		attr_accessor :server_node_id_equal
-		attr_accessor :created_at_greater_than_or_equal
-		attr_accessor :created_at_less_than_or_equal
-		attr_accessor :updated_at_greater_than_or_equal
-		attr_accessor :updated_at_less_than_or_equal
-		attr_accessor :status_equal
-		attr_accessor :status_in
-		attr_accessor :server_type_equal
+	class KalturaEntryServerNodeFilter < KalturaEntryServerNodeBaseFilter
 
-		def server_node_id_equal=(val)
-			@server_node_id_equal = val.to_i
-		end
-		def created_at_greater_than_or_equal=(val)
-			@created_at_greater_than_or_equal = val.to_i
-		end
-		def created_at_less_than_or_equal=(val)
-			@created_at_less_than_or_equal = val.to_i
-		end
-		def updated_at_greater_than_or_equal=(val)
-			@updated_at_greater_than_or_equal = val.to_i
-		end
-		def updated_at_less_than_or_equal=(val)
-			@updated_at_less_than_or_equal = val.to_i
-		end
-		def status_equal=(val)
-			@status_equal = val.to_i
-		end
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['entryIdEqual'] != nil
-				self.entry_id_equal = xml_element.elements['entryIdEqual'].text
-			end
-			if xml_element.elements['entryIdIn'] != nil
-				self.entry_id_in = xml_element.elements['entryIdIn'].text
-			end
-			if xml_element.elements['serverNodeIdEqual'] != nil
-				self.server_node_id_equal = xml_element.elements['serverNodeIdEqual'].text
-			end
-			if xml_element.elements['createdAtGreaterThanOrEqual'] != nil
-				self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
-			end
-			if xml_element.elements['createdAtLessThanOrEqual'] != nil
-				self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
-			end
-			if xml_element.elements['updatedAtGreaterThanOrEqual'] != nil
-				self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
-			end
-			if xml_element.elements['updatedAtLessThanOrEqual'] != nil
-				self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
-			end
-			if xml_element.elements['statusEqual'] != nil
-				self.status_equal = xml_element.elements['statusEqual'].text
-			end
-			if xml_element.elements['statusIn'] != nil
-				self.status_in = xml_element.elements['statusIn'].text
-			end
-			if xml_element.elements['serverTypeEqual'] != nil
-				self.server_type_equal = xml_element.elements['serverTypeEqual'].text
-			end
 		end
 
 	end
@@ -17185,22 +17192,10 @@ module Kaltura
 	end
 
 	class KalturaDeliveryServerNodeBaseFilter < KalturaServerNodeFilter
-		attr_accessor :playback_domain_like
-		attr_accessor :playback_domain_multi_like_or
-		attr_accessor :playback_domain_multi_like_and
 
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['playbackDomainLike'] != nil
-				self.playback_domain_like = xml_element.elements['playbackDomainLike'].text
-			end
-			if xml_element.elements['playbackDomainMultiLikeOr'] != nil
-				self.playback_domain_multi_like_or = xml_element.elements['playbackDomainMultiLikeOr'].text
-			end
-			if xml_element.elements['playbackDomainMultiLikeAnd'] != nil
-				self.playback_domain_multi_like_and = xml_element.elements['playbackDomainMultiLikeAnd'].text
-			end
 		end
 
 	end
@@ -17233,15 +17228,6 @@ module Kaltura
 			if xml_element.elements['attribute'] != nil
 				self.attribute = xml_element.elements['attribute'].text
 			end
-		end
-
-	end
-
-	class KalturaEntryServerNodeFilter < KalturaEntryServerNodeBaseFilter
-
-
-		def from_xml(xml_element)
-			super
 		end
 
 	end
@@ -18233,10 +18219,22 @@ module Kaltura
 	end
 
 	class KalturaEdgeServerNodeBaseFilter < KalturaDeliveryServerNodeFilter
+		attr_accessor :playback_domain_like
+		attr_accessor :playback_domain_multi_like_or
+		attr_accessor :playback_domain_multi_like_and
 
 
 		def from_xml(xml_element)
 			super
+			if xml_element.elements['playbackDomainLike'] != nil
+				self.playback_domain_like = xml_element.elements['playbackDomainLike'].text
+			end
+			if xml_element.elements['playbackDomainMultiLikeOr'] != nil
+				self.playback_domain_multi_like_or = xml_element.elements['playbackDomainMultiLikeOr'].text
+			end
+			if xml_element.elements['playbackDomainMultiLikeAnd'] != nil
+				self.playback_domain_multi_like_and = xml_element.elements['playbackDomainMultiLikeAnd'].text
+			end
 		end
 
 	end

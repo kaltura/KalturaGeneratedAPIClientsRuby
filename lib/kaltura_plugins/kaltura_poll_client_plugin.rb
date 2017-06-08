@@ -49,6 +49,19 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Vote Action
+		# @return [string]
+		def get_vote(poll_id, user_id)
+			kparams = {}
+			client.add_param(kparams, 'pollId', poll_id)
+			client.add_param(kparams, 'userId', user_id)
+			client.queue_service_action_call('poll_poll', 'getVote', 'string', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Get Votes Action
 		# @return [string]
 		def get_votes(poll_id, answer_ids, other_dc_votes=KalturaNotImplemented)

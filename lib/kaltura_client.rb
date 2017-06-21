@@ -4224,6 +4224,18 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Use this action to report device capabilities to the kaltura server.
+		# @return []
+		def report_device_capabilities(data)
+			kparams = {}
+			client.add_param(kparams, 'data', data)
+			client.queue_service_action_call('stats', 'reportDeviceCapabilities', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Use this action to report errors to the kaltura server.
 		# @return []
 		def report_error(error_code, error_message)
@@ -5931,7 +5943,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:17-06-20'
+			self.client_tag = 'ruby:17-06-21'
 			self.api_version = '3.3.0'
 		end
 		

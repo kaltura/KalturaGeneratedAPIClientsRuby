@@ -76,6 +76,19 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Get resetVotes Action
+		# @return []
+		def reset_votes(poll_id, answer_ids)
+			kparams = {}
+			client.add_param(kparams, 'pollId', poll_id)
+			client.add_param(kparams, 'answerIds', answer_ids)
+			client.queue_service_action_call('poll_poll', 'resetVotes', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Vote Action
 		# @return [string]
 		def vote(poll_id, user_id, answer_ids)

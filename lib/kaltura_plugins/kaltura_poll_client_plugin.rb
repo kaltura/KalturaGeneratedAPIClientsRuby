@@ -64,11 +64,10 @@ module Kaltura
 
 		# Get Votes Action
 		# @return [string]
-		def get_votes(poll_id, answer_ids, other_dc_votes=KalturaNotImplemented)
+		def get_votes(poll_id, answer_ids)
 			kparams = {}
 			client.add_param(kparams, 'pollId', poll_id)
 			client.add_param(kparams, 'answerIds', answer_ids)
-			client.add_param(kparams, 'otherDCVotes', other_dc_votes)
 			client.queue_service_action_call('poll_poll', 'getVotes', 'string', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -78,10 +77,9 @@ module Kaltura
 
 		# Get resetVotes Action
 		# @return []
-		def reset_votes(poll_id, answer_ids)
+		def reset_votes(poll_id)
 			kparams = {}
 			client.add_param(kparams, 'pollId', poll_id)
-			client.add_param(kparams, 'answerIds', answer_ids)
 			client.queue_service_action_call('poll_poll', 'resetVotes', '', kparams)
 			if (client.is_multirequest)
 				return nil

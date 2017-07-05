@@ -34,9 +34,13 @@ module Kaltura
 		attr_accessor :playback_context
 		# Last playback time reached by user
 		attr_accessor :last_time_reached
+		attr_accessor :last_update_time
 
 		def last_time_reached=(val)
 			@last_time_reached = val.to_i
+		end
+		def last_update_time=(val)
+			@last_update_time = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -46,6 +50,9 @@ module Kaltura
 			end
 			if xml_element.elements['lastTimeReached'] != nil
 				self.last_time_reached = xml_element.elements['lastTimeReached'].text
+			end
+			if xml_element.elements['lastUpdateTime'] != nil
+				self.last_update_time = xml_element.elements['lastUpdateTime'].text
 			end
 		end
 

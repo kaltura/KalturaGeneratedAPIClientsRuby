@@ -1637,6 +1637,7 @@ module Kaltura
 	class KalturaGeoCoderType
 		KALTURA = "1"
 		MAX_MIND = "2"
+		DIGITAL_ELEMENT = "3"
 	end
 
 	class KalturaGoogleSyndicationFeedAdultValues

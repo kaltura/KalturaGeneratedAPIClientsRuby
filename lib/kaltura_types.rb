@@ -17303,6 +17303,15 @@ module Kaltura
 
 	end
 
+	class KalturaGenericDataCenterContentResource < KalturaDataCenterContentResource
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaGenericSyndicationFeedBaseFilter < KalturaBaseSyndicationFeedFilter
 
 
@@ -17651,29 +17660,6 @@ module Kaltura
 
 	end
 
-	# Used to ingest media file that is already accessible on the shared disc.
-	class KalturaServerFileResource < KalturaDataCenterContentResource
-		# Full path to the local file
-		attr_accessor :local_file_path
-		# Should keep original file (false = mv, true = cp)
-		attr_accessor :keep_original_file
-
-		def keep_original_file=(val)
-			@keep_original_file = to_b(val)
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['localFilePath'] != nil
-				self.local_file_path = xml_element.elements['localFilePath'].text
-			end
-			if xml_element.elements['keepOriginalFile'] != nil
-				self.keep_original_file = xml_element.elements['keepOriginalFile'].text
-			end
-		end
-
-	end
-
 	# Used to ingest media that is available on remote SSH server and accessible using the supplied URL, media file will be downloaded using import job in order to make the asset ready.
 	class KalturaSshUrlResource < KalturaUrlResource
 		# SSH private key
@@ -17722,21 +17708,6 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-		end
-
-	end
-
-	# Used to ingest media that uploaded to the system and represented by token that returned from upload.upload action or uploadToken.add action.
-	class KalturaUploadedFileTokenResource < KalturaDataCenterContentResource
-		# Token that returned from upload.upload action or uploadToken.add action.
-		attr_accessor :token
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['token'] != nil
-				self.token = xml_element.elements['token'].text
-			end
 		end
 
 	end
@@ -18098,6 +18069,29 @@ module Kaltura
 
 	end
 
+	# Used to ingest media file that is already accessible on the shared disc.
+	class KalturaServerFileResource < KalturaGenericDataCenterContentResource
+		# Full path to the local file
+		attr_accessor :local_file_path
+		# Should keep original file (false = mv, true = cp)
+		attr_accessor :keep_original_file
+
+		def keep_original_file=(val)
+			@keep_original_file = to_b(val)
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['localFilePath'] != nil
+				self.local_file_path = xml_element.elements['localFilePath'].text
+			end
+			if xml_element.elements['keepOriginalFile'] != nil
+				self.keep_original_file = xml_element.elements['keepOriginalFile'].text
+			end
+		end
+
+	end
+
 	class KalturaThumbAssetBaseFilter < KalturaAssetFilter
 		attr_accessor :thumb_params_id_equal
 		attr_accessor :thumb_params_id_in
@@ -18151,6 +18145,21 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
+		end
+
+	end
+
+	# Used to ingest media that uploaded to the system and represented by token that returned from upload.upload action or uploadToken.add action.
+	class KalturaUploadedFileTokenResource < KalturaGenericDataCenterContentResource
+		# Token that returned from upload.upload action or uploadToken.add action.
+		attr_accessor :token
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['token'] != nil
+				self.token = xml_element.elements['token'].text
+			end
 		end
 
 	end

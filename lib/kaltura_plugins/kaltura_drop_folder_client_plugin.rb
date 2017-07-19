@@ -1025,24 +1025,6 @@ module Kaltura
 
 	end
 
-	# Used to ingest media that dropped through drop folder
-	class KalturaDropFolderFileResource < KalturaDataCenterContentResource
-		# Id of the drop folder file object
-		attr_accessor :drop_folder_file_id
-
-		def drop_folder_file_id=(val)
-			@drop_folder_file_id = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['dropFolderFileId'] != nil
-				self.drop_folder_file_id = xml_element.elements['dropFolderFileId'].text
-			end
-		end
-
-	end
-
 	class KalturaDropFolderImportJobData < KalturaSshImportJobData
 		attr_accessor :drop_folder_file_id
 
@@ -1082,6 +1064,24 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
+		end
+
+	end
+
+	# Used to ingest media that dropped through drop folder
+	class KalturaDropFolderFileResource < KalturaGenericDataCenterContentResource
+		# Id of the drop folder file object
+		attr_accessor :drop_folder_file_id
+
+		def drop_folder_file_id=(val)
+			@drop_folder_file_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['dropFolderFileId'] != nil
+				self.drop_folder_file_id = xml_element.elements['dropFolderFileId'].text
+			end
 		end
 
 	end

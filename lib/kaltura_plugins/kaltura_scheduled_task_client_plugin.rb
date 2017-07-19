@@ -248,9 +248,15 @@ module Kaltura
 
 	class KalturaMailNotificationObjectTask < KalturaObjectTask
 		# The mail to send the notification to
-		attr_accessor :mail_address
+		attr_accessor :mail_to
+		# The sender in the mail
+		attr_accessor :sender
+		# The subject of the entry
+		attr_accessor :subject
 		# The message to send in the notification mail
 		attr_accessor :message
+		# The basic link for the KMC site
+		attr_accessor :link
 		# Send the mail to each user
 		attr_accessor :send_to_users
 
@@ -260,11 +266,20 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['mailAddress'] != nil
-				self.mail_address = xml_element.elements['mailAddress'].text
+			if xml_element.elements['mailTo'] != nil
+				self.mail_to = xml_element.elements['mailTo'].text
+			end
+			if xml_element.elements['sender'] != nil
+				self.sender = xml_element.elements['sender'].text
+			end
+			if xml_element.elements['subject'] != nil
+				self.subject = xml_element.elements['subject'].text
 			end
 			if xml_element.elements['message'] != nil
 				self.message = xml_element.elements['message'].text
+			end
+			if xml_element.elements['link'] != nil
+				self.link = xml_element.elements['link'].text
 			end
 			if xml_element.elements['sendToUsers'] != nil
 				self.send_to_users = xml_element.elements['sendToUsers'].text

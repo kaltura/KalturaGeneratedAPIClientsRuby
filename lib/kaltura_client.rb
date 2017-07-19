@@ -1274,6 +1274,19 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Update the dataContent of data entry using a resource
+		# @return [string]
+		def add_content(entry_id, resource)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'resource', resource)
+			client.queue_service_action_call('data', 'addContent', 'string', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Delete a data entry.
 		# @return []
 		def delete(entry_id)
@@ -5943,7 +5956,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:17-07-18'
+			self.client_tag = 'ruby:17-07-19'
 			self.api_version = '3.3.0'
 		end
 		

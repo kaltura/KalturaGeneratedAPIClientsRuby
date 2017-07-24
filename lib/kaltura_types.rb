@@ -3087,6 +3087,7 @@ module Kaltura
 		attr_accessor :delete_policy
 		attr_accessor :is_encrypted
 		attr_accessor :content_awareness
+		attr_accessor :chunked_encode_mode
 		attr_accessor :two_pass
 		attr_accessor :tags
 
@@ -3113,6 +3114,9 @@ module Kaltura
 		end
 		def content_awareness=(val)
 			@content_awareness = val.to_f
+		end
+		def chunked_encode_mode=(val)
+			@chunked_encode_mode = val.to_i
 		end
 		def two_pass=(val)
 			@two_pass = val.to_i
@@ -3146,6 +3150,9 @@ module Kaltura
 			end
 			if xml_element.elements['contentAwareness'] != nil
 				self.content_awareness = xml_element.elements['contentAwareness'].text
+			end
+			if xml_element.elements['chunkedEncodeMode'] != nil
+				self.chunked_encode_mode = xml_element.elements['chunkedEncodeMode'].text
 			end
 			if xml_element.elements['twoPass'] != nil
 				self.two_pass = xml_element.elements['twoPass'].text
@@ -4393,6 +4400,7 @@ module Kaltura
 		attr_accessor :subtitles_data
 		attr_accessor :is_encrypted
 		attr_accessor :content_awareness
+		attr_accessor :chunked_encode_mode
 		attr_accessor :clip_offset
 		attr_accessor :clip_duration
 
@@ -4479,6 +4487,9 @@ module Kaltura
 		end
 		def content_awareness=(val)
 			@content_awareness = val.to_f
+		end
+		def chunked_encode_mode=(val)
+			@chunked_encode_mode = val.to_i
 		end
 		def clip_offset=(val)
 			@clip_offset = val.to_i
@@ -4599,6 +4610,9 @@ module Kaltura
 			end
 			if xml_element.elements['contentAwareness'] != nil
 				self.content_awareness = xml_element.elements['contentAwareness'].text
+			end
+			if xml_element.elements['chunkedEncodeMode'] != nil
+				self.chunked_encode_mode = xml_element.elements['chunkedEncodeMode'].text
 			end
 			if xml_element.elements['clipOffset'] != nil
 				self.clip_offset = xml_element.elements['clipOffset'].text

@@ -5090,7 +5090,7 @@ module Kaltura
 		end
 
 		# @return [KalturaUserEntryListResponse]
-		def list(filter, pager=KalturaNotImplemented)
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
 			client.add_param(kparams, 'pager', pager)
@@ -5956,7 +5956,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:17-08-01'
+			self.client_tag = 'ruby:17-08-02'
 			self.api_version = '3.3.0'
 		end
 		

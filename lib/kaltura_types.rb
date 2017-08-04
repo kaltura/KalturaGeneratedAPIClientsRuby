@@ -3623,8 +3623,8 @@ module Kaltura
 
 	end
 
-	# The KalturaFilterPager object enables paging management to be applied upon service list actions.
-	class KalturaFilterPager < KalturaObjectBase
+	# The KalturaPager object enables paging management to be applied upon service list/search actions.
+	class KalturaPager < KalturaObjectBase
 		# The number of objects to retrieve. (Default is 30, maximum page size is 500).
 		attr_accessor :page_size
 		# The page number for which {pageSize} of objects should be retrieved (Default is 1).
@@ -3645,6 +3645,16 @@ module Kaltura
 			if xml_element.elements['pageIndex'] != nil
 				self.page_index = xml_element.elements['pageIndex'].text
 			end
+		end
+
+	end
+
+	# The KalturaFilterPager object enables paging management to be applied upon service list actions.
+	class KalturaFilterPager < KalturaPager
+
+
+		def from_xml(xml_element)
+			super
 		end
 
 	end

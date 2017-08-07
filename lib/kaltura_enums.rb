@@ -1445,6 +1445,9 @@ module Kaltura
 		USER_ID = "userId"
 	end
 
+	class KalturaDrmSchemeName
+	end
+
 	class KalturaDurationType
 		LONG = "long"
 		MEDIUM = "medium"

@@ -15557,6 +15557,15 @@ module Kaltura
 
 	end
 
+	class KalturaEntryIndexAdvancedFilter < KalturaIndexAdvancedFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaEntryReferrerLiveStats < KalturaEntryLiveStats
 		attr_accessor :referrer
 

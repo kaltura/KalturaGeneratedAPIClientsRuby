@@ -2147,6 +2147,19 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# @return [KalturaLiveEntry]
+		def create_recorded_entry(entry_id, media_server_index, live_entry_status)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'mediaServerIndex', media_server_index)
+			client.add_param(kparams, 'liveEntryStatus', live_entry_status)
+			client.queue_service_action_call('livechannel', 'createRecordedEntry', 'KalturaLiveEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Delete a live channel.
 		# @return []
 		def delete(id)
@@ -2198,13 +2211,14 @@ module Kaltura
 
 		# Register media server to live entry
 		# @return [KalturaLiveEntry]
-		def register_media_server(entry_id, hostname, media_server_index, application_name=KalturaNotImplemented, live_entry_status=1)
+		def register_media_server(entry_id, hostname, media_server_index, application_name=KalturaNotImplemented, live_entry_status=1, should_create_recorded_entry=true)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
 			client.add_param(kparams, 'hostname', hostname)
 			client.add_param(kparams, 'mediaServerIndex', media_server_index)
 			client.add_param(kparams, 'applicationName', application_name)
 			client.add_param(kparams, 'liveEntryStatus', live_entry_status)
+			client.add_param(kparams, 'shouldCreateRecordedEntry', should_create_recorded_entry)
 			client.queue_service_action_call('livechannel', 'registerMediaServer', 'KalturaLiveEntry', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -2427,6 +2441,19 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# @return [KalturaLiveEntry]
+		def create_recorded_entry(entry_id, media_server_index, live_entry_status)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'mediaServerIndex', media_server_index)
+			client.add_param(kparams, 'liveEntryStatus', live_entry_status)
+			client.queue_service_action_call('livestream', 'createRecordedEntry', 'KalturaLiveEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Delete a live stream entry.
 		# @return []
 		def delete(entry_id)
@@ -2492,13 +2519,14 @@ module Kaltura
 
 		# Register media server to live entry
 		# @return [KalturaLiveEntry]
-		def register_media_server(entry_id, hostname, media_server_index, application_name=KalturaNotImplemented, live_entry_status=1)
+		def register_media_server(entry_id, hostname, media_server_index, application_name=KalturaNotImplemented, live_entry_status=1, should_create_recorded_entry=true)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
 			client.add_param(kparams, 'hostname', hostname)
 			client.add_param(kparams, 'mediaServerIndex', media_server_index)
 			client.add_param(kparams, 'applicationName', application_name)
 			client.add_param(kparams, 'liveEntryStatus', live_entry_status)
+			client.add_param(kparams, 'shouldCreateRecordedEntry', should_create_recorded_entry)
 			client.queue_service_action_call('livestream', 'registerMediaServer', 'KalturaLiveEntry', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -5956,7 +5984,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:17-08-15'
+			self.client_tag = 'ruby:17-08-16'
 			self.api_version = '3.3.0'
 		end
 		

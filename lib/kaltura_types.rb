@@ -3725,6 +3725,32 @@ module Kaltura
 
 	end
 
+	class KalturaPluginData < KalturaObjectBase
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaDrmPlaybackPluginData < KalturaPluginData
+		attr_accessor :scheme
+		attr_accessor :license_url
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['scheme'] != nil
+				self.scheme = xml_element.elements['scheme'].text
+			end
+			if xml_element.elements['licenseURL'] != nil
+				self.license_url = xml_element.elements['licenseURL'].text
+			end
+		end
+
+	end
+
 	class KalturaEmailIngestionProfile < KalturaObjectBase
 		attr_accessor :id
 		attr_accessor :name
@@ -7279,32 +7305,6 @@ module Kaltura
 			end
 			if xml_element.elements['updatedAt'] != nil
 				self.updated_at = xml_element.elements['updatedAt'].text
-			end
-		end
-
-	end
-
-	class KalturaPluginData < KalturaObjectBase
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaDrmPlaybackPluginData < KalturaPluginData
-		attr_accessor :scheme
-		attr_accessor :license_url
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['scheme'] != nil
-				self.scheme = xml_element.elements['scheme'].text
-			end
-			if xml_element.elements['licenseURL'] != nil
-				self.license_url = xml_element.elements['licenseURL'].text
 			end
 		end
 

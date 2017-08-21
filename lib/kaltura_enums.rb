@@ -842,6 +842,7 @@ module Kaltura
 		SWF = "document.SWF"
 		TIMED_THUMB_ASSET = "thumbCuePoint.timedThumb"
 		TRANSCRIPT = "transcript.Transcript"
+		WIDEVINE_FLAVOR = "widevine.WidevineFlavor"
 		FLAVOR = "1"
 		THUMBNAIL = "2"
 		LIVE = "3"
@@ -997,6 +998,7 @@ module Kaltura
 		INDEX_TAGS = "tagSearch.IndexTagsByPrivacyContext"
 		TAG_RESOLVE = "tagSearch.TagResolve"
 		VIRUS_SCAN = "virusScan.VirusScan"
+		WIDEVINE_REPOSITORY_SYNC = "widevine.WidevineRepositorySync"
 		IMPORT = "1"
 		DELETE = "2"
 		FLATTEN = "3"
@@ -1446,6 +1448,10 @@ module Kaltura
 	end
 
 	class KalturaDrmSchemeName
+		PLAYREADY_CENC = "drm.PLAYREADY_CENC"
+		WIDEVINE_CENC = "drm.WIDEVINE_CENC"
+		PLAYREADY = "playReady.PLAYREADY"
+		WIDEVINE = "widevine.WIDEVINE"
 	end
 
 	class KalturaDurationType
@@ -2904,6 +2910,7 @@ module Kaltura
 	end
 
 	class KalturaRuleActionType
+		DRM_POLICY = "drm.DRM_POLICY"
 		BLOCK = "1"
 		PREVIEW = "2"
 		LIMIT_FLAVORS = "3"

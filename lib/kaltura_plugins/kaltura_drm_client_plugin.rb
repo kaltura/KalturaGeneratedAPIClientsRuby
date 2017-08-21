@@ -68,18 +68,9 @@ module Kaltura
 	end
 
 	class KalturaDrmProviderType
-		FAIRPLAY = "fairplay.FAIRPLAY"
 		PLAY_READY = "playReady.PLAY_READY"
 		WIDEVINE = "widevine.WIDEVINE"
 		CENC = "1"
-	end
-
-	class KalturaDrmSchemeName
-		PLAYREADY_CENC = "drm.PLAYREADY_CENC"
-		WIDEVINE_CENC = "drm.WIDEVINE_CENC"
-		FAIRPLAY = "fairplay.FAIRPLAY"
-		PLAYREADY = "playReady.PLAYREADY"
-		WIDEVINE = "widevine.WIDEVINE"
 	end
 
 	class KalturaDrmLicenseAccessDetails < KalturaObjectBase

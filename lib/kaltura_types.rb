@@ -3725,32 +3725,6 @@ module Kaltura
 
 	end
 
-	class KalturaPluginData < KalturaObjectBase
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaDrmPlaybackPluginData < KalturaPluginData
-		attr_accessor :scheme
-		attr_accessor :license_url
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['scheme'] != nil
-				self.scheme = xml_element.elements['scheme'].text
-			end
-			if xml_element.elements['licenseURL'] != nil
-				self.license_url = xml_element.elements['licenseURL'].text
-			end
-		end
-
-	end
-
 	class KalturaEmailIngestionProfile < KalturaObjectBase
 		attr_accessor :id
 		attr_accessor :name
@@ -5955,6 +5929,26 @@ module Kaltura
 
 	end
 
+	class KalturaLiveEntryServerNodeRecordingInfo < KalturaObjectBase
+		attr_accessor :recorded_entry_id
+		attr_accessor :duration
+
+		def duration=(val)
+			@duration = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['recordedEntryId'] != nil
+				self.recorded_entry_id = xml_element.elements['recordedEntryId'].text
+			end
+			if xml_element.elements['duration'] != nil
+				self.duration = xml_element.elements['duration'].text
+			end
+		end
+
+	end
+
 	class KalturaLiveReportExportParams < KalturaObjectBase
 		attr_accessor :entry_ids
 		attr_accessor :recpient_email
@@ -7305,6 +7299,32 @@ module Kaltura
 			end
 			if xml_element.elements['updatedAt'] != nil
 				self.updated_at = xml_element.elements['updatedAt'].text
+			end
+		end
+
+	end
+
+	class KalturaPluginData < KalturaObjectBase
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaDrmPlaybackPluginData < KalturaPluginData
+		attr_accessor :scheme
+		attr_accessor :license_url
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['scheme'] != nil
+				self.scheme = xml_element.elements['scheme'].text
+			end
+			if xml_element.elements['licenseURL'] != nil
+				self.license_url = xml_element.elements['licenseURL'].text
 			end
 		end
 
@@ -12559,12 +12579,16 @@ module Kaltura
 	class KalturaLiveEntryServerNode < KalturaEntryServerNode
 		# parameters of the stream we got
 		attr_accessor :streams
+		attr_accessor :recording_info
 
 
 		def from_xml(xml_element)
 			super
 			if xml_element.elements['streams'] != nil
 				self.streams = KalturaClientBase.object_from_xml(xml_element.elements['streams'], 'KalturaLiveStreamParams')
+			end
+			if xml_element.elements['recordingInfo'] != nil
+				self.recording_info = KalturaClientBase.object_from_xml(xml_element.elements['recordingInfo'], 'KalturaLiveEntryServerNodeRecordingInfo')
 			end
 		end
 

@@ -1200,10 +1200,9 @@ module Kaltura
 
 		# freeExclusive KalturaDropFolder object
 		# @return [KalturaDropFolder]
-		def free_exclusive_drop_folder(drop_folder_id, status, error_code=KalturaNotImplemented, error_description=KalturaNotImplemented)
+		def free_exclusive_drop_folder(drop_folder_id, error_code=KalturaNotImplemented, error_description=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'dropFolderId', drop_folder_id)
-			client.add_param(kparams, 'status', status)
 			client.add_param(kparams, 'errorCode', error_code)
 			client.add_param(kparams, 'errorDescription', error_description)
 			client.queue_service_action_call('dropfolder_dropfolder', 'freeExclusiveDropFolder', 'KalturaDropFolder', kparams)

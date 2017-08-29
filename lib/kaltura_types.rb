@@ -5862,6 +5862,9 @@ module Kaltura
 		# Segment play duration time, in mili-seconds
 		attr_accessor :duration
 
+		def id=(val)
+			@id = val.to_i
+		end
 		def partner_id=(val)
 			@partner_id = val.to_i
 		end
@@ -5870,6 +5873,9 @@ module Kaltura
 		end
 		def updated_at=(val)
 			@updated_at = val.to_i
+		end
+		def trigger_segment_id=(val)
+			@trigger_segment_id = val.to_i
 		end
 		def start_time=(val)
 			@start_time = val.to_f

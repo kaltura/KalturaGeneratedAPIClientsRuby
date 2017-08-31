@@ -2913,6 +2913,38 @@ module Kaltura
 
 	end
 
+	class KalturaPluginReplacementOptionsItem < KalturaObjectBase
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	# Advanced configuration for entry replacement process
+	class KalturaEntryReplacementOptions < KalturaObjectBase
+		# If true manually created thumbnails will not be deleted on entry replacement
+		attr_accessor :keep_manual_thumbnails
+		# Array of plugin replacement options
+		attr_accessor :plugin_option_items
+
+		def keep_manual_thumbnails=(val)
+			@keep_manual_thumbnails = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['keepManualThumbnails'] != nil
+				self.keep_manual_thumbnails = xml_element.elements['keepManualThumbnails'].text
+			end
+			if xml_element.elements['pluginOptionItems'] != nil
+				self.plugin_option_items = KalturaClientBase.object_from_xml(xml_element.elements['pluginOptionItems'], 'KalturaPluginReplacementOptionsItem')
+			end
+		end
+
+	end
+
 	class KalturaConversionProfile < KalturaObjectBase
 		# The id of the Conversion Profile
 		attr_accessor :id
@@ -2960,6 +2992,8 @@ module Kaltura
 		attr_accessor :detect_gop
 		# XSL to transform ingestion Media Info XML
 		attr_accessor :media_info_xsl_transformation
+		# Default replacement options to be applied to entries
+		attr_accessor :default_replacement_options
 
 		def id=(val)
 			@id = val.to_i
@@ -3065,6 +3099,9 @@ module Kaltura
 			end
 			if xml_element.elements['mediaInfoXslTransformation'] != nil
 				self.media_info_xsl_transformation = xml_element.elements['mediaInfoXslTransformation'].text
+			end
+			if xml_element.elements['defaultReplacementOptions'] != nil
+				self.default_replacement_options = KalturaClientBase.object_from_xml(xml_element.elements['defaultReplacementOptions'], 'KalturaEntryReplacementOptions')
 			end
 		end
 
@@ -3828,38 +3865,6 @@ module Kaltura
 			super
 			if xml_element.elements['value'] != nil
 				self.value = xml_element.elements['value'].text
-			end
-		end
-
-	end
-
-	class KalturaPluginReplacementOptionsItem < KalturaObjectBase
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	# Advanced configuration for entry replacement process
-	class KalturaEntryReplacementOptions < KalturaObjectBase
-		# If true manually created thumbnails will not be deleted on entry replacement
-		attr_accessor :keep_manual_thumbnails
-		# Array of plugin replacement options
-		attr_accessor :plugin_option_items
-
-		def keep_manual_thumbnails=(val)
-			@keep_manual_thumbnails = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['keepManualThumbnails'] != nil
-				self.keep_manual_thumbnails = xml_element.elements['keepManualThumbnails'].text
-			end
-			if xml_element.elements['pluginOptionItems'] != nil
-				self.plugin_option_items = KalturaClientBase.object_from_xml(xml_element.elements['pluginOptionItems'], 'KalturaPluginReplacementOptionsItem')
 			end
 		end
 

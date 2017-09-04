@@ -191,6 +191,48 @@ module Kaltura
 
 	end
 
+	class KalturaCopyCaptionsJobData < KalturaJobData
+		# source entry Id
+		attr_accessor :source_entry_id
+		# entry Id
+		attr_accessor :entry_id
+		# clip offset
+		attr_accessor :offset
+		# clip duration
+		attr_accessor :duration
+		attr_accessor :full_copy
+
+		def offset=(val)
+			@offset = val.to_i
+		end
+		def duration=(val)
+			@duration = val.to_i
+		end
+		def full_copy=(val)
+			@full_copy = to_b(val)
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['sourceEntryId'] != nil
+				self.source_entry_id = xml_element.elements['sourceEntryId'].text
+			end
+			if xml_element.elements['entryId'] != nil
+				self.entry_id = xml_element.elements['entryId'].text
+			end
+			if xml_element.elements['offset'] != nil
+				self.offset = xml_element.elements['offset'].text
+			end
+			if xml_element.elements['duration'] != nil
+				self.duration = xml_element.elements['duration'].text
+			end
+			if xml_element.elements['fullCopy'] != nil
+				self.full_copy = xml_element.elements['fullCopy'].text
+			end
+		end
+
+	end
+
 	class KalturaParseMultiLanguageCaptionAssetJobData < KalturaJobData
 		attr_accessor :multi_lanaguage_caption_asset_id
 		attr_accessor :entry_id

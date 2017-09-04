@@ -185,6 +185,20 @@ module Kaltura
 			super(client)
 		end
 
+		# List caption asset items by filter and pager
+		# @return [KalturaCaptionAssetItemListResponse]
+		def list(caption_asset_id, caption_asset_item_filter=KalturaNotImplemented, caption_asset_item_pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'captionAssetId', caption_asset_id)
+			client.add_param(kparams, 'captionAssetItemFilter', caption_asset_item_filter)
+			client.add_param(kparams, 'captionAssetItemPager', caption_asset_item_pager)
+			client.queue_service_action_call('captionsearch_captionassetitem', 'list', 'KalturaCaptionAssetItemListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Search caption asset items by filter, pager and free text
 		# @return [KalturaCaptionAssetItemListResponse]
 		def search(entry_filter=KalturaNotImplemented, caption_asset_item_filter=KalturaNotImplemented, caption_asset_item_pager=KalturaNotImplemented)

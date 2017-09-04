@@ -10830,6 +10830,28 @@ module Kaltura
 
 	end
 
+	class KalturaClearBeaconsJobData < KalturaJobData
+		# Beacon object Id to clear info for
+		attr_accessor :object_id
+		# Beacon object Type to clear info for
+		attr_accessor :related_object_type
+
+		def related_object_type=(val)
+			@related_object_type = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['objectId'] != nil
+				self.object_id = xml_element.elements['objectId'].text
+			end
+			if xml_element.elements['relatedObjectType'] != nil
+				self.related_object_type = xml_element.elements['relatedObjectType'].text
+			end
+		end
+
+	end
+
 	# Clip operation attributes
 	class KalturaClipAttributes < KalturaOperationAttributes
 		# Offset in milliseconds

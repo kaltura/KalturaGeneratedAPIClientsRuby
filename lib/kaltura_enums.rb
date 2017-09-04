@@ -1035,6 +1035,7 @@ module Kaltura
 		LIVE_REPORT_EXPORT = "40"
 		RECALCULATE_CACHE = "41"
 		LIVE_TO_VOD = "42"
+		COPY_CAPTIONS = "43"
 	end
 
 	class KalturaBulkUploadAction

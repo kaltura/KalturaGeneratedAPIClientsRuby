@@ -68,6 +68,7 @@ module Kaltura
 	end
 
 	class KalturaDrmProviderType
+		FAIRPLAY = "fairplay.FAIRPLAY"
 		PLAY_READY = "playReady.PLAY_READY"
 		WIDEVINE = "widevine.WIDEVINE"
 		CENC = "1"

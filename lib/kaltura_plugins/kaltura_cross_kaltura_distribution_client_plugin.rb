@@ -60,6 +60,10 @@ module Kaltura
 		attr_accessor :distributed_caption_assets
 		# Key-value array where the keys are IDs of distributed cue points in the source account and the values are the matching IDs in the target account
 		attr_accessor :distributed_cue_points
+		# Key-value array where the keys are IDs of distributed thumb cue points in the source account and the values are the matching IDs in the target account
+		attr_accessor :distributed_thumb_cue_points
+		# Key-value array where the keys are IDs of distributed timed thumb assets in the source account and the values are the matching IDs in the target account
+		attr_accessor :distributed_timed_thumb_assets
 
 
 		def from_xml(xml_element)
@@ -78,6 +82,12 @@ module Kaltura
 			end
 			if xml_element.elements['distributedCuePoints'] != nil
 				self.distributed_cue_points = xml_element.elements['distributedCuePoints'].text
+			end
+			if xml_element.elements['distributedThumbCuePoints'] != nil
+				self.distributed_thumb_cue_points = xml_element.elements['distributedThumbCuePoints'].text
+			end
+			if xml_element.elements['distributedTimedThumbAssets'] != nil
+				self.distributed_timed_thumb_assets = xml_element.elements['distributedTimedThumbAssets'].text
 			end
 		end
 

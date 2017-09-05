@@ -190,6 +190,13 @@ module Kaltura
 		AUTO_APPROVED = 6
 	end
 
+	class KalturaEntryServerNodeRecordingStatus
+		STOPPED = 0
+		ON_GOING = 1
+		DONE = 2
+		DISMISSED = 3
+	end
+
 	class KalturaEntryServerNodeStatus
 		STOPPED = 0
 		PLAYABLE = 1
@@ -2103,7 +2110,7 @@ module Kaltura
 		NE = "Nepali"
 		NEW_ = "Newari Nepal Bhasa"
 		NIO = "Nganasan"
-		NCG = "Nisga'a"
+		NCG = "Nisgaa"
 		NIU = "Niuean"
 		NOG = "Nogai"
 		NON = "Norse Old"
@@ -2147,7 +2154,7 @@ module Kaltura
 		PRG = "Prussian"
 		FUC = "Pulaar"
 		PA = "Punjabi"
-		QXQ = "Qashqa'i"
+		QXQ = "Qashqai"
 		ALC = "Qawasqar"
 		QU = "Quechua"
 		QUC = "Quich Central"
@@ -2251,7 +2258,7 @@ module Kaltura
 		TI = "Tigrinya"
 		TLI = "Tlingit"
 		TCX = "Toda"
-		OOD = "Tohono O'odham"
+		OOD = "Tohono Oodham"
 		TPI = "Tok Pisin"
 		TO = "Tonga"
 		TOG = "Tonga (Nyasa)"

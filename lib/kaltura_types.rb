@@ -5943,9 +5943,13 @@ module Kaltura
 	class KalturaLiveEntryServerNodeRecordingInfo < KalturaObjectBase
 		attr_accessor :recorded_entry_id
 		attr_accessor :duration
+		attr_accessor :recording_status
 
 		def duration=(val)
 			@duration = val.to_i
+		end
+		def recording_status=(val)
+			@recording_status = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -5955,6 +5959,9 @@ module Kaltura
 			end
 			if xml_element.elements['duration'] != nil
 				self.duration = xml_element.elements['duration'].text
+			end
+			if xml_element.elements['recordingStatus'] != nil
+				self.recording_status = xml_element.elements['recordingStatus'].text
 			end
 		end
 

@@ -51,9 +51,6 @@ module Kaltura
 
 	class KalturaVirusScanEngineType
 		CLAMAV_SCAN_ENGINE = "clamAVScanEngine.ClamAV"
-		SYMANTEC_SCAN_DIRECT_ENGINE = "symantecScanEngine.SymantecScanDirectEngine"
-		SYMANTEC_SCAN_ENGINE = "symantecScanEngine.SymantecScanEngine"
-		SYMANTEC_SCAN_JAVA_ENGINE = "symantecScanEngine.SymantecScanJavaEngine"
 	end
 
 	class KalturaVirusScanProfileOrderBy

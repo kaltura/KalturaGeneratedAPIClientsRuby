@@ -849,7 +849,6 @@ module Kaltura
 		SWF = "document.SWF"
 		TIMED_THUMB_ASSET = "thumbCuePoint.timedThumb"
 		TRANSCRIPT = "transcript.Transcript"
-		WIDEVINE_FLAVOR = "widevine.WidevineFlavor"
 		FLAVOR = "1"
 		THUMBNAIL = "2"
 		LIVE = "3"
@@ -987,6 +986,7 @@ module Kaltura
 	end
 
 	class KalturaBatchJobType
+		CONVERT = "0"
 		PARSE_MULTI_LANGUAGE_CAPTION_ASSET = "caption.parsemultilanguagecaptionasset"
 		PARSE_CAPTION_ASSET = "captionSearch.parseCaptionAsset"
 		DISTRIBUTION_DELETE = "contentDistribution.DistributionDelete"
@@ -996,7 +996,6 @@ module Kaltura
 		DISTRIBUTION_SUBMIT = "contentDistribution.DistributionSubmit"
 		DISTRIBUTION_SYNC = "contentDistribution.DistributionSync"
 		DISTRIBUTION_UPDATE = "contentDistribution.DistributionUpdate"
-		CONVERT = "0"
 		DROP_FOLDER_CONTENT_PROCESSOR = "dropFolder.DropFolderContentProcessor"
 		DROP_FOLDER_WATCHER = "dropFolder.DropFolderWatcher"
 		EVENT_NOTIFICATION_HANDLER = "eventNotification.EventNotificationHandler"
@@ -1005,7 +1004,6 @@ module Kaltura
 		INDEX_TAGS = "tagSearch.IndexTagsByPrivacyContext"
 		TAG_RESOLVE = "tagSearch.TagResolve"
 		VIRUS_SCAN = "virusScan.VirusScan"
-		WIDEVINE_REPOSITORY_SYNC = "widevine.WidevineRepositorySync"
 		IMPORT = "1"
 		DELETE = "2"
 		FLATTEN = "3"
@@ -1401,6 +1399,7 @@ module Kaltura
 		VOD_PACKAGER_HDS = "63"
 		VOD_PACKAGER_MSS = "67"
 		VOD_PACKAGER_DASH = "68"
+		VOD_PACKAGER_HLS_MANIFEST = "69"
 		LIVE_HLS = "1001"
 		LIVE_HDS = "1002"
 		LIVE_DASH = "1003"
@@ -1456,11 +1455,6 @@ module Kaltura
 	end
 
 	class KalturaDrmSchemeName
-		PLAYREADY_CENC = "drm.PLAYREADY_CENC"
-		WIDEVINE_CENC = "drm.WIDEVINE_CENC"
-		FAIRPLAY = "fairplay.FAIRPLAY"
-		PLAYREADY = "playReady.PLAYREADY"
-		WIDEVINE = "widevine.WIDEVINE"
 	end
 
 	class KalturaDurationType
@@ -1911,9 +1905,9 @@ module Kaltura
 		EEE = "E"
 		EGL = "Emilian"
 		EN = "English"
-		ENM = "English	 Middle (1100-1500)"
 		EN_US = "English (American)"
 		EN_GB = "English (British)"
+		ENM = "English Middle (1100-1500)"
 		MYV = "Erzya"
 		EO = "Esperanto"
 		ET = "Estonian"
@@ -2121,7 +2115,7 @@ module Kaltura
 		NIU = "Niuean"
 		NOG = "Nogai"
 		NON = "Norse Old"
-		NSO = "Northern Sotho	 Pedi Sepedi"
+		NSO = "Northern Sotho Pedi Sepedi"
 		NO = "Norwegian"
 		NOV = "Novial"
 		NYM = "Nyamwezi"
@@ -2249,9 +2243,9 @@ module Kaltura
 		TLY = "Talysh"
 		TTQ = "Tamajaq Tawallammat"
 		TAQ = "Tamasheq"
-		TZM = "Tamazight	 Central Atlas"
+		TZM = "Tamazight Central Atlas"
 		TA = "Tamil"
-		TAR = "Tarahumara	 Central"
+		TAR = "Tarahumara Central"
 		TTT = "Tat Muslim"
 		TT = "Tatar"
 		TE = "Telugu"
@@ -2278,7 +2272,7 @@ module Kaltura
 		TPN = "Tupinamb"
 		TUV = "Turkana"
 		TR = "Turkish"
-		OTA = "Turkish	 Ottoman"
+		OTA = "Turkish Ottoman"
 		TK = "Turkmen"
 		TUS = "Tuscarora"
 		TVL = "Tuvalu"
@@ -3316,7 +3310,6 @@ module Kaltura
 	end
 
 	class KalturaRuleActionType
-		DRM_POLICY = "drm.DRM_POLICY"
 		BLOCK = "1"
 		PREVIEW = "2"
 		LIMIT_FLAVORS = "3"
@@ -3360,7 +3353,6 @@ module Kaltura
 	end
 
 	class KalturaSourceType
-		LIMELIGHT_LIVE = "limeLight.LIVE_STREAM"
 		VELOCIX_LIVE = "velocix.VELOCIX_LIVE"
 		FILE = "1"
 		WEBCAM = "2"

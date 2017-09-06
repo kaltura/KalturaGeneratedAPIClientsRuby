@@ -36,7 +36,6 @@ module Kaltura
 	end
 
 	class KalturaIntegrationTriggerType
-		BPM_EVENT_NOTIFICATION = "bpmEventNotificationIntegration.BpmEventNotification"
 		MANUAL = "1"
 	end
 

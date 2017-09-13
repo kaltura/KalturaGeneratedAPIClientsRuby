@@ -849,6 +849,7 @@ module Kaltura
 		SWF = "document.SWF"
 		TIMED_THUMB_ASSET = "thumbCuePoint.timedThumb"
 		TRANSCRIPT = "transcript.Transcript"
+		WIDEVINE_FLAVOR = "widevine.WidevineFlavor"
 		FLAVOR = "1"
 		THUMBNAIL = "2"
 		LIVE = "3"
@@ -986,10 +987,10 @@ module Kaltura
 	end
 
 	class KalturaBatchJobType
-		CONVERT = "0"
 		PARSE_MULTI_LANGUAGE_CAPTION_ASSET = "caption.parsemultilanguagecaptionasset"
 		PARSE_CAPTION_ASSET = "captionSearch.parseCaptionAsset"
 		DISTRIBUTION_DELETE = "contentDistribution.DistributionDelete"
+		CONVERT = "0"
 		DISTRIBUTION_DISABLE = "contentDistribution.DistributionDisable"
 		DISTRIBUTION_ENABLE = "contentDistribution.DistributionEnable"
 		DISTRIBUTION_FETCH_REPORT = "contentDistribution.DistributionFetchReport"
@@ -1004,6 +1005,7 @@ module Kaltura
 		INDEX_TAGS = "tagSearch.IndexTagsByPrivacyContext"
 		TAG_RESOLVE = "tagSearch.TagResolve"
 		VIRUS_SCAN = "virusScan.VirusScan"
+		WIDEVINE_REPOSITORY_SYNC = "widevine.WidevineRepositorySync"
 		IMPORT = "1"
 		DELETE = "2"
 		FLATTEN = "3"
@@ -1043,6 +1045,7 @@ module Kaltura
 		RECALCULATE_CACHE = "41"
 		LIVE_TO_VOD = "42"
 		COPY_CAPTIONS = "43"
+		CHUNKED_ENCODE_JOB_SCHEDULER = "44"
 	end
 
 	class KalturaBulkUploadAction
@@ -1455,6 +1458,11 @@ module Kaltura
 	end
 
 	class KalturaDrmSchemeName
+		PLAYREADY_CENC = "drm.PLAYREADY_CENC"
+		WIDEVINE_CENC = "drm.WIDEVINE_CENC"
+		FAIRPLAY = "fairplay.FAIRPLAY"
+		PLAYREADY = "playReady.PLAYREADY"
+		WIDEVINE = "widevine.WIDEVINE"
 	end
 
 	class KalturaDurationType
@@ -3310,6 +3318,7 @@ module Kaltura
 	end
 
 	class KalturaRuleActionType
+		DRM_POLICY = "drm.DRM_POLICY"
 		BLOCK = "1"
 		PREVIEW = "2"
 		LIMIT_FLAVORS = "3"
@@ -3353,6 +3362,7 @@ module Kaltura
 	end
 
 	class KalturaSourceType
+		LIMELIGHT_LIVE = "limeLight.LIVE_STREAM"
 		VELOCIX_LIVE = "velocix.VELOCIX_LIVE"
 		FILE = "1"
 		WEBCAM = "2"

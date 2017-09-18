@@ -13730,6 +13730,15 @@ module Kaltura
 
 	end
 
+	class KalturaSessionResponse < KalturaStartWidgetSessionResponse
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaSessionRestriction < KalturaBaseRestriction
 
 

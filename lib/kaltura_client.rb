@@ -5393,6 +5393,18 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Loges a user to the destination account as long the ks user id exists in the desc acount and the loginData id match for both accounts
+		# @return [KalturaSessionResponse]
+		def login_by_ks(requested_partner_id)
+			kparams = {}
+			client.add_param(kparams, 'requestedPartnerId', requested_partner_id)
+			client.queue_service_action_call('user', 'loginByKs', 'KalturaSessionResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Logs a user into a partner account with a user login ID and a user password.
 		# @return [string]
 		def login_by_login_id(login_id, password, partner_id=KalturaNotImplemented, expiry=86400, privileges='*', otp=KalturaNotImplemented)
@@ -5985,7 +5997,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:17-09-17'
+			self.client_tag = 'ruby:17-09-18'
 			self.api_version = '3.3.0'
 		end
 		

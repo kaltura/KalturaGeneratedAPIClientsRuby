@@ -911,10 +911,12 @@ module Kaltura
 		attr_accessor :parent_entry_id
 		# clipping, skipping and cropping attributes that used to create this entry
 		attr_accessor :operation_attributes
-		# list of user ids that are entitled to edit the entry (no server enforcement) The difference between entitledUsersEdit and entitledUsersPublish is applicative only
+		# list of user ids that are entitled to edit the entry (no server enforcement) The difference between entitledUsersEdit, entitledUsersPublish and entitledUsersView is applicative only
 		attr_accessor :entitled_users_edit
-		# list of user ids that are entitled to publish the entry (no server enforcement) The difference between entitledUsersEdit and entitledUsersPublish is applicative only
+		# list of user ids that are entitled to publish the entry (no server enforcement) The difference between entitledUsersEdit, entitledUsersPublish and entitledUsersView is applicative only
 		attr_accessor :entitled_users_publish
+		# list of user ids that are entitled to view the entry (no server enforcement) The difference between entitledUsersEdit, entitledUsersPublish and entitledUsersView is applicative only
+		attr_accessor :entitled_users_view
 		# Comma seperated string of the capabilities of the entry. Any capability needed can be added to this list.
 		attr_accessor :capabilities
 		# Template entry id
@@ -1098,6 +1100,9 @@ module Kaltura
 			end
 			if xml_element.elements['entitledUsersPublish'] != nil
 				self.entitled_users_publish = xml_element.elements['entitledUsersPublish'].text
+			end
+			if xml_element.elements['entitledUsersView'] != nil
+				self.entitled_users_view = xml_element.elements['entitledUsersView'].text
 			end
 			if xml_element.elements['capabilities'] != nil
 				self.capabilities = xml_element.elements['capabilities'].text
@@ -6511,6 +6516,8 @@ module Kaltura
 		attr_accessor :entitled_users_edit_match_or
 		attr_accessor :entitled_users_publish_match_and
 		attr_accessor :entitled_users_publish_match_or
+		attr_accessor :entitled_users_view_match_and
+		attr_accessor :entitled_users_view_match_or
 		attr_accessor :tags_name_multi_like_or
 		attr_accessor :tags_admin_tags_multi_like_or
 		attr_accessor :tags_admin_tags_name_multi_like_or
@@ -6802,6 +6809,12 @@ module Kaltura
 			end
 			if xml_element.elements['entitledUsersPublishMatchOr'] != nil
 				self.entitled_users_publish_match_or = xml_element.elements['entitledUsersPublishMatchOr'].text
+			end
+			if xml_element.elements['entitledUsersViewMatchAnd'] != nil
+				self.entitled_users_view_match_and = xml_element.elements['entitledUsersViewMatchAnd'].text
+			end
+			if xml_element.elements['entitledUsersViewMatchOr'] != nil
+				self.entitled_users_view_match_or = xml_element.elements['entitledUsersViewMatchOr'].text
 			end
 			if xml_element.elements['tagsNameMultiLikeOr'] != nil
 				self.tags_name_multi_like_or = xml_element.elements['tagsNameMultiLikeOr'].text
@@ -8876,6 +8889,8 @@ module Kaltura
 		attr_accessor :created_at
 		# Last update date as Unix timestamp (In seconds)
 		attr_accessor :updated_at
+		# Upload url - to explicitly determine to which domain to adress the uploadToken->upload call
+		attr_accessor :upload_url
 
 		def partner_id=(val)
 			@partner_id = val.to_i
@@ -8924,6 +8939,9 @@ module Kaltura
 			end
 			if xml_element.elements['updatedAt'] != nil
 				self.updated_at = xml_element.elements['updatedAt'].text
+			end
+			if xml_element.elements['uploadUrl'] != nil
+				self.upload_url = xml_element.elements['uploadUrl'].text
 			end
 		end
 

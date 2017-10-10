@@ -880,6 +880,8 @@ module Kaltura
 		CATEGORIES = "2"
 		CHILD_ENTRIES = "3"
 		ACCESS_CONTROL = "4"
+		METADATA = "5"
+		FLAVORS = "6"
 	end
 
 	class KalturaBaseEntryCompareAttribute

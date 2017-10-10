@@ -2924,6 +2924,15 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Get volume map by entry id
+		# @return [file]
+		def get_volume_map(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('media', 'getVolumeMap', 'file', kparams)
+			return client.get_serve_url()
+		end
+
 		# List media entries by filter with paging support.
 		# @return [KalturaMediaListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
@@ -5996,7 +6005,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:17-10-09'
+			self.client_tag = 'ruby:17-10-10'
 			self.api_version = '3.3.0'
 		end
 		

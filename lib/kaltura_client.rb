@@ -2926,9 +2926,10 @@ module Kaltura
 
 		# Get volume map by entry id
 		# @return [file]
-		def get_volume_map(entry_id)
+		def get_volume_map(entry_id, flavor_id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'flavorId', flavor_id)
 			client.queue_service_action_call('media', 'getVolumeMap', 'file', kparams)
 			return client.get_serve_url()
 		end

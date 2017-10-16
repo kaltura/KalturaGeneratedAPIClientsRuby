@@ -882,6 +882,7 @@ module Kaltura
 		ACCESS_CONTROL = "4"
 		METADATA = "5"
 		FLAVORS = "6"
+		CAPTIONS = "7"
 	end
 
 	class KalturaBaseEntryCompareAttribute

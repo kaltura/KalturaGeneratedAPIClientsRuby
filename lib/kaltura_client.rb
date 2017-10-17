@@ -1795,6 +1795,15 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Get volume map by entry id
+		# @return [file]
+		def get_volume_map(flavor_id)
+			kparams = {}
+			client.add_param(kparams, 'flavorId', flavor_id)
+			client.queue_service_action_call('flavorasset', 'getVolumeMap', 'file', kparams)
+			return client.get_serve_url()
+		end
+
 		# Get web playable Flavor Assets for Entry
 		# @return [array]
 		def get_web_playable_by_entry_id(entry_id)
@@ -2926,10 +2935,9 @@ module Kaltura
 
 		# Get volume map by entry id
 		# @return [file]
-		def get_volume_map(entry_id, flavor_id=KalturaNotImplemented)
+		def get_volume_map(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'flavorId', flavor_id)
 			client.queue_service_action_call('media', 'getVolumeMap', 'file', kparams)
 			return client.get_serve_url()
 		end
@@ -6006,7 +6014,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:17-10-16'
+			self.client_tag = 'ruby:17-10-17'
 			self.api_version = '3.3.0'
 		end
 		

@@ -505,11 +505,15 @@ module Kaltura
 	class KalturaESearchMetadataItemData < KalturaESearchItemData
 		attr_accessor :xpath
 		attr_accessor :metadata_profile_id
+		attr_accessor :metadata_field_id
 		attr_accessor :value_text
 		attr_accessor :value_int
 
 		def metadata_profile_id=(val)
 			@metadata_profile_id = val.to_i
+		end
+		def metadata_field_id=(val)
+			@metadata_field_id = val.to_i
 		end
 		def value_int=(val)
 			@value_int = val.to_i
@@ -522,6 +526,9 @@ module Kaltura
 			end
 			if xml_element.elements['metadataProfileId'] != nil
 				self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
+			end
+			if xml_element.elements['metadataFieldId'] != nil
+				self.metadata_field_id = xml_element.elements['metadataFieldId'].text
 			end
 			if xml_element.elements['valueText'] != nil
 				self.value_text = xml_element.elements['valueText'].text
@@ -610,9 +617,13 @@ module Kaltura
 	class KalturaESearchMetadataItem < KalturaESearchItem
 		attr_accessor :xpath
 		attr_accessor :metadata_profile_id
+		attr_accessor :metadata_field_id
 
 		def metadata_profile_id=(val)
 			@metadata_profile_id = val.to_i
+		end
+		def metadata_field_id=(val)
+			@metadata_field_id = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -622,6 +633,9 @@ module Kaltura
 			end
 			if xml_element.elements['metadataProfileId'] != nil
 				self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
+			end
+			if xml_element.elements['metadataFieldId'] != nil
+				self.metadata_field_id = xml_element.elements['metadataFieldId'].text
 			end
 		end
 

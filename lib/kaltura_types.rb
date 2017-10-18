@@ -8891,6 +8891,8 @@ module Kaltura
 		attr_accessor :updated_at
 		# Upload url - to explicitly determine to which domain to adress the uploadToken->upload call
 		attr_accessor :upload_url
+		# autoFinalize - Should the upload be finalized once the file size on disk matches the file size reproted when adding the upload token.
+		attr_accessor :auto_finalize
 
 		def partner_id=(val)
 			@partner_id = val.to_i
@@ -8909,6 +8911,9 @@ module Kaltura
 		end
 		def updated_at=(val)
 			@updated_at = val.to_i
+		end
+		def auto_finalize=(val)
+			@auto_finalize = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -8942,6 +8947,9 @@ module Kaltura
 			end
 			if xml_element.elements['uploadUrl'] != nil
 				self.upload_url = xml_element.elements['uploadUrl'].text
+			end
+			if xml_element.elements['autoFinalize'] != nil
+				self.auto_finalize = xml_element.elements['autoFinalize'].text
 			end
 		end
 

@@ -2156,6 +2156,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Create recorded entry id if it doesn't exist and make sure it happens on the DC that the live entry was created on.
 		# @return [KalturaLiveEntry]
 		def create_recorded_entry(entry_id, media_server_index, live_entry_status)
 			kparams = {}
@@ -2235,7 +2236,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Sey recorded video to live entry
+		# Set recorded video to live entry
 		# @return [KalturaLiveEntry]
 		def set_recorded_content(entry_id, media_server_index, resource, duration, recorded_entry_id=KalturaNotImplemented, flavor_params_id=KalturaNotImplemented)
 			kparams = {}
@@ -2450,6 +2451,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Create recorded entry id if it doesn't exist and make sure it happens on the DC that the live entry was created on.
 		# @return [KalturaLiveEntry]
 		def create_recorded_entry(entry_id, media_server_index, live_entry_status)
 			kparams = {}
@@ -2556,7 +2558,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Sey recorded video to live entry
+		# Set recorded video to live entry
 		# @return [KalturaLiveEntry]
 		def set_recorded_content(entry_id, media_server_index, resource, duration, recorded_entry_id=KalturaNotImplemented, flavor_params_id=KalturaNotImplemented)
 			kparams = {}
@@ -6014,7 +6016,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:17-10-23'
+			self.client_tag = 'ruby:17-10-24'
 			self.api_version = '3.3.0'
 		end
 		

@@ -417,6 +417,7 @@ module Kaltura
 		attr_accessor :start_time
 		attr_accessor :end_time
 		attr_accessor :sub_type
+		attr_accessor :question
 		attr_accessor :answers
 		attr_accessor :hint
 		attr_accessor :explanation
@@ -447,6 +448,9 @@ module Kaltura
 			end
 			if xml_element.elements['subType'] != nil
 				self.sub_type = xml_element.elements['subType'].text
+			end
+			if xml_element.elements['question'] != nil
+				self.question = xml_element.elements['question'].text
 			end
 			if xml_element.elements['answers'] != nil
 				self.answers = xml_element.elements['answers'].text

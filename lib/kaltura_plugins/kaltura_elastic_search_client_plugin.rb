@@ -210,6 +210,15 @@ module Kaltura
 
 	end
 
+	class KalturaESearchObject < KalturaObjectBase
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaESearchOrderByItem < KalturaObjectBase
 		attr_accessor :sort_order
 
@@ -231,47 +240,6 @@ module Kaltura
 			super
 			if xml_element.elements['orderItems'] != nil
 				self.order_items = KalturaClientBase.object_from_xml(xml_element.elements['orderItems'], 'KalturaESearchOrderByItem')
-			end
-		end
-
-	end
-
-	class KalturaESearchOperator < KalturaESearchBaseItem
-		attr_accessor :operator
-		attr_accessor :search_items
-
-		def operator=(val)
-			@operator = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['operator'] != nil
-				self.operator = xml_element.elements['operator'].text
-			end
-			if xml_element.elements['searchItems'] != nil
-				self.search_items = KalturaClientBase.object_from_xml(xml_element.elements['searchItems'], 'KalturaESearchBaseItem')
-			end
-		end
-
-	end
-
-	class KalturaESearchParams < KalturaObjectBase
-		attr_accessor :search_operator
-		attr_accessor :object_statuses
-		attr_accessor :order_by
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['searchOperator'] != nil
-				self.search_operator = KalturaClientBase.object_from_xml(xml_element.elements['searchOperator'], 'KalturaESearchOperator')
-			end
-			if xml_element.elements['objectStatuses'] != nil
-				self.object_statuses = xml_element.elements['objectStatuses'].text
-			end
-			if xml_element.elements['orderBy'] != nil
-				self.order_by = KalturaClientBase.object_from_xml(xml_element.elements['orderBy'], 'KalturaESearchOrderBy')
 			end
 		end
 
@@ -544,6 +512,47 @@ module Kaltura
 			end
 			if xml_element.elements['valueInt'] != nil
 				self.value_int = xml_element.elements['valueInt'].text
+			end
+		end
+
+	end
+
+	class KalturaESearchOperator < KalturaESearchBaseItem
+		attr_accessor :operator
+		attr_accessor :search_items
+
+		def operator=(val)
+			@operator = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['operator'] != nil
+				self.operator = xml_element.elements['operator'].text
+			end
+			if xml_element.elements['searchItems'] != nil
+				self.search_items = KalturaClientBase.object_from_xml(xml_element.elements['searchItems'], 'KalturaESearchBaseItem')
+			end
+		end
+
+	end
+
+	class KalturaESearchParams < KalturaESearchObject
+		attr_accessor :search_operator
+		attr_accessor :object_statuses
+		attr_accessor :order_by
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['searchOperator'] != nil
+				self.search_operator = KalturaClientBase.object_from_xml(xml_element.elements['searchOperator'], 'KalturaESearchOperator')
+			end
+			if xml_element.elements['objectStatuses'] != nil
+				self.object_statuses = xml_element.elements['objectStatuses'].text
+			end
+			if xml_element.elements['orderBy'] != nil
+				self.order_by = KalturaClientBase.object_from_xml(xml_element.elements['orderBy'], 'KalturaESearchOrderBy')
 			end
 		end
 

@@ -558,6 +558,19 @@ module Kaltura
 
 	end
 
+	class KalturaESearchQuery < KalturaESearchObject
+		attr_accessor :e_serach_query
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['eSerachQuery'] != nil
+				self.e_serach_query = xml_element.elements['eSerachQuery'].text
+			end
+		end
+
+	end
+
 	class KalturaESearchUserOrderByItem < KalturaESearchOrderByItem
 		attr_accessor :sort_field
 

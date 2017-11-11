@@ -3633,6 +3633,7 @@ module Kaltura
 
 	class KalturaFileSyncDescriptor < KalturaObjectBase
 		attr_accessor :file_sync_local_path
+		attr_accessor :file_encryption_key
 		# The translated path as used by the scheduler
 		attr_accessor :file_sync_remote_url
 		attr_accessor :file_sync_object_sub_type
@@ -3645,6 +3646,9 @@ module Kaltura
 			super
 			if xml_element.elements['fileSyncLocalPath'] != nil
 				self.file_sync_local_path = xml_element.elements['fileSyncLocalPath'].text
+			end
+			if xml_element.elements['fileEncryptionKey'] != nil
+				self.file_encryption_key = xml_element.elements['fileEncryptionKey'].text
 			end
 			if xml_element.elements['fileSyncRemoteUrl'] != nil
 				self.file_sync_remote_url = xml_element.elements['fileSyncRemoteUrl'].text
@@ -5763,6 +5767,9 @@ module Kaltura
 		attr_accessor :live_status
 		# The chunk duration value in milliseconds
 		attr_accessor :segment_duration
+		attr_accessor :explicit_live
+		attr_accessor :view_mode
+		attr_accessor :recording_status
 
 		def record_status=(val)
 			@record_status = val.to_i
@@ -5793,6 +5800,15 @@ module Kaltura
 		end
 		def segment_duration=(val)
 			@segment_duration = val.to_i
+		end
+		def explicit_live=(val)
+			@explicit_live = to_b(val)
+		end
+		def view_mode=(val)
+			@view_mode = val.to_i
+		end
+		def recording_status=(val)
+			@recording_status = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -5841,6 +5857,15 @@ module Kaltura
 			end
 			if xml_element.elements['segmentDuration'] != nil
 				self.segment_duration = xml_element.elements['segmentDuration'].text
+			end
+			if xml_element.elements['explicitLive'] != nil
+				self.explicit_live = xml_element.elements['explicitLive'].text
+			end
+			if xml_element.elements['viewMode'] != nil
+				self.view_mode = xml_element.elements['viewMode'].text
+			end
+			if xml_element.elements['recordingStatus'] != nil
+				self.recording_status = xml_element.elements['recordingStatus'].text
 			end
 		end
 

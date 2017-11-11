@@ -953,12 +953,12 @@ module Kaltura
 		end
 
 		# Move categories that belong to the same parent category to a target categroy - enabled only for ks with disable entitlement
-		# @return [KalturaCategoryListResponse]
+		# @return [bool]
 		def move(category_ids, target_category_parent_id)
 			kparams = {}
 			client.add_param(kparams, 'categoryIds', category_ids)
 			client.add_param(kparams, 'targetCategoryParentId', target_category_parent_id)
-			client.queue_service_action_call('category', 'move', 'KalturaCategoryListResponse', kparams)
+			client.queue_service_action_call('category', 'move', 'bool', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -6016,7 +6016,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:17-11-09'
+			self.client_tag = 'ruby:17-11-11'
 			self.api_version = '3.3.0'
 		end
 		

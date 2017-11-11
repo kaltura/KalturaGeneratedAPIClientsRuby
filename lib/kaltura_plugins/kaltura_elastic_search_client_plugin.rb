@@ -559,13 +559,13 @@ module Kaltura
 	end
 
 	class KalturaESearchQuery < KalturaESearchObject
-		attr_accessor :e_serach_query
+		attr_accessor :e_search_query
 
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['eSerachQuery'] != nil
-				self.e_serach_query = xml_element.elements['eSerachQuery'].text
+			if xml_element.elements['eSearchQuery'] != nil
+				self.e_search_query = xml_element.elements['eSearchQuery'].text
 			end
 		end
 

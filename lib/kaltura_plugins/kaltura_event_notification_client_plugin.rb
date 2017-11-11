@@ -81,6 +81,7 @@ module Kaltura
 		USERROLE = "35"
 		WIDGET = "36"
 		CATEGORYENTRY = "37"
+		LIVE_STREAM = "38"
 	end
 
 	class KalturaEventNotificationEventType

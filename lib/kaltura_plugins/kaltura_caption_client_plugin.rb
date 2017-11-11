@@ -237,6 +237,7 @@ module Kaltura
 		attr_accessor :multi_lanaguage_caption_asset_id
 		attr_accessor :entry_id
 		attr_accessor :file_location
+		attr_accessor :file_encryption_key
 
 
 		def from_xml(xml_element)
@@ -249,6 +250,9 @@ module Kaltura
 			end
 			if xml_element.elements['fileLocation'] != nil
 				self.file_location = xml_element.elements['fileLocation'].text
+			end
+			if xml_element.elements['fileEncryptionKey'] != nil
+				self.file_encryption_key = xml_element.elements['fileEncryptionKey'].text
 			end
 		end
 

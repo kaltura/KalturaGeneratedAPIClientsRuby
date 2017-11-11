@@ -255,6 +255,8 @@ module Kaltura
 		attr_accessor :subject
 		# The message to send in the notification mail
 		attr_accessor :message
+		# The footer of the message to send in the notification mail
+		attr_accessor :footer
 		# The basic link for the KMC site
 		attr_accessor :link
 		# Send the mail to each user
@@ -277,6 +279,9 @@ module Kaltura
 			end
 			if xml_element.elements['message'] != nil
 				self.message = xml_element.elements['message'].text
+			end
+			if xml_element.elements['footer'] != nil
+				self.footer = xml_element.elements['footer'].text
 			end
 			if xml_element.elements['link'] != nil
 				self.link = xml_element.elements['link'].text

@@ -427,6 +427,13 @@ module Kaltura
 		PER_SESSION = 2
 	end
 
+	class KalturaRecordingStatus
+		STOPPED = 0
+		PAUSED = 1
+		ACTIVE = 2
+		DISABLED = 3
+	end
+
 	class KalturaResponseProfileStatus
 		DISABLED = 1
 		ENABLED = 2
@@ -739,6 +746,11 @@ module Kaltura
 	class KalturaUserType
 		USER = 0
 		GROUP = 1
+	end
+
+	class KalturaViewMode
+		PREVIEW = 0
+		ALLOW_ALL = 1
 	end
 
 	class KalturaWidgetSecurityType

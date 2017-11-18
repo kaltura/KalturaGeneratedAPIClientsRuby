@@ -4326,6 +4326,8 @@ module Kaltura
 		attr_accessor :language
 		# The label of the flavor asset
 		attr_accessor :label
+		# Is default flavor asset of the entry (This field will be taken into account selectign which audio flavor will be selected as default)
+		attr_accessor :is_default
 
 		def flavor_params_id=(val)
 			@flavor_params_id = val.to_i
@@ -4350,6 +4352,9 @@ module Kaltura
 		end
 		def status=(val)
 			@status = val.to_i
+		end
+		def is_default=(val)
+			@is_default = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -4389,6 +4394,9 @@ module Kaltura
 			end
 			if xml_element.elements['label'] != nil
 				self.label = xml_element.elements['label'].text
+			end
+			if xml_element.elements['isDefault'] != nil
+				self.is_default = xml_element.elements['isDefault'].text
 			end
 		end
 

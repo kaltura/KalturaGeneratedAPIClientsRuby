@@ -666,10 +666,18 @@ module Kaltura
 	end
 
 	class KalturaLiveStreamScheduleEvent < KalturaEntryScheduleEvent
+		# Defines the expected audience.
+		attr_accessor :projected_audience
 
+		def projected_audience=(val)
+			@projected_audience = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
+			if xml_element.elements['projectedAudience'] != nil
+				self.projected_audience = xml_element.elements['projectedAudience'].text
+			end
 		end
 
 	end

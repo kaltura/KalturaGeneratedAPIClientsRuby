@@ -140,7 +140,7 @@ module Kaltura
 	end
 
 	class KalturaVirusScanJobData < KalturaJobData
-		attr_accessor :src_file_path
+		attr_accessor :file_container
 		attr_accessor :flavor_asset_id
 		attr_accessor :scan_result
 		attr_accessor :virus_found_action
@@ -154,8 +154,8 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['srcFilePath'] != nil
-				self.src_file_path = xml_element.elements['srcFilePath'].text
+			if xml_element.elements['fileContainer'] != nil
+				self.file_container = KalturaClientBase.object_from_xml(xml_element.elements['fileContainer'], 'KalturaFileContainer')
 			end
 			if xml_element.elements['flavorAssetId'] != nil
 				self.flavor_asset_id = xml_element.elements['flavorAssetId'].text

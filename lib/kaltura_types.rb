@@ -4301,6 +4301,30 @@ module Kaltura
 
 	end
 
+	class KalturaFileContainer < KalturaObjectBase
+		attr_accessor :file_path
+		attr_accessor :encryption_key
+		attr_accessor :file_size
+
+		def file_size=(val)
+			@file_size = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['filePath'] != nil
+				self.file_path = xml_element.elements['filePath'].text
+			end
+			if xml_element.elements['encryptionKey'] != nil
+				self.encryption_key = xml_element.elements['encryptionKey'].text
+			end
+			if xml_element.elements['fileSize'] != nil
+				self.file_size = xml_element.elements['fileSize'].text
+			end
+		end
+
+	end
+
 	class KalturaFlavorAsset < KalturaAsset
 		# The Flavor Params used to create this Flavor Asset
 		attr_accessor :flavor_params_id

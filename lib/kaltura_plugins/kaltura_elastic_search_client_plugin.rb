@@ -103,23 +103,24 @@ module Kaltura
 		ENTRY_ACCESS_CONTROL_ID = "access_control_id"
 		ENTRY_ADMIN_TAGS = "admin_tags"
 		ENTRY_CATEGORIES = "categories"
+		ENTRY_CATEGORY_NAME = "categories.name"
 		ENTRY_CATEGORY_IDS = "category_ids"
 		ENTRY_CONVERSION_PROFILE_ID = "conversion_profile_id"
 		ENTRY_CREATED_AT = "created_at"
-		ENTRY_CREATOR_ID = "creator_puser_id"
+		ENTRY_CREATOR_ID = "creator_kuser_id"
 		ENTRY_CREDIT = "credit"
 		ENTRY_DESCRIPTION = "description"
 		ENTRY_DISPLAY_IN_SEARCH = "display_in_search"
 		ENTRY_END_DATE = "end_date"
-		ENTRY_ENTITLED_USER_EDIT = "entitled_pusers_edit"
-		ENTRY_ENTITLED_USER_PUBLISH = "entitled_pusers_publish"
+		ENTRY_ENTITLED_USER_EDIT = "entitled_kusers_edit"
+		ENTRY_ENTITLED_USER_PUBLISH = "entitled_kusers_publish"
 		ENTRY_TYPE = "entry_type"
+		ENTRY_USER_ID = "kuser_id"
 		ENTRY_LENGTH_IN_MSECS = "length_in_msecs"
 		ENTRY_MEDIA_TYPE = "media_type"
 		ENTRY_MODERATION_STATUS = "moderation_status"
 		ENTRY_NAME = "name"
 		ENTRY_PARENT_ENTRY_ID = "parent_id"
-		ENTRY_USER_ID = "puser_id"
 		ENTRY_PUSH_PUBLISH = "push_publish"
 		ENTRY_RECORDED_ENTRY_ID = "recorded_entry_id"
 		ENTRY_REDIRECT_ENTRY_ID = "redirect_entry_id"
@@ -178,10 +179,14 @@ module Kaltura
 	end
 
 	class KalturaESearchItemData < KalturaObjectBase
+		attr_accessor :highlight
 
 
 		def from_xml(xml_element)
 			super
+			if xml_element.elements['highlight'] != nil
+				self.highlight = xml_element.elements['highlight'].text
+			end
 		end
 
 	end
@@ -210,15 +215,6 @@ module Kaltura
 
 	end
 
-	class KalturaESearchObject < KalturaObjectBase
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
 	class KalturaESearchOrderByItem < KalturaObjectBase
 		attr_accessor :sort_order
 
@@ -240,6 +236,58 @@ module Kaltura
 			super
 			if xml_element.elements['orderItems'] != nil
 				self.order_items = KalturaClientBase.object_from_xml(xml_element.elements['orderItems'], 'KalturaESearchOrderByItem')
+			end
+		end
+
+	end
+
+	class KalturaESearchOperator < KalturaESearchBaseItem
+		attr_accessor :operator
+		attr_accessor :search_items
+
+		def operator=(val)
+			@operator = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['operator'] != nil
+				self.operator = xml_element.elements['operator'].text
+			end
+			if xml_element.elements['searchItems'] != nil
+				self.search_items = KalturaClientBase.object_from_xml(xml_element.elements['searchItems'], 'KalturaESearchBaseItem')
+			end
+		end
+
+	end
+
+	class KalturaESearchParams < KalturaObjectBase
+		attr_accessor :search_operator
+		attr_accessor :object_statuses
+		attr_accessor :object_id
+		attr_accessor :order_by
+		attr_accessor :use_highlight
+
+		def use_highlight=(val)
+			@use_highlight = to_b(val)
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['searchOperator'] != nil
+				self.search_operator = KalturaClientBase.object_from_xml(xml_element.elements['searchOperator'], 'KalturaESearchOperator')
+			end
+			if xml_element.elements['objectStatuses'] != nil
+				self.object_statuses = xml_element.elements['objectStatuses'].text
+			end
+			if xml_element.elements['objectId'] != nil
+				self.object_id = xml_element.elements['objectId'].text
+			end
+			if xml_element.elements['orderBy'] != nil
+				self.order_by = KalturaClientBase.object_from_xml(xml_element.elements['orderBy'], 'KalturaESearchOrderBy')
+			end
+			if xml_element.elements['useHighlight'] != nil
+				self.use_highlight = xml_element.elements['useHighlight'].text
 			end
 		end
 
@@ -284,6 +332,7 @@ module Kaltura
 
 	class KalturaESearchResult < KalturaObjectBase
 		attr_accessor :object
+		attr_accessor :highlight
 		attr_accessor :items_data
 
 
@@ -291,6 +340,9 @@ module Kaltura
 			super
 			if xml_element.elements['object'] != nil
 				self.object = KalturaClientBase.object_from_xml(xml_element.elements['object'], 'KalturaObjectBase')
+			end
+			if xml_element.elements['highlight'] != nil
+				self.highlight = xml_element.elements['highlight'].text
 			end
 			if xml_element.elements['itemsData'] != nil
 				self.items_data = KalturaClientBase.object_from_xml(xml_element.elements['itemsData'], 'KalturaESearchItemDataResult')
@@ -517,48 +569,7 @@ module Kaltura
 
 	end
 
-	class KalturaESearchOperator < KalturaESearchBaseItem
-		attr_accessor :operator
-		attr_accessor :search_items
-
-		def operator=(val)
-			@operator = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['operator'] != nil
-				self.operator = xml_element.elements['operator'].text
-			end
-			if xml_element.elements['searchItems'] != nil
-				self.search_items = KalturaClientBase.object_from_xml(xml_element.elements['searchItems'], 'KalturaESearchBaseItem')
-			end
-		end
-
-	end
-
-	class KalturaESearchParams < KalturaESearchObject
-		attr_accessor :search_operator
-		attr_accessor :object_statuses
-		attr_accessor :order_by
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['searchOperator'] != nil
-				self.search_operator = KalturaClientBase.object_from_xml(xml_element.elements['searchOperator'], 'KalturaESearchOperator')
-			end
-			if xml_element.elements['objectStatuses'] != nil
-				self.object_statuses = xml_element.elements['objectStatuses'].text
-			end
-			if xml_element.elements['orderBy'] != nil
-				self.order_by = KalturaClientBase.object_from_xml(xml_element.elements['orderBy'], 'KalturaESearchOrderBy')
-			end
-		end
-
-	end
-
-	class KalturaESearchQuery < KalturaESearchObject
+	class KalturaESearchQuery < KalturaESearchBaseItem
 		attr_accessor :e_search_query
 
 

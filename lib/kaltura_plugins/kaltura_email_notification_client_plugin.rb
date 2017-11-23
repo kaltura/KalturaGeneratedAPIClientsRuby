@@ -193,6 +193,8 @@ module Kaltura
 	class KalturaEmailNotificationCategoryRecipientProvider < KalturaEmailNotificationRecipientProvider
 		# The ID of the category whose subscribers should receive the email notification.
 		attr_accessor :category_id
+		# The IDs of the categories whose subscribers should receive the email notification.
+		attr_accessor :category_ids
 		attr_accessor :category_user_filter
 
 
@@ -200,6 +202,9 @@ module Kaltura
 			super
 			if xml_element.elements['categoryId'] != nil
 				self.category_id = KalturaClientBase.object_from_xml(xml_element.elements['categoryId'], 'KalturaStringValue')
+			end
+			if xml_element.elements['categoryIds'] != nil
+				self.category_ids = KalturaClientBase.object_from_xml(xml_element.elements['categoryIds'], 'KalturaStringValue')
 			end
 			if xml_element.elements['categoryUserFilter'] != nil
 				self.category_user_filter = KalturaClientBase.object_from_xml(xml_element.elements['categoryUserFilter'], 'KalturaCategoryUserProviderFilter')

@@ -500,6 +500,7 @@ module Kaltura
 		# Comma separated privileges to be applied on KS (Kaltura Session) that created using the current token
 		attr_accessor :session_privileges
 		attr_accessor :hash_type
+		attr_accessor :description
 
 		def partner_id=(val)
 			@partner_id = val.to_i
@@ -560,6 +561,9 @@ module Kaltura
 			end
 			if xml_element.elements['hashType'] != nil
 				self.hash_type = xml_element.elements['hashType'].text
+			end
+			if xml_element.elements['description'] != nil
+				self.description = xml_element.elements['description'].text
 			end
 		end
 
@@ -1676,6 +1680,19 @@ module Kaltura
 
 	end
 
+	class KalturaESearchLanguageItem < KalturaObjectBase
+		attr_accessor :e_serach_language
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['eSerachLanguage'] != nil
+				self.e_serach_language = xml_element.elements['eSerachLanguage'].text
+			end
+		end
+
+	end
+
 	class KalturaPartner < KalturaObjectBase
 		attr_accessor :id
 		attr_accessor :name
@@ -1735,6 +1752,7 @@ module Kaltura
 		attr_accessor :crm_id
 		attr_accessor :reference_id
 		attr_accessor :time_aligned_renditions
+		attr_accessor :e_search_languages
 
 		def id=(val)
 			@id = val.to_i
@@ -1963,6 +1981,9 @@ module Kaltura
 			end
 			if xml_element.elements['timeAlignedRenditions'] != nil
 				self.time_aligned_renditions = xml_element.elements['timeAlignedRenditions'].text
+			end
+			if xml_element.elements['eSearchLanguages'] != nil
+				self.e_search_languages = KalturaClientBase.object_from_xml(xml_element.elements['eSearchLanguages'], 'KalturaESearchLanguageItem')
 			end
 		end
 
@@ -5834,7 +5855,7 @@ module Kaltura
 			@segment_duration = val.to_i
 		end
 		def explicit_live=(val)
-			@explicit_live = to_b(val)
+			@explicit_live = val.to_i
 		end
 		def view_mode=(val)
 			@view_mode = val.to_i
@@ -9975,6 +9996,7 @@ module Kaltura
 		attr_accessor :updated_at_less_than_or_equal
 		attr_accessor :status_equal
 		attr_accessor :status_in
+		attr_accessor :session_user_id_equal
 
 		def created_at_greater_than_or_equal=(val)
 			@created_at_greater_than_or_equal = val.to_i
@@ -10017,6 +10039,9 @@ module Kaltura
 			end
 			if xml_element.elements['statusIn'] != nil
 				self.status_in = xml_element.elements['statusIn'].text
+			end
+			if xml_element.elements['sessionUserIdEqual'] != nil
+				self.session_user_id_equal = xml_element.elements['sessionUserIdEqual'].text
 			end
 		end
 
@@ -10770,7 +10795,7 @@ module Kaltura
 	end
 
 	class KalturaCaptureThumbJobData < KalturaJobData
-		attr_accessor :src_file_sync_local_path
+		attr_accessor :file_container
 		# The translated path as used by the scheduler
 		attr_accessor :actual_src_file_sync_local_path
 		attr_accessor :src_file_sync_remote_url
@@ -10786,8 +10811,8 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['srcFileSyncLocalPath'] != nil
-				self.src_file_sync_local_path = xml_element.elements['srcFileSyncLocalPath'].text
+			if xml_element.elements['fileContainer'] != nil
+				self.file_container = KalturaClientBase.object_from_xml(xml_element.elements['fileContainer'], 'KalturaFileContainer')
 			end
 			if xml_element.elements['actualSrcFileSyncLocalPath'] != nil
 				self.actual_src_file_sync_local_path = xml_element.elements['actualSrcFileSyncLocalPath'].text

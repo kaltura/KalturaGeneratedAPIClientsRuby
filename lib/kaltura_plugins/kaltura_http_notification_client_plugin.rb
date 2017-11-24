@@ -165,6 +165,8 @@ module Kaltura
 		attr_accessor :ignore_null
 		# PHP code
 		attr_accessor :code
+		# An array of pattern-replacement pairs used for data string regex replacements
+		attr_accessor :data_string_replacements
 
 		def format=(val)
 			@format = val.to_i
@@ -186,6 +188,9 @@ module Kaltura
 			end
 			if xml_element.elements['code'] != nil
 				self.code = xml_element.elements['code'].text
+			end
+			if xml_element.elements['dataStringReplacements'] != nil
+				self.data_string_replacements = KalturaClientBase.object_from_xml(xml_element.elements['dataStringReplacements'], 'KalturaKeyValue')
 			end
 		end
 

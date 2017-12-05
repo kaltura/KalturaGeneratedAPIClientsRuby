@@ -13896,6 +13896,7 @@ module Kaltura
 		attr_accessor :server_pass_phrase
 		attr_accessor :ftp_passive_mode
 		attr_accessor :src_file_sync_local_path
+		attr_accessor :src_file_encryption_key
 		attr_accessor :src_file_sync_id
 		attr_accessor :dest_file_sync_stored_path
 
@@ -13928,6 +13929,9 @@ module Kaltura
 			end
 			if xml_element.elements['srcFileSyncLocalPath'] != nil
 				self.src_file_sync_local_path = xml_element.elements['srcFileSyncLocalPath'].text
+			end
+			if xml_element.elements['srcFileEncryptionKey'] != nil
+				self.src_file_encryption_key = xml_element.elements['srcFileEncryptionKey'].text
 			end
 			if xml_element.elements['srcFileSyncId'] != nil
 				self.src_file_sync_id = xml_element.elements['srcFileSyncId'].text

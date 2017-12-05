@@ -95,7 +95,6 @@ module Kaltura
 		CUE_POINT_SUB_TYPE = "cue_points.cue_point_sub_type"
 		CUE_POINT_TAGS = "cue_points.cue_point_tags"
 		CUE_POINT_TEXT = "cue_points.cue_point_text"
-		CUE_POINT_TYPE = "cue_points.cue_point_type"
 	end
 
 	class KalturaESearchEntryFieldName
@@ -632,12 +631,16 @@ module Kaltura
 
 	class KalturaESearchCuePointItem < KalturaESearchItem
 		attr_accessor :field_name
+		attr_accessor :cue_point_type
 
 
 		def from_xml(xml_element)
 			super
 			if xml_element.elements['fieldName'] != nil
 				self.field_name = xml_element.elements['fieldName'].text
+			end
+			if xml_element.elements['cuePointType'] != nil
+				self.cue_point_type = xml_element.elements['cuePointType'].text
 			end
 		end
 

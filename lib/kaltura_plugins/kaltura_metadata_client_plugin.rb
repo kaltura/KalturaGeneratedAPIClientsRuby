@@ -479,7 +479,7 @@ module Kaltura
 	end
 
 	class KalturaTransformMetadataJobData < KalturaJobData
-		attr_accessor :src_xsl_path
+		attr_accessor :src_xsl
 		attr_accessor :src_version
 		attr_accessor :dest_version
 		attr_accessor :dest_xsd_path
@@ -497,8 +497,8 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['srcXslPath'] != nil
-				self.src_xsl_path = xml_element.elements['srcXslPath'].text
+			if xml_element.elements['srcXsl'] != nil
+				self.src_xsl = KalturaClientBase.object_from_xml(xml_element.elements['srcXsl'], 'KalturaFileContainer')
 			end
 			if xml_element.elements['srcVersion'] != nil
 				self.src_version = xml_element.elements['srcVersion'].text

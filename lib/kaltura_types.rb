@@ -7083,6 +7083,7 @@ module Kaltura
 
 	class KalturaMediaEntryFilterForPlaylist < KalturaMediaEntryFilter
 		attr_accessor :limit
+		attr_accessor :name
 
 		def limit=(val)
 			@limit = val.to_i
@@ -7092,6 +7093,9 @@ module Kaltura
 			super
 			if xml_element.elements['limit'] != nil
 				self.limit = xml_element.elements['limit'].text
+			end
+			if xml_element.elements['name'] != nil
+				self.name = xml_element.elements['name'].text
 			end
 		end
 

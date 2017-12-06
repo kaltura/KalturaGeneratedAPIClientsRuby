@@ -177,6 +177,23 @@ module Kaltura
 
 	end
 
+	class KalturaESearchHighlight < KalturaObjectBase
+		attr_accessor :field_name
+		attr_accessor :hits
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['fieldName'] != nil
+				self.field_name = xml_element.elements['fieldName'].text
+			end
+			if xml_element.elements['hits'] != nil
+				self.hits = KalturaClientBase.object_from_xml(xml_element.elements['hits'], 'KalturaString')
+			end
+		end
+
+	end
+
 	class KalturaESearchItemData < KalturaObjectBase
 		attr_accessor :highlight
 
@@ -184,7 +201,7 @@ module Kaltura
 		def from_xml(xml_element)
 			super
 			if xml_element.elements['highlight'] != nil
-				self.highlight = xml_element.elements['highlight'].text
+				self.highlight = KalturaClientBase.object_from_xml(xml_element.elements['highlight'], 'KalturaESearchHighlight')
 			end
 		end
 
@@ -341,7 +358,7 @@ module Kaltura
 				self.object = KalturaClientBase.object_from_xml(xml_element.elements['object'], 'KalturaObjectBase')
 			end
 			if xml_element.elements['highlight'] != nil
-				self.highlight = xml_element.elements['highlight'].text
+				self.highlight = KalturaClientBase.object_from_xml(xml_element.elements['highlight'], 'KalturaESearchHighlight')
 			end
 			if xml_element.elements['itemsData'] != nil
 				self.items_data = KalturaClientBase.object_from_xml(xml_element.elements['itemsData'], 'KalturaESearchItemDataResult')

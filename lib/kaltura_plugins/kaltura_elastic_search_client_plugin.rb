@@ -44,104 +44,106 @@ module Kaltura
 	end
 
 	class KalturaESearchCaptionFieldName
-		CAPTION_CONTENT = "caption_assets.lines.content"
-		CAPTION_END_TIME = "caption_assets.lines.end_time"
-		CAPTION_START_TIME = "caption_assets.lines.start_time"
+		CONTENT = "content"
+		END_TIME = "end_time"
+		START_TIME = "start_time"
 	end
 
 	class KalturaESearchCategoryFieldName
-		CATEGORY_CONTRIBUTION_POLICY = "contribution_policy"
-		CATEGORY_CREATED_AT = "created_at"
-		CATEGORY_DEPTH = "depth"
-		CATEGORY_DESCRIPTION = "description"
-		CATEGORY_DIRECT_ENTRIES_COUNT = "direct_entries_count"
-		CATEGORY_DIRECT_SUB_CATEGORIES_COUNT = "direct_sub_categories_count"
-		CATEGORY_DISPLAY_IN_SEARCH = "display_in_search"
-		CATEGORY_ENTRIES_COUNT = "entries_count"
-		CATEGORY_FULL_IDS = "full_ids"
-		CATEGORY_FULL_NAME = "full_name"
-		CATEGORY_INHERITANCE_TYPE = "inheritance_type"
-		CATEGORY_INHERITED_PARENT_ID = "inherited_parent_id"
-		CATEGORY_KUSER_ID = "kuser_id"
-		CATEGORY_KUSER_IDS = "kuser_ids"
-		CATEGORY_MEMBERS_COUNT = "members_count"
-		CATEGORY_MODERATION = "moderation"
-		CATEGORY_NAME = "name"
-		CATEGORY_PARENT_ID = "parent_id"
-		CATEGORY_PENDING_ENTRIES_COUNT = "pending_entries_count"
-		CATEGORY_PENDING_MEMBERS_COUNT = "pending_members_count"
-		CATEGORY_PRIVACY = "privacy"
-		CATEGORY_PRIVACY_CONTEXT = "privacy_context"
-		CATEGORY_PRIVACY_CONTEXTS = "privacy_contexts"
-		CATEGORY_REFERENCE_ID = "reference_id"
-		CATEGORY_TAGS = "tags"
-		CATEGORY_UPDATED_AT = "updated_at"
+		CONTRIBUTION_POLICY = "contribution_policy"
+		CREATED_AT = "created_at"
+		DEPTH = "depth"
+		DESCRIPTION = "description"
+		DIRECT_ENTRIES_COUNT = "direct_entries_count"
+		DIRECT_SUB_CATEGORIES_COUNT = "direct_sub_categories_count"
+		DISPLAY_IN_SEARCH = "display_in_search"
+		ENTRIES_COUNT = "entries_count"
+		FULL_IDS = "full_ids"
+		FULL_NAME = "full_name"
+		INHERITANCE_TYPE = "inheritance_type"
+		INHERITED_PARENT_ID = "inherited_parent_id"
+		MEMBERS_COUNT = "members_count"
+		MODERATION = "moderation"
+		NAME = "name"
+		PARENT_ID = "parent_id"
+		PENDING_ENTRIES_COUNT = "pending_entries_count"
+		PENDING_MEMBERS_COUNT = "pending_members_count"
+		PRIVACY = "privacy"
+		PRIVACY_CONTEXT = "privacy_context"
+		PRIVACY_CONTEXTS = "privacy_contexts"
+		REFERENCE_ID = "reference_id"
+		TAGS = "tags"
+		UPDATED_AT = "updated_at"
+		USER_ID = "user_id"
+		USER_IDS = "user_ids"
 	end
 
 	class KalturaESearchCategoryOrderByFieldName
-		CATEGORY_CREATED_AT = "created_at"
-		CATEGORY_UPDATED_AT = "updated_at"
+		CREATED_AT = "created_at"
+		UPDATED_AT = "updated_at"
 	end
 
 	class KalturaESearchCuePointFieldName
-		CUE_POINT_ANSWERS = "cue_points.cue_point_answers"
-		CUE_POINT_END_TIME = "cue_points.cue_point_end_time"
-		CUE_POINT_EXPLANATION = "cue_points.cue_point_explanation"
-		CUE_POINT_HINT = "cue_points.cue_point_hint"
-		CUE_POINT_ID = "cue_points.cue_point_id"
-		CUE_POINT_NAME = "cue_points.cue_point_name"
-		CUE_POINT_QUESTION = "cue_points.cue_point_question"
-		CUE_POINT_START_TIME = "cue_points.cue_point_start_time"
-		CUE_POINT_SUB_TYPE = "cue_points.cue_point_sub_type"
-		CUE_POINT_TAGS = "cue_points.cue_point_tags"
-		CUE_POINT_TEXT = "cue_points.cue_point_text"
+		ANSWERS = "answers"
+		END_TIME = "end_time"
+		EXPLANATION = "explanation"
+		HINT = "hint"
+		ID = "id"
+		NAME = "name"
+		QUESTION = "question"
+		START_TIME = "start_time"
+		SUB_TYPE = "sub_type"
+		TAGS = "tags"
+		TEXT = "text"
 	end
 
 	class KalturaESearchEntryFieldName
-		ENTRY_ID = "_id"
-		ENTRY_ACCESS_CONTROL_ID = "access_control_id"
-		ENTRY_ADMIN_TAGS = "admin_tags"
-		ENTRY_CATEGORIES = "categories"
-		ENTRY_CATEGORY_NAME = "categories.name"
-		ENTRY_CATEGORY_IDS = "category_ids"
-		ENTRY_CONVERSION_PROFILE_ID = "conversion_profile_id"
-		ENTRY_CREATED_AT = "created_at"
-		ENTRY_CREATOR_ID = "creator_kuser_id"
-		ENTRY_CREDIT = "credit"
-		ENTRY_DESCRIPTION = "description"
-		ENTRY_END_DATE = "end_date"
-		ENTRY_ENTITLED_USER_EDIT = "entitled_kusers_edit"
-		ENTRY_ENTITLED_USER_PUBLISH = "entitled_kusers_publish"
+		ACCESS_CONTROL_ID = "access_control_id"
+		ADMIN_TAGS = "admin_tags"
+		CATEGORIES = "categories"
+		CATEGORY_IDS = "category_ids"
+		CATEGORY_NAME = "category_name"
+		CONVERSION_PROFILE_ID = "conversion_profile_id"
+		CREATED_AT = "created_at"
+		CREATOR_ID = "creator_kuser_id"
+		CREDIT = "credit"
+		DESCRIPTION = "description"
+		END_DATE = "end_date"
+		ENTITLED_USER_EDIT = "entitled_kusers_edit"
+		ENTITLED_USER_PUBLISH = "entitled_kusers_publish"
 		ENTRY_TYPE = "entry_type"
-		ENTRY_EXTERNAL_SOURCE_TYPE = "external_source_type"
-		ENTRY_USER_ID = "kuser_id"
-		ENTRY_LENGTH_IN_MSECS = "length_in_msecs"
-		ENTRY_MEDIA_TYPE = "media_type"
-		ENTRY_MODERATION_STATUS = "moderation_status"
-		ENTRY_NAME = "name"
-		ENTRY_PARENT_ENTRY_ID = "parent_id"
-		ENTRY_PUSH_PUBLISH = "push_publish"
-		ENTRY_RECORDED_ENTRY_ID = "recorded_entry_id"
-		ENTRY_REDIRECT_ENTRY_ID = "redirect_entry_id"
-		ENTRY_REFERENCE_ID = "reference_id"
-		ENTRY_SITE_URL = "site_url"
-		ENTRY_SOURCE_TYPE = "source_type"
-		ENTRY_START_DATE = "start_date"
-		ENTRY_TAGS = "tags"
-		ENTRY_TEMPLATE_ENTRY_ID = "template_entry_id"
-		ENTRY_UPDATED_AT = "updated_at"
-		ENTRY_VIEWS = "views"
-		ENTRY_VOTES = "votes"
+		EXTERNAL_SOURCE_TYPE = "external_source_type"
+		ID = "id"
+		IS_LIVE = "is_live"
+		IS_QUIZ = "is_quiz"
+		USER_ID = "kuser_id"
+		LENGTH_IN_MSECS = "length_in_msecs"
+		MEDIA_TYPE = "media_type"
+		MODERATION_STATUS = "moderation_status"
+		NAME = "name"
+		PARENT_ENTRY_ID = "parent_id"
+		PUSH_PUBLISH = "push_publish"
+		RECORDED_ENTRY_ID = "recorded_entry_id"
+		REDIRECT_ENTRY_ID = "redirect_entry_id"
+		REFERENCE_ID = "reference_id"
+		SITE_URL = "site_url"
+		SOURCE_TYPE = "source_type"
+		START_DATE = "start_date"
+		TAGS = "tags"
+		TEMPLATE_ENTRY_ID = "template_entry_id"
+		UPDATED_AT = "updated_at"
+		VIEWS = "views"
+		VOTES = "votes"
 	end
 
 	class KalturaESearchEntryOrderByFieldName
-		ENTRY_CREATED_AT = "created_at"
-		ENTRY_END_DATE = "end_date"
-		ENTRY_NAME = "name.keyword"
-		ENTRY_START_DATE = "start_date"
-		ENTRY_UPDATED_AT = "updated_at"
-		ENTRY_VIEWS = "views"
-		ENTRY_VOTES = "votes"
+		CREATED_AT = "created_at"
+		END_DATE = "end_date"
+		NAME = "name"
+		START_DATE = "start_date"
+		UPDATED_AT = "updated_at"
+		VIEWS = "views"
+		VOTES = "votes"
 	end
 
 	class KalturaESearchSortOrder
@@ -150,25 +152,43 @@ module Kaltura
 	end
 
 	class KalturaESearchUserFieldName
-		USER_CREATED_AT = "created_at"
-		USER_EMAIL = "email"
-		USER_FIRST_NAME = "first_name"
-		USER_GROUP_IDS = "group_ids"
-		USER_TYPE = "kuser_type"
-		USER_LAST_NAME = "last_name"
-		USER_PERMISSION_NAMES = "permission_names"
-		USER_ROLE_IDS = "role_ids"
-		USER_SCREEN_NAME = "screen_name"
-		USER_TAGS = "tags"
-		USER_UPDATED_AT = "updated_at"
+		CREATED_AT = "created_at"
+		EMAIL = "email"
+		FIRST_NAME = "first_name"
+		GROUP_IDS = "group_ids"
+		LAST_NAME = "last_name"
+		PERMISSION_NAMES = "permission_names"
+		ROLE_IDS = "role_ids"
+		SCREEN_NAME = "screen_name"
+		TAGS = "tags"
+		UPDATED_AT = "updated_at"
+		TYPE = "user_type"
 	end
 
 	class KalturaESearchUserOrderByFieldName
-		USER_CREATED_AT = "created_at"
-		USER_UPDATED_AT = "updated_at"
+		CREATED_AT = "created_at"
+		UPDATED_AT = "updated_at"
 	end
 
 	class KalturaESearchBaseItem < KalturaObjectBase
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaESearchCategoryBaseItem < KalturaESearchBaseItem
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaESearchEntryBaseItem < KalturaESearchBaseItem
 
 
 		def from_xml(xml_element)
@@ -257,28 +277,7 @@ module Kaltura
 
 	end
 
-	class KalturaESearchOperator < KalturaESearchBaseItem
-		attr_accessor :operator
-		attr_accessor :search_items
-
-		def operator=(val)
-			@operator = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['operator'] != nil
-				self.operator = xml_element.elements['operator'].text
-			end
-			if xml_element.elements['searchItems'] != nil
-				self.search_items = KalturaClientBase.object_from_xml(xml_element.elements['searchItems'], 'KalturaESearchBaseItem')
-			end
-		end
-
-	end
-
 	class KalturaESearchParams < KalturaObjectBase
-		attr_accessor :search_operator
 		attr_accessor :object_statuses
 		attr_accessor :object_id
 		attr_accessor :order_by
@@ -290,9 +289,6 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['searchOperator'] != nil
-				self.search_operator = KalturaClientBase.object_from_xml(xml_element.elements['searchOperator'], 'KalturaESearchOperator')
-			end
 			if xml_element.elements['objectStatuses'] != nil
 				self.object_statuses = xml_element.elements['objectStatuses'].text
 			end
@@ -387,6 +383,15 @@ module Kaltura
 
 	end
 
+	class KalturaESearchUserBaseItem < KalturaESearchBaseItem
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaESearchCaptionItemData < KalturaESearchItemData
 		attr_accessor :line
 		attr_accessor :starts_at
@@ -435,6 +440,39 @@ module Kaltura
 
 	end
 
+	class KalturaESearchCategoryOperator < KalturaESearchCategoryBaseItem
+		attr_accessor :operator
+		attr_accessor :search_items
+
+		def operator=(val)
+			@operator = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['operator'] != nil
+				self.operator = xml_element.elements['operator'].text
+			end
+			if xml_element.elements['searchItems'] != nil
+				self.search_items = KalturaClientBase.object_from_xml(xml_element.elements['searchItems'], 'KalturaESearchCategoryBaseItem')
+			end
+		end
+
+	end
+
+	class KalturaESearchCategoryParams < KalturaESearchParams
+		attr_accessor :search_operator
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['searchOperator'] != nil
+				self.search_operator = KalturaClientBase.object_from_xml(xml_element.elements['searchOperator'], 'KalturaESearchCategoryOperator')
+			end
+		end
+
+	end
+
 	class KalturaESearchCategoryResult < KalturaESearchResult
 
 
@@ -457,6 +495,7 @@ module Kaltura
 		attr_accessor :answers
 		attr_accessor :hint
 		attr_accessor :explanation
+		attr_accessor :asset_id
 
 
 		def from_xml(xml_element)
@@ -497,6 +536,9 @@ module Kaltura
 			if xml_element.elements['explanation'] != nil
 				self.explanation = xml_element.elements['explanation'].text
 			end
+			if xml_element.elements['assetId'] != nil
+				self.asset_id = xml_element.elements['assetId'].text
+			end
 		end
 
 	end
@@ -514,35 +556,44 @@ module Kaltura
 
 	end
 
+	class KalturaESearchEntryOperator < KalturaESearchEntryBaseItem
+		attr_accessor :operator
+		attr_accessor :search_items
+
+		def operator=(val)
+			@operator = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['operator'] != nil
+				self.operator = xml_element.elements['operator'].text
+			end
+			if xml_element.elements['searchItems'] != nil
+				self.search_items = KalturaClientBase.object_from_xml(xml_element.elements['searchItems'], 'KalturaESearchEntryBaseItem')
+			end
+		end
+
+	end
+
+	class KalturaESearchEntryParams < KalturaESearchParams
+		attr_accessor :search_operator
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['searchOperator'] != nil
+				self.search_operator = KalturaClientBase.object_from_xml(xml_element.elements['searchOperator'], 'KalturaESearchEntryOperator')
+			end
+		end
+
+	end
+
 	class KalturaESearchEntryResult < KalturaESearchResult
 
 
 		def from_xml(xml_element)
 			super
-		end
-
-	end
-
-	class KalturaESearchItem < KalturaESearchBaseItem
-		attr_accessor :search_term
-		attr_accessor :item_type
-		attr_accessor :range
-
-		def item_type=(val)
-			@item_type = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['searchTerm'] != nil
-				self.search_term = xml_element.elements['searchTerm'].text
-			end
-			if xml_element.elements['itemType'] != nil
-				self.item_type = xml_element.elements['itemType'].text
-			end
-			if xml_element.elements['range'] != nil
-				self.range = KalturaClientBase.object_from_xml(xml_element.elements['range'], 'KalturaESearchRange')
-			end
 		end
 
 	end
@@ -585,14 +636,21 @@ module Kaltura
 
 	end
 
-	class KalturaESearchQuery < KalturaESearchBaseItem
-		attr_accessor :e_search_query
+	class KalturaESearchMetadataOrderByItem < KalturaESearchOrderByItem
+		attr_accessor :xpath
+		attr_accessor :metadata_profile_id
 
+		def metadata_profile_id=(val)
+			@metadata_profile_id = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['eSearchQuery'] != nil
-				self.e_search_query = xml_element.elements['eSearchQuery'].text
+			if xml_element.elements['xpath'] != nil
+				self.xpath = xml_element.elements['xpath'].text
+			end
+			if xml_element.elements['metadataProfileId'] != nil
+				self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
 			end
 		end
 
@@ -611,6 +669,39 @@ module Kaltura
 
 	end
 
+	class KalturaESearchUserOperator < KalturaESearchUserBaseItem
+		attr_accessor :operator
+		attr_accessor :search_items
+
+		def operator=(val)
+			@operator = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['operator'] != nil
+				self.operator = xml_element.elements['operator'].text
+			end
+			if xml_element.elements['searchItems'] != nil
+				self.search_items = KalturaClientBase.object_from_xml(xml_element.elements['searchItems'], 'KalturaESearchUserBaseItem')
+			end
+		end
+
+	end
+
+	class KalturaESearchUserParams < KalturaESearchParams
+		attr_accessor :search_operator
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['searchOperator'] != nil
+				self.search_operator = KalturaClientBase.object_from_xml(xml_element.elements['searchOperator'], 'KalturaESearchUserOperator')
+			end
+		end
+
+	end
+
 	class KalturaESearchUserResult < KalturaESearchResult
 
 
@@ -620,7 +711,118 @@ module Kaltura
 
 	end
 
-	class KalturaESearchCaptionItem < KalturaESearchItem
+	class KalturaESearchAbstractCategoryItem < KalturaESearchCategoryBaseItem
+		attr_accessor :search_term
+		attr_accessor :item_type
+		attr_accessor :range
+
+		def item_type=(val)
+			@item_type = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['searchTerm'] != nil
+				self.search_term = xml_element.elements['searchTerm'].text
+			end
+			if xml_element.elements['itemType'] != nil
+				self.item_type = xml_element.elements['itemType'].text
+			end
+			if xml_element.elements['range'] != nil
+				self.range = KalturaClientBase.object_from_xml(xml_element.elements['range'], 'KalturaESearchRange')
+			end
+		end
+
+	end
+
+	class KalturaESearchAbstractEntryItem < KalturaESearchEntryBaseItem
+		attr_accessor :search_term
+		attr_accessor :item_type
+		attr_accessor :range
+
+		def item_type=(val)
+			@item_type = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['searchTerm'] != nil
+				self.search_term = xml_element.elements['searchTerm'].text
+			end
+			if xml_element.elements['itemType'] != nil
+				self.item_type = xml_element.elements['itemType'].text
+			end
+			if xml_element.elements['range'] != nil
+				self.range = KalturaClientBase.object_from_xml(xml_element.elements['range'], 'KalturaESearchRange')
+			end
+		end
+
+	end
+
+	class KalturaESearchAbstractUserItem < KalturaESearchUserBaseItem
+		attr_accessor :search_term
+		attr_accessor :item_type
+		attr_accessor :range
+
+		def item_type=(val)
+			@item_type = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['searchTerm'] != nil
+				self.search_term = xml_element.elements['searchTerm'].text
+			end
+			if xml_element.elements['itemType'] != nil
+				self.item_type = xml_element.elements['itemType'].text
+			end
+			if xml_element.elements['range'] != nil
+				self.range = KalturaClientBase.object_from_xml(xml_element.elements['range'], 'KalturaESearchRange')
+			end
+		end
+
+	end
+
+	class KalturaESearchCategoryQuery < KalturaESearchCategoryBaseItem
+		attr_accessor :e_search_query
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['eSearchQuery'] != nil
+				self.e_search_query = xml_element.elements['eSearchQuery'].text
+			end
+		end
+
+	end
+
+	class KalturaESearchEntryQuery < KalturaESearchEntryBaseItem
+		attr_accessor :e_search_query
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['eSearchQuery'] != nil
+				self.e_search_query = xml_element.elements['eSearchQuery'].text
+			end
+		end
+
+	end
+
+	class KalturaESearchUserQuery < KalturaESearchUserBaseItem
+		attr_accessor :e_search_query
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['eSearchQuery'] != nil
+				self.e_search_query = xml_element.elements['eSearchQuery'].text
+			end
+		end
+
+	end
+
+	class KalturaESearchCaptionItem < KalturaESearchAbstractEntryItem
 		attr_accessor :field_name
 
 
@@ -633,7 +835,7 @@ module Kaltura
 
 	end
 
-	class KalturaESearchCategoryItem < KalturaESearchItem
+	class KalturaESearchCategoryItem < KalturaESearchAbstractCategoryItem
 		attr_accessor :field_name
 
 
@@ -646,37 +848,7 @@ module Kaltura
 
 	end
 
-	class KalturaESearchCuePointItem < KalturaESearchItem
-		attr_accessor :field_name
-		attr_accessor :cue_point_type
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['fieldName'] != nil
-				self.field_name = xml_element.elements['fieldName'].text
-			end
-			if xml_element.elements['cuePointType'] != nil
-				self.cue_point_type = xml_element.elements['cuePointType'].text
-			end
-		end
-
-	end
-
-	class KalturaESearchEntryItem < KalturaESearchItem
-		attr_accessor :field_name
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['fieldName'] != nil
-				self.field_name = xml_element.elements['fieldName'].text
-			end
-		end
-
-	end
-
-	class KalturaESearchMetadataItem < KalturaESearchItem
+	class KalturaESearchCategoryMetadataItem < KalturaESearchAbstractCategoryItem
 		attr_accessor :xpath
 		attr_accessor :metadata_profile_id
 		attr_accessor :metadata_field_id
@@ -703,16 +875,24 @@ module Kaltura
 
 	end
 
-	class KalturaESearchUnifiedItem < KalturaESearchItem
+	class KalturaESearchCuePointItem < KalturaESearchAbstractEntryItem
+		attr_accessor :field_name
+		attr_accessor :cue_point_type
 
 
 		def from_xml(xml_element)
 			super
+			if xml_element.elements['fieldName'] != nil
+				self.field_name = xml_element.elements['fieldName'].text
+			end
+			if xml_element.elements['cuePointType'] != nil
+				self.cue_point_type = xml_element.elements['cuePointType'].text
+			end
 		end
 
 	end
 
-	class KalturaESearchUserItem < KalturaESearchItem
+	class KalturaESearchEntryItem < KalturaESearchAbstractEntryItem
 		attr_accessor :field_name
 
 
@@ -725,21 +905,86 @@ module Kaltura
 
 	end
 
+	class KalturaESearchEntryMetadataItem < KalturaESearchAbstractEntryItem
+		attr_accessor :xpath
+		attr_accessor :metadata_profile_id
+		attr_accessor :metadata_field_id
+
+		def metadata_profile_id=(val)
+			@metadata_profile_id = val.to_i
+		end
+		def metadata_field_id=(val)
+			@metadata_field_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['xpath'] != nil
+				self.xpath = xml_element.elements['xpath'].text
+			end
+			if xml_element.elements['metadataProfileId'] != nil
+				self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
+			end
+			if xml_element.elements['metadataFieldId'] != nil
+				self.metadata_field_id = xml_element.elements['metadataFieldId'].text
+			end
+		end
+
+	end
+
+	class KalturaESearchUnifiedItem < KalturaESearchAbstractEntryItem
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaESearchUserItem < KalturaESearchAbstractUserItem
+		attr_accessor :field_name
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['fieldName'] != nil
+				self.field_name = xml_element.elements['fieldName'].text
+			end
+		end
+
+	end
+
+	class KalturaESearchUserMetadataItem < KalturaESearchAbstractUserItem
+		attr_accessor :xpath
+		attr_accessor :metadata_profile_id
+		attr_accessor :metadata_field_id
+
+		def metadata_profile_id=(val)
+			@metadata_profile_id = val.to_i
+		end
+		def metadata_field_id=(val)
+			@metadata_field_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['xpath'] != nil
+				self.xpath = xml_element.elements['xpath'].text
+			end
+			if xml_element.elements['metadataProfileId'] != nil
+				self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
+			end
+			if xml_element.elements['metadataFieldId'] != nil
+				self.metadata_field_id = xml_element.elements['metadataFieldId'].text
+			end
+		end
+
+	end
+
 
 	class KalturaESearchService < KalturaServiceBase
 		def initialize(client)
 			super(client)
-		end
-
-		# @return [array]
-		def get_allowed_search_types(search_item)
-			kparams = {}
-			client.add_param(kparams, 'searchItem', search_item)
-			client.queue_service_action_call('elasticsearch_esearch', 'getAllowedSearchTypes', 'KalturaKeyValue', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
 		end
 
 		# @return [KalturaESearchResponse]

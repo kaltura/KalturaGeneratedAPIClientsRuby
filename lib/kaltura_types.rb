@@ -1753,6 +1753,9 @@ module Kaltura
 		attr_accessor :reference_id
 		attr_accessor :time_aligned_renditions
 		attr_accessor :e_search_languages
+		attr_accessor :publisher_environment_type
+		attr_accessor :ovp_environment_url
+		attr_accessor :ott_environment_url
 
 		def id=(val)
 			@id = val.to_i
@@ -1819,6 +1822,9 @@ module Kaltura
 		end
 		def time_aligned_renditions=(val)
 			@time_aligned_renditions = to_b(val)
+		end
+		def publisher_environment_type=(val)
+			@publisher_environment_type = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -1984,6 +1990,15 @@ module Kaltura
 			end
 			if xml_element.elements['eSearchLanguages'] != nil
 				self.e_search_languages = KalturaClientBase.object_from_xml(xml_element.elements['eSearchLanguages'], 'KalturaESearchLanguageItem')
+			end
+			if xml_element.elements['publisherEnvironmentType'] != nil
+				self.publisher_environment_type = xml_element.elements['publisherEnvironmentType'].text
+			end
+			if xml_element.elements['ovpEnvironmentUrl'] != nil
+				self.ovp_environment_url = xml_element.elements['ovpEnvironmentUrl'].text
+			end
+			if xml_element.elements['ottEnvironmentUrl'] != nil
+				self.ott_environment_url = xml_element.elements['ottEnvironmentUrl'].text
 			end
 		end
 
@@ -7086,21 +7101,10 @@ module Kaltura
 	end
 
 	class KalturaMediaEntryFilter < KalturaMediaEntryBaseFilter
-		attr_accessor :is_sequence_entry
-		attr_accessor :sequence_entry_ids_in
 
-		def is_sequence_entry=(val)
-			@is_sequence_entry = val.to_i
-		end
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['isSequenceEntry'] != nil
-				self.is_sequence_entry = xml_element.elements['isSequenceEntry'].text
-			end
-			if xml_element.elements['sequenceEntryIdsIn'] != nil
-				self.sequence_entry_ids_in = xml_element.elements['sequenceEntryIdsIn'].text
-			end
 		end
 
 	end

@@ -4190,10 +4190,6 @@ module Kaltura
 		attr_accessor :is_trim_disabled
 		# Array of streams that exists on the entry
 		attr_accessor :streams
-		# True if the entry is a sequence entry
-		attr_accessor :is_sequence_entry
-		# The sequence entries of the entry
-		attr_accessor :sequence_entry_ids
 
 		def media_type=(val)
 			@media_type = val.to_i
@@ -4206,9 +4202,6 @@ module Kaltura
 		end
 		def is_trim_disabled=(val)
 			@is_trim_disabled = val.to_i
-		end
-		def is_sequence_entry=(val)
-			@is_sequence_entry = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -4248,12 +4241,6 @@ module Kaltura
 			end
 			if xml_element.elements['streams'] != nil
 				self.streams = KalturaClientBase.object_from_xml(xml_element.elements['streams'], 'KalturaStreamContainer')
-			end
-			if xml_element.elements['isSequenceEntry'] != nil
-				self.is_sequence_entry = xml_element.elements['isSequenceEntry'].text
-			end
-			if xml_element.elements['sequenceEntryIds'] != nil
-				self.sequence_entry_ids = xml_element.elements['sequenceEntryIds'].text
 			end
 		end
 

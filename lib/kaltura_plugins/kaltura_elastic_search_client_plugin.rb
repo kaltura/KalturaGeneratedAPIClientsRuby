@@ -49,6 +49,14 @@ module Kaltura
 		START_TIME = "start_time"
 	end
 
+	class KalturaESearchCategoryEntryFieldName
+		ANCESTOR_ID = "ancestor_id"
+		ANCESTOR_NAME = "ancestor_name"
+		FULL_IDS = "full_ids"
+		ID = "id"
+		NAME = "name"
+	end
+
 	class KalturaESearchCategoryFieldName
 		CONTRIBUTION_POLICY = "contribution_policy"
 		CREATED_AT = "created_at"
@@ -100,9 +108,6 @@ module Kaltura
 	class KalturaESearchEntryFieldName
 		ACCESS_CONTROL_ID = "access_control_id"
 		ADMIN_TAGS = "admin_tags"
-		CATEGORIES = "categories"
-		CATEGORY_IDS = "category_ids"
-		CATEGORY_NAME = "category_name"
 		CONVERSION_PROFILE_ID = "conversion_profile_id"
 		CREATED_AT = "created_at"
 		CREATOR_ID = "creator_kuser_id"
@@ -830,6 +835,26 @@ module Kaltura
 			super
 			if xml_element.elements['fieldName'] != nil
 				self.field_name = xml_element.elements['fieldName'].text
+			end
+		end
+
+	end
+
+	class KalturaESearchCategoryEntryItem < KalturaESearchAbstractEntryItem
+		attr_accessor :field_name
+		attr_accessor :category_entry_status
+
+		def category_entry_status=(val)
+			@category_entry_status = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['fieldName'] != nil
+				self.field_name = xml_element.elements['fieldName'].text
+			end
+			if xml_element.elements['categoryEntryStatus'] != nil
+				self.category_entry_status = xml_element.elements['categoryEntryStatus'].text
 			end
 		end
 

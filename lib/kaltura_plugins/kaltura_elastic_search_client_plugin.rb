@@ -286,11 +286,7 @@ module Kaltura
 		attr_accessor :object_statuses
 		attr_accessor :object_id
 		attr_accessor :order_by
-		attr_accessor :use_highlight
 
-		def use_highlight=(val)
-			@use_highlight = to_b(val)
-		end
 
 		def from_xml(xml_element)
 			super
@@ -302,9 +298,6 @@ module Kaltura
 			end
 			if xml_element.elements['orderBy'] != nil
 				self.order_by = KalturaClientBase.object_from_xml(xml_element.elements['orderBy'], 'KalturaESearchOrderBy')
-			end
-			if xml_element.elements['useHighlight'] != nil
-				self.use_highlight = xml_element.elements['useHighlight'].text
 			end
 		end
 
@@ -720,9 +713,13 @@ module Kaltura
 		attr_accessor :search_term
 		attr_accessor :item_type
 		attr_accessor :range
+		attr_accessor :add_highlight
 
 		def item_type=(val)
 			@item_type = val.to_i
+		end
+		def add_highlight=(val)
+			@add_highlight = to_b(val)
 		end
 
 		def from_xml(xml_element)
@@ -735,6 +732,9 @@ module Kaltura
 			end
 			if xml_element.elements['range'] != nil
 				self.range = KalturaClientBase.object_from_xml(xml_element.elements['range'], 'KalturaESearchRange')
+			end
+			if xml_element.elements['addHighlight'] != nil
+				self.add_highlight = xml_element.elements['addHighlight'].text
 			end
 		end
 
@@ -744,9 +744,13 @@ module Kaltura
 		attr_accessor :search_term
 		attr_accessor :item_type
 		attr_accessor :range
+		attr_accessor :add_highlight
 
 		def item_type=(val)
 			@item_type = val.to_i
+		end
+		def add_highlight=(val)
+			@add_highlight = to_b(val)
 		end
 
 		def from_xml(xml_element)
@@ -759,6 +763,9 @@ module Kaltura
 			end
 			if xml_element.elements['range'] != nil
 				self.range = KalturaClientBase.object_from_xml(xml_element.elements['range'], 'KalturaESearchRange')
+			end
+			if xml_element.elements['addHighlight'] != nil
+				self.add_highlight = xml_element.elements['addHighlight'].text
 			end
 		end
 
@@ -768,9 +775,13 @@ module Kaltura
 		attr_accessor :search_term
 		attr_accessor :item_type
 		attr_accessor :range
+		attr_accessor :add_highlight
 
 		def item_type=(val)
 			@item_type = val.to_i
+		end
+		def add_highlight=(val)
+			@add_highlight = to_b(val)
 		end
 
 		def from_xml(xml_element)
@@ -783,6 +794,9 @@ module Kaltura
 			end
 			if xml_element.elements['range'] != nil
 				self.range = KalturaClientBase.object_from_xml(xml_element.elements['range'], 'KalturaESearchRange')
+			end
+			if xml_element.elements['addHighlight'] != nil
+				self.add_highlight = xml_element.elements['addHighlight'].text
 			end
 		end
 

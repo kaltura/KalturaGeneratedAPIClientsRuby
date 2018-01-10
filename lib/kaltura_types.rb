@@ -10133,6 +10133,19 @@ module Kaltura
 
 	end
 
+	class KalturaAssetTypeCondition < KalturaCondition
+		attr_accessor :asset_types
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['assetTypes'] != nil
+				self.asset_types = xml_element.elements['assetTypes'].text
+			end
+		end
+
+	end
+
 	class KalturaAssetsParamsResourceContainers < KalturaResource
 		# Array of resources associated with asset params ids
 		attr_accessor :resources

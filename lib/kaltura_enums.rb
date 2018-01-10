@@ -1173,6 +1173,7 @@ module Kaltura
 		DELIVERY_PROFILE = "13"
 		ACTIVE_EDGE_VALIDATE = "14"
 		ANONYMOUS_IP = "15"
+		ASSET_TYPE = "16"
 	end
 
 	class KalturaContainerFormat

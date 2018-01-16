@@ -4109,6 +4109,18 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Mark server node offline
+		# @return [KalturaServerNode]
+		def mark_offline(server_node_id)
+			kparams = {}
+			client.add_param(kparams, 'serverNodeId', server_node_id)
+			client.queue_service_action_call('servernode', 'markOffline', 'KalturaServerNode', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Update server node status
 		# @return [KalturaServerNode]
 		def report_status(host_name, server_node=KalturaNotImplemented)
@@ -6016,7 +6028,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:18-01-15'
+			self.client_tag = 'ruby:18-01-16'
 			self.api_version = '3.3.0'
 		end
 		

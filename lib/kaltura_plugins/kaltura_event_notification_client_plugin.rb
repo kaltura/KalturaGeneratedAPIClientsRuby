@@ -82,6 +82,7 @@ module Kaltura
 		WIDGET = "36"
 		CATEGORYENTRY = "37"
 		LIVE_STREAM = "38"
+		SERVER_NODE = "39"
 	end
 
 	class KalturaEventNotificationEventType

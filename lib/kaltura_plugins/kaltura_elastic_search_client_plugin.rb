@@ -137,14 +137,15 @@ module Kaltura
 		TAGS = "tags"
 		TEMPLATE_ENTRY_ID = "template_entry_id"
 		UPDATED_AT = "updated_at"
-		VIEWS = "views"
-		VOTES = "votes"
+		USER_NAMES = "user_names"
 	end
 
 	class KalturaESearchEntryOrderByFieldName
 		CREATED_AT = "created_at"
 		END_DATE = "end_date"
+		LAST_PLAYED_AT = "last_played_at"
 		NAME = "name"
+		PLAYS = "plays"
 		START_DATE = "start_date"
 		UPDATED_AT = "updated_at"
 		VIEWS = "views"

@@ -103,6 +103,7 @@ module Kaltura
 		SUB_TYPE = "sub_type"
 		TAGS = "tags"
 		TEXT = "text"
+		TYPE = "type"
 	end
 
 	class KalturaESearchEntryFieldName
@@ -195,6 +196,24 @@ module Kaltura
 	end
 
 	class KalturaESearchEntryBaseItem < KalturaESearchBaseItem
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaESearchEntryBaseNestedObject < KalturaESearchEntryBaseItem
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaESearchEntryNestedBaseItem < KalturaESearchEntryBaseNestedObject
 
 
 		def from_xml(xml_element)
@@ -512,7 +531,7 @@ module Kaltura
 				self.text = xml_element.elements['text'].text
 			end
 			if xml_element.elements['tags'] != nil
-				self.tags = xml_element.elements['tags'].text
+				self.tags = KalturaClientBase.object_from_xml(xml_element.elements['tags'], 'KalturaString')
 			end
 			if xml_element.elements['startTime'] != nil
 				self.start_time = xml_element.elements['startTime'].text
@@ -527,7 +546,7 @@ module Kaltura
 				self.question = xml_element.elements['question'].text
 			end
 			if xml_element.elements['answers'] != nil
-				self.answers = xml_element.elements['answers'].text
+				self.answers = KalturaClientBase.object_from_xml(xml_element.elements['answers'], 'KalturaString')
 			end
 			if xml_element.elements['hint'] != nil
 				self.hint = xml_element.elements['hint'].text
@@ -842,19 +861,6 @@ module Kaltura
 
 	end
 
-	class KalturaESearchCaptionItem < KalturaESearchAbstractEntryItem
-		attr_accessor :field_name
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['fieldName'] != nil
-				self.field_name = xml_element.elements['fieldName'].text
-			end
-		end
-
-	end
-
 	class KalturaESearchCategoryEntryItem < KalturaESearchAbstractEntryItem
 		attr_accessor :field_name
 		attr_accessor :category_entry_status
@@ -915,23 +921,6 @@ module Kaltura
 
 	end
 
-	class KalturaESearchCuePointItem < KalturaESearchAbstractEntryItem
-		attr_accessor :field_name
-		attr_accessor :cue_point_type
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['fieldName'] != nil
-				self.field_name = xml_element.elements['fieldName'].text
-			end
-			if xml_element.elements['cuePointType'] != nil
-				self.cue_point_type = xml_element.elements['cuePointType'].text
-			end
-		end
-
-	end
-
 	class KalturaESearchEntryItem < KalturaESearchAbstractEntryItem
 		attr_accessor :field_name
 
@@ -940,33 +929,6 @@ module Kaltura
 			super
 			if xml_element.elements['fieldName'] != nil
 				self.field_name = xml_element.elements['fieldName'].text
-			end
-		end
-
-	end
-
-	class KalturaESearchEntryMetadataItem < KalturaESearchAbstractEntryItem
-		attr_accessor :xpath
-		attr_accessor :metadata_profile_id
-		attr_accessor :metadata_field_id
-
-		def metadata_profile_id=(val)
-			@metadata_profile_id = val.to_i
-		end
-		def metadata_field_id=(val)
-			@metadata_field_id = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['xpath'] != nil
-				self.xpath = xml_element.elements['xpath'].text
-			end
-			if xml_element.elements['metadataProfileId'] != nil
-				self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
-			end
-			if xml_element.elements['metadataFieldId'] != nil
-				self.metadata_field_id = xml_element.elements['metadataFieldId'].text
 			end
 		end
 
@@ -995,6 +957,110 @@ module Kaltura
 	end
 
 	class KalturaESearchUserMetadataItem < KalturaESearchAbstractUserItem
+		attr_accessor :xpath
+		attr_accessor :metadata_profile_id
+		attr_accessor :metadata_field_id
+
+		def metadata_profile_id=(val)
+			@metadata_profile_id = val.to_i
+		end
+		def metadata_field_id=(val)
+			@metadata_field_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['xpath'] != nil
+				self.xpath = xml_element.elements['xpath'].text
+			end
+			if xml_element.elements['metadataProfileId'] != nil
+				self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
+			end
+			if xml_element.elements['metadataFieldId'] != nil
+				self.metadata_field_id = xml_element.elements['metadataFieldId'].text
+			end
+		end
+
+	end
+
+	class KalturaESearchEntryAbstractNestedItem < KalturaESearchEntryNestedBaseItem
+		attr_accessor :search_term
+		attr_accessor :item_type
+		attr_accessor :range
+		attr_accessor :add_highlight
+
+		def item_type=(val)
+			@item_type = val.to_i
+		end
+		def add_highlight=(val)
+			@add_highlight = to_b(val)
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['searchTerm'] != nil
+				self.search_term = xml_element.elements['searchTerm'].text
+			end
+			if xml_element.elements['itemType'] != nil
+				self.item_type = xml_element.elements['itemType'].text
+			end
+			if xml_element.elements['range'] != nil
+				self.range = KalturaClientBase.object_from_xml(xml_element.elements['range'], 'KalturaESearchRange')
+			end
+			if xml_element.elements['addHighlight'] != nil
+				self.add_highlight = xml_element.elements['addHighlight'].text
+			end
+		end
+
+	end
+
+	class KalturaESearchNestedOperator < KalturaESearchEntryNestedBaseItem
+		attr_accessor :operator
+		attr_accessor :search_items
+
+		def operator=(val)
+			@operator = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['operator'] != nil
+				self.operator = xml_element.elements['operator'].text
+			end
+			if xml_element.elements['searchItems'] != nil
+				self.search_items = KalturaClientBase.object_from_xml(xml_element.elements['searchItems'], 'KalturaESearchEntryNestedBaseItem')
+			end
+		end
+
+	end
+
+	class KalturaESearchCaptionItem < KalturaESearchEntryAbstractNestedItem
+		attr_accessor :field_name
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['fieldName'] != nil
+				self.field_name = xml_element.elements['fieldName'].text
+			end
+		end
+
+	end
+
+	class KalturaESearchCuePointItem < KalturaESearchEntryAbstractNestedItem
+		attr_accessor :field_name
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['fieldName'] != nil
+				self.field_name = xml_element.elements['fieldName'].text
+			end
+		end
+
+	end
+
+	class KalturaESearchEntryMetadataItem < KalturaESearchEntryAbstractNestedItem
 		attr_accessor :xpath
 		attr_accessor :metadata_profile_id
 		attr_accessor :metadata_field_id

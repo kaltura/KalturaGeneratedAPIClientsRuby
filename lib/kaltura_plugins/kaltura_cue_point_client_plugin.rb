@@ -36,6 +36,16 @@ module Kaltura
 		PENDING = 4
 	end
 
+	class KalturaQuestionType
+		MULTIPLE_CHOICE_ANSWER = 1
+		TRUE_FALSE = 2
+		REFLECTION_POINT = 3
+		MULTIPLE_ANSWER_QUESTION = 4
+		FILL_IN_BLANK = 5
+		HOT_SPOT = 6
+		GO_TO = 7
+	end
+
 	class KalturaQuizOutputType
 		PDF = 1
 	end

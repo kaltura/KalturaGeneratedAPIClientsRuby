@@ -194,7 +194,11 @@ module Kaltura
 		attr_accessor :hint
 		attr_accessor :question
 		attr_accessor :explanation
+		attr_accessor :question_type
 
+		def question_type=(val)
+			@question_type = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
@@ -209,6 +213,9 @@ module Kaltura
 			end
 			if xml_element.elements['explanation'] != nil
 				self.explanation = xml_element.elements['explanation'].text
+			end
+			if xml_element.elements['questionType'] != nil
+				self.question_type = xml_element.elements['questionType'].text
 			end
 		end
 

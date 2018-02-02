@@ -5355,6 +5355,20 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# add batch job that sends an email with a link to download an updated CSV that contains list of users
+		# @return [string]
+		def export_to_csv(filter, metadata_profile_id=KalturaNotImplemented, additional_fields=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'metadataProfileId', metadata_profile_id)
+			client.add_param(kparams, 'additionalFields', additional_fields)
+			client.queue_service_action_call('user', 'exportToCsv', 'string', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Retrieves a user object for a specified user ID.
 		# @return [KalturaUser]
 		def get(user_id=KalturaNotImplemented)
@@ -5471,6 +5485,18 @@ module Kaltura
 			kparams = {}
 			client.add_param(kparams, 'email', email)
 			client.queue_service_action_call('user', 'resetPassword', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Will serve a requested csv
+		# @return [string]
+		def serve_csv(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('user', 'serveCsv', 'string', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -6028,7 +6054,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:18-02-01'
+			self.client_tag = 'ruby:18-02-02'
 			self.api_version = '3.3.0'
 		end
 		

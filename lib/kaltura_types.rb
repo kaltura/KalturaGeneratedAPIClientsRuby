@@ -3318,6 +3318,23 @@ module Kaltura
 
 	end
 
+	class KalturaCsvAdditionalFieldInfo < KalturaObjectBase
+		attr_accessor :field_name
+		attr_accessor :xpath
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['fieldName'] != nil
+				self.field_name = xml_element.elements['fieldName'].text
+			end
+			if xml_element.elements['xpath'] != nil
+				self.xpath = xml_element.elements['xpath'].text
+			end
+		end
+
+	end
+
 	class KalturaDataEntry < KalturaBaseEntry
 		# The data of the entry
 		attr_accessor :data_content
@@ -14716,6 +14733,48 @@ module Kaltura
 			super
 			if xml_element.elements['objects'] != nil
 				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaUserRole')
+			end
+		end
+
+	end
+
+	class KalturaUsersCsvJobData < KalturaJobData
+		# The filter should return the list of users that need to be specified in the csv.
+		attr_accessor :filter
+		# The metadata profile we should look the xpath in
+		attr_accessor :metadata_profile_id
+		# The xpath to look in the metadataProfileId  and the wanted csv field name
+		attr_accessor :additional_fields
+		# The users name
+		attr_accessor :user_name
+		# The users email
+		attr_accessor :user_mail
+		# The file location
+		attr_accessor :output_path
+
+		def metadata_profile_id=(val)
+			@metadata_profile_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['filter'] != nil
+				self.filter = KalturaClientBase.object_from_xml(xml_element.elements['filter'], 'KalturaUserFilter')
+			end
+			if xml_element.elements['metadataProfileId'] != nil
+				self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
+			end
+			if xml_element.elements['additionalFields'] != nil
+				self.additional_fields = KalturaClientBase.object_from_xml(xml_element.elements['additionalFields'], 'KalturaCsvAdditionalFieldInfo')
+			end
+			if xml_element.elements['userName'] != nil
+				self.user_name = xml_element.elements['userName'].text
+			end
+			if xml_element.elements['userMail'] != nil
+				self.user_mail = xml_element.elements['userMail'].text
+			end
+			if xml_element.elements['outputPath'] != nil
+				self.output_path = xml_element.elements['outputPath'].text
 			end
 		end
 

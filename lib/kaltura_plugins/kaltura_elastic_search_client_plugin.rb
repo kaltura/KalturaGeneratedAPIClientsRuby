@@ -416,6 +416,7 @@ module Kaltura
 		attr_accessor :ends_at
 		attr_accessor :language
 		attr_accessor :caption_asset_id
+		attr_accessor :label
 
 		def starts_at=(val)
 			@starts_at = val.to_i
@@ -440,6 +441,9 @@ module Kaltura
 			end
 			if xml_element.elements['captionAssetId'] != nil
 				self.caption_asset_id = xml_element.elements['captionAssetId'].text
+			end
+			if xml_element.elements['label'] != nil
+				self.label = xml_element.elements['label'].text
 			end
 		end
 

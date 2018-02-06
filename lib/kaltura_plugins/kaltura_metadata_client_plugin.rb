@@ -482,7 +482,7 @@ module Kaltura
 		attr_accessor :src_xsl
 		attr_accessor :src_version
 		attr_accessor :dest_version
-		attr_accessor :dest_xsd_path
+		attr_accessor :dest_xsd
 		attr_accessor :metadata_profile_id
 
 		def src_version=(val)
@@ -506,8 +506,8 @@ module Kaltura
 			if xml_element.elements['destVersion'] != nil
 				self.dest_version = xml_element.elements['destVersion'].text
 			end
-			if xml_element.elements['destXsdPath'] != nil
-				self.dest_xsd_path = xml_element.elements['destXsdPath'].text
+			if xml_element.elements['destXsd'] != nil
+				self.dest_xsd = KalturaClientBase.object_from_xml(xml_element.elements['destXsd'], 'KalturaFileContainer')
 			end
 			if xml_element.elements['metadataProfileId'] != nil
 				self.metadata_profile_id = xml_element.elements['metadataProfileId'].text

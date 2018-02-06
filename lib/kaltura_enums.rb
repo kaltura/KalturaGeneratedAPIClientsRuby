@@ -1927,6 +1927,8 @@ module Kaltura
 		CIC = "Chickasaw"
 		CLC = "Chilcotin"
 		ZH = "Chinese"
+		ZH_HANS = "Chinese (Simplified)"
+		ZH_HANT = "Chinese (Traditional)"
 		CHN = "Chinook jargon"
 		CHP = "Chipewyan"
 		CIW = "Chippewa"
@@ -2371,8 +2373,8 @@ module Kaltura
 		WYM = "Wymysorys"
 		XH = "Xhosa"
 		AME = "Yanesha"
-		YI = "Yiddish"
 		JI = "Yiddish"
+		YI = "Yiddish"
 		YO = "Yoruba"
 		ZAI = "Zapotec Isthmus"
 		DJE = "Zarma"
@@ -2525,6 +2527,8 @@ module Kaltura
 		YI = "yi"
 		YO = "yo"
 		ZH = "zh"
+		ZH_HANS = "zh_s"
+		ZH_HANT = "zh_t"
 		ZU = "zu"
 	end
 

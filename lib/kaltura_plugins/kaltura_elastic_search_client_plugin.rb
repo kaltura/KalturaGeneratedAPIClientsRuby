@@ -132,6 +132,7 @@ module Kaltura
 		RECORDED_ENTRY_ID = "recorded_entry_id"
 		REDIRECT_ENTRY_ID = "redirect_entry_id"
 		REFERENCE_ID = "reference_id"
+		ROOT_ID = "root_id"
 		SITE_URL = "site_url"
 		SOURCE_TYPE = "source_type"
 		START_DATE = "start_date"

@@ -8,7 +8,7 @@
 # to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2017  Kaltura Inc.
+# Copyright (C) 2006-2018  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -12755,7 +12755,11 @@ module Kaltura
 		# parameters of the stream we got
 		attr_accessor :streams
 		attr_accessor :recording_info
+		attr_accessor :is_playable_user
 
+		def is_playable_user=(val)
+			@is_playable_user = to_b(val)
+		end
 
 		def from_xml(xml_element)
 			super
@@ -12764,6 +12768,9 @@ module Kaltura
 			end
 			if xml_element.elements['recordingInfo'] != nil
 				self.recording_info = KalturaClientBase.object_from_xml(xml_element.elements['recordingInfo'], 'KalturaLiveEntryServerNodeRecordingInfo')
+			end
+			if xml_element.elements['isPlayableUser'] != nil
+				self.is_playable_user = xml_element.elements['isPlayableUser'].text
 			end
 		end
 

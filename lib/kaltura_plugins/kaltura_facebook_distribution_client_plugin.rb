@@ -84,7 +84,7 @@ module Kaltura
 
 	class KalturaFacebookDistributionJobProviderData < KalturaConfigurableDistributionJobProviderData
 		attr_accessor :video_asset_file_path
-		attr_accessor :thumb_asset_file_path
+		attr_accessor :thumb_asset_id
 		attr_accessor :captions_info
 
 
@@ -93,8 +93,8 @@ module Kaltura
 			if xml_element.elements['videoAssetFilePath'] != nil
 				self.video_asset_file_path = xml_element.elements['videoAssetFilePath'].text
 			end
-			if xml_element.elements['thumbAssetFilePath'] != nil
-				self.thumb_asset_file_path = xml_element.elements['thumbAssetFilePath'].text
+			if xml_element.elements['thumbAssetId'] != nil
+				self.thumb_asset_id = xml_element.elements['thumbAssetId'].text
 			end
 			if xml_element.elements['captionsInfo'] != nil
 				self.captions_info = KalturaClientBase.object_from_xml(xml_element.elements['captionsInfo'], 'KalturaFacebookCaptionDistributionInfo')

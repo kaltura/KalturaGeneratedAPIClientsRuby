@@ -195,9 +195,13 @@ module Kaltura
 		attr_accessor :question
 		attr_accessor :explanation
 		attr_accessor :question_type
+		attr_accessor :presentation_order
 
 		def question_type=(val)
 			@question_type = val.to_i
+		end
+		def presentation_order=(val)
+			@presentation_order = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -216,6 +220,9 @@ module Kaltura
 			end
 			if xml_element.elements['questionType'] != nil
 				self.question_type = xml_element.elements['questionType'].text
+			end
+			if xml_element.elements['presentationOrder'] != nil
+				self.presentation_order = xml_element.elements['presentationOrder'].text
 			end
 		end
 

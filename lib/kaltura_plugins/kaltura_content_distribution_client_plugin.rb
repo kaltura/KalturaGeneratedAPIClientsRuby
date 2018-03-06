@@ -246,6 +246,7 @@ module Kaltura
 		attr_accessor :entry_mrss_xslt
 		# Is the field required to have a value for submission ?
 		attr_accessor :is_required
+		attr_accessor :type
 		# Trigger distribution update when this field changes or not ?
 		attr_accessor :update_on_change
 		# Entry column or metadata xpath that should trigger an update
@@ -281,6 +282,9 @@ module Kaltura
 			end
 			if xml_element.elements['isRequired'] != nil
 				self.is_required = xml_element.elements['isRequired'].text
+			end
+			if xml_element.elements['type'] != nil
+				self.type = xml_element.elements['type'].text
 			end
 			if xml_element.elements['updateOnChange'] != nil
 				self.update_on_change = xml_element.elements['updateOnChange'].text

@@ -1630,6 +1630,7 @@ module Kaltura
 
 	class KalturaFileAssetObjectType
 		UI_CONF = "2"
+		ENTRY = "3"
 	end
 
 	class KalturaFileAssetOrderBy

@@ -196,12 +196,16 @@ module Kaltura
 		attr_accessor :explanation
 		attr_accessor :question_type
 		attr_accessor :presentation_order
+		attr_accessor :exclude_from_score
 
 		def question_type=(val)
 			@question_type = val.to_i
 		end
 		def presentation_order=(val)
 			@presentation_order = val.to_i
+		end
+		def exclude_from_score=(val)
+			@exclude_from_score = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -223,6 +227,9 @@ module Kaltura
 			end
 			if xml_element.elements['presentationOrder'] != nil
 				self.presentation_order = xml_element.elements['presentationOrder'].text
+			end
+			if xml_element.elements['excludeFromScore'] != nil
+				self.exclude_from_score = xml_element.elements['excludeFromScore'].text
 			end
 		end
 

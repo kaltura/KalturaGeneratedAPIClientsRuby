@@ -12316,6 +12316,7 @@ module Kaltura
 		attr_accessor :status_equal
 		attr_accessor :status_in
 		attr_accessor :server_type_equal
+		attr_accessor :server_type_in
 
 		def server_node_id_equal=(val)
 			@server_node_id_equal = val.to_i
@@ -12367,6 +12368,9 @@ module Kaltura
 			end
 			if xml_element.elements['serverTypeEqual'] != nil
 				self.server_type_equal = xml_element.elements['serverTypeEqual'].text
+			end
+			if xml_element.elements['serverTypeIn'] != nil
+				self.server_type_in = xml_element.elements['serverTypeIn'].text
 			end
 		end
 
@@ -17725,6 +17729,15 @@ module Kaltura
 
 	end
 
+	class KalturaLiveEntryServerNodeBaseFilter < KalturaEntryServerNodeFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	# Auto-generated class.
 	#  Used to search KalturaLiveStreamAdminEntry attributes. Use KalturaLiveStreamAdminEntryCompareAttribute enum to provide attribute name.
 	# /
@@ -18319,6 +18332,15 @@ module Kaltura
 	end
 
 	class KalturaITunesSyndicationFeedFilter < KalturaITunesSyndicationFeedBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaLiveEntryServerNodeFilter < KalturaLiveEntryServerNodeBaseFilter
 
 
 		def from_xml(xml_element)

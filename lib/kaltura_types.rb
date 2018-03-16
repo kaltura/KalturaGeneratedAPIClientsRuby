@@ -3035,6 +3035,7 @@ module Kaltura
 		attr_accessor :media_info_xsl_transformation
 		# Default replacement options to be applied to entries
 		attr_accessor :default_replacement_options
+		attr_accessor :default_audio_lang
 
 		def id=(val)
 			@id = val.to_i
@@ -3143,6 +3144,9 @@ module Kaltura
 			end
 			if xml_element.elements['defaultReplacementOptions'] != nil
 				self.default_replacement_options = KalturaClientBase.object_from_xml(xml_element.elements['defaultReplacementOptions'], 'KalturaEntryReplacementOptions')
+			end
+			if xml_element.elements['defaultAudioLang'] != nil
+				self.default_audio_lang = xml_element.elements['defaultAudioLang'].text
 			end
 		end
 

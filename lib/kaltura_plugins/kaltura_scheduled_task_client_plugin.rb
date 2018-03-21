@@ -35,6 +35,11 @@ module Kaltura
 		DELETE_KEEP_SMALLEST = 3
 	end
 
+	class KalturaDryRunFileType
+		LIST_RESPONSE = 1
+		CSV = 2
+	end
+
 	class KalturaScheduledTaskAddOrRemoveType
 		ADD = 1
 		REMOVE = 2
@@ -367,11 +372,19 @@ module Kaltura
 
 	class KalturaScheduledTaskJobData < KalturaJobData
 		attr_accessor :max_results
+		attr_accessor :total_count
+		attr_accessor :file_format
 		attr_accessor :results_file_path
 		attr_accessor :reference_time
 
 		def max_results=(val)
 			@max_results = val.to_i
+		end
+		def total_count=(val)
+			@total_count = val.to_i
+		end
+		def file_format=(val)
+			@file_format = val.to_i
 		end
 		def reference_time=(val)
 			@reference_time = val.to_i
@@ -381,6 +394,12 @@ module Kaltura
 			super
 			if xml_element.elements['maxResults'] != nil
 				self.max_results = xml_element.elements['maxResults'].text
+			end
+			if xml_element.elements['totalCount'] != nil
+				self.total_count = xml_element.elements['totalCount'].text
+			end
+			if xml_element.elements['fileFormat'] != nil
+				self.file_format = xml_element.elements['fileFormat'].text
 			end
 			if xml_element.elements['resultsFilePath'] != nil
 				self.results_file_path = xml_element.elements['resultsFilePath'].text
@@ -597,6 +616,15 @@ module Kaltura
 				return nil
 			end
 			return client.do_queue()
+		end
+
+		# Serves dry run results by its request id
+		# @return [file]
+		def serve_dry_run_results(request_id)
+			kparams = {}
+			client.add_param(kparams, 'requestId', request_id)
+			client.queue_service_action_call('scheduledtask_scheduledtaskprofile', 'serveDryRunResults', 'file', kparams)
+			return client.get_serve_url()
 		end
 
 		# Update an existing scheduled task profile

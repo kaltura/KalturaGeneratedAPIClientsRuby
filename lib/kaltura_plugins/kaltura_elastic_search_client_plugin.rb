@@ -68,6 +68,7 @@ module Kaltura
 		ENTRIES_COUNT = "entries_count"
 		FULL_IDS = "full_ids"
 		FULL_NAME = "full_name"
+		ID = "id"
 		INHERITANCE_TYPE = "inheritance_type"
 		INHERITED_PARENT_ID = "inherited_parent_id"
 		MEMBERS_COUNT = "members_count"
@@ -365,16 +366,12 @@ module Kaltura
 	end
 
 	class KalturaESearchResult < KalturaObjectBase
-		attr_accessor :object
 		attr_accessor :highlight
 		attr_accessor :items_data
 
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['object'] != nil
-				self.object = KalturaClientBase.object_from_xml(xml_element.elements['object'], 'KalturaObjectBase')
-			end
 			if xml_element.elements['highlight'] != nil
 				self.highlight = KalturaClientBase.object_from_xml(xml_element.elements['highlight'], 'KalturaESearchHighlight')
 			end
@@ -500,10 +497,14 @@ module Kaltura
 	end
 
 	class KalturaESearchCategoryResult < KalturaESearchResult
+		attr_accessor :object
 
 
 		def from_xml(xml_element)
 			super
+			if xml_element.elements['object'] != nil
+				self.object = KalturaClientBase.object_from_xml(xml_element.elements['object'], 'KalturaCategory')
+			end
 		end
 
 	end
@@ -616,10 +617,14 @@ module Kaltura
 	end
 
 	class KalturaESearchEntryResult < KalturaESearchResult
+		attr_accessor :object
 
 
 		def from_xml(xml_element)
 			super
+			if xml_element.elements['object'] != nil
+				self.object = KalturaClientBase.object_from_xml(xml_element.elements['object'], 'KalturaBaseEntry')
+			end
 		end
 
 	end
@@ -729,10 +734,14 @@ module Kaltura
 	end
 
 	class KalturaESearchUserResult < KalturaESearchResult
+		attr_accessor :object
 
 
 		def from_xml(xml_element)
 			super
+			if xml_element.elements['object'] != nil
+				self.object = KalturaClientBase.object_from_xml(xml_element.elements['object'], 'KalturaUser')
+			end
 		end
 
 	end

@@ -3854,19 +3854,6 @@ module Kaltura
 
 	end
 
-	class KalturaObject < KalturaObjectBase
-		attr_accessor :related_objects
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['relatedObjects'] != nil
-				self.related_objects = KalturaClientBase.object_from_xml(xml_element.elements['relatedObjects'], 'KalturaListResponse')
-			end
-		end
-
-	end
-
 	class KalturaEmailIngestionProfile < KalturaObjectBase
 		attr_accessor :id
 		attr_accessor :name
@@ -5216,6 +5203,19 @@ module Kaltura
 			end
 			if xml_element.elements['updatedAt'] != nil
 				self.updated_at = xml_element.elements['updatedAt'].text
+			end
+		end
+
+	end
+
+	class KalturaObject < KalturaObjectBase
+		attr_accessor :related_objects
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['relatedObjects'] != nil
+				self.related_objects = KalturaClientBase.object_from_xml(xml_element.elements['relatedObjects'], 'KalturaListResponse')
 			end
 		end
 

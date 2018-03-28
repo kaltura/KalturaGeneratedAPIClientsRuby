@@ -5357,7 +5357,7 @@ module Kaltura
 
 		# add batch job that sends an email with a link to download an updated CSV that contains list of users
 		# @return [string]
-		def export_to_csv(filter, metadata_profile_id=KalturaNotImplemented, additional_fields=KalturaNotImplemented)
+		def export_to_csv(filter=KalturaNotImplemented, metadata_profile_id=KalturaNotImplemented, additional_fields=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
 			client.add_param(kparams, 'metadataProfileId', metadata_profile_id)
@@ -6054,7 +6054,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:18-03-27'
+			self.client_tag = 'ruby:18-03-28'
 			self.api_version = '3.3.0'
 		end
 		

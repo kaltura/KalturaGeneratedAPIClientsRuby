@@ -5859,6 +5859,8 @@ module Kaltura
 		attr_accessor :explicit_live
 		attr_accessor :view_mode
 		attr_accessor :recording_status
+		# The time the last broadcast finished.
+		attr_accessor :last_broadcast_end_time
 
 		def record_status=(val)
 			@record_status = val.to_i
@@ -5898,6 +5900,9 @@ module Kaltura
 		end
 		def recording_status=(val)
 			@recording_status = val.to_i
+		end
+		def last_broadcast_end_time=(val)
+			@last_broadcast_end_time = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -5955,6 +5960,9 @@ module Kaltura
 			end
 			if xml_element.elements['recordingStatus'] != nil
 				self.recording_status = xml_element.elements['recordingStatus'].text
+			end
+			if xml_element.elements['lastBroadcastEndTime'] != nil
+				self.last_broadcast_end_time = xml_element.elements['lastBroadcastEndTime'].text
 			end
 		end
 

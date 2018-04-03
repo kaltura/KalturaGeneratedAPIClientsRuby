@@ -11012,12 +11012,17 @@ module Kaltura
 		attr_accessor :offset
 		# Duration in milliseconds
 		attr_accessor :duration
+		# global Offset In Destination in milliseconds
+		attr_accessor :global_offset_in_destination
 
 		def offset=(val)
 			@offset = val.to_i
 		end
 		def duration=(val)
 			@duration = val.to_i
+		end
+		def global_offset_in_destination=(val)
+			@global_offset_in_destination = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -11027,6 +11032,44 @@ module Kaltura
 			end
 			if xml_element.elements['duration'] != nil
 				self.duration = xml_element.elements['duration'].text
+			end
+			if xml_element.elements['globalOffsetInDestination'] != nil
+				self.global_offset_in_destination = xml_element.elements['globalOffsetInDestination'].text
+			end
+		end
+
+	end
+
+	# Created by IntelliJ IDEA.
+	#  User: roie.beck
+	#  Date: 3/12/2018
+	#  Time: 11:20 AM
+	#  /
+	class KalturaClipConcatJobData < KalturaJobData
+		# $partnerId
+		attr_accessor :partner_id
+		# $priority
+		attr_accessor :priority
+		# clip operations
+		attr_accessor :operation_attributes
+
+		def partner_id=(val)
+			@partner_id = val.to_i
+		end
+		def priority=(val)
+			@priority = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['partnerId'] != nil
+				self.partner_id = xml_element.elements['partnerId'].text
+			end
+			if xml_element.elements['priority'] != nil
+				self.priority = xml_element.elements['priority'].text
+			end
+			if xml_element.elements['operationAttributes'] != nil
+				self.operation_attributes = KalturaClientBase.object_from_xml(xml_element.elements['operationAttributes'], 'KalturaObject')
 			end
 		end
 
@@ -11088,6 +11131,8 @@ module Kaltura
 		attr_accessor :duration
 		# duration of the concated video
 		attr_accessor :concatenated_duration
+		# Should Sort the clip parts
+		attr_accessor :should_sort
 
 		def offset=(val)
 			@offset = val.to_f
@@ -11097,6 +11142,9 @@ module Kaltura
 		end
 		def concatenated_duration=(val)
 			@concatenated_duration = val.to_f
+		end
+		def should_sort=(val)
+			@should_sort = to_b(val)
 		end
 
 		def from_xml(xml_element)
@@ -11118,6 +11166,9 @@ module Kaltura
 			end
 			if xml_element.elements['concatenatedDuration'] != nil
 				self.concatenated_duration = xml_element.elements['concatenatedDuration'].text
+			end
+			if xml_element.elements['shouldSort'] != nil
+				self.should_sort = xml_element.elements['shouldSort'].text
 			end
 		end
 

@@ -496,6 +496,19 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# @return [KalturaCuePoint]
+		def update_cue_points_times(id, start_time, end_time=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'startTime', start_time)
+			client.add_param(kparams, 'endTime', end_time)
+			client.queue_service_action_call('cuepoint_cuepoint', 'updateCuePointsTimes', 'KalturaCuePoint', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Update cuePoint status by id
 		# @return []
 		def update_status(id, status)

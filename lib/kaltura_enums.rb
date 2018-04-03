@@ -1009,10 +1009,10 @@ module Kaltura
 		DISTRIBUTION_ENABLE = "contentDistribution.DistributionEnable"
 		DISTRIBUTION_FETCH_REPORT = "contentDistribution.DistributionFetchReport"
 		DISTRIBUTION_SUBMIT = "contentDistribution.DistributionSubmit"
-		DISTRIBUTION_SYNC = "contentDistribution.DistributionSync"
 		DISTRIBUTION_UPDATE = "contentDistribution.DistributionUpdate"
-		CONVERT = "0"
 		DROP_FOLDER_CONTENT_PROCESSOR = "dropFolder.DropFolderContentProcessor"
+		CONVERT = "0"
+		DISTRIBUTION_SYNC = "contentDistribution.DistributionSync"
 		DROP_FOLDER_WATCHER = "dropFolder.DropFolderWatcher"
 		EVENT_NOTIFICATION_HANDLER = "eventNotification.EventNotificationHandler"
 		INTEGRATION = "integration.Integration"
@@ -1063,6 +1063,8 @@ module Kaltura
 		CHUNKED_ENCODE_JOB_SCHEDULER = "44"
 		SERVER_NODE_MONITOR = "45"
 		USERS_CSV = "46"
+		CLIP_CONCAT = "47"
+		COPY_CUE_POINTS = "48"
 	end
 
 	class KalturaBulkUploadAction

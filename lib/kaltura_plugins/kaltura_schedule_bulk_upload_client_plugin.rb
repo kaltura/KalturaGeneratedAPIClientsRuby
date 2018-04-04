@@ -26,7 +26,7 @@
 # @ignore
 # ===================================================================================================
 require 'kaltura_client.rb'
-require File.dirname(__FILE__) + '/kaltura_bulk_upload_client_plugin.rb'
+require File.dirname(__FILE__) + '/kaltura_bulk_upload_csv_client_plugin.rb'
 require File.dirname(__FILE__) + '/kaltura_schedule_client_plugin.rb'
 
 module Kaltura

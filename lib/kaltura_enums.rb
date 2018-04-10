@@ -3369,6 +3369,7 @@ module Kaltura
 		LIVE = "24"
 		TOP_PLAYBACK_CONTEXT = "25"
 		VPAAS_USAGE = "26"
+		ENTRY_USAGE = "27"
 		PARTNER_USAGE = "201"
 	end
 

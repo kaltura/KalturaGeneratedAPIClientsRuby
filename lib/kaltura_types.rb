@@ -2728,6 +2728,40 @@ module Kaltura
 
 	end
 
+	class KalturaClipDescription < KalturaObjectBase
+		attr_accessor :source_entry_id
+		attr_accessor :start_time
+		attr_accessor :duration
+		attr_accessor :offset_in_destination
+
+		def start_time=(val)
+			@start_time = val.to_i
+		end
+		def duration=(val)
+			@duration = val.to_i
+		end
+		def offset_in_destination=(val)
+			@offset_in_destination = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['sourceEntryId'] != nil
+				self.source_entry_id = xml_element.elements['sourceEntryId'].text
+			end
+			if xml_element.elements['startTime'] != nil
+				self.start_time = xml_element.elements['startTime'].text
+			end
+			if xml_element.elements['duration'] != nil
+				self.duration = xml_element.elements['duration'].text
+			end
+			if xml_element.elements['offsetInDestination'] != nil
+				self.offset_in_destination = xml_element.elements['offsetInDestination'].text
+			end
+		end
+
+	end
+
 	class KalturaContext < KalturaObjectBase
 
 

@@ -2517,11 +2517,11 @@ module Kaltura
 		end
 
 		# Regenerate new secure token for liveStream
-		# @return []
+		# @return [KalturaLiveEntry]
 		def regenerate_stream_token(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('livestream', 'regenerateStreamToken', '', kparams)
+			client.queue_service_action_call('livestream', 'regenerateStreamToken', 'KalturaLiveEntry', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -6054,7 +6054,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:18-04-10'
+			self.client_tag = 'ruby:18-04-11'
 			self.api_version = '3.3.0'
 		end
 		

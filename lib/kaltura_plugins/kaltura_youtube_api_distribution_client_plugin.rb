@@ -50,7 +50,6 @@ module Kaltura
 		attr_accessor :language
 		attr_accessor :label
 		attr_accessor :file_path
-		attr_accessor :encryption_key
 		attr_accessor :remote_id
 		attr_accessor :action
 		attr_accessor :version
@@ -70,9 +69,6 @@ module Kaltura
 			end
 			if xml_element.elements['filePath'] != nil
 				self.file_path = xml_element.elements['filePath'].text
-			end
-			if xml_element.elements['encryptionKey'] != nil
-				self.encryption_key = xml_element.elements['encryptionKey'].text
 			end
 			if xml_element.elements['remoteId'] != nil
 				self.remote_id = xml_element.elements['remoteId'].text

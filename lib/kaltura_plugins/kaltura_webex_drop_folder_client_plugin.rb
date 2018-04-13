@@ -69,6 +69,7 @@ module Kaltura
 		attr_accessor :webex_host_id_metadata_field_name
 		attr_accessor :delete_from_recycle_bin
 		attr_accessor :webex_service_type
+		attr_accessor :webex_site_name
 		attr_accessor :delete_from_timestamp
 
 		def webex_site_id=(val)
@@ -106,6 +107,9 @@ module Kaltura
 			end
 			if xml_element.elements['webexServiceType'] != nil
 				self.webex_service_type = xml_element.elements['webexServiceType'].text
+			end
+			if xml_element.elements['webexSiteName'] != nil
+				self.webex_site_name = xml_element.elements['webexSiteName'].text
 			end
 			if xml_element.elements['deleteFromTimestamp'] != nil
 				self.delete_from_timestamp = xml_element.elements['deleteFromTimestamp'].text

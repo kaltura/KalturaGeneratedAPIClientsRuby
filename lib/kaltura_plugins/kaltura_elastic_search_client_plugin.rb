@@ -84,7 +84,6 @@ module Kaltura
 		TAGS = "tags"
 		UPDATED_AT = "updated_at"
 		USER_ID = "user_id"
-		USER_IDS = "user_ids"
 	end
 
 	class KalturaESearchCategoryOrderByFieldName
@@ -93,6 +92,10 @@ module Kaltura
 		MEMBERS_COUNT = "members_count"
 		NAME = "name"
 		UPDATED_AT = "updated_at"
+	end
+
+	class KalturaESearchCategoryUserFieldName
+		USER_ID = "user_id"
 	end
 
 	class KalturaESearchCuePointFieldName
@@ -933,6 +936,30 @@ module Kaltura
 			end
 			if xml_element.elements['metadataFieldId'] != nil
 				self.metadata_field_id = xml_element.elements['metadataFieldId'].text
+			end
+		end
+
+	end
+
+	class KalturaESearchCategoryUserItem < KalturaESearchAbstractCategoryItem
+		attr_accessor :field_name
+		attr_accessor :permission_level
+		attr_accessor :permission_name
+
+		def permission_level=(val)
+			@permission_level = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['fieldName'] != nil
+				self.field_name = xml_element.elements['fieldName'].text
+			end
+			if xml_element.elements['permissionLevel'] != nil
+				self.permission_level = xml_element.elements['permissionLevel'].text
+			end
+			if xml_element.elements['permissionName'] != nil
+				self.permission_name = xml_element.elements['permissionName'].text
 			end
 		end
 

@@ -12650,9 +12650,13 @@ module Kaltura
 		attr_accessor :category
 		attr_accessor :adult_content
 		attr_accessor :feed_author
+		attr_accessor :enforce_feed_author
 		# true in case you want to enfore the palylist order on the
 		attr_accessor :enforce_order
 
+		def enforce_feed_author=(val)
+			@enforce_feed_author = to_b(val)
+		end
 		def enforce_order=(val)
 			@enforce_order = val.to_i
 		end
@@ -12685,6 +12689,9 @@ module Kaltura
 			end
 			if xml_element.elements['feedAuthor'] != nil
 				self.feed_author = xml_element.elements['feedAuthor'].text
+			end
+			if xml_element.elements['enforceFeedAuthor'] != nil
+				self.enforce_feed_author = xml_element.elements['enforceFeedAuthor'].text
 			end
 			if xml_element.elements['enforceOrder'] != nil
 				self.enforce_order = xml_element.elements['enforceOrder'].text

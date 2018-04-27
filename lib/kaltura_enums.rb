@@ -169,6 +169,11 @@ module Kaltura
 		ADVANCED = 2
 	end
 
+	class KalturaEffectType
+		VIDEO_FADE_IN = 1
+		VIDEO_FADE_OUT = 2
+	end
+
 	class KalturaEmailIngestionProfileStatus
 		INACTIVE = 0
 		ACTIVE = 1

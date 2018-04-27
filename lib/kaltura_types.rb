@@ -3888,6 +3888,28 @@ module Kaltura
 
 	end
 
+	# Effects attributes
+	class KalturaEffect < KalturaObjectBase
+		attr_accessor :effect_type
+		# value
+		attr_accessor :value
+
+		def effect_type=(val)
+			@effect_type = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['effectType'] != nil
+				self.effect_type = xml_element.elements['effectType'].text
+			end
+			if xml_element.elements['value'] != nil
+				self.value = xml_element.elements['value'].text
+			end
+		end
+
+	end
+
 	class KalturaEmailIngestionProfile < KalturaObjectBase
 		attr_accessor :id
 		attr_accessor :name
@@ -11048,6 +11070,8 @@ module Kaltura
 		attr_accessor :duration
 		# global Offset In Destination in milliseconds
 		attr_accessor :global_offset_in_destination
+		# global Offset In Destination in milliseconds
+		attr_accessor :effect_array
 
 		def offset=(val)
 			@offset = val.to_i
@@ -11070,15 +11094,13 @@ module Kaltura
 			if xml_element.elements['globalOffsetInDestination'] != nil
 				self.global_offset_in_destination = xml_element.elements['globalOffsetInDestination'].text
 			end
+			if xml_element.elements['effectArray'] != nil
+				self.effect_array = KalturaClientBase.object_from_xml(xml_element.elements['effectArray'], 'KalturaEffect')
+			end
 		end
 
 	end
 
-	# Created by IntelliJ IDEA.
-	#  User: roie.beck
-	#  Date: 3/12/2018
-	#  Time: 11:20 AM
-	#  /
 	class KalturaClipConcatJobData < KalturaJobData
 		# $partnerId
 		attr_accessor :partner_id

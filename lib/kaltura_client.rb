@@ -1545,6 +1545,18 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# @return [KalturaEntryServerNode]
+		def update_status(id, status)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'status', status)
+			client.queue_service_action_call('entryservernode', 'updateStatus', 'KalturaEntryServerNode', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Validates server node still registered on entry
 		# @return []
 		def validate_registered_entry_server_node(id)
@@ -6054,7 +6066,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:18-04-29'
+			self.client_tag = 'ruby:18-04-30'
 			self.api_version = '3.3.0'
 		end
 		

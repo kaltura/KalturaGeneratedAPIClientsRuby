@@ -203,11 +203,17 @@ module Kaltura
 	end
 
 	class KalturaEntryServerNodeStatus
+		ERROR = -1
 		STOPPED = 0
 		PLAYABLE = 1
 		BROADCASTING = 2
 		AUTHENTICATED = 3
 		MARKED_FOR_DELETION = 4
+		TASK_PENDING = 5
+		TASK_QUEUED = 6
+		TASK_PROCESSING = 7
+		TASK_UPLOADING = 8
+		TASK_FINISHED = 9
 	end
 
 	class KalturaFeatureStatusType
@@ -1565,6 +1571,7 @@ module Kaltura
 	class KalturaEntryServerNodeType
 		LIVE_PRIMARY = "0"
 		LIVE_BACKUP = "1"
+		LIVE_CLIPPING_TASK = "2"
 	end
 
 	class KalturaEntryStatus

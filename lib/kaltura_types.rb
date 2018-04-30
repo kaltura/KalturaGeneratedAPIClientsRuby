@@ -14263,6 +14263,15 @@ module Kaltura
 
 	end
 
+	class KalturaTaskEntryServerNode < KalturaEntryServerNode
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaThumbAssetListResponse < KalturaListResponse
 		attr_accessor :objects
 
@@ -15619,6 +15628,27 @@ module Kaltura
 			end
 			if xml_element.elements['creatorUserIdIn'] != nil
 				self.creator_user_id_in = xml_element.elements['creatorUserIdIn'].text
+			end
+		end
+
+	end
+
+	class KalturaClippingTaskEntryServerNode < KalturaTaskEntryServerNode
+		attr_accessor :clip_attributes
+		attr_accessor :clipped_entry_id
+		attr_accessor :live_entry_id
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['clipAttributes'] != nil
+				self.clip_attributes = KalturaClientBase.object_from_xml(xml_element.elements['clipAttributes'], 'KalturaClipAttributes')
+			end
+			if xml_element.elements['clippedEntryId'] != nil
+				self.clipped_entry_id = xml_element.elements['clippedEntryId'].text
+			end
+			if xml_element.elements['liveEntryId'] != nil
+				self.live_entry_id = xml_element.elements['liveEntryId'].text
 			end
 		end
 

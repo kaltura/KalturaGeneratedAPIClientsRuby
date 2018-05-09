@@ -203,33 +203,6 @@ module Kaltura
 
 	end
 
-	class KalturaESearchEntryBaseItem < KalturaESearchBaseItem
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaESearchEntryBaseNestedObject < KalturaESearchEntryBaseItem
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaESearchEntryNestedBaseItem < KalturaESearchEntryBaseNestedObject
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
 	class KalturaESearchHighlight < KalturaObjectBase
 		attr_accessor :field_name
 		attr_accessor :hits
@@ -279,6 +252,76 @@ module Kaltura
 			end
 			if xml_element.elements['itemsType'] != nil
 				self.items_type = xml_element.elements['itemsType'].text
+			end
+		end
+
+	end
+
+	class KalturaESearchResult < KalturaObjectBase
+		attr_accessor :highlight
+		attr_accessor :items_data
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['highlight'] != nil
+				self.highlight = KalturaClientBase.object_from_xml(xml_element.elements['highlight'], 'KalturaESearchHighlight')
+			end
+			if xml_element.elements['itemsData'] != nil
+				self.items_data = KalturaClientBase.object_from_xml(xml_element.elements['itemsData'], 'KalturaESearchItemDataResult')
+			end
+		end
+
+	end
+
+	class KalturaESearchCategoryResult < KalturaESearchResult
+		attr_accessor :object
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['object'] != nil
+				self.object = KalturaClientBase.object_from_xml(xml_element.elements['object'], 'KalturaCategory')
+			end
+		end
+
+	end
+
+	class KalturaESearchEntryBaseItem < KalturaESearchBaseItem
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaESearchEntryBaseNestedObject < KalturaESearchEntryBaseItem
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaESearchEntryNestedBaseItem < KalturaESearchEntryBaseNestedObject
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaESearchEntryResult < KalturaESearchResult
+		attr_accessor :object
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['object'] != nil
+				self.object = KalturaClientBase.object_from_xml(xml_element.elements['object'], 'KalturaBaseEntry')
 			end
 		end
 
@@ -368,26 +411,8 @@ module Kaltura
 
 	end
 
-	class KalturaESearchResult < KalturaObjectBase
-		attr_accessor :highlight
-		attr_accessor :items_data
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['highlight'] != nil
-				self.highlight = KalturaClientBase.object_from_xml(xml_element.elements['highlight'], 'KalturaESearchHighlight')
-			end
-			if xml_element.elements['itemsData'] != nil
-				self.items_data = KalturaClientBase.object_from_xml(xml_element.elements['itemsData'], 'KalturaESearchItemDataResult')
-			end
-		end
-
-	end
-
 	class KalturaESearchResponse < KalturaObjectBase
 		attr_accessor :total_count
-		attr_accessor :objects
 
 		def total_count=(val)
 			@total_count = val.to_i
@@ -398,9 +423,6 @@ module Kaltura
 			if xml_element.elements['totalCount'] != nil
 				self.total_count = xml_element.elements['totalCount'].text
 			end
-			if xml_element.elements['objects'] != nil
-				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaESearchResult')
-			end
 		end
 
 	end
@@ -410,6 +432,19 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
+		end
+
+	end
+
+	class KalturaESearchUserResult < KalturaESearchResult
+		attr_accessor :object
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['object'] != nil
+				self.object = KalturaClientBase.object_from_xml(xml_element.elements['object'], 'KalturaUser')
+			end
 		end
 
 	end
@@ -499,14 +534,14 @@ module Kaltura
 
 	end
 
-	class KalturaESearchCategoryResult < KalturaESearchResult
-		attr_accessor :object
+	class KalturaESearchCategoryResponse < KalturaESearchResponse
+		attr_accessor :objects
 
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['object'] != nil
-				self.object = KalturaClientBase.object_from_xml(xml_element.elements['object'], 'KalturaCategory')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaESearchCategoryResult')
 			end
 		end
 
@@ -619,14 +654,14 @@ module Kaltura
 
 	end
 
-	class KalturaESearchEntryResult < KalturaESearchResult
-		attr_accessor :object
+	class KalturaESearchEntryResponse < KalturaESearchResponse
+		attr_accessor :objects
 
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['object'] != nil
-				self.object = KalturaClientBase.object_from_xml(xml_element.elements['object'], 'KalturaBaseEntry')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaESearchEntryResult')
 			end
 		end
 
@@ -736,14 +771,14 @@ module Kaltura
 
 	end
 
-	class KalturaESearchUserResult < KalturaESearchResult
-		attr_accessor :object
+	class KalturaESearchUserResponse < KalturaESearchResponse
+		attr_accessor :objects
 
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['object'] != nil
-				self.object = KalturaClientBase.object_from_xml(xml_element.elements['object'], 'KalturaUser')
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaESearchUserResult')
 			end
 		end
 
@@ -1137,36 +1172,36 @@ module Kaltura
 			super(client)
 		end
 
-		# @return [KalturaESearchResponse]
+		# @return [KalturaESearchCategoryResponse]
 		def search_category(search_params, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'searchParams', search_params)
 			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('elasticsearch_esearch', 'searchCategory', 'KalturaESearchResponse', kparams)
+			client.queue_service_action_call('elasticsearch_esearch', 'searchCategory', 'KalturaESearchCategoryResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
 			return client.do_queue()
 		end
 
-		# @return [KalturaESearchResponse]
+		# @return [KalturaESearchEntryResponse]
 		def search_entry(search_params, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'searchParams', search_params)
 			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('elasticsearch_esearch', 'searchEntry', 'KalturaESearchResponse', kparams)
+			client.queue_service_action_call('elasticsearch_esearch', 'searchEntry', 'KalturaESearchEntryResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
 			return client.do_queue()
 		end
 
-		# @return [KalturaESearchResponse]
+		# @return [KalturaESearchUserResponse]
 		def search_user(search_params, pager=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'searchParams', search_params)
 			client.add_param(kparams, 'pager', pager)
-			client.queue_service_action_call('elasticsearch_esearch', 'searchUser', 'KalturaESearchResponse', kparams)
+			client.queue_service_action_call('elasticsearch_esearch', 'searchUser', 'KalturaESearchUserResponse', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

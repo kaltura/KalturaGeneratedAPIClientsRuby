@@ -3888,6 +3888,212 @@ module Kaltura
 
 	end
 
+	class KalturaUser < KalturaObjectBase
+		attr_accessor :id
+		attr_accessor :partner_id
+		attr_accessor :type
+		attr_accessor :screen_name
+		attr_accessor :full_name
+		attr_accessor :email
+		attr_accessor :date_of_birth
+		attr_accessor :country
+		attr_accessor :state
+		attr_accessor :city
+		attr_accessor :zip
+		attr_accessor :thumbnail_url
+		attr_accessor :description
+		attr_accessor :tags
+		# Admin tags can be updated only by using an admin session
+		attr_accessor :admin_tags
+		attr_accessor :gender
+		attr_accessor :status
+		# Creation date as Unix timestamp (In seconds)
+		attr_accessor :created_at
+		# Last update date as Unix timestamp (In seconds)
+		attr_accessor :updated_at
+		# Can be used to store various partner related data as a string
+		attr_accessor :partner_data
+		attr_accessor :indexed_partner_data_int
+		attr_accessor :indexed_partner_data_string
+		attr_accessor :storage_size
+		attr_accessor :password
+		attr_accessor :first_name
+		attr_accessor :last_name
+		attr_accessor :is_admin
+		attr_accessor :language
+		attr_accessor :last_login_time
+		attr_accessor :status_updated_at
+		attr_accessor :deleted_at
+		attr_accessor :login_enabled
+		attr_accessor :role_ids
+		attr_accessor :role_names
+		attr_accessor :is_account_owner
+		attr_accessor :allowed_partner_ids
+		attr_accessor :allowed_partner_packages
+
+		def partner_id=(val)
+			@partner_id = val.to_i
+		end
+		def type=(val)
+			@type = val.to_i
+		end
+		def date_of_birth=(val)
+			@date_of_birth = val.to_i
+		end
+		def gender=(val)
+			@gender = val.to_i
+		end
+		def status=(val)
+			@status = val.to_i
+		end
+		def created_at=(val)
+			@created_at = val.to_i
+		end
+		def updated_at=(val)
+			@updated_at = val.to_i
+		end
+		def indexed_partner_data_int=(val)
+			@indexed_partner_data_int = val.to_i
+		end
+		def storage_size=(val)
+			@storage_size = val.to_i
+		end
+		def is_admin=(val)
+			@is_admin = to_b(val)
+		end
+		def last_login_time=(val)
+			@last_login_time = val.to_i
+		end
+		def status_updated_at=(val)
+			@status_updated_at = val.to_i
+		end
+		def deleted_at=(val)
+			@deleted_at = val.to_i
+		end
+		def login_enabled=(val)
+			@login_enabled = to_b(val)
+		end
+		def is_account_owner=(val)
+			@is_account_owner = to_b(val)
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['id'] != nil
+				self.id = xml_element.elements['id'].text
+			end
+			if xml_element.elements['partnerId'] != nil
+				self.partner_id = xml_element.elements['partnerId'].text
+			end
+			if xml_element.elements['type'] != nil
+				self.type = xml_element.elements['type'].text
+			end
+			if xml_element.elements['screenName'] != nil
+				self.screen_name = xml_element.elements['screenName'].text
+			end
+			if xml_element.elements['fullName'] != nil
+				self.full_name = xml_element.elements['fullName'].text
+			end
+			if xml_element.elements['email'] != nil
+				self.email = xml_element.elements['email'].text
+			end
+			if xml_element.elements['dateOfBirth'] != nil
+				self.date_of_birth = xml_element.elements['dateOfBirth'].text
+			end
+			if xml_element.elements['country'] != nil
+				self.country = xml_element.elements['country'].text
+			end
+			if xml_element.elements['state'] != nil
+				self.state = xml_element.elements['state'].text
+			end
+			if xml_element.elements['city'] != nil
+				self.city = xml_element.elements['city'].text
+			end
+			if xml_element.elements['zip'] != nil
+				self.zip = xml_element.elements['zip'].text
+			end
+			if xml_element.elements['thumbnailUrl'] != nil
+				self.thumbnail_url = xml_element.elements['thumbnailUrl'].text
+			end
+			if xml_element.elements['description'] != nil
+				self.description = xml_element.elements['description'].text
+			end
+			if xml_element.elements['tags'] != nil
+				self.tags = xml_element.elements['tags'].text
+			end
+			if xml_element.elements['adminTags'] != nil
+				self.admin_tags = xml_element.elements['adminTags'].text
+			end
+			if xml_element.elements['gender'] != nil
+				self.gender = xml_element.elements['gender'].text
+			end
+			if xml_element.elements['status'] != nil
+				self.status = xml_element.elements['status'].text
+			end
+			if xml_element.elements['createdAt'] != nil
+				self.created_at = xml_element.elements['createdAt'].text
+			end
+			if xml_element.elements['updatedAt'] != nil
+				self.updated_at = xml_element.elements['updatedAt'].text
+			end
+			if xml_element.elements['partnerData'] != nil
+				self.partner_data = xml_element.elements['partnerData'].text
+			end
+			if xml_element.elements['indexedPartnerDataInt'] != nil
+				self.indexed_partner_data_int = xml_element.elements['indexedPartnerDataInt'].text
+			end
+			if xml_element.elements['indexedPartnerDataString'] != nil
+				self.indexed_partner_data_string = xml_element.elements['indexedPartnerDataString'].text
+			end
+			if xml_element.elements['storageSize'] != nil
+				self.storage_size = xml_element.elements['storageSize'].text
+			end
+			if xml_element.elements['password'] != nil
+				self.password = xml_element.elements['password'].text
+			end
+			if xml_element.elements['firstName'] != nil
+				self.first_name = xml_element.elements['firstName'].text
+			end
+			if xml_element.elements['lastName'] != nil
+				self.last_name = xml_element.elements['lastName'].text
+			end
+			if xml_element.elements['isAdmin'] != nil
+				self.is_admin = xml_element.elements['isAdmin'].text
+			end
+			if xml_element.elements['language'] != nil
+				self.language = xml_element.elements['language'].text
+			end
+			if xml_element.elements['lastLoginTime'] != nil
+				self.last_login_time = xml_element.elements['lastLoginTime'].text
+			end
+			if xml_element.elements['statusUpdatedAt'] != nil
+				self.status_updated_at = xml_element.elements['statusUpdatedAt'].text
+			end
+			if xml_element.elements['deletedAt'] != nil
+				self.deleted_at = xml_element.elements['deletedAt'].text
+			end
+			if xml_element.elements['loginEnabled'] != nil
+				self.login_enabled = xml_element.elements['loginEnabled'].text
+			end
+			if xml_element.elements['roleIds'] != nil
+				self.role_ids = xml_element.elements['roleIds'].text
+			end
+			if xml_element.elements['roleNames'] != nil
+				self.role_names = xml_element.elements['roleNames'].text
+			end
+			if xml_element.elements['isAccountOwner'] != nil
+				self.is_account_owner = xml_element.elements['isAccountOwner'].text
+			end
+			if xml_element.elements['allowedPartnerIds'] != nil
+				self.allowed_partner_ids = xml_element.elements['allowedPartnerIds'].text
+			end
+			if xml_element.elements['allowedPartnerPackages'] != nil
+				self.allowed_partner_packages = xml_element.elements['allowedPartnerPackages'].text
+			end
+		end
+
+	end
+
 	# Effects attributes
 	class KalturaEffect < KalturaObjectBase
 		attr_accessor :effect_type
@@ -9132,212 +9338,6 @@ module Kaltura
 			end
 			if xml_element.elements['autoFinalize'] != nil
 				self.auto_finalize = xml_element.elements['autoFinalize'].text
-			end
-		end
-
-	end
-
-	class KalturaUser < KalturaObjectBase
-		attr_accessor :id
-		attr_accessor :partner_id
-		attr_accessor :type
-		attr_accessor :screen_name
-		attr_accessor :full_name
-		attr_accessor :email
-		attr_accessor :date_of_birth
-		attr_accessor :country
-		attr_accessor :state
-		attr_accessor :city
-		attr_accessor :zip
-		attr_accessor :thumbnail_url
-		attr_accessor :description
-		attr_accessor :tags
-		# Admin tags can be updated only by using an admin session
-		attr_accessor :admin_tags
-		attr_accessor :gender
-		attr_accessor :status
-		# Creation date as Unix timestamp (In seconds)
-		attr_accessor :created_at
-		# Last update date as Unix timestamp (In seconds)
-		attr_accessor :updated_at
-		# Can be used to store various partner related data as a string
-		attr_accessor :partner_data
-		attr_accessor :indexed_partner_data_int
-		attr_accessor :indexed_partner_data_string
-		attr_accessor :storage_size
-		attr_accessor :password
-		attr_accessor :first_name
-		attr_accessor :last_name
-		attr_accessor :is_admin
-		attr_accessor :language
-		attr_accessor :last_login_time
-		attr_accessor :status_updated_at
-		attr_accessor :deleted_at
-		attr_accessor :login_enabled
-		attr_accessor :role_ids
-		attr_accessor :role_names
-		attr_accessor :is_account_owner
-		attr_accessor :allowed_partner_ids
-		attr_accessor :allowed_partner_packages
-
-		def partner_id=(val)
-			@partner_id = val.to_i
-		end
-		def type=(val)
-			@type = val.to_i
-		end
-		def date_of_birth=(val)
-			@date_of_birth = val.to_i
-		end
-		def gender=(val)
-			@gender = val.to_i
-		end
-		def status=(val)
-			@status = val.to_i
-		end
-		def created_at=(val)
-			@created_at = val.to_i
-		end
-		def updated_at=(val)
-			@updated_at = val.to_i
-		end
-		def indexed_partner_data_int=(val)
-			@indexed_partner_data_int = val.to_i
-		end
-		def storage_size=(val)
-			@storage_size = val.to_i
-		end
-		def is_admin=(val)
-			@is_admin = to_b(val)
-		end
-		def last_login_time=(val)
-			@last_login_time = val.to_i
-		end
-		def status_updated_at=(val)
-			@status_updated_at = val.to_i
-		end
-		def deleted_at=(val)
-			@deleted_at = val.to_i
-		end
-		def login_enabled=(val)
-			@login_enabled = to_b(val)
-		end
-		def is_account_owner=(val)
-			@is_account_owner = to_b(val)
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['id'] != nil
-				self.id = xml_element.elements['id'].text
-			end
-			if xml_element.elements['partnerId'] != nil
-				self.partner_id = xml_element.elements['partnerId'].text
-			end
-			if xml_element.elements['type'] != nil
-				self.type = xml_element.elements['type'].text
-			end
-			if xml_element.elements['screenName'] != nil
-				self.screen_name = xml_element.elements['screenName'].text
-			end
-			if xml_element.elements['fullName'] != nil
-				self.full_name = xml_element.elements['fullName'].text
-			end
-			if xml_element.elements['email'] != nil
-				self.email = xml_element.elements['email'].text
-			end
-			if xml_element.elements['dateOfBirth'] != nil
-				self.date_of_birth = xml_element.elements['dateOfBirth'].text
-			end
-			if xml_element.elements['country'] != nil
-				self.country = xml_element.elements['country'].text
-			end
-			if xml_element.elements['state'] != nil
-				self.state = xml_element.elements['state'].text
-			end
-			if xml_element.elements['city'] != nil
-				self.city = xml_element.elements['city'].text
-			end
-			if xml_element.elements['zip'] != nil
-				self.zip = xml_element.elements['zip'].text
-			end
-			if xml_element.elements['thumbnailUrl'] != nil
-				self.thumbnail_url = xml_element.elements['thumbnailUrl'].text
-			end
-			if xml_element.elements['description'] != nil
-				self.description = xml_element.elements['description'].text
-			end
-			if xml_element.elements['tags'] != nil
-				self.tags = xml_element.elements['tags'].text
-			end
-			if xml_element.elements['adminTags'] != nil
-				self.admin_tags = xml_element.elements['adminTags'].text
-			end
-			if xml_element.elements['gender'] != nil
-				self.gender = xml_element.elements['gender'].text
-			end
-			if xml_element.elements['status'] != nil
-				self.status = xml_element.elements['status'].text
-			end
-			if xml_element.elements['createdAt'] != nil
-				self.created_at = xml_element.elements['createdAt'].text
-			end
-			if xml_element.elements['updatedAt'] != nil
-				self.updated_at = xml_element.elements['updatedAt'].text
-			end
-			if xml_element.elements['partnerData'] != nil
-				self.partner_data = xml_element.elements['partnerData'].text
-			end
-			if xml_element.elements['indexedPartnerDataInt'] != nil
-				self.indexed_partner_data_int = xml_element.elements['indexedPartnerDataInt'].text
-			end
-			if xml_element.elements['indexedPartnerDataString'] != nil
-				self.indexed_partner_data_string = xml_element.elements['indexedPartnerDataString'].text
-			end
-			if xml_element.elements['storageSize'] != nil
-				self.storage_size = xml_element.elements['storageSize'].text
-			end
-			if xml_element.elements['password'] != nil
-				self.password = xml_element.elements['password'].text
-			end
-			if xml_element.elements['firstName'] != nil
-				self.first_name = xml_element.elements['firstName'].text
-			end
-			if xml_element.elements['lastName'] != nil
-				self.last_name = xml_element.elements['lastName'].text
-			end
-			if xml_element.elements['isAdmin'] != nil
-				self.is_admin = xml_element.elements['isAdmin'].text
-			end
-			if xml_element.elements['language'] != nil
-				self.language = xml_element.elements['language'].text
-			end
-			if xml_element.elements['lastLoginTime'] != nil
-				self.last_login_time = xml_element.elements['lastLoginTime'].text
-			end
-			if xml_element.elements['statusUpdatedAt'] != nil
-				self.status_updated_at = xml_element.elements['statusUpdatedAt'].text
-			end
-			if xml_element.elements['deletedAt'] != nil
-				self.deleted_at = xml_element.elements['deletedAt'].text
-			end
-			if xml_element.elements['loginEnabled'] != nil
-				self.login_enabled = xml_element.elements['loginEnabled'].text
-			end
-			if xml_element.elements['roleIds'] != nil
-				self.role_ids = xml_element.elements['roleIds'].text
-			end
-			if xml_element.elements['roleNames'] != nil
-				self.role_names = xml_element.elements['roleNames'].text
-			end
-			if xml_element.elements['isAccountOwner'] != nil
-				self.is_account_owner = xml_element.elements['isAccountOwner'].text
-			end
-			if xml_element.elements['allowedPartnerIds'] != nil
-				self.allowed_partner_ids = xml_element.elements['allowedPartnerIds'].text
-			end
-			if xml_element.elements['allowedPartnerPackages'] != nil
-				self.allowed_partner_packages = xml_element.elements['allowedPartnerPackages'].text
 			end
 		end
 

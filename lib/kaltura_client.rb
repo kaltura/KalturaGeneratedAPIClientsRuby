@@ -2062,6 +2062,19 @@ module Kaltura
 			end
 			return client.do_queue()
 		end
+
+		# sync by userId and groupIds
+		# @return [KalturaBulkUpload]
+		def sync(user_id, group_ids)
+			kparams = {}
+			client.add_param(kparams, 'userId', user_id)
+			client.add_param(kparams, 'groupIds', group_ids)
+			client.queue_service_action_call('groupuser', 'sync', 'KalturaBulkUpload', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
 	end
 
 	# Manage live channel segments
@@ -6066,7 +6079,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:18-05-10'
+			self.client_tag = 'ruby:18-05-11'
 			self.api_version = '3.3.0'
 		end
 		

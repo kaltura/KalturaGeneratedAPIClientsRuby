@@ -3930,6 +3930,7 @@ module Kaltura
 		attr_accessor :is_account_owner
 		attr_accessor :allowed_partner_ids
 		attr_accessor :allowed_partner_packages
+		attr_accessor :user_mode
 
 		def partner_id=(val)
 			@partner_id = val.to_i
@@ -3975,6 +3976,9 @@ module Kaltura
 		end
 		def is_account_owner=(val)
 			@is_account_owner = to_b(val)
+		end
+		def user_mode=(val)
+			@user_mode = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -4089,6 +4093,9 @@ module Kaltura
 			end
 			if xml_element.elements['allowedPartnerPackages'] != nil
 				self.allowed_partner_packages = xml_element.elements['allowedPartnerPackages'].text
+			end
+			if xml_element.elements['userMode'] != nil
+				self.user_mode = xml_element.elements['userMode'].text
 			end
 		end
 
@@ -5432,6 +5439,7 @@ module Kaltura
 		attr_accessor :created_at
 		# Last update date as Unix timestamp (In seconds)
 		attr_accessor :updated_at
+		attr_accessor :creation_mode
 
 		def status=(val)
 			@status = val.to_i
@@ -5444,6 +5452,9 @@ module Kaltura
 		end
 		def updated_at=(val)
 			@updated_at = val.to_i
+		end
+		def creation_mode=(val)
+			@creation_mode = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -5465,6 +5476,9 @@ module Kaltura
 			end
 			if xml_element.elements['updatedAt'] != nil
 				self.updated_at = xml_element.elements['updatedAt'].text
+			end
+			if xml_element.elements['creationMode'] != nil
+				self.creation_mode = xml_element.elements['creationMode'].text
 			end
 		end
 

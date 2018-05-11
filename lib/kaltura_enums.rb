@@ -252,6 +252,11 @@ module Kaltura
 		FEMALE = 2
 	end
 
+	class KalturaGroupUserCreationMode
+		MANUAL = 1
+		AUTOMATIC = 2
+	end
+
 	class KalturaGroupUserStatus
 		ACTIVE = 0
 		DELETED = 1
@@ -741,6 +746,11 @@ module Kaltura
 		AUTO_JOIN = 1
 		REQUEST_TO_JOIN = 2
 		NOT_ALLOWED = 3
+	end
+
+	class KalturaUserMode
+		NONE = 0
+		PROTECTED_USER = 1
 	end
 
 	class KalturaUserRoleStatus

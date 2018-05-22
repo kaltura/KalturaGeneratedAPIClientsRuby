@@ -2065,10 +2065,12 @@ module Kaltura
 
 		# sync by userId and groupIds
 		# @return [KalturaBulkUpload]
-		def sync(user_id, group_ids)
+		def sync(user_id, group_ids, remove_from_existing_groups=true, create_new_groups=true)
 			kparams = {}
 			client.add_param(kparams, 'userId', user_id)
 			client.add_param(kparams, 'groupIds', group_ids)
+			client.add_param(kparams, 'removeFromExistingGroups', remove_from_existing_groups)
+			client.add_param(kparams, 'createNewGroups', create_new_groups)
 			client.queue_service_action_call('groupuser', 'sync', 'KalturaBulkUpload', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -6079,7 +6081,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:18-05-21'
+			self.client_tag = 'ruby:18-05-22'
 			self.api_version = '3.3.0'
 		end
 		

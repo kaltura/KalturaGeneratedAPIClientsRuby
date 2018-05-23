@@ -45,6 +45,7 @@ module Kaltura
 		STATIC_LIST = "1"
 		CATEGORY = "2"
 		USER = "3"
+		GROUP = "4"
 	end
 
 	class KalturaEmailNotificationTemplateOrderBy
@@ -208,6 +209,34 @@ module Kaltura
 			end
 			if xml_element.elements['categoryUserFilter'] != nil
 				self.category_user_filter = KalturaClientBase.object_from_xml(xml_element.elements['categoryUserFilter'], 'KalturaCategoryUserProviderFilter')
+			end
+		end
+
+	end
+
+	# JobData representing the dynamic user receipient array
+	class KalturaEmailNotificationGroupRecipientJobData < KalturaEmailNotificationRecipientJobData
+		attr_accessor :group_id
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['groupId'] != nil
+				self.group_id = xml_element.elements['groupId'].text
+			end
+		end
+
+	end
+
+	# API class for recipient provider which constructs a dynamic list of recipients according to a user filter
+	class KalturaEmailNotificationGroupRecipientProvider < KalturaEmailNotificationRecipientProvider
+		attr_accessor :group_id
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['groupId'] != nil
+				self.group_id = xml_element.elements['groupId'].text
 			end
 		end
 

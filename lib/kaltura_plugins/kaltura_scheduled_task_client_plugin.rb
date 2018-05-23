@@ -56,6 +56,7 @@ module Kaltura
 
 	class KalturaObjectFilterEngineType
 		ENTRY = "1"
+		ENTRY_VENDOR_TASK = "2"
 	end
 
 	class KalturaObjectTaskType

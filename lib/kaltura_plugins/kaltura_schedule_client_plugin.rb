@@ -604,6 +604,19 @@ module Kaltura
 
 	end
 
+	class KalturaEntryVendorTaskListResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaEntryVendorTask')
+			end
+		end
+
+	end
+
 	class KalturaLiveEntryScheduleResource < KalturaScheduleResource
 		attr_accessor :entry_id
 
@@ -622,6 +635,19 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
+		end
+
+	end
+
+	class KalturaReachProfileListResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaReachProfile')
+			end
 		end
 
 	end

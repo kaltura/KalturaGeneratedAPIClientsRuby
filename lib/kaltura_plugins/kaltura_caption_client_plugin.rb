@@ -78,6 +78,8 @@ module Kaltura
 		attr_accessor :parent_id
 		# The Accuracy of the caption content
 		attr_accessor :accuracy
+		# The Accuracy of the caption content
+		attr_accessor :display_on_player
 
 		def caption_params_id=(val)
 			@caption_params_id = val.to_i
@@ -90,6 +92,9 @@ module Kaltura
 		end
 		def accuracy=(val)
 			@accuracy = val.to_i
+		end
+		def display_on_player=(val)
+			@display_on_player = to_b(val)
 		end
 
 		def from_xml(xml_element)
@@ -120,6 +125,9 @@ module Kaltura
 			end
 			if xml_element.elements['accuracy'] != nil
 				self.accuracy = xml_element.elements['accuracy'].text
+			end
+			if xml_element.elements['displayOnPlayer'] != nil
+				self.display_on_player = xml_element.elements['displayOnPlayer'].text
 			end
 		end
 

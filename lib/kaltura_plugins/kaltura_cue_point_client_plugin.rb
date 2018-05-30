@@ -96,6 +96,7 @@ module Kaltura
 		attr_accessor :force_stop
 		attr_accessor :thumb_offset
 		attr_accessor :system_name
+		attr_accessor :is_momentary
 
 		def status=(val)
 			@status = val.to_i
@@ -123,6 +124,9 @@ module Kaltura
 		end
 		def thumb_offset=(val)
 			@thumb_offset = val.to_i
+		end
+		def is_momentary=(val)
+			@is_momentary = to_b(val)
 		end
 
 		def from_xml(xml_element)
@@ -174,6 +178,9 @@ module Kaltura
 			end
 			if xml_element.elements['systemName'] != nil
 				self.system_name = xml_element.elements['systemName'].text
+			end
+			if xml_element.elements['isMomentary'] != nil
+				self.is_momentary = xml_element.elements['isMomentary'].text
 			end
 		end
 

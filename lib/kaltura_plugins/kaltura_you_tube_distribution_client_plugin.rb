@@ -33,6 +33,7 @@ module Kaltura
 	class KalturaYouTubeDistributionFeedSpecVersion
 		VERSION_1 = "1"
 		VERSION_2 = "2"
+		VERSION_3 = "3"
 	end
 
 	class KalturaYouTubeDistributionProfileOrderBy
@@ -68,6 +69,10 @@ module Kaltura
 		attr_accessor :google_client_id
 		attr_accessor :google_client_secret
 		attr_accessor :google_token_data
+		attr_accessor :captions_csv_map
+		attr_accessor :submit_csv_map
+		attr_accessor :update_csv_map
+		attr_accessor :delete_video_ids
 
 
 		def from_xml(xml_element)
@@ -110,6 +115,18 @@ module Kaltura
 			end
 			if xml_element.elements['googleTokenData'] != nil
 				self.google_token_data = xml_element.elements['googleTokenData'].text
+			end
+			if xml_element.elements['captionsCsvMap'] != nil
+				self.captions_csv_map = xml_element.elements['captionsCsvMap'].text
+			end
+			if xml_element.elements['submitCsvMap'] != nil
+				self.submit_csv_map = xml_element.elements['submitCsvMap'].text
+			end
+			if xml_element.elements['updateCsvMap'] != nil
+				self.update_csv_map = xml_element.elements['updateCsvMap'].text
+			end
+			if xml_element.elements['deleteVideoIds'] != nil
+				self.delete_video_ids = xml_element.elements['deleteVideoIds'].text
 			end
 		end
 
@@ -154,6 +171,12 @@ module Kaltura
 		attr_accessor :delete_reference
 		attr_accessor :release_claims
 		attr_accessor :api_authorize_url
+		attr_accessor :privacy_status
+		attr_accessor :enable_content_id
+		attr_accessor :third_party_ads
+		attr_accessor :product_listing_ads
+		attr_accessor :domain_whitelist
+		attr_accessor :notify_subscribers
 
 		def sftp_port=(val)
 			@sftp_port = val.to_i
@@ -292,6 +315,24 @@ module Kaltura
 			end
 			if xml_element.elements['apiAuthorizeUrl'] != nil
 				self.api_authorize_url = xml_element.elements['apiAuthorizeUrl'].text
+			end
+			if xml_element.elements['privacyStatus'] != nil
+				self.privacy_status = xml_element.elements['privacyStatus'].text
+			end
+			if xml_element.elements['enableContentId'] != nil
+				self.enable_content_id = xml_element.elements['enableContentId'].text
+			end
+			if xml_element.elements['thirdPartyAds'] != nil
+				self.third_party_ads = xml_element.elements['thirdPartyAds'].text
+			end
+			if xml_element.elements['productListingAds'] != nil
+				self.product_listing_ads = xml_element.elements['productListingAds'].text
+			end
+			if xml_element.elements['domainWhitelist'] != nil
+				self.domain_whitelist = xml_element.elements['domainWhitelist'].text
+			end
+			if xml_element.elements['notifySubscribers'] != nil
+				self.notify_subscribers = xml_element.elements['notifySubscribers'].text
 			end
 		end
 

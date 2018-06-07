@@ -58,6 +58,7 @@ module Kaltura
 	class KalturaYouTubeDistributionJobProviderData < KalturaConfigurableDistributionJobProviderData
 		attr_accessor :video_asset_file_path
 		attr_accessor :thumb_asset_file_path
+		attr_accessor :thumb_asset_id
 		attr_accessor :caption_asset_ids
 		attr_accessor :sftp_directory
 		attr_accessor :sftp_metadata_filename
@@ -82,6 +83,9 @@ module Kaltura
 			end
 			if xml_element.elements['thumbAssetFilePath'] != nil
 				self.thumb_asset_file_path = xml_element.elements['thumbAssetFilePath'].text
+			end
+			if xml_element.elements['thumbAssetId'] != nil
+				self.thumb_asset_id = xml_element.elements['thumbAssetId'].text
 			end
 			if xml_element.elements['captionAssetIds'] != nil
 				self.caption_asset_ids = xml_element.elements['captionAssetIds'].text

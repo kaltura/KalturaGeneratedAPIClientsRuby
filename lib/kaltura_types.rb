@@ -11842,6 +11842,20 @@ module Kaltura
 
 	end
 
+	class KalturaDeliveryProfileLivePackager < KalturaDeliveryProfile
+		# Domain used to sign the live url
+		attr_accessor :live_packager_signing_domain
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['livePackagerSigningDomain'] != nil
+				self.live_packager_signing_domain = xml_element.elements['livePackagerSigningDomain'].text
+			end
+		end
+
+	end
+
 	class KalturaDeliveryProfileRtmp < KalturaDeliveryProfile
 		# enforceRtmpe
 		attr_accessor :enforce_rtmpe
@@ -15920,6 +15934,29 @@ module Kaltura
 			end
 			if xml_element.elements['rendererClass'] != nil
 				self.renderer_class = xml_element.elements['rendererClass'].text
+			end
+		end
+
+	end
+
+	class KalturaDeliveryProfileLivePackagerHls < KalturaDeliveryProfileLivePackager
+		attr_accessor :disable_extra_attributes
+		attr_accessor :force_proxy
+
+		def disable_extra_attributes=(val)
+			@disable_extra_attributes = to_b(val)
+		end
+		def force_proxy=(val)
+			@force_proxy = to_b(val)
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['disableExtraAttributes'] != nil
+				self.disable_extra_attributes = xml_element.elements['disableExtraAttributes'].text
+			end
+			if xml_element.elements['forceProxy'] != nil
+				self.force_proxy = xml_element.elements['forceProxy'].text
 			end
 		end
 

@@ -1752,6 +1752,7 @@ module Kaltura
 		attr_accessor :crm_id
 		attr_accessor :reference_id
 		attr_accessor :time_aligned_renditions
+		attr_accessor :publisher_environment_type
 		attr_accessor :ovp_environment_url
 		attr_accessor :ott_environment_url
 		attr_accessor :e_search_languages
@@ -1821,6 +1822,9 @@ module Kaltura
 		end
 		def time_aligned_renditions=(val)
 			@time_aligned_renditions = to_b(val)
+		end
+		def publisher_environment_type=(val)
+			@publisher_environment_type = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -1983,6 +1987,9 @@ module Kaltura
 			end
 			if xml_element.elements['timeAlignedRenditions'] != nil
 				self.time_aligned_renditions = xml_element.elements['timeAlignedRenditions'].text
+			end
+			if xml_element.elements['publisherEnvironmentType'] != nil
+				self.publisher_environment_type = xml_element.elements['publisherEnvironmentType'].text
 			end
 			if xml_element.elements['ovpEnvironmentUrl'] != nil
 				self.ovp_environment_url = xml_element.elements['ovpEnvironmentUrl'].text

@@ -14824,6 +14824,23 @@ module Kaltura
 
 	end
 
+	class KalturaUrlTokenizerWowzaSecureToken < KalturaUrlTokenizer
+		attr_accessor :param_prefix
+		attr_accessor :hash_algorithm
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['paramPrefix'] != nil
+				self.param_prefix = xml_element.elements['paramPrefix'].text
+			end
+			if xml_element.elements['hashAlgorithm'] != nil
+				self.hash_algorithm = xml_element.elements['hashAlgorithm'].text
+			end
+		end
+
+	end
+
 	class KalturaUserAgentRestriction < KalturaBaseRestriction
 		# User agent restriction type (Allow or deny)
 		attr_accessor :user_agent_restriction_type

@@ -72,6 +72,8 @@ module Kaltura
 		FATAL = 10
 		DONT_PROCESS = 11
 		FINISHED_PARTIALLY = 12
+		SUSPEND = 13
+		SUSPEND_ALMOST_DONE = 14
 	end
 
 	class KalturaBitRateMode

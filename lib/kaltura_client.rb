@@ -269,7 +269,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Delete application authentication token by id
+		# Delete application authentication token by ID
 		# @return []
 		def delete(id)
 			kparams = {}
@@ -281,7 +281,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Get application authentication token by id
+		# Get application authentication token by ID
 		# @return [KalturaAppToken]
 		def get(id)
 			kparams = {}
@@ -306,7 +306,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Starts a new KS (kaltura Session) based on application authentication token id
+		# Starts a new KS (kaltura Session) based on an application authentication token ID
 		# @return [KalturaSessionInfo]
 		def start_session(id, token_hash, user_id=KalturaNotImplemented, type=KalturaNotImplemented, expiry=KalturaNotImplemented)
 			kparams = {}
@@ -322,7 +322,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Update application authentication token by id
+		# Update application authentication token by ID
 		# @return [KalturaAppToken]
 		def update(id, app_token)
 			kparams = {}
@@ -6081,7 +6081,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:18-06-20'
+			self.client_tag = 'ruby:18-06-21'
 			self.api_version = '3.3.0'
 		end
 		

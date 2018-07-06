@@ -97,6 +97,7 @@ module Kaltura
 		attr_accessor :thumb_offset
 		attr_accessor :system_name
 		attr_accessor :is_momentary
+		attr_accessor :copied_from
 
 		def status=(val)
 			@status = val.to_i
@@ -181,6 +182,9 @@ module Kaltura
 			end
 			if xml_element.elements['isMomentary'] != nil
 				self.is_momentary = xml_element.elements['isMomentary'].text
+			end
+			if xml_element.elements['copiedFrom'] != nil
+				self.copied_from = xml_element.elements['copiedFrom'].text
 			end
 		end
 

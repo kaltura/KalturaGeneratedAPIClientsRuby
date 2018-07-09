@@ -11904,12 +11904,17 @@ module Kaltura
 	class KalturaDeliveryServerNode < KalturaServerNode
 		# Delivery profile ids
 		attr_accessor :delivery_profile_ids
+		# Override server node default configuration - json format
+		attr_accessor :config
 
 
 		def from_xml(xml_element)
 			super
 			if xml_element.elements['deliveryProfileIds'] != nil
 				self.delivery_profile_ids = KalturaClientBase.object_from_xml(xml_element.elements['deliveryProfileIds'], 'KalturaKeyValue')
+			end
+			if xml_element.elements['config'] != nil
+				self.config = xml_element.elements['config'].text
 			end
 		end
 
@@ -16005,17 +16010,12 @@ module Kaltura
 	class KalturaEdgeServerNode < KalturaDeliveryServerNode
 		# Delivery server playback Domain
 		attr_accessor :playback_domain
-		# Overdie edge server default configuration - json format
-		attr_accessor :config
 
 
 		def from_xml(xml_element)
 			super
 			if xml_element.elements['playbackDomain'] != nil
 				self.playback_domain = xml_element.elements['playbackDomain'].text
-			end
-			if xml_element.elements['config'] != nil
-				self.config = xml_element.elements['config'].text
 			end
 		end
 

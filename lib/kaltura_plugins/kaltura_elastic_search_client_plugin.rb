@@ -877,45 +877,6 @@ module Kaltura
 
 	end
 
-	class KalturaESearchCategoryQuery < KalturaESearchCategoryBaseItem
-		attr_accessor :e_search_query
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['eSearchQuery'] != nil
-				self.e_search_query = xml_element.elements['eSearchQuery'].text
-			end
-		end
-
-	end
-
-	class KalturaESearchEntryQuery < KalturaESearchEntryBaseItem
-		attr_accessor :e_search_query
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['eSearchQuery'] != nil
-				self.e_search_query = xml_element.elements['eSearchQuery'].text
-			end
-		end
-
-	end
-
-	class KalturaESearchUserQuery < KalturaESearchUserBaseItem
-		attr_accessor :e_search_query
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['eSearchQuery'] != nil
-				self.e_search_query = xml_element.elements['eSearchQuery'].text
-			end
-		end
-
-	end
-
 	class KalturaESearchCategoryEntryItem < KalturaESearchAbstractEntryItem
 		attr_accessor :field_name
 		attr_accessor :category_entry_status

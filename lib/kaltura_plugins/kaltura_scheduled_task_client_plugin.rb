@@ -427,6 +427,7 @@ module Kaltura
 		attr_accessor :updated_at_less_than_or_equal
 		attr_accessor :last_execution_started_at_greater_than_or_equal
 		attr_accessor :last_execution_started_at_less_than_or_equal
+		attr_accessor :last_execution_started_at_less_than_or_equal_or_null
 
 		def id_equal=(val)
 			@id_equal = val.to_i
@@ -454,6 +455,9 @@ module Kaltura
 		end
 		def last_execution_started_at_less_than_or_equal=(val)
 			@last_execution_started_at_less_than_or_equal = val.to_i
+		end
+		def last_execution_started_at_less_than_or_equal_or_null=(val)
+			@last_execution_started_at_less_than_or_equal_or_null = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -499,6 +503,9 @@ module Kaltura
 			end
 			if xml_element.elements['lastExecutionStartedAtLessThanOrEqual'] != nil
 				self.last_execution_started_at_less_than_or_equal = xml_element.elements['lastExecutionStartedAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['lastExecutionStartedAtLessThanOrEqualOrNull'] != nil
+				self.last_execution_started_at_less_than_or_equal_or_null = xml_element.elements['lastExecutionStartedAtLessThanOrEqualOrNull'].text
 			end
 		end
 

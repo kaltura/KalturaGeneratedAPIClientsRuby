@@ -308,13 +308,14 @@ module Kaltura
 
 		# Starts a new KS (kaltura Session) based on an application authentication token ID
 		# @return [KalturaSessionInfo]
-		def start_session(id, token_hash, user_id=KalturaNotImplemented, type=KalturaNotImplemented, expiry=KalturaNotImplemented)
+		def start_session(id, token_hash, user_id=KalturaNotImplemented, type=KalturaNotImplemented, expiry=KalturaNotImplemented, session_privileges=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
 			client.add_param(kparams, 'tokenHash', token_hash)
 			client.add_param(kparams, 'userId', user_id)
 			client.add_param(kparams, 'type', type)
 			client.add_param(kparams, 'expiry', expiry)
+			client.add_param(kparams, 'sessionPrivileges', session_privileges)
 			client.queue_service_action_call('apptoken', 'startSession', 'KalturaSessionInfo', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -6081,8 +6082,8 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:18-08-29'
-			self.api_version = '14.5.0'
+			self.client_tag = 'ruby:18-08-30'
+			self.api_version = '14.6.0'
 		end
 		
 		def client_tag=(value)

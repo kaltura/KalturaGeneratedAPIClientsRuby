@@ -4125,6 +4125,21 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Get the edge server node full path
+		# @return [string]
+		def get_full_path(host_name, protocol='http', delivery_format=KalturaNotImplemented, delivery_type=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'hostName', host_name)
+			client.add_param(kparams, 'protocol', protocol)
+			client.add_param(kparams, 'deliveryFormat', delivery_format)
+			client.add_param(kparams, 'deliveryType', delivery_type)
+			client.queue_service_action_call('servernode', 'getFullPath', 'string', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# @return [KalturaServerNodeListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
 			kparams = {}
@@ -4151,10 +4166,11 @@ module Kaltura
 
 		# Update server node status
 		# @return [KalturaServerNode]
-		def report_status(host_name, server_node=KalturaNotImplemented)
+		def report_status(host_name, server_node=KalturaNotImplemented, server_node_status=1)
 			kparams = {}
 			client.add_param(kparams, 'hostName', host_name)
 			client.add_param(kparams, 'serverNode', server_node)
+			client.add_param(kparams, 'serverNodeStatus', server_node_status)
 			client.queue_service_action_call('servernode', 'reportStatus', 'KalturaServerNode', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -6082,7 +6098,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:18-09-17'
+			self.client_tag = 'ruby:18-09-18'
 			self.api_version = '14.6.0'
 		end
 		

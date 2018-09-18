@@ -10014,12 +10014,19 @@ module Kaltura
 	class KalturaAccessControlServeRemoteEdgeServerAction < KalturaRuleAction
 		# Comma separated list of edge servers playBack should be done from
 		attr_accessor :edge_server_ids
+		attr_accessor :seamless_fallback_enabled
 
+		def seamless_fallback_enabled=(val)
+			@seamless_fallback_enabled = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
 			if xml_element.elements['edgeServerIds'] != nil
 				self.edge_server_ids = xml_element.elements['edgeServerIds'].text
+			end
+			if xml_element.elements['seamlessFallbackEnabled'] != nil
+				self.seamless_fallback_enabled = xml_element.elements['seamlessFallbackEnabled'].text
 			end
 		end
 

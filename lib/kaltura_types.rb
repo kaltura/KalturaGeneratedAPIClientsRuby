@@ -10940,6 +10940,7 @@ module Kaltura
 		attr_accessor :thumb_params_output_id
 		attr_accessor :thumb_asset_id
 		attr_accessor :src_asset_id
+		attr_accessor :src_asset_encryption_key
 		attr_accessor :src_asset_type
 		attr_accessor :thumb_path
 
@@ -10966,6 +10967,9 @@ module Kaltura
 			end
 			if xml_element.elements['srcAssetId'] != nil
 				self.src_asset_id = xml_element.elements['srcAssetId'].text
+			end
+			if xml_element.elements['srcAssetEncryptionKey'] != nil
+				self.src_asset_encryption_key = xml_element.elements['srcAssetEncryptionKey'].text
 			end
 			if xml_element.elements['srcAssetType'] != nil
 				self.src_asset_type = xml_element.elements['srcAssetType'].text
@@ -16831,6 +16835,7 @@ module Kaltura
 
 	class KalturaPostConvertJobData < KalturaConvartableJobData
 		attr_accessor :flavor_asset_id
+		attr_accessor :flavor_asset_encryption_key
 		# Indicates if a thumbnail should be created
 		attr_accessor :create_thumb
 		# The path of the created thumbnail
@@ -16860,6 +16865,9 @@ module Kaltura
 			super
 			if xml_element.elements['flavorAssetId'] != nil
 				self.flavor_asset_id = xml_element.elements['flavorAssetId'].text
+			end
+			if xml_element.elements['flavorAssetEncryptionKey'] != nil
+				self.flavor_asset_encryption_key = xml_element.elements['flavorAssetEncryptionKey'].text
 			end
 			if xml_element.elements['createThumb'] != nil
 				self.create_thumb = xml_element.elements['createThumb'].text

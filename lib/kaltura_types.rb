@@ -13694,6 +13694,12 @@ module Kaltura
 		attr_accessor :search_in_admin_tags
 		# Search onjects in specified categories
 		attr_accessor :categories
+		# Filter by customVar1
+		attr_accessor :custom_var1in
+		# Filter by customVar2
+		attr_accessor :custom_var2in
+		# Filter by customVar3
+		attr_accessor :custom_var3in
 		# Time zone offset in minutes
 		attr_accessor :time_zone_offset
 		# Aggregated results according to interval
@@ -13722,6 +13728,15 @@ module Kaltura
 			end
 			if xml_element.elements['categories'] != nil
 				self.categories = xml_element.elements['categories'].text
+			end
+			if xml_element.elements['customVar1In'] != nil
+				self.custom_var1in = xml_element.elements['customVar1In'].text
+			end
+			if xml_element.elements['customVar2In'] != nil
+				self.custom_var2in = xml_element.elements['customVar2In'].text
+			end
+			if xml_element.elements['customVar3In'] != nil
+				self.custom_var3in = xml_element.elements['customVar3In'].text
 			end
 			if xml_element.elements['timeZoneOffset'] != nil
 				self.time_zone_offset = xml_element.elements['timeZoneOffset'].text

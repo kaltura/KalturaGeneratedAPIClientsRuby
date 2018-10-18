@@ -741,7 +741,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# serve action returan the original file.
+		# serve action return the original file.
 		# @return [file]
 		def serve(id)
 			kparams = {}
@@ -6098,8 +6098,8 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:18-10-17'
-			self.api_version = '14.6.0'
+			self.client_tag = 'ruby:18-10-18'
+			self.api_version = '14.7.0'
 		end
 		
 		def client_tag=(value)

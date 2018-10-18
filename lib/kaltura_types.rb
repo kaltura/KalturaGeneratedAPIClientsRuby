@@ -10502,6 +10502,8 @@ module Kaltura
 		attr_accessor :email_recipients
 		# Number of objects that finished on error status
 		attr_accessor :num_of_error_objects
+		# privileges for the job
+		attr_accessor :privileges
 
 		def conversion_profile_id=(val)
 			@conversion_profile_id = val.to_i
@@ -10559,6 +10561,9 @@ module Kaltura
 			end
 			if xml_element.elements['numOfErrorObjects'] != nil
 				self.num_of_error_objects = xml_element.elements['numOfErrorObjects'].text
+			end
+			if xml_element.elements['privileges'] != nil
+				self.privileges = xml_element.elements['privileges'].text
 			end
 		end
 

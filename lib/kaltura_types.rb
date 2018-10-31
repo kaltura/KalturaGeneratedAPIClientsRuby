@@ -3206,6 +3206,8 @@ module Kaltura
 		attr_accessor :chunked_encode_mode
 		attr_accessor :two_pass
 		attr_accessor :tags
+		# JSON string containing an array of flavotParams field-value pairs.
+		attr_accessor :overload_params
 
 		def conversion_profile_id=(val)
 			@conversion_profile_id = val.to_i
@@ -3275,6 +3277,9 @@ module Kaltura
 			end
 			if xml_element.elements['tags'] != nil
 				self.tags = xml_element.elements['tags'].text
+			end
+			if xml_element.elements['overloadParams'] != nil
+				self.overload_params = xml_element.elements['overloadParams'].text
 			end
 		end
 

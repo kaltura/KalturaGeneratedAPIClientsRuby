@@ -17794,6 +17794,24 @@ module Kaltura
 
 	end
 
+	# Represents the Bulk upload job data for drop folder xml bulk upload
+	class KalturaDropFolderXmlBulkUploadJobData < KalturaBulkUploadXmlJobData
+		# the job drop folder id
+		attr_accessor :drop_folder_id
+
+		def drop_folder_id=(val)
+			@drop_folder_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['dropFolderId'] != nil
+				self.drop_folder_id = xml_element.elements['dropFolderId'].text
+			end
+		end
+
+	end
+
 	# Evaluates PHP statement, depends on the execution context
 	class KalturaEvalBooleanField < KalturaBooleanField
 		# PHP code

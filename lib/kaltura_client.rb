@@ -6098,7 +6098,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:18-11-07'
+			self.client_tag = 'ruby:18-11-08'
 			self.api_version = '14.8.0'
 		end
 		

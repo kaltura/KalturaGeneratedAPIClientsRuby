@@ -8473,6 +8473,8 @@ module Kaltura
 		attr_accessor :dc
 		# Id of the parent serverNode
 		attr_accessor :parent_id
+		# Environment
+		attr_accessor :environment
 
 		def id=(val)
 			@id = val.to_i
@@ -8539,6 +8541,9 @@ module Kaltura
 			end
 			if xml_element.elements['parentId'] != nil
 				self.parent_id = xml_element.elements['parentId'].text
+			end
+			if xml_element.elements['environment'] != nil
+				self.environment = xml_element.elements['environment'].text
 			end
 		end
 
@@ -13964,6 +13969,8 @@ module Kaltura
 		attr_accessor :parent_id_like
 		attr_accessor :parent_id_multi_like_or
 		attr_accessor :parent_id_multi_like_and
+		attr_accessor :environment_equal
+		attr_accessor :environment_in
 
 		def id_equal=(val)
 			@id_equal = val.to_i
@@ -14075,6 +14082,12 @@ module Kaltura
 			end
 			if xml_element.elements['parentIdMultiLikeAnd'] != nil
 				self.parent_id_multi_like_and = xml_element.elements['parentIdMultiLikeAnd'].text
+			end
+			if xml_element.elements['environmentEqual'] != nil
+				self.environment_equal = xml_element.elements['environmentEqual'].text
+			end
+			if xml_element.elements['environmentIn'] != nil
+				self.environment_in = xml_element.elements['environmentIn'].text
 			end
 		end
 

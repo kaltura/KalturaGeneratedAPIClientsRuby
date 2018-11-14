@@ -13715,6 +13715,8 @@ module Kaltura
 		attr_accessor :custom_var2in
 		# Filter by customVar3
 		attr_accessor :custom_var3in
+		# Filter by device
+		attr_accessor :devices_in
 		# Time zone offset in minutes
 		attr_accessor :time_zone_offset
 		# Aggregated results according to interval
@@ -13752,6 +13754,9 @@ module Kaltura
 			end
 			if xml_element.elements['customVar3In'] != nil
 				self.custom_var3in = xml_element.elements['customVar3In'].text
+			end
+			if xml_element.elements['devicesIn'] != nil
+				self.devices_in = xml_element.elements['devicesIn'].text
 			end
 			if xml_element.elements['timeZoneOffset'] != nil
 				self.time_zone_offset = xml_element.elements['timeZoneOffset'].text

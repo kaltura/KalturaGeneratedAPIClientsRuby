@@ -750,7 +750,7 @@ module Kaltura
 			return client.get_serve_url()
 		end
 
-		# serveLog action returan the original file.
+		# serveLog action return the original file.
 		# @return [file]
 		def serve_log(id)
 			kparams = {}
@@ -6098,7 +6098,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:18-11-13'
+			self.client_tag = 'ruby:18-11-14'
 			self.api_version = '14.8.0'
 		end
 		

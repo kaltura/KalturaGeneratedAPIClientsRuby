@@ -868,6 +868,20 @@ module Kaltura
 			end
 			return client.do_queue()
 		end
+
+		# @return [KalturaBulkUpload]
+		def update_statusfrombulk(file_data, bulk_upload_data=KalturaNotImplemented, bulk_upload_category_entry_data=KalturaNotImplemented)
+			kparams = {}
+			kfiles = {}
+			client.add_param(kfiles, 'fileData', file_data)
+			client.add_param(kparams, 'bulkUploadData', bulk_upload_data)
+			client.add_param(kparams, 'bulkUploadCategoryEntryData', bulk_upload_category_entry_data)
+			client.queue_service_action_call('categoryentry', 'updateStatusfrombulk', 'KalturaBulkUpload', kparams, kfiles)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
 	end
 
 	# Add & Manage Categories
@@ -6098,8 +6112,8 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:18-11-21'
-			self.api_version = '14.8.0'
+			self.client_tag = 'ruby:18-11-22'
+			self.api_version = '14.9.0'
 		end
 		
 		def client_tag=(value)

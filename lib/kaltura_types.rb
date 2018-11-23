@@ -13716,11 +13716,15 @@ module Kaltura
 		# Filter by customVar3
 		attr_accessor :custom_var3in
 		# Filter by device
-		attr_accessor :devices_in
+		attr_accessor :device_in
 		# Filter by country
-		attr_accessor :countries_in
+		attr_accessor :country_in
 		# Filter by region
-		attr_accessor :regions_in
+		attr_accessor :region_in
+		# Filter by operating system family
+		attr_accessor :operating_system_family_in
+		# Filter by browser family
+		attr_accessor :browser_family_in
 		# Time zone offset in minutes
 		attr_accessor :time_zone_offset
 		# Aggregated results according to interval
@@ -13759,14 +13763,20 @@ module Kaltura
 			if xml_element.elements['customVar3In'] != nil
 				self.custom_var3in = xml_element.elements['customVar3In'].text
 			end
-			if xml_element.elements['devicesIn'] != nil
-				self.devices_in = xml_element.elements['devicesIn'].text
+			if xml_element.elements['deviceIn'] != nil
+				self.device_in = xml_element.elements['deviceIn'].text
 			end
-			if xml_element.elements['countriesIn'] != nil
-				self.countries_in = xml_element.elements['countriesIn'].text
+			if xml_element.elements['countryIn'] != nil
+				self.country_in = xml_element.elements['countryIn'].text
 			end
-			if xml_element.elements['regionsIn'] != nil
-				self.regions_in = xml_element.elements['regionsIn'].text
+			if xml_element.elements['regionIn'] != nil
+				self.region_in = xml_element.elements['regionIn'].text
+			end
+			if xml_element.elements['operatingSystemFamilyIn'] != nil
+				self.operating_system_family_in = xml_element.elements['operatingSystemFamilyIn'].text
+			end
+			if xml_element.elements['browserFamilyIn'] != nil
+				self.browser_family_in = xml_element.elements['browserFamilyIn'].text
 			end
 			if xml_element.elements['timeZoneOffset'] != nil
 				self.time_zone_offset = xml_element.elements['timeZoneOffset'].text

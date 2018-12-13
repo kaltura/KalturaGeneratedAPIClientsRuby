@@ -9,7 +9,9 @@ install: gem install activesupport mime-types rest-client shoulda minitest
 
 # uncomment this line if your project needs to run something other than `rake`:
 # script: bundle exec rspec spec
-script: echo "y" | rake test
+script:
+    - sed -e "s#@YOUR_PARTNER_ID@#$PARTNER_ID#g" -e "s#@YOUR_ADMIN_SECRET@#$ADMIN_SECRET#g" -e "s#@YOUR_USER_SECRET@#$USER_SECRET#g" -e "s#@SERVICE_URL@#https://www.kaltura.com#g" -i kaltura.yml
+    - echo "y" | rake test
 notifications:
   email:
     recipients:

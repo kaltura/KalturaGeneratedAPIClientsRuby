@@ -13703,12 +13703,14 @@ module Kaltura
 	class KalturaReportInputFilter < KalturaReportInputBaseFilter
 		# Search keywords to filter objects
 		attr_accessor :keywords
-		# Search keywords in onjects tags
+		# Search keywords in objects tags
 		attr_accessor :search_in_tags
-		# Search keywords in onjects admin tags
+		# Search keywords in objects admin tags
 		attr_accessor :search_in_admin_tags
-		# Search onjects in specified categories
+		# Search objects in specified categories
 		attr_accessor :categories
+		# Search objects in specified category ids
+		attr_accessor :categories_ids_in
 		# Filter by customVar1
 		attr_accessor :custom_var1in
 		# Filter by customVar2
@@ -13721,6 +13723,8 @@ module Kaltura
 		attr_accessor :country_in
 		# Filter by region
 		attr_accessor :region_in
+		# Filter by city
+		attr_accessor :cities_in
 		# Filter by operating system family
 		attr_accessor :operating_system_family_in
 		# Filter by browser family
@@ -13729,6 +13733,10 @@ module Kaltura
 		attr_accessor :time_zone_offset
 		# Aggregated results according to interval
 		attr_accessor :interval
+		# Filter by media types
+		attr_accessor :media_type_in
+		# Filter by source types
+		attr_accessor :source_type_in
 
 		def search_in_tags=(val)
 			@search_in_tags = to_b(val)
@@ -13754,6 +13762,9 @@ module Kaltura
 			if xml_element.elements['categories'] != nil
 				self.categories = xml_element.elements['categories'].text
 			end
+			if xml_element.elements['categoriesIdsIn'] != nil
+				self.categories_ids_in = xml_element.elements['categoriesIdsIn'].text
+			end
 			if xml_element.elements['customVar1In'] != nil
 				self.custom_var1in = xml_element.elements['customVar1In'].text
 			end
@@ -13772,6 +13783,9 @@ module Kaltura
 			if xml_element.elements['regionIn'] != nil
 				self.region_in = xml_element.elements['regionIn'].text
 			end
+			if xml_element.elements['citiesIn'] != nil
+				self.cities_in = xml_element.elements['citiesIn'].text
+			end
 			if xml_element.elements['operatingSystemFamilyIn'] != nil
 				self.operating_system_family_in = xml_element.elements['operatingSystemFamilyIn'].text
 			end
@@ -13783,6 +13797,12 @@ module Kaltura
 			end
 			if xml_element.elements['interval'] != nil
 				self.interval = xml_element.elements['interval'].text
+			end
+			if xml_element.elements['mediaTypeIn'] != nil
+				self.media_type_in = xml_element.elements['mediaTypeIn'].text
+			end
+			if xml_element.elements['sourceTypeIn'] != nil
+				self.source_type_in = xml_element.elements['sourceTypeIn'].text
 			end
 		end
 

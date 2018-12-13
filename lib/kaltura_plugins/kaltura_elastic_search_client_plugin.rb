@@ -197,6 +197,15 @@ module Kaltura
 
 	end
 
+	class KalturaBeaconScheduledResourceBaseItem < KalturaESearchBaseItem
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaESearchCategoryBaseItem < KalturaESearchBaseItem
 
 
@@ -782,6 +791,30 @@ module Kaltura
 			super
 			if xml_element.elements['objects'] != nil
 				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaESearchUserResult')
+			end
+		end
+
+	end
+
+	class KalturaBeaconAbstractScheduledResourceItem < KalturaBeaconScheduledResourceBaseItem
+		attr_accessor :search_term
+		attr_accessor :item_type
+		attr_accessor :range
+
+		def item_type=(val)
+			@item_type = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['searchTerm'] != nil
+				self.search_term = xml_element.elements['searchTerm'].text
+			end
+			if xml_element.elements['itemType'] != nil
+				self.item_type = xml_element.elements['itemType'].text
+			end
+			if xml_element.elements['range'] != nil
+				self.range = KalturaClientBase.object_from_xml(xml_element.elements['range'], 'KalturaESearchRange')
 			end
 		end
 

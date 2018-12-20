@@ -638,7 +638,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Update entry thumbnail using url.
+		# Update entry thumbnail using URL.
 		# @return [KalturaBaseEntry]
 		def update_thumbnail_from_url(entry_id, url)
 			kparams = {}
@@ -1050,7 +1050,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Copy all memeber from parent category
+		# Copy all member from parent category
 		# @return []
 		def copy_from_category(category_id)
 			kparams = {}
@@ -1340,7 +1340,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# serve action returan the file from dataContent field.
+		# return the file from dataContent field.
 		# @return [file]
 		def serve(entry_id, version=-1, force_proxy=false)
 			kparams = {}
@@ -1421,7 +1421,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Update exisiting delivery
+		# Update existing delivery profile
 		# @return [KalturaDeliveryProfile]
 		def update(id, delivery)
 			kparams = {}
@@ -2779,7 +2779,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Add new entry after the file was recored on the server and the token id exists
+		# Add new entry after the file was recorded on the server and the token id exists
 		# @return [KalturaMediaEntry]
 		def add_from_recorded_webcam(media_entry, webcam_token_id)
 			kparams = {}
@@ -3096,7 +3096,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Update entry thumbnail using url
+		# Update entry thumbnail using URL
 		# @return [KalturaBaseEntry]
 		def update_thumbnail_from_url(entry_id, url)
 			kparams = {}
@@ -3170,7 +3170,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Appends a media entry to a the end of the mix timeline, this will save the mix timeline as a new version.
+		# Appends a media entry to the end of the mix timeline, this will save the mix timeline as a new version.
 		# @return [KalturaMixEntry]
 		def append_media_entry(mix_entry_id, media_entry_id)
 			kparams = {}
@@ -3375,7 +3375,7 @@ module Kaltura
 
 		# Get usage statistics for a partner
 		# 	 Calculation is done according to partner's package
-		# 	 Additional data returned is a graph points of streaming usage in a timeframe
+		# 	 Additional data returned is a graph points of streaming usage in a time frame
 		# 	 The resolution can be "days" or "months"
 		# @return [KalturaPartnerUsage]
 		def get_usage(year='', month=1, resolution=KalturaNotImplemented)
@@ -3391,7 +3391,7 @@ module Kaltura
 		end
 
 		# List partners by filter with paging support
-		# 	 Current implementation will only list the sub partners of the partner initiating the api call (using the current KS).
+		# 	 Current implementation will only list the sub partners of the partner initiating the API call (using the current KS).
 		# 	 This action is only partially implemented to support listing sub partners of a VAR partner.
 		# @return [KalturaPartnerListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
@@ -3613,7 +3613,7 @@ module Kaltura
 	end
 
 	# Playlist service lets you create,manage and play your playlists
-	#  Playlists could be static (containing a fixed list of entries) or dynamic (baseed on a filter)
+	#  Playlists could be static (containing a fixed list of entries) or dynamic (based on a filter)
 	class KalturaPlaylistService < KalturaServiceBase
 		def initialize(client)
 			super(client)
@@ -3689,7 +3689,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Revrieve playlist for playing purpose, based on media entry filters
+		# Retrieve playlist for playing purpose, based on media entry filters
 		# @return [array]
 		def execute_from_filters(filters, total_results, detailed='1', pager=KalturaNotImplemented)
 			kparams = {}
@@ -3744,7 +3744,7 @@ module Kaltura
 		end
 
 		# Update existing playlist
-		# 	 Note - you cannot change playlist type. updated playlist must be of the same type.
+		# 	 Note - you cannot change playlist type. Updated playlist must be of the same type.
 		# @return [KalturaPlaylist]
 		def update(id, playlist, update_stats=false)
 			kparams = {}
@@ -3777,7 +3777,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# report getBaseTotal action allows to get a the total base for storage reports
+		# report getBaseTotal action allows to get the total base for storage reports
 		# @return [array]
 		def get_base_total(report_type, report_input_filter, object_ids=KalturaNotImplemented)
 			kparams = {}
@@ -3855,7 +3855,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# will create a Csv file for the given report and return the URL to access it
+		# will create a CSV file for the given report and return the URL to access it
 		# @return [string]
 		def get_url_for_report_as_csv(report_title, report_text, headers, report_type, report_input_filter, dimension=KalturaNotImplemented, pager=KalturaNotImplemented, order=KalturaNotImplemented, object_ids=KalturaNotImplemented)
 			kparams = {}
@@ -4527,7 +4527,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# request conversion for all entries that doesnt have the required flavor param
+		# request conversion for all entries that doesn't have the required flavor param
 		# 	 returns a comma-separated ids of conversion jobs
 		# @return [string]
 		def request_conversion(feed_id)
@@ -5663,7 +5663,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Update exisiting widget
+		# Update existing widget
 		# @return [KalturaWidget]
 		def update(id, widget)
 			kparams = {}
@@ -6112,8 +6112,8 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:18-12-12'
-			self.api_version = '14.10.0'
+			self.client_tag = 'ruby:18-12-20'
+			self.api_version = '14.11.0'
 		end
 		
 		def client_tag=(value)

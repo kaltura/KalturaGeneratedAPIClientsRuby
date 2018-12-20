@@ -44,6 +44,7 @@ module Kaltura
 	end
 
 	class KalturaESearchCaptionFieldName
+		CAPTION_ASSET_ID = "caption_asset_id"
 		CONTENT = "content"
 		END_TIME = "end_time"
 		LABEL = "label"

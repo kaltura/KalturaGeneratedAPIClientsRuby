@@ -7807,6 +7807,7 @@ module Kaltura
 
 	class KalturaPlaybackContext < KalturaObjectBase
 		attr_accessor :sources
+		attr_accessor :playback_captions
 		attr_accessor :flavor_assets
 		# Array of actions as received from the rules that invalidated
 		attr_accessor :actions
@@ -7818,6 +7819,9 @@ module Kaltura
 			super
 			if xml_element.elements['sources'] != nil
 				self.sources = KalturaClientBase.object_from_xml(xml_element.elements['sources'], 'KalturaPlaybackSource')
+			end
+			if xml_element.elements['playbackCaptions'] != nil
+				self.playback_captions = KalturaClientBase.object_from_xml(xml_element.elements['playbackCaptions'], 'KalturaCaptionPlaybackPluginData')
 			end
 			if xml_element.elements['flavorAssets'] != nil
 				self.flavor_assets = KalturaClientBase.object_from_xml(xml_element.elements['flavorAssets'], 'KalturaFlavorAsset')

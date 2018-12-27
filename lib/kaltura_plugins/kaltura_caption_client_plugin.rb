@@ -173,6 +173,42 @@ module Kaltura
 
 	end
 
+	class KalturaCaptionPlaybackPluginData < KalturaObjectBase
+		attr_accessor :label
+		attr_accessor :format
+		attr_accessor :language
+		attr_accessor :web_vtt_url
+		attr_accessor :url
+		attr_accessor :is_default
+
+		def is_default=(val)
+			@is_default = to_b(val)
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['label'] != nil
+				self.label = xml_element.elements['label'].text
+			end
+			if xml_element.elements['format'] != nil
+				self.format = xml_element.elements['format'].text
+			end
+			if xml_element.elements['language'] != nil
+				self.language = xml_element.elements['language'].text
+			end
+			if xml_element.elements['webVttUrl'] != nil
+				self.web_vtt_url = xml_element.elements['webVttUrl'].text
+			end
+			if xml_element.elements['url'] != nil
+				self.url = xml_element.elements['url'].text
+			end
+			if xml_element.elements['isDefault'] != nil
+				self.is_default = xml_element.elements['isDefault'].text
+			end
+		end
+
+	end
+
 	class KalturaCaptionAssetListResponse < KalturaListResponse
 		attr_accessor :objects
 

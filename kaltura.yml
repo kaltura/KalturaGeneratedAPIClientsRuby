@@ -3,5 +3,5 @@ test:
     partner_id: @YOUR_PARTNER_ID@
     administrator_secret: @YOUR_ADMIN_SECRET@
     secret: @YOUR_USER_SECRET@
-    service_url: https://www.kaltura.com
+    service_url: @SERVICE_URL@
     timeout: 120

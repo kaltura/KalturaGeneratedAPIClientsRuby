@@ -1105,6 +1105,7 @@ module Kaltura
 	end
 
 	class KalturaBulkUploadObjectType
+		JOB = "bulkUploadFilter.JOB"
 		SCHEDULE_EVENT = "scheduleBulkUpload.SCHEDULE_EVENT"
 		SCHEDULE_RESOURCE = "scheduleBulkUpload.SCHEDULE_RESOURCE"
 		ENTRY = "1"

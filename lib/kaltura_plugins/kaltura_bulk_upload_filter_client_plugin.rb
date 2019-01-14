@@ -27,6 +27,7 @@
 # ===================================================================================================
 require 'kaltura_client.rb'
 require File.dirname(__FILE__) + '/kaltura_bulk_upload_client_plugin.rb'
+require File.dirname(__FILE__) + '/kaltura_bulk_upload_xml_client_plugin.rb'
 
 module Kaltura
 
@@ -45,6 +46,23 @@ module Kaltura
 			end
 			if xml_element.elements['templateObject'] != nil
 				self.template_object = KalturaClientBase.object_from_xml(xml_element.elements['templateObject'], 'KalturaObjectBase')
+			end
+		end
+
+	end
+
+	class KalturaBulkUploadResultJob < KalturaBulkUploadResult
+		# ID of object being processed by the job
+		attr_accessor :job_object_id
+
+		def job_object_id=(val)
+			@job_object_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['jobObjectId'] != nil
+				self.job_object_id = xml_element.elements['jobObjectId'].text
 			end
 		end
 

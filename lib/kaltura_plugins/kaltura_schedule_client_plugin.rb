@@ -35,6 +35,12 @@ module Kaltura
 		CONFIDENTIAL_EVENT = 3
 	end
 
+	class KalturaScheduleEventConflictType
+		RESOURCE_CONFLICT = 1
+		BLACKOUT_CONFLICT = 2
+		BOTH = 3
+	end
+
 	class KalturaScheduleEventRecurrenceType
 		NONE = 0
 		RECURRING = 1
@@ -50,6 +56,7 @@ module Kaltura
 	class KalturaScheduleEventType
 		RECORD = 1
 		LIVE_STREAM = 2
+		BLACKOUT = 3
 	end
 
 	class KalturaScheduleResourceStatus
@@ -566,6 +573,15 @@ module Kaltura
 
 	end
 
+	class KalturaBlackoutScheduleEvent < KalturaScheduleEvent
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaCameraScheduleResource < KalturaScheduleResource
 		# URL of the stream
 		attr_accessor :stream_url
@@ -587,6 +603,8 @@ module Kaltura
 		attr_accessor :entry_ids
 		# Categories that associated with this event
 		attr_accessor :category_ids
+		# Blackout schedule events the conflict with this event
+		attr_accessor :blackout_conflicts
 
 
 		def from_xml(xml_element)
@@ -599,6 +617,9 @@ module Kaltura
 			end
 			if xml_element.elements['categoryIds'] != nil
 				self.category_ids = xml_element.elements['categoryIds'].text
+			end
+			if xml_element.elements['blackoutConflicts'] != nil
+				self.blackout_conflicts = KalturaClientBase.object_from_xml(xml_element.elements['blackoutConflicts'], 'KalturaScheduleEvent')
 			end
 		end
 
@@ -1235,6 +1256,15 @@ module Kaltura
 
 	end
 
+	class KalturaBlackoutScheduleEventFilter < KalturaRecordScheduleEventBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaLiveStreamScheduleEventFilter < KalturaLiveStreamScheduleEventBaseFilter
 
 
@@ -1324,11 +1354,12 @@ module Kaltura
 
 		# List conflicting events for resourcesIds by event's dates
 		# @return [KalturaScheduleEventListResponse]
-		def get_conflicts(resource_ids, schedule_event, schedule_event_id_to_ignore=KalturaNotImplemented)
+		def get_conflicts(resource_ids, schedule_event, schedule_event_id_to_ignore=KalturaNotImplemented, schedule_event_conflict_type=1)
 			kparams = {}
 			client.add_param(kparams, 'resourceIds', resource_ids)
 			client.add_param(kparams, 'scheduleEvent', schedule_event)
 			client.add_param(kparams, 'scheduleEventIdToIgnore', schedule_event_id_to_ignore)
+			client.add_param(kparams, 'scheduleEventConflictType', schedule_event_conflict_type)
 			client.queue_service_action_call('schedule_scheduleevent', 'getConflicts', 'KalturaScheduleEventListResponse', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -1492,10 +1523,11 @@ module Kaltura
 
 		# List KalturaScheduleEventResource objects
 		# @return [KalturaScheduleEventResourceListResponse]
-		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented, filter_blackout_conflicts=true)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
 			client.add_param(kparams, 'pager', pager)
+			client.add_param(kparams, 'filterBlackoutConflicts', filter_blackout_conflicts)
 			client.queue_service_action_call('schedule_scheduleeventresource', 'list', 'KalturaScheduleEventResourceListResponse', kparams)
 			if (client.is_multirequest)
 				return nil

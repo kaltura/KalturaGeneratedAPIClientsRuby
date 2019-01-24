@@ -155,6 +155,7 @@ module Kaltura
 		attr_accessor :parent_id
 		attr_accessor :quiz_user_entry_id
 		attr_accessor :answer_key
+		attr_accessor :open_answer
 		attr_accessor :is_correct
 		# Array of string
 		attr_accessor :correct_answer_keys
@@ -174,6 +175,9 @@ module Kaltura
 			end
 			if xml_element.elements['answerKey'] != nil
 				self.answer_key = xml_element.elements['answerKey'].text
+			end
+			if xml_element.elements['openAnswer'] != nil
+				self.open_answer = xml_element.elements['openAnswer'].text
 			end
 			if xml_element.elements['isCorrect'] != nil
 				self.is_correct = xml_element.elements['isCorrect'].text

@@ -13629,6 +13629,7 @@ module Kaltura
 
 	class KalturaQuizUserEntry < KalturaUserEntry
 		attr_accessor :score
+		attr_accessor :feedback
 
 		def score=(val)
 			@score = val.to_f
@@ -13638,6 +13639,9 @@ module Kaltura
 			super
 			if xml_element.elements['score'] != nil
 				self.score = xml_element.elements['score'].text
+			end
+			if xml_element.elements['feedback'] != nil
+				self.feedback = xml_element.elements['feedback'].text
 			end
 		end
 

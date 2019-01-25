@@ -293,7 +293,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Update exisitng short link
+		# Update existing short link
 		# @return [KalturaShortLink]
 		def update(id, short_link)
 			kparams = {}

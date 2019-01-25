@@ -838,7 +838,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Allows you to add a metadata xml data from remote URL.
+		# Allows you to add a metadata XML data from remote URL.
 		# 	 Enables different permissions than addFromUrl action.
 		# @return [KalturaMetadata]
 		def add_from_bulk(metadata_profile_id, object_type, object_id, url)
@@ -870,7 +870,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Allows you to add a metadata xml data from remote URL
+		# Allows you to add a metadata XML data from remote URL
 		# @return [KalturaMetadata]
 		def add_from_url(metadata_profile_id, object_type, object_id, url)
 			kparams = {}
@@ -1145,7 +1145,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Update an existing metadata object xslt file
+		# Update an existing metadata object XSLT file
 		# @return [KalturaMetadataProfile]
 		def update_transformation_from_file(id, xslt_file)
 			kparams = {}

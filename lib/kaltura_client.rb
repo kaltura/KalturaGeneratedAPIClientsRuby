@@ -2479,7 +2479,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Creates perioding metadata sync-point events on a live stream
+		# Creates periodic metadata sync-point events on a live stream
 		# @return []
 		def create_periodic_sync_points(entry_id, interval, duration)
 			kparams = {}
@@ -4392,7 +4392,8 @@ module Kaltura
 		end
 	end
 
-	# Storage Profiles service
+	# The Storage Profile service allows you to export your Kaltura content to external storage volumes.
+	#  This service is disabled by default, please contact your account manager if you wish to enable it for your partner.
 	class KalturaStorageProfileService < KalturaServiceBase
 		def initialize(client)
 			super(client)
@@ -6112,7 +6113,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:19-01-24'
+			self.client_tag = 'ruby:19-01-25'
 			self.api_version = '14.13.0'
 		end
 		

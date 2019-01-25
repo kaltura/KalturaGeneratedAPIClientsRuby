@@ -160,6 +160,7 @@ module Kaltura
 		# Array of string
 		attr_accessor :correct_answer_keys
 		attr_accessor :explanation
+		attr_accessor :feedback
 
 		def is_correct=(val)
 			@is_correct = val.to_i
@@ -187,6 +188,9 @@ module Kaltura
 			end
 			if xml_element.elements['explanation'] != nil
 				self.explanation = xml_element.elements['explanation'].text
+			end
+			if xml_element.elements['feedback'] != nil
+				self.feedback = xml_element.elements['feedback'].text
 			end
 		end
 

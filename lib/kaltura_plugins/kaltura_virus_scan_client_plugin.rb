@@ -347,7 +347,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Update exisitng virus scan profile, it is possible to update the virus scan profile id too
+		# Update existing virus scan profile, it is possible to update the virus scan profile id too
 		# @return [KalturaVirusScanProfile]
 		def update(virus_scan_profile_id, virus_scan_profile)
 			kparams = {}

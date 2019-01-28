@@ -180,6 +180,7 @@ module Kaltura
 		attr_accessor :web_vtt_url
 		attr_accessor :url
 		attr_accessor :is_default
+		attr_accessor :language_code
 
 		def is_default=(val)
 			@is_default = to_b(val)
@@ -204,6 +205,9 @@ module Kaltura
 			end
 			if xml_element.elements['isDefault'] != nil
 				self.is_default = xml_element.elements['isDefault'].text
+			end
+			if xml_element.elements['languageCode'] != nil
+				self.language_code = xml_element.elements['languageCode'].text
 			end
 		end
 

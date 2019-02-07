@@ -13745,6 +13745,8 @@ module Kaltura
 		attr_accessor :media_type_in
 		# Filter by source types
 		attr_accessor :source_type_in
+		# Filter by entry owner
+		attr_accessor :owner_ids_in
 
 		def search_in_tags=(val)
 			@search_in_tags = to_b(val)
@@ -13811,6 +13813,9 @@ module Kaltura
 			end
 			if xml_element.elements['sourceTypeIn'] != nil
 				self.source_type_in = xml_element.elements['sourceTypeIn'].text
+			end
+			if xml_element.elements['ownerIdsIn'] != nil
+				self.owner_ids_in = xml_element.elements['ownerIdsIn'].text
 			end
 		end
 

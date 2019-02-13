@@ -13747,6 +13747,7 @@ module Kaltura
 		attr_accessor :source_type_in
 		# Filter by entry owner
 		attr_accessor :owner_ids_in
+		attr_accessor :entry_operator
 
 		def search_in_tags=(val)
 			@search_in_tags = to_b(val)
@@ -13816,6 +13817,9 @@ module Kaltura
 			end
 			if xml_element.elements['ownerIdsIn'] != nil
 				self.owner_ids_in = xml_element.elements['ownerIdsIn'].text
+			end
+			if xml_element.elements['entryOperator'] != nil
+				self.entry_operator = KalturaClientBase.object_from_xml(xml_element.elements['entryOperator'], 'KalturaESearchEntryOperator')
 			end
 		end
 

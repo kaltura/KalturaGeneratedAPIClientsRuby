@@ -8110,6 +8110,19 @@ module Kaltura
 
 	end
 
+	class KalturaReportResponseOptions < KalturaObjectBase
+		attr_accessor :delimiter
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['delimiter'] != nil
+				self.delimiter = xml_element.elements['delimiter'].text
+			end
+		end
+
+	end
+
 	class KalturaReportTable < KalturaObjectBase
 		attr_accessor :header
 		attr_accessor :data

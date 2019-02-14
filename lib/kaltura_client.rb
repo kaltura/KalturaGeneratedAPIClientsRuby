@@ -3779,11 +3779,12 @@ module Kaltura
 
 		# report getBaseTotal action allows to get the total base for storage reports
 		# @return [array]
-		def get_base_total(report_type, report_input_filter, object_ids=KalturaNotImplemented)
+		def get_base_total(report_type, report_input_filter, object_ids=KalturaNotImplemented, response_options=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'reportType', report_type)
 			client.add_param(kparams, 'reportInputFilter', report_input_filter)
 			client.add_param(kparams, 'objectIds', object_ids)
+			client.add_param(kparams, 'responseOptions', response_options)
 			client.queue_service_action_call('report', 'getBaseTotal', 'KalturaReportBaseTotal', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -3812,12 +3813,13 @@ module Kaltura
 
 		# report getGraphs action allows to get a graph data for a specific report.
 		# @return [array]
-		def get_graphs(report_type, report_input_filter, dimension=KalturaNotImplemented, object_ids=KalturaNotImplemented)
+		def get_graphs(report_type, report_input_filter, dimension=KalturaNotImplemented, object_ids=KalturaNotImplemented, response_options=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'reportType', report_type)
 			client.add_param(kparams, 'reportInputFilter', report_input_filter)
 			client.add_param(kparams, 'dimension', dimension)
 			client.add_param(kparams, 'objectIds', object_ids)
+			client.add_param(kparams, 'responseOptions', response_options)
 			client.queue_service_action_call('report', 'getGraphs', 'KalturaReportGraph', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -3827,13 +3829,14 @@ module Kaltura
 
 		# report getTable action allows to get a graph data for a specific report.
 		# @return [KalturaReportTable]
-		def get_table(report_type, report_input_filter, pager, order=KalturaNotImplemented, object_ids=KalturaNotImplemented)
+		def get_table(report_type, report_input_filter, pager, order=KalturaNotImplemented, object_ids=KalturaNotImplemented, response_options=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'reportType', report_type)
 			client.add_param(kparams, 'reportInputFilter', report_input_filter)
 			client.add_param(kparams, 'pager', pager)
 			client.add_param(kparams, 'order', order)
 			client.add_param(kparams, 'objectIds', object_ids)
+			client.add_param(kparams, 'responseOptions', response_options)
 			client.queue_service_action_call('report', 'getTable', 'KalturaReportTable', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -3843,11 +3846,12 @@ module Kaltura
 
 		# report getTotal action allows to get a graph data for a specific report.
 		# @return [KalturaReportTotal]
-		def get_total(report_type, report_input_filter, object_ids=KalturaNotImplemented)
+		def get_total(report_type, report_input_filter, object_ids=KalturaNotImplemented, response_options=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'reportType', report_type)
 			client.add_param(kparams, 'reportInputFilter', report_input_filter)
 			client.add_param(kparams, 'objectIds', object_ids)
+			client.add_param(kparams, 'responseOptions', response_options)
 			client.queue_service_action_call('report', 'getTotal', 'KalturaReportTotal', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -3857,7 +3861,7 @@ module Kaltura
 
 		# will create a CSV file for the given report and return the URL to access it
 		# @return [string]
-		def get_url_for_report_as_csv(report_title, report_text, headers, report_type, report_input_filter, dimension=KalturaNotImplemented, pager=KalturaNotImplemented, order=KalturaNotImplemented, object_ids=KalturaNotImplemented)
+		def get_url_for_report_as_csv(report_title, report_text, headers, report_type, report_input_filter, dimension=KalturaNotImplemented, pager=KalturaNotImplemented, order=KalturaNotImplemented, object_ids=KalturaNotImplemented, response_options=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'reportTitle', report_title)
 			client.add_param(kparams, 'reportText', report_text)
@@ -3868,6 +3872,7 @@ module Kaltura
 			client.add_param(kparams, 'pager', pager)
 			client.add_param(kparams, 'order', order)
 			client.add_param(kparams, 'objectIds', object_ids)
+			client.add_param(kparams, 'responseOptions', response_options)
 			client.queue_service_action_call('report', 'getUrlForReportAsCsv', 'string', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -6113,7 +6118,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:19-02-13'
+			self.client_tag = 'ruby:19-02-14'
 			self.api_version = '14.14.0'
 		end
 		

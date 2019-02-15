@@ -8112,12 +8112,19 @@ module Kaltura
 
 	class KalturaReportResponseOptions < KalturaObjectBase
 		attr_accessor :delimiter
+		attr_accessor :skip_empty_dates
 
+		def skip_empty_dates=(val)
+			@skip_empty_dates = to_b(val)
+		end
 
 		def from_xml(xml_element)
 			super
 			if xml_element.elements['delimiter'] != nil
 				self.delimiter = xml_element.elements['delimiter'].text
+			end
+			if xml_element.elements['skipEmptyDates'] != nil
+				self.skip_empty_dates = xml_element.elements['skipEmptyDates'].text
 			end
 		end
 

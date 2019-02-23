@@ -11189,7 +11189,7 @@ module Kaltura
 				self.priority = xml_element.elements['priority'].text
 			end
 			if xml_element.elements['operationAttributes'] != nil
-				self.operation_attributes = KalturaClientBase.object_from_xml(xml_element.elements['operationAttributes'], 'KalturaObject')
+				self.operation_attributes = KalturaClientBase.object_from_xml(xml_element.elements['operationAttributes'], 'KalturaOperationAttributes')
 			end
 		end
 
@@ -13768,6 +13768,10 @@ module Kaltura
 		# Filter by entry owner
 		attr_accessor :owner_ids_in
 		attr_accessor :entry_operator
+		# Entry created at greater than or equal as Unix timestamp
+		attr_accessor :entry_created_at_greater_than_or_equal
+		# Entry created at less than or equal as Unix timestamp
+		attr_accessor :entry_created_at_less_than_or_equal
 
 		def search_in_tags=(val)
 			@search_in_tags = to_b(val)
@@ -13777,6 +13781,12 @@ module Kaltura
 		end
 		def time_zone_offset=(val)
 			@time_zone_offset = val.to_i
+		end
+		def entry_created_at_greater_than_or_equal=(val)
+			@entry_created_at_greater_than_or_equal = val.to_i
+		end
+		def entry_created_at_less_than_or_equal=(val)
+			@entry_created_at_less_than_or_equal = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -13840,6 +13850,12 @@ module Kaltura
 			end
 			if xml_element.elements['entryOperator'] != nil
 				self.entry_operator = KalturaClientBase.object_from_xml(xml_element.elements['entryOperator'], 'KalturaESearchEntryOperator')
+			end
+			if xml_element.elements['entryCreatedAtGreaterThanOrEqual'] != nil
+				self.entry_created_at_greater_than_or_equal = xml_element.elements['entryCreatedAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['entryCreatedAtLessThanOrEqual'] != nil
+				self.entry_created_at_less_than_or_equal = xml_element.elements['entryCreatedAtLessThanOrEqual'].text
 			end
 		end
 

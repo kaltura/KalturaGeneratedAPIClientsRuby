@@ -13772,6 +13772,7 @@ module Kaltura
 		attr_accessor :entry_created_at_greater_than_or_equal
 		# Entry created at less than or equal as Unix timestamp
 		attr_accessor :entry_created_at_less_than_or_equal
+		attr_accessor :entry_id_in
 
 		def search_in_tags=(val)
 			@search_in_tags = to_b(val)
@@ -13856,6 +13857,9 @@ module Kaltura
 			end
 			if xml_element.elements['entryCreatedAtLessThanOrEqual'] != nil
 				self.entry_created_at_less_than_or_equal = xml_element.elements['entryCreatedAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['entryIdIn'] != nil
+				self.entry_id_in = xml_element.elements['entryIdIn'].text
 			end
 		end
 

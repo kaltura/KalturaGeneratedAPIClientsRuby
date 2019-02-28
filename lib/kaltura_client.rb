@@ -5237,12 +5237,12 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# @return []
+		# @return [KalturaUserEntry]
 		def update(id, user_entry)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
 			client.add_param(kparams, 'userEntry', user_entry)
-			client.queue_service_action_call('userentry', 'update', '', kparams)
+			client.queue_service_action_call('userentry', 'update', 'KalturaUserEntry', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -6118,7 +6118,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:19-02-27'
+			self.client_tag = 'ruby:19-02-28'
 			self.api_version = '14.15.0'
 		end
 		

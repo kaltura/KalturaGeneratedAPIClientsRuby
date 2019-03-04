@@ -1208,6 +1208,11 @@ module Kaltura
 		ASSET_TYPE = "16"
 	end
 
+	class KalturaConfMapsSourceLocation
+		FS = "FileSystem"
+		DB = "database"
+	end
+
 	class KalturaContainerFormat
 		_3GP = "3gp"
 		APPLEHTTP = "applehttp"

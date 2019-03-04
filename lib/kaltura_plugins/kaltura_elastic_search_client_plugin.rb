@@ -214,6 +214,28 @@ module Kaltura
 
 	end
 
+	class KalturaESearchOrderByItem < KalturaObjectBase
+		attr_accessor :sort_order
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['sortOrder'] != nil
+				self.sort_order = xml_element.elements['sortOrder'].text
+			end
+		end
+
+	end
+
+	class KalturaESearchBaseFilter < KalturaObjectBase
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaESearchCategoryBaseItem < KalturaESearchBaseItem
 
 
@@ -342,19 +364,6 @@ module Kaltura
 			super
 			if xml_element.elements['object'] != nil
 				self.object = KalturaClientBase.object_from_xml(xml_element.elements['object'], 'KalturaBaseEntry')
-			end
-		end
-
-	end
-
-	class KalturaESearchOrderByItem < KalturaObjectBase
-		attr_accessor :sort_order
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['sortOrder'] != nil
-				self.sort_order = xml_element.elements['sortOrder'].text
 			end
 		end
 

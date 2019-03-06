@@ -98,6 +98,7 @@ module Kaltura
 		attr_accessor :show_correct_after_submission
 		attr_accessor :allow_download
 		attr_accessor :show_grade_after_submission
+		attr_accessor :max_retakes_allowed
 
 		def version=(val)
 			@version = val.to_i
@@ -119,6 +120,9 @@ module Kaltura
 		end
 		def show_grade_after_submission=(val)
 			@show_grade_after_submission = val.to_i
+		end
+		def max_retakes_allowed=(val)
+			@max_retakes_allowed = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -146,6 +150,9 @@ module Kaltura
 			end
 			if xml_element.elements['showGradeAfterSubmission'] != nil
 				self.show_grade_after_submission = xml_element.elements['showGradeAfterSubmission'].text
+			end
+			if xml_element.elements['maxRetakesAllowed'] != nil
+				self.max_retakes_allowed = xml_element.elements['maxRetakesAllowed'].text
 			end
 		end
 
@@ -356,10 +363,17 @@ module Kaltura
 	end
 
 	class KalturaQuizUserEntryFilter < KalturaQuizUserEntryBaseFilter
+		attr_accessor :version_equal
 
+		def version_equal=(val)
+			@version_equal = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
+			if xml_element.elements['versionEqual'] != nil
+				self.version_equal = xml_element.elements['versionEqual'].text
+			end
 		end
 
 	end

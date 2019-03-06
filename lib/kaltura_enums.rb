@@ -259,6 +259,11 @@ module Kaltura
 		AUTOMATIC = 2
 	end
 
+	class KalturaGroupUserRole
+		MEMBER = 1
+		MANAGER = 2
+	end
+
 	class KalturaGroupUserStatus
 		ACTIVE = 0
 		DELETED = 1
@@ -1217,6 +1222,7 @@ module Kaltura
 		_3GP = "3gp"
 		APPLEHTTP = "applehttp"
 		AVI = "avi"
+		BIF = "bif"
 		BMP = "bmp"
 		COPY = "copy"
 		FLV = "flv"

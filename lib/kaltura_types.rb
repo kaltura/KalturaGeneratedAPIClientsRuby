@@ -5436,6 +5436,7 @@ module Kaltura
 	end
 
 	class KalturaGroupUser < KalturaObjectBase
+		attr_accessor :id
 		attr_accessor :user_id
 		attr_accessor :group_id
 		attr_accessor :status
@@ -5445,6 +5446,7 @@ module Kaltura
 		# Last update date as Unix timestamp (In seconds)
 		attr_accessor :updated_at
 		attr_accessor :creation_mode
+		attr_accessor :user_role
 
 		def status=(val)
 			@status = val.to_i
@@ -5461,9 +5463,15 @@ module Kaltura
 		def creation_mode=(val)
 			@creation_mode = val.to_i
 		end
+		def user_role=(val)
+			@user_role = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
+			if xml_element.elements['id'] != nil
+				self.id = xml_element.elements['id'].text
+			end
 			if xml_element.elements['userId'] != nil
 				self.user_id = xml_element.elements['userId'].text
 			end
@@ -5484,6 +5492,9 @@ module Kaltura
 			end
 			if xml_element.elements['creationMode'] != nil
 				self.creation_mode = xml_element.elements['creationMode'].text
+			end
+			if xml_element.elements['userRole'] != nil
+				self.user_role = xml_element.elements['userRole'].text
 			end
 		end
 
@@ -5865,6 +5876,8 @@ module Kaltura
 		attr_accessor :strip_profiles
 		# Create thumbnail from the videoLengthpercentage second
 		attr_accessor :video_offset_in_percentage
+		# interval in seconds for creating thumbnail
+		attr_accessor :interval
 
 		def crop_type=(val)
 			@crop_type = val.to_i
@@ -5910,6 +5923,9 @@ module Kaltura
 		end
 		def video_offset_in_percentage=(val)
 			@video_offset_in_percentage = val.to_i
+		end
+		def interval=(val)
+			@interval = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -5964,6 +5980,9 @@ module Kaltura
 			end
 			if xml_element.elements['videoOffsetInPercentage'] != nil
 				self.video_offset_in_percentage = xml_element.elements['videoOffsetInPercentage'].text
+			end
+			if xml_element.elements['interval'] != nil
+				self.interval = xml_element.elements['interval'].text
 			end
 		end
 
@@ -13650,9 +13669,13 @@ module Kaltura
 	class KalturaQuizUserEntry < KalturaUserEntry
 		attr_accessor :score
 		attr_accessor :feedback
+		attr_accessor :version
 
 		def score=(val)
 			@score = val.to_f
+		end
+		def version=(val)
+			@version = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -13662,6 +13685,9 @@ module Kaltura
 			end
 			if xml_element.elements['feedback'] != nil
 				self.feedback = xml_element.elements['feedback'].text
+			end
+			if xml_element.elements['version'] != nil
+				self.version = xml_element.elements['version'].text
 			end
 		end
 

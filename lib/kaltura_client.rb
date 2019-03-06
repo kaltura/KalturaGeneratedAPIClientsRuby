@@ -2092,6 +2092,19 @@ module Kaltura
 			end
 			return client.do_queue()
 		end
+
+		# update GroupUser
+		# @return [KalturaGroupUser]
+		def update(group_user_id, group_user)
+			kparams = {}
+			client.add_param(kparams, 'groupUserId', group_user_id)
+			client.add_param(kparams, 'groupUser', group_user)
+			client.queue_service_action_call('groupuser', 'update', 'KalturaGroupUser', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
 	end
 
 	# Manage live channel segments
@@ -6118,8 +6131,8 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:19-03-05'
-			self.api_version = '14.15.0'
+			self.client_tag = 'ruby:19-03-06'
+			self.api_version = '14.16.0'
 		end
 		
 		def client_tag=(value)

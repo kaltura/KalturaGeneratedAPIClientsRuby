@@ -13668,11 +13668,15 @@ module Kaltura
 
 	class KalturaQuizUserEntry < KalturaUserEntry
 		attr_accessor :score
+		attr_accessor :calculated_score
 		attr_accessor :feedback
 		attr_accessor :version
 
 		def score=(val)
 			@score = val.to_f
+		end
+		def calculated_score=(val)
+			@calculated_score = val.to_f
 		end
 		def version=(val)
 			@version = val.to_i
@@ -13682,6 +13686,9 @@ module Kaltura
 			super
 			if xml_element.elements['score'] != nil
 				self.score = xml_element.elements['score'].text
+			end
+			if xml_element.elements['calculatedScore'] != nil
+				self.calculated_score = xml_element.elements['calculatedScore'].text
 			end
 			if xml_element.elements['feedback'] != nil
 				self.feedback = xml_element.elements['feedback'].text

@@ -99,6 +99,7 @@ module Kaltura
 		attr_accessor :allow_download
 		attr_accessor :show_grade_after_submission
 		attr_accessor :max_retakes_allowed
+		attr_accessor :score_type
 
 		def version=(val)
 			@version = val.to_i
@@ -123,6 +124,9 @@ module Kaltura
 		end
 		def max_retakes_allowed=(val)
 			@max_retakes_allowed = val.to_i
+		end
+		def score_type=(val)
+			@score_type = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -153,6 +157,9 @@ module Kaltura
 			end
 			if xml_element.elements['maxRetakesAllowed'] != nil
 				self.max_retakes_allowed = xml_element.elements['maxRetakesAllowed'].text
+			end
+			if xml_element.elements['scoreType'] != nil
+				self.score_type = xml_element.elements['scoreType'].text
 			end
 		end
 

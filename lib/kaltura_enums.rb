@@ -1038,14 +1038,16 @@ module Kaltura
 		DISTRIBUTION_DISABLE = "contentDistribution.DistributionDisable"
 		DISTRIBUTION_ENABLE = "contentDistribution.DistributionEnable"
 		DISTRIBUTION_FETCH_REPORT = "contentDistribution.DistributionFetchReport"
+		CONVERT = "0"
 		DISTRIBUTION_SUBMIT = "contentDistribution.DistributionSubmit"
+		DISTRIBUTION_SYNC = "contentDistribution.DistributionSync"
 		DISTRIBUTION_UPDATE = "contentDistribution.DistributionUpdate"
 		DROP_FOLDER_CONTENT_PROCESSOR = "dropFolder.DropFolderContentProcessor"
-		CONVERT = "0"
-		DISTRIBUTION_SYNC = "contentDistribution.DistributionSync"
 		DROP_FOLDER_WATCHER = "dropFolder.DropFolderWatcher"
 		EVENT_NOTIFICATION_HANDLER = "eventNotification.EventNotificationHandler"
 		INTEGRATION = "integration.Integration"
+		ENTRY_VENDOR_TASK_CSV = "reach.EntryVendorTasksCsv"
+		SYNC_REACH_CREDIT_TASK = "reach.SyncReachCreditTask"
 		SCHEDULED_TASK = "scheduledTask.ScheduledTask"
 		INDEX_TAGS = "tagSearch.IndexTagsByPrivacyContext"
 		TAG_RESOLVE = "tagSearch.TagResolve"
@@ -1195,6 +1197,7 @@ module Kaltura
 		METADATA_FIELD_CHANGED = "metadata.FieldChanged"
 		METADATA_FIELD_COMPARE = "metadata.FieldCompare"
 		METADATA_FIELD_MATCH = "metadata.FieldMatch"
+		EVENT_CATEGORY_ENTRY = "reach.CategoryEntry"
 		AUTHENTICATED = "1"
 		COUNTRY = "2"
 		IP_ADDRESS = "3"
@@ -3367,8 +3370,10 @@ module Kaltura
 	class KalturaQuizUserEntryOrderBy
 		CREATED_AT_ASC = "+createdAt"
 		UPDATED_AT_ASC = "+updatedAt"
+		VERSION_ASC = "+version"
 		CREATED_AT_DESC = "-createdAt"
 		UPDATED_AT_DESC = "-updatedAt"
+		VERSION_DESC = "-version"
 	end
 
 	class KalturaReportInterval
@@ -3424,6 +3429,7 @@ module Kaltura
 		APP_DOMAIN_UNIQUE_ACTIVE_USERS = "40"
 		TOP_SOURCES = "41"
 		VPAAS_USAGE_MULTI = "42"
+		CONTENT_REPORT_REASONS = "44"
 		PARTNER_USAGE = "201"
 	end
 
@@ -3436,6 +3442,7 @@ module Kaltura
 
 	class KalturaRuleActionType
 		DRM_POLICY = "drm.DRM_POLICY"
+		ADD_ENTRY_VENDOR_TASK = "reach.ADD_ENTRY_VENDOR_TASK"
 		BLOCK = "1"
 		PREVIEW = "2"
 		LIMIT_FLAVORS = "3"

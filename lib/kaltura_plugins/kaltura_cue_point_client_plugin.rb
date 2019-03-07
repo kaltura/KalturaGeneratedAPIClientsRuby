@@ -51,6 +51,14 @@ module Kaltura
 		PDF = 1
 	end
 
+	class KalturaScoreType
+		HIGHEST = 1
+		LOWEST = 2
+		LATEST = 3
+		FIRST = 4
+		AVERAGE = 5
+	end
+
 	class KalturaThumbCuePointSubType
 		SLIDE = 1
 		CHAPTER = 2

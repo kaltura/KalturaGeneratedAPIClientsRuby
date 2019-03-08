@@ -1214,6 +1214,7 @@ module Kaltura
 		ACTIVE_EDGE_VALIDATE = "14"
 		ANONYMOUS_IP = "15"
 		ASSET_TYPE = "16"
+		BOOLEAN = "17"
 	end
 
 	class KalturaConfMapsSourceLocation

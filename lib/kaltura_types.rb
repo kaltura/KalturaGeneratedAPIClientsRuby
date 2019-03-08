@@ -10399,6 +10399,20 @@ module Kaltura
 
 	end
 
+	class KalturaBooleanEventNotificationCondition < KalturaCondition
+		# The boolean event notification ids
+		attr_accessor :boolean_event_notification_ids
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['booleanEventNotificationIds'] != nil
+				self.boolean_event_notification_ids = xml_element.elements['booleanEventNotificationIds'].text
+			end
+		end
+
+	end
+
 	class KalturaBulkDownloadJobData < KalturaJobData
 		# Comma separated list of entry ids
 		attr_accessor :entry_ids

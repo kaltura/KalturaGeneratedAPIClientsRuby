@@ -98,7 +98,7 @@ module Kaltura
 		attr_accessor :show_correct_after_submission
 		attr_accessor :allow_download
 		attr_accessor :show_grade_after_submission
-		attr_accessor :max_retakes_allowed
+		attr_accessor :attempts_allowed
 		attr_accessor :score_type
 
 		def version=(val)
@@ -122,8 +122,8 @@ module Kaltura
 		def show_grade_after_submission=(val)
 			@show_grade_after_submission = val.to_i
 		end
-		def max_retakes_allowed=(val)
-			@max_retakes_allowed = val.to_i
+		def attempts_allowed=(val)
+			@attempts_allowed = val.to_i
 		end
 		def score_type=(val)
 			@score_type = val.to_i
@@ -155,8 +155,8 @@ module Kaltura
 			if xml_element.elements['showGradeAfterSubmission'] != nil
 				self.show_grade_after_submission = xml_element.elements['showGradeAfterSubmission'].text
 			end
-			if xml_element.elements['maxRetakesAllowed'] != nil
-				self.max_retakes_allowed = xml_element.elements['maxRetakesAllowed'].text
+			if xml_element.elements['attemptsAllowed'] != nil
+				self.attempts_allowed = xml_element.elements['attemptsAllowed'].text
 			end
 			if xml_element.elements['scoreType'] != nil
 				self.score_type = xml_element.elements['scoreType'].text

@@ -370,17 +370,10 @@ module Kaltura
 	end
 
 	class KalturaQuizUserEntryFilter < KalturaQuizUserEntryBaseFilter
-		attr_accessor :version_equal
 
-		def version_equal=(val)
-			@version_equal = val.to_i
-		end
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['versionEqual'] != nil
-				self.version_equal = xml_element.elements['versionEqual'].text
-			end
 		end
 
 	end

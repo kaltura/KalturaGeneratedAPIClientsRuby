@@ -1,0 +1,152 @@
+# ===================================================================================================
+#                           _  __     _ _
+#                          | |/ /__ _| | |_ _  _ _ _ __ _
+#                          | ' </ _` | |  _| || | '_/ _` |
+#                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
+#
+# This file is part of the Kaltura Collaborative Media Suite which allows users
+# to do with audio, video, and animation what Wiki platfroms allow them to do with
+# text.
+#
+# Copyright (C) 2006-2019  Kaltura Inc.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http:#www.gnu.org/licenses/>.
+#
+# @ignore
+# ===================================================================================================
+require 'kaltura_client.rb'
+
+module Kaltura
+
+	class KalturaGroup < KalturaBaseUser
+		attr_accessor :members_count
+
+		def members_count=(val)
+			@members_count = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['membersCount'] != nil
+				self.members_count = xml_element.elements['membersCount'].text
+			end
+		end
+
+	end
+
+	class KalturaGroupListResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaGroup')
+			end
+		end
+
+	end
+
+	class KalturaGroupFilter < KalturaUserFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+
+	class KalturaGroupService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		# Adds a new group (user of type group).
+		# @return [KalturaGroup]
+		def add(group)
+			kparams = {}
+			client.add_param(kparams, 'group', group)
+			client.queue_service_action_call('group_group', 'add', 'KalturaGroup', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Delete group by ID
+		# @return [KalturaGroup]
+		def delete(group_id)
+			kparams = {}
+			client.add_param(kparams, 'groupId', group_id)
+			client.queue_service_action_call('group_group', 'delete', 'KalturaGroup', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Retrieves a group object for a specified group ID.
+		# @return [KalturaGroup]
+		def get(group_id)
+			kparams = {}
+			client.add_param(kparams, 'groupId', group_id)
+			client.queue_service_action_call('group_group', 'get', 'KalturaGroup', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Lists group  objects that are associated with an account.
+		# 	 Blocked users are listed unless you use a filter to exclude them.
+		# 	 Deleted users are not listed unless you use a filter to include them.
+		# @return [KalturaGroupListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('group_group', 'list', 'KalturaGroupListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update group by ID
+		# @return [KalturaGroup]
+		def update(group_id, group)
+			kparams = {}
+			client.add_param(kparams, 'groupId', group_id)
+			client.add_param(kparams, 'group', group)
+			client.queue_service_action_call('group_group', 'update', 'KalturaGroup', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+	end
+
+	class KalturaClient < KalturaClientBase
+		attr_reader :group_service
+		def group_service
+			if (@group_service == nil)
+				@group_service = KalturaGroupService.new(self)
+			end
+			return @group_service
+		end
+		
+	end
+
+end

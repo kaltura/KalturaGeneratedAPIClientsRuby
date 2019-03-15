@@ -26,8 +26,40 @@
 # @ignore
 # ===================================================================================================
 require 'kaltura_client.rb'
+require File.dirname(__FILE__) + '/kaltura_elastic_search_client_plugin.rb'
 
 module Kaltura
+
+	class KalturaESearchGroupFieldName
+		CREATED_AT = "created_at"
+		EMAIL = "email"
+		FIRST_NAME = "first_name"
+		GROUP_IDS = "group_ids"
+		LAST_NAME = "last_name"
+		PERMISSION_NAMES = "permission_names"
+		ROLE_IDS = "role_ids"
+		SCREEN_NAME = "screen_name"
+		TAGS = "tags"
+		UPDATED_AT = "updated_at"
+		USER_ID = "user_id"
+	end
+
+	class KalturaESearchGroupOrderByFieldName
+		CREATED_AT = "created_at"
+		MEMBERS_COUNT = "members_count"
+		USER_ID = "puser_id"
+		SCREEN_NAME = "screen_name"
+		UPDATED_AT = "updated_at"
+	end
+
+	class KalturaESearchGroupBaseItem < KalturaESearchBaseItem
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
 
 	class KalturaGroup < KalturaBaseUser
 		attr_accessor :members_count
@@ -45,6 +77,26 @@ module Kaltura
 
 	end
 
+	class KalturaESearchGroupOperator < KalturaESearchGroupBaseItem
+		attr_accessor :operator
+		attr_accessor :search_items
+
+		def operator=(val)
+			@operator = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['operator'] != nil
+				self.operator = xml_element.elements['operator'].text
+			end
+			if xml_element.elements['searchItems'] != nil
+				self.search_items = KalturaClientBase.object_from_xml(xml_element.elements['searchItems'], 'KalturaESearchGroupBaseItem')
+			end
+		end
+
+	end
+
 	class KalturaGroupListResponse < KalturaListResponse
 		attr_accessor :objects
 
@@ -53,6 +105,77 @@ module Kaltura
 			super
 			if xml_element.elements['objects'] != nil
 				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaGroup')
+			end
+		end
+
+	end
+
+	class KalturaESearchAbstractGroupItem < KalturaESearchGroupBaseItem
+		attr_accessor :search_term
+		attr_accessor :item_type
+		attr_accessor :range
+		attr_accessor :add_highlight
+
+		def item_type=(val)
+			@item_type = val.to_i
+		end
+		def add_highlight=(val)
+			@add_highlight = to_b(val)
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['searchTerm'] != nil
+				self.search_term = xml_element.elements['searchTerm'].text
+			end
+			if xml_element.elements['itemType'] != nil
+				self.item_type = xml_element.elements['itemType'].text
+			end
+			if xml_element.elements['range'] != nil
+				self.range = KalturaClientBase.object_from_xml(xml_element.elements['range'], 'KalturaESearchRange')
+			end
+			if xml_element.elements['addHighlight'] != nil
+				self.add_highlight = xml_element.elements['addHighlight'].text
+			end
+		end
+
+	end
+
+	class KalturaESearchGroupItem < KalturaESearchAbstractGroupItem
+		attr_accessor :field_name
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['fieldName'] != nil
+				self.field_name = xml_element.elements['fieldName'].text
+			end
+		end
+
+	end
+
+	class KalturaESearchGroupMetadataItem < KalturaESearchAbstractGroupItem
+		attr_accessor :xpath
+		attr_accessor :metadata_profile_id
+		attr_accessor :metadata_field_id
+
+		def metadata_profile_id=(val)
+			@metadata_profile_id = val.to_i
+		end
+		def metadata_field_id=(val)
+			@metadata_field_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['xpath'] != nil
+				self.xpath = xml_element.elements['xpath'].text
+			end
+			if xml_element.elements['metadataProfileId'] != nil
+				self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
+			end
+			if xml_element.elements['metadataFieldId'] != nil
+				self.metadata_field_id = xml_element.elements['metadataFieldId'].text
 			end
 		end
 

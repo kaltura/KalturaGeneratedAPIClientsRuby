@@ -171,28 +171,6 @@ module Kaltura
 		VOTES = "votes"
 	end
 
-	class KalturaESearchGroupFieldName
-		CREATED_AT = "created_at"
-		EMAIL = "email"
-		FIRST_NAME = "first_name"
-		GROUP_IDS = "group_ids"
-		LAST_NAME = "last_name"
-		PERMISSION_NAMES = "permission_names"
-		ROLE_IDS = "role_ids"
-		SCREEN_NAME = "screen_name"
-		TAGS = "tags"
-		UPDATED_AT = "updated_at"
-		USER_ID = "user_id"
-	end
-
-	class KalturaESearchGroupOrderByFieldName
-		CREATED_AT = "created_at"
-		MEMBERS_COUNT = "members_count"
-		USER_ID = "puser_id"
-		SCREEN_NAME = "screen_name"
-		UPDATED_AT = "updated_at"
-	end
-
 	class KalturaESearchSortOrder
 		ORDER_BY_ASC = "asc"
 		ORDER_BY_DESC = "desc"
@@ -746,35 +724,6 @@ module Kaltura
 
 	end
 
-	class KalturaESearchUserOperator < KalturaESearchUserBaseItem
-		attr_accessor :operator
-		attr_accessor :search_items
-
-		def operator=(val)
-			@operator = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['operator'] != nil
-				self.operator = xml_element.elements['operator'].text
-			end
-			if xml_element.elements['searchItems'] != nil
-				self.search_items = KalturaClientBase.object_from_xml(xml_element.elements['searchItems'], 'KalturaESearchUserBaseItem')
-			end
-		end
-
-	end
-
-	class KalturaESearchGroupOperator < KalturaESearchUserOperator
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
 	class KalturaESearchGroupParams < KalturaESearchParams
 		attr_accessor :search_operator
 
@@ -867,6 +816,26 @@ module Kaltura
 			super
 			if xml_element.elements['sortField'] != nil
 				self.sort_field = xml_element.elements['sortField'].text
+			end
+		end
+
+	end
+
+	class KalturaESearchUserOperator < KalturaESearchUserBaseItem
+		attr_accessor :operator
+		attr_accessor :search_items
+
+		def operator=(val)
+			@operator = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['operator'] != nil
+				self.operator = xml_element.elements['operator'].text
+			end
+			if xml_element.elements['searchItems'] != nil
+				self.search_items = KalturaClientBase.object_from_xml(xml_element.elements['searchItems'], 'KalturaESearchUserBaseItem')
 			end
 		end
 
@@ -1112,19 +1081,6 @@ module Kaltura
 
 	end
 
-	class KalturaESearchGroupItem < KalturaESearchAbstractUserItem
-		attr_accessor :field_name
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['fieldName'] != nil
-				self.field_name = xml_element.elements['fieldName'].text
-			end
-		end
-
-	end
-
 	class KalturaESearchUnifiedItem < KalturaESearchAbstractEntryItem
 
 
@@ -1201,15 +1157,6 @@ module Kaltura
 			if xml_element.elements['addHighlight'] != nil
 				self.add_highlight = xml_element.elements['addHighlight'].text
 			end
-		end
-
-	end
-
-	class KalturaESearchGroupMetadataItem < KalturaESearchUserMetadataItem
-
-
-		def from_xml(xml_element)
-			super
 		end
 
 	end

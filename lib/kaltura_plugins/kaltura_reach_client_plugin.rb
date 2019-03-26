@@ -93,12 +93,18 @@ module Kaltura
 		TWELVE_HOURS = 43200
 		TWENTY_FOUR_HOURS = 86400
 		FORTY_EIGHT_HOURS = 172800
+		FOUR_DAYS = 345600
 		TEN_DAYS = 864000
 	end
 
 	class KalturaVendorServiceType
 		HUMAN = 1
 		MACHINE = 2
+	end
+
+	class KalturaVendorTaskProcessingRegion
+		US = 1
+		EU = 2
 	end
 
 	class KalturaCatalogItemLanguage
@@ -412,6 +418,8 @@ module Kaltura
 		attr_accessor :dictionaries
 		# Comma separated flavorParamsIds that the vendor should look for it matching asset when trying to download the asset
 		attr_accessor :flavor_params_ids
+		# Indicates in which region the task processing should task place
+		attr_accessor :vendor_task_processing_region
 
 		def id=(val)
 			@id = val.to_i
@@ -466,6 +474,9 @@ module Kaltura
 		end
 		def used_credit=(val)
 			@used_credit = val.to_f
+		end
+		def vendor_task_processing_region=(val)
+			@vendor_task_processing_region = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -538,6 +549,9 @@ module Kaltura
 			end
 			if xml_element.elements['flavorParamsIds'] != nil
 				self.flavor_params_ids = xml_element.elements['flavorParamsIds'].text
+			end
+			if xml_element.elements['vendorTaskProcessingRegion'] != nil
+				self.vendor_task_processing_region = xml_element.elements['vendorTaskProcessingRegion'].text
 			end
 		end
 
@@ -758,180 +772,6 @@ module Kaltura
 
 	end
 
-	class KalturaEntryVendorTaskBaseFilter < KalturaRelatedFilter
-		attr_accessor :id_equal
-		attr_accessor :id_in
-		attr_accessor :vendor_partner_id_equal
-		attr_accessor :vendor_partner_id_in
-		attr_accessor :created_at_greater_than_or_equal
-		attr_accessor :created_at_less_than_or_equal
-		attr_accessor :updated_at_greater_than_or_equal
-		attr_accessor :updated_at_less_than_or_equal
-		attr_accessor :queue_time_greater_than_or_equal
-		attr_accessor :queue_time_less_than_or_equal
-		attr_accessor :finish_time_greater_than_or_equal
-		attr_accessor :finish_time_less_than_or_equal
-		attr_accessor :entry_id_equal
-		attr_accessor :status_equal
-		attr_accessor :status_in
-		attr_accessor :reach_profile_id_equal
-		attr_accessor :reach_profile_id_in
-		attr_accessor :catalog_item_id_equal
-		attr_accessor :catalog_item_id_in
-		attr_accessor :user_id_equal
-		attr_accessor :context_equal
-
-		def id_equal=(val)
-			@id_equal = val.to_i
-		end
-		def vendor_partner_id_equal=(val)
-			@vendor_partner_id_equal = val.to_i
-		end
-		def created_at_greater_than_or_equal=(val)
-			@created_at_greater_than_or_equal = val.to_i
-		end
-		def created_at_less_than_or_equal=(val)
-			@created_at_less_than_or_equal = val.to_i
-		end
-		def updated_at_greater_than_or_equal=(val)
-			@updated_at_greater_than_or_equal = val.to_i
-		end
-		def updated_at_less_than_or_equal=(val)
-			@updated_at_less_than_or_equal = val.to_i
-		end
-		def queue_time_greater_than_or_equal=(val)
-			@queue_time_greater_than_or_equal = val.to_i
-		end
-		def queue_time_less_than_or_equal=(val)
-			@queue_time_less_than_or_equal = val.to_i
-		end
-		def finish_time_greater_than_or_equal=(val)
-			@finish_time_greater_than_or_equal = val.to_i
-		end
-		def finish_time_less_than_or_equal=(val)
-			@finish_time_less_than_or_equal = val.to_i
-		end
-		def status_equal=(val)
-			@status_equal = val.to_i
-		end
-		def reach_profile_id_equal=(val)
-			@reach_profile_id_equal = val.to_i
-		end
-		def catalog_item_id_equal=(val)
-			@catalog_item_id_equal = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['idEqual'] != nil
-				self.id_equal = xml_element.elements['idEqual'].text
-			end
-			if xml_element.elements['idIn'] != nil
-				self.id_in = xml_element.elements['idIn'].text
-			end
-			if xml_element.elements['vendorPartnerIdEqual'] != nil
-				self.vendor_partner_id_equal = xml_element.elements['vendorPartnerIdEqual'].text
-			end
-			if xml_element.elements['vendorPartnerIdIn'] != nil
-				self.vendor_partner_id_in = xml_element.elements['vendorPartnerIdIn'].text
-			end
-			if xml_element.elements['createdAtGreaterThanOrEqual'] != nil
-				self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
-			end
-			if xml_element.elements['createdAtLessThanOrEqual'] != nil
-				self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
-			end
-			if xml_element.elements['updatedAtGreaterThanOrEqual'] != nil
-				self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
-			end
-			if xml_element.elements['updatedAtLessThanOrEqual'] != nil
-				self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
-			end
-			if xml_element.elements['queueTimeGreaterThanOrEqual'] != nil
-				self.queue_time_greater_than_or_equal = xml_element.elements['queueTimeGreaterThanOrEqual'].text
-			end
-			if xml_element.elements['queueTimeLessThanOrEqual'] != nil
-				self.queue_time_less_than_or_equal = xml_element.elements['queueTimeLessThanOrEqual'].text
-			end
-			if xml_element.elements['finishTimeGreaterThanOrEqual'] != nil
-				self.finish_time_greater_than_or_equal = xml_element.elements['finishTimeGreaterThanOrEqual'].text
-			end
-			if xml_element.elements['finishTimeLessThanOrEqual'] != nil
-				self.finish_time_less_than_or_equal = xml_element.elements['finishTimeLessThanOrEqual'].text
-			end
-			if xml_element.elements['entryIdEqual'] != nil
-				self.entry_id_equal = xml_element.elements['entryIdEqual'].text
-			end
-			if xml_element.elements['statusEqual'] != nil
-				self.status_equal = xml_element.elements['statusEqual'].text
-			end
-			if xml_element.elements['statusIn'] != nil
-				self.status_in = xml_element.elements['statusIn'].text
-			end
-			if xml_element.elements['reachProfileIdEqual'] != nil
-				self.reach_profile_id_equal = xml_element.elements['reachProfileIdEqual'].text
-			end
-			if xml_element.elements['reachProfileIdIn'] != nil
-				self.reach_profile_id_in = xml_element.elements['reachProfileIdIn'].text
-			end
-			if xml_element.elements['catalogItemIdEqual'] != nil
-				self.catalog_item_id_equal = xml_element.elements['catalogItemIdEqual'].text
-			end
-			if xml_element.elements['catalogItemIdIn'] != nil
-				self.catalog_item_id_in = xml_element.elements['catalogItemIdIn'].text
-			end
-			if xml_element.elements['userIdEqual'] != nil
-				self.user_id_equal = xml_element.elements['userIdEqual'].text
-			end
-			if xml_element.elements['contextEqual'] != nil
-				self.context_equal = xml_element.elements['contextEqual'].text
-			end
-		end
-
-	end
-
-	class KalturaEntryVendorTaskFilter < KalturaEntryVendorTaskBaseFilter
-		attr_accessor :free_text
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['freeText'] != nil
-				self.free_text = xml_element.elements['freeText'].text
-			end
-		end
-
-	end
-
-	class KalturaEntryVendorTaskCsvJobData < KalturaJobData
-		# The filter should return the list of users that need to be specified in the csv.
-		attr_accessor :filter
-		# The users name
-		attr_accessor :user_name
-		# The users email
-		attr_accessor :user_mail
-		# The file location
-		attr_accessor :output_path
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['filter'] != nil
-				self.filter = KalturaClientBase.object_from_xml(xml_element.elements['filter'], 'KalturaEntryVendorTaskFilter')
-			end
-			if xml_element.elements['userName'] != nil
-				self.user_name = xml_element.elements['userName'].text
-			end
-			if xml_element.elements['userMail'] != nil
-				self.user_mail = xml_element.elements['userMail'].text
-			end
-			if xml_element.elements['outputPath'] != nil
-				self.output_path = xml_element.elements['outputPath'].text
-			end
-		end
-
-	end
-
 	class KalturaEntryVendorTaskListResponse < KalturaListResponse
 		attr_accessor :objects
 
@@ -1087,6 +927,165 @@ module Kaltura
 			end
 			if xml_element.elements['addOn'] != nil
 				self.add_on = xml_element.elements['addOn'].text
+			end
+		end
+
+	end
+
+	class KalturaEntryVendorTaskBaseFilter < KalturaRelatedFilter
+		attr_accessor :id_equal
+		attr_accessor :id_in
+		attr_accessor :vendor_partner_id_equal
+		attr_accessor :vendor_partner_id_in
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :created_at_less_than_or_equal
+		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
+		attr_accessor :queue_time_greater_than_or_equal
+		attr_accessor :queue_time_less_than_or_equal
+		attr_accessor :finish_time_greater_than_or_equal
+		attr_accessor :finish_time_less_than_or_equal
+		attr_accessor :entry_id_equal
+		attr_accessor :status_equal
+		attr_accessor :status_in
+		attr_accessor :reach_profile_id_equal
+		attr_accessor :reach_profile_id_in
+		attr_accessor :catalog_item_id_equal
+		attr_accessor :catalog_item_id_in
+		attr_accessor :user_id_equal
+		attr_accessor :context_equal
+
+		def id_equal=(val)
+			@id_equal = val.to_i
+		end
+		def vendor_partner_id_equal=(val)
+			@vendor_partner_id_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def created_at_less_than_or_equal=(val)
+			@created_at_less_than_or_equal = val.to_i
+		end
+		def updated_at_greater_than_or_equal=(val)
+			@updated_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
+		end
+		def queue_time_greater_than_or_equal=(val)
+			@queue_time_greater_than_or_equal = val.to_i
+		end
+		def queue_time_less_than_or_equal=(val)
+			@queue_time_less_than_or_equal = val.to_i
+		end
+		def finish_time_greater_than_or_equal=(val)
+			@finish_time_greater_than_or_equal = val.to_i
+		end
+		def finish_time_less_than_or_equal=(val)
+			@finish_time_less_than_or_equal = val.to_i
+		end
+		def status_equal=(val)
+			@status_equal = val.to_i
+		end
+		def reach_profile_id_equal=(val)
+			@reach_profile_id_equal = val.to_i
+		end
+		def catalog_item_id_equal=(val)
+			@catalog_item_id_equal = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['idEqual'] != nil
+				self.id_equal = xml_element.elements['idEqual'].text
+			end
+			if xml_element.elements['idIn'] != nil
+				self.id_in = xml_element.elements['idIn'].text
+			end
+			if xml_element.elements['vendorPartnerIdEqual'] != nil
+				self.vendor_partner_id_equal = xml_element.elements['vendorPartnerIdEqual'].text
+			end
+			if xml_element.elements['vendorPartnerIdIn'] != nil
+				self.vendor_partner_id_in = xml_element.elements['vendorPartnerIdIn'].text
+			end
+			if xml_element.elements['createdAtGreaterThanOrEqual'] != nil
+				self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['createdAtLessThanOrEqual'] != nil
+				self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtGreaterThanOrEqual'] != nil
+				self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtLessThanOrEqual'] != nil
+				self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['queueTimeGreaterThanOrEqual'] != nil
+				self.queue_time_greater_than_or_equal = xml_element.elements['queueTimeGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['queueTimeLessThanOrEqual'] != nil
+				self.queue_time_less_than_or_equal = xml_element.elements['queueTimeLessThanOrEqual'].text
+			end
+			if xml_element.elements['finishTimeGreaterThanOrEqual'] != nil
+				self.finish_time_greater_than_or_equal = xml_element.elements['finishTimeGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['finishTimeLessThanOrEqual'] != nil
+				self.finish_time_less_than_or_equal = xml_element.elements['finishTimeLessThanOrEqual'].text
+			end
+			if xml_element.elements['entryIdEqual'] != nil
+				self.entry_id_equal = xml_element.elements['entryIdEqual'].text
+			end
+			if xml_element.elements['statusEqual'] != nil
+				self.status_equal = xml_element.elements['statusEqual'].text
+			end
+			if xml_element.elements['statusIn'] != nil
+				self.status_in = xml_element.elements['statusIn'].text
+			end
+			if xml_element.elements['reachProfileIdEqual'] != nil
+				self.reach_profile_id_equal = xml_element.elements['reachProfileIdEqual'].text
+			end
+			if xml_element.elements['reachProfileIdIn'] != nil
+				self.reach_profile_id_in = xml_element.elements['reachProfileIdIn'].text
+			end
+			if xml_element.elements['catalogItemIdEqual'] != nil
+				self.catalog_item_id_equal = xml_element.elements['catalogItemIdEqual'].text
+			end
+			if xml_element.elements['catalogItemIdIn'] != nil
+				self.catalog_item_id_in = xml_element.elements['catalogItemIdIn'].text
+			end
+			if xml_element.elements['userIdEqual'] != nil
+				self.user_id_equal = xml_element.elements['userIdEqual'].text
+			end
+			if xml_element.elements['contextEqual'] != nil
+				self.context_equal = xml_element.elements['contextEqual'].text
+			end
+		end
+
+	end
+
+	class KalturaEntryVendorTaskFilter < KalturaEntryVendorTaskBaseFilter
+		attr_accessor :free_text
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['freeText'] != nil
+				self.free_text = xml_element.elements['freeText'].text
+			end
+		end
+
+	end
+
+	class KalturaEntryVendorTaskCsvJobData < KalturaExportCsvJobData
+		# The filter should return the list of users that need to be specified in the csv.
+		attr_accessor :filter
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['filter'] != nil
+				self.filter = KalturaClientBase.object_from_xml(xml_element.elements['filter'], 'KalturaEntryVendorTaskFilter')
 			end
 		end
 

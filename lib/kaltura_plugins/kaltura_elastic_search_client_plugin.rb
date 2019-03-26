@@ -984,6 +984,20 @@ module Kaltura
 
 	end
 
+	class KalturaMediaEsearchExportToCsvJobData < KalturaExportCsvJobData
+		# Esearch parameters for the entry search
+		attr_accessor :search_params
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['searchParams'] != nil
+				self.search_params = KalturaClientBase.object_from_xml(xml_element.elements['searchParams'], 'KalturaESearchEntryParams')
+			end
+		end
+
+	end
+
 	class KalturaESearchCategoryEntryItem < KalturaESearchAbstractEntryItem
 		attr_accessor :field_name
 		attr_accessor :category_entry_status

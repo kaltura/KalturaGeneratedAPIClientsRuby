@@ -12634,6 +12634,30 @@ module Kaltura
 
 	end
 
+	class KalturaExportCsvJobData < KalturaJobData
+		# The users name
+		attr_accessor :user_name
+		# The users email
+		attr_accessor :user_mail
+		# The file location
+		attr_accessor :output_path
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['userName'] != nil
+				self.user_name = xml_element.elements['userName'].text
+			end
+			if xml_element.elements['userMail'] != nil
+				self.user_mail = xml_element.elements['userMail'].text
+			end
+			if xml_element.elements['outputPath'] != nil
+				self.output_path = xml_element.elements['outputPath'].text
+			end
+		end
+
+	end
+
 	class KalturaFeatureStatusListResponse < KalturaListResponse
 		attr_accessor :objects
 
@@ -15132,48 +15156,6 @@ module Kaltura
 
 	end
 
-	class KalturaUsersCsvJobData < KalturaJobData
-		# The filter should return the list of users that need to be specified in the csv.
-		attr_accessor :filter
-		# The metadata profile we should look the xpath in
-		attr_accessor :metadata_profile_id
-		# The xpath to look in the metadataProfileId  and the wanted csv field name
-		attr_accessor :additional_fields
-		# The users name
-		attr_accessor :user_name
-		# The users email
-		attr_accessor :user_mail
-		# The file location
-		attr_accessor :output_path
-
-		def metadata_profile_id=(val)
-			@metadata_profile_id = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['filter'] != nil
-				self.filter = KalturaClientBase.object_from_xml(xml_element.elements['filter'], 'KalturaUserFilter')
-			end
-			if xml_element.elements['metadataProfileId'] != nil
-				self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
-			end
-			if xml_element.elements['additionalFields'] != nil
-				self.additional_fields = KalturaClientBase.object_from_xml(xml_element.elements['additionalFields'], 'KalturaCsvAdditionalFieldInfo')
-			end
-			if xml_element.elements['userName'] != nil
-				self.user_name = xml_element.elements['userName'].text
-			end
-			if xml_element.elements['userMail'] != nil
-				self.user_mail = xml_element.elements['userMail'].text
-			end
-			if xml_element.elements['outputPath'] != nil
-				self.output_path = xml_element.elements['outputPath'].text
-			end
-		end
-
-	end
-
 	class KalturaValidateActiveEdgeCondition < KalturaCondition
 		# Comma separated list of edge servers to validate are active
 		attr_accessor :edge_server_ids
@@ -17552,6 +17534,33 @@ module Kaltura
 			end
 			if xml_element.elements['updatedAtLessThanOrEqual'] != nil
 				self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			end
+		end
+
+	end
+
+	class KalturaUsersCsvJobData < KalturaExportCsvJobData
+		# The filter should return the list of users that need to be specified in the csv.
+		attr_accessor :filter
+		# The metadata profile we should look the xpath in
+		attr_accessor :metadata_profile_id
+		# The xpath to look in the metadataProfileId  and the wanted csv field name
+		attr_accessor :additional_fields
+
+		def metadata_profile_id=(val)
+			@metadata_profile_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['filter'] != nil
+				self.filter = KalturaClientBase.object_from_xml(xml_element.elements['filter'], 'KalturaUserFilter')
+			end
+			if xml_element.elements['metadataProfileId'] != nil
+				self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
+			end
+			if xml_element.elements['additionalFields'] != nil
+				self.additional_fields = KalturaClientBase.object_from_xml(xml_element.elements['additionalFields'], 'KalturaCsvAdditionalFieldInfo')
 			end
 		end
 

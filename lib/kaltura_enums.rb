@@ -1035,10 +1035,10 @@ module Kaltura
 		PARSE_MULTI_LANGUAGE_CAPTION_ASSET = "caption.parsemultilanguagecaptionasset"
 		PARSE_CAPTION_ASSET = "captionSearch.parseCaptionAsset"
 		DISTRIBUTION_DELETE = "contentDistribution.DistributionDelete"
+		CONVERT = "0"
 		DISTRIBUTION_DISABLE = "contentDistribution.DistributionDisable"
 		DISTRIBUTION_ENABLE = "contentDistribution.DistributionEnable"
 		DISTRIBUTION_FETCH_REPORT = "contentDistribution.DistributionFetchReport"
-		CONVERT = "0"
 		DISTRIBUTION_SUBMIT = "contentDistribution.DistributionSubmit"
 		DISTRIBUTION_SYNC = "contentDistribution.DistributionSync"
 		DISTRIBUTION_UPDATE = "contentDistribution.DistributionUpdate"
@@ -1097,6 +1097,7 @@ module Kaltura
 		USERS_CSV = "46"
 		CLIP_CONCAT = "47"
 		COPY_CUE_POINTS = "48"
+		EXPORT_CSV = "49"
 	end
 
 	class KalturaBulkUploadAction
@@ -2993,6 +2994,7 @@ module Kaltura
 		MAIL_TYPE_LIVE_REPORT_EXPORT_FAILURE = "131"
 		MAIL_TYPE_LIVE_REPORT_EXPORT_ABORT = "132"
 		MAIL_TYPE_USERS_CSV = "133"
+		MAIL_TYPE_OBJECTS_CSV = "135"
 	end
 
 	class KalturaMatchConditionType

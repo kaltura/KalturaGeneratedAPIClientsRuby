@@ -1585,6 +1585,25 @@ module Kaltura
 		end
 	end
 
+	# Export CSV service is used to manage CSV exports of objects
+	class KalturaExportcsvService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		# Will serve a requested CSV
+		# @return [string]
+		def serve_csv(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('exportcsv', 'serveCsv', 'string', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+	end
+
 	# Manage file assets
 	class KalturaFileAssetService < KalturaServiceBase
 		def initialize(client)
@@ -2944,6 +2963,18 @@ module Kaltura
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
 			client.queue_service_action_call('media', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Creates a batch job that sends an email with a link to download a CSV containing a list of entries
+		# @return [string]
+		def export_to_csv(data)
+			kparams = {}
+			client.add_param(kparams, 'data', data)
+			client.queue_service_action_call('media', 'exportToCsv', 'string', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -5825,6 +5856,14 @@ module Kaltura
 			return @entry_server_node_service
 		end
 		
+		attr_reader :exportcsv_service
+		def exportcsv_service
+			if (@exportcsv_service == nil)
+				@exportcsv_service = KalturaExportcsvService.new(self)
+			end
+			return @exportcsv_service
+		end
+		
 		attr_reader :file_asset_service
 		def file_asset_service
 			if (@file_asset_service == nil)
@@ -6131,8 +6170,8 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:19-03-19'
-			self.api_version = '14.16.0'
+			self.client_tag = 'ruby:19-03-26'
+			self.api_version = '14.17.0'
 		end
 		
 		def client_tag=(value)

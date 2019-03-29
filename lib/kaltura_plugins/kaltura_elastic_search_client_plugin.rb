@@ -493,6 +493,26 @@ module Kaltura
 
 	end
 
+	class KalturaESearchEntryOperator < KalturaESearchEntryBaseItem
+		attr_accessor :operator
+		attr_accessor :search_items
+
+		def operator=(val)
+			@operator = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['operator'] != nil
+				self.operator = xml_element.elements['operator'].text
+			end
+			if xml_element.elements['searchItems'] != nil
+				self.search_items = KalturaClientBase.object_from_xml(xml_element.elements['searchItems'], 'KalturaESearchEntryBaseItem')
+			end
+		end
+
+	end
+
 	class KalturaESearchCaptionItemData < KalturaESearchItemData
 		attr_accessor :line
 		attr_accessor :starts_at
@@ -660,26 +680,6 @@ module Kaltura
 			super
 			if xml_element.elements['sortField'] != nil
 				self.sort_field = xml_element.elements['sortField'].text
-			end
-		end
-
-	end
-
-	class KalturaESearchEntryOperator < KalturaESearchEntryBaseItem
-		attr_accessor :operator
-		attr_accessor :search_items
-
-		def operator=(val)
-			@operator = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['operator'] != nil
-				self.operator = xml_element.elements['operator'].text
-			end
-			if xml_element.elements['searchItems'] != nil
-				self.search_items = KalturaClientBase.object_from_xml(xml_element.elements['searchItems'], 'KalturaESearchEntryBaseItem')
 			end
 		end
 

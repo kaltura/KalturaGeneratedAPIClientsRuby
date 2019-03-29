@@ -8069,23 +8069,6 @@ module Kaltura
 
 	end
 
-	class KalturaReportGraph < KalturaObjectBase
-		attr_accessor :id
-		attr_accessor :data
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['id'] != nil
-				self.id = xml_element.elements['id'].text
-			end
-			if xml_element.elements['data'] != nil
-				self.data = xml_element.elements['data'].text
-			end
-		end
-
-	end
-
 	class KalturaReportInputBaseFilter < KalturaObjectBase
 		# Start date as Unix timestamp (In seconds)
 		attr_accessor :from_date
@@ -8121,18 +8104,138 @@ module Kaltura
 
 	end
 
-	class KalturaReportResponse < KalturaObjectBase
-		attr_accessor :columns
-		attr_accessor :results
+	class KalturaReportInputFilter < KalturaReportInputBaseFilter
+		# Search keywords to filter objects
+		attr_accessor :keywords
+		# Search keywords in objects tags
+		attr_accessor :search_in_tags
+		# Search keywords in objects admin tags
+		attr_accessor :search_in_admin_tags
+		# Search objects in specified categories
+		attr_accessor :categories
+		# Search objects in specified category ids
+		attr_accessor :categories_ids_in
+		# Filter by customVar1
+		attr_accessor :custom_var1in
+		# Filter by customVar2
+		attr_accessor :custom_var2in
+		# Filter by customVar3
+		attr_accessor :custom_var3in
+		# Filter by device
+		attr_accessor :device_in
+		# Filter by country
+		attr_accessor :country_in
+		# Filter by region
+		attr_accessor :region_in
+		# Filter by city
+		attr_accessor :cities_in
+		# Filter by operating system family
+		attr_accessor :operating_system_family_in
+		# Filter by browser family
+		attr_accessor :browser_family_in
+		# Time zone offset in minutes
+		attr_accessor :time_zone_offset
+		# Aggregated results according to interval
+		attr_accessor :interval
+		# Filter by media types
+		attr_accessor :media_type_in
+		# Filter by source types
+		attr_accessor :source_type_in
+		# Filter by entry owner
+		attr_accessor :owner_ids_in
+		attr_accessor :entry_operator
+		# Entry created at greater than or equal as Unix timestamp
+		attr_accessor :entry_created_at_greater_than_or_equal
+		# Entry created at less than or equal as Unix timestamp
+		attr_accessor :entry_created_at_less_than_or_equal
+		attr_accessor :entry_id_in
 
+		def search_in_tags=(val)
+			@search_in_tags = to_b(val)
+		end
+		def search_in_admin_tags=(val)
+			@search_in_admin_tags = to_b(val)
+		end
+		def time_zone_offset=(val)
+			@time_zone_offset = val.to_i
+		end
+		def entry_created_at_greater_than_or_equal=(val)
+			@entry_created_at_greater_than_or_equal = val.to_i
+		end
+		def entry_created_at_less_than_or_equal=(val)
+			@entry_created_at_less_than_or_equal = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['columns'] != nil
-				self.columns = xml_element.elements['columns'].text
+			if xml_element.elements['keywords'] != nil
+				self.keywords = xml_element.elements['keywords'].text
 			end
-			if xml_element.elements['results'] != nil
-				self.results = KalturaClientBase.object_from_xml(xml_element.elements['results'], 'KalturaString')
+			if xml_element.elements['searchInTags'] != nil
+				self.search_in_tags = xml_element.elements['searchInTags'].text
+			end
+			if xml_element.elements['searchInAdminTags'] != nil
+				self.search_in_admin_tags = xml_element.elements['searchInAdminTags'].text
+			end
+			if xml_element.elements['categories'] != nil
+				self.categories = xml_element.elements['categories'].text
+			end
+			if xml_element.elements['categoriesIdsIn'] != nil
+				self.categories_ids_in = xml_element.elements['categoriesIdsIn'].text
+			end
+			if xml_element.elements['customVar1In'] != nil
+				self.custom_var1in = xml_element.elements['customVar1In'].text
+			end
+			if xml_element.elements['customVar2In'] != nil
+				self.custom_var2in = xml_element.elements['customVar2In'].text
+			end
+			if xml_element.elements['customVar3In'] != nil
+				self.custom_var3in = xml_element.elements['customVar3In'].text
+			end
+			if xml_element.elements['deviceIn'] != nil
+				self.device_in = xml_element.elements['deviceIn'].text
+			end
+			if xml_element.elements['countryIn'] != nil
+				self.country_in = xml_element.elements['countryIn'].text
+			end
+			if xml_element.elements['regionIn'] != nil
+				self.region_in = xml_element.elements['regionIn'].text
+			end
+			if xml_element.elements['citiesIn'] != nil
+				self.cities_in = xml_element.elements['citiesIn'].text
+			end
+			if xml_element.elements['operatingSystemFamilyIn'] != nil
+				self.operating_system_family_in = xml_element.elements['operatingSystemFamilyIn'].text
+			end
+			if xml_element.elements['browserFamilyIn'] != nil
+				self.browser_family_in = xml_element.elements['browserFamilyIn'].text
+			end
+			if xml_element.elements['timeZoneOffset'] != nil
+				self.time_zone_offset = xml_element.elements['timeZoneOffset'].text
+			end
+			if xml_element.elements['interval'] != nil
+				self.interval = xml_element.elements['interval'].text
+			end
+			if xml_element.elements['mediaTypeIn'] != nil
+				self.media_type_in = xml_element.elements['mediaTypeIn'].text
+			end
+			if xml_element.elements['sourceTypeIn'] != nil
+				self.source_type_in = xml_element.elements['sourceTypeIn'].text
+			end
+			if xml_element.elements['ownerIdsIn'] != nil
+				self.owner_ids_in = xml_element.elements['ownerIdsIn'].text
+			end
+			if xml_element.elements['entryOperator'] != nil
+				self.entry_operator = KalturaClientBase.object_from_xml(xml_element.elements['entryOperator'], 'KalturaESearchEntryOperator')
+			end
+			if xml_element.elements['entryCreatedAtGreaterThanOrEqual'] != nil
+				self.entry_created_at_greater_than_or_equal = xml_element.elements['entryCreatedAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['entryCreatedAtLessThanOrEqual'] != nil
+				self.entry_created_at_less_than_or_equal = xml_element.elements['entryCreatedAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['entryIdIn'] != nil
+				self.entry_id_in = xml_element.elements['entryIdIn'].text
 			end
 		end
 
@@ -8153,6 +8256,125 @@ module Kaltura
 			end
 			if xml_element.elements['skipEmptyDates'] != nil
 				self.skip_empty_dates = xml_element.elements['skipEmptyDates'].text
+			end
+		end
+
+	end
+
+	class KalturaReportExportItem < KalturaObjectBase
+		attr_accessor :report_title
+		attr_accessor :action
+		attr_accessor :report_type
+		attr_accessor :filter
+		attr_accessor :order
+		attr_accessor :object_ids
+		attr_accessor :response_options
+
+		def action=(val)
+			@action = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['reportTitle'] != nil
+				self.report_title = xml_element.elements['reportTitle'].text
+			end
+			if xml_element.elements['action'] != nil
+				self.action = xml_element.elements['action'].text
+			end
+			if xml_element.elements['reportType'] != nil
+				self.report_type = xml_element.elements['reportType'].text
+			end
+			if xml_element.elements['filter'] != nil
+				self.filter = KalturaClientBase.object_from_xml(xml_element.elements['filter'], 'KalturaReportInputFilter')
+			end
+			if xml_element.elements['order'] != nil
+				self.order = xml_element.elements['order'].text
+			end
+			if xml_element.elements['objectIds'] != nil
+				self.object_ids = xml_element.elements['objectIds'].text
+			end
+			if xml_element.elements['responseOptions'] != nil
+				self.response_options = KalturaClientBase.object_from_xml(xml_element.elements['responseOptions'], 'KalturaReportResponseOptions')
+			end
+		end
+
+	end
+
+	class KalturaReportExportParams < KalturaObjectBase
+		attr_accessor :recipient_email
+		# Time zone offset in minutes (between client to UTC)
+		attr_accessor :time_zone_offset
+		attr_accessor :report_items
+
+		def time_zone_offset=(val)
+			@time_zone_offset = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['recipientEmail'] != nil
+				self.recipient_email = xml_element.elements['recipientEmail'].text
+			end
+			if xml_element.elements['timeZoneOffset'] != nil
+				self.time_zone_offset = xml_element.elements['timeZoneOffset'].text
+			end
+			if xml_element.elements['reportItems'] != nil
+				self.report_items = KalturaClientBase.object_from_xml(xml_element.elements['reportItems'], 'KalturaReportExportItem')
+			end
+		end
+
+	end
+
+	class KalturaReportExportResponse < KalturaObjectBase
+		attr_accessor :reference_job_id
+		attr_accessor :report_email
+
+		def reference_job_id=(val)
+			@reference_job_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['referenceJobId'] != nil
+				self.reference_job_id = xml_element.elements['referenceJobId'].text
+			end
+			if xml_element.elements['reportEmail'] != nil
+				self.report_email = xml_element.elements['reportEmail'].text
+			end
+		end
+
+	end
+
+	class KalturaReportGraph < KalturaObjectBase
+		attr_accessor :id
+		attr_accessor :data
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['id'] != nil
+				self.id = xml_element.elements['id'].text
+			end
+			if xml_element.elements['data'] != nil
+				self.data = xml_element.elements['data'].text
+			end
+		end
+
+	end
+
+	class KalturaReportResponse < KalturaObjectBase
+		attr_accessor :columns
+		attr_accessor :results
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['columns'] != nil
+				self.columns = xml_element.elements['columns'].text
+			end
+			if xml_element.elements['results'] != nil
+				self.results = KalturaClientBase.object_from_xml(xml_element.elements['results'], 'KalturaString')
 			end
 		end
 
@@ -13799,138 +14021,22 @@ module Kaltura
 
 	end
 
-	class KalturaReportInputFilter < KalturaReportInputBaseFilter
-		# Search keywords to filter objects
-		attr_accessor :keywords
-		# Search keywords in objects tags
-		attr_accessor :search_in_tags
-		# Search keywords in objects admin tags
-		attr_accessor :search_in_admin_tags
-		# Search objects in specified categories
-		attr_accessor :categories
-		# Search objects in specified category ids
-		attr_accessor :categories_ids_in
-		# Filter by customVar1
-		attr_accessor :custom_var1in
-		# Filter by customVar2
-		attr_accessor :custom_var2in
-		# Filter by customVar3
-		attr_accessor :custom_var3in
-		# Filter by device
-		attr_accessor :device_in
-		# Filter by country
-		attr_accessor :country_in
-		# Filter by region
-		attr_accessor :region_in
-		# Filter by city
-		attr_accessor :cities_in
-		# Filter by operating system family
-		attr_accessor :operating_system_family_in
-		# Filter by browser family
-		attr_accessor :browser_family_in
-		# Time zone offset in minutes
-		attr_accessor :time_zone_offset
-		# Aggregated results according to interval
-		attr_accessor :interval
-		# Filter by media types
-		attr_accessor :media_type_in
-		# Filter by source types
-		attr_accessor :source_type_in
-		# Filter by entry owner
-		attr_accessor :owner_ids_in
-		attr_accessor :entry_operator
-		# Entry created at greater than or equal as Unix timestamp
-		attr_accessor :entry_created_at_greater_than_or_equal
-		# Entry created at less than or equal as Unix timestamp
-		attr_accessor :entry_created_at_less_than_or_equal
-		attr_accessor :entry_id_in
+	class KalturaReportExportJobData < KalturaJobData
+		attr_accessor :recipient_email
+		attr_accessor :report_items
+		attr_accessor :file_paths
 
-		def search_in_tags=(val)
-			@search_in_tags = to_b(val)
-		end
-		def search_in_admin_tags=(val)
-			@search_in_admin_tags = to_b(val)
-		end
-		def time_zone_offset=(val)
-			@time_zone_offset = val.to_i
-		end
-		def entry_created_at_greater_than_or_equal=(val)
-			@entry_created_at_greater_than_or_equal = val.to_i
-		end
-		def entry_created_at_less_than_or_equal=(val)
-			@entry_created_at_less_than_or_equal = val.to_i
-		end
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['keywords'] != nil
-				self.keywords = xml_element.elements['keywords'].text
+			if xml_element.elements['recipientEmail'] != nil
+				self.recipient_email = xml_element.elements['recipientEmail'].text
 			end
-			if xml_element.elements['searchInTags'] != nil
-				self.search_in_tags = xml_element.elements['searchInTags'].text
+			if xml_element.elements['reportItems'] != nil
+				self.report_items = KalturaClientBase.object_from_xml(xml_element.elements['reportItems'], 'KalturaReportExportItem')
 			end
-			if xml_element.elements['searchInAdminTags'] != nil
-				self.search_in_admin_tags = xml_element.elements['searchInAdminTags'].text
-			end
-			if xml_element.elements['categories'] != nil
-				self.categories = xml_element.elements['categories'].text
-			end
-			if xml_element.elements['categoriesIdsIn'] != nil
-				self.categories_ids_in = xml_element.elements['categoriesIdsIn'].text
-			end
-			if xml_element.elements['customVar1In'] != nil
-				self.custom_var1in = xml_element.elements['customVar1In'].text
-			end
-			if xml_element.elements['customVar2In'] != nil
-				self.custom_var2in = xml_element.elements['customVar2In'].text
-			end
-			if xml_element.elements['customVar3In'] != nil
-				self.custom_var3in = xml_element.elements['customVar3In'].text
-			end
-			if xml_element.elements['deviceIn'] != nil
-				self.device_in = xml_element.elements['deviceIn'].text
-			end
-			if xml_element.elements['countryIn'] != nil
-				self.country_in = xml_element.elements['countryIn'].text
-			end
-			if xml_element.elements['regionIn'] != nil
-				self.region_in = xml_element.elements['regionIn'].text
-			end
-			if xml_element.elements['citiesIn'] != nil
-				self.cities_in = xml_element.elements['citiesIn'].text
-			end
-			if xml_element.elements['operatingSystemFamilyIn'] != nil
-				self.operating_system_family_in = xml_element.elements['operatingSystemFamilyIn'].text
-			end
-			if xml_element.elements['browserFamilyIn'] != nil
-				self.browser_family_in = xml_element.elements['browserFamilyIn'].text
-			end
-			if xml_element.elements['timeZoneOffset'] != nil
-				self.time_zone_offset = xml_element.elements['timeZoneOffset'].text
-			end
-			if xml_element.elements['interval'] != nil
-				self.interval = xml_element.elements['interval'].text
-			end
-			if xml_element.elements['mediaTypeIn'] != nil
-				self.media_type_in = xml_element.elements['mediaTypeIn'].text
-			end
-			if xml_element.elements['sourceTypeIn'] != nil
-				self.source_type_in = xml_element.elements['sourceTypeIn'].text
-			end
-			if xml_element.elements['ownerIdsIn'] != nil
-				self.owner_ids_in = xml_element.elements['ownerIdsIn'].text
-			end
-			if xml_element.elements['entryOperator'] != nil
-				self.entry_operator = KalturaClientBase.object_from_xml(xml_element.elements['entryOperator'], 'KalturaESearchEntryOperator')
-			end
-			if xml_element.elements['entryCreatedAtGreaterThanOrEqual'] != nil
-				self.entry_created_at_greater_than_or_equal = xml_element.elements['entryCreatedAtGreaterThanOrEqual'].text
-			end
-			if xml_element.elements['entryCreatedAtLessThanOrEqual'] != nil
-				self.entry_created_at_less_than_or_equal = xml_element.elements['entryCreatedAtLessThanOrEqual'].text
-			end
-			if xml_element.elements['entryIdIn'] != nil
-				self.entry_id_in = xml_element.elements['entryIdIn'].text
+			if xml_element.elements['filePaths'] != nil
+				self.file_paths = xml_element.elements['filePaths'].text
 			end
 		end
 

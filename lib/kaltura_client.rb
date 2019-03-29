@@ -3821,6 +3821,17 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# @return [KalturaReportExportResponse]
+		def export_to_csv(params)
+			kparams = {}
+			client.add_param(kparams, 'params', params)
+			client.queue_service_action_call('report', 'exportToCsv', 'KalturaReportExportResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# report getBaseTotal action allows to get the total base for storage reports
 		# @return [array]
 		def get_base_total(report_type, report_input_filter, object_ids=KalturaNotImplemented, response_options=KalturaNotImplemented)
@@ -6170,7 +6181,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:19-03-28'
+			self.client_tag = 'ruby:19-03-29'
 			self.api_version = '14.17.0'
 		end
 		

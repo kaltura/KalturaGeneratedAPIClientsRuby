@@ -80,6 +80,7 @@ module Kaltura
 		CAPTIONS = 1
 		TRANSLATION = 2
 		ALIGNMENT = 3
+		AUDIO_DESCRIPTION = 4
 	end
 
 	class KalturaVendorServiceTurnAroundTime
@@ -111,21 +112,26 @@ module Kaltura
 		AR = "Arabic"
 		YUE = "Cantonese"
 		ZH = "Chinese"
+		DA = "Danish"
 		NL = "Dutch"
 		EN = "English"
 		EN_US = "English (American)"
 		EN_GB = "English (British)"
+		FI = "Finnish"
 		FR = "French"
 		DE = "German"
 		HE = "Hebrew"
 		HI = "Hindi"
+		IS = "Icelandic"
 		IT = "Italian"
 		JA = "Japanese"
 		KO = "Korean"
 		CMN = "Mandarin Chinese"
+		NO = "Norwegian"
 		PT = "Portuguese"
 		RU = "Russian"
 		ES = "Spanish"
+		SV = "Swedish"
 		TH = "Thai"
 		TR = "Turkish"
 	end
@@ -848,6 +854,26 @@ module Kaltura
 
 	end
 
+	class KalturaVendorAudioDescriptionCatalogItem < KalturaVendorCatalogItem
+		attr_accessor :source_language
+		attr_accessor :flavor_params_id
+
+		def flavor_params_id=(val)
+			@flavor_params_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['sourceLanguage'] != nil
+				self.source_language = xml_element.elements['sourceLanguage'].text
+			end
+			if xml_element.elements['flavorParamsId'] != nil
+				self.flavor_params_id = xml_element.elements['flavorParamsId'].text
+			end
+		end
+
+	end
+
 	class KalturaVendorCaptionsCatalogItem < KalturaVendorCatalogItem
 		attr_accessor :source_language
 		attr_accessor :output_format
@@ -1394,6 +1420,15 @@ module Kaltura
 	end
 
 	class KalturaVendorAlignmentCatalogItemFilter < KalturaVendorCaptionsCatalogItemBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaVendorAudioDescriptionCatalogItemFilter < KalturaVendorCaptionsCatalogItemBaseFilter
 
 
 		def from_xml(xml_element)

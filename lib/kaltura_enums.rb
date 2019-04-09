@@ -1128,6 +1128,7 @@ module Kaltura
 		USER = "3"
 		CATEGORY_USER = "4"
 		CATEGORY_ENTRY = "5"
+		USER_ENTRY = "6"
 	end
 
 	class KalturaBulkUploadOrderBy

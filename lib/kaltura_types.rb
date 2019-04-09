@@ -11215,6 +11215,22 @@ module Kaltura
 
 	end
 
+	class KalturaBulkUploadResultUserEntry < KalturaBulkUploadResult
+		attr_accessor :user_entry_id
+
+		def user_entry_id=(val)
+			@user_entry_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['userEntryId'] != nil
+				self.user_entry_id = xml_element.elements['userEntryId'].text
+			end
+		end
+
+	end
+
 	# This class represents object-specific data passed to the 
 	#  bulk upload job.
 	class KalturaBulkUploadUserData < KalturaBulkUploadObjectData
@@ -13736,6 +13752,8 @@ module Kaltura
 		attr_accessor :partner_package_in
 		attr_accessor :partner_group_type_equal
 		attr_accessor :partner_name_description_website_admin_name_admin_email_like
+		attr_accessor :created_at_greater_than_or_equal
+		attr_accessor :id_greater_than
 
 		def id_equal=(val)
 			@id_equal = val.to_i
@@ -13754,6 +13772,12 @@ module Kaltura
 		end
 		def partner_group_type_equal=(val)
 			@partner_group_type_equal = val.to_i
+		end
+		def created_at_greater_than_or_equal=(val)
+			@created_at_greater_than_or_equal = val.to_i
+		end
+		def id_greater_than=(val)
+			@id_greater_than = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -13802,6 +13826,12 @@ module Kaltura
 			end
 			if xml_element.elements['partnerNameDescriptionWebsiteAdminNameAdminEmailLike'] != nil
 				self.partner_name_description_website_admin_name_admin_email_like = xml_element.elements['partnerNameDescriptionWebsiteAdminNameAdminEmailLike'].text
+			end
+			if xml_element.elements['createdAtGreaterThanOrEqual'] != nil
+				self.created_at_greater_than_or_equal = xml_element.elements['createdAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['idGreaterThan'] != nil
+				self.id_greater_than = xml_element.elements['idGreaterThan'].text
 			end
 		end
 
@@ -18603,12 +18633,16 @@ module Kaltura
 		attr_accessor :is_anonymous
 		attr_accessor :privacy_context_equal
 		attr_accessor :privacy_context_in
+		attr_accessor :partner_id
 
 		def user_id_equal_current=(val)
 			@user_id_equal_current = val.to_i
 		end
 		def is_anonymous=(val)
 			@is_anonymous = val.to_i
+		end
+		def partner_id=(val)
+			@partner_id = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -18624,6 +18658,9 @@ module Kaltura
 			end
 			if xml_element.elements['privacyContextIn'] != nil
 				self.privacy_context_in = xml_element.elements['privacyContextIn'].text
+			end
+			if xml_element.elements['partnerId'] != nil
+				self.partner_id = xml_element.elements['partnerId'].text
 			end
 		end
 

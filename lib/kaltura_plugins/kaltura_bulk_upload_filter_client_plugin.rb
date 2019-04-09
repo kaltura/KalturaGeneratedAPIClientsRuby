@@ -32,20 +32,15 @@ require File.dirname(__FILE__) + '/kaltura_bulk_upload_xml_client_plugin.rb'
 module Kaltura
 
 	# Represents the Bulk service input for filter bulk upload
-	class KalturaBulkServiceFilterData < KalturaBulkServiceData
+	class KalturaBulkServiceFilterDataBase < KalturaBulkServiceData
 		# Filter for extracting the objects list to upload
 		attr_accessor :filter
-		# Template object for new object creation
-		attr_accessor :template_object
 
 
 		def from_xml(xml_element)
 			super
 			if xml_element.elements['filter'] != nil
 				self.filter = KalturaClientBase.object_from_xml(xml_element.elements['filter'], 'KalturaFilter')
-			end
-			if xml_element.elements['templateObject'] != nil
-				self.template_object = KalturaClientBase.object_from_xml(xml_element.elements['templateObject'], 'KalturaObjectBase')
 			end
 		end
 
@@ -63,6 +58,21 @@ module Kaltura
 			super
 			if xml_element.elements['jobObjectId'] != nil
 				self.job_object_id = xml_element.elements['jobObjectId'].text
+			end
+		end
+
+	end
+
+	# Represents the Bulk service input for filter bulk upload
+	class KalturaBulkServiceFilterData < KalturaBulkServiceFilterDataBase
+		# Template object for new object creation
+		attr_accessor :template_object
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['templateObject'] != nil
+				self.template_object = KalturaClientBase.object_from_xml(xml_element.elements['templateObject'], 'KalturaObjectBase')
 			end
 		end
 

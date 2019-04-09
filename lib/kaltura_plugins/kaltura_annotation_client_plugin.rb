@@ -239,12 +239,13 @@ module Kaltura
 		end
 
 		# Clone cuePoint with id to given entry
-		# @return [KalturaCuePoint]
-		def clone(id, entry_id)
+		# @return [KalturaAnnotation]
+		def clone(id, entry_id, parent_id=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
 			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('annotation_annotation', 'clone', 'KalturaCuePoint', kparams)
+			client.add_param(kparams, 'parentId', parent_id)
+			client.queue_service_action_call('annotation_annotation', 'clone', 'KalturaAnnotation', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

@@ -5235,11 +5235,11 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# @return [KalturaBulkUpload]
+		# @return [int]
 		def bulk_delete(filter)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
-			client.queue_service_action_call('userentry', 'bulkDelete', 'KalturaBulkUpload', kparams)
+			client.queue_service_action_call('userentry', 'bulkDelete', 'int', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -6181,8 +6181,8 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:19-04-16'
-			self.api_version = '14.18.0'
+			self.client_tag = 'ruby:19-04-17'
+			self.api_version = '14.19.0'
 		end
 		
 		def client_tag=(value)

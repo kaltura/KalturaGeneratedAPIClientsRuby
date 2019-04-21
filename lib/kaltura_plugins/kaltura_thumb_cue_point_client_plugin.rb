@@ -32,11 +32,13 @@ module Kaltura
 
 	class KalturaThumbCuePointOrderBy
 		CREATED_AT_ASC = "+createdAt"
+		INT_ID_ASC = "+intId"
 		PARTNER_SORT_VALUE_ASC = "+partnerSortValue"
 		START_TIME_ASC = "+startTime"
 		TRIGGERED_AT_ASC = "+triggeredAt"
 		UPDATED_AT_ASC = "+updatedAt"
 		CREATED_AT_DESC = "-createdAt"
+		INT_ID_DESC = "-intId"
 		PARTNER_SORT_VALUE_DESC = "-partnerSortValue"
 		START_TIME_DESC = "-startTime"
 		TRIGGERED_AT_DESC = "-triggeredAt"

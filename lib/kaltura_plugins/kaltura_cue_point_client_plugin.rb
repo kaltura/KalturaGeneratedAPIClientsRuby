@@ -66,11 +66,13 @@ module Kaltura
 
 	class KalturaCuePointOrderBy
 		CREATED_AT_ASC = "+createdAt"
+		INT_ID_ASC = "+intId"
 		PARTNER_SORT_VALUE_ASC = "+partnerSortValue"
 		START_TIME_ASC = "+startTime"
 		TRIGGERED_AT_ASC = "+triggeredAt"
 		UPDATED_AT_ASC = "+updatedAt"
 		CREATED_AT_DESC = "-createdAt"
+		INT_ID_DESC = "-intId"
 		PARTNER_SORT_VALUE_DESC = "-partnerSortValue"
 		START_TIME_DESC = "-startTime"
 		TRIGGERED_AT_DESC = "-triggeredAt"
@@ -89,6 +91,7 @@ module Kaltura
 
 	class KalturaCuePoint < KalturaObjectBase
 		attr_accessor :id
+		attr_accessor :int_id
 		attr_accessor :cue_point_type
 		attr_accessor :status
 		attr_accessor :entry_id
@@ -108,6 +111,9 @@ module Kaltura
 		attr_accessor :is_momentary
 		attr_accessor :copied_from
 
+		def int_id=(val)
+			@int_id = val.to_i
+		end
 		def status=(val)
 			@status = val.to_i
 		end
@@ -143,6 +149,9 @@ module Kaltura
 			super
 			if xml_element.elements['id'] != nil
 				self.id = xml_element.elements['id'].text
+			end
+			if xml_element.elements['intId'] != nil
+				self.int_id = xml_element.elements['intId'].text
 			end
 			if xml_element.elements['cuePointType'] != nil
 				self.cue_point_type = xml_element.elements['cuePointType'].text

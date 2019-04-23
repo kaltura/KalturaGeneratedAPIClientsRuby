@@ -198,6 +198,10 @@ module Kaltura
 		UPDATED_AT = "updated_at"
 	end
 
+	class KalturaEsearchGroupUserFieldName
+		GROUP_IDS = "group_ids"
+	end
+
 	class KalturaESearchBaseItem < KalturaObjectBase
 
 
@@ -1090,6 +1094,26 @@ module Kaltura
 			super
 			if xml_element.elements['fieldName'] != nil
 				self.field_name = xml_element.elements['fieldName'].text
+			end
+		end
+
+	end
+
+	class KalturaESearchGroupUserItem < KalturaESearchAbstractUserItem
+		attr_accessor :field_name
+		attr_accessor :creation_mode
+
+		def creation_mode=(val)
+			@creation_mode = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['fieldName'] != nil
+				self.field_name = xml_element.elements['fieldName'].text
+			end
+			if xml_element.elements['creationMode'] != nil
+				self.creation_mode = xml_element.elements['creationMode'].text
 			end
 		end
 

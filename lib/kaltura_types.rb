@@ -1462,6 +1462,7 @@ module Kaltura
 		attr_accessor :err_number
 		attr_accessor :host_name
 		attr_accessor :session_id
+		attr_accessor :scheduler_name
 
 		def scheduler_id=(val)
 			@scheduler_id = val.to_i
@@ -1510,6 +1511,9 @@ module Kaltura
 			end
 			if xml_element.elements['sessionId'] != nil
 				self.session_id = xml_element.elements['sessionId'].text
+			end
+			if xml_element.elements['schedulerName'] != nil
+				self.scheduler_name = xml_element.elements['schedulerName'].text
 			end
 		end
 

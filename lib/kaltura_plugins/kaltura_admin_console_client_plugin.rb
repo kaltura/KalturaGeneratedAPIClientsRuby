@@ -64,6 +64,7 @@ module Kaltura
 		attr_accessor :created_at
 		attr_accessor :updated_at
 		attr_accessor :user_ip
+		attr_accessor :session_id
 
 		def id=(val)
 			@id = val.to_i
@@ -79,6 +80,9 @@ module Kaltura
 		end
 		def updated_at=(val)
 			@updated_at = val.to_i
+		end
+		def session_id=(val)
+			@session_id = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -133,6 +137,9 @@ module Kaltura
 			end
 			if xml_element.elements['userIp'] != nil
 				self.user_ip = xml_element.elements['userIp'].text
+			end
+			if xml_element.elements['sessionId'] != nil
+				self.session_id = xml_element.elements['sessionId'].text
 			end
 		end
 

@@ -210,9 +210,10 @@ module Kaltura
 
 		# clone the group (groupId), and set group id with the neeGroupName.
 		# @return [KalturaGroup]
-		def clone(original_group_id, new_group_name)
+		def clone(original_group_id, new_group_id, new_group_name=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'originalGroupId', original_group_id)
+			client.add_param(kparams, 'newGroupId', new_group_id)
 			client.add_param(kparams, 'newGroupName', new_group_name)
 			client.queue_service_action_call('group_group', 'clone', 'KalturaGroup', kparams)
 			if (client.is_multirequest)

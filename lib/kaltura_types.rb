@@ -6728,6 +6728,7 @@ module Kaltura
 		attr_accessor :stream_username
 		# The Streams primary server node id
 		attr_accessor :primary_server_node_id
+		attr_accessor :sip_token
 
 		def primary_server_node_id=(val)
 			@primary_server_node_id = val.to_i
@@ -6782,6 +6783,9 @@ module Kaltura
 			end
 			if xml_element.elements['primaryServerNodeId'] != nil
 				self.primary_server_node_id = xml_element.elements['primaryServerNodeId'].text
+			end
+			if xml_element.elements['sipToken'] != nil
+				self.sip_token = xml_element.elements['sipToken'].text
 			end
 		end
 

@@ -3391,6 +3391,18 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Returns partner public info by Id
+		# @return [KalturaPartnerPublicInfo]
+		def get_public_info(id=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('partner', 'getPublicInfo', 'KalturaPartnerPublicInfo', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Retrieve partner secret and admin secret
 		# @return [KalturaPartner]
 		def get_secrets(partner_id, admin_email, cms_password)
@@ -6181,7 +6193,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:19-05-20'
+			self.client_tag = 'ruby:19-05-21'
 			self.api_version = '15.0.0'
 		end
 		

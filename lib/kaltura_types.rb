@@ -7567,6 +7567,23 @@ module Kaltura
 
 	end
 
+	class KalturaPartnerPublicInfo < KalturaObjectBase
+		attr_accessor :analytics_url
+		attr_accessor :ott_environment_url
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['analyticsUrl'] != nil
+				self.analytics_url = xml_element.elements['analyticsUrl'].text
+			end
+			if xml_element.elements['ottEnvironmentUrl'] != nil
+				self.ott_environment_url = xml_element.elements['ottEnvironmentUrl'].text
+			end
+		end
+
+	end
+
 	class KalturaPartnerStatistics < KalturaObjectBase
 		# Package total allowed bandwidth and storage
 		attr_accessor :package_bandwidth_and_storage

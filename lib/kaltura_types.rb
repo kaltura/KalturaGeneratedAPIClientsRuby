@@ -7570,7 +7570,11 @@ module Kaltura
 	class KalturaPartnerPublicInfo < KalturaObjectBase
 		attr_accessor :analytics_url
 		attr_accessor :ott_environment_url
+		attr_accessor :analytics_persistent_session_id
 
+		def analytics_persistent_session_id=(val)
+			@analytics_persistent_session_id = to_b(val)
+		end
 
 		def from_xml(xml_element)
 			super
@@ -7579,6 +7583,9 @@ module Kaltura
 			end
 			if xml_element.elements['ottEnvironmentUrl'] != nil
 				self.ott_environment_url = xml_element.elements['ottEnvironmentUrl'].text
+			end
+			if xml_element.elements['analyticsPersistentSessionId'] != nil
+				self.analytics_persistent_session_id = xml_element.elements['analyticsPersistentSessionId'].text
 			end
 		end
 

@@ -1038,13 +1038,13 @@ module Kaltura
 	end
 
 	class KalturaBatchJobType
+		CONVERT = "0"
 		PARSE_MULTI_LANGUAGE_CAPTION_ASSET = "caption.parsemultilanguagecaptionasset"
 		PARSE_CAPTION_ASSET = "captionSearch.parseCaptionAsset"
 		DISTRIBUTION_DELETE = "contentDistribution.DistributionDelete"
 		DISTRIBUTION_DISABLE = "contentDistribution.DistributionDisable"
 		DISTRIBUTION_ENABLE = "contentDistribution.DistributionEnable"
 		DISTRIBUTION_FETCH_REPORT = "contentDistribution.DistributionFetchReport"
-		CONVERT = "0"
 		DISTRIBUTION_SUBMIT = "contentDistribution.DistributionSubmit"
 		DISTRIBUTION_SYNC = "contentDistribution.DistributionSync"
 		DISTRIBUTION_UPDATE = "contentDistribution.DistributionUpdate"
@@ -1618,9 +1618,9 @@ module Kaltura
 	class KalturaEntryStatus
 		ERROR_IMPORTING = "-2"
 		ERROR_CONVERTING = "-1"
-		SCAN_FAILURE = "virusScan.ScanFailure"
 		IMPORT = "0"
 		INFECTED = "virusScan.Infected"
+		SCAN_FAILURE = "virusScan.ScanFailure"
 		PRECONVERT = "1"
 		READY = "2"
 		DELETED = "3"
@@ -2076,8 +2076,8 @@ module Kaltura
 		HNI = "Hani"
 		HA = "Hausa"
 		HAW = "Hawaiian"
-		IW = "Hebrew"
 		HE = "Hebrew"
+		IW = "Hebrew"
 		HEI = "Heiltsuk"
 		HID = "Hidatsa"
 		HIL = "Hiligaynon"
@@ -3009,6 +3009,7 @@ module Kaltura
 		MAIL_TYPE_REPORT_EXPORT_SUCCESS = "136"
 		MAIL_TYPE_REPORT_EXPORT_FAILURE = "137"
 		MAIL_TYPE_REPORT_EXPORT_ABORT = "138"
+		MAIL_TYPE_SIP_FAILURE = "139"
 	end
 
 	class KalturaMatchConditionType

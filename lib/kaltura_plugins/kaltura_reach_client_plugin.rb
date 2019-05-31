@@ -128,6 +128,7 @@ module Kaltura
 		KO = "Korean"
 		CMN = "Mandarin Chinese"
 		NO = "Norwegian"
+		PL = "Polish"
 		PT = "Portuguese"
 		RU = "Russian"
 		ES = "Spanish"

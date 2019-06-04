@@ -42,6 +42,10 @@ module Kaltura
 		attr_accessor :csv_version
 		# Array containing CSV headers
 		attr_accessor :columns
+		# The object in process
+		attr_accessor :process_object_id
+		# The type of the object in process
+		attr_accessor :process_object_type
 
 		def csv_version=(val)
 			@csv_version = val.to_i
@@ -54,6 +58,12 @@ module Kaltura
 			end
 			if xml_element.elements['columns'] != nil
 				self.columns = KalturaClientBase.object_from_xml(xml_element.elements['columns'], 'KalturaString')
+			end
+			if xml_element.elements['processObjectId'] != nil
+				self.process_object_id = xml_element.elements['processObjectId'].text
+			end
+			if xml_element.elements['processObjectType'] != nil
+				self.process_object_type = xml_element.elements['processObjectType'].text
 			end
 		end
 

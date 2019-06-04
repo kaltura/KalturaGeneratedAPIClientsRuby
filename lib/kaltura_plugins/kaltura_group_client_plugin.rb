@@ -30,6 +30,11 @@ require File.dirname(__FILE__) + '/kaltura_elastic_search_client_plugin.rb'
 
 module Kaltura
 
+	class KalturaGroupProcessStatus
+		NONE = 0
+		PROCESSING = 1
+	end
+
 	class KalturaESearchGroupFieldName
 		CREATED_AT = "created_at"
 		EMAIL = "email"
@@ -63,15 +68,22 @@ module Kaltura
 
 	class KalturaGroup < KalturaBaseUser
 		attr_accessor :members_count
+		attr_accessor :process_status
 
 		def members_count=(val)
 			@members_count = val.to_i
+		end
+		def process_status=(val)
+			@process_status = val.to_i
 		end
 
 		def from_xml(xml_element)
 			super
 			if xml_element.elements['membersCount'] != nil
 				self.members_count = xml_element.elements['membersCount'].text
+			end
+			if xml_element.elements['processStatus'] != nil
+				self.process_status = xml_element.elements['processStatus'].text
 			end
 		end
 

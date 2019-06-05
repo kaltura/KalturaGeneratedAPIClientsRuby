@@ -5500,6 +5500,18 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# get QR image content
+		# @return [string]
+		def generate_qr_code(hash_key)
+			kparams = {}
+			client.add_param(kparams, 'hashKey', hash_key)
+			client.queue_service_action_call('user', 'generateQrCode', 'string', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Retrieves a user object for a specified user ID.
 		# @return [KalturaUser]
 		def get(user_id=KalturaNotImplemented)
@@ -6193,7 +6205,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:19-06-04'
+			self.client_tag = 'ruby:19-06-05'
 			self.api_version = '15.1.0'
 		end
 		

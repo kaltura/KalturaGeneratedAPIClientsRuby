@@ -1911,6 +1911,7 @@ module Kaltura
 		attr_accessor :ovp_environment_url
 		attr_accessor :ott_environment_url
 		attr_accessor :e_search_languages
+		attr_accessor :authentication_type
 
 		def id=(val)
 			@id = val.to_i
@@ -1980,6 +1981,9 @@ module Kaltura
 		end
 		def publisher_environment_type=(val)
 			@publisher_environment_type = val.to_i
+		end
+		def authentication_type=(val)
+			@authentication_type = to_b(val)
 		end
 
 		def from_xml(xml_element)
@@ -2154,6 +2158,9 @@ module Kaltura
 			end
 			if xml_element.elements['eSearchLanguages'] != nil
 				self.e_search_languages = KalturaClientBase.object_from_xml(xml_element.elements['eSearchLanguages'], 'KalturaESearchLanguageItem')
+			end
+			if xml_element.elements['authenticationType'] != nil
+				self.authentication_type = xml_element.elements['authenticationType'].text
 			end
 		end
 

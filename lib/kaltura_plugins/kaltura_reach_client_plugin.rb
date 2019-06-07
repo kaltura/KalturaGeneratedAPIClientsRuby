@@ -81,6 +81,7 @@ module Kaltura
 		TRANSLATION = 2
 		ALIGNMENT = 3
 		AUDIO_DESCRIPTION = 4
+		CHAPTERING = 5
 	end
 
 	class KalturaVendorServiceTurnAroundTime
@@ -752,6 +753,8 @@ module Kaltura
 	class KalturaCategoryEntryCondition < KalturaCondition
 		# Category id to check condition for
 		attr_accessor :category_id
+		# Category id's to check condition for
+		attr_accessor :category_ids
 		# Minimum category user level permission to validate
 		attr_accessor :category_user_permission
 		# Comparing operator
@@ -768,6 +771,9 @@ module Kaltura
 			super
 			if xml_element.elements['categoryId'] != nil
 				self.category_id = xml_element.elements['categoryId'].text
+			end
+			if xml_element.elements['categoryIds'] != nil
+				self.category_ids = xml_element.elements['categoryIds'].text
 			end
 			if xml_element.elements['categoryUserPermission'] != nil
 				self.category_user_permission = xml_element.elements['categoryUserPermission'].text
@@ -917,6 +923,19 @@ module Kaltura
 			super
 			if xml_element.elements['objects'] != nil
 				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaVendorCatalogItem')
+			end
+		end
+
+	end
+
+	class KalturaVendorChapteringCatalogItem < KalturaVendorCatalogItem
+		attr_accessor :source_language
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['sourceLanguage'] != nil
+				self.source_language = xml_element.elements['sourceLanguage'].text
 			end
 		end
 
@@ -1439,6 +1458,15 @@ module Kaltura
 	end
 
 	class KalturaVendorCaptionsCatalogItemFilter < KalturaVendorCaptionsCatalogItemBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaVendorChapteringCatalogItemFilter < KalturaVendorCaptionsCatalogItemBaseFilter
 
 
 		def from_xml(xml_element)

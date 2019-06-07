@@ -1983,7 +1983,7 @@ module Kaltura
 			@publisher_environment_type = val.to_i
 		end
 		def authentication_type=(val)
-			@authentication_type = to_b(val)
+			@authentication_type = val.to_i
 		end
 
 		def from_xml(xml_element)

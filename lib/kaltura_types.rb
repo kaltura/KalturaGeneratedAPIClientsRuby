@@ -829,6 +829,19 @@ module Kaltura
 
 	end
 
+	class KalturaAuthentication < KalturaObjectBase
+		attr_accessor :qr_code
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['qrCode'] != nil
+				self.qr_code = xml_element.elements['qrCode'].text
+			end
+		end
+
+	end
+
 	# Base class to all operation attributes types
 	class KalturaOperationAttributes < KalturaObjectBase
 

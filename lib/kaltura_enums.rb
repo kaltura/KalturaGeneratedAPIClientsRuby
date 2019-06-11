@@ -391,6 +391,12 @@ module Kaltura
 		TRUE_VALUE = 1
 	end
 
+	class KalturaPartnerAuthenticationType
+		PASSWORD_ONLY = 0
+		TWO_FACTOR_AUTH = 1
+		SSO = 2
+	end
+
 	class KalturaPartnerGroupType
 		PUBLISHER = 1
 		VAR_GROUP = 2

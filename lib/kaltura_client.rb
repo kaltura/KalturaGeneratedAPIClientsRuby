@@ -203,12 +203,12 @@ module Kaltura
 		end
 
 		# Set initial users password
-		# @return []
+		# @return [KalturaAuthentication]
 		def set_initial_password(hash_key, new_password)
 			kparams = {}
 			client.add_param(kparams, 'hashKey', hash_key)
 			client.add_param(kparams, 'newPassword', new_password)
-			client.queue_service_action_call('adminuser', 'setInitialPassword', '', kparams)
+			client.queue_service_action_call('adminuser', 'setInitialPassword', 'KalturaAuthentication', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -5647,12 +5647,12 @@ module Kaltura
 		end
 
 		# Set initial user password
-		# @return []
+		# @return [KalturaAuthentication]
 		def set_initial_password(hash_key, new_password)
 			kparams = {}
 			client.add_param(kparams, 'hashKey', hash_key)
 			client.add_param(kparams, 'newPassword', new_password)
-			client.queue_service_action_call('user', 'setInitialPassword', '', kparams)
+			client.queue_service_action_call('user', 'setInitialPassword', 'KalturaAuthentication', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -6205,7 +6205,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:19-06-10'
+			self.client_tag = 'ruby:19-06-11'
 			self.api_version = '15.1.0'
 		end
 		

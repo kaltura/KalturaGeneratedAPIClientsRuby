@@ -9631,6 +9631,8 @@ module Kaltura
 		attr_accessor :upload_url
 		# autoFinalize - Should the upload be finalized once the file size on disk matches the file size reproted when adding the upload token.
 		attr_accessor :auto_finalize
+		# set the minimum size in bytes for each uploaded part of the file
+		attr_accessor :minimum_chunk_size
 
 		def partner_id=(val)
 			@partner_id = val.to_i
@@ -9652,6 +9654,9 @@ module Kaltura
 		end
 		def auto_finalize=(val)
 			@auto_finalize = val.to_i
+		end
+		def minimum_chunk_size=(val)
+			@minimum_chunk_size = val.to_f
 		end
 
 		def from_xml(xml_element)
@@ -9688,6 +9693,9 @@ module Kaltura
 			end
 			if xml_element.elements['autoFinalize'] != nil
 				self.auto_finalize = xml_element.elements['autoFinalize'].text
+			end
+			if xml_element.elements['minimumChunkSize'] != nil
+				self.minimum_chunk_size = xml_element.elements['minimumChunkSize'].text
 			end
 		end
 

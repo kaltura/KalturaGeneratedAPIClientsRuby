@@ -1886,6 +1886,7 @@ module Kaltura
 		attr_accessor :allow_quick_edit
 		attr_accessor :merge_entry_lists
 		attr_accessor :notifications_config
+		attr_accessor :allowed_from_email_white_list
 		attr_accessor :max_upload_size
 		attr_accessor :partner_package
 		attr_accessor :secret
@@ -2069,6 +2070,9 @@ module Kaltura
 			end
 			if xml_element.elements['notificationsConfig'] != nil
 				self.notifications_config = xml_element.elements['notificationsConfig'].text
+			end
+			if xml_element.elements['allowedFromEmailWhiteList'] != nil
+				self.allowed_from_email_white_list = xml_element.elements['allowedFromEmailWhiteList'].text
 			end
 			if xml_element.elements['maxUploadSize'] != nil
 				self.max_upload_size = xml_element.elements['maxUploadSize'].text

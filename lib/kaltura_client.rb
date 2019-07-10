@@ -3405,11 +3405,12 @@ module Kaltura
 
 		# Retrieve partner secret and admin secret
 		# @return [KalturaPartner]
-		def get_secrets(partner_id, admin_email, cms_password)
+		def get_secrets(partner_id, admin_email, cms_password, otp=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'partnerId', partner_id)
 			client.add_param(kparams, 'adminEmail', admin_email)
 			client.add_param(kparams, 'cmsPassword', cms_password)
+			client.add_param(kparams, 'otp', otp)
 			client.queue_service_action_call('partner', 'getSecrets', 'KalturaPartner', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -6205,8 +6206,8 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:19-07-08'
-			self.api_version = '15.2.0'
+			self.client_tag = 'ruby:19-07-10'
+			self.api_version = '15.3.0'
 		end
 		
 		def client_tag=(value)

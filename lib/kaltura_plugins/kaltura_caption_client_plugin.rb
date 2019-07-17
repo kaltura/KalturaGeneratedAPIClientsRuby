@@ -57,6 +57,7 @@ module Kaltura
 		DFXP = "2"
 		WEBVTT = "3"
 		CAP = "4"
+		SCC = "5"
 	end
 
 	class KalturaCaptionAsset < KalturaAsset
@@ -234,6 +235,35 @@ module Kaltura
 			super
 			if xml_element.elements['objects'] != nil
 				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaCaptionParams')
+			end
+		end
+
+	end
+
+	class KalturaConvertCaptionAssetJobData < KalturaJobData
+		attr_accessor :caption_asset_id
+		attr_accessor :file_location
+		attr_accessor :file_encryption_key
+		attr_accessor :from_type
+		attr_accessor :to_type
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['captionAssetId'] != nil
+				self.caption_asset_id = xml_element.elements['captionAssetId'].text
+			end
+			if xml_element.elements['fileLocation'] != nil
+				self.file_location = xml_element.elements['fileLocation'].text
+			end
+			if xml_element.elements['fileEncryptionKey'] != nil
+				self.file_encryption_key = xml_element.elements['fileEncryptionKey'].text
+			end
+			if xml_element.elements['fromType'] != nil
+				self.from_type = xml_element.elements['fromType'].text
+			end
+			if xml_element.elements['toType'] != nil
+				self.to_type = xml_element.elements['toType'].text
 			end
 		end
 

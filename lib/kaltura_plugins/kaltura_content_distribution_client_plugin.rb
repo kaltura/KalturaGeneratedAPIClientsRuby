@@ -30,6 +30,11 @@ require File.dirname(__FILE__) + '/kaltura_metadata_client_plugin.rb'
 
 module Kaltura
 
+	class KalturaDistributeTrigger
+		ENTRY_READY = 1
+		MODERATION_APPROVED = 2
+	end
+
 	class KalturaDistributionAction
 		SUBMIT = 1
 		UPDATE = 2
@@ -375,6 +380,8 @@ module Kaltura
 		attr_accessor :recommended_dc_for_download
 		# The best Kaltura data center to be used to execute the distribution job
 		attr_accessor :recommended_dc_for_execute
+		# The event that trigger the automatic distribute
+		attr_accessor :distribute_trigger
 
 		def id=(val)
 			@id = val.to_i
@@ -417,6 +424,9 @@ module Kaltura
 		end
 		def recommended_dc_for_execute=(val)
 			@recommended_dc_for_execute = val.to_i
+		end
+		def distribute_trigger=(val)
+			@distribute_trigger = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -492,6 +502,9 @@ module Kaltura
 			end
 			if xml_element.elements['recommendedDcForExecute'] != nil
 				self.recommended_dc_for_execute = xml_element.elements['recommendedDcForExecute'].text
+			end
+			if xml_element.elements['distributeTrigger'] != nil
+				self.distribute_trigger = xml_element.elements['distributeTrigger'].text
 			end
 		end
 

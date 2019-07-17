@@ -1045,6 +1045,7 @@ module Kaltura
 
 	class KalturaBatchJobType
 		CONVERT = "0"
+		CONVERT_CAPTION_ASSET = "caption.convertcaptionasset"
 		PARSE_MULTI_LANGUAGE_CAPTION_ASSET = "caption.parsemultilanguagecaptionasset"
 		PARSE_CAPTION_ASSET = "captionSearch.parseCaptionAsset"
 		DISTRIBUTION_DELETE = "contentDistribution.DistributionDelete"

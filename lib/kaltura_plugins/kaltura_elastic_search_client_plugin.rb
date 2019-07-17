@@ -52,6 +52,10 @@ module Kaltura
 		START_TIME = "start_time"
 	end
 
+	class KalturaESearchCategoryAggregateByFieldName
+		CATEGORY_NAME = "category_name"
+	end
+
 	class KalturaESearchCategoryEntryFieldName
 		ANCESTOR_ID = "ancestor_id"
 		ANCESTOR_NAME = "ancestor_name"
@@ -101,6 +105,11 @@ module Kaltura
 		USER_ID = "user_id"
 	end
 
+	class KalturaESearchCuePointAggregateByFieldName
+		TAGS = "tags"
+		TYPE = "type"
+	end
+
 	class KalturaESearchCuePointFieldName
 		ANSWERS = "answers"
 		END_TIME = "end_time"
@@ -114,6 +123,13 @@ module Kaltura
 		TAGS = "tags"
 		TEXT = "text"
 		TYPE = "type"
+	end
+
+	class KalturaESearchEntryAggregateByFieldName
+		ACCESS_CONTROL_PROFILE = "access_control_profile_id"
+		ENTRY_TYPE = "entry_type"
+		MEDIA_TYPE = "media_type"
+		TAGS = "tags"
 	end
 
 	class KalturaESearchEntryFieldName
@@ -170,6 +186,9 @@ module Kaltura
 		VIEWS_LAST_30_DAYS = "views_last_30_days"
 		VIEWS_LAST_7_DAYS = "views_last_7_days"
 		VOTES = "votes"
+	end
+
+	class KalturaESearchMetadataAggregateByFieldName
 	end
 
 	class KalturaESearchSortOrder
@@ -229,6 +248,76 @@ module Kaltura
 			super
 			if xml_element.elements['sortOrder'] != nil
 				self.sort_order = xml_element.elements['sortOrder'].text
+			end
+		end
+
+	end
+
+	class KalturaESearchAggregationItem < KalturaObjectBase
+		attr_accessor :size
+
+		def size=(val)
+			@size = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['size'] != nil
+				self.size = xml_element.elements['size'].text
+			end
+		end
+
+	end
+
+	class KalturaESearchAggregation < KalturaObjectBase
+		attr_accessor :aggregations
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['aggregations'] != nil
+				self.aggregations = KalturaClientBase.object_from_xml(xml_element.elements['aggregations'], 'KalturaESearchAggregationItem')
+			end
+		end
+
+	end
+
+	class KalturaESearchAggregationBucket < KalturaObjectBase
+		attr_accessor :value
+		attr_accessor :count
+
+		def count=(val)
+			@count = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['value'] != nil
+				self.value = xml_element.elements['value'].text
+			end
+			if xml_element.elements['count'] != nil
+				self.count = xml_element.elements['count'].text
+			end
+		end
+
+	end
+
+	class KalturaESearchAggregationResponseItem < KalturaObjectBase
+		attr_accessor :name
+		attr_accessor :field_name
+		attr_accessor :buckets
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['name'] != nil
+				self.name = xml_element.elements['name'].text
+			end
+			if xml_element.elements['fieldName'] != nil
+				self.field_name = xml_element.elements['fieldName'].text
+			end
+			if xml_element.elements['buckets'] != nil
+				self.buckets = KalturaClientBase.object_from_xml(xml_element.elements['buckets'], 'KalturaESearchAggregationBucket')
 			end
 		end
 
@@ -557,6 +646,19 @@ module Kaltura
 
 	end
 
+	class KalturaESearchCategoryAggregationItem < KalturaESearchAggregationItem
+		attr_accessor :field_name
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['fieldName'] != nil
+				self.field_name = xml_element.elements['fieldName'].text
+			end
+		end
+
+	end
+
 	class KalturaESearchCategoryOrderByItem < KalturaESearchOrderByItem
 		attr_accessor :sort_field
 
@@ -677,6 +779,32 @@ module Kaltura
 
 	end
 
+	class KalturaESearchCuepointsAggregationItem < KalturaESearchAggregationItem
+		attr_accessor :field_name
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['fieldName'] != nil
+				self.field_name = xml_element.elements['fieldName'].text
+			end
+		end
+
+	end
+
+	class KalturaESearchEntryAggregationItem < KalturaESearchAggregationItem
+		attr_accessor :field_name
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['fieldName'] != nil
+				self.field_name = xml_element.elements['fieldName'].text
+			end
+		end
+
+	end
+
 	class KalturaESearchEntryOrderByItem < KalturaESearchOrderByItem
 		attr_accessor :sort_field
 
@@ -692,6 +820,7 @@ module Kaltura
 
 	class KalturaESearchEntryParams < KalturaESearchParams
 		attr_accessor :search_operator
+		attr_accessor :aggregations
 
 
 		def from_xml(xml_element)
@@ -699,18 +828,25 @@ module Kaltura
 			if xml_element.elements['searchOperator'] != nil
 				self.search_operator = KalturaClientBase.object_from_xml(xml_element.elements['searchOperator'], 'KalturaESearchEntryOperator')
 			end
+			if xml_element.elements['aggregations'] != nil
+				self.aggregations = KalturaClientBase.object_from_xml(xml_element.elements['aggregations'], 'KalturaESearchAggregation')
+			end
 		end
 
 	end
 
 	class KalturaESearchEntryResponse < KalturaESearchResponse
 		attr_accessor :objects
+		attr_accessor :aggregations
 
 
 		def from_xml(xml_element)
 			super
 			if xml_element.elements['objects'] != nil
 				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaESearchEntryResult')
+			end
+			if xml_element.elements['aggregations'] != nil
+				self.aggregations = KalturaClientBase.object_from_xml(xml_element.elements['aggregations'], 'KalturaESearchAggregationResponseItem')
 			end
 		end
 
@@ -750,6 +886,19 @@ module Kaltura
 			super
 			if xml_element.elements['objects'] != nil
 				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaESearchGroupResult')
+			end
+		end
+
+	end
+
+	class KalturaESearchMetadataAggregationItem < KalturaESearchAggregationItem
+		attr_accessor :field_name
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['fieldName'] != nil
+				self.field_name = xml_element.elements['fieldName'].text
 			end
 		end
 

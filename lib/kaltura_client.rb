@@ -217,12 +217,13 @@ module Kaltura
 
 		# Update admin user password and email
 		# @return [KalturaAdminUser]
-		def update_password(email, password, new_email='', new_password='')
+		def update_password(email, password, new_email='', new_password='', otp=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'email', email)
 			client.add_param(kparams, 'password', password)
 			client.add_param(kparams, 'newEmail', new_email)
 			client.add_param(kparams, 'newPassword', new_password)
+			client.add_param(kparams, 'otp', otp)
 			client.queue_service_action_call('adminuser', 'updatePassword', 'KalturaAdminUser', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -5676,7 +5677,7 @@ module Kaltura
 
 		# Updates a user's login data: email, password, name.
 		# @return []
-		def update_login_data(old_login_id, password, new_login_id='', new_password='', new_first_name=KalturaNotImplemented, new_last_name=KalturaNotImplemented)
+		def update_login_data(old_login_id, password, new_login_id='', new_password='', new_first_name=KalturaNotImplemented, new_last_name=KalturaNotImplemented, otp=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'oldLoginId', old_login_id)
 			client.add_param(kparams, 'password', password)
@@ -5684,6 +5685,7 @@ module Kaltura
 			client.add_param(kparams, 'newPassword', new_password)
 			client.add_param(kparams, 'newFirstName', new_first_name)
 			client.add_param(kparams, 'newLastName', new_last_name)
+			client.add_param(kparams, 'otp', otp)
 			client.queue_service_action_call('user', 'updateLoginData', '', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -6206,7 +6208,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:19-07-10'
+			self.client_tag = 'ruby:19-07-17'
 			self.api_version = '15.3.0'
 		end
 		

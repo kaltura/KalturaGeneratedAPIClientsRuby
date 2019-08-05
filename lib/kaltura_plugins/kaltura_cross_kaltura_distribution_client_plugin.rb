@@ -58,6 +58,8 @@ module Kaltura
 		attr_accessor :distributed_metadata
 		# Key-value array where the keys are IDs of distributed caption assets in the source account and the values are the matching IDs in the target account
 		attr_accessor :distributed_caption_assets
+		# Key-value array where the keys are IDs of distributed caption assets in the source account and the values are the matching IDs in the target account
+		attr_accessor :distributed_attachment_assets
 		# Key-value array where the keys are IDs of distributed cue points in the source account and the values are the matching IDs in the target account
 		attr_accessor :distributed_cue_points
 		# Key-value array where the keys are IDs of distributed thumb cue points in the source account and the values are the matching IDs in the target account
@@ -80,6 +82,9 @@ module Kaltura
 			if xml_element.elements['distributedCaptionAssets'] != nil
 				self.distributed_caption_assets = xml_element.elements['distributedCaptionAssets'].text
 			end
+			if xml_element.elements['distributedAttachmentAssets'] != nil
+				self.distributed_attachment_assets = xml_element.elements['distributedAttachmentAssets'].text
+			end
 			if xml_element.elements['distributedCuePoints'] != nil
 				self.distributed_cue_points = xml_element.elements['distributedCuePoints'].text
 			end
@@ -101,6 +106,10 @@ module Kaltura
 		attr_accessor :metadata_xslt
 		attr_accessor :metadata_xpaths_trigger_update
 		attr_accessor :distribute_captions
+		attr_accessor :designated_categories
+		attr_accessor :distribute_categories
+		attr_accessor :collaborators_custom_metadata_profile_id
+		attr_accessor :collaborators_from_custom_metadata_profile
 		attr_accessor :distribute_cue_points
 		attr_accessor :distribute_remote_flavor_asset_content
 		attr_accessor :distribute_remote_thumb_asset_content
@@ -112,12 +121,19 @@ module Kaltura
 		attr_accessor :map_flavor_params_ids
 		attr_accessor :map_thumb_params_ids
 		attr_accessor :map_caption_params_ids
+		attr_accessor :map_attachment_params_ids
 
 		def target_account_id=(val)
 			@target_account_id = val.to_i
 		end
 		def distribute_captions=(val)
 			@distribute_captions = to_b(val)
+		end
+		def distribute_categories=(val)
+			@distribute_categories = to_b(val)
+		end
+		def collaborators_from_custom_metadata_profile=(val)
+			@collaborators_from_custom_metadata_profile = to_b(val)
 		end
 		def distribute_cue_points=(val)
 			@distribute_cue_points = to_b(val)
@@ -155,6 +171,18 @@ module Kaltura
 			if xml_element.elements['distributeCaptions'] != nil
 				self.distribute_captions = xml_element.elements['distributeCaptions'].text
 			end
+			if xml_element.elements['designatedCategories'] != nil
+				self.designated_categories = xml_element.elements['designatedCategories'].text
+			end
+			if xml_element.elements['distributeCategories'] != nil
+				self.distribute_categories = xml_element.elements['distributeCategories'].text
+			end
+			if xml_element.elements['collaboratorsCustomMetadataProfileId'] != nil
+				self.collaborators_custom_metadata_profile_id = xml_element.elements['collaboratorsCustomMetadataProfileId'].text
+			end
+			if xml_element.elements['collaboratorsFromCustomMetadataProfile'] != nil
+				self.collaborators_from_custom_metadata_profile = xml_element.elements['collaboratorsFromCustomMetadataProfile'].text
+			end
 			if xml_element.elements['distributeCuePoints'] != nil
 				self.distribute_cue_points = xml_element.elements['distributeCuePoints'].text
 			end
@@ -187,6 +215,9 @@ module Kaltura
 			end
 			if xml_element.elements['mapCaptionParamsIds'] != nil
 				self.map_caption_params_ids = KalturaClientBase.object_from_xml(xml_element.elements['mapCaptionParamsIds'], 'KalturaKeyValue')
+			end
+			if xml_element.elements['mapAttachmentParamsIds'] != nil
+				self.map_attachment_params_ids = KalturaClientBase.object_from_xml(xml_element.elements['mapAttachmentParamsIds'], 'KalturaKeyValue')
 			end
 		end
 

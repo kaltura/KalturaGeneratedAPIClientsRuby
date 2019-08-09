@@ -430,6 +430,19 @@ module Kaltura
 
 	end
 
+	class KalturaEventNotificationDispatchScope < KalturaEventNotificationScope
+		attr_accessor :dynamic_values
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['dynamicValues'] != nil
+				self.dynamic_values = KalturaClientBase.object_from_xml(xml_element.elements['dynamicValues'], 'KalturaKeyValue')
+			end
+		end
+
+	end
+
 	class KalturaEventNotificationTemplateFilter < KalturaEventNotificationTemplateBaseFilter
 
 

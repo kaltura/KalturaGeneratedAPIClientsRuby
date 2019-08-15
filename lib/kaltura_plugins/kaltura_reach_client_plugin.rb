@@ -865,9 +865,13 @@ module Kaltura
 	class KalturaVendorAudioDescriptionCatalogItem < KalturaVendorCatalogItem
 		attr_accessor :source_language
 		attr_accessor :flavor_params_id
+		attr_accessor :clear_audio_flavor_params_id
 
 		def flavor_params_id=(val)
 			@flavor_params_id = val.to_i
+		end
+		def clear_audio_flavor_params_id=(val)
+			@clear_audio_flavor_params_id = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -877,6 +881,9 @@ module Kaltura
 			end
 			if xml_element.elements['flavorParamsId'] != nil
 				self.flavor_params_id = xml_element.elements['flavorParamsId'].text
+			end
+			if xml_element.elements['clearAudioFlavorParamsId'] != nil
+				self.clear_audio_flavor_params_id = xml_element.elements['clearAudioFlavorParamsId'].text
 			end
 		end
 

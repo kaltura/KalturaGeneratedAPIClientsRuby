@@ -2,7 +2,7 @@ require 'rake'
 
 spec = Gem::Specification.new do |s| 
   s.name = "kaltura-client"
-  s.version = "15.5.0"
+  s.version = "15.6.0"
   s.date = '2012-04-16'
   s.author = "Kaltura Inc."
   s.email = "community@kaltura.com"

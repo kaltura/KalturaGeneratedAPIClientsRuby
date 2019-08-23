@@ -15163,6 +15163,25 @@ module Kaltura
 
 	end
 
+	class KalturaUrlTokenizerL3 < KalturaUrlTokenizer
+		# gen
+		attr_accessor :gen
+		# paramName
+		attr_accessor :param_name
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['gen'] != nil
+				self.gen = xml_element.elements['gen'].text
+			end
+			if xml_element.elements['paramName'] != nil
+				self.param_name = xml_element.elements['paramName'].text
+			end
+		end
+
+	end
+
 	class KalturaUrlTokenizerLevel3 < KalturaUrlTokenizer
 		# paramName
 		attr_accessor :param_name

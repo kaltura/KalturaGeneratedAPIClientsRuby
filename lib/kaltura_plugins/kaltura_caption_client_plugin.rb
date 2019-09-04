@@ -81,6 +81,8 @@ module Kaltura
 		attr_accessor :accuracy
 		# The Accuracy of the caption content
 		attr_accessor :display_on_player
+		# List of associated transcript asset id's, comma separated
+		attr_accessor :associated_transcript_ids
 
 		def caption_params_id=(val)
 			@caption_params_id = val.to_i
@@ -129,6 +131,9 @@ module Kaltura
 			end
 			if xml_element.elements['displayOnPlayer'] != nil
 				self.display_on_player = xml_element.elements['displayOnPlayer'].text
+			end
+			if xml_element.elements['associatedTranscriptIds'] != nil
+				self.associated_transcript_ids = xml_element.elements['associatedTranscriptIds'].text
 			end
 		end
 

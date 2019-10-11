@@ -7338,6 +7338,7 @@ module Kaltura
 	class KalturaPlayableEntryBaseFilter < KalturaBaseEntryFilter
 		attr_accessor :last_played_at_greater_than_or_equal
 		attr_accessor :last_played_at_less_than_or_equal
+		attr_accessor :last_played_at_less_than_or_equal_or_null
 		attr_accessor :duration_less_than
 		attr_accessor :duration_greater_than
 		attr_accessor :duration_less_than_or_equal
@@ -7349,6 +7350,9 @@ module Kaltura
 		end
 		def last_played_at_less_than_or_equal=(val)
 			@last_played_at_less_than_or_equal = val.to_i
+		end
+		def last_played_at_less_than_or_equal_or_null=(val)
+			@last_played_at_less_than_or_equal_or_null = val.to_i
 		end
 		def duration_less_than=(val)
 			@duration_less_than = val.to_i
@@ -7370,6 +7374,9 @@ module Kaltura
 			end
 			if xml_element.elements['lastPlayedAtLessThanOrEqual'] != nil
 				self.last_played_at_less_than_or_equal = xml_element.elements['lastPlayedAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['lastPlayedAtLessThanOrEqualOrNull'] != nil
+				self.last_played_at_less_than_or_equal_or_null = xml_element.elements['lastPlayedAtLessThanOrEqualOrNull'].text
 			end
 			if xml_element.elements['durationLessThan'] != nil
 				self.duration_less_than = xml_element.elements['durationLessThan'].text

@@ -283,6 +283,9 @@ module Kaltura
 		# Task creation mode
 		attr_accessor :creation_mode
 		attr_accessor :task_job_data
+		attr_accessor :expected_finish_time
+		attr_accessor :service_type
+		attr_accessor :service_feature
 
 		def id=(val)
 			@id = val.to_i
@@ -322,6 +325,15 @@ module Kaltura
 		end
 		def creation_mode=(val)
 			@creation_mode = val.to_i
+		end
+		def expected_finish_time=(val)
+			@expected_finish_time = val.to_i
+		end
+		def service_type=(val)
+			@service_type = val.to_i
+		end
+		def service_feature=(val)
+			@service_feature = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -400,6 +412,15 @@ module Kaltura
 			end
 			if xml_element.elements['taskJobData'] != nil
 				self.task_job_data = KalturaClientBase.object_from_xml(xml_element.elements['taskJobData'], 'KalturaVendorTaskData')
+			end
+			if xml_element.elements['expectedFinishTime'] != nil
+				self.expected_finish_time = xml_element.elements['expectedFinishTime'].text
+			end
+			if xml_element.elements['serviceType'] != nil
+				self.service_type = xml_element.elements['serviceType'].text
+			end
+			if xml_element.elements['serviceFeature'] != nil
+				self.service_feature = xml_element.elements['serviceFeature'].text
 			end
 		end
 
@@ -1124,12 +1145,26 @@ module Kaltura
 
 	class KalturaEntryVendorTaskFilter < KalturaEntryVendorTaskBaseFilter
 		attr_accessor :free_text
+		attr_accessor :expected_finish_time_greater_than_or_equal
+		attr_accessor :expected_finish_time_less_than_or_equal
 
+		def expected_finish_time_greater_than_or_equal=(val)
+			@expected_finish_time_greater_than_or_equal = val.to_i
+		end
+		def expected_finish_time_less_than_or_equal=(val)
+			@expected_finish_time_less_than_or_equal = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
 			if xml_element.elements['freeText'] != nil
 				self.free_text = xml_element.elements['freeText'].text
+			end
+			if xml_element.elements['expectedFinishTimeGreaterThanOrEqual'] != nil
+				self.expected_finish_time_greater_than_or_equal = xml_element.elements['expectedFinishTimeGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['expectedFinishTimeLessThanOrEqual'] != nil
+				self.expected_finish_time_less_than_or_equal = xml_element.elements['expectedFinishTimeLessThanOrEqual'].text
 			end
 		end
 

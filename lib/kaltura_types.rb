@@ -12472,10 +12472,8 @@ module Kaltura
 
 	end
 
-	class KalturaUserBaseFilter < KalturaRelatedFilter
+	class KalturaBaseUserBaseFilter < KalturaRelatedFilter
 		attr_accessor :partner_id_equal
-		attr_accessor :type_equal
-		attr_accessor :type_in
 		attr_accessor :screen_name_like
 		attr_accessor :screen_name_starts_with
 		attr_accessor :email_like
@@ -12486,15 +12484,11 @@ module Kaltura
 		attr_accessor :status_in
 		attr_accessor :created_at_greater_than_or_equal
 		attr_accessor :created_at_less_than_or_equal
-		attr_accessor :first_name_starts_with
-		attr_accessor :last_name_starts_with
-		attr_accessor :is_admin_equal
+		attr_accessor :updated_at_greater_than_or_equal
+		attr_accessor :updated_at_less_than_or_equal
 
 		def partner_id_equal=(val)
 			@partner_id_equal = val.to_i
-		end
-		def type_equal=(val)
-			@type_equal = val.to_i
 		end
 		def status_equal=(val)
 			@status_equal = val.to_i
@@ -12505,20 +12499,17 @@ module Kaltura
 		def created_at_less_than_or_equal=(val)
 			@created_at_less_than_or_equal = val.to_i
 		end
-		def is_admin_equal=(val)
-			@is_admin_equal = val.to_i
+		def updated_at_greater_than_or_equal=(val)
+			@updated_at_greater_than_or_equal = val.to_i
+		end
+		def updated_at_less_than_or_equal=(val)
+			@updated_at_less_than_or_equal = val.to_i
 		end
 
 		def from_xml(xml_element)
 			super
 			if xml_element.elements['partnerIdEqual'] != nil
 				self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
-			end
-			if xml_element.elements['typeEqual'] != nil
-				self.type_equal = xml_element.elements['typeEqual'].text
-			end
-			if xml_element.elements['typeIn'] != nil
-				self.type_in = xml_element.elements['typeIn'].text
 			end
 			if xml_element.elements['screenNameLike'] != nil
 				self.screen_name_like = xml_element.elements['screenNameLike'].text
@@ -12550,14 +12541,55 @@ module Kaltura
 			if xml_element.elements['createdAtLessThanOrEqual'] != nil
 				self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text
 			end
+			if xml_element.elements['updatedAtGreaterThanOrEqual'] != nil
+				self.updated_at_greater_than_or_equal = xml_element.elements['updatedAtGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['updatedAtLessThanOrEqual'] != nil
+				self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			end
+		end
+
+	end
+
+	class KalturaBaseUserFilter < KalturaBaseUserBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaUserBaseFilter < KalturaBaseUserFilter
+		attr_accessor :type_equal
+		attr_accessor :type_in
+		attr_accessor :is_admin_equal
+		attr_accessor :first_name_starts_with
+		attr_accessor :last_name_starts_with
+
+		def type_equal=(val)
+			@type_equal = val.to_i
+		end
+		def is_admin_equal=(val)
+			@is_admin_equal = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['typeEqual'] != nil
+				self.type_equal = xml_element.elements['typeEqual'].text
+			end
+			if xml_element.elements['typeIn'] != nil
+				self.type_in = xml_element.elements['typeIn'].text
+			end
+			if xml_element.elements['isAdminEqual'] != nil
+				self.is_admin_equal = xml_element.elements['isAdminEqual'].text
+			end
 			if xml_element.elements['firstNameStartsWith'] != nil
 				self.first_name_starts_with = xml_element.elements['firstNameStartsWith'].text
 			end
 			if xml_element.elements['lastNameStartsWith'] != nil
 				self.last_name_starts_with = xml_element.elements['lastNameStartsWith'].text
-			end
-			if xml_element.elements['isAdminEqual'] != nil
-				self.is_admin_equal = xml_element.elements['isAdminEqual'].text
 			end
 		end
 
@@ -18790,15 +18822,6 @@ module Kaltura
 
 	end
 
-	class KalturaAdminUserBaseFilter < KalturaUserFilter
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
 	class KalturaAmazonS3StorageProfileFilter < KalturaAmazonS3StorageProfileBaseFilter
 
 
@@ -19158,15 +19181,6 @@ module Kaltura
 
 	end
 
-	class KalturaAdminUserFilter < KalturaAdminUserBaseFilter
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
 	class KalturaApiActionPermissionItemFilter < KalturaApiActionPermissionItemBaseFilter
 
 
@@ -19305,6 +19319,15 @@ module Kaltura
 
 	end
 
+	class KalturaAdminUserBaseFilter < KalturaUserFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaDeliveryProfileGenericRtmpFilter < KalturaDeliveryProfileGenericRtmpBaseFilter
 
 
@@ -19429,6 +19452,15 @@ module Kaltura
 			if xml_element.elements['thumbAssetVersionEqual'] != nil
 				self.thumb_asset_version_equal = xml_element.elements['thumbAssetVersionEqual'].text
 			end
+		end
+
+	end
+
+	class KalturaAdminUserFilter < KalturaAdminUserBaseFilter
+
+
+		def from_xml(xml_element)
+			super
 		end
 
 	end

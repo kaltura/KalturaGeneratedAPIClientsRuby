@@ -815,8 +815,10 @@ module Kaltura
 	class KalturaAdminUserOrderBy
 		CREATED_AT_ASC = "+createdAt"
 		ID_ASC = "+id"
+		UPDATED_AT_ASC = "+updatedAt"
 		CREATED_AT_DESC = "-createdAt"
 		ID_DESC = "-id"
+		UPDATED_AT_DESC = "-updatedAt"
 	end
 
 	class KalturaAkamaiUniversalStreamType
@@ -1007,6 +1009,15 @@ module Kaltura
 		NAME_DESC = "-name"
 		PLAYLIST_ID_DESC = "-playlistId"
 		TYPE_DESC = "-type"
+		UPDATED_AT_DESC = "-updatedAt"
+	end
+
+	class KalturaBaseUserOrderBy
+		CREATED_AT_ASC = "+createdAt"
+		ID_ASC = "+id"
+		UPDATED_AT_ASC = "+updatedAt"
+		CREATED_AT_DESC = "-createdAt"
+		ID_DESC = "-id"
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
@@ -3716,8 +3727,10 @@ module Kaltura
 	class KalturaUserOrderBy
 		CREATED_AT_ASC = "+createdAt"
 		ID_ASC = "+id"
+		UPDATED_AT_ASC = "+updatedAt"
 		CREATED_AT_DESC = "-createdAt"
 		ID_DESC = "-id"
+		UPDATED_AT_DESC = "-updatedAt"
 	end
 
 	class KalturaUserRoleOrderBy

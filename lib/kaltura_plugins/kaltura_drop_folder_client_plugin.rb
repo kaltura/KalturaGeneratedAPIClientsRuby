@@ -136,6 +136,7 @@ module Kaltura
 	end
 
 	class KalturaDropFolderType
+		AP_FEED = "ApFeedDropFolder.AP_FEED"
 		FEED = "FeedDropFolder.FEED"
 		WEBEX = "WebexDropFolder.WEBEX"
 		LOCAL = "1"

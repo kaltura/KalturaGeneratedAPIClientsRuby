@@ -27,6 +27,7 @@
 # ===================================================================================================
 require 'kaltura_client.rb'
 require File.dirname(__FILE__) + '/kaltura_drop_folder_client_plugin.rb'
+require File.dirname(__FILE__) + '/kaltura_feed_drop_folder_client_plugin.rb'
 
 module Kaltura
 

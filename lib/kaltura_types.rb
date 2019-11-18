@@ -5643,6 +5643,12 @@ module Kaltura
 		attr_accessor :content_streams
 		attr_accessor :complexity_value
 		attr_accessor :max_gop
+		attr_accessor :matrix_coefficients
+		attr_accessor :color_transfer
+		attr_accessor :color_primaries
+		attr_accessor :pixel_format
+		attr_accessor :chroma_subsampling
+		attr_accessor :bits_depth
 
 		def id=(val)
 			@id = val.to_i
@@ -5709,6 +5715,9 @@ module Kaltura
 		end
 		def max_gop=(val)
 			@max_gop = val.to_f
+		end
+		def bits_depth=(val)
+			@bits_depth = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -5817,6 +5826,24 @@ module Kaltura
 			end
 			if xml_element.elements['maxGOP'] != nil
 				self.max_gop = xml_element.elements['maxGOP'].text
+			end
+			if xml_element.elements['matrixCoefficients'] != nil
+				self.matrix_coefficients = xml_element.elements['matrixCoefficients'].text
+			end
+			if xml_element.elements['colorTransfer'] != nil
+				self.color_transfer = xml_element.elements['colorTransfer'].text
+			end
+			if xml_element.elements['colorPrimaries'] != nil
+				self.color_primaries = xml_element.elements['colorPrimaries'].text
+			end
+			if xml_element.elements['pixelFormat'] != nil
+				self.pixel_format = xml_element.elements['pixelFormat'].text
+			end
+			if xml_element.elements['chromaSubsampling'] != nil
+				self.chroma_subsampling = xml_element.elements['chromaSubsampling'].text
+			end
+			if xml_element.elements['bitsDepth'] != nil
+				self.bits_depth = xml_element.elements['bitsDepth'].text
 			end
 		end
 
@@ -6945,6 +6972,8 @@ module Kaltura
 		attr_accessor :created_at_less_than_or_equal
 		attr_accessor :updated_at_greater_than_or_equal
 		attr_accessor :updated_at_less_than_or_equal
+		attr_accessor :rank_less_than_or_equal
+		attr_accessor :rank_greater_than_or_equal
 		attr_accessor :total_rank_less_than_or_equal
 		attr_accessor :total_rank_greater_than_or_equal
 		attr_accessor :group_id_equal
@@ -7011,6 +7040,12 @@ module Kaltura
 		end
 		def updated_at_less_than_or_equal=(val)
 			@updated_at_less_than_or_equal = val.to_i
+		end
+		def rank_less_than_or_equal=(val)
+			@rank_less_than_or_equal = val.to_f
+		end
+		def rank_greater_than_or_equal=(val)
+			@rank_greater_than_or_equal = val.to_f
 		end
 		def total_rank_less_than_or_equal=(val)
 			@total_rank_less_than_or_equal = val.to_i
@@ -7176,6 +7211,12 @@ module Kaltura
 			end
 			if xml_element.elements['updatedAtLessThanOrEqual'] != nil
 				self.updated_at_less_than_or_equal = xml_element.elements['updatedAtLessThanOrEqual'].text
+			end
+			if xml_element.elements['rankLessThanOrEqual'] != nil
+				self.rank_less_than_or_equal = xml_element.elements['rankLessThanOrEqual'].text
+			end
+			if xml_element.elements['rankGreaterThanOrEqual'] != nil
+				self.rank_greater_than_or_equal = xml_element.elements['rankGreaterThanOrEqual'].text
 			end
 			if xml_element.elements['totalRankLessThanOrEqual'] != nil
 				self.total_rank_less_than_or_equal = xml_element.elements['totalRankLessThanOrEqual'].text
@@ -8212,6 +8253,9 @@ module Kaltura
 		# Entry created at less than or equal as Unix timestamp
 		attr_accessor :entry_created_at_less_than_or_equal
 		attr_accessor :entry_id_in
+		attr_accessor :playback_type_in
+		# filter by playback context ids
+		attr_accessor :playback_context_ids_in
 
 		def search_in_tags=(val)
 			@search_in_tags = to_b(val)
@@ -8299,6 +8343,12 @@ module Kaltura
 			end
 			if xml_element.elements['entryIdIn'] != nil
 				self.entry_id_in = xml_element.elements['entryIdIn'].text
+			end
+			if xml_element.elements['playbackTypeIn'] != nil
+				self.playback_type_in = xml_element.elements['playbackTypeIn'].text
+			end
+			if xml_element.elements['playbackContextIdsIn'] != nil
+				self.playback_context_ids_in = xml_element.elements['playbackContextIdsIn'].text
 			end
 		end
 

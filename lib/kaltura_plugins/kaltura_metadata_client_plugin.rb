@@ -59,6 +59,7 @@ module Kaltura
 		USER = "3"
 		PARTNER = "4"
 		DYNAMIC_OBJECT = "5"
+		USER_ENTRY = "6"
 	end
 
 	class KalturaMetadataOrderBy

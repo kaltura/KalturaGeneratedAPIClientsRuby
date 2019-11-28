@@ -39,10 +39,11 @@ module Kaltura
 		attr_accessor :name
 		# Ini file content
 		attr_accessor :content
+		attr_accessor :raw_data
 		# IsEditable - true / false
 		attr_accessor :is_editable
 		# Time of the last update
-		attr_accessor :last_update
+		attr_accessor :created_at
 		# Regex that represent the host/s that this map affect
 		attr_accessor :related_host
 		attr_accessor :version
@@ -54,8 +55,8 @@ module Kaltura
 		def is_editable=(val)
 			@is_editable = to_b(val)
 		end
-		def last_update=(val)
-			@last_update = val.to_i
+		def created_at=(val)
+			@created_at = val.to_i
 		end
 		def version=(val)
 			@version = val.to_i
@@ -72,11 +73,14 @@ module Kaltura
 			if xml_element.elements['content'] != nil
 				self.content = xml_element.elements['content'].text
 			end
+			if xml_element.elements['rawData'] != nil
+				self.raw_data = xml_element.elements['rawData'].text
+			end
 			if xml_element.elements['isEditable'] != nil
 				self.is_editable = xml_element.elements['isEditable'].text
 			end
-			if xml_element.elements['lastUpdate'] != nil
-				self.last_update = xml_element.elements['lastUpdate'].text
+			if xml_element.elements['createdAt'] != nil
+				self.created_at = xml_element.elements['createdAt'].text
 			end
 			if xml_element.elements['relatedHost'] != nil
 				self.related_host = xml_element.elements['relatedHost'].text

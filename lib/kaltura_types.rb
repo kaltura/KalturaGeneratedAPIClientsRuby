@@ -9284,6 +9284,8 @@ module Kaltura
 		attr_accessor :public_key
 		attr_accessor :pass_phrase
 		attr_accessor :should_export_thumbs
+		attr_accessor :mapped_packager_url
+		attr_accessor :regular_packager_url
 
 		def id=(val)
 			@id = val.to_i
@@ -9431,6 +9433,12 @@ module Kaltura
 			end
 			if xml_element.elements['shouldExportThumbs'] != nil
 				self.should_export_thumbs = xml_element.elements['shouldExportThumbs'].text
+			end
+			if xml_element.elements['mappedPackagerUrl'] != nil
+				self.mapped_packager_url = xml_element.elements['mappedPackagerUrl'].text
+			end
+			if xml_element.elements['regularPackagerUrl'] != nil
+				self.regular_packager_url = xml_element.elements['regularPackagerUrl'].text
 			end
 		end
 

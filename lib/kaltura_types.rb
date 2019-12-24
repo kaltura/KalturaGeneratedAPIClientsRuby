@@ -8256,6 +8256,8 @@ module Kaltura
 		attr_accessor :playback_type_in
 		# filter by playback context ids
 		attr_accessor :playback_context_ids_in
+		# filter by root entry ids
+		attr_accessor :root_entry_id_in
 
 		def search_in_tags=(val)
 			@search_in_tags = to_b(val)
@@ -8349,6 +8351,9 @@ module Kaltura
 			end
 			if xml_element.elements['playbackContextIdsIn'] != nil
 				self.playback_context_ids_in = xml_element.elements['playbackContextIdsIn'].text
+			end
+			if xml_element.elements['rootEntryIdIn'] != nil
+				self.root_entry_id_in = xml_element.elements['rootEntryIdIn'].text
 			end
 		end
 
@@ -18385,6 +18390,20 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
+		end
+
+	end
+
+	class KalturaHttpHeaderCondition < KalturaRegexCondition
+		# header name
+		attr_accessor :header_name
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['headerName'] != nil
+				self.header_name = xml_element.elements['headerName'].text
+			end
 		end
 
 	end

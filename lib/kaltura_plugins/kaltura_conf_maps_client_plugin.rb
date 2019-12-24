@@ -40,6 +40,7 @@ module Kaltura
 		# Ini file content
 		attr_accessor :content
 		attr_accessor :raw_data
+		attr_accessor :user_id
 		# IsEditable - true / false
 		attr_accessor :is_editable
 		# Time of the last update
@@ -75,6 +76,9 @@ module Kaltura
 			end
 			if xml_element.elements['rawData'] != nil
 				self.raw_data = xml_element.elements['rawData'].text
+			end
+			if xml_element.elements['userId'] != nil
+				self.user_id = xml_element.elements['userId'].text
 			end
 			if xml_element.elements['isEditable'] != nil
 				self.is_editable = xml_element.elements['isEditable'].text

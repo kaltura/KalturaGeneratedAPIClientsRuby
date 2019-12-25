@@ -172,6 +172,7 @@ module Kaltura
 		TEMPLATE_ENTRY_ID = "template_entry_id"
 		UPDATED_AT = "updated_at"
 		USER_NAMES = "user_names"
+		VOTES = "votes"
 	end
 
 	class KalturaESearchEntryOrderByFieldName
@@ -1146,12 +1147,17 @@ module Kaltura
 	class KalturaMediaEsearchExportToCsvJobData < KalturaExportCsvJobData
 		# Esearch parameters for the entry search
 		attr_accessor :search_params
+		# options
+		attr_accessor :options
 
 
 		def from_xml(xml_element)
 			super
 			if xml_element.elements['searchParams'] != nil
 				self.search_params = KalturaClientBase.object_from_xml(xml_element.elements['searchParams'], 'KalturaESearchEntryParams')
+			end
+			if xml_element.elements['options'] != nil
+				self.options = KalturaClientBase.object_from_xml(xml_element.elements['options'], 'KalturaExportToCsvOptions')
 			end
 		end
 

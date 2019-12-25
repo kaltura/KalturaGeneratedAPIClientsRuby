@@ -4333,6 +4333,21 @@ module Kaltura
 
 	end
 
+	class KalturaExportToCsvOptions < KalturaObjectBase
+		# The format of the outputted date string. There are also several predefined date constants that may be used instead, so for example DATE_RSS contains the format string 'D, d M Y H:i:s'.
+		# 	 https://www.php.net/manual/en/function.date.php
+		attr_accessor :format
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['format'] != nil
+				self.format = xml_element.elements['format'].text
+			end
+		end
+
+	end
+
 	# Configuration for extended item in the Kaltura MRSS feeds
 	class KalturaObjectIdentifier < KalturaObjectBase
 		# Comma separated string of enum values denoting which features of the item need to be included in the MRSS

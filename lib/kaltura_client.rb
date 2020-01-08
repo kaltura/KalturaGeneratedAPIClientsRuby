@@ -8,7 +8,7 @@
 # to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2019  Kaltura Inc.
+# Copyright (C) 2006-2020  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -2490,6 +2490,18 @@ module Kaltura
 			client.add_param(kparams, 'duration', duration)
 			client.add_param(kparams, 'isLastChunk', is_last_chunk)
 			client.queue_service_action_call('livestream', 'appendRecording', 'KalturaLiveEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Archive a live entry which was recorded
+		# @return [bool]
+		def archive(live_entry_id)
+			kparams = {}
+			client.add_param(kparams, 'liveEntryId', live_entry_id)
+			client.queue_service_action_call('livestream', 'archive', 'bool', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -6218,8 +6230,8 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:20-01-07'
-			self.api_version = '15.14.0'
+			self.client_tag = 'ruby:20-01-08'
+			self.api_version = '15.15.0'
 		end
 		
 		def client_tag=(value)

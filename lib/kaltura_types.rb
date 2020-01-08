@@ -8,7 +8,7 @@
 # to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2019  Kaltura Inc.
+# Copyright (C) 2006-2020  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -6173,6 +6173,8 @@ module Kaltura
 		attr_accessor :should_copy_scheduling
 		attr_accessor :should_copy_thumbnail
 		attr_accessor :should_make_hidden
+		attr_accessor :should_auto_archive
+		attr_accessor :non_deleted_cue_points_tags
 
 		def should_copy_entitlement=(val)
 			@should_copy_entitlement = val.to_i
@@ -6185,6 +6187,9 @@ module Kaltura
 		end
 		def should_make_hidden=(val)
 			@should_make_hidden = val.to_i
+		end
+		def should_auto_archive=(val)
+			@should_auto_archive = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -6200,6 +6205,12 @@ module Kaltura
 			end
 			if xml_element.elements['shouldMakeHidden'] != nil
 				self.should_make_hidden = xml_element.elements['shouldMakeHidden'].text
+			end
+			if xml_element.elements['shouldAutoArchive'] != nil
+				self.should_auto_archive = xml_element.elements['shouldAutoArchive'].text
+			end
+			if xml_element.elements['nonDeletedCuePointsTags'] != nil
+				self.non_deleted_cue_points_tags = xml_element.elements['nonDeletedCuePointsTags'].text
 			end
 		end
 
@@ -13427,6 +13438,19 @@ module Kaltura
 			super
 			if xml_element.elements['objects'] != nil
 				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaLiveChannelSegment')
+			end
+		end
+
+	end
+
+	class KalturaLiveEntryArchiveJobData < KalturaJobData
+		attr_accessor :live_entry_id
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['liveEntryId'] != nil
+				self.live_entry_id = xml_element.elements['liveEntryId'].text
 			end
 		end
 

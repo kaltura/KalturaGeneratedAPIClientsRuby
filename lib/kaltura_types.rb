@@ -5662,6 +5662,7 @@ module Kaltura
 		attr_accessor :color_transfer
 		attr_accessor :color_primaries
 		attr_accessor :pixel_format
+		attr_accessor :color_space
 		attr_accessor :chroma_subsampling
 		attr_accessor :bits_depth
 
@@ -5853,6 +5854,9 @@ module Kaltura
 			end
 			if xml_element.elements['pixelFormat'] != nil
 				self.pixel_format = xml_element.elements['pixelFormat'].text
+			end
+			if xml_element.elements['colorSpace'] != nil
+				self.color_space = xml_element.elements['colorSpace'].text
 			end
 			if xml_element.elements['chromaSubsampling'] != nil
 				self.chroma_subsampling = xml_element.elements['chromaSubsampling'].text
@@ -6777,6 +6781,52 @@ module Kaltura
 
 	end
 
+	class KalturaLiveStreamDetails < KalturaObjectBase
+		# The status of the primary stream
+		attr_accessor :primary_stream_status
+		# The status of the secondary stream
+		attr_accessor :secondary_stream_status
+		attr_accessor :view_mode
+		attr_accessor :was_broadcast
+		attr_accessor :broadcast_status
+
+		def primary_stream_status=(val)
+			@primary_stream_status = val.to_i
+		end
+		def secondary_stream_status=(val)
+			@secondary_stream_status = val.to_i
+		end
+		def view_mode=(val)
+			@view_mode = val.to_i
+		end
+		def was_broadcast=(val)
+			@was_broadcast = to_b(val)
+		end
+		def broadcast_status=(val)
+			@broadcast_status = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['primaryStreamStatus'] != nil
+				self.primary_stream_status = xml_element.elements['primaryStreamStatus'].text
+			end
+			if xml_element.elements['secondaryStreamStatus'] != nil
+				self.secondary_stream_status = xml_element.elements['secondaryStreamStatus'].text
+			end
+			if xml_element.elements['viewMode'] != nil
+				self.view_mode = xml_element.elements['viewMode'].text
+			end
+			if xml_element.elements['wasBroadcast'] != nil
+				self.was_broadcast = xml_element.elements['wasBroadcast'].text
+			end
+			if xml_element.elements['broadcastStatus'] != nil
+				self.broadcast_status = xml_element.elements['broadcastStatus'].text
+			end
+		end
+
+	end
+
 	class KalturaLiveStreamEntry < KalturaLiveEntry
 		# The stream id as provided by the provider
 		attr_accessor :stream_remote_id
@@ -6786,6 +6836,8 @@ module Kaltura
 		attr_accessor :bitrates
 		attr_accessor :primary_broadcasting_url
 		attr_accessor :secondary_broadcasting_url
+		attr_accessor :primary_secured_broadcasting_url
+		attr_accessor :secondary_secured_broadcasting_url
 		attr_accessor :primary_rtsp_broadcasting_url
 		attr_accessor :secondary_rtsp_broadcasting_url
 		attr_accessor :stream_name
@@ -6827,6 +6879,12 @@ module Kaltura
 			end
 			if xml_element.elements['secondaryBroadcastingUrl'] != nil
 				self.secondary_broadcasting_url = xml_element.elements['secondaryBroadcastingUrl'].text
+			end
+			if xml_element.elements['primarySecuredBroadcastingUrl'] != nil
+				self.primary_secured_broadcasting_url = xml_element.elements['primarySecuredBroadcastingUrl'].text
+			end
+			if xml_element.elements['secondarySecuredBroadcastingUrl'] != nil
+				self.secondary_secured_broadcasting_url = xml_element.elements['secondarySecuredBroadcastingUrl'].text
 			end
 			if xml_element.elements['primaryRtspBroadcastingUrl'] != nil
 				self.primary_rtsp_broadcasting_url = xml_element.elements['primaryRtspBroadcastingUrl'].text
@@ -8261,8 +8319,12 @@ module Kaltura
 		attr_accessor :cities_in
 		# Filter by operating system family
 		attr_accessor :operating_system_family_in
+		# Filter by operating system
+		attr_accessor :operating_system_in
 		# Filter by browser family
 		attr_accessor :browser_family_in
+		# Filter by browser
+		attr_accessor :browser_in
 		# Time zone offset in minutes
 		attr_accessor :time_zone_offset
 		# Aggregated results according to interval
@@ -8284,6 +8346,12 @@ module Kaltura
 		attr_accessor :playback_context_ids_in
 		# filter by root entry ids
 		attr_accessor :root_entry_id_in
+		# filter by error code
+		attr_accessor :error_code_in
+		# filter by player version
+		attr_accessor :player_version_in
+		# filter by isp
+		attr_accessor :isp_in
 
 		def search_in_tags=(val)
 			@search_in_tags = to_b(val)
@@ -8342,8 +8410,14 @@ module Kaltura
 			if xml_element.elements['operatingSystemFamilyIn'] != nil
 				self.operating_system_family_in = xml_element.elements['operatingSystemFamilyIn'].text
 			end
+			if xml_element.elements['operatingSystemIn'] != nil
+				self.operating_system_in = xml_element.elements['operatingSystemIn'].text
+			end
 			if xml_element.elements['browserFamilyIn'] != nil
 				self.browser_family_in = xml_element.elements['browserFamilyIn'].text
+			end
+			if xml_element.elements['browserIn'] != nil
+				self.browser_in = xml_element.elements['browserIn'].text
 			end
 			if xml_element.elements['timeZoneOffset'] != nil
 				self.time_zone_offset = xml_element.elements['timeZoneOffset'].text
@@ -8380,6 +8454,15 @@ module Kaltura
 			end
 			if xml_element.elements['rootEntryIdIn'] != nil
 				self.root_entry_id_in = xml_element.elements['rootEntryIdIn'].text
+			end
+			if xml_element.elements['errorCodeIn'] != nil
+				self.error_code_in = xml_element.elements['errorCodeIn'].text
+			end
+			if xml_element.elements['playerVersionIn'] != nil
+				self.player_version_in = xml_element.elements['playerVersionIn'].text
+			end
+			if xml_element.elements['ispIn'] != nil
+				self.isp_in = xml_element.elements['ispIn'].text
 			end
 		end
 
@@ -12966,6 +13049,7 @@ module Kaltura
 		attr_accessor :entry_id_equal
 		attr_accessor :entry_id_in
 		attr_accessor :server_node_id_equal
+		attr_accessor :server_node_id_in
 		attr_accessor :created_at_less_than_or_equal
 		attr_accessor :created_at_greater_than_or_equal
 		attr_accessor :updated_at_greater_than_or_equal
@@ -13004,6 +13088,9 @@ module Kaltura
 			end
 			if xml_element.elements['serverNodeIdEqual'] != nil
 				self.server_node_id_equal = xml_element.elements['serverNodeIdEqual'].text
+			end
+			if xml_element.elements['serverNodeIdIn'] != nil
+				self.server_node_id_in = xml_element.elements['serverNodeIdIn'].text
 			end
 			if xml_element.elements['createdAtLessThanOrEqual'] != nil
 				self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text

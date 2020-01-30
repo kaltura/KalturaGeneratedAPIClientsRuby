@@ -840,16 +840,12 @@ module Kaltura
 	class KalturaUnlimitedVendorCredit < KalturaBaseVendorCredit
 		attr_accessor :credit
 		attr_accessor :from_date
-		attr_accessor :to_date
 
 		def credit=(val)
 			@credit = val.to_i
 		end
 		def from_date=(val)
 			@from_date = val.to_i
-		end
-		def to_date=(val)
-			@to_date = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -859,9 +855,6 @@ module Kaltura
 			end
 			if xml_element.elements['fromDate'] != nil
 				self.from_date = xml_element.elements['fromDate'].text
-			end
-			if xml_element.elements['toDate'] != nil
-				self.to_date = xml_element.elements['toDate'].text
 			end
 		end
 

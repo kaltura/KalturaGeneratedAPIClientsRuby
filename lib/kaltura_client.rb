@@ -2578,6 +2578,18 @@ module Kaltura
 		end
 
 		# Delivering the status of a live stream (on-air/offline) if it is possible
+		# @return [KalturaLiveStreamDetails]
+		def get_details(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('livestream', 'getDetails', 'KalturaLiveStreamDetails', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Delivering the status of a live stream (on-air/offline) if it is possible
 		# @return [bool]
 		def is_live(id, protocol)
 			kparams = {}
@@ -6230,8 +6242,8 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:20-01-29'
-			self.api_version = '15.15.0'
+			self.client_tag = 'ruby:20-01-30'
+			self.api_version = '15.16.0'
 		end
 		
 		def client_tag=(value)

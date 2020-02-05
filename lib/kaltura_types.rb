@@ -6179,6 +6179,7 @@ module Kaltura
 		attr_accessor :should_make_hidden
 		attr_accessor :should_auto_archive
 		attr_accessor :non_deleted_cue_points_tags
+		attr_accessor :archive_vod_suffix_timezone
 
 		def should_copy_entitlement=(val)
 			@should_copy_entitlement = val.to_i
@@ -6215,6 +6216,9 @@ module Kaltura
 			end
 			if xml_element.elements['nonDeletedCuePointsTags'] != nil
 				self.non_deleted_cue_points_tags = xml_element.elements['nonDeletedCuePointsTags'].text
+			end
+			if xml_element.elements['archiveVodSuffixTimezone'] != nil
+				self.archive_vod_suffix_timezone = xml_element.elements['archiveVodSuffixTimezone'].text
 			end
 		end
 
@@ -13058,6 +13062,7 @@ module Kaltura
 		attr_accessor :status_in
 		attr_accessor :server_type_equal
 		attr_accessor :server_type_in
+		attr_accessor :server_type_not_in
 
 		def server_node_id_equal=(val)
 			@server_node_id_equal = val.to_i
@@ -13115,6 +13120,9 @@ module Kaltura
 			end
 			if xml_element.elements['serverTypeIn'] != nil
 				self.server_type_in = xml_element.elements['serverTypeIn'].text
+			end
+			if xml_element.elements['serverTypeNotIn'] != nil
+				self.server_type_not_in = xml_element.elements['serverTypeNotIn'].text
 			end
 		end
 

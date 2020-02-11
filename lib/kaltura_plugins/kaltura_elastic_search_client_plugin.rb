@@ -1027,6 +1027,22 @@ module Kaltura
 
 	end
 
+	class KalturaEntryCaptionAdvancedFilter < KalturaSearchItem
+		attr_accessor :has_caption
+
+		def has_caption=(val)
+			@has_caption = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['hasCaption'] != nil
+				self.has_caption = xml_element.elements['hasCaption'].text
+			end
+		end
+
+	end
+
 	class KalturaBeaconAbstractScheduledResourceItem < KalturaBeaconScheduledResourceBaseItem
 		attr_accessor :search_term
 		attr_accessor :item_type

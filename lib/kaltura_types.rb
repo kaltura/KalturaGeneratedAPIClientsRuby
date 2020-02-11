@@ -8356,6 +8356,8 @@ module Kaltura
 		attr_accessor :player_version_in
 		# filter by isp
 		attr_accessor :isp_in
+		# filter by application version
+		attr_accessor :application_version_in
 
 		def search_in_tags=(val)
 			@search_in_tags = to_b(val)
@@ -8467,6 +8469,9 @@ module Kaltura
 			end
 			if xml_element.elements['ispIn'] != nil
 				self.isp_in = xml_element.elements['ispIn'].text
+			end
+			if xml_element.elements['applicationVersionIn'] != nil
+				self.application_version_in = xml_element.elements['applicationVersionIn'].text
 			end
 		end
 

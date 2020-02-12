@@ -13545,12 +13545,16 @@ module Kaltura
 
 	class KalturaLiveEntryArchiveJobData < KalturaJobData
 		attr_accessor :live_entry_id
+		attr_accessor :vod_entry_id
 
 
 		def from_xml(xml_element)
 			super
 			if xml_element.elements['liveEntryId'] != nil
 				self.live_entry_id = xml_element.elements['liveEntryId'].text
+			end
+			if xml_element.elements['vodEntryId'] != nil
+				self.vod_entry_id = xml_element.elements['vodEntryId'].text
 			end
 		end
 

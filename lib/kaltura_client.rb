@@ -2498,9 +2498,10 @@ module Kaltura
 
 		# Archive a live entry which was recorded
 		# @return [bool]
-		def archive(live_entry_id)
+		def archive(live_entry_id, vod_entry_id)
 			kparams = {}
 			client.add_param(kparams, 'liveEntryId', live_entry_id)
+			client.add_param(kparams, 'vodEntryId', vod_entry_id)
 			client.queue_service_action_call('livestream', 'archive', 'bool', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -6242,7 +6243,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:20-02-11'
+			self.client_tag = 'ruby:20-02-12'
 			self.api_version = '15.17.0'
 		end
 		

@@ -13059,6 +13059,7 @@ module Kaltura
 		attr_accessor :entry_id_in
 		attr_accessor :server_node_id_equal
 		attr_accessor :server_node_id_in
+		attr_accessor :server_node_id_not_in
 		attr_accessor :created_at_less_than_or_equal
 		attr_accessor :created_at_greater_than_or_equal
 		attr_accessor :updated_at_greater_than_or_equal
@@ -13101,6 +13102,9 @@ module Kaltura
 			end
 			if xml_element.elements['serverNodeIdIn'] != nil
 				self.server_node_id_in = xml_element.elements['serverNodeIdIn'].text
+			end
+			if xml_element.elements['serverNodeIdNotIn'] != nil
+				self.server_node_id_not_in = xml_element.elements['serverNodeIdNotIn'].text
 			end
 			if xml_element.elements['createdAtLessThanOrEqual'] != nil
 				self.created_at_less_than_or_equal = xml_element.elements['createdAtLessThanOrEqual'].text

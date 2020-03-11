@@ -1926,6 +1926,15 @@ module Kaltura
 		attr_accessor :ott_environment_url
 		attr_accessor :e_search_languages
 		attr_accessor :authentication_type
+		attr_accessor :extended_free_trail_expiry_reason
+		# Unix timestamp (In seconds)
+		attr_accessor :extended_free_trail_expiry_date
+		attr_accessor :extended_free_trail
+		attr_accessor :extended_free_trail_ends_warning
+		attr_accessor :eighty_percent_warning
+		attr_accessor :usage_limit_warning
+		attr_accessor :last_free_trial_notification_day
+		attr_accessor :monitor_usage
 
 		def id=(val)
 			@id = val.to_i
@@ -1998,6 +2007,27 @@ module Kaltura
 		end
 		def authentication_type=(val)
 			@authentication_type = val.to_i
+		end
+		def extended_free_trail_expiry_date=(val)
+			@extended_free_trail_expiry_date = val.to_i
+		end
+		def extended_free_trail=(val)
+			@extended_free_trail = val.to_i
+		end
+		def extended_free_trail_ends_warning=(val)
+			@extended_free_trail_ends_warning = to_b(val)
+		end
+		def eighty_percent_warning=(val)
+			@eighty_percent_warning = val.to_i
+		end
+		def usage_limit_warning=(val)
+			@usage_limit_warning = val.to_i
+		end
+		def last_free_trial_notification_day=(val)
+			@last_free_trial_notification_day = val.to_i
+		end
+		def monitor_usage=(val)
+			@monitor_usage = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -2178,6 +2208,30 @@ module Kaltura
 			end
 			if xml_element.elements['authenticationType'] != nil
 				self.authentication_type = xml_element.elements['authenticationType'].text
+			end
+			if xml_element.elements['extendedFreeTrailExpiryReason'] != nil
+				self.extended_free_trail_expiry_reason = xml_element.elements['extendedFreeTrailExpiryReason'].text
+			end
+			if xml_element.elements['extendedFreeTrailExpiryDate'] != nil
+				self.extended_free_trail_expiry_date = xml_element.elements['extendedFreeTrailExpiryDate'].text
+			end
+			if xml_element.elements['extendedFreeTrail'] != nil
+				self.extended_free_trail = xml_element.elements['extendedFreeTrail'].text
+			end
+			if xml_element.elements['extendedFreeTrailEndsWarning'] != nil
+				self.extended_free_trail_ends_warning = xml_element.elements['extendedFreeTrailEndsWarning'].text
+			end
+			if xml_element.elements['eightyPercentWarning'] != nil
+				self.eighty_percent_warning = xml_element.elements['eightyPercentWarning'].text
+			end
+			if xml_element.elements['usageLimitWarning'] != nil
+				self.usage_limit_warning = xml_element.elements['usageLimitWarning'].text
+			end
+			if xml_element.elements['lastFreeTrialNotificationDay'] != nil
+				self.last_free_trial_notification_day = xml_element.elements['lastFreeTrialNotificationDay'].text
+			end
+			if xml_element.elements['monitorUsage'] != nil
+				self.monitor_usage = xml_element.elements['monitorUsage'].text
 			end
 		end
 
@@ -14059,6 +14113,7 @@ module Kaltura
 		attr_accessor :partner_name_description_website_admin_name_admin_email_like
 		attr_accessor :created_at_greater_than_or_equal
 		attr_accessor :id_greater_than
+		attr_accessor :monitor_usage_equal
 
 		def id_equal=(val)
 			@id_equal = val.to_i
@@ -14083,6 +14138,9 @@ module Kaltura
 		end
 		def id_greater_than=(val)
 			@id_greater_than = val.to_i
+		end
+		def monitor_usage_equal=(val)
+			@monitor_usage_equal = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -14137,6 +14195,9 @@ module Kaltura
 			end
 			if xml_element.elements['idGreaterThan'] != nil
 				self.id_greater_than = xml_element.elements['idGreaterThan'].text
+			end
+			if xml_element.elements['monitorUsageEqual'] != nil
+				self.monitor_usage_equal = xml_element.elements['monitorUsageEqual'].text
 			end
 		end
 

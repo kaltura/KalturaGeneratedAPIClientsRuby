@@ -3799,6 +3799,7 @@ module Kaltura
 	class KalturaUserEntryType
 		QUIZ = "quiz.QUIZ"
 		VIEW_HISTORY = "viewHistory.VIEW_HISTORY"
+		WATCH_LATER = "watchLater.WATCH_LATER"
 	end
 
 	class KalturaUserLoginDataOrderBy

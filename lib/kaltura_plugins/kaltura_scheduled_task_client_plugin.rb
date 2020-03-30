@@ -336,12 +336,17 @@ module Kaltura
 		attr_accessor :input_entitled_users_edit
 		# The input entitled users publish to set on the entry
 		attr_accessor :input_entitled_users_publish
+		# Should clear the media repurposing data and therefore reset the process
+		attr_accessor :reset_media_repurposing_process
 
 		def input_metadata_profile_id=(val)
 			@input_metadata_profile_id = val.to_i
 		end
 		def output_metadata_profile_id=(val)
 			@output_metadata_profile_id = val.to_i
+		end
+		def reset_media_repurposing_process=(val)
+			@reset_media_repurposing_process = to_b(val)
 		end
 
 		def from_xml(xml_element)
@@ -366,6 +371,9 @@ module Kaltura
 			end
 			if xml_element.elements['inputEntitledUsersPublish'] != nil
 				self.input_entitled_users_publish = xml_element.elements['inputEntitledUsersPublish'].text
+			end
+			if xml_element.elements['resetMediaRepurposingProcess'] != nil
+				self.reset_media_repurposing_process = xml_element.elements['resetMediaRepurposingProcess'].text
 			end
 		end
 

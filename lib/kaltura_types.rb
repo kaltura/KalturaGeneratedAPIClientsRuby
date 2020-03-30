@@ -6313,6 +6313,8 @@ module Kaltura
 		attr_accessor :recording_status
 		# The time the last broadcast finished.
 		attr_accessor :last_broadcast_end_time
+		# The time when the entry was first live with view_all
+		attr_accessor :broadcast_time
 
 		def record_status=(val)
 			@record_status = val.to_i
@@ -6355,6 +6357,9 @@ module Kaltura
 		end
 		def last_broadcast_end_time=(val)
 			@last_broadcast_end_time = val.to_i
+		end
+		def broadcast_time=(val)
+			@broadcast_time = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -6415,6 +6420,9 @@ module Kaltura
 			end
 			if xml_element.elements['lastBroadcastEndTime'] != nil
 				self.last_broadcast_end_time = xml_element.elements['lastBroadcastEndTime'].text
+			end
+			if xml_element.elements['broadcastTime'] != nil
+				self.broadcast_time = xml_element.elements['broadcastTime'].text
 			end
 		end
 
@@ -8412,6 +8420,8 @@ module Kaltura
 		attr_accessor :isp_in
 		# filter by application version
 		attr_accessor :application_version_in
+		# filter by node id
+		attr_accessor :node_ids_in
 
 		def search_in_tags=(val)
 			@search_in_tags = to_b(val)
@@ -8526,6 +8536,9 @@ module Kaltura
 			end
 			if xml_element.elements['applicationVersionIn'] != nil
 				self.application_version_in = xml_element.elements['applicationVersionIn'].text
+			end
+			if xml_element.elements['nodeIdsIn'] != nil
+				self.node_ids_in = xml_element.elements['nodeIdsIn'].text
 			end
 		end
 

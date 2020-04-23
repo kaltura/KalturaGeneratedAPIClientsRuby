@@ -1659,7 +1659,9 @@ module Kaltura
 
 	class KalturaEntryType
 		AUTOMATIC = "-1"
+		CONFERENCE_ENTRY_SERVER = "conference.CONFERENCE_ENTRY_SERVER"
 		EXTERNAL_MEDIA = "externalMedia.externalMedia"
+		SIP_ENTRY_SERVER = "sip.SIP_ENTRY_SERVER"
 		MEDIA_CLIP = "1"
 		MIX = "2"
 		PLAYLIST = "5"
@@ -3668,6 +3670,9 @@ module Kaltura
 	end
 
 	class KalturaServerNodeType
+		CONFERENCE_SERVER = "conference.CONFERENCE_SERVER"
+		LIVE_CLUSTER_MEDIA_SERVER = "liveCluster.LIVE_CLUSTER_MEDIA_SERVER"
+		SIP_SERVER = "sip.SIP_SERVER"
 		WOWZA_MEDIA_SERVER = "wowza.WOWZA_MEDIA_SERVER"
 		EDGE = "1"
 	end
@@ -3799,6 +3804,7 @@ module Kaltura
 
 	class KalturaUserEntryType
 		QUIZ = "quiz.QUIZ"
+		REGISTRATION = "registration.REGISTRATION"
 		VIEW_HISTORY = "viewHistory.VIEW_HISTORY"
 		WATCH_LATER = "watchLater.WATCH_LATER"
 	end

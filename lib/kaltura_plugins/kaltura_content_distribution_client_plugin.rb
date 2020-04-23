@@ -161,6 +161,7 @@ module Kaltura
 		IDETIC = "ideticDistribution.IDETIC"
 		METRO_PCS = "metroPcsDistribution.METRO_PCS"
 		MSN = "msnDistribution.MSN"
+		PODCAST = "podcastDistribution.PODCAST"
 		QUICKPLAY = "quickPlayDistribution.QUICKPLAY"
 		UNICORN = "unicornDistribution.UNICORN"
 		YAHOO = "yahooDistribution.YAHOO"

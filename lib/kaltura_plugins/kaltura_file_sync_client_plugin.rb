@@ -84,6 +84,8 @@ module Kaltura
 		attr_accessor :is_current_dc
 		attr_accessor :is_dir
 		attr_accessor :original_id
+		attr_accessor :src_path
+		attr_accessor :src_enc_key
 
 		def id=(val)
 			@id = val.to_i
@@ -213,6 +215,12 @@ module Kaltura
 			end
 			if xml_element.elements['originalId'] != nil
 				self.original_id = xml_element.elements['originalId'].text
+			end
+			if xml_element.elements['srcPath'] != nil
+				self.src_path = xml_element.elements['srcPath'].text
+			end
+			if xml_element.elements['srcEncKey'] != nil
+				self.src_enc_key = xml_element.elements['srcEncKey'].text
 			end
 		end
 

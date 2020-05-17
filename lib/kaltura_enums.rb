@@ -448,6 +448,7 @@ module Kaltura
 		STATIC_LIST = 3
 		DYNAMIC = 10
 		EXTERNAL = 101
+		PATH = 102
 	end
 
 	class KalturaPrivacyType
@@ -1131,6 +1132,7 @@ module Kaltura
 		REPORT_EXPORT = "50"
 		LIVE_ENTRY_ARCHIVE = "51"
 		STORAGE_UPDATE = "52"
+		STORAGE_PERIODIC_EXPORT = "53"
 	end
 
 	class KalturaBulkUploadAction
@@ -1143,6 +1145,7 @@ module Kaltura
 		ADD_OR_UPDATE = "6"
 		ACTIVATE = "7"
 		REJECT = "8"
+		UPDATE_STATUS = "9"
 	end
 
 	class KalturaBulkUploadObjectType
@@ -1155,6 +1158,7 @@ module Kaltura
 		CATEGORY_USER = "4"
 		CATEGORY_ENTRY = "5"
 		USER_ENTRY = "6"
+		VENDOR_CATALOG_ITEM = "7"
 	end
 
 	class KalturaBulkUploadOrderBy
@@ -3520,6 +3524,9 @@ module Kaltura
 		INTERACTIVE_VIDEO_TOP_NODES = "50"
 		LATEST_PLAYED_ENTRIES = "51"
 		CATEGORY_HIGHLIGHTS = "52"
+		SUB_CATEGORIES = "53"
+		INTERACTIVE_VIDEO_NODE_TOP_HOTSPOTS = "54"
+		INTERCATIVE_VIDEO_NODE_SWITCH_TOP_HOTSPOTS = "55"
 		PARTNER_USAGE = "201"
 		MAP_OVERLAY_COUNTRY_REALTIME = "10001"
 		MAP_OVERLAY_REGION_REALTIME = "10002"

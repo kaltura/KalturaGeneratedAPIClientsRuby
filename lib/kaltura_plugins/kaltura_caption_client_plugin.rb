@@ -434,6 +434,19 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# manually export an asset
+		# @return [KalturaFlavorAsset]
+		def export(asset_id, storage_profile_id)
+			kparams = {}
+			client.add_param(kparams, 'assetId', asset_id)
+			client.add_param(kparams, 'storageProfileId', storage_profile_id)
+			client.queue_service_action_call('caption_captionasset', 'export', 'KalturaFlavorAsset', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# @return [KalturaCaptionAsset]
 		def get(caption_asset_id)
 			kparams = {}

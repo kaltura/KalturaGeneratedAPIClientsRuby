@@ -27,6 +27,7 @@
 # ===================================================================================================
 require 'kaltura_client.rb'
 require File.dirname(__FILE__) + '/kaltura_event_notification_client_plugin.rb'
+require File.dirname(__FILE__) + '/kaltura_bulk_upload_client_plugin.rb'
 
 module Kaltura
 
@@ -87,6 +88,13 @@ module Kaltura
 	class KalturaVendorServiceTurnAroundTime
 		BEST_EFFORT = -1
 		IMMEDIATE = 0
+		ONE_BUSINESS_DAY = 1
+		TWO_BUSINESS_DAYS = 2
+		THREE_BUSINESS_DAYS = 3
+		FOUR_BUSINESS_DAYS = 4
+		FIVE_BUSINESS_DAYS = 5
+		SIX_BUSINESS_DAYS = 6
+		SEVEN_BUSINESS_DAYS = 7
 		THIRTY_MINUTES = 1800
 		TWO_HOURS = 7200
 		THREE_HOURS = 10800
@@ -94,9 +102,7 @@ module Kaltura
 		EIGHT_HOURS = 28800
 		TWELVE_HOURS = 43200
 		TWENTY_FOUR_HOURS = 86400
-		ONE_BUSINESS_DAY = 129600
 		FORTY_EIGHT_HOURS = 172800
-		TWO_BUSINESS_DAYS = 216000
 		FOUR_DAYS = 345600
 		FIVE_DAYS = 432000
 		TEN_DAYS = 864000
@@ -288,6 +294,7 @@ module Kaltura
 		attr_accessor :expected_finish_time
 		attr_accessor :service_type
 		attr_accessor :service_feature
+		attr_accessor :turn_around_time
 
 		def id=(val)
 			@id = val.to_i
@@ -336,6 +343,9 @@ module Kaltura
 		end
 		def service_feature=(val)
 			@service_feature = val.to_i
+		end
+		def turn_around_time=(val)
+			@turn_around_time = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -423,6 +433,9 @@ module Kaltura
 			end
 			if xml_element.elements['serviceFeature'] != nil
 				self.service_feature = xml_element.elements['serviceFeature'].text
+			end
+			if xml_element.elements['turnAroundTime'] != nil
+				self.turn_around_time = xml_element.elements['turnAroundTime'].text
 			end
 		end
 
@@ -1562,6 +1575,20 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# @return [KalturaBulkUpload]
+		def add_from_bulk_upload(file_data, bulk_upload_data=KalturaNotImplemented, bulk_upload_vendor_catalog_item_data=KalturaNotImplemented)
+			kparams = {}
+			kfiles = {}
+			client.add_param(kfiles, 'fileData', file_data)
+			client.add_param(kparams, 'bulkUploadData', bulk_upload_data)
+			client.add_param(kparams, 'bulkUploadVendorCatalogItemData', bulk_upload_vendor_catalog_item_data)
+			client.queue_service_action_call('reach_vendorcatalogitem', 'addFromBulkUpload', 'KalturaBulkUpload', kparams, kfiles)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Delete vedor catalog item object
 		# @return []
 		def delete(id)
@@ -1586,6 +1613,17 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# @return [string]
+		def get_serve_url(vendor_partner_id=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'vendorPartnerId', vendor_partner_id)
+			client.queue_service_action_call('reach_vendorcatalogitem', 'getServeUrl', 'string', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# List KalturaVendorCatalogItem objects
 		# @return [KalturaVendorCatalogItemListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
@@ -1597,6 +1635,14 @@ module Kaltura
 				return nil
 			end
 			return client.do_queue()
+		end
+
+		# @return [file]
+		def serve(vendor_partner_id=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'vendorPartnerId', vendor_partner_id)
+			client.queue_service_action_call('reach_vendorcatalogitem', 'serve', 'file', kparams)
+			return client.get_serve_url()
 		end
 
 		# Update an existing vedor catalog item object

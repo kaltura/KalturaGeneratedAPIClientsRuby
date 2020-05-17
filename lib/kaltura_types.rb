@@ -8422,6 +8422,8 @@ module Kaltura
 		attr_accessor :application_version_in
 		# filter by node id
 		attr_accessor :node_ids_in
+		# filter by categories ancestor
+		attr_accessor :categories_ancestor_id_in
 
 		def search_in_tags=(val)
 			@search_in_tags = to_b(val)
@@ -8539,6 +8541,9 @@ module Kaltura
 			end
 			if xml_element.elements['nodeIdsIn'] != nil
 				self.node_ids_in = xml_element.elements['nodeIdsIn'].text
+			end
+			if xml_element.elements['categoriesAncestorIdIn'] != nil
+				self.categories_ancestor_id_in = xml_element.elements['categoriesAncestorIdIn'].text
 			end
 		end
 
@@ -9474,8 +9479,10 @@ module Kaltura
 		attr_accessor :public_key
 		attr_accessor :pass_phrase
 		attr_accessor :should_export_thumbs
-		attr_accessor :mapped_packager_url
-		attr_accessor :regular_packager_url
+		attr_accessor :packager_url
+		attr_accessor :export_periodically
+		attr_accessor :excluded_flavor_params_ids
+		attr_accessor :should_export_captions
 
 		def id=(val)
 			@id = val.to_i
@@ -9524,6 +9531,12 @@ module Kaltura
 		end
 		def should_export_thumbs=(val)
 			@should_export_thumbs = to_b(val)
+		end
+		def export_periodically=(val)
+			@export_periodically = to_b(val)
+		end
+		def should_export_captions=(val)
+			@should_export_captions = to_b(val)
 		end
 
 		def from_xml(xml_element)
@@ -9624,11 +9637,17 @@ module Kaltura
 			if xml_element.elements['shouldExportThumbs'] != nil
 				self.should_export_thumbs = xml_element.elements['shouldExportThumbs'].text
 			end
-			if xml_element.elements['mappedPackagerUrl'] != nil
-				self.mapped_packager_url = xml_element.elements['mappedPackagerUrl'].text
+			if xml_element.elements['packagerUrl'] != nil
+				self.packager_url = xml_element.elements['packagerUrl'].text
 			end
-			if xml_element.elements['regularPackagerUrl'] != nil
-				self.regular_packager_url = xml_element.elements['regularPackagerUrl'].text
+			if xml_element.elements['exportPeriodically'] != nil
+				self.export_periodically = xml_element.elements['exportPeriodically'].text
+			end
+			if xml_element.elements['excludedFlavorParamsIds'] != nil
+				self.excluded_flavor_params_ids = xml_element.elements['excludedFlavorParamsIds'].text
+			end
+			if xml_element.elements['shouldExportCaptions'] != nil
+				self.should_export_captions = xml_element.elements['shouldExportCaptions'].text
 			end
 		end
 
@@ -11542,9 +11561,119 @@ module Kaltura
 
 	end
 
+	class KalturaBulkUploadResultVendorCatalogItem < KalturaBulkUploadResult
+		attr_accessor :vendor_catalog_item_id
+		attr_accessor :vendor_partner_id
+		attr_accessor :name
+		attr_accessor :system_name
+		attr_accessor :service_feature
+		attr_accessor :service_type
+		attr_accessor :turn_around_time
+		attr_accessor :source_language
+		attr_accessor :target_language
+		attr_accessor :output_format
+		attr_accessor :enable_speaker_id
+		attr_accessor :fixed_price_addons
+		attr_accessor :pricing
+		attr_accessor :flavor_params_id
+		attr_accessor :clear_audio_flavor_params_id
+
+		def vendor_catalog_item_id=(val)
+			@vendor_catalog_item_id = val.to_i
+		end
+		def vendor_partner_id=(val)
+			@vendor_partner_id = val.to_i
+		end
+		def service_feature=(val)
+			@service_feature = val.to_i
+		end
+		def service_type=(val)
+			@service_type = val.to_i
+		end
+		def turn_around_time=(val)
+			@turn_around_time = val.to_i
+		end
+		def output_format=(val)
+			@output_format = val.to_i
+		end
+		def enable_speaker_id=(val)
+			@enable_speaker_id = val.to_i
+		end
+		def fixed_price_addons=(val)
+			@fixed_price_addons = val.to_i
+		end
+		def flavor_params_id=(val)
+			@flavor_params_id = val.to_i
+		end
+		def clear_audio_flavor_params_id=(val)
+			@clear_audio_flavor_params_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['vendorCatalogItemId'] != nil
+				self.vendor_catalog_item_id = xml_element.elements['vendorCatalogItemId'].text
+			end
+			if xml_element.elements['vendorPartnerId'] != nil
+				self.vendor_partner_id = xml_element.elements['vendorPartnerId'].text
+			end
+			if xml_element.elements['name'] != nil
+				self.name = xml_element.elements['name'].text
+			end
+			if xml_element.elements['systemName'] != nil
+				self.system_name = xml_element.elements['systemName'].text
+			end
+			if xml_element.elements['serviceFeature'] != nil
+				self.service_feature = xml_element.elements['serviceFeature'].text
+			end
+			if xml_element.elements['serviceType'] != nil
+				self.service_type = xml_element.elements['serviceType'].text
+			end
+			if xml_element.elements['turnAroundTime'] != nil
+				self.turn_around_time = xml_element.elements['turnAroundTime'].text
+			end
+			if xml_element.elements['sourceLanguage'] != nil
+				self.source_language = xml_element.elements['sourceLanguage'].text
+			end
+			if xml_element.elements['targetLanguage'] != nil
+				self.target_language = xml_element.elements['targetLanguage'].text
+			end
+			if xml_element.elements['outputFormat'] != nil
+				self.output_format = xml_element.elements['outputFormat'].text
+			end
+			if xml_element.elements['enableSpeakerId'] != nil
+				self.enable_speaker_id = xml_element.elements['enableSpeakerId'].text
+			end
+			if xml_element.elements['fixedPriceAddons'] != nil
+				self.fixed_price_addons = xml_element.elements['fixedPriceAddons'].text
+			end
+			if xml_element.elements['pricing'] != nil
+				self.pricing = KalturaClientBase.object_from_xml(xml_element.elements['pricing'], 'KalturaVendorCatalogItemPricing')
+			end
+			if xml_element.elements['flavorParamsId'] != nil
+				self.flavor_params_id = xml_element.elements['flavorParamsId'].text
+			end
+			if xml_element.elements['clearAudioFlavorParamsId'] != nil
+				self.clear_audio_flavor_params_id = xml_element.elements['clearAudioFlavorParamsId'].text
+			end
+		end
+
+	end
+
 	# This class represents object-specific data passed to the 
 	#  bulk upload job.
 	class KalturaBulkUploadUserData < KalturaBulkUploadObjectData
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	# This class represents object-specific data passed to the
+	#  bulk upload job.
+	class KalturaBulkUploadVendorCatalogItemData < KalturaBulkUploadObjectData
 
 
 		def from_xml(xml_element)
@@ -19591,10 +19720,21 @@ module Kaltura
 	end
 
 	class KalturaPlaylistFilter < KalturaPlaylistBaseFilter
+		attr_accessor :play_list_type_equal
+		attr_accessor :play_list_type_in
 
+		def play_list_type_equal=(val)
+			@play_list_type_equal = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
+			if xml_element.elements['playListTypeEqual'] != nil
+				self.play_list_type_equal = xml_element.elements['playListTypeEqual'].text
+			end
+			if xml_element.elements['playListTypeIn'] != nil
+				self.play_list_type_in = xml_element.elements['playListTypeIn'].text
+			end
 		end
 
 	end

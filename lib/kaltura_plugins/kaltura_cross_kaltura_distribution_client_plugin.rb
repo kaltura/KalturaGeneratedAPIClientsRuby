@@ -58,6 +58,8 @@ module Kaltura
 		attr_accessor :distributed_metadata
 		# Key-value array where the keys are IDs of distributed caption assets in the source account and the values are the matching IDs in the target account
 		attr_accessor :distributed_caption_assets
+		# Key-value array where the keys are IDs of distributed fileassets in the source account and the values are the matching IDs in the target account
+		attr_accessor :distributed_file_assets
 		# Key-value array where the keys are IDs of distributed caption assets in the source account and the values are the matching IDs in the target account
 		attr_accessor :distributed_attachment_assets
 		# Key-value array where the keys are IDs of distributed cue points in the source account and the values are the matching IDs in the target account
@@ -81,6 +83,9 @@ module Kaltura
 			end
 			if xml_element.elements['distributedCaptionAssets'] != nil
 				self.distributed_caption_assets = xml_element.elements['distributedCaptionAssets'].text
+			end
+			if xml_element.elements['distributedFileAssets'] != nil
+				self.distributed_file_assets = xml_element.elements['distributedFileAssets'].text
 			end
 			if xml_element.elements['distributedAttachmentAssets'] != nil
 				self.distributed_attachment_assets = xml_element.elements['distributedAttachmentAssets'].text

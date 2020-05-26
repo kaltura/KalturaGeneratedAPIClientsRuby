@@ -17933,6 +17933,8 @@ module Kaltura
 	class KalturaStorageExportJobData < KalturaStorageJobData
 		attr_accessor :force
 		attr_accessor :create_link
+		attr_accessor :asset_id
+		attr_accessor :external_url
 
 		def force=(val)
 			@force = to_b(val)
@@ -17948,6 +17950,12 @@ module Kaltura
 			end
 			if xml_element.elements['createLink'] != nil
 				self.create_link = xml_element.elements['createLink'].text
+			end
+			if xml_element.elements['assetId'] != nil
+				self.asset_id = xml_element.elements['assetId'].text
+			end
+			if xml_element.elements['externalUrl'] != nil
+				self.external_url = xml_element.elements['externalUrl'].text
 			end
 		end
 
@@ -18263,6 +18271,7 @@ module Kaltura
 		attr_accessor :sse_kms_key_id
 		attr_accessor :signature_type
 		attr_accessor :end_point
+		attr_accessor :storage_class
 
 
 		def from_xml(xml_element)
@@ -18284,6 +18293,9 @@ module Kaltura
 			end
 			if xml_element.elements['endPoint'] != nil
 				self.end_point = xml_element.elements['endPoint'].text
+			end
+			if xml_element.elements['storageClass'] != nil
+				self.storage_class = xml_element.elements['storageClass'].text
 			end
 		end
 

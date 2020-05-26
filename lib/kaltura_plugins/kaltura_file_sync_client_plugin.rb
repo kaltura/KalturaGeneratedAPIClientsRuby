@@ -86,6 +86,7 @@ module Kaltura
 		attr_accessor :original_id
 		attr_accessor :src_path
 		attr_accessor :src_enc_key
+		attr_accessor :storage_class
 
 		def id=(val)
 			@id = val.to_i
@@ -221,6 +222,9 @@ module Kaltura
 			end
 			if xml_element.elements['srcEncKey'] != nil
 				self.src_enc_key = xml_element.elements['srcEncKey'].text
+			end
+			if xml_element.elements['storageClass'] != nil
+				self.storage_class = xml_element.elements['storageClass'].text
 			end
 		end
 

@@ -7494,6 +7494,7 @@ module Kaltura
 
 	class KalturaBaseEntryFilter < KalturaBaseEntryBaseFilter
 		attr_accessor :free_text
+		attr_accessor :excluded_free_text_groups
 		attr_accessor :is_root
 		attr_accessor :categories_full_name_in
 		# All entries within this categoy or in child categories
@@ -7509,6 +7510,9 @@ module Kaltura
 			super
 			if xml_element.elements['freeText'] != nil
 				self.free_text = xml_element.elements['freeText'].text
+			end
+			if xml_element.elements['excludedFreeTextGroups'] != nil
+				self.excluded_free_text_groups = xml_element.elements['excludedFreeTextGroups'].text
 			end
 			if xml_element.elements['isRoot'] != nil
 				self.is_root = xml_element.elements['isRoot'].text
@@ -16737,7 +16741,11 @@ module Kaltura
 		attr_accessor :custom_data
 		attr_accessor :extra_dest_file_syncs
 		attr_accessor :engine_message
+		attr_accessor :user_cpu
 
+		def user_cpu=(val)
+			@user_cpu = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
@@ -16767,6 +16775,9 @@ module Kaltura
 			end
 			if xml_element.elements['engineMessage'] != nil
 				self.engine_message = xml_element.elements['engineMessage'].text
+			end
+			if xml_element.elements['userCpu'] != nil
+				self.user_cpu = xml_element.elements['userCpu'].text
 			end
 		end
 

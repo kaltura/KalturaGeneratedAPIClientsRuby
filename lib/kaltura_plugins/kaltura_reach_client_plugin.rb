@@ -717,30 +717,6 @@ module Kaltura
 
 	end
 
-	class KalturaAlignmentVendorTaskData < KalturaVendorTaskData
-		# The id of the text transcript object the vendor should use while runing the alignment task
-		attr_accessor :text_transcript_asset_id
-		# Optional - The id of the json transcript object the vendor should update once alignment task processing is done
-		attr_accessor :json_transcript_asset_id
-		# Optional - The id of the caption asset object the vendor should update once alignment task processing is done
-		attr_accessor :caption_asset_id
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['textTranscriptAssetId'] != nil
-				self.text_transcript_asset_id = xml_element.elements['textTranscriptAssetId'].text
-			end
-			if xml_element.elements['jsonTranscriptAssetId'] != nil
-				self.json_transcript_asset_id = xml_element.elements['jsonTranscriptAssetId'].text
-			end
-			if xml_element.elements['captionAssetId'] != nil
-				self.caption_asset_id = xml_element.elements['captionAssetId'].text
-			end
-		end
-
-	end
-
 	class KalturaCatalogItemAdvancedFilter < KalturaSearchItem
 		attr_accessor :service_type_equal
 		attr_accessor :service_type_in
@@ -1014,6 +990,39 @@ module Kaltura
 			end
 			if xml_element.elements['addOn'] != nil
 				self.add_on = xml_element.elements['addOn'].text
+			end
+		end
+
+	end
+
+	class KalturaVendorTaskDataCaptionAsset < KalturaVendorTaskData
+		# Optional - The id of the caption asset object
+		attr_accessor :caption_asset_id
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['captionAssetId'] != nil
+				self.caption_asset_id = xml_element.elements['captionAssetId'].text
+			end
+		end
+
+	end
+
+	class KalturaAlignmentVendorTaskData < KalturaVendorTaskDataCaptionAsset
+		# The id of the text transcript object the vendor should use while runing the alignment task
+		attr_accessor :text_transcript_asset_id
+		# Optional - The id of the json transcript object the vendor should update once alignment task processing is done
+		attr_accessor :json_transcript_asset_id
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['textTranscriptAssetId'] != nil
+				self.text_transcript_asset_id = xml_element.elements['textTranscriptAssetId'].text
+			end
+			if xml_element.elements['jsonTranscriptAssetId'] != nil
+				self.json_transcript_asset_id = xml_element.elements['jsonTranscriptAssetId'].text
 			end
 		end
 
@@ -1304,6 +1313,15 @@ module Kaltura
 			if xml_element.elements['toDate'] != nil
 				self.to_date = xml_element.elements['toDate'].text
 			end
+		end
+
+	end
+
+	class KalturaTranslationVendorTaskData < KalturaVendorTaskDataCaptionAsset
+
+
+		def from_xml(xml_element)
+			super
 		end
 
 	end

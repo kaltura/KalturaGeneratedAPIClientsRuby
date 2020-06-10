@@ -5765,6 +5765,18 @@ module Kaltura
 			end
 			return client.do_queue()
 		end
+
+		# Validate hash key
+		# @return [KalturaAuthentication]
+		def validate_hash_key(hash_key)
+			kparams = {}
+			client.add_param(kparams, 'hashKey', hash_key)
+			client.queue_service_action_call('user', 'validateHashKey', 'KalturaAuthentication', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
 	end
 
 	# widget service for full widget management
@@ -6282,7 +6294,7 @@ module Kaltura
 		def initialize(client)
 			super(client)
 			self.client_tag = 'ruby:20-06-09'
-			self.api_version = '16.3.0'
+			self.api_version = '16.4.0'
 		end
 		
 		def client_tag=(value)

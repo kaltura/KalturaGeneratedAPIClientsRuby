@@ -7495,6 +7495,7 @@ module Kaltura
 	class KalturaBaseEntryFilter < KalturaBaseEntryBaseFilter
 		attr_accessor :free_text
 		attr_accessor :excluded_free_text_groups
+		attr_accessor :description_like
 		attr_accessor :is_root
 		attr_accessor :categories_full_name_in
 		# All entries within this categoy or in child categories
@@ -7513,6 +7514,9 @@ module Kaltura
 			end
 			if xml_element.elements['excludedFreeTextGroups'] != nil
 				self.excluded_free_text_groups = xml_element.elements['excludedFreeTextGroups'].text
+			end
+			if xml_element.elements['descriptionLike'] != nil
+				self.description_like = xml_element.elements['descriptionLike'].text
 			end
 			if xml_element.elements['isRoot'] != nil
 				self.is_root = xml_element.elements['isRoot'].text

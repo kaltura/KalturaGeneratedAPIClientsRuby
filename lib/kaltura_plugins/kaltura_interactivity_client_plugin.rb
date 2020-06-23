@@ -62,6 +62,68 @@ module Kaltura
 
 	end
 
+	class KalturaInteractivityDataFieldsFilter < KalturaObjectBase
+		# A string containing CSV list of fields to include
+		attr_accessor :fields
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['fields'] != nil
+				self.fields = xml_element.elements['fields'].text
+			end
+		end
+
+	end
+
+	class KalturaInteractivityRootFilter < KalturaInteractivityDataFieldsFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaInteractivityNodeFilter < KalturaInteractivityDataFieldsFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaInteractivityInteractionFilter < KalturaInteractivityDataFieldsFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaInteractivityDataFilter < KalturaObjectBase
+		attr_accessor :root_filter
+		attr_accessor :node_filter
+		attr_accessor :interaction_filter
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['rootFilter'] != nil
+				self.root_filter = KalturaClientBase.object_from_xml(xml_element.elements['rootFilter'], 'KalturaInteractivityRootFilter')
+			end
+			if xml_element.elements['nodeFilter'] != nil
+				self.node_filter = KalturaClientBase.object_from_xml(xml_element.elements['nodeFilter'], 'KalturaInteractivityNodeFilter')
+			end
+			if xml_element.elements['interactionFilter'] != nil
+				self.interaction_filter = KalturaClientBase.object_from_xml(xml_element.elements['interactionFilter'], 'KalturaInteractivityInteractionFilter')
+			end
+		end
+
+	end
+
 	class KalturaInteractivity < KalturaBaseInteractivity
 
 
@@ -113,9 +175,10 @@ module Kaltura
 
 		# Retrieve a interactivity object by entry id
 		# @return [KalturaInteractivity]
-		def get(entry_id)
+		def get(entry_id, data_filter=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'dataFilter', data_filter)
 			client.queue_service_action_call('interactivity_interactivity', 'get', 'KalturaInteractivity', kparams)
 			if (client.is_multirequest)
 				return nil

@@ -8432,6 +8432,8 @@ module Kaltura
 		attr_accessor :node_ids_in
 		# filter by categories ancestor
 		attr_accessor :categories_ancestor_id_in
+		# filter by hotspot id
+		attr_accessor :hotspot_id_in
 
 		def search_in_tags=(val)
 			@search_in_tags = to_b(val)
@@ -8552,6 +8554,9 @@ module Kaltura
 			end
 			if xml_element.elements['categoriesAncestorIdIn'] != nil
 				self.categories_ancestor_id_in = xml_element.elements['categoriesAncestorIdIn'].text
+			end
+			if xml_element.elements['hotspotIdIn'] != nil
+				self.hotspot_id_in = xml_element.elements['hotspotIdIn'].text
 			end
 		end
 

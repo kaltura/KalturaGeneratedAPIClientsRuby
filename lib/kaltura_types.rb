@@ -9496,6 +9496,7 @@ module Kaltura
 		attr_accessor :export_periodically
 		attr_accessor :excluded_flavor_params_ids
 		attr_accessor :should_export_captions
+		attr_accessor :excluded_entry_types
 
 		def id=(val)
 			@id = val.to_i
@@ -9661,6 +9662,9 @@ module Kaltura
 			end
 			if xml_element.elements['shouldExportCaptions'] != nil
 				self.should_export_captions = xml_element.elements['shouldExportCaptions'].text
+			end
+			if xml_element.elements['excludedEntryTypes'] != nil
+				self.excluded_entry_types = xml_element.elements['excludedEntryTypes'].text
 			end
 		end
 

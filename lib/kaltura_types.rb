@@ -940,6 +940,10 @@ module Kaltura
 		attr_accessor :template_entry_id
 		# should we display this entry in search
 		attr_accessor :display_in_search
+		# Entry application
+		attr_accessor :application
+		# Entry application version
+		attr_accessor :application_version
 
 		def partner_id=(val)
 			@partner_id = val.to_i
@@ -1129,6 +1133,12 @@ module Kaltura
 			end
 			if xml_element.elements['displayInSearch'] != nil
 				self.display_in_search = xml_element.elements['displayInSearch'].text
+			end
+			if xml_element.elements['application'] != nil
+				self.application = xml_element.elements['application'].text
+			end
+			if xml_element.elements['applicationVersion'] != nil
+				self.application_version = xml_element.elements['applicationVersion'].text
 			end
 		end
 
@@ -4560,6 +4570,8 @@ module Kaltura
 		attr_accessor :conversion_quality
 		# The source type of the entry
 		attr_accessor :source_type
+		# The source version of the entry
+		attr_accessor :source_version
 		# The search provider type used to import this entry
 		attr_accessor :search_provider_type
 		# The ID of the media in the importing site
@@ -4602,6 +4614,9 @@ module Kaltura
 			end
 			if xml_element.elements['sourceType'] != nil
 				self.source_type = xml_element.elements['sourceType'].text
+			end
+			if xml_element.elements['sourceVersion'] != nil
+				self.source_version = xml_element.elements['sourceVersion'].text
 			end
 			if xml_element.elements['searchProviderType'] != nil
 				self.search_provider_type = xml_element.elements['searchProviderType'].text

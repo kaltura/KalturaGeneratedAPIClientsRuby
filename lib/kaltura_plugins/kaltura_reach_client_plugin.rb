@@ -1876,6 +1876,20 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# @return [string]
+		def get_serve_url(filter_type=KalturaNotImplemented, filter_input=KalturaNotImplemented, status=KalturaNotImplemented, due_date=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filterType', filter_type)
+			client.add_param(kparams, 'filterInput', filter_input)
+			client.add_param(kparams, 'status', status)
+			client.add_param(kparams, 'dueDate', due_date)
+			client.queue_service_action_call('reach_entryvendortask', 'getServeUrl', 'string', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# List KalturaEntryVendorTask objects
 		# @return [KalturaEntryVendorTaskListResponse]
 		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
@@ -1900,6 +1914,17 @@ module Kaltura
 				return nil
 			end
 			return client.do_queue()
+		end
+
+		# @return [file]
+		def serve(vendor_partner_id=KalturaNotImplemented, partner_id=KalturaNotImplemented, status=KalturaNotImplemented, due_date=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'vendorPartnerId', vendor_partner_id)
+			client.add_param(kparams, 'partnerId', partner_id)
+			client.add_param(kparams, 'status', status)
+			client.add_param(kparams, 'dueDate', due_date)
+			client.queue_service_action_call('reach_entryvendortask', 'serve', 'file', kparams)
+			return client.get_serve_url()
 		end
 
 		# Will serve a requested csv

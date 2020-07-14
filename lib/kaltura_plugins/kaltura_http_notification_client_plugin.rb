@@ -317,6 +317,8 @@ module Kaltura
 		attr_accessor :url
 		# Request method.
 		attr_accessor :method
+		# The type of the data to send.
+		attr_accessor :content_type
 		# Data to send.
 		attr_accessor :data
 		# The maximum number of seconds to allow cURL functions to execute.
@@ -377,6 +379,9 @@ module Kaltura
 			end
 			if xml_element.elements['method'] != nil
 				self.method = xml_element.elements['method'].text
+			end
+			if xml_element.elements['contentType'] != nil
+				self.content_type = xml_element.elements['contentType'].text
 			end
 			if xml_element.elements['data'] != nil
 				self.data = xml_element.elements['data'].text

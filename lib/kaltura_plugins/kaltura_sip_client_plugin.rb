@@ -111,10 +111,11 @@ module Kaltura
 		end
 
 		# @return [string]
-		def generate_sip_url(entry_id, regenerate=false)
+		def generate_sip_url(entry_id, regenerate=false, source_type=1)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
 			client.add_param(kparams, 'regenerate', regenerate)
+			client.add_param(kparams, 'sourceType', source_type)
 			client.queue_service_action_call('sip_pexip', 'generateSipUrl', 'string', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -122,10 +123,10 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# @return [bool]
+		# @return []
 		def handle_incoming_call()
 			kparams = {}
-			client.queue_service_action_call('sip_pexip', 'handleIncomingCall', 'bool', kparams)
+			client.queue_service_action_call('sip_pexip', 'handleIncomingCall', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

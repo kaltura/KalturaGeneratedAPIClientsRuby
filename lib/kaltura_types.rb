@@ -6939,9 +6939,13 @@ module Kaltura
 		# The Streams primary server node id
 		attr_accessor :primary_server_node_id
 		attr_accessor :sip_token
+		attr_accessor :sip_source_type
 
 		def primary_server_node_id=(val)
 			@primary_server_node_id = val.to_i
+		end
+		def sip_source_type=(val)
+			@sip_source_type = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -7002,6 +7006,9 @@ module Kaltura
 			end
 			if xml_element.elements['sipToken'] != nil
 				self.sip_token = xml_element.elements['sipToken'].text
+			end
+			if xml_element.elements['sipSourceType'] != nil
+				self.sip_source_type = xml_element.elements['sipSourceType'].text
 			end
 		end
 

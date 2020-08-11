@@ -29,6 +29,12 @@ require 'kaltura_client.rb'
 
 module Kaltura
 
+	class KalturaSipSourceType
+		PICTURE_IN_PICTURE = 1
+		TALKING_HEADS = 2
+		SCREEN_SHARE = 3
+	end
+
 	class KalturaSipServerNodeOrderBy
 		CREATED_AT_ASC = "+createdAt"
 		HEARTBEAT_TIME_ASC = "+heartbeatTime"

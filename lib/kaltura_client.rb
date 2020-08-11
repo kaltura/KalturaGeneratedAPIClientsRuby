@@ -5699,9 +5699,10 @@ module Kaltura
 
 		# Reset user's password and send the user an email to generate a new one.
 		# @return []
-		def reset_password(email)
+		def reset_password(email, link_type=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'email', email)
+			client.add_param(kparams, 'linkType', link_type)
 			client.queue_service_action_call('user', 'resetPassword', '', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -6293,8 +6294,8 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:20-08-10'
-			self.api_version = '16.7.0'
+			self.client_tag = 'ruby:20-08-11'
+			self.api_version = '16.8.0'
 		end
 		
 		def client_tag=(value)

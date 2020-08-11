@@ -1135,6 +1135,7 @@ module Kaltura
 		STORAGE_PERIODIC_EXPORT = "53"
 		STORAGE_PERIODIC_PURGE = "54"
 		STORAGE_PERIODIC_DELETE_LOCAL = "55"
+		REACH_JOB_CLEANER = "56"
 	end
 
 	class KalturaBulkUploadAction
@@ -3646,6 +3647,11 @@ module Kaltura
 		QOE_ENGAGEMENT_APPLICATION_VERSION = "30062"
 		QOE_STREAM_QUALITY_APPLICATION_VERSION = "30063"
 		QOE_ERROR_TRACKING_APPLICATION_VERSION = "30064"
+	end
+
+	class KalturaResetPassLinkType
+		KMC = "1"
+		KMS = "2"
 	end
 
 	class KalturaResponseProfileOrderBy

@@ -1263,6 +1263,18 @@ module Kaltura
 			end
 			return client.do_queue()
 		end
+
+		# @return []
+		def update_status(drop_folder_id, status)
+			kparams = {}
+			client.add_param(kparams, 'dropFolderId', drop_folder_id)
+			client.add_param(kparams, 'status', status)
+			client.queue_service_action_call('dropfolder_dropfolder', 'updateStatus', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
 	end
 
 	# DropFolderFile service lets you create and manage drop folder files

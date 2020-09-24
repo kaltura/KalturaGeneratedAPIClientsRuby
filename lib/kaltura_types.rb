@@ -4148,6 +4148,8 @@ module Kaltura
 		attr_accessor :first_name
 		attr_accessor :last_name
 		attr_accessor :login_enabled
+		attr_accessor :registration_info
+		attr_accessor :attendance_info
 
 		def type=(val)
 			@type = val.to_i
@@ -4202,6 +4204,12 @@ module Kaltura
 			end
 			if xml_element.elements['loginEnabled'] != nil
 				self.login_enabled = xml_element.elements['loginEnabled'].text
+			end
+			if xml_element.elements['registrationInfo'] != nil
+				self.registration_info = xml_element.elements['registrationInfo'].text
+			end
+			if xml_element.elements['attendanceInfo'] != nil
+				self.attendance_info = xml_element.elements['attendanceInfo'].text
 			end
 		end
 

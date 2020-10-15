@@ -2618,7 +2618,7 @@ module Kaltura
 
 		# Delivering the status of a live stream (on-air/offline) if it is possible
 		# @return [bool]
-		def is_live(id, protocol)
+		def is_live(id, protocol=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
 			client.add_param(kparams, 'protocol', protocol)
@@ -6294,8 +6294,8 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:20-10-13'
-			self.api_version = '16.8.0'
+			self.client_tag = 'ruby:20-10-14'
+			self.api_version = '16.9.0'
 		end
 		
 		def client_tag=(value)

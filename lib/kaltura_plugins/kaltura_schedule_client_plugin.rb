@@ -689,15 +689,28 @@ module Kaltura
 	class KalturaLiveStreamScheduleEvent < KalturaEntryScheduleEvent
 		# Defines the expected audience.
 		attr_accessor :projected_audience
+		# The entry ID of the source entry (for simulive)
+		attr_accessor :source_entry_id
+		# The time relative time before the startTime considered as preStart time
+		attr_accessor :pre_start_time
 
 		def projected_audience=(val)
 			@projected_audience = val.to_i
+		end
+		def pre_start_time=(val)
+			@pre_start_time = val.to_i
 		end
 
 		def from_xml(xml_element)
 			super
 			if xml_element.elements['projectedAudience'] != nil
 				self.projected_audience = xml_element.elements['projectedAudience'].text
+			end
+			if xml_element.elements['sourceEntryId'] != nil
+				self.source_entry_id = xml_element.elements['sourceEntryId'].text
+			end
+			if xml_element.elements['preStartTime'] != nil
+				self.pre_start_time = xml_element.elements['preStartTime'].text
 			end
 		end
 

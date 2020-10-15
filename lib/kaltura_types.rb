@@ -594,6 +594,8 @@ module Kaltura
 		attr_accessor :partner_description
 		# Comma separated list of source flavor params ids
 		attr_accessor :actual_source_asset_params_ids
+		# The size (in Bytes) of the asset
+		attr_accessor :size_in_bytes
 
 		def partner_id=(val)
 			@partner_id = val.to_i
@@ -612,6 +614,9 @@ module Kaltura
 		end
 		def deleted_at=(val)
 			@deleted_at = val.to_i
+		end
+		def size_in_bytes=(val)
+			@size_in_bytes = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -657,6 +662,9 @@ module Kaltura
 			end
 			if xml_element.elements['actualSourceAssetParamsIds'] != nil
 				self.actual_source_asset_params_ids = xml_element.elements['actualSourceAssetParamsIds'].text
+			end
+			if xml_element.elements['sizeInBytes'] != nil
+				self.size_in_bytes = xml_element.elements['sizeInBytes'].text
 			end
 		end
 
@@ -1923,6 +1931,7 @@ module Kaltura
 		attr_accessor :embed_code_types
 		attr_accessor :template_partner_id
 		attr_accessor :ignore_seo_links
+		attr_accessor :block_direct_login
 		attr_accessor :host
 		attr_accessor :cdn_host
 		attr_accessor :is_first_login
@@ -2002,6 +2011,9 @@ module Kaltura
 		end
 		def ignore_seo_links=(val)
 			@ignore_seo_links = to_b(val)
+		end
+		def block_direct_login=(val)
+			@block_direct_login = to_b(val)
 		end
 		def is_first_login=(val)
 			@is_first_login = to_b(val)
@@ -2179,6 +2191,9 @@ module Kaltura
 			end
 			if xml_element.elements['ignoreSeoLinks'] != nil
 				self.ignore_seo_links = xml_element.elements['ignoreSeoLinks'].text
+			end
+			if xml_element.elements['blockDirectLogin'] != nil
+				self.block_direct_login = xml_element.elements['blockDirectLogin'].text
 			end
 			if xml_element.elements['host'] != nil
 				self.host = xml_element.elements['host'].text
@@ -8361,6 +8376,23 @@ module Kaltura
 
 	end
 
+	class KalturaReportExportFile < KalturaObjectBase
+		attr_accessor :file_id
+		attr_accessor :file_name
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['fileId'] != nil
+				self.file_id = xml_element.elements['fileId'].text
+			end
+			if xml_element.elements['fileName'] != nil
+				self.file_name = xml_element.elements['fileName'].text
+			end
+		end
+
+	end
+
 	class KalturaReportInputBaseFilter < KalturaObjectBase
 		# Start date as Unix timestamp (In seconds)
 		attr_accessor :from_date
@@ -8657,6 +8689,7 @@ module Kaltura
 		# Time zone offset in minutes (between client to UTC)
 		attr_accessor :time_zone_offset
 		attr_accessor :report_items
+		attr_accessor :reports_items_group
 
 		def time_zone_offset=(val)
 			@time_zone_offset = val.to_i
@@ -8672,6 +8705,9 @@ module Kaltura
 			end
 			if xml_element.elements['reportItems'] != nil
 				self.report_items = KalturaClientBase.object_from_xml(xml_element.elements['reportItems'], 'KalturaReportExportItem')
+			end
+			if xml_element.elements['reportsItemsGroup'] != nil
+				self.reports_items_group = xml_element.elements['reportsItemsGroup'].text
 			end
 		end
 
@@ -9495,6 +9531,7 @@ module Kaltura
 		attr_accessor :protocol
 		attr_accessor :storage_url
 		attr_accessor :storage_base_dir
+		attr_accessor :path_prefix
 		attr_accessor :storage_username
 		attr_accessor :storage_password
 		attr_accessor :storage_ftp_passive_mode
@@ -9617,6 +9654,9 @@ module Kaltura
 			end
 			if xml_element.elements['storageBaseDir'] != nil
 				self.storage_base_dir = xml_element.elements['storageBaseDir'].text
+			end
+			if xml_element.elements['pathPrefix'] != nil
+				self.path_prefix = xml_element.elements['pathPrefix'].text
 			end
 			if xml_element.elements['storageUsername'] != nil
 				self.storage_username = xml_element.elements['storageUsername'].text
@@ -14614,6 +14654,8 @@ module Kaltura
 		attr_accessor :recipient_email
 		attr_accessor :report_items
 		attr_accessor :file_paths
+		attr_accessor :reports_group
+		attr_accessor :files
 
 
 		def from_xml(xml_element)
@@ -14626,6 +14668,12 @@ module Kaltura
 			end
 			if xml_element.elements['filePaths'] != nil
 				self.file_paths = xml_element.elements['filePaths'].text
+			end
+			if xml_element.elements['reportsGroup'] != nil
+				self.reports_group = xml_element.elements['reportsGroup'].text
+			end
+			if xml_element.elements['files'] != nil
+				self.files = KalturaClientBase.object_from_xml(xml_element.elements['files'], 'KalturaReportExportFile')
 			end
 		end
 
@@ -16788,6 +16836,7 @@ module Kaltura
 		attr_accessor :custom_data
 		attr_accessor :extra_dest_file_syncs
 		attr_accessor :engine_message
+		attr_accessor :dest_file_sync_shared_path
 		attr_accessor :user_cpu
 
 		def user_cpu=(val)
@@ -16822,6 +16871,9 @@ module Kaltura
 			end
 			if xml_element.elements['engineMessage'] != nil
 				self.engine_message = xml_element.elements['engineMessage'].text
+			end
+			if xml_element.elements['destFileSyncSharedPath'] != nil
+				self.dest_file_sync_shared_path = xml_element.elements['destFileSyncSharedPath'].text
 			end
 			if xml_element.elements['userCpu'] != nil
 				self.user_cpu = xml_element.elements['userCpu'].text

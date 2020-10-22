@@ -693,12 +693,17 @@ module Kaltura
 		attr_accessor :source_entry_id
 		# The time relative time before the startTime considered as preStart time
 		attr_accessor :pre_start_time
+		# The time relative time before the endTime considered as postEnd time
+		attr_accessor :post_end_time
 
 		def projected_audience=(val)
 			@projected_audience = val.to_i
 		end
 		def pre_start_time=(val)
 			@pre_start_time = val.to_i
+		end
+		def post_end_time=(val)
+			@post_end_time = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -711,6 +716,9 @@ module Kaltura
 			end
 			if xml_element.elements['preStartTime'] != nil
 				self.pre_start_time = xml_element.elements['preStartTime'].text
+			end
+			if xml_element.elements['postEndTime'] != nil
+				self.post_end_time = xml_element.elements['postEndTime'].text
 			end
 		end
 

@@ -12482,23 +12482,6 @@ module Kaltura
 
 	end
 
-	class KalturaDeliveryProfileAkamaiHttp < KalturaDeliveryProfile
-		# Should we use intelliseek
-		attr_accessor :use_intelliseek
-
-		def use_intelliseek=(val)
-			@use_intelliseek = to_b(val)
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['useIntelliseek'] != nil
-				self.use_intelliseek = xml_element.elements['useIntelliseek'].text
-			end
-		end
-
-	end
-
 	class KalturaDeliveryProfileBaseFilter < KalturaFilter
 		attr_accessor :id_equal
 		attr_accessor :id_in
@@ -12639,7 +12622,7 @@ module Kaltura
 
 	end
 
-	class KalturaDeliveryProfileGenericHttp < KalturaDeliveryProfile
+	class KalturaDeliveryProfileGenericSilverLight < KalturaDeliveryProfile
 		attr_accessor :pattern
 
 
@@ -12652,14 +12635,17 @@ module Kaltura
 
 	end
 
-	class KalturaDeliveryProfileGenericSilverLight < KalturaDeliveryProfile
-		attr_accessor :pattern
+	class KalturaDeliveryProfileHttp < KalturaDeliveryProfile
+		attr_accessor :max_size
 
+		def max_size=(val)
+			@max_size = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['pattern'] != nil
-				self.pattern = xml_element.elements['pattern'].text
+			if xml_element.elements['maxSize'] != nil
+				self.max_size = xml_element.elements['maxSize'].text
 			end
 		end
 
@@ -15532,6 +15518,19 @@ module Kaltura
 
 	end
 
+	class KalturaUrlRecognizerKaltura < KalturaUrlRecognizer
+		attr_accessor :key
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['key'] != nil
+				self.key = xml_element.elements['key'].text
+			end
+		end
+
+	end
+
 	class KalturaUrlTokenizerAkamaiHttp < KalturaUrlTokenizer
 		# param
 		attr_accessor :param_name
@@ -15690,6 +15689,15 @@ module Kaltura
 			if xml_element.elements['rootDir'] != nil
 				self.root_dir = xml_element.elements['rootDir'].text
 			end
+		end
+
+	end
+
+	class KalturaUrlTokenizerKaltura < KalturaUrlTokenizer
+
+
+		def from_xml(xml_element)
+			super
 		end
 
 	end
@@ -16896,6 +16904,23 @@ module Kaltura
 
 	end
 
+	class KalturaDeliveryProfileAkamaiHttp < KalturaDeliveryProfileHttp
+		# Should we use intelliseek
+		attr_accessor :use_intelliseek
+
+		def use_intelliseek=(val)
+			@use_intelliseek = to_b(val)
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['useIntelliseek'] != nil
+				self.use_intelliseek = xml_element.elements['useIntelliseek'].text
+			end
+		end
+
+	end
+
 	class KalturaDeliveryProfileFilter < KalturaDeliveryProfileBaseFilter
 		attr_accessor :is_live
 
@@ -16907,6 +16932,19 @@ module Kaltura
 			super
 			if xml_element.elements['isLive'] != nil
 				self.is_live = xml_element.elements['isLive'].text
+			end
+		end
+
+	end
+
+	class KalturaDeliveryProfileGenericHttp < KalturaDeliveryProfileHttp
+		attr_accessor :pattern
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['pattern'] != nil
+				self.pattern = xml_element.elements['pattern'].text
 			end
 		end
 

@@ -256,10 +256,18 @@ module Kaltura
 	end
 
 	class KalturaVendorTaskData < KalturaObjectBase
+		# The duration of the entry for which the task was created for in milliseconds
+		attr_accessor :entry_duration
 
+		def entry_duration=(val)
+			@entry_duration = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
+			if xml_element.elements['entryDuration'] != nil
+				self.entry_duration = xml_element.elements['entryDuration'].text
+			end
 		end
 
 	end

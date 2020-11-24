@@ -659,6 +659,7 @@ module Kaltura
 		attr_accessor :service_feature
 		attr_accessor :turn_around_time
 		attr_accessor :pricing
+		attr_accessor :allow_resubmission
 
 		def id=(val)
 			@id = val.to_i
@@ -683,6 +684,9 @@ module Kaltura
 		end
 		def turn_around_time=(val)
 			@turn_around_time = val.to_i
+		end
+		def allow_resubmission=(val)
+			@allow_resubmission = to_b(val)
 		end
 
 		def from_xml(xml_element)
@@ -719,6 +723,9 @@ module Kaltura
 			end
 			if xml_element.elements['pricing'] != nil
 				self.pricing = KalturaClientBase.object_from_xml(xml_element.elements['pricing'], 'KalturaVendorCatalogItemPricing')
+			end
+			if xml_element.elements['allowResubmission'] != nil
+				self.allow_resubmission = xml_element.elements['allowResubmission'].text
 			end
 		end
 

@@ -8140,6 +8140,22 @@ module Kaltura
 
 	end
 
+	class KalturaTypedArray < KalturaObjectBase
+		attr_accessor :count
+
+		def count=(val)
+			@count = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['count'] != nil
+				self.count = xml_element.elements['count'].text
+			end
+		end
+
+	end
+
 	class KalturaPlaybackContext < KalturaObjectBase
 		attr_accessor :sources
 		attr_accessor :playback_captions
@@ -8148,6 +8164,7 @@ module Kaltura
 		attr_accessor :actions
 		# Array of actions as received from the rules that invalidated
 		attr_accessor :messages
+		attr_accessor :bumper_data
 
 
 		def from_xml(xml_element)
@@ -8166,6 +8183,9 @@ module Kaltura
 			end
 			if xml_element.elements['messages'] != nil
 				self.messages = KalturaClientBase.object_from_xml(xml_element.elements['messages'], 'KalturaAccessControlMessage')
+			end
+			if xml_element.elements['bumperData'] != nil
+				self.bumper_data = KalturaClientBase.object_from_xml(xml_element.elements['bumperData'], 'KalturaTypedArray')
 			end
 		end
 

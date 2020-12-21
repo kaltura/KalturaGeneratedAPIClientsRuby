@@ -47,11 +47,12 @@ module Kaltura
 		attr_accessor :account_id
 		attr_accessor :enable_recording_upload
 		attr_accessor :create_user_if_not_exist
-		attr_accessor :handle_participant_mode
+		attr_accessor :handle_participants_mode
 		attr_accessor :zoom_user_matching_mode
 		attr_accessor :zoom_user_postfix
 		attr_accessor :zoom_webinar_category
 		attr_accessor :enable_webinar_uploads
+		attr_accessor :conversion_profile_id
 
 		def enable_recording_upload=(val)
 			@enable_recording_upload = val.to_i
@@ -59,14 +60,17 @@ module Kaltura
 		def create_user_if_not_exist=(val)
 			@create_user_if_not_exist = val.to_i
 		end
-		def handle_participant_mode=(val)
-			@handle_participant_mode = val.to_i
+		def handle_participants_mode=(val)
+			@handle_participants_mode = val.to_i
 		end
 		def zoom_user_matching_mode=(val)
 			@zoom_user_matching_mode = val.to_i
 		end
 		def enable_webinar_uploads=(val)
 			@enable_webinar_uploads = val.to_i
+		end
+		def conversion_profile_id=(val)
+			@conversion_profile_id = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -86,8 +90,8 @@ module Kaltura
 			if xml_element.elements['createUserIfNotExist'] != nil
 				self.create_user_if_not_exist = xml_element.elements['createUserIfNotExist'].text
 			end
-			if xml_element.elements['handleParticipantMode'] != nil
-				self.handle_participant_mode = xml_element.elements['handleParticipantMode'].text
+			if xml_element.elements['handleParticipantsMode'] != nil
+				self.handle_participants_mode = xml_element.elements['handleParticipantsMode'].text
 			end
 			if xml_element.elements['zoomUserMatchingMode'] != nil
 				self.zoom_user_matching_mode = xml_element.elements['zoomUserMatchingMode'].text
@@ -100,6 +104,9 @@ module Kaltura
 			end
 			if xml_element.elements['enableWebinarUploads'] != nil
 				self.enable_webinar_uploads = xml_element.elements['enableWebinarUploads'].text
+			end
+			if xml_element.elements['conversionProfileId'] != nil
+				self.conversion_profile_id = xml_element.elements['conversionProfileId'].text
 			end
 		end
 
@@ -127,6 +134,18 @@ module Kaltura
 			client.add_param(kparams, 'tokensData', tokens_data)
 			client.add_param(kparams, 'iv', iv)
 			client.queue_service_action_call('vendor_zoomvendor', 'fetchRegistrationPage', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Retrieve zoom integration setting object by partner id
+		# @return [KalturaZoomIntegrationSetting]
+		def get(partner_id)
+			kparams = {}
+			client.add_param(kparams, 'partnerId', partner_id)
+			client.queue_service_action_call('vendor_zoomvendor', 'get', 'KalturaZoomIntegrationSetting', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

@@ -8,7 +8,7 @@
 # to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2020  Kaltura Inc.
+# Copyright (C) 2006-2021  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -481,6 +481,8 @@ module Kaltura
 		attr_accessor :enable_audio_tags
 		attr_accessor :enable_profanity_removal
 		attr_accessor :max_characters_per_caption_line
+		attr_accessor :label_addition_for_machine_service_type
+		attr_accessor :label_addition_for_human_service_type
 		attr_accessor :content_deletion_policy
 		attr_accessor :rules
 		attr_accessor :credit
@@ -601,6 +603,12 @@ module Kaltura
 			end
 			if xml_element.elements['maxCharactersPerCaptionLine'] != nil
 				self.max_characters_per_caption_line = xml_element.elements['maxCharactersPerCaptionLine'].text
+			end
+			if xml_element.elements['labelAdditionForMachineServiceType'] != nil
+				self.label_addition_for_machine_service_type = xml_element.elements['labelAdditionForMachineServiceType'].text
+			end
+			if xml_element.elements['labelAdditionForHumanServiceType'] != nil
+				self.label_addition_for_human_service_type = xml_element.elements['labelAdditionForHumanServiceType'].text
 			end
 			if xml_element.elements['contentDeletionPolicy'] != nil
 				self.content_deletion_policy = xml_element.elements['contentDeletionPolicy'].text

@@ -8,7 +8,7 @@
 # to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2020  Kaltura Inc.
+# Copyright (C) 2006-2021  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -8516,6 +8516,8 @@ module Kaltura
 		attr_accessor :categories_ancestor_id_in
 		# filter by hotspot id
 		attr_accessor :hotspot_id_in
+		# filter by crm id
+		attr_accessor :crm_id_in
 
 		def search_in_tags=(val)
 			@search_in_tags = to_b(val)
@@ -8639,6 +8641,9 @@ module Kaltura
 			end
 			if xml_element.elements['hotspotIdIn'] != nil
 				self.hotspot_id_in = xml_element.elements['hotspotIdIn'].text
+			end
+			if xml_element.elements['crmIdIn'] != nil
+				self.crm_id_in = xml_element.elements['crmIdIn'].text
 			end
 		end
 
@@ -13460,6 +13465,7 @@ module Kaltura
 		attr_accessor :user_mail
 		# The file location
 		attr_accessor :output_path
+		attr_accessor :shared_output_path
 
 
 		def from_xml(xml_element)
@@ -13472,6 +13478,9 @@ module Kaltura
 			end
 			if xml_element.elements['outputPath'] != nil
 				self.output_path = xml_element.elements['outputPath'].text
+			end
+			if xml_element.elements['sharedOutputPath'] != nil
+				self.shared_output_path = xml_element.elements['sharedOutputPath'].text
 			end
 		end
 

@@ -8518,6 +8518,8 @@ module Kaltura
 		attr_accessor :hotspot_id_in
 		# filter by crm id
 		attr_accessor :crm_id_in
+		# filter by playlist id
+		attr_accessor :playlist_id_in
 
 		def search_in_tags=(val)
 			@search_in_tags = to_b(val)
@@ -8644,6 +8646,9 @@ module Kaltura
 			end
 			if xml_element.elements['crmIdIn'] != nil
 				self.crm_id_in = xml_element.elements['crmIdIn'].text
+			end
+			if xml_element.elements['playlistIdIn'] != nil
+				self.playlist_id_in = xml_element.elements['playlistIdIn'].text
 			end
 		end
 
@@ -13695,6 +13700,7 @@ module Kaltura
 		attr_accessor :dest_file_local_path
 		attr_accessor :flavor_asset_id
 		attr_accessor :file_size
+		attr_accessor :dest_file_shared_path
 
 		def file_size=(val)
 			@file_size = val.to_i
@@ -13713,6 +13719,9 @@ module Kaltura
 			end
 			if xml_element.elements['fileSize'] != nil
 				self.file_size = xml_element.elements['fileSize'].text
+			end
+			if xml_element.elements['destFileSharedPath'] != nil
+				self.dest_file_shared_path = xml_element.elements['destFileSharedPath'].text
 			end
 		end
 

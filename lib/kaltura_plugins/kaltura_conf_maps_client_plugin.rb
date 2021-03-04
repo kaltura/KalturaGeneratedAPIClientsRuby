@@ -52,6 +52,7 @@ module Kaltura
 		attr_accessor :remarks
 		# map status
 		attr_accessor :status
+		attr_accessor :change_description
 
 		def is_editable=(val)
 			@is_editable = to_b(val)
@@ -100,6 +101,9 @@ module Kaltura
 			end
 			if xml_element.elements['status'] != nil
 				self.status = xml_element.elements['status'].text
+			end
+			if xml_element.elements['changeDescription'] != nil
+				self.change_description = xml_element.elements['changeDescription'].text
 			end
 		end
 

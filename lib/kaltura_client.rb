@@ -2100,7 +2100,7 @@ module Kaltura
 
 		# sync by userId and groupIds
 		# @return [KalturaBulkUpload]
-		def sync(user_id, group_ids, remove_from_existing_groups=true, create_new_groups=true)
+		def sync(user_id, group_ids=KalturaNotImplemented, remove_from_existing_groups=true, create_new_groups=true)
 			kparams = {}
 			client.add_param(kparams, 'userId', user_id)
 			client.add_param(kparams, 'groupIds', group_ids)
@@ -6294,8 +6294,8 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:21-03-02'
-			self.api_version = '16.16.0'
+			self.client_tag = 'ruby:21-03-03'
+			self.api_version = '16.18.0'
 		end
 		
 		def client_tag=(value)

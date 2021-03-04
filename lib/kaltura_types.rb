@@ -2639,6 +2639,7 @@ module Kaltura
 		attr_accessor :is_aggregation_category
 		# List of aggregation channels the category belongs to
 		attr_accessor :aggregation_categories
+		attr_accessor :admin_tags
 
 		def id=(val)
 			@id = val.to_i
@@ -2816,6 +2817,9 @@ module Kaltura
 			end
 			if xml_element.elements['aggregationCategories'] != nil
 				self.aggregation_categories = xml_element.elements['aggregationCategories'].text
+			end
+			if xml_element.elements['adminTags'] != nil
+				self.admin_tags = xml_element.elements['adminTags'].text
 			end
 		end
 
@@ -4165,6 +4169,9 @@ module Kaltura
 		attr_accessor :login_enabled
 		attr_accessor :registration_info
 		attr_accessor :attendance_info
+		attr_accessor :title
+		attr_accessor :company
+		attr_accessor :ks_privileges
 
 		def type=(val)
 			@type = val.to_i
@@ -4225,6 +4232,15 @@ module Kaltura
 			end
 			if xml_element.elements['attendanceInfo'] != nil
 				self.attendance_info = xml_element.elements['attendanceInfo'].text
+			end
+			if xml_element.elements['title'] != nil
+				self.title = xml_element.elements['title'].text
+			end
+			if xml_element.elements['company'] != nil
+				self.company = xml_element.elements['company'].text
+			end
+			if xml_element.elements['ksPrivileges'] != nil
+				self.ks_privileges = xml_element.elements['ksPrivileges'].text
 			end
 		end
 
@@ -8520,6 +8536,10 @@ module Kaltura
 		attr_accessor :crm_id_in
 		# filter by playlist id
 		attr_accessor :playlist_id_in
+		# filter by domain
+		attr_accessor :domain_in
+		# filter by canonical url
+		attr_accessor :canonical_url_in
 
 		def search_in_tags=(val)
 			@search_in_tags = to_b(val)
@@ -8649,6 +8669,12 @@ module Kaltura
 			end
 			if xml_element.elements['playlistIdIn'] != nil
 				self.playlist_id_in = xml_element.elements['playlistIdIn'].text
+			end
+			if xml_element.elements['domainIn'] != nil
+				self.domain_in = xml_element.elements['domainIn'].text
+			end
+			if xml_element.elements['canonicalUrlIn'] != nil
+				self.canonical_url_in = xml_element.elements['canonicalUrlIn'].text
 			end
 		end
 
@@ -13880,9 +13906,13 @@ module Kaltura
 		attr_accessor :streams
 		attr_accessor :recording_info
 		attr_accessor :is_playable_user
+		attr_accessor :view_mode
 
 		def is_playable_user=(val)
 			@is_playable_user = to_b(val)
+		end
+		def view_mode=(val)
+			@view_mode = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -13895,6 +13925,9 @@ module Kaltura
 			end
 			if xml_element.elements['isPlayableUser'] != nil
 				self.is_playable_user = xml_element.elements['isPlayableUser'].text
+			end
+			if xml_element.elements['viewMode'] != nil
+				self.view_mode = xml_element.elements['viewMode'].text
 			end
 		end
 

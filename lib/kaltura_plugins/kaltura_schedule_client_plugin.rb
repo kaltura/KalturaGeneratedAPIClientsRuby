@@ -57,6 +57,7 @@ module Kaltura
 		RECORD = 1
 		LIVE_STREAM = 2
 		BLACKOUT = 3
+		MEETING = 4
 	end
 
 	class KalturaScheduleResourceStatus
@@ -724,6 +725,23 @@ module Kaltura
 
 	end
 
+	class KalturaMeetingScheduleEvent < KalturaEntryScheduleEvent
+		# The time relative time before the startTime considered as preStart time
+		attr_accessor :pre_start_time
+
+		def pre_start_time=(val)
+			@pre_start_time = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['preStartTime'] != nil
+				self.pre_start_time = xml_element.elements['preStartTime'].text
+			end
+		end
+
+	end
+
 	class KalturaRecordScheduleEvent < KalturaEntryScheduleEvent
 
 
@@ -1268,6 +1286,15 @@ module Kaltura
 
 	end
 
+	class KalturaMeetingScheduleEventBaseFilter < KalturaEntryScheduleEventFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaRecordScheduleEventBaseFilter < KalturaEntryScheduleEventFilter
 
 
@@ -1287,6 +1314,15 @@ module Kaltura
 	end
 
 	class KalturaLiveStreamScheduleEventFilter < KalturaLiveStreamScheduleEventBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaMeetingScheduleEventFilter < KalturaMeetingScheduleEventBaseFilter
 
 
 		def from_xml(xml_element)

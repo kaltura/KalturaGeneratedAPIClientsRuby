@@ -4564,6 +4564,7 @@ module Kaltura
 	end
 
 	class KalturaStreamContainer < KalturaObjectBase
+		attr_accessor :id
 		attr_accessor :type
 		attr_accessor :track_index
 		attr_accessor :language
@@ -4580,6 +4581,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
+			if xml_element.elements['id'] != nil
+				self.id = xml_element.elements['id'].text
+			end
 			if xml_element.elements['type'] != nil
 				self.type = xml_element.elements['type'].text
 			end
@@ -18436,6 +18440,8 @@ module Kaltura
 		attr_accessor :metadata_profile_id
 		# The xpath to look in the metadataProfileId  and the wanted csv field name
 		attr_accessor :additional_fields
+		# Array of header names and their mapped user fields
+		attr_accessor :mapped_fields
 
 		def metadata_profile_id=(val)
 			@metadata_profile_id = val.to_i
@@ -18451,6 +18457,9 @@ module Kaltura
 			end
 			if xml_element.elements['additionalFields'] != nil
 				self.additional_fields = KalturaClientBase.object_from_xml(xml_element.elements['additionalFields'], 'KalturaCsvAdditionalFieldInfo')
+			end
+			if xml_element.elements['mappedFields'] != nil
+				self.mapped_fields = KalturaClientBase.object_from_xml(xml_element.elements['mappedFields'], 'KalturaKeyValue')
 			end
 		end
 

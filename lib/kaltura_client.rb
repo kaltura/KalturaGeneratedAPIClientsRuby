@@ -5563,11 +5563,12 @@ module Kaltura
 
 		# Creates a batch job that sends an email with a link to download a CSV containing a list of users
 		# @return [string]
-		def export_to_csv(filter=KalturaNotImplemented, metadata_profile_id=KalturaNotImplemented, additional_fields=KalturaNotImplemented)
+		def export_to_csv(filter=KalturaNotImplemented, metadata_profile_id=KalturaNotImplemented, additional_fields=KalturaNotImplemented, mapped_fields=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
 			client.add_param(kparams, 'metadataProfileId', metadata_profile_id)
 			client.add_param(kparams, 'additionalFields', additional_fields)
+			client.add_param(kparams, 'mappedFields', mapped_fields)
 			client.queue_service_action_call('user', 'exportToCsv', 'string', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -6294,8 +6295,8 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:21-03-16'
-			self.api_version = '16.18.0'
+			self.client_tag = 'ruby:21-03-17'
+			self.api_version = '16.19.0'
 		end
 		
 		def client_tag=(value)

@@ -180,33 +180,4 @@ module Kaltura
 	end
 
 
-	# Unicorn Service
-	class KalturaUnicornService < KalturaServiceBase
-		def initialize(client)
-			super(client)
-		end
-
-		# @return []
-		def notify(id)
-			kparams = {}
-			client.add_param(kparams, 'id', id)
-			client.queue_service_action_call('unicorndistribution_unicorn', 'notify', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-	end
-
-	class KalturaClient < KalturaClientBase
-		attr_reader :unicorn_service
-		def unicorn_service
-			if (@unicorn_service == nil)
-				@unicorn_service = KalturaUnicornService.new(self)
-			end
-			return @unicorn_service
-		end
-		
-	end
-
 end

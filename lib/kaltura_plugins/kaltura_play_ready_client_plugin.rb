@@ -128,25 +128,6 @@ module Kaltura
 
 	end
 
-	class KalturaPlayReadyContentKey < KalturaObjectBase
-		# Guid - key id of the specific content
-		attr_accessor :key_id
-		# License content key 64 bit encoded
-		attr_accessor :content_key
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['keyId'] != nil
-				self.key_id = xml_element.elements['keyId'].text
-			end
-			if xml_element.elements['contentKey'] != nil
-				self.content_key = xml_element.elements['contentKey'].text
-			end
-		end
-
-	end
-
 	class KalturaPlayReadyCopyEnablerHolder < KalturaObjectBase
 		# The type of the copy enabler
 		attr_accessor :type
@@ -220,44 +201,6 @@ module Kaltura
 			end
 			if xml_element.elements['rights'] != nil
 				self.rights = KalturaClientBase.object_from_xml(xml_element.elements['rights'], 'KalturaPlayReadyRight')
-			end
-		end
-
-	end
-
-	class KalturaPlayReadyLicenseDetails < KalturaObjectBase
-		# PlayReady policy object
-		attr_accessor :policy
-		# License begin date
-		attr_accessor :begin_date
-		# License expiration date
-		attr_accessor :expiration_date
-		# License removal date
-		attr_accessor :removal_date
-
-		def begin_date=(val)
-			@begin_date = val.to_i
-		end
-		def expiration_date=(val)
-			@expiration_date = val.to_i
-		end
-		def removal_date=(val)
-			@removal_date = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['policy'] != nil
-				self.policy = KalturaClientBase.object_from_xml(xml_element.elements['policy'], 'KalturaPlayReadyPolicy')
-			end
-			if xml_element.elements['beginDate'] != nil
-				self.begin_date = xml_element.elements['beginDate'].text
-			end
-			if xml_element.elements['expirationDate'] != nil
-				self.expiration_date = xml_element.elements['expirationDate'].text
-			end
-			if xml_element.elements['removalDate'] != nil
-				self.removal_date = xml_element.elements['removalDate'].text
 			end
 		end
 
@@ -409,74 +352,5 @@ module Kaltura
 
 	end
 
-
-	class KalturaPlayReadyDrmService < KalturaServiceBase
-		def initialize(client)
-			super(client)
-		end
-
-		# Generate key id and content key for PlayReady encryption
-		# @return [KalturaPlayReadyContentKey]
-		def generate_key()
-			kparams = {}
-			client.queue_service_action_call('playready_playreadydrm', 'generateKey', 'KalturaPlayReadyContentKey', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Get content keys for input key ids
-		# @return [array]
-		def get_content_keys(key_ids)
-			kparams = {}
-			client.add_param(kparams, 'keyIds', key_ids)
-			client.queue_service_action_call('playready_playreadydrm', 'getContentKeys', 'KalturaPlayReadyContentKey', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Get content key and key id for the given entry
-		# @return [KalturaPlayReadyContentKey]
-		def get_entry_content_key(entry_id, create_if_missing=false)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'createIfMissing', create_if_missing)
-			client.queue_service_action_call('playready_playreadydrm', 'getEntryContentKey', 'KalturaPlayReadyContentKey', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Get Play Ready policy and dates for license creation
-		# @return [KalturaPlayReadyLicenseDetails]
-		def get_license_details(key_id, device_id, device_type, entry_id=KalturaNotImplemented, referrer=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'keyId', key_id)
-			client.add_param(kparams, 'deviceId', device_id)
-			client.add_param(kparams, 'deviceType', device_type)
-			client.add_param(kparams, 'entryId', entry_id)
-			client.add_param(kparams, 'referrer', referrer)
-			client.queue_service_action_call('playready_playreadydrm', 'getLicenseDetails', 'KalturaPlayReadyLicenseDetails', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-	end
-
-	class KalturaClient < KalturaClientBase
-		attr_reader :play_ready_drm_service
-		def play_ready_drm_service
-			if (@play_ready_drm_service == nil)
-				@play_ready_drm_service = KalturaPlayReadyDrmService.new(self)
-			end
-			return @play_ready_drm_service
-		end
-		
-	end
 
 end

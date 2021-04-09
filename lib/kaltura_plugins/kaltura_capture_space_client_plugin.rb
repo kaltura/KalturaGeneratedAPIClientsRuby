@@ -30,7 +30,4 @@ require 'kaltura_client.rb'
 module Kaltura
 
 
-	class KalturaClient < KalturaClientBase
-	end
-
 end

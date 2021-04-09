@@ -83,41 +83,6 @@ module Kaltura
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
-	class KalturaBusinessProcessCase < KalturaObjectBase
-		attr_accessor :id
-		attr_accessor :business_process_id
-		attr_accessor :business_process_start_notification_template_id
-		attr_accessor :suspended
-		attr_accessor :activity_id
-
-		def business_process_start_notification_template_id=(val)
-			@business_process_start_notification_template_id = val.to_i
-		end
-		def suspended=(val)
-			@suspended = to_b(val)
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['id'] != nil
-				self.id = xml_element.elements['id'].text
-			end
-			if xml_element.elements['businessProcessId'] != nil
-				self.business_process_id = xml_element.elements['businessProcessId'].text
-			end
-			if xml_element.elements['businessProcessStartNotificationTemplateId'] != nil
-				self.business_process_start_notification_template_id = xml_element.elements['businessProcessStartNotificationTemplateId'].text
-			end
-			if xml_element.elements['suspended'] != nil
-				self.suspended = xml_element.elements['suspended'].text
-			end
-			if xml_element.elements['activityId'] != nil
-				self.activity_id = xml_element.elements['activityId'].text
-			end
-		end
-
-	end
-
 	class KalturaBusinessProcessServer < KalturaObjectBase
 		# Auto generated identifier
 		attr_accessor :id
@@ -485,61 +450,5 @@ module Kaltura
 
 	end
 
-
-	# Business-process case service lets you get information about processes
-	class KalturaBusinessProcessCaseService < KalturaServiceBase
-		def initialize(client)
-			super(client)
-		end
-
-		# Abort business-process case
-		# @return []
-		def abort(object_type, object_id, business_process_start_notification_template_id)
-			kparams = {}
-			client.add_param(kparams, 'objectType', object_type)
-			client.add_param(kparams, 'objectId', object_id)
-			client.add_param(kparams, 'businessProcessStartNotificationTemplateId', business_process_start_notification_template_id)
-			client.queue_service_action_call('businessprocessnotification_businessprocesscase', 'abort', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# list business-process cases
-		# @return [array]
-		def list(object_type, object_id)
-			kparams = {}
-			client.add_param(kparams, 'objectType', object_type)
-			client.add_param(kparams, 'objectId', object_id)
-			client.queue_service_action_call('businessprocessnotification_businessprocesscase', 'list', 'KalturaBusinessProcessCase', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Server business-process case diagram
-		# @return [file]
-		def serve_diagram(object_type, object_id, business_process_start_notification_template_id)
-			kparams = {}
-			client.add_param(kparams, 'objectType', object_type)
-			client.add_param(kparams, 'objectId', object_id)
-			client.add_param(kparams, 'businessProcessStartNotificationTemplateId', business_process_start_notification_template_id)
-			client.queue_service_action_call('businessprocessnotification_businessprocesscase', 'serveDiagram', 'file', kparams)
-			return client.get_serve_url()
-		end
-	end
-
-	class KalturaClient < KalturaClientBase
-		attr_reader :business_process_case_service
-		def business_process_case_service
-			if (@business_process_case_service == nil)
-				@business_process_case_service = KalturaBusinessProcessCaseService.new(self)
-			end
-			return @business_process_case_service
-		end
-		
-	end
 
 end

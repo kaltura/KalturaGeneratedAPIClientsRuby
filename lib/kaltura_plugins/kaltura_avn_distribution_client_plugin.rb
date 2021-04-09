@@ -103,7 +103,4 @@ module Kaltura
 	end
 
 
-	class KalturaClient < KalturaClientBase
-	end
-
 end

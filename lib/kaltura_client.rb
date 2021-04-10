@@ -2479,6 +2479,19 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Allocates a conference room or returns ones that has already been allocated
+		# @return [KalturaRoomDetails]
+		def allocate_conference_room(entry_id, env='')
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'env', env)
+			client.queue_service_action_call('livestream', 'allocateConferenceRoom', 'KalturaRoomDetails', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Append recorded video to live entry
 		# @return [KalturaLiveEntry]
 		def append_recording(entry_id, asset_id, media_server_index, resource, duration, is_last_chunk=false)
@@ -2565,6 +2578,19 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# When the conf is finished this API should be called.
+		# @return [bool]
+		def finish_conf(entry_id, server_node_id=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'serverNodeId', server_node_id)
+			client.queue_service_action_call('livestream', 'finishConf', 'bool', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Get live stream entry by ID.
 		# @return [KalturaLiveStreamEntry]
 		def get(entry_id, version=-1)
@@ -2622,6 +2648,18 @@ module Kaltura
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
 			client.queue_service_action_call('livestream', 'regenerateStreamToken', 'KalturaLiveEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Mark that the conference has actually started
+		# @return [bool]
+		def register_conf(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('livestream', 'registerConf', 'bool', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -6257,7 +6295,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:21-04-09'
+			self.client_tag = 'ruby:21-04-10'
 			self.api_version = '16.19.0'
 		end
 		

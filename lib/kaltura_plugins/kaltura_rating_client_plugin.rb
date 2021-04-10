@@ -99,4 +99,67 @@ module Kaltura
 	end
 
 
+	# Allows user to manipulate their entry rating
+	class KalturaRatingService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		# @return [int]
+		def check_rating(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('rating_rating', 'checkRating', 'int', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# @return [KalturaRatingCountListResponse]
+		def get_rating_counts(filter)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.queue_service_action_call('rating_rating', 'getRatingCounts', 'KalturaRatingCountListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# @return [int]
+		def rate(entry_id, rank)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'rank', rank)
+			client.queue_service_action_call('rating_rating', 'rate', 'int', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# @return [bool]
+		def remove_rating(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('rating_rating', 'removeRating', 'bool', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+	end
+
+	class KalturaClient < KalturaClientBase
+		attr_reader :rating_service
+		def rating_service
+			if (@rating_service == nil)
+				@rating_service = KalturaRatingService.new(self)
+			end
+			return @rating_service
+		end
+		
+	end
+
 end

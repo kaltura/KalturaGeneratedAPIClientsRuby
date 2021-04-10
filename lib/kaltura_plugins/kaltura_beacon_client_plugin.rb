@@ -114,6 +114,19 @@ module Kaltura
 
 	end
 
+	class KalturaBeaconSearchParams < KalturaObjectBase
+		attr_accessor :object_id
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['objectId'] != nil
+				self.object_id = xml_element.elements['objectId'].text
+			end
+		end
+
+	end
+
 	class KalturaBeaconSearchScheduledResourceOrderByItem < KalturaESearchOrderByItem
 		attr_accessor :sort_field
 
@@ -122,6 +135,19 @@ module Kaltura
 			super
 			if xml_element.elements['sortField'] != nil
 				self.sort_field = xml_element.elements['sortField'].text
+			end
+		end
+
+	end
+
+	class KalturaBeaconSearchScheduledResourceOrderBy < KalturaObjectBase
+		attr_accessor :order_items
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['orderItems'] != nil
+				self.order_items = KalturaClientBase.object_from_xml(xml_element.elements['orderItems'], 'KalturaBeaconSearchScheduledResourceOrderByItem')
 			end
 		end
 
@@ -216,6 +242,23 @@ module Kaltura
 
 	end
 
+	class KalturaBeaconScheduledResourceSearchParams < KalturaBeaconSearchParams
+		attr_accessor :search_operator
+		attr_accessor :order_by
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['searchOperator'] != nil
+				self.search_operator = KalturaClientBase.object_from_xml(xml_element.elements['searchOperator'], 'KalturaBeaconScheduledResourceOperator')
+			end
+			if xml_element.elements['orderBy'] != nil
+				self.order_by = KalturaClientBase.object_from_xml(xml_element.elements['orderBy'], 'KalturaBeaconSearchScheduledResourceOrderBy')
+			end
+		end
+
+	end
+
 	class KalturaBeaconFilter < KalturaBeaconBaseFilter
 		attr_accessor :index_type_equal
 
@@ -242,5 +285,71 @@ module Kaltura
 
 	end
 
+
+	# Sending beacons on objects
+	class KalturaBeaconService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		# @return [bool]
+		def add(beacon, should_log=0)
+			kparams = {}
+			client.add_param(kparams, 'beacon', beacon)
+			client.add_param(kparams, 'shouldLog', should_log)
+			client.queue_service_action_call('beacon_beacon', 'add', 'bool', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# @return [KalturaBeaconListResponse]
+		def enhance_search(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('beacon_beacon', 'enhanceSearch', 'KalturaBeaconListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# @return [KalturaBeaconListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('beacon_beacon', 'list', 'KalturaBeaconListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# @return [KalturaBeaconListResponse]
+		def search_scheduled_resource(search_params, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'searchParams', search_params)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('beacon_beacon', 'searchScheduledResource', 'KalturaBeaconListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+	end
+
+	class KalturaClient < KalturaClientBase
+		attr_reader :beacon_service
+		def beacon_service
+			if (@beacon_service == nil)
+				@beacon_service = KalturaBeaconService.new(self)
+			end
+			return @beacon_service
+		end
+		
+	end
 
 end

@@ -54,6 +54,23 @@ module Kaltura
 
 	end
 
+	class KalturaESearchHistoryFilter < KalturaESearchBaseFilter
+		attr_accessor :search_term_starts_with
+		attr_accessor :searched_object_in
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['searchTermStartsWith'] != nil
+				self.search_term_starts_with = xml_element.elements['searchTermStartsWith'].text
+			end
+			if xml_element.elements['searchedObjectIn'] != nil
+				self.searched_object_in = xml_element.elements['searchedObjectIn'].text
+			end
+		end
+
+	end
+
 	class KalturaESearchHistoryListResponse < KalturaListResponse
 		attr_accessor :objects
 
@@ -67,5 +84,44 @@ module Kaltura
 
 	end
 
+
+	class KalturaSearchHistoryService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		# @return []
+		def delete(search_term)
+			kparams = {}
+			client.add_param(kparams, 'searchTerm', search_term)
+			client.queue_service_action_call('searchhistory_searchhistory', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# @return [KalturaESearchHistoryListResponse]
+		def list(filter=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.queue_service_action_call('searchhistory_searchhistory', 'list', 'KalturaESearchHistoryListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+	end
+
+	class KalturaClient < KalturaClientBase
+		attr_reader :search_history_service
+		def search_history_service
+			if (@search_history_service == nil)
+				@search_history_service = KalturaSearchHistoryService.new(self)
+			end
+			return @search_history_service
+		end
+		
+	end
 
 end

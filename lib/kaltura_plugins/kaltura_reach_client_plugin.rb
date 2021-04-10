@@ -1611,4 +1611,461 @@ module Kaltura
 	end
 
 
+	# Vendor Catalog Item Service
+	class KalturaVendorCatalogItemService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		# Allows you to add an service catalog item
+		# @return [KalturaVendorCatalogItem]
+		def add(vendor_catalog_item)
+			kparams = {}
+			client.add_param(kparams, 'vendorCatalogItem', vendor_catalog_item)
+			client.queue_service_action_call('reach_vendorcatalogitem', 'add', 'KalturaVendorCatalogItem', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# @return [KalturaBulkUpload]
+		def add_from_bulk_upload(file_data, bulk_upload_data=KalturaNotImplemented, bulk_upload_vendor_catalog_item_data=KalturaNotImplemented)
+			kparams = {}
+			kfiles = {}
+			client.add_param(kfiles, 'fileData', file_data)
+			client.add_param(kparams, 'bulkUploadData', bulk_upload_data)
+			client.add_param(kparams, 'bulkUploadVendorCatalogItemData', bulk_upload_vendor_catalog_item_data)
+			client.queue_service_action_call('reach_vendorcatalogitem', 'addFromBulkUpload', 'KalturaBulkUpload', kparams, kfiles)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Delete vedor catalog item object
+		# @return []
+		def delete(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('reach_vendorcatalogitem', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Retrieve specific catalog item by id
+		# @return [KalturaVendorCatalogItem]
+		def get(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('reach_vendorcatalogitem', 'get', 'KalturaVendorCatalogItem', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# @return [string]
+		def get_serve_url(vendor_partner_id=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'vendorPartnerId', vendor_partner_id)
+			client.queue_service_action_call('reach_vendorcatalogitem', 'getServeUrl', 'string', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# List KalturaVendorCatalogItem objects
+		# @return [KalturaVendorCatalogItemListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('reach_vendorcatalogitem', 'list', 'KalturaVendorCatalogItemListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# @return [file]
+		def serve(vendor_partner_id=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'vendorPartnerId', vendor_partner_id)
+			client.queue_service_action_call('reach_vendorcatalogitem', 'serve', 'file', kparams)
+			return client.get_serve_url()
+		end
+
+		# Update an existing vedor catalog item object
+		# @return [KalturaVendorCatalogItem]
+		def update(id, vendor_catalog_item)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'vendorCatalogItem', vendor_catalog_item)
+			client.queue_service_action_call('reach_vendorcatalogitem', 'update', 'KalturaVendorCatalogItem', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update vendor catalog item status by id
+		# @return [KalturaVendorCatalogItem]
+		def update_status(id, status)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'status', status)
+			client.queue_service_action_call('reach_vendorcatalogitem', 'updateStatus', 'KalturaVendorCatalogItem', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+	end
+
+	# Reach Profile Service
+	class KalturaReachProfileService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		# Allows you to add a partner specific reach profile
+		# @return [KalturaReachProfile]
+		def add(reach_profile)
+			kparams = {}
+			client.add_param(kparams, 'reachProfile', reach_profile)
+			client.queue_service_action_call('reach_reachprofile', 'add', 'KalturaReachProfile', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Delete vednor profile by id
+		# @return []
+		def delete(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('reach_reachprofile', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Retrieve specific reach profile by id
+		# @return [KalturaReachProfile]
+		def get(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('reach_reachprofile', 'get', 'KalturaReachProfile', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# List KalturaReachProfile objects
+		# @return [KalturaReachProfileListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('reach_reachprofile', 'list', 'KalturaReachProfileListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# sync vednor profile credit
+		# @return [KalturaReachProfile]
+		def sync_credit(reach_profile_id)
+			kparams = {}
+			client.add_param(kparams, 'reachProfileId', reach_profile_id)
+			client.queue_service_action_call('reach_reachprofile', 'syncCredit', 'KalturaReachProfile', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update an existing reach profile object
+		# @return [KalturaReachProfile]
+		def update(id, reach_profile)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'reachProfile', reach_profile)
+			client.queue_service_action_call('reach_reachprofile', 'update', 'KalturaReachProfile', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update reach profile status by id
+		# @return [KalturaReachProfile]
+		def update_status(id, status)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'status', status)
+			client.queue_service_action_call('reach_reachprofile', 'updateStatus', 'KalturaReachProfile', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+	end
+
+	# Entry Vendor Task Service
+	class KalturaEntryVendorTaskService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		# Cancel entry task. will only occur for task in PENDING or PENDING_MODERATION status
+		# @return [KalturaEntryVendorTask]
+		def abort(id, abort_reason=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'abortReason', abort_reason)
+			client.queue_service_action_call('reach_entryvendortask', 'abort', 'KalturaEntryVendorTask', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Allows you to add a entry vendor task
+		# @return [KalturaEntryVendorTask]
+		def add(entry_vendor_task)
+			kparams = {}
+			client.add_param(kparams, 'entryVendorTask', entry_vendor_task)
+			client.queue_service_action_call('reach_entryvendortask', 'add', 'KalturaEntryVendorTask', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Approve entry vendor task for execution.
+		# @return [KalturaEntryVendorTask]
+		def approve(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('reach_entryvendortask', 'approve', 'KalturaEntryVendorTask', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# add batch job that sends an email with a link to download an updated CSV that contains list of users
+		# @return [string]
+		def export_to_csv(filter)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.queue_service_action_call('reach_entryvendortask', 'exportToCsv', 'string', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Extend access key in case the existing one has expired.
+		# @return [KalturaEntryVendorTask]
+		def extend_access_key(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('reach_entryvendortask', 'extendAccessKey', 'KalturaEntryVendorTask', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Retrieve specific entry vendor task by id
+		# @return [KalturaEntryVendorTask]
+		def get(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('reach_entryvendortask', 'get', 'KalturaEntryVendorTask', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# get KalturaEntryVendorTask objects for specific vendor partner
+		# @return [KalturaEntryVendorTaskListResponse]
+		def get_jobs(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('reach_entryvendortask', 'getJobs', 'KalturaEntryVendorTaskListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# @return [string]
+		def get_serve_url(filter_type=KalturaNotImplemented, filter_input=KalturaNotImplemented, status=KalturaNotImplemented, due_date=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filterType', filter_type)
+			client.add_param(kparams, 'filterInput', filter_input)
+			client.add_param(kparams, 'status', status)
+			client.add_param(kparams, 'dueDate', due_date)
+			client.queue_service_action_call('reach_entryvendortask', 'getServeUrl', 'string', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# List KalturaEntryVendorTask objects
+		# @return [KalturaEntryVendorTaskListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('reach_entryvendortask', 'list', 'KalturaEntryVendorTaskListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Reject entry vendor task for execution.
+		# @return [KalturaEntryVendorTask]
+		def reject(id, reject_reason=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'rejectReason', reject_reason)
+			client.queue_service_action_call('reach_entryvendortask', 'reject', 'KalturaEntryVendorTask', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# @return [file]
+		def serve(vendor_partner_id=KalturaNotImplemented, partner_id=KalturaNotImplemented, status=KalturaNotImplemented, due_date=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'vendorPartnerId', vendor_partner_id)
+			client.add_param(kparams, 'partnerId', partner_id)
+			client.add_param(kparams, 'status', status)
+			client.add_param(kparams, 'dueDate', due_date)
+			client.queue_service_action_call('reach_entryvendortask', 'serve', 'file', kparams)
+			return client.get_serve_url()
+		end
+
+		# Will serve a requested csv
+		# @return [string]
+		def serve_csv(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('reach_entryvendortask', 'serveCsv', 'string', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update entry vendor task. Only the properties that were set will be updated.
+		# @return [KalturaEntryVendorTask]
+		def update(id, entry_vendor_task)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'entryVendorTask', entry_vendor_task)
+			client.queue_service_action_call('reach_entryvendortask', 'update', 'KalturaEntryVendorTask', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update entry vendor task. Only the properties that were set will be updated.
+		# @return [KalturaEntryVendorTask]
+		def update_job(id, entry_vendor_task)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.add_param(kparams, 'entryVendorTask', entry_vendor_task)
+			client.queue_service_action_call('reach_entryvendortask', 'updateJob', 'KalturaEntryVendorTask', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+	end
+
+	# Partner Catalog Item Service
+	class KalturaPartnerCatalogItemService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		# Assign existing catalogItem to specific account
+		# @return [KalturaVendorCatalogItem]
+		def add(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('reach_partnercatalogitem', 'add', 'KalturaVendorCatalogItem', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Remove existing catalogItem from specific account
+		# @return []
+		def delete(id)
+			kparams = {}
+			client.add_param(kparams, 'id', id)
+			client.queue_service_action_call('reach_partnercatalogitem', 'delete', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+	end
+
+	class KalturaClient < KalturaClientBase
+		attr_reader :vendor_catalog_item_service
+		def vendor_catalog_item_service
+			if (@vendor_catalog_item_service == nil)
+				@vendor_catalog_item_service = KalturaVendorCatalogItemService.new(self)
+			end
+			return @vendor_catalog_item_service
+		end
+		
+		attr_reader :reach_profile_service
+		def reach_profile_service
+			if (@reach_profile_service == nil)
+				@reach_profile_service = KalturaReachProfileService.new(self)
+			end
+			return @reach_profile_service
+		end
+		
+		attr_reader :entry_vendor_task_service
+		def entry_vendor_task_service
+			if (@entry_vendor_task_service == nil)
+				@entry_vendor_task_service = KalturaEntryVendorTaskService.new(self)
+			end
+			return @entry_vendor_task_service
+		end
+		
+		attr_reader :partner_catalog_item_service
+		def partner_catalog_item_service
+			if (@partner_catalog_item_service == nil)
+				@partner_catalog_item_service = KalturaPartnerCatalogItemService.new(self)
+			end
+			return @partner_catalog_item_service
+		end
+		
+	end
+
 end

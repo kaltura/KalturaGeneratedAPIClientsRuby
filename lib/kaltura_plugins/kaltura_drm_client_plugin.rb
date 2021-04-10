@@ -74,6 +74,40 @@ module Kaltura
 		CENC = "1"
 	end
 
+	class KalturaDrmLicenseAccessDetails < KalturaObjectBase
+		# Drm policy name
+		attr_accessor :policy
+		# movie duration in seconds
+		attr_accessor :duration
+		# playback window in seconds
+		attr_accessor :absolute_duration
+		attr_accessor :license_params
+
+		def duration=(val)
+			@duration = val.to_i
+		end
+		def absolute_duration=(val)
+			@absolute_duration = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['policy'] != nil
+				self.policy = xml_element.elements['policy'].text
+			end
+			if xml_element.elements['duration'] != nil
+				self.duration = xml_element.elements['duration'].text
+			end
+			if xml_element.elements['absolute_duration'] != nil
+				self.absolute_duration = xml_element.elements['absolute_duration'].text
+			end
+			if xml_element.elements['licenseParams'] != nil
+				self.license_params = KalturaClientBase.object_from_xml(xml_element.elements['licenseParams'], 'KalturaKeyValue')
+			end
+		end
+
+	end
+
 	class KalturaDrmPolicy < KalturaObjectBase
 		attr_accessor :id
 		attr_accessor :partner_id
@@ -399,5 +433,203 @@ module Kaltura
 
 	end
 
+
+	class KalturaDrmPolicyService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		# Allows you to add a new DrmPolicy object
+		# @return [KalturaDrmPolicy]
+		def add(drm_policy)
+			kparams = {}
+			client.add_param(kparams, 'drmPolicy', drm_policy)
+			client.queue_service_action_call('drm_drmpolicy', 'add', 'KalturaDrmPolicy', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Mark the KalturaDrmPolicy object as deleted
+		# @return [KalturaDrmPolicy]
+		def delete(drm_policy_id)
+			kparams = {}
+			client.add_param(kparams, 'drmPolicyId', drm_policy_id)
+			client.queue_service_action_call('drm_drmpolicy', 'delete', 'KalturaDrmPolicy', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Retrieve a KalturaDrmPolicy object by ID
+		# @return [KalturaDrmPolicy]
+		def get(drm_policy_id)
+			kparams = {}
+			client.add_param(kparams, 'drmPolicyId', drm_policy_id)
+			client.queue_service_action_call('drm_drmpolicy', 'get', 'KalturaDrmPolicy', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# List KalturaDrmPolicy objects
+		# @return [KalturaDrmPolicyListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('drm_drmpolicy', 'list', 'KalturaDrmPolicyListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update an existing KalturaDrmPolicy object
+		# @return [KalturaDrmPolicy]
+		def update(drm_policy_id, drm_policy)
+			kparams = {}
+			client.add_param(kparams, 'drmPolicyId', drm_policy_id)
+			client.add_param(kparams, 'drmPolicy', drm_policy)
+			client.queue_service_action_call('drm_drmpolicy', 'update', 'KalturaDrmPolicy', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+	end
+
+	class KalturaDrmProfileService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		# Allows you to add a new DrmProfile object
+		# @return [KalturaDrmProfile]
+		def add(drm_profile)
+			kparams = {}
+			client.add_param(kparams, 'drmProfile', drm_profile)
+			client.queue_service_action_call('drm_drmprofile', 'add', 'KalturaDrmProfile', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Mark the KalturaDrmProfile object as deleted
+		# @return [KalturaDrmProfile]
+		def delete(drm_profile_id)
+			kparams = {}
+			client.add_param(kparams, 'drmProfileId', drm_profile_id)
+			client.queue_service_action_call('drm_drmprofile', 'delete', 'KalturaDrmProfile', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Retrieve a KalturaDrmProfile object by ID
+		# @return [KalturaDrmProfile]
+		def get(drm_profile_id)
+			kparams = {}
+			client.add_param(kparams, 'drmProfileId', drm_profile_id)
+			client.queue_service_action_call('drm_drmprofile', 'get', 'KalturaDrmProfile', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Retrieve a KalturaDrmProfile object by provider, if no specific profile defined return default profile
+		# @return [KalturaDrmProfile]
+		def get_by_provider(provider)
+			kparams = {}
+			client.add_param(kparams, 'provider', provider)
+			client.queue_service_action_call('drm_drmprofile', 'getByProvider', 'KalturaDrmProfile', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# List KalturaDrmProfile objects
+		# @return [KalturaDrmProfileListResponse]
+		def list(filter=KalturaNotImplemented, pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('drm_drmprofile', 'list', 'KalturaDrmProfileListResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Update an existing KalturaDrmProfile object
+		# @return [KalturaDrmProfile]
+		def update(drm_profile_id, drm_profile)
+			kparams = {}
+			client.add_param(kparams, 'drmProfileId', drm_profile_id)
+			client.add_param(kparams, 'drmProfile', drm_profile)
+			client.queue_service_action_call('drm_drmprofile', 'update', 'KalturaDrmProfile', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+	end
+
+	# Retrieve information and invoke actions on Flavor Asset
+	class KalturaDrmLicenseAccessService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		# getAccessAction
+		#      input: flavor ids, drmProvider
+		#      Get Access Action
+		# @return [KalturaDrmLicenseAccessDetails]
+		def get_access(entry_id, flavor_ids, referrer)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.add_param(kparams, 'flavorIds', flavor_ids)
+			client.add_param(kparams, 'referrer', referrer)
+			client.queue_service_action_call('drm_drmlicenseaccess', 'getAccess', 'KalturaDrmLicenseAccessDetails', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+	end
+
+	class KalturaClient < KalturaClientBase
+		attr_reader :drm_policy_service
+		def drm_policy_service
+			if (@drm_policy_service == nil)
+				@drm_policy_service = KalturaDrmPolicyService.new(self)
+			end
+			return @drm_policy_service
+		end
+		
+		attr_reader :drm_profile_service
+		def drm_profile_service
+			if (@drm_profile_service == nil)
+				@drm_profile_service = KalturaDrmProfileService.new(self)
+			end
+			return @drm_profile_service
+		end
+		
+		attr_reader :drm_license_access_service
+		def drm_license_access_service
+			if (@drm_license_access_service == nil)
+				@drm_license_access_service = KalturaDrmLicenseAccessService.new(self)
+			end
+			return @drm_license_access_service
+		end
+		
+	end
 
 end

@@ -265,4 +265,35 @@ module Kaltura
 	end
 
 
+	# WidevineDrmService serves as a license proxy to a Widevine license server
+	class KalturaWidevineDrmService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		# Get license for encrypted content playback
+		# @return [string]
+		def get_license(flavor_asset_id, referrer=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'flavorAssetId', flavor_asset_id)
+			client.add_param(kparams, 'referrer', referrer)
+			client.queue_service_action_call('widevine_widevinedrm', 'getLicense', 'string', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+	end
+
+	class KalturaClient < KalturaClientBase
+		attr_reader :widevine_drm_service
+		def widevine_drm_service
+			if (@widevine_drm_service == nil)
+				@widevine_drm_service = KalturaWidevineDrmService.new(self)
+			end
+			return @widevine_drm_service
+		end
+		
+	end
+
 end

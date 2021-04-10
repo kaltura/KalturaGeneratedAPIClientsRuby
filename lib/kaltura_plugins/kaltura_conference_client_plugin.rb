@@ -44,6 +44,38 @@ module Kaltura
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
+	class KalturaRoomDetails < KalturaObjectBase
+		attr_accessor :server_url
+		attr_accessor :entry_id
+		attr_accessor :token
+		attr_accessor :expiry
+		attr_accessor :server_name
+
+		def expiry=(val)
+			@expiry = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['serverUrl'] != nil
+				self.server_url = xml_element.elements['serverUrl'].text
+			end
+			if xml_element.elements['entryId'] != nil
+				self.entry_id = xml_element.elements['entryId'].text
+			end
+			if xml_element.elements['token'] != nil
+				self.token = xml_element.elements['token'].text
+			end
+			if xml_element.elements['expiry'] != nil
+				self.expiry = xml_element.elements['expiry'].text
+			end
+			if xml_element.elements['serverName'] != nil
+				self.server_name = xml_element.elements['serverName'].text
+			end
+		end
+
+	end
+
 	class KalturaConferenceEntryServerNode < KalturaEntryServerNode
 		attr_accessor :conf_room_status
 		attr_accessor :registered

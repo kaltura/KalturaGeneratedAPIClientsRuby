@@ -30,4 +30,33 @@ require 'kaltura_client.rb'
 module Kaltura
 
 
+	# Aspera service
+	class KalturaAsperaService < KalturaServiceBase
+		def initialize(client)
+			super(client)
+		end
+
+		# @return [string]
+		def get_fasp_url(flavor_asset_id)
+			kparams = {}
+			client.add_param(kparams, 'flavorAssetId', flavor_asset_id)
+			client.queue_service_action_call('aspera_aspera', 'getFaspUrl', 'string', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+	end
+
+	class KalturaClient < KalturaClientBase
+		attr_reader :aspera_service
+		def aspera_service
+			if (@aspera_service == nil)
+				@aspera_service = KalturaAsperaService.new(self)
+			end
+			return @aspera_service
+		end
+		
+	end
+
 end

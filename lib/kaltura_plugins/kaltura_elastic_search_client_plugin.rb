@@ -329,6 +329,15 @@ module Kaltura
 
 	end
 
+	class KalturaESearchBaseFilter < KalturaObjectBase
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaESearchCategoryBaseItem < KalturaESearchBaseItem
 
 

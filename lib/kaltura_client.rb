@@ -5,7 +5,7 @@
 #                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 #
 # This file is part of the Kaltura Collaborative Media Suite which allows users
-# to do with audio, video, and animation what Wiki platfroms allow them to do with
+# to do with audio, video, and animation what Wiki platforms allow them to do with
 # text.
 #
 # Copyright (C) 2006-2021  Kaltura Inc.
@@ -452,6 +452,21 @@ module Kaltura
 			client.add_param(kparams, 'entryId', entry_id)
 			client.add_param(kparams, 'storageProfileId', storage_profile_id)
 			client.queue_service_action_call('baseentry', 'export', 'KalturaBaseEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# add batch job that sends an email with a link to download an updated CSV that contains list of entries
+		# @return [string]
+		def export_to_csv(filter=KalturaNotImplemented, metadata_profile_id=KalturaNotImplemented, additional_fields=KalturaNotImplemented, mapped_fields=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'metadataProfileId', metadata_profile_id)
+			client.add_param(kparams, 'additionalFields', additional_fields)
+			client.add_param(kparams, 'mappedFields', mapped_fields)
+			client.queue_service_action_call('baseentry', 'exportToCsv', 'string', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -6295,8 +6310,8 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:21-04-25'
-			self.api_version = '16.19.0'
+			self.client_tag = 'ruby:21-05-06'
+			self.api_version = '17.1.0'
 		end
 		
 		def client_tag=(value)

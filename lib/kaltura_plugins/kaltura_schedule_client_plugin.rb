@@ -5,7 +5,7 @@
 #                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 #
 # This file is part of the Kaltura Collaborative Media Suite which allows users
-# to do with audio, video, and animation what Wiki platfroms allow them to do with
+# to do with audio, video, and animation what Wiki platforms allow them to do with
 # text.
 #
 # Copyright (C) 2006-2021  Kaltura Inc.
@@ -58,6 +58,7 @@ module Kaltura
 		LIVE_STREAM = 2
 		BLACKOUT = 3
 		MEETING = 4
+		LIVE_REDIRECT = 5
 	end
 
 	class KalturaScheduleResourceStatus
@@ -687,40 +688,11 @@ module Kaltura
 
 	end
 
-	class KalturaLiveStreamScheduleEvent < KalturaEntryScheduleEvent
-		# Defines the expected audience.
-		attr_accessor :projected_audience
-		# The entry ID of the source entry (for simulive)
-		attr_accessor :source_entry_id
-		# The time relative time before the startTime considered as preStart time
-		attr_accessor :pre_start_time
-		# The time relative time before the endTime considered as postEnd time
-		attr_accessor :post_end_time
+	class KalturaBaseLiveScheduleEvent < KalturaEntryScheduleEvent
 
-		def projected_audience=(val)
-			@projected_audience = val.to_i
-		end
-		def pre_start_time=(val)
-			@pre_start_time = val.to_i
-		end
-		def post_end_time=(val)
-			@post_end_time = val.to_i
-		end
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['projectedAudience'] != nil
-				self.projected_audience = xml_element.elements['projectedAudience'].text
-			end
-			if xml_element.elements['sourceEntryId'] != nil
-				self.source_entry_id = xml_element.elements['sourceEntryId'].text
-			end
-			if xml_element.elements['preStartTime'] != nil
-				self.pre_start_time = xml_element.elements['preStartTime'].text
-			end
-			if xml_element.elements['postEndTime'] != nil
-				self.post_end_time = xml_element.elements['postEndTime'].text
-			end
 		end
 
 	end
@@ -1078,6 +1050,58 @@ module Kaltura
 
 	end
 
+	class KalturaLiveRedirectScheduleEvent < KalturaBaseLiveScheduleEvent
+		# The vod entry to redirect
+		attr_accessor :redirect_entry_id
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['redirectEntryId'] != nil
+				self.redirect_entry_id = xml_element.elements['redirectEntryId'].text
+			end
+		end
+
+	end
+
+	class KalturaLiveStreamScheduleEvent < KalturaBaseLiveScheduleEvent
+		# The entry ID of the source entry (for simulive)
+		attr_accessor :source_entry_id
+		# Defines the expected audience.
+		attr_accessor :projected_audience
+		# The time relative time before the startTime considered as preStart time
+		attr_accessor :pre_start_time
+		# The time relative time before the endTime considered as postEnd time
+		attr_accessor :post_end_time
+
+		def projected_audience=(val)
+			@projected_audience = val.to_i
+		end
+		def pre_start_time=(val)
+			@pre_start_time = val.to_i
+		end
+		def post_end_time=(val)
+			@post_end_time = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['sourceEntryId'] != nil
+				self.source_entry_id = xml_element.elements['sourceEntryId'].text
+			end
+			if xml_element.elements['projectedAudience'] != nil
+				self.projected_audience = xml_element.elements['projectedAudience'].text
+			end
+			if xml_element.elements['preStartTime'] != nil
+				self.pre_start_time = xml_element.elements['preStartTime'].text
+			end
+			if xml_element.elements['postEndTime'] != nil
+				self.post_end_time = xml_element.elements['postEndTime'].text
+			end
+		end
+
+	end
+
 	class KalturaScheduleEventFilter < KalturaScheduleEventBaseFilter
 		attr_accessor :resource_ids_like
 		attr_accessor :resource_ids_multi_like_or
@@ -1269,6 +1293,15 @@ module Kaltura
 	end
 
 	class KalturaLocationScheduleResourceFilter < KalturaLocationScheduleResourceBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaLiveRedirectScheduleEventFilter < KalturaEntryScheduleEventFilter
 
 
 		def from_xml(xml_element)

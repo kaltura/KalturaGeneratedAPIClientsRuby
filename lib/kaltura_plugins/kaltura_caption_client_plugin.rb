@@ -5,7 +5,7 @@
 #                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 #
 # This file is part of the Kaltura Collaborative Media Suite which allows users
-# to do with audio, video, and animation what Wiki platfroms allow them to do with
+# to do with audio, video, and animation what Wiki platforms allow them to do with
 # text.
 #
 # Copyright (C) 2006-2021  Kaltura Inc.
@@ -52,6 +52,11 @@ module Kaltura
 	class KalturaCaptionParamsOrderBy
 	end
 
+	class KalturaCaptionSource
+		UNKNOWN = "0"
+		ZOOM = "1"
+	end
+
 	class KalturaCaptionType
 		SRT = "1"
 		DFXP = "2"
@@ -73,6 +78,8 @@ module Kaltura
 		attr_accessor :label
 		# The caption format
 		attr_accessor :format
+		# The source of the asset
+		attr_accessor :source
 		# The status of the asset
 		attr_accessor :status
 		# The parent id of the asset
@@ -119,6 +126,9 @@ module Kaltura
 			end
 			if xml_element.elements['format'] != nil
 				self.format = xml_element.elements['format'].text
+			end
+			if xml_element.elements['source'] != nil
+				self.source = xml_element.elements['source'].text
 			end
 			if xml_element.elements['status'] != nil
 				self.status = xml_element.elements['status'].text

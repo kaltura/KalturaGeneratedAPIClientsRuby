@@ -5,7 +5,7 @@
 #                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 #
 # This file is part of the Kaltura Collaborative Media Suite which allows users
-# to do with audio, video, and animation what Wiki platfroms allow them to do with
+# to do with audio, video, and animation what Wiki platforms allow them to do with
 # text.
 #
 # Copyright (C) 2006-2021  Kaltura Inc.
@@ -952,6 +952,8 @@ module Kaltura
 		attr_accessor :application
 		# Entry application version
 		attr_accessor :application_version
+		# Block auto transcript on Entry
+		attr_accessor :block_auto_transcript
 
 		def partner_id=(val)
 			@partner_id = val.to_i
@@ -1003,6 +1005,9 @@ module Kaltura
 		end
 		def display_in_search=(val)
 			@display_in_search = val.to_i
+		end
+		def block_auto_transcript=(val)
+			@block_auto_transcript = to_b(val)
 		end
 
 		def from_xml(xml_element)
@@ -1147,6 +1152,9 @@ module Kaltura
 			end
 			if xml_element.elements['applicationVersion'] != nil
 				self.application_version = xml_element.elements['applicationVersion'].text
+			end
+			if xml_element.elements['blockAutoTranscript'] != nil
+				self.block_auto_transcript = xml_element.elements['blockAutoTranscript'].text
 			end
 		end
 
@@ -8160,22 +8168,6 @@ module Kaltura
 
 	end
 
-	class KalturaTypedArray < KalturaObjectBase
-		attr_accessor :count
-
-		def count=(val)
-			@count = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['count'] != nil
-				self.count = xml_element.elements['count'].text
-			end
-		end
-
-	end
-
 	class KalturaPlaybackContext < KalturaObjectBase
 		attr_accessor :sources
 		attr_accessor :playback_captions
@@ -8205,7 +8197,7 @@ module Kaltura
 				self.messages = KalturaClientBase.object_from_xml(xml_element.elements['messages'], 'KalturaAccessControlMessage')
 			end
 			if xml_element.elements['bumperData'] != nil
-				self.bumper_data = KalturaClientBase.object_from_xml(xml_element.elements['bumperData'], 'KalturaTypedArray')
+				self.bumper_data = KalturaClientBase.object_from_xml(xml_element.elements['bumperData'], 'KalturaObject')
 			end
 		end
 
@@ -17621,6 +17613,33 @@ module Kaltura
 
 	end
 
+	class KalturaMappedObjectsCsvJobData < KalturaExportCsvJobData
+		# The metadata profile we should look the xpath in
+		attr_accessor :metadata_profile_id
+		# The xpath to look in the metadataProfileId  and the wanted csv field name
+		attr_accessor :additional_fields
+		# Array of header names and their mapped user fields
+		attr_accessor :mapped_fields
+
+		def metadata_profile_id=(val)
+			@metadata_profile_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['metadataProfileId'] != nil
+				self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
+			end
+			if xml_element.elements['additionalFields'] != nil
+				self.additional_fields = KalturaClientBase.object_from_xml(xml_element.elements['additionalFields'], 'KalturaCsvAdditionalFieldInfo')
+			end
+			if xml_element.elements['mappedFields'] != nil
+				self.mapped_fields = KalturaClientBase.object_from_xml(xml_element.elements['mappedFields'], 'KalturaKeyValue')
+			end
+		end
+
+	end
+
 	class KalturaMediaFlavorParams < KalturaFlavorParams
 
 
@@ -18433,38 +18452,6 @@ module Kaltura
 
 	end
 
-	class KalturaUsersCsvJobData < KalturaExportCsvJobData
-		# The filter should return the list of users that need to be specified in the csv.
-		attr_accessor :filter
-		# The metadata profile we should look the xpath in
-		attr_accessor :metadata_profile_id
-		# The xpath to look in the metadataProfileId  and the wanted csv field name
-		attr_accessor :additional_fields
-		# Array of header names and their mapped user fields
-		attr_accessor :mapped_fields
-
-		def metadata_profile_id=(val)
-			@metadata_profile_id = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['filter'] != nil
-				self.filter = KalturaClientBase.object_from_xml(xml_element.elements['filter'], 'KalturaUserFilter')
-			end
-			if xml_element.elements['metadataProfileId'] != nil
-				self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
-			end
-			if xml_element.elements['additionalFields'] != nil
-				self.additional_fields = KalturaClientBase.object_from_xml(xml_element.elements['additionalFields'], 'KalturaCsvAdditionalFieldInfo')
-			end
-			if xml_element.elements['mappedFields'] != nil
-				self.mapped_fields = KalturaClientBase.object_from_xml(xml_element.elements['mappedFields'], 'KalturaKeyValue')
-			end
-		end
-
-	end
-
 	class KalturaWidgetFilter < KalturaWidgetBaseFilter
 
 
@@ -18872,6 +18859,20 @@ module Kaltura
 			super
 			if xml_element.elements['attribute'] != nil
 				self.attribute = xml_element.elements['attribute'].text
+			end
+		end
+
+	end
+
+	class KalturaEntriesCsvJobData < KalturaMappedObjectsCsvJobData
+		# The filter should return the list of entries that need to be specified in the csv.
+		attr_accessor :filter
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['filter'] != nil
+				self.filter = KalturaClientBase.object_from_xml(xml_element.elements['filter'], 'KalturaBaseEntryFilter')
 			end
 		end
 
@@ -19461,6 +19462,20 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
+		end
+
+	end
+
+	class KalturaUsersCsvJobData < KalturaMappedObjectsCsvJobData
+		# The filter should return the list of users that need to be specified in the csv.
+		attr_accessor :filter
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['filter'] != nil
+				self.filter = KalturaClientBase.object_from_xml(xml_element.elements['filter'], 'KalturaUserFilter')
+			end
 		end
 
 	end

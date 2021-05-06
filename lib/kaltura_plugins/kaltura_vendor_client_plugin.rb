@@ -5,7 +5,7 @@
 #                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 #
 # This file is part of the Kaltura Collaborative Media Suite which allows users
-# to do with audio, video, and animation what Wiki platfroms allow them to do with
+# to do with audio, video, and animation what Wiki platforms allow them to do with
 # text.
 #
 # Copyright (C) 2006-2021  Kaltura Inc.
@@ -54,6 +54,10 @@ module Kaltura
 		attr_accessor :zoom_webinar_category
 		attr_accessor :enable_webinar_uploads
 		attr_accessor :conversion_profile_id
+		attr_accessor :jwt_token
+		attr_accessor :deletion_policy
+		attr_accessor :enable_zoom_transcription
+		attr_accessor :zoom_account_description
 
 		def enable_recording_upload=(val)
 			@enable_recording_upload = val.to_i
@@ -72,6 +76,12 @@ module Kaltura
 		end
 		def conversion_profile_id=(val)
 			@conversion_profile_id = val.to_i
+		end
+		def deletion_policy=(val)
+			@deletion_policy = val.to_i
+		end
+		def enable_zoom_transcription=(val)
+			@enable_zoom_transcription = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -108,6 +118,31 @@ module Kaltura
 			end
 			if xml_element.elements['conversionProfileId'] != nil
 				self.conversion_profile_id = xml_element.elements['conversionProfileId'].text
+			end
+			if xml_element.elements['jwtToken'] != nil
+				self.jwt_token = xml_element.elements['jwtToken'].text
+			end
+			if xml_element.elements['deletionPolicy'] != nil
+				self.deletion_policy = xml_element.elements['deletionPolicy'].text
+			end
+			if xml_element.elements['enableZoomTranscription'] != nil
+				self.enable_zoom_transcription = xml_element.elements['enableZoomTranscription'].text
+			end
+			if xml_element.elements['zoomAccountDescription'] != nil
+				self.zoom_account_description = xml_element.elements['zoomAccountDescription'].text
+			end
+		end
+
+	end
+
+	class KalturaZoomIntegrationSettingResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaZoomIntegrationSetting')
 			end
 		end
 
@@ -153,10 +188,45 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# List KalturaZoomIntegrationSetting objects
+		# @return [KalturaZoomIntegrationSettingResponse]
+		def list(pager=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'pager', pager)
+			client.queue_service_action_call('vendor_zoomvendor', 'list', 'KalturaZoomIntegrationSettingResponse', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# @return []
+		def local_registration_page(jwt)
+			kparams = {}
+			client.add_param(kparams, 'jwt', jwt)
+			client.queue_service_action_call('vendor_zoomvendor', 'localRegistrationPage', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# @return [string]
 		def oauth_validation()
 			kparams = {}
 			client.queue_service_action_call('vendor_zoomvendor', 'oauthValidation', 'string', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# load html page the that will ask the user for its KMC URL, derive the region of the user from it,
+		# 	 and redirect to the registration page in the correct region, while forwarding the necessary code for registration
+		# @return []
+		def pre_oauth_validation()
+			kparams = {}
+			client.queue_service_action_call('vendor_zoomvendor', 'preOauthValidation', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

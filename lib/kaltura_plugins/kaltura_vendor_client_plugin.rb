@@ -58,6 +58,9 @@ module Kaltura
 		attr_accessor :deletion_policy
 		attr_accessor :enable_zoom_transcription
 		attr_accessor :zoom_account_description
+		attr_accessor :created_at
+		attr_accessor :updated_at
+		attr_accessor :enable_meeting_upload
 
 		def enable_recording_upload=(val)
 			@enable_recording_upload = val.to_i
@@ -82,6 +85,9 @@ module Kaltura
 		end
 		def enable_zoom_transcription=(val)
 			@enable_zoom_transcription = val.to_i
+		end
+		def enable_meeting_upload=(val)
+			@enable_meeting_upload = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -130,6 +136,15 @@ module Kaltura
 			end
 			if xml_element.elements['zoomAccountDescription'] != nil
 				self.zoom_account_description = xml_element.elements['zoomAccountDescription'].text
+			end
+			if xml_element.elements['createdAt'] != nil
+				self.created_at = xml_element.elements['createdAt'].text
+			end
+			if xml_element.elements['updatedAt'] != nil
+				self.updated_at = xml_element.elements['updatedAt'].text
+			end
+			if xml_element.elements['enableMeetingUpload'] != nil
+				self.enable_meeting_upload = xml_element.elements['enableMeetingUpload'].text
 			end
 		end
 
@@ -211,22 +226,22 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# @return [string]
+		# load html page the that will ask the user for its KMC URL, derive the region of the user from it,
+		# 	 and redirect to the registration page in the correct region, while forwarding the necessary code for registration
+		# @return []
 		def oauth_validation()
 			kparams = {}
-			client.queue_service_action_call('vendor_zoomvendor', 'oauthValidation', 'string', kparams)
+			client.queue_service_action_call('vendor_zoomvendor', 'oauthValidation', '', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
 			return client.do_queue()
 		end
 
-		# load html page the that will ask the user for its KMC URL, derive the region of the user from it,
-		# 	 and redirect to the registration page in the correct region, while forwarding the necessary code for registration
-		# @return []
+		# @return [string]
 		def pre_oauth_validation()
 			kparams = {}
-			client.queue_service_action_call('vendor_zoomvendor', 'preOauthValidation', '', kparams)
+			client.queue_service_action_call('vendor_zoomvendor', 'preOauthValidation', 'string', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

@@ -336,6 +336,8 @@ module Kaltura
 		attr_accessor :input_entitled_users_edit
 		# The input entitled users publish to set on the entry
 		attr_accessor :input_entitled_users_publish
+		# The input entitled users view to set on the entry
+		attr_accessor :input_entitled_users_view
 		# Should clear the media repurposing data and therefore reset the process
 		attr_accessor :reset_media_repurposing_process
 
@@ -371,6 +373,9 @@ module Kaltura
 			end
 			if xml_element.elements['inputEntitledUsersPublish'] != nil
 				self.input_entitled_users_publish = xml_element.elements['inputEntitledUsersPublish'].text
+			end
+			if xml_element.elements['inputEntitledUsersView'] != nil
+				self.input_entitled_users_view = xml_element.elements['inputEntitledUsersView'].text
 			end
 			if xml_element.elements['resetMediaRepurposingProcess'] != nil
 				self.reset_media_repurposing_process = xml_element.elements['resetMediaRepurposingProcess'].text

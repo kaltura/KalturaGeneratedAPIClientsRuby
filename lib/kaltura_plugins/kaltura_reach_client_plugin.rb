@@ -28,6 +28,7 @@
 require 'kaltura_client.rb'
 require File.dirname(__FILE__) + '/kaltura_event_notification_client_plugin.rb'
 require File.dirname(__FILE__) + '/kaltura_bulk_upload_client_plugin.rb'
+require File.dirname(__FILE__) + '/kaltura_caption_client_plugin.rb'
 
 module Kaltura
 
@@ -83,6 +84,7 @@ module Kaltura
 		ALIGNMENT = 3
 		AUDIO_DESCRIPTION = 4
 		CHAPTERING = 5
+		INTELLIGENT_TAGGING = 6
 	end
 
 	class KalturaVendorServiceTurnAroundTime
@@ -166,6 +168,7 @@ module Kaltura
 
 	class KalturaEntryVendorTaskOrderBy
 		CREATED_AT_ASC = "+createdAt"
+		EXPECTED_FINISH_TIME_ASC = "+expectedFinishTime"
 		FINISH_TIME_ASC = "+finishTime"
 		ID_ASC = "+id"
 		PRICE_ASC = "+price"
@@ -173,6 +176,7 @@ module Kaltura
 		STATUS_ASC = "+status"
 		UPDATED_AT_ASC = "+updatedAt"
 		CREATED_AT_DESC = "-createdAt"
+		EXPECTED_FINISH_TIME_DESC = "-expectedFinishTime"
 		FINISH_TIME_DESC = "-finishTime"
 		ID_DESC = "-id"
 		PRICE_DESC = "-price"
@@ -188,6 +192,9 @@ module Kaltura
 		CREATED_AT_DESC = "-createdAt"
 		ID_DESC = "-id"
 		UPDATED_AT_DESC = "-updatedAt"
+	end
+
+	class KalturaReachVendorEngineType
 	end
 
 	class KalturaVendorCaptionsCatalogItemOrderBy
@@ -667,6 +674,9 @@ module Kaltura
 		attr_accessor :service_feature
 		attr_accessor :turn_around_time
 		attr_accessor :pricing
+		# Property showing the catalog item's engine type, in case a vendor can offer the same service via different engines.
+		attr_accessor :engine_type
+		attr_accessor :source_language
 		attr_accessor :allow_resubmission
 
 		def id=(val)
@@ -731,6 +741,12 @@ module Kaltura
 			end
 			if xml_element.elements['pricing'] != nil
 				self.pricing = KalturaClientBase.object_from_xml(xml_element.elements['pricing'], 'KalturaVendorCatalogItemPricing')
+			end
+			if xml_element.elements['engineType'] != nil
+				self.engine_type = xml_element.elements['engineType'].text
+			end
+			if xml_element.elements['sourceLanguage'] != nil
+				self.source_language = xml_element.elements['sourceLanguage'].text
 			end
 			if xml_element.elements['allowResubmission'] != nil
 				self.allow_resubmission = xml_element.elements['allowResubmission'].text
@@ -851,6 +867,20 @@ module Kaltura
 
 	end
 
+	class KalturaIntelligentTaggingVendorTaskData < KalturaVendorTaskData
+		# Optional - The id of the caption asset object
+		attr_accessor :asset_id
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['assetId'] != nil
+				self.asset_id = xml_element.elements['assetId'].text
+			end
+		end
+
+	end
+
 	class KalturaReachProfileListResponse < KalturaListResponse
 		attr_accessor :objects
 
@@ -888,7 +918,6 @@ module Kaltura
 	end
 
 	class KalturaVendorAlignmentCatalogItem < KalturaVendorCatalogItem
-		attr_accessor :source_language
 		attr_accessor :output_format
 
 		def output_format=(val)
@@ -897,9 +926,6 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['sourceLanguage'] != nil
-				self.source_language = xml_element.elements['sourceLanguage'].text
-			end
 			if xml_element.elements['outputFormat'] != nil
 				self.output_format = xml_element.elements['outputFormat'].text
 			end
@@ -908,7 +934,6 @@ module Kaltura
 	end
 
 	class KalturaVendorAudioDescriptionCatalogItem < KalturaVendorCatalogItem
-		attr_accessor :source_language
 		attr_accessor :flavor_params_id
 		attr_accessor :clear_audio_flavor_params_id
 
@@ -921,9 +946,6 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['sourceLanguage'] != nil
-				self.source_language = xml_element.elements['sourceLanguage'].text
-			end
 			if xml_element.elements['flavorParamsId'] != nil
 				self.flavor_params_id = xml_element.elements['flavorParamsId'].text
 			end
@@ -935,7 +957,6 @@ module Kaltura
 	end
 
 	class KalturaVendorCaptionsCatalogItem < KalturaVendorCatalogItem
-		attr_accessor :source_language
 		attr_accessor :output_format
 		attr_accessor :enable_speaker_id
 		attr_accessor :fixed_price_addons
@@ -952,9 +973,6 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['sourceLanguage'] != nil
-				self.source_language = xml_element.elements['sourceLanguage'].text
-			end
 			if xml_element.elements['outputFormat'] != nil
 				self.output_format = xml_element.elements['outputFormat'].text
 			end
@@ -982,14 +1000,10 @@ module Kaltura
 	end
 
 	class KalturaVendorChapteringCatalogItem < KalturaVendorCatalogItem
-		attr_accessor :source_language
 
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['sourceLanguage'] != nil
-				self.source_language = xml_element.elements['sourceLanguage'].text
-			end
 		end
 
 	end
@@ -1031,6 +1045,15 @@ module Kaltura
 
 	end
 
+	class KalturaVendorIntelligentTaggingCatalogItem < KalturaVendorCatalogItem
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaVendorTaskDataCaptionAsset < KalturaVendorTaskData
 		# Optional - The id of the caption asset object
 		attr_accessor :caption_asset_id
@@ -1067,6 +1090,7 @@ module Kaltura
 	class KalturaEntryVendorTaskBaseFilter < KalturaRelatedFilter
 		attr_accessor :id_equal
 		attr_accessor :id_in
+		attr_accessor :id_not_in
 		attr_accessor :vendor_partner_id_equal
 		attr_accessor :vendor_partner_id_in
 		attr_accessor :created_at_greater_than_or_equal
@@ -1086,6 +1110,8 @@ module Kaltura
 		attr_accessor :catalog_item_id_in
 		attr_accessor :user_id_equal
 		attr_accessor :context_equal
+		attr_accessor :expected_finish_time_greater_than_or_equal
+		attr_accessor :expected_finish_time_less_than_or_equal
 
 		def id_equal=(val)
 			@id_equal = val.to_i
@@ -1126,6 +1152,12 @@ module Kaltura
 		def catalog_item_id_equal=(val)
 			@catalog_item_id_equal = val.to_i
 		end
+		def expected_finish_time_greater_than_or_equal=(val)
+			@expected_finish_time_greater_than_or_equal = val.to_i
+		end
+		def expected_finish_time_less_than_or_equal=(val)
+			@expected_finish_time_less_than_or_equal = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
@@ -1134,6 +1166,9 @@ module Kaltura
 			end
 			if xml_element.elements['idIn'] != nil
 				self.id_in = xml_element.elements['idIn'].text
+			end
+			if xml_element.elements['idNotIn'] != nil
+				self.id_not_in = xml_element.elements['idNotIn'].text
 			end
 			if xml_element.elements['vendorPartnerIdEqual'] != nil
 				self.vendor_partner_id_equal = xml_element.elements['vendorPartnerIdEqual'].text
@@ -1191,6 +1226,12 @@ module Kaltura
 			end
 			if xml_element.elements['contextEqual'] != nil
 				self.context_equal = xml_element.elements['contextEqual'].text
+			end
+			if xml_element.elements['expectedFinishTimeGreaterThanOrEqual'] != nil
+				self.expected_finish_time_greater_than_or_equal = xml_element.elements['expectedFinishTimeGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['expectedFinishTimeLessThanOrEqual'] != nil
+				self.expected_finish_time_less_than_or_equal = xml_element.elements['expectedFinishTimeLessThanOrEqual'].text
 			end
 		end
 

@@ -3580,6 +3580,21 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Create a new Partner object
+		# @return [bool]
+		def registration_validation(partner, cms_password='', template_partner_id=KalturaNotImplemented, silent=false)
+			kparams = {}
+			client.add_param(kparams, 'partner', partner)
+			client.add_param(kparams, 'cmsPassword', cms_password)
+			client.add_param(kparams, 'templatePartnerId', template_partner_id)
+			client.add_param(kparams, 'silent', silent)
+			client.queue_service_action_call('partner', 'registrationValidation', 'bool', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Update details and settings of an existing partner
 		# @return [KalturaPartner]
 		def update(partner, allow_empty=false)
@@ -6310,8 +6325,8 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:21-06-13'
-			self.api_version = '17.2.0'
+			self.client_tag = 'ruby:21-06-22'
+			self.api_version = '17.3.0'
 		end
 		
 		def client_tag=(value)

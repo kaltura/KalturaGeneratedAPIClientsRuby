@@ -3888,6 +3888,7 @@ module Kaltura
 
 	class KalturaVideoCodec
 		NONE = ""
+		AV1 = "AV1"
 		APCH = "apch"
 		APCN = "apcn"
 		APCO = "apco"

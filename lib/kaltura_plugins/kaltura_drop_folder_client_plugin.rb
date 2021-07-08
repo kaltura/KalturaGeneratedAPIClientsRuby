@@ -226,6 +226,7 @@ module Kaltura
 		# The ammount of time, in seconds, that should pass so that a file with no change in size we'll be treated as "finished uploading to folder"
 		attr_accessor :file_size_check_interval
 		attr_accessor :file_delete_policy
+		attr_accessor :file_delete_regex
 		attr_accessor :auto_file_delete_days
 		attr_accessor :file_handler_type
 		attr_accessor :file_name_patterns
@@ -327,6 +328,9 @@ module Kaltura
 			end
 			if xml_element.elements['fileDeletePolicy'] != nil
 				self.file_delete_policy = xml_element.elements['fileDeletePolicy'].text
+			end
+			if xml_element.elements['fileDeleteRegex'] != nil
+				self.file_delete_regex = xml_element.elements['fileDeleteRegex'].text
 			end
 			if xml_element.elements['autoFileDeleteDays'] != nil
 				self.auto_file_delete_days = xml_element.elements['autoFileDeleteDays'].text

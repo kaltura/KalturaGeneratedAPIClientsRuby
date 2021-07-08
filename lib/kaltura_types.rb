@@ -1962,6 +1962,12 @@ module Kaltura
 		attr_accessor :usage_limit_warning
 		attr_accessor :last_free_trial_notification_day
 		attr_accessor :monitor_usage
+		attr_accessor :password_structure_validations
+		attr_accessor :password_structure_validations_description
+		attr_accessor :pass_replace_freq
+		attr_accessor :max_login_attempts
+		attr_accessor :login_block_period
+		attr_accessor :num_prev_pass_to_keep
 
 		def id=(val)
 			@id = val.to_i
@@ -2058,6 +2064,18 @@ module Kaltura
 		end
 		def monitor_usage=(val)
 			@monitor_usage = val.to_i
+		end
+		def pass_replace_freq=(val)
+			@pass_replace_freq = val.to_i
+		end
+		def max_login_attempts=(val)
+			@max_login_attempts = val.to_i
+		end
+		def login_block_period=(val)
+			@login_block_period = val.to_i
+		end
+		def num_prev_pass_to_keep=(val)
+			@num_prev_pass_to_keep = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -2265,6 +2283,24 @@ module Kaltura
 			end
 			if xml_element.elements['monitorUsage'] != nil
 				self.monitor_usage = xml_element.elements['monitorUsage'].text
+			end
+			if xml_element.elements['passwordStructureValidations'] != nil
+				self.password_structure_validations = xml_element.elements['passwordStructureValidations'].text
+			end
+			if xml_element.elements['passwordStructureValidationsDescription'] != nil
+				self.password_structure_validations_description = xml_element.elements['passwordStructureValidationsDescription'].text
+			end
+			if xml_element.elements['passReplaceFreq'] != nil
+				self.pass_replace_freq = xml_element.elements['passReplaceFreq'].text
+			end
+			if xml_element.elements['maxLoginAttempts'] != nil
+				self.max_login_attempts = xml_element.elements['maxLoginAttempts'].text
+			end
+			if xml_element.elements['loginBlockPeriod'] != nil
+				self.login_block_period = xml_element.elements['loginBlockPeriod'].text
+			end
+			if xml_element.elements['numPrevPassToKeep'] != nil
+				self.num_prev_pass_to_keep = xml_element.elements['numPrevPassToKeep'].text
 			end
 		end
 

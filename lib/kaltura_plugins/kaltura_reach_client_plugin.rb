@@ -1239,26 +1239,12 @@ module Kaltura
 
 	class KalturaEntryVendorTaskFilter < KalturaEntryVendorTaskBaseFilter
 		attr_accessor :free_text
-		attr_accessor :expected_finish_time_greater_than_or_equal
-		attr_accessor :expected_finish_time_less_than_or_equal
 
-		def expected_finish_time_greater_than_or_equal=(val)
-			@expected_finish_time_greater_than_or_equal = val.to_i
-		end
-		def expected_finish_time_less_than_or_equal=(val)
-			@expected_finish_time_less_than_or_equal = val.to_i
-		end
 
 		def from_xml(xml_element)
 			super
 			if xml_element.elements['freeText'] != nil
 				self.free_text = xml_element.elements['freeText'].text
-			end
-			if xml_element.elements['expectedFinishTimeGreaterThanOrEqual'] != nil
-				self.expected_finish_time_greater_than_or_equal = xml_element.elements['expectedFinishTimeGreaterThanOrEqual'].text
-			end
-			if xml_element.elements['expectedFinishTimeLessThanOrEqual'] != nil
-				self.expected_finish_time_less_than_or_equal = xml_element.elements['expectedFinishTimeLessThanOrEqual'].text
 			end
 		end
 

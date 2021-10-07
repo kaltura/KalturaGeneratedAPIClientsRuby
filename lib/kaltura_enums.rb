@@ -715,6 +715,12 @@ module Kaltura
 		RESIZE_WITH_FORCE = 5
 	end
 
+	class KalturaTwoFactorAuthenticationMode
+		ALL = 0
+		ADMIN_USERS_ONLY = 1
+		NON_ADMIN_USERS_ONLY = 2
+	end
+
 	class KalturaUiConfCreationMode
 		WIZARD = 2
 		ADVANCED = 3
@@ -1258,6 +1264,7 @@ module Kaltura
 		ASSET_TYPE = "16"
 		BOOLEAN = "17"
 		HTTP_HEADER = "18"
+		ENTRY_SCHEDULED = "19"
 	end
 
 	class KalturaConfMapsSourceLocation
@@ -3554,6 +3561,7 @@ module Kaltura
 		INTERACTIVE_VIDEO_NODE_SWITCH_HOTSPOT_CLICKED_PERCENTILES = "57"
 		TOP_CUSTOM_VAR2 = "58"
 		TOP_CUSTOM_VAR3 = "59"
+		SELF_SERVE_USAGE = "60"
 		PARTNER_USAGE = "201"
 		MAP_OVERLAY_COUNTRY_REALTIME = "10001"
 		MAP_OVERLAY_REGION_REALTIME = "10002"
@@ -3592,6 +3600,7 @@ module Kaltura
 		PLAYBACK_RATE_VPAAS = "20020"
 		PARTNER_USAGE_VPAAS = "20021"
 		TOP_PLAYBACK_CONTEXT_VPAAS = "20022"
+		SELF_SERVE_USAGE_VPAAS = "20023"
 		QOE_OVERVIEW = "30001"
 		QOE_EXPERIENCE = "30002"
 		QOE_EXPERIENCE_PLATFORMS = "30003"
@@ -3888,11 +3897,11 @@ module Kaltura
 
 	class KalturaVideoCodec
 		NONE = ""
-		AV1 = "AV1"
 		APCH = "apch"
 		APCN = "apcn"
 		APCO = "apco"
 		APCS = "apcs"
+		AV1 = "av1"
 		COPY = "copy"
 		DNXHD = "dnxhd"
 		DV = "dv"

@@ -46,6 +46,7 @@ module Kaltura
 	end
 
 	class KalturaDrmLicenseScenario
+		NONE = "0"
 		PROTECTION = "playReady.PROTECTION"
 		PURCHASE = "playReady.PURCHASE"
 		RENTAL = "playReady.RENTAL"

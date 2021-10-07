@@ -1968,6 +1968,7 @@ module Kaltura
 		attr_accessor :max_login_attempts
 		attr_accessor :login_block_period
 		attr_accessor :num_prev_pass_to_keep
+		attr_accessor :two_factor_authentication_mode
 
 		def id=(val)
 			@id = val.to_i
@@ -2076,6 +2077,9 @@ module Kaltura
 		end
 		def num_prev_pass_to_keep=(val)
 			@num_prev_pass_to_keep = val.to_i
+		end
+		def two_factor_authentication_mode=(val)
+			@two_factor_authentication_mode = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -2301,6 +2305,9 @@ module Kaltura
 			end
 			if xml_element.elements['numPrevPassToKeep'] != nil
 				self.num_prev_pass_to_keep = xml_element.elements['numPrevPassToKeep'].text
+			end
+			if xml_element.elements['twoFactorAuthenticationMode'] != nil
+				self.two_factor_authentication_mode = xml_element.elements['twoFactorAuthenticationMode'].text
 			end
 		end
 
@@ -4216,6 +4223,7 @@ module Kaltura
 		attr_accessor :title
 		attr_accessor :company
 		attr_accessor :ks_privileges
+		attr_accessor :encrypted_seed
 
 		def type=(val)
 			@type = val.to_i
@@ -4285,6 +4293,9 @@ module Kaltura
 			end
 			if xml_element.elements['ksPrivileges'] != nil
 				self.ks_privileges = xml_element.elements['ksPrivileges'].text
+			end
+			if xml_element.elements['encryptedSeed'] != nil
+				self.encrypted_seed = xml_element.elements['encryptedSeed'].text
 			end
 		end
 
@@ -7611,9 +7622,13 @@ module Kaltura
 		attr_accessor :category_ancestor_id_in
 		# The id of the original entry
 		attr_accessor :redirect_from_entry_id
+		attr_accessor :conversion_profile_id_equal
 
 		def is_root=(val)
 			@is_root = val.to_i
+		end
+		def conversion_profile_id_equal=(val)
+			@conversion_profile_id_equal = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -7638,6 +7653,9 @@ module Kaltura
 			end
 			if xml_element.elements['redirectFromEntryId'] != nil
 				self.redirect_from_entry_id = xml_element.elements['redirectFromEntryId'].text
+			end
+			if xml_element.elements['conversionProfileIdEqual'] != nil
+				self.conversion_profile_id_equal = xml_element.elements['conversionProfileIdEqual'].text
 			end
 		end
 
@@ -8778,6 +8796,7 @@ module Kaltura
 		attr_accessor :time_zone_offset
 		attr_accessor :report_items
 		attr_accessor :reports_items_group
+		attr_accessor :base_url
 
 		def time_zone_offset=(val)
 			@time_zone_offset = val.to_i
@@ -8796,6 +8815,9 @@ module Kaltura
 			end
 			if xml_element.elements['reportsItemsGroup'] != nil
 				self.reports_items_group = xml_element.elements['reportsItemsGroup'].text
+			end
+			if xml_element.elements['baseUrl'] != nil
+				self.base_url = xml_element.elements['baseUrl'].text
 			end
 		end
 
@@ -12811,17 +12833,17 @@ module Kaltura
 
 	end
 
-	class KalturaDeliveryProfileVodPackagerPlayServer < KalturaDeliveryProfile
-		attr_accessor :ad_stitching_enabled
+	class KalturaDeliveryProfileVod < KalturaDeliveryProfile
+		attr_accessor :simulive_support
 
-		def ad_stitching_enabled=(val)
-			@ad_stitching_enabled = to_b(val)
+		def simulive_support=(val)
+			@simulive_support = to_b(val)
 		end
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['adStitchingEnabled'] != nil
-				self.ad_stitching_enabled = xml_element.elements['adStitchingEnabled'].text
+			if xml_element.elements['simuliveSupport'] != nil
+				self.simulive_support = xml_element.elements['simuliveSupport'].text
 			end
 		end
 
@@ -13411,6 +13433,15 @@ module Kaltura
 			if xml_element.elements['peakDvrAudience'] != nil
 				self.peak_dvr_audience = xml_element.elements['peakDvrAudience'].text
 			end
+		end
+
+	end
+
+	class KalturaEntryScheduledCondition < KalturaCondition
+
+
+		def from_xml(xml_element)
+			super
 		end
 
 	end
@@ -14745,6 +14776,7 @@ module Kaltura
 		attr_accessor :file_paths
 		attr_accessor :reports_group
 		attr_accessor :files
+		attr_accessor :base_url
 
 
 		def from_xml(xml_element)
@@ -14763,6 +14795,9 @@ module Kaltura
 			end
 			if xml_element.elements['files'] != nil
 				self.files = KalturaClientBase.object_from_xml(xml_element.elements['files'], 'KalturaReportExportFile')
+			end
+			if xml_element.elements['baseUrl'] != nil
+				self.base_url = xml_element.elements['baseUrl'].text
 			end
 		end
 
@@ -17094,17 +17129,17 @@ module Kaltura
 
 	end
 
-	class KalturaDeliveryProfileVodPackagerHls < KalturaDeliveryProfileVodPackagerPlayServer
-		attr_accessor :allow_fairplay_offline
+	class KalturaDeliveryProfileVodPackagerPlayServer < KalturaDeliveryProfileVod
+		attr_accessor :ad_stitching_enabled
 
-		def allow_fairplay_offline=(val)
-			@allow_fairplay_offline = to_b(val)
+		def ad_stitching_enabled=(val)
+			@ad_stitching_enabled = to_b(val)
 		end
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['allowFairplayOffline'] != nil
-				self.allow_fairplay_offline = xml_element.elements['allowFairplayOffline'].text
+			if xml_element.elements['adStitchingEnabled'] != nil
+				self.ad_stitching_enabled = xml_element.elements['adStitchingEnabled'].text
 			end
 		end
 
@@ -18855,6 +18890,22 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
+		end
+
+	end
+
+	class KalturaDeliveryProfileVodPackagerHls < KalturaDeliveryProfileVodPackagerPlayServer
+		attr_accessor :allow_fairplay_offline
+
+		def allow_fairplay_offline=(val)
+			@allow_fairplay_offline = to_b(val)
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['allowFairplayOffline'] != nil
+				self.allow_fairplay_offline = xml_element.elements['allowFairplayOffline'].text
+			end
 		end
 
 	end

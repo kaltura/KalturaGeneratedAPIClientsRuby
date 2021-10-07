@@ -383,6 +383,7 @@ module Kaltura
 		attr_accessor :recommended_dc_for_execute
 		# The event that trigger the automatic distribute
 		attr_accessor :distribute_trigger
+		attr_accessor :support_image_entry
 
 		def id=(val)
 			@id = val.to_i
@@ -428,6 +429,9 @@ module Kaltura
 		end
 		def distribute_trigger=(val)
 			@distribute_trigger = val.to_i
+		end
+		def support_image_entry=(val)
+			@support_image_entry = to_b(val)
 		end
 
 		def from_xml(xml_element)
@@ -506,6 +510,9 @@ module Kaltura
 			end
 			if xml_element.elements['distributeTrigger'] != nil
 				self.distribute_trigger = xml_element.elements['distributeTrigger'].text
+			end
+			if xml_element.elements['supportImageEntry'] != nil
+				self.support_image_entry = xml_element.elements['supportImageEntry'].text
 			end
 		end
 

@@ -59,6 +59,7 @@ module Kaltura
 		BLACKOUT = 3
 		MEETING = 4
 		LIVE_REDIRECT = 5
+		VOD = 6
 	end
 
 	class KalturaScheduleResourceStatus
@@ -182,6 +183,31 @@ module Kaltura
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
+	class KalturaLinkedScheduleEvent < KalturaObjectBase
+		# The time between the end of the event which it's id is in $eventId and the start of the event holding this object
+		attr_accessor :offset
+		# The id of the event influencing the start of the event holding this object
+		attr_accessor :event_id
+
+		def offset=(val)
+			@offset = val.to_i
+		end
+		def event_id=(val)
+			@event_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['offset'] != nil
+				self.offset = xml_element.elements['offset'].text
+			end
+			if xml_element.elements['eventId'] != nil
+				self.event_id = xml_element.elements['eventId'].text
+			end
+		end
+
+	end
+
 	class KalturaScheduleEventRecurrence < KalturaObjectBase
 		attr_accessor :name
 		attr_accessor :frequency
@@ -303,6 +329,10 @@ module Kaltura
 		attr_accessor :start_date
 		attr_accessor :end_date
 		attr_accessor :reference_id
+		# Contains the Id of the event that influences the timing of this event and the offset of time.
+		attr_accessor :linked_to
+		# An array of Schedule Event Ids that their start time depends on the end of the current.
+		attr_accessor :linked_by
 		attr_accessor :classification_type
 		# Specifies the global position for the activity
 		attr_accessor :geo_latitude
@@ -404,6 +434,12 @@ module Kaltura
 			end
 			if xml_element.elements['referenceId'] != nil
 				self.reference_id = xml_element.elements['referenceId'].text
+			end
+			if xml_element.elements['linkedTo'] != nil
+				self.linked_to = KalturaClientBase.object_from_xml(xml_element.elements['linkedTo'], 'KalturaLinkedScheduleEvent')
+			end
+			if xml_element.elements['linkedBy'] != nil
+				self.linked_by = xml_element.elements['linkedBy'].text
 			end
 			if xml_element.elements['classificationType'] != nil
 				self.classification_type = xml_element.elements['classificationType'].text
@@ -1050,6 +1086,15 @@ module Kaltura
 
 	end
 
+	class KalturaVodScheduleEvent < KalturaEntryScheduleEvent
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaLiveRedirectScheduleEvent < KalturaBaseLiveScheduleEvent
 		# The vod entry to redirect
 		attr_accessor :redirect_entry_id
@@ -1073,6 +1118,10 @@ module Kaltura
 		attr_accessor :pre_start_time
 		# The time relative time before the endTime considered as postEnd time
 		attr_accessor :post_end_time
+		# The entry id of the pre start entry
+		attr_accessor :pre_start_entry_id
+		# The entry id of the post end entry
+		attr_accessor :post_end_entry_id
 
 		def projected_audience=(val)
 			@projected_audience = val.to_i
@@ -1097,6 +1146,12 @@ module Kaltura
 			end
 			if xml_element.elements['postEndTime'] != nil
 				self.post_end_time = xml_element.elements['postEndTime'].text
+			end
+			if xml_element.elements['preStartEntryId'] != nil
+				self.pre_start_entry_id = xml_element.elements['preStartEntryId'].text
+			end
+			if xml_element.elements['postEndEntryId'] != nil
+				self.post_end_entry_id = xml_element.elements['postEndEntryId'].text
 			end
 		end
 
@@ -1337,6 +1392,15 @@ module Kaltura
 
 	end
 
+	class KalturaVodScheduleEventBaseFilter < KalturaEntryScheduleEventFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaBlackoutScheduleEventFilter < KalturaRecordScheduleEventBaseFilter
 
 
@@ -1365,6 +1429,15 @@ module Kaltura
 	end
 
 	class KalturaRecordScheduleEventFilter < KalturaRecordScheduleEventBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaVodScheduleEventFilter < KalturaVodScheduleEventBaseFilter
 
 
 		def from_xml(xml_element)

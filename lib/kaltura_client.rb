@@ -612,6 +612,15 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# This action serves HLS encrypted key if access control is validated
+		# @return [file]
+		def serve_playback_key(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('baseentry', 'servePlaybackKey', 'file', kparams)
+			return client.get_serve_url()
+		end
+
 		# Update base entry. Only the properties that were set will be updated.
 		# @return [KalturaBaseEntry]
 		def update(entry_id, base_entry)
@@ -926,6 +935,20 @@ module Kaltura
 			client.add_param(kparams, 'bulkUploadData', bulk_upload_data)
 			client.add_param(kparams, 'bulkUploadCategoryData', bulk_upload_category_data)
 			client.queue_service_action_call('category', 'addFromBulkUpload', 'KalturaBulkUpload', kparams, kfiles)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Clone Category
+		# @return [KalturaCategory]
+		def clone(category_id, from_partner_id, parent_category_id=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'categoryId', category_id)
+			client.add_param(kparams, 'fromPartnerId', from_partner_id)
+			client.add_param(kparams, 'parentCategoryId', parent_category_id)
+			client.queue_service_action_call('category', 'clone', 'KalturaCategory', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -6325,8 +6348,8 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:21-09-05'
-			self.api_version = '17.5.0'
+			self.client_tag = 'ruby:21-10-07'
+			self.api_version = '17.11.0'
 		end
 		
 		def client_tag=(value)

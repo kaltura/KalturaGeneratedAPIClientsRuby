@@ -123,6 +123,7 @@ module Kaltura
 	class KalturaCatalogItemLanguage
 		AR = "Arabic"
 		YUE = "Cantonese"
+		CA = "Catalan"
 		ZH = "Chinese"
 		DA = "Danish"
 		NL = "Dutch"
@@ -1808,7 +1809,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# sync vednor profile credit
+		# sync vendor profile credit
 		# @return [KalturaReachProfile]
 		def sync_credit(reach_profile_id)
 			kparams = {}

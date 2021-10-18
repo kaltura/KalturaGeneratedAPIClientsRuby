@@ -35,6 +35,8 @@ module Kaltura
 		# Last playback time reached by user
 		attr_accessor :last_time_reached
 		attr_accessor :last_update_time
+		# Property to save last entry ID played in a playlist.
+		attr_accessor :playlist_last_entry_id
 
 		def last_time_reached=(val)
 			@last_time_reached = val.to_i
@@ -53,6 +55,9 @@ module Kaltura
 			end
 			if xml_element.elements['lastUpdateTime'] != nil
 				self.last_update_time = xml_element.elements['lastUpdateTime'].text
+			end
+			if xml_element.elements['playlistLastEntryId'] != nil
+				self.playlist_last_entry_id = xml_element.elements['playlistLastEntryId'].text
 			end
 		end
 

@@ -74,6 +74,7 @@ module Kaltura
 		ERROR_GET_DB_FILE_LIST = "4"
 		DROP_FOLDER_APP_ERROR = "5"
 		CONTENT_MATCH_POLICY_UNDEFINED = "6"
+		MISSING_CONFIG = "7"
 	end
 
 	class KalturaDropFolderFileErrorCode

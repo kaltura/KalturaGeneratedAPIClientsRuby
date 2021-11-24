@@ -3978,20 +3978,23 @@ module Kaltura
 		end
 
 		# @return [file]
-		def get_csv(id, params=KalturaNotImplemented)
+		def get_csv(id, params=KalturaNotImplemented, excluded_fields=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
 			client.add_param(kparams, 'params', params)
+			client.add_param(kparams, 'excludedFields', excluded_fields)
 			client.queue_service_action_call('report', 'getCsv', 'file', kparams)
 			return client.get_serve_url()
 		end
 
 		# Returns report CSV file executed by string params with the following convention: param1=value1;param2=value2
+		# 	 excludedFields can be supplied comma separated
 		# @return [file]
-		def get_csv_from_string_params(id, params=KalturaNotImplemented)
+		def get_csv_from_string_params(id, params=KalturaNotImplemented, excluded_fields=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
 			client.add_param(kparams, 'params', params)
+			client.add_param(kparams, 'excludedFields', excluded_fields)
 			client.queue_service_action_call('report', 'getCsvFromStringParams', 'file', kparams)
 			return client.get_serve_url()
 		end
@@ -6348,8 +6351,8 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:21-11-21'
-			self.api_version = '17.12.0'
+			self.client_tag = 'ruby:21-11-24'
+			self.api_version = '17.14.0'
 		end
 		
 		def client_tag=(value)

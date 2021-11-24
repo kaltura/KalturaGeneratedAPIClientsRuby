@@ -1887,6 +1887,19 @@ module Kaltura
 
 	end
 
+	class KalturaRegexItem < KalturaObjectBase
+		attr_accessor :regex
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['regex'] != nil
+				self.regex = xml_element.elements['regex'].text
+			end
+		end
+
+	end
+
 	class KalturaPartner < KalturaObjectBase
 		attr_accessor :id
 		attr_accessor :name
@@ -1969,6 +1982,7 @@ module Kaltura
 		attr_accessor :login_block_period
 		attr_accessor :num_prev_pass_to_keep
 		attr_accessor :two_factor_authentication_mode
+		attr_accessor :is_self_serve
 
 		def id=(val)
 			@id = val.to_i
@@ -2080,6 +2094,9 @@ module Kaltura
 		end
 		def two_factor_authentication_mode=(val)
 			@two_factor_authentication_mode = val.to_i
+		end
+		def is_self_serve=(val)
+			@is_self_serve = to_b(val)
 		end
 
 		def from_xml(xml_element)
@@ -2289,7 +2306,7 @@ module Kaltura
 				self.monitor_usage = xml_element.elements['monitorUsage'].text
 			end
 			if xml_element.elements['passwordStructureValidations'] != nil
-				self.password_structure_validations = xml_element.elements['passwordStructureValidations'].text
+				self.password_structure_validations = KalturaClientBase.object_from_xml(xml_element.elements['passwordStructureValidations'], 'KalturaRegexItem')
 			end
 			if xml_element.elements['passwordStructureValidationsDescription'] != nil
 				self.password_structure_validations_description = xml_element.elements['passwordStructureValidationsDescription'].text
@@ -2308,6 +2325,9 @@ module Kaltura
 			end
 			if xml_element.elements['twoFactorAuthenticationMode'] != nil
 				self.two_factor_authentication_mode = xml_element.elements['twoFactorAuthenticationMode'].text
+			end
+			if xml_element.elements['isSelfServe'] != nil
+				self.is_self_serve = xml_element.elements['isSelfServe'].text
 			end
 		end
 
@@ -15624,6 +15644,15 @@ module Kaltura
 
 	end
 
+	class KalturaUrlAuthenticationParamsCondition < KalturaCondition
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaUrlRecognizerAkamaiG2O < KalturaUrlRecognizer
 		# headerData
 		attr_accessor :header_data
@@ -18542,6 +18571,15 @@ module Kaltura
 	end
 
 	class KalturaAccessControlProfileFilter < KalturaAccessControlProfileBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaActionNameCondition < KalturaRegexCondition
 
 
 		def from_xml(xml_element)

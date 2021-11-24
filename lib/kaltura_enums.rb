@@ -1266,6 +1266,8 @@ module Kaltura
 		BOOLEAN = "17"
 		HTTP_HEADER = "18"
 		ENTRY_SCHEDULED = "19"
+		ACTION_NAME = "20"
+		URL_AUTH_PARAMS = "21"
 	end
 
 	class KalturaConfMapsSourceLocation
@@ -3495,6 +3497,7 @@ module Kaltura
 		MONTHS = "months"
 		TEN_MINUTES = "ten_minutes"
 		TEN_SECONDS = "ten_seconds"
+		YEARS = "years"
 	end
 
 	class KalturaReportOrderBy

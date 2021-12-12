@@ -4226,6 +4226,25 @@ module Kaltura
 
 	end
 
+	class KalturaDynamicEmailContents < KalturaObjectBase
+		# The subject of the customized email
+		attr_accessor :email_subject
+		# The body of the customized email
+		attr_accessor :email_body
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['emailSubject'] != nil
+				self.email_subject = xml_element.elements['emailSubject'].text
+			end
+			if xml_element.elements['emailBody'] != nil
+				self.email_body = xml_element.elements['emailBody'].text
+			end
+		end
+
+	end
+
 	class KalturaUser < KalturaBaseUser
 		attr_accessor :type
 		attr_accessor :date_of_birth
@@ -9688,6 +9707,7 @@ module Kaltura
 		attr_accessor :private_key
 		attr_accessor :public_key
 		attr_accessor :pass_phrase
+		attr_accessor :port
 		attr_accessor :should_export_thumbs
 		attr_accessor :packager_url
 		attr_accessor :export_periodically
@@ -9739,6 +9759,9 @@ module Kaltura
 		end
 		def create_file_link=(val)
 			@create_file_link = to_b(val)
+		end
+		def port=(val)
+			@port = val.to_i
 		end
 		def should_export_thumbs=(val)
 			@should_export_thumbs = to_b(val)
@@ -9847,6 +9870,9 @@ module Kaltura
 			end
 			if xml_element.elements['passPhrase'] != nil
 				self.pass_phrase = xml_element.elements['passPhrase'].text
+			end
+			if xml_element.elements['port'] != nil
+				self.port = xml_element.elements['port'].text
 			end
 			if xml_element.elements['shouldExportThumbs'] != nil
 				self.should_export_thumbs = xml_element.elements['shouldExportThumbs'].text
@@ -14171,6 +14197,7 @@ module Kaltura
 		attr_accessor :from_email
 		attr_accessor :body_params
 		attr_accessor :subject_params
+		attr_accessor :dynamic_email_contents
 		attr_accessor :template_path
 		attr_accessor :language
 		attr_accessor :campaign_id
@@ -14228,6 +14255,9 @@ module Kaltura
 			end
 			if xml_element.elements['subjectParams'] != nil
 				self.subject_params = xml_element.elements['subjectParams'].text
+			end
+			if xml_element.elements['dynamicEmailContents'] != nil
+				self.dynamic_email_contents = KalturaClientBase.object_from_xml(xml_element.elements['dynamicEmailContents'], 'KalturaDynamicEmailContents')
 			end
 			if xml_element.elements['templatePath'] != nil
 				self.template_path = xml_element.elements['templatePath'].text
@@ -18277,12 +18307,16 @@ module Kaltura
 		attr_accessor :create_link
 		attr_accessor :asset_id
 		attr_accessor :external_url
+		attr_accessor :port
 
 		def force=(val)
 			@force = to_b(val)
 		end
 		def create_link=(val)
 			@create_link = to_b(val)
+		end
+		def port=(val)
+			@port = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -18298,6 +18332,9 @@ module Kaltura
 			end
 			if xml_element.elements['externalUrl'] != nil
 				self.external_url = xml_element.elements['externalUrl'].text
+			end
+			if xml_element.elements['port'] != nil
+				self.port = xml_element.elements['port'].text
 			end
 		end
 

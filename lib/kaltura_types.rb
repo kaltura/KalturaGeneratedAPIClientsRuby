@@ -8629,6 +8629,8 @@ module Kaltura
 		attr_accessor :domain_in
 		# filter by canonical url
 		attr_accessor :canonical_url_in
+		# filter by virtual event id
+		attr_accessor :virtual_event_id_in
 
 		def search_in_tags=(val)
 			@search_in_tags = to_b(val)
@@ -8764,6 +8766,9 @@ module Kaltura
 			end
 			if xml_element.elements['canonicalUrlIn'] != nil
 				self.canonical_url_in = xml_element.elements['canonicalUrlIn'].text
+			end
+			if xml_element.elements['virtualEventIdIn'] != nil
+				self.virtual_event_id_in = xml_element.elements['virtualEventIdIn'].text
 			end
 		end
 
@@ -17043,9 +17048,13 @@ module Kaltura
 		attr_accessor :engine_message
 		attr_accessor :dest_file_sync_shared_path
 		attr_accessor :user_cpu
+		attr_accessor :estimated_effort
 
 		def user_cpu=(val)
 			@user_cpu = val.to_i
+		end
+		def estimated_effort=(val)
+			@estimated_effort = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -17082,6 +17091,9 @@ module Kaltura
 			end
 			if xml_element.elements['userCpu'] != nil
 				self.user_cpu = xml_element.elements['userCpu'].text
+			end
+			if xml_element.elements['estimatedEffort'] != nil
+				self.estimated_effort = xml_element.elements['estimatedEffort'].text
 			end
 		end
 

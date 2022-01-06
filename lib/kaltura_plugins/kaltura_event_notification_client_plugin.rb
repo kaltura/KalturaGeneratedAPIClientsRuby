@@ -89,7 +89,6 @@ module Kaltura
 	end
 
 	class KalturaEventNotificationEventType
-		INTEGRATION_JOB_CLOSED = "integrationEventNotifications.INTEGRATION_JOB_CLOSED"
 		BATCH_JOB_STATUS = "1"
 		OBJECT_ADDED = "2"
 		OBJECT_CHANGED = "3"

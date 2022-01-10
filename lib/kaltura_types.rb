@@ -12851,12 +12851,19 @@ module Kaltura
 	class KalturaDeliveryProfileLivePackager < KalturaDeliveryProfile
 		# Domain used to sign the live url
 		attr_accessor :live_packager_signing_domain
+		attr_accessor :should_redirect
 
+		def should_redirect=(val)
+			@should_redirect = to_b(val)
+		end
 
 		def from_xml(xml_element)
 			super
 			if xml_element.elements['livePackagerSigningDomain'] != nil
 				self.live_packager_signing_domain = xml_element.elements['livePackagerSigningDomain'].text
+			end
+			if xml_element.elements['shouldRedirect'] != nil
+				self.should_redirect = xml_element.elements['shouldRedirect'].text
 			end
 		end
 

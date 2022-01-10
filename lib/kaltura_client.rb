@@ -5742,6 +5742,19 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Resets user login password
+		# @return []
+		def login_data_reset_password(login_data_id, new_password)
+			kparams = {}
+			client.add_param(kparams, 'loginDataId', login_data_id)
+			client.add_param(kparams, 'newPassword', new_password)
+			client.queue_service_action_call('user', 'loginDataResetPassword', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Notifies that a user is banned from an account.
 		# @return []
 		def notify_ban(user_id)
@@ -6352,7 +6365,7 @@ module Kaltura
 		def initialize(client)
 			super(client)
 			self.client_tag = 'ruby:22-01-10'
-			self.api_version = '17.17.0'
+			self.api_version = '17.18.0'
 		end
 		
 		def client_tag=(value)

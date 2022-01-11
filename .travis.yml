@@ -1,12 +1,8 @@
 language: ruby
 rvm:
-  #- "1.9.3"
   - "2.5.0"
-#  - rbx
-#  - rbx-2
-# install: gem install activesupport -v 4.2.6 && gem install mime-types -v 2.6.2 && gem install rest-client -v 1.8.0 && gem install shoulda minitest
-install: gem install activesupport mime-types rest-client shoulda minitest
-
+  - "2.7.0"
+install: gem install activesupport:6.1.4.4 mime-types rest-client shoulda minitest
 # uncomment this line if your project needs to run something other than `rake`:
 # script: bundle exec rspec spec
 script:

@@ -8,7 +8,7 @@
 # to do with audio, video, and animation what Wiki platforms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2021  Kaltura Inc.
+# Copyright (C) 2006-2022  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -6364,8 +6364,8 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:22-02-15'
-			self.api_version = '17.18.0'
+			self.client_tag = 'ruby:22-02-16'
+			self.api_version = '17.19.0'
 		end
 		
 		def client_tag=(value)

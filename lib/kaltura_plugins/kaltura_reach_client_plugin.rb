@@ -85,6 +85,7 @@ module Kaltura
 		AUDIO_DESCRIPTION = 4
 		CHAPTERING = 5
 		INTELLIGENT_TAGGING = 6
+		DUBBING = 7
 	end
 
 	class KalturaVendorServiceTurnAroundTime
@@ -1046,6 +1047,33 @@ module Kaltura
 
 	end
 
+	class KalturaVendorDubbingCatalogItem < KalturaVendorCatalogItem
+		attr_accessor :flavor_params_id
+		attr_accessor :clear_audio_flavor_params_id
+		attr_accessor :target_language
+
+		def flavor_params_id=(val)
+			@flavor_params_id = val.to_i
+		end
+		def clear_audio_flavor_params_id=(val)
+			@clear_audio_flavor_params_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['flavorParamsId'] != nil
+				self.flavor_params_id = xml_element.elements['flavorParamsId'].text
+			end
+			if xml_element.elements['clearAudioFlavorParamsId'] != nil
+				self.clear_audio_flavor_params_id = xml_element.elements['clearAudioFlavorParamsId'].text
+			end
+			if xml_element.elements['targetLanguage'] != nil
+				self.target_language = xml_element.elements['targetLanguage'].text
+			end
+		end
+
+	end
+
 	class KalturaVendorIntelligentTaggingCatalogItem < KalturaVendorCatalogItem
 
 
@@ -1576,6 +1604,23 @@ module Kaltura
 
 	end
 
+	class KalturaVendorDubbingCatalogItemBaseFilter < KalturaVendorCatalogItemFilter
+		attr_accessor :target_language_equal
+		attr_accessor :target_language_in
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['targetLanguageEqual'] != nil
+				self.target_language_equal = xml_element.elements['targetLanguageEqual'].text
+			end
+			if xml_element.elements['targetLanguageIn'] != nil
+				self.target_language_in = xml_element.elements['targetLanguageIn'].text
+			end
+		end
+
+	end
+
 	class KalturaVendorAlignmentCatalogItemFilter < KalturaVendorCaptionsCatalogItemBaseFilter
 
 
@@ -1604,6 +1649,15 @@ module Kaltura
 	end
 
 	class KalturaVendorChapteringCatalogItemFilter < KalturaVendorCaptionsCatalogItemBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaVendorDubbingCatalogItemFilter < KalturaVendorDubbingCatalogItemBaseFilter
 
 
 		def from_xml(xml_element)

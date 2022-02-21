@@ -1122,6 +1122,8 @@ module Kaltura
 		attr_accessor :pre_start_entry_id
 		# The entry id of the post end entry
 		attr_accessor :post_end_entry_id
+		# Detect whether "real" live can interrupt to the "main" content
+		attr_accessor :is_content_interruptible
 
 		def projected_audience=(val)
 			@projected_audience = val.to_i
@@ -1131,6 +1133,9 @@ module Kaltura
 		end
 		def post_end_time=(val)
 			@post_end_time = val.to_i
+		end
+		def is_content_interruptible=(val)
+			@is_content_interruptible = to_b(val)
 		end
 
 		def from_xml(xml_element)
@@ -1152,6 +1157,9 @@ module Kaltura
 			end
 			if xml_element.elements['postEndEntryId'] != nil
 				self.post_end_entry_id = xml_element.elements['postEndEntryId'].text
+			end
+			if xml_element.elements['isContentInterruptible'] != nil
+				self.is_content_interruptible = xml_element.elements['isContentInterruptible'].text
 			end
 		end
 

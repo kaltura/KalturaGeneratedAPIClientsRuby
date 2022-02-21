@@ -8631,6 +8631,8 @@ module Kaltura
 		attr_accessor :canonical_url_in
 		# filter by virtual event id
 		attr_accessor :virtual_event_id_in
+		# filter by origin
+		attr_accessor :origin_in
 
 		def search_in_tags=(val)
 			@search_in_tags = to_b(val)
@@ -8769,6 +8771,9 @@ module Kaltura
 			end
 			if xml_element.elements['virtualEventIdIn'] != nil
 				self.virtual_event_id_in = xml_element.elements['virtualEventIdIn'].text
+			end
+			if xml_element.elements['originIn'] != nil
+				self.origin_in = xml_element.elements['originIn'].text
 			end
 		end
 

@@ -1983,6 +1983,8 @@ module Kaltura
 		attr_accessor :num_prev_pass_to_keep
 		attr_accessor :two_factor_authentication_mode
 		attr_accessor :is_self_serve
+		attr_accessor :allowed_domains
+		attr_accessor :excluded_admin_role_name
 
 		def id=(val)
 			@id = val.to_i
@@ -2328,6 +2330,12 @@ module Kaltura
 			end
 			if xml_element.elements['isSelfServe'] != nil
 				self.is_self_serve = xml_element.elements['isSelfServe'].text
+			end
+			if xml_element.elements['allowedDomains'] != nil
+				self.allowed_domains = xml_element.elements['allowedDomains'].text
+			end
+			if xml_element.elements['excludedAdminRoleName'] != nil
+				self.excluded_admin_role_name = xml_element.elements['excludedAdminRoleName'].text
 			end
 		end
 
@@ -4263,6 +4271,7 @@ module Kaltura
 		attr_accessor :company
 		attr_accessor :ks_privileges
 		attr_accessor :encrypted_seed
+		attr_accessor :is_sso_excluded
 
 		def type=(val)
 			@type = val.to_i
@@ -4281,6 +4290,9 @@ module Kaltura
 		end
 		def login_enabled=(val)
 			@login_enabled = to_b(val)
+		end
+		def is_sso_excluded=(val)
+			@is_sso_excluded = to_b(val)
 		end
 
 		def from_xml(xml_element)
@@ -4335,6 +4347,9 @@ module Kaltura
 			end
 			if xml_element.elements['encryptedSeed'] != nil
 				self.encrypted_seed = xml_element.elements['encryptedSeed'].text
+			end
+			if xml_element.elements['isSsoExcluded'] != nil
+				self.is_sso_excluded = xml_element.elements['isSsoExcluded'].text
 			end
 		end
 
@@ -7058,6 +7073,10 @@ module Kaltura
 		attr_accessor :secondary_secured_broadcasting_url
 		attr_accessor :primary_rtsp_broadcasting_url
 		attr_accessor :secondary_rtsp_broadcasting_url
+		attr_accessor :primary_srt_broadcasting_url
+		attr_accessor :primary_srt_stream_id
+		attr_accessor :secondary_srt_broadcasting_url
+		attr_accessor :secondary_srt_stream_id
 		attr_accessor :stream_name
 		# The stream url
 		attr_accessor :stream_url
@@ -7073,6 +7092,7 @@ module Kaltura
 		attr_accessor :stream_password
 		# The broadcast username
 		attr_accessor :stream_username
+		attr_accessor :srt_pass
 		# The Streams primary server node id
 		attr_accessor :primary_server_node_id
 		attr_accessor :sip_token
@@ -7114,6 +7134,18 @@ module Kaltura
 			if xml_element.elements['secondaryRtspBroadcastingUrl'] != nil
 				self.secondary_rtsp_broadcasting_url = xml_element.elements['secondaryRtspBroadcastingUrl'].text
 			end
+			if xml_element.elements['primarySrtBroadcastingUrl'] != nil
+				self.primary_srt_broadcasting_url = xml_element.elements['primarySrtBroadcastingUrl'].text
+			end
+			if xml_element.elements['primarySrtStreamId'] != nil
+				self.primary_srt_stream_id = xml_element.elements['primarySrtStreamId'].text
+			end
+			if xml_element.elements['secondarySrtBroadcastingUrl'] != nil
+				self.secondary_srt_broadcasting_url = xml_element.elements['secondarySrtBroadcastingUrl'].text
+			end
+			if xml_element.elements['secondarySrtStreamId'] != nil
+				self.secondary_srt_stream_id = xml_element.elements['secondarySrtStreamId'].text
+			end
 			if xml_element.elements['streamName'] != nil
 				self.stream_name = xml_element.elements['streamName'].text
 			end
@@ -7137,6 +7169,9 @@ module Kaltura
 			end
 			if xml_element.elements['streamUsername'] != nil
 				self.stream_username = xml_element.elements['streamUsername'].text
+			end
+			if xml_element.elements['srtPass'] != nil
+				self.srt_pass = xml_element.elements['srtPass'].text
 			end
 			if xml_element.elements['primaryServerNodeId'] != nil
 				self.primary_server_node_id = xml_element.elements['primaryServerNodeId'].text

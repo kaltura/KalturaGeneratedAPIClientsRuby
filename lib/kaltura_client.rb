@@ -1006,7 +1006,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Move categories that belong to the same parent category to a target categroy - enabled only for ks with disable entitlement
+		# Move categories that belong to the same parent category to a target category - enabled only for ks with disable entitlement
 		# @return [bool]
 		def move(category_ids, target_category_parent_id)
 			kparams = {}
@@ -4503,7 +4503,7 @@ module Kaltura
 		end
 
 		# Will write to the event log a single line representing the event
-		# 	 client version - will help interprete the line structure. different client versions might have slightly different data/data formats in the line
+		# 	 client version - will help interpret the line structure. Different client versions might have slightly different data/data formats in the line
 		# event_id - number is the row number in yuval's excel
 		# datetime - same format as MySql's datetime - can change and should reflect the time zone
 		# session id - can be some big random number or guid
@@ -4536,7 +4536,7 @@ module Kaltura
 		end
 
 		# Will collect the kmcEvent sent form the KMC client
-		# 	 // this will actually be an empty function because all events will be sent using GET and will anyway be logged in the apache log
+		# 	 // this will actually be an empty function because all events will be sent using GET and will anyway be logged in the Apache log
 		# @return []
 		def kmc_collect(kmc_event)
 			kparams = {}
@@ -4982,7 +4982,7 @@ module Kaltura
 			return client.get_serve_url()
 		end
 
-		# Serves thumbnail by entry id and thumnail params id
+		# Serves thumbnail by entry id and thumbnail params id
 		# @return [file]
 		def serve_by_entry_id(entry_id, thumb_param_id=KalturaNotImplemented)
 			kparams = {}
@@ -6364,8 +6364,8 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:22-04-26'
-			self.api_version = '18.2.0'
+			self.client_tag = 'ruby:22-04-27'
+			self.api_version = '18.3.0'
 		end
 		
 		def client_tag=(value)

@@ -6505,7 +6505,7 @@ module Kaltura
 			@last_broadcast = val.to_i
 		end
 		def current_broadcast_start_time=(val)
-			@current_broadcast_start_time = val.to_f
+			@current_broadcast_start_time = val.to_i
 		end
 		def live_status=(val)
 			@live_status = val.to_i
@@ -9538,7 +9538,7 @@ module Kaltura
 			@event_type = val.to_i
 		end
 		def event_timestamp=(val)
-			@event_timestamp = val.to_f
+			@event_timestamp = val.to_i
 		end
 		def partner_id=(val)
 			@partner_id = val.to_i
@@ -9665,7 +9665,7 @@ module Kaltura
 			@kmc_event_type = val.to_i
 		end
 		def event_timestamp=(val)
-			@event_timestamp = val.to_f
+			@event_timestamp = val.to_i
 		end
 		def partner_id=(val)
 			@partner_id = val.to_i

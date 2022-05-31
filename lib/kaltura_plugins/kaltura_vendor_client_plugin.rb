@@ -133,6 +133,9 @@ module Kaltura
 		attr_accessor :enable_zoom_transcription
 		attr_accessor :zoom_account_description
 		attr_accessor :enable_meeting_upload
+		attr_accessor :opt_out_group_names
+		attr_accessor :opt_in_group_names
+		attr_accessor :group_participation_type
 
 		def enable_recording_upload=(val)
 			@enable_recording_upload = val.to_i
@@ -148,6 +151,9 @@ module Kaltura
 		end
 		def enable_meeting_upload=(val)
 			@enable_meeting_upload = val.to_i
+		end
+		def group_participation_type=(val)
+			@group_participation_type = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -181,6 +187,15 @@ module Kaltura
 			end
 			if xml_element.elements['enableMeetingUpload'] != nil
 				self.enable_meeting_upload = xml_element.elements['enableMeetingUpload'].text
+			end
+			if xml_element.elements['optOutGroupNames'] != nil
+				self.opt_out_group_names = xml_element.elements['optOutGroupNames'].text
+			end
+			if xml_element.elements['optInGroupNames'] != nil
+				self.opt_in_group_names = xml_element.elements['optInGroupNames'].text
+			end
+			if xml_element.elements['groupParticipationType'] != nil
+				self.group_participation_type = xml_element.elements['groupParticipationType'].text
 			end
 		end
 

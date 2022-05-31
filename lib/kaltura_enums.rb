@@ -814,6 +814,12 @@ module Kaltura
 		TIMEHASH = 2
 	end
 
+	class KalturaZoomGroupParticipationType
+		NO_CLASSIFICATION = 0
+		OPT_IN = 1
+		OPT_OUT = 2
+	end
+
 	class KalturaAccessControlOrderBy
 		CREATED_AT_ASC = "+createdAt"
 		CREATED_AT_DESC = "-createdAt"

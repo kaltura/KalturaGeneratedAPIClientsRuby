@@ -325,6 +325,8 @@ module Kaltura
 		attr_accessor :service_type
 		attr_accessor :service_feature
 		attr_accessor :turn_around_time
+		# The vendor's task internal Id
+		attr_accessor :external_task_id
 
 		def id=(val)
 			@id = val.to_i
@@ -466,6 +468,9 @@ module Kaltura
 			end
 			if xml_element.elements['turnAroundTime'] != nil
 				self.turn_around_time = xml_element.elements['turnAroundTime'].text
+			end
+			if xml_element.elements['externalTaskId'] != nil
+				self.external_task_id = xml_element.elements['externalTaskId'].text
 			end
 		end
 

@@ -208,6 +208,33 @@ module Kaltura
 
 	end
 
+	class KalturaLiveFeature < KalturaObjectBase
+		attr_accessor :system_name
+		attr_accessor :pre_start_time
+		attr_accessor :post_end_time
+
+		def pre_start_time=(val)
+			@pre_start_time = val.to_i
+		end
+		def post_end_time=(val)
+			@post_end_time = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['systemName'] != nil
+				self.system_name = xml_element.elements['systemName'].text
+			end
+			if xml_element.elements['preStartTime'] != nil
+				self.pre_start_time = xml_element.elements['preStartTime'].text
+			end
+			if xml_element.elements['postEndTime'] != nil
+				self.post_end_time = xml_element.elements['postEndTime'].text
+			end
+		end
+
+	end
+
 	class KalturaScheduleEventRecurrence < KalturaObjectBase
 		attr_accessor :name
 		attr_accessor :frequency
@@ -658,6 +685,31 @@ module Kaltura
 			end
 			if xml_element.elements['blackoutConflicts'] != nil
 				self.blackout_conflicts = KalturaClientBase.object_from_xml(xml_element.elements['blackoutConflicts'], 'KalturaScheduleEvent')
+			end
+		end
+
+	end
+
+	class KalturaLiveCaptionFeature < KalturaLiveFeature
+		attr_accessor :media_url
+		attr_accessor :media_key
+		attr_accessor :caption_url
+		attr_accessor :caption_token
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['mediaUrl'] != nil
+				self.media_url = xml_element.elements['mediaUrl'].text
+			end
+			if xml_element.elements['mediaKey'] != nil
+				self.media_key = xml_element.elements['mediaKey'].text
+			end
+			if xml_element.elements['captionUrl'] != nil
+				self.caption_url = xml_element.elements['captionUrl'].text
+			end
+			if xml_element.elements['captionToken'] != nil
+				self.caption_token = xml_element.elements['captionToken'].text
 			end
 		end
 
@@ -1124,6 +1176,8 @@ module Kaltura
 		attr_accessor :post_end_entry_id
 		# Detect whether "real" live can interrupt to the "main" content
 		attr_accessor :is_content_interruptible
+		# list of live features that apply to the event
+		attr_accessor :live_features
 
 		def projected_audience=(val)
 			@projected_audience = val.to_i
@@ -1160,6 +1214,9 @@ module Kaltura
 			end
 			if xml_element.elements['isContentInterruptible'] != nil
 				self.is_content_interruptible = xml_element.elements['isContentInterruptible'].text
+			end
+			if xml_element.elements['liveFeatures'] != nil
+				self.live_features = KalturaClientBase.object_from_xml(xml_element.elements['liveFeatures'], 'KalturaLiveFeature')
 			end
 		end
 

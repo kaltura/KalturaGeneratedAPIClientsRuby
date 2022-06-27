@@ -4546,16 +4546,28 @@ module Kaltura
 	end
 
 	class KalturaExportToCsvOptions < KalturaObjectBase
+		# The format of the outputted date string. There are also several predefined date constants that may be used instead, so for example DATE_RSS contains the format string 'D, d M Y H:i:s'.
+		# 	 https://www.php.net/manual/en/function.date.php
+		attr_accessor :format
 		# Setting this property will cause additional columns to be added to the final report. The columns will be related to the specific object type passed (currently only MEDIA_CLIP is supported).
 		# 	 Please note that this property will NOT change the result filter in any way (i.e passing MEDIA_CLIP here will not force the report to return only media items).
-		# 	 /
-		attr_accessor :format
+		attr_accessor :type_equal
+		attr_accessor :default_header
 
+		def default_header=(val)
+			@default_header = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
 			if xml_element.elements['format'] != nil
 				self.format = xml_element.elements['format'].text
+			end
+			if xml_element.elements['typeEqual'] != nil
+				self.type_equal = xml_element.elements['typeEqual'].text
+			end
+			if xml_element.elements['defaultHeader'] != nil
+				self.default_header = xml_element.elements['defaultHeader'].text
 			end
 		end
 
@@ -10198,6 +10210,10 @@ module Kaltura
 		attr_accessor :upload_url
 		# autoFinalize - Should the upload be finalized once the file size on disk matches the file size reproted when adding the upload token.
 		attr_accessor :auto_finalize
+		# The value for the object_type field.
+		attr_accessor :attached_object_type
+		# The value for the object_id field.
+		attr_accessor :attached_object_id
 
 		def partner_id=(val)
 			@partner_id = val.to_i
@@ -10255,6 +10271,12 @@ module Kaltura
 			end
 			if xml_element.elements['autoFinalize'] != nil
 				self.auto_finalize = xml_element.elements['autoFinalize'].text
+			end
+			if xml_element.elements['attachedObjectType'] != nil
+				self.attached_object_type = xml_element.elements['attachedObjectType'].text
+			end
+			if xml_element.elements['attachedObjectId'] != nil
+				self.attached_object_id = xml_element.elements['attachedObjectId'].text
 			end
 		end
 
@@ -13993,6 +14015,22 @@ module Kaltura
 			end
 			if xml_element.elements['ipAddressList'] != nil
 				self.ip_address_list = xml_element.elements['ipAddressList'].text
+			end
+		end
+
+	end
+
+	class KalturaKeyValueExtended < KalturaKeyValue
+		attr_accessor :predefined_format
+
+		def predefined_format=(val)
+			@predefined_format = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['predefinedFormat'] != nil
+				self.predefined_format = xml_element.elements['predefinedFormat'].text
 			end
 		end
 
@@ -17810,6 +17848,7 @@ module Kaltura
 		attr_accessor :additional_fields
 		# Array of header names and their mapped user fields
 		attr_accessor :mapped_fields
+		attr_accessor :options
 
 		def metadata_profile_id=(val)
 			@metadata_profile_id = val.to_i
@@ -17825,6 +17864,9 @@ module Kaltura
 			end
 			if xml_element.elements['mappedFields'] != nil
 				self.mapped_fields = KalturaClientBase.object_from_xml(xml_element.elements['mappedFields'], 'KalturaKeyValue')
+			end
+			if xml_element.elements['options'] != nil
+				self.options = KalturaClientBase.object_from_xml(xml_element.elements['options'], 'KalturaExportToCsvOptions')
 			end
 		end
 

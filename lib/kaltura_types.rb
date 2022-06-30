@@ -10206,13 +10206,13 @@ module Kaltura
 		attr_accessor :created_at
 		# Last update date as Unix timestamp (In seconds)
 		attr_accessor :updated_at
-		# Upload url - to explicitly determine to which domain to adress the uploadToken->upload call
+		# Upload url - to explicitly determine to which domain to address the uploadToken->upload call
 		attr_accessor :upload_url
-		# autoFinalize - Should the upload be finalized once the file size on disk matches the file size reproted when adding the upload token.
+		# autoFinalize - Should the upload be finalized once the file size on disk matches the file size reported when adding the upload token.
 		attr_accessor :auto_finalize
-		# The value for the object_type field.
+		# The type of the object this token is attached to.
 		attr_accessor :attached_object_type
-		# The value for the object_id field.
+		# The id of the object this token is attached to.
 		attr_accessor :attached_object_id
 
 		def partner_id=(val)
@@ -18842,15 +18842,6 @@ module Kaltura
 
 	end
 
-	class KalturaCategoryEntryFilter < KalturaCategoryEntryBaseFilter
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
 	class KalturaCategoryFilter < KalturaCategoryBaseFilter
 		attr_accessor :free_text
 		attr_accessor :members_in
@@ -18889,6 +18880,29 @@ module Kaltura
 			if xml_element.elements['idOrInheritedParentIdIn'] != nil
 				self.id_or_inherited_parent_id_in = xml_element.elements['idOrInheritedParentIdIn'].text
 			end
+		end
+
+	end
+
+	class KalturaCategoriesCsvJobData < KalturaMappedObjectsCsvJobData
+		# The filter should return the list of categories that need to be specified in the csv.
+		attr_accessor :filter
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['filter'] != nil
+				self.filter = KalturaClientBase.object_from_xml(xml_element.elements['filter'], 'KalturaCategoryFilter')
+			end
+		end
+
+	end
+
+	class KalturaCategoryEntryFilter < KalturaCategoryEntryBaseFilter
+
+
+		def from_xml(xml_element)
+			super
 		end
 
 	end

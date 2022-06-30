@@ -969,6 +969,22 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Creates a batch job that sends an email with a link to download a CSV containing a list of categories
+		# @return [string]
+		def export_to_csv(filter=KalturaNotImplemented, metadata_profile_id=KalturaNotImplemented, additional_fields=KalturaNotImplemented, mapped_fields=KalturaNotImplemented, options=KalturaNotImplemented)
+			kparams = {}
+			client.add_param(kparams, 'filter', filter)
+			client.add_param(kparams, 'metadataProfileId', metadata_profile_id)
+			client.add_param(kparams, 'additionalFields', additional_fields)
+			client.add_param(kparams, 'mappedFields', mapped_fields)
+			client.add_param(kparams, 'options', options)
+			client.queue_service_action_call('category', 'exportToCsv', 'string', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Get Category by id
 		# @return [KalturaCategory]
 		def get(id)
@@ -6366,8 +6382,8 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:22-06-29'
-			self.api_version = '18.8.0'
+			self.client_tag = 'ruby:22-06-30'
+			self.api_version = '18.9.0'
 		end
 		
 		def client_tag=(value)

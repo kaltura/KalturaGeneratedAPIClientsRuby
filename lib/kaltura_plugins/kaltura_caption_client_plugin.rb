@@ -515,6 +515,15 @@ module Kaltura
 			return client.get_serve_url()
 		end
 
+		# Serves caption file as Json by its ID
+		# @return [file]
+		def serve_as_json(caption_asset_id)
+			kparams = {}
+			client.add_param(kparams, 'captionAssetId', caption_asset_id)
+			client.queue_service_action_call('caption_captionasset', 'serveAsJson', 'file', kparams)
+			return client.get_serve_url()
+		end
+
 		# Serves caption by entry id and thumnail params id
 		# @return [file]
 		def serve_by_entry_id(entry_id, caption_param_id=KalturaNotImplemented)

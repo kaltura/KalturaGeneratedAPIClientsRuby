@@ -8681,6 +8681,8 @@ module Kaltura
 		attr_accessor :virtual_event_id_in
 		# filter by origin
 		attr_accessor :origin_in
+		# filter by ui conf id
+		attr_accessor :ui_conf_id_in
 
 		def search_in_tags=(val)
 			@search_in_tags = to_b(val)
@@ -8822,6 +8824,9 @@ module Kaltura
 			end
 			if xml_element.elements['originIn'] != nil
 				self.origin_in = xml_element.elements['originIn'].text
+			end
+			if xml_element.elements['uiConfIdIn'] != nil
+				self.ui_conf_id_in = xml_element.elements['uiConfIdIn'].text
 			end
 		end
 

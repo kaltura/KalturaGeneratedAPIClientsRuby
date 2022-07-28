@@ -46,6 +46,7 @@ module Kaltura
 		ERROR = 6
 		ABORTED = 7
 		PENDING_ENTRY_READY = 8
+		SCHEDULED = 9
 	end
 
 	class KalturaReachProfileContentDeletionPolicy
@@ -86,6 +87,7 @@ module Kaltura
 		CHAPTERING = 5
 		INTELLIGENT_TAGGING = 6
 		DUBBING = 7
+		LIVE_CAPTION = 8
 	end
 
 	class KalturaVendorServiceTurnAroundTime
@@ -901,6 +903,36 @@ module Kaltura
 
 	end
 
+	class KalturaScheduledVendorTaskData < KalturaVendorTaskData
+		attr_accessor :start_date
+		attr_accessor :end_date
+		attr_accessor :scheduled_event_id
+
+		def start_date=(val)
+			@start_date = val.to_i
+		end
+		def end_date=(val)
+			@end_date = val.to_i
+		end
+		def scheduled_event_id=(val)
+			@scheduled_event_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['startDate'] != nil
+				self.start_date = xml_element.elements['startDate'].text
+			end
+			if xml_element.elements['endDate'] != nil
+				self.end_date = xml_element.elements['endDate'].text
+			end
+			if xml_element.elements['scheduledEventId'] != nil
+				self.scheduled_event_id = xml_element.elements['scheduledEventId'].text
+			end
+		end
+
+	end
+
 	class KalturaUnlimitedVendorCredit < KalturaBaseVendorCredit
 		attr_accessor :credit
 		attr_accessor :from_date
@@ -1530,6 +1562,36 @@ module Kaltura
 
 	end
 
+	class KalturaVendorLiveCaptionCatalogItem < KalturaVendorCaptionsCatalogItem
+		attr_accessor :minimal_refund_time
+		attr_accessor :minimal_order_time
+		attr_accessor :duration_limit
+
+		def minimal_refund_time=(val)
+			@minimal_refund_time = val.to_i
+		end
+		def minimal_order_time=(val)
+			@minimal_order_time = val.to_i
+		end
+		def duration_limit=(val)
+			@duration_limit = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['minimalRefundTime'] != nil
+				self.minimal_refund_time = xml_element.elements['minimalRefundTime'].text
+			end
+			if xml_element.elements['minimalOrderTime'] != nil
+				self.minimal_order_time = xml_element.elements['minimalOrderTime'].text
+			end
+			if xml_element.elements['durationLimit'] != nil
+				self.duration_limit = xml_element.elements['durationLimit'].text
+			end
+		end
+
+	end
+
 	class KalturaVendorTranslationCatalogItem < KalturaVendorCaptionsCatalogItem
 		attr_accessor :target_language
 
@@ -1663,6 +1725,15 @@ module Kaltura
 	end
 
 	class KalturaVendorDubbingCatalogItemFilter < KalturaVendorDubbingCatalogItemBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaVendorLiveCaptionCatalogItemFilter < KalturaVendorCaptionsCatalogItemBaseFilter
 
 
 		def from_xml(xml_element)

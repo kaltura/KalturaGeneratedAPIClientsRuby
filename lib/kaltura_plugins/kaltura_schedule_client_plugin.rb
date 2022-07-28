@@ -1620,6 +1620,20 @@ module Kaltura
 			end
 			return client.do_queue()
 		end
+
+		# Add feature to live event
+		# @return [KalturaLiveStreamScheduleEvent]
+		def update_live_feature(scheduled_event_id, feature_name, live_feature)
+			kparams = {}
+			client.add_param(kparams, 'scheduledEventId', scheduled_event_id)
+			client.add_param(kparams, 'featureName', feature_name)
+			client.add_param(kparams, 'liveFeature', live_feature)
+			client.queue_service_action_call('schedule_scheduleevent', 'updateLiveFeature', 'KalturaLiveStreamScheduleEvent', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
 	end
 
 	# The ScheduleResource service enables you to create and manage (update, delete, retrieve, etc.) the resources required for scheduled events (cameras, capture devices, etc.).

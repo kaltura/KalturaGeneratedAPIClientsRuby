@@ -5761,12 +5761,12 @@ module Kaltura
 		end
 
 		# Resets user login password
-		# @return []
+		# @return [KalturaUser]
 		def login_data_reset_password(login_data_id, new_password)
 			kparams = {}
 			client.add_param(kparams, 'loginDataId', login_data_id)
 			client.add_param(kparams, 'newPassword', new_password)
-			client.queue_service_action_call('user', 'loginDataResetPassword', '', kparams)
+			client.queue_service_action_call('user', 'loginDataResetPassword', 'KalturaUser', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -6382,7 +6382,7 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:22-08-17'
+			self.client_tag = 'ruby:22-08-18'
 			self.api_version = '18.12.0'
 		end
 		

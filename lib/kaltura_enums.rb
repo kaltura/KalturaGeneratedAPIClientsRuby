@@ -725,6 +725,7 @@ module Kaltura
 	class KalturaUiConfCreationMode
 		WIZARD = 2
 		ADVANCED = 3
+		SYSTEM = 4
 	end
 
 	class KalturaUiConfObjType

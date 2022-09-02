@@ -728,6 +728,27 @@ module Kaltura
 
 	end
 
+	class KalturaLiveRestreamFeature < KalturaLiveFeature
+		attr_accessor :primary_url
+		attr_accessor :secondary_url
+		attr_accessor :stream_key
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['primaryUrl'] != nil
+				self.primary_url = xml_element.elements['primaryUrl'].text
+			end
+			if xml_element.elements['secondaryUrl'] != nil
+				self.secondary_url = xml_element.elements['secondaryUrl'].text
+			end
+			if xml_element.elements['streamKey'] != nil
+				self.stream_key = xml_element.elements['streamKey'].text
+			end
+		end
+
+	end
+
 	class KalturaLocationScheduleResource < KalturaScheduleResource
 
 

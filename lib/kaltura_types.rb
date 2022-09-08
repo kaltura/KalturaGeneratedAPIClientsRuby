@@ -13251,6 +13251,8 @@ module Kaltura
 	end
 
 	class KalturaUserBaseFilter < KalturaBaseUserFilter
+		attr_accessor :id_equal
+		attr_accessor :id_in
 		attr_accessor :type_equal
 		attr_accessor :type_in
 		attr_accessor :is_admin_equal
@@ -13266,6 +13268,12 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
+			if xml_element.elements['idEqual'] != nil
+				self.id_equal = xml_element.elements['idEqual'].text
+			end
+			if xml_element.elements['idIn'] != nil
+				self.id_in = xml_element.elements['idIn'].text
+			end
 			if xml_element.elements['typeEqual'] != nil
 				self.type_equal = xml_element.elements['typeEqual'].text
 			end
@@ -13287,8 +13295,6 @@ module Kaltura
 
 	class KalturaUserFilter < KalturaUserBaseFilter
 		attr_accessor :id_or_screen_name_starts_with
-		attr_accessor :id_equal
-		attr_accessor :id_in
 		attr_accessor :login_enabled_equal
 		attr_accessor :role_id_equal
 		attr_accessor :role_ids_equal
@@ -13307,12 +13313,6 @@ module Kaltura
 			super
 			if xml_element.elements['idOrScreenNameStartsWith'] != nil
 				self.id_or_screen_name_starts_with = xml_element.elements['idOrScreenNameStartsWith'].text
-			end
-			if xml_element.elements['idEqual'] != nil
-				self.id_equal = xml_element.elements['idEqual'].text
-			end
-			if xml_element.elements['idIn'] != nil
-				self.id_in = xml_element.elements['idIn'].text
 			end
 			if xml_element.elements['loginEnabledEqual'] != nil
 				self.login_enabled_equal = xml_element.elements['loginEnabledEqual'].text

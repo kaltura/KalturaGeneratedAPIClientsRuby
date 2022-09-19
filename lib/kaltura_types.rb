@@ -1985,6 +1985,7 @@ module Kaltura
 		attr_accessor :is_self_serve
 		attr_accessor :allowed_domains
 		attr_accessor :excluded_admin_role_name
+		attr_accessor :event_platform_allowed_templates
 
 		def id=(val)
 			@id = val.to_i
@@ -2336,6 +2337,9 @@ module Kaltura
 			end
 			if xml_element.elements['excludedAdminRoleName'] != nil
 				self.excluded_admin_role_name = xml_element.elements['excludedAdminRoleName'].text
+			end
+			if xml_element.elements['eventPlatformAllowedTemplates'] != nil
+				self.event_platform_allowed_templates = xml_element.elements['eventPlatformAllowedTemplates'].text
 			end
 		end
 
@@ -10896,9 +10900,14 @@ module Kaltura
 		attr_accessor :replacement
 		# serverNodeId to generate replacment host from
 		attr_accessor :replacmen_server_node_id
+		# Set this value if you want to check if the server is accessible before redirecting traffic to it (this value is in milliseconds)
+		attr_accessor :check_alive_timeout_ms
 
 		def replacmen_server_node_id=(val)
 			@replacmen_server_node_id = val.to_i
+		end
+		def check_alive_timeout_ms=(val)
+			@check_alive_timeout_ms = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -10911,6 +10920,9 @@ module Kaltura
 			end
 			if xml_element.elements['replacmenServerNodeId'] != nil
 				self.replacmen_server_node_id = xml_element.elements['replacmenServerNodeId'].text
+			end
+			if xml_element.elements['checkAliveTimeoutMs'] != nil
+				self.check_alive_timeout_ms = xml_element.elements['checkAliveTimeoutMs'].text
 			end
 		end
 

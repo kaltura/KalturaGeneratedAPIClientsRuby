@@ -6382,8 +6382,8 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:22-09-20'
-			self.api_version = '18.14.0'
+			self.client_tag = 'ruby:22-09-21'
+			self.api_version = '18.15.0'
 		end
 		
 		def client_tag=(value)
@@ -6488,6 +6488,27 @@ module Kaltura
 		
 		def get_session_id()
 			return self.session_id
+		end
+		
+	
+		def language=(value)
+			@request_configuration['language'] = value
+		end
+		
+		def set_language(value)
+			self.language = value
+		end
+		
+		def language()
+			if(@request_configuration.has_key?('language'))
+				return @request_configuration['language']
+			end
+			
+			return KalturaNotImplemented
+		end
+		
+		def get_language()
+			return self.language
 		end
 		
 	

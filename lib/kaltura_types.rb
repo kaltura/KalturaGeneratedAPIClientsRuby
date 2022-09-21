@@ -850,6 +850,26 @@ module Kaltura
 
 	end
 
+	# A Multi Lingual String
+	class KalturaMultiLingualString < KalturaObjectBase
+		# The language of the value
+		attr_accessor :language
+		# Value
+		attr_accessor :value
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['language'] != nil
+				self.language = xml_element.elements['language'].text
+			end
+			if xml_element.elements['value'] != nil
+				self.value = xml_element.elements['value'].text
+			end
+		end
+
+	end
+
 	# Base class to all operation attributes types
 	class KalturaOperationAttributes < KalturaObjectBase
 
@@ -865,8 +885,12 @@ module Kaltura
 		attr_accessor :id
 		# Entry name (Min 1 chars)
 		attr_accessor :name
+		# Entry name (Min 1 chars)
+		attr_accessor :multi_lingual_name
 		# Entry description
 		attr_accessor :description
+		# Entry description
+		attr_accessor :multi_lingual_description
 		attr_accessor :partner_id
 		# The ID of the user who is the owner of this entry
 		attr_accessor :user_id
@@ -874,6 +898,8 @@ module Kaltura
 		attr_accessor :creator_id
 		# Entry tags
 		attr_accessor :tags
+		# Entry tags
+		attr_accessor :multi_lingual_tags
 		# Entry admin tags can be updated only by administrators
 		attr_accessor :admin_tags
 		# Comma separated list of full names of categories to which this entry belongs. Only categories that don't have entitlement (privacy context) are listed, to retrieve the full list of categories, use the categoryEntry.list action.
@@ -1018,8 +1044,14 @@ module Kaltura
 			if xml_element.elements['name'] != nil
 				self.name = xml_element.elements['name'].text
 			end
+			if xml_element.elements['multiLingual_name'] != nil
+				self.multi_lingual_name = KalturaClientBase.object_from_xml(xml_element.elements['multiLingual_name'], 'KalturaMultiLingualString')
+			end
 			if xml_element.elements['description'] != nil
 				self.description = xml_element.elements['description'].text
+			end
+			if xml_element.elements['multiLingual_description'] != nil
+				self.multi_lingual_description = KalturaClientBase.object_from_xml(xml_element.elements['multiLingual_description'], 'KalturaMultiLingualString')
 			end
 			if xml_element.elements['partnerId'] != nil
 				self.partner_id = xml_element.elements['partnerId'].text
@@ -1032,6 +1064,9 @@ module Kaltura
 			end
 			if xml_element.elements['tags'] != nil
 				self.tags = xml_element.elements['tags'].text
+			end
+			if xml_element.elements['multiLingual_tags'] != nil
+				self.multi_lingual_tags = KalturaClientBase.object_from_xml(xml_element.elements['multiLingual_tags'], 'KalturaMultiLingualString')
 			end
 			if xml_element.elements['adminTags'] != nil
 				self.admin_tags = xml_element.elements['adminTags'].text
@@ -9031,6 +9066,8 @@ module Kaltura
 		attr_accessor :partner_id
 		# Kaltura API session
 		attr_accessor :ks
+		# language
+		attr_accessor :language
 		# Response profile - this attribute will be automatically unset after every API call.
 		attr_accessor :response_profile
 
@@ -9045,6 +9082,9 @@ module Kaltura
 			end
 			if xml_element.elements['ks'] != nil
 				self.ks = xml_element.elements['ks'].text
+			end
+			if xml_element.elements['language'] != nil
+				self.language = xml_element.elements['language'].text
 			end
 			if xml_element.elements['responseProfile'] != nil
 				self.response_profile = KalturaClientBase.object_from_xml(xml_element.elements['responseProfile'], 'KalturaBaseResponseProfile')

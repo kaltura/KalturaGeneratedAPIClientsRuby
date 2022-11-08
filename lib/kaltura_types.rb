@@ -2016,11 +2016,13 @@ module Kaltura
 		attr_accessor :max_login_attempts
 		attr_accessor :login_block_period
 		attr_accessor :num_prev_pass_to_keep
+		attr_accessor :allow_default_password_restrictions
 		attr_accessor :two_factor_authentication_mode
 		attr_accessor :is_self_serve
 		attr_accessor :allowed_domains
 		attr_accessor :excluded_admin_role_name
 		attr_accessor :event_platform_allowed_templates
+		attr_accessor :vertical_classification_id
 
 		def id=(val)
 			@id = val.to_i
@@ -2130,11 +2132,17 @@ module Kaltura
 		def num_prev_pass_to_keep=(val)
 			@num_prev_pass_to_keep = val.to_i
 		end
+		def allow_default_password_restrictions=(val)
+			@allow_default_password_restrictions = to_b(val)
+		end
 		def two_factor_authentication_mode=(val)
 			@two_factor_authentication_mode = val.to_i
 		end
 		def is_self_serve=(val)
 			@is_self_serve = to_b(val)
+		end
+		def vertical_classification_id=(val)
+			@vertical_classification_id = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -2361,6 +2369,9 @@ module Kaltura
 			if xml_element.elements['numPrevPassToKeep'] != nil
 				self.num_prev_pass_to_keep = xml_element.elements['numPrevPassToKeep'].text
 			end
+			if xml_element.elements['allowDefaultPasswordRestrictions'] != nil
+				self.allow_default_password_restrictions = xml_element.elements['allowDefaultPasswordRestrictions'].text
+			end
 			if xml_element.elements['twoFactorAuthenticationMode'] != nil
 				self.two_factor_authentication_mode = xml_element.elements['twoFactorAuthenticationMode'].text
 			end
@@ -2375,6 +2386,9 @@ module Kaltura
 			end
 			if xml_element.elements['eventPlatformAllowedTemplates'] != nil
 				self.event_platform_allowed_templates = xml_element.elements['eventPlatformAllowedTemplates'].text
+			end
+			if xml_element.elements['verticalClassificationId'] != nil
+				self.vertical_classification_id = xml_element.elements['verticalClassificationId'].text
 			end
 		end
 
@@ -14164,12 +14178,16 @@ module Kaltura
 		attr_accessor :recording_info
 		attr_accessor :is_playable_user
 		attr_accessor :view_mode
+		attr_accessor :features_updated_at
 
 		def is_playable_user=(val)
 			@is_playable_user = to_b(val)
 		end
 		def view_mode=(val)
 			@view_mode = val.to_i
+		end
+		def features_updated_at=(val)
+			@features_updated_at = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -14185,6 +14203,9 @@ module Kaltura
 			end
 			if xml_element.elements['viewMode'] != nil
 				self.view_mode = xml_element.elements['viewMode'].text
+			end
+			if xml_element.elements['featuresUpdatedAt'] != nil
+				self.features_updated_at = xml_element.elements['featuresUpdatedAt'].text
 			end
 		end
 

@@ -81,6 +81,7 @@ module Kaltura
 		USER_ROLE = "UserRole"
 		ACCESS_CONTROL = "accessControl"
 		CATEGORY = "category"
+		CATEGORY_ENTRY = "categoryEntry"
 		CONVERSION_PROFILE_2 = "conversionProfile2"
 		ENTRY = "entry"
 		FLAVOR_ASSET = "flavorAsset"

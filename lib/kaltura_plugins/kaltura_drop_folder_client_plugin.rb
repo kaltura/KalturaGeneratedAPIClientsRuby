@@ -224,7 +224,7 @@ module Kaltura
 		attr_accessor :conversion_profile_id
 		attr_accessor :dc
 		attr_accessor :path
-		# The ammount of time, in seconds, that should pass so that a file with no change in size we'll be treated as "finished uploading to folder"
+		# The amount of time, in seconds, that should pass so that a file with no change in size will be treated as "finished uploading to folder"
 		attr_accessor :file_size_check_interval
 		attr_accessor :file_delete_policy
 		attr_accessor :file_delete_regex

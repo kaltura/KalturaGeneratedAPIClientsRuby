@@ -4311,6 +4311,7 @@ module Kaltura
 		attr_accessor :date_of_birth
 		attr_accessor :gender
 		attr_accessor :is_admin
+		attr_accessor :is_guest
 		attr_accessor :role_ids
 		attr_accessor :role_names
 		attr_accessor :is_account_owner
@@ -4325,6 +4326,8 @@ module Kaltura
 		attr_accessor :ks_privileges
 		attr_accessor :encrypted_seed
 		attr_accessor :is_sso_excluded
+		# This field should be sent instead of the id field whenever you want to work with hashed user ids
+		attr_accessor :external_id
 
 		def type=(val)
 			@type = val.to_i
@@ -4337,6 +4340,9 @@ module Kaltura
 		end
 		def is_admin=(val)
 			@is_admin = to_b(val)
+		end
+		def is_guest=(val)
+			@is_guest = to_b(val)
 		end
 		def is_account_owner=(val)
 			@is_account_owner = to_b(val)
@@ -4361,6 +4367,9 @@ module Kaltura
 			end
 			if xml_element.elements['isAdmin'] != nil
 				self.is_admin = xml_element.elements['isAdmin'].text
+			end
+			if xml_element.elements['isGuest'] != nil
+				self.is_guest = xml_element.elements['isGuest'].text
 			end
 			if xml_element.elements['roleIds'] != nil
 				self.role_ids = xml_element.elements['roleIds'].text
@@ -4403,6 +4412,9 @@ module Kaltura
 			end
 			if xml_element.elements['isSsoExcluded'] != nil
 				self.is_sso_excluded = xml_element.elements['isSsoExcluded'].text
+			end
+			if xml_element.elements['externalId'] != nil
+				self.external_id = xml_element.elements['externalId'].text
 			end
 		end
 
@@ -11875,6 +11887,7 @@ module Kaltura
 		attr_accessor :first_name
 		attr_accessor :last_name
 		attr_accessor :group
+		attr_accessor :external_id
 
 		def date_of_birth=(val)
 			@date_of_birth = val.to_i
@@ -11926,6 +11939,9 @@ module Kaltura
 			end
 			if xml_element.elements['group'] != nil
 				self.group = xml_element.elements['group'].text
+			end
+			if xml_element.elements['externalId'] != nil
+				self.external_id = xml_element.elements['externalId'].text
 			end
 		end
 

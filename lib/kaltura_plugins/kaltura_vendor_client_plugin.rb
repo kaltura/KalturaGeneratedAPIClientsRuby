@@ -60,6 +60,7 @@ module Kaltura
 		attr_accessor :created_at
 		attr_accessor :updated_at
 		attr_accessor :partner_id
+		attr_accessor :enable_meeting_upload
 
 		def id=(val)
 			@id = val.to_i
@@ -81,6 +82,9 @@ module Kaltura
 		end
 		def partner_id=(val)
 			@partner_id = val.to_i
+		end
+		def enable_meeting_upload=(val)
+			@enable_meeting_upload = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -118,6 +122,9 @@ module Kaltura
 			if xml_element.elements['partnerId'] != nil
 				self.partner_id = xml_element.elements['partnerId'].text
 			end
+			if xml_element.elements['enableMeetingUpload'] != nil
+				self.enable_meeting_upload = xml_element.elements['enableMeetingUpload'].text
+			end
 		end
 
 	end
@@ -132,7 +139,6 @@ module Kaltura
 		attr_accessor :jwt_token
 		attr_accessor :enable_zoom_transcription
 		attr_accessor :zoom_account_description
-		attr_accessor :enable_meeting_upload
 		attr_accessor :opt_out_group_names
 		attr_accessor :opt_in_group_names
 		attr_accessor :group_participation_type
@@ -148,9 +154,6 @@ module Kaltura
 		end
 		def enable_zoom_transcription=(val)
 			@enable_zoom_transcription = val.to_i
-		end
-		def enable_meeting_upload=(val)
-			@enable_meeting_upload = val.to_i
 		end
 		def group_participation_type=(val)
 			@group_participation_type = val.to_i
@@ -184,9 +187,6 @@ module Kaltura
 			end
 			if xml_element.elements['zoomAccountDescription'] != nil
 				self.zoom_account_description = xml_element.elements['zoomAccountDescription'].text
-			end
-			if xml_element.elements['enableMeetingUpload'] != nil
-				self.enable_meeting_upload = xml_element.elements['enableMeetingUpload'].text
 			end
 			if xml_element.elements['optOutGroupNames'] != nil
 				self.opt_out_group_names = xml_element.elements['optOutGroupNames'].text

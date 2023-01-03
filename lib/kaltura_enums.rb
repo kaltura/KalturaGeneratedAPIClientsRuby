@@ -3579,6 +3579,7 @@ module Kaltura
 		CDN_BANDWIDTH_USAGE = "64"
 		REACH_CATALOG_USAGE = "65"
 		REACH_PROFILE_USAGE = "66"
+		SELF_SERVE_BANDWIDTH = "67"
 		PARTNER_USAGE = "201"
 		MAP_OVERLAY_COUNTRY_REALTIME = "10001"
 		MAP_OVERLAY_REGION_REALTIME = "10002"
@@ -3706,6 +3707,7 @@ module Kaltura
 	class KalturaResetPassLinkType
 		KMC = "1"
 		KMS = "2"
+		KME = "3"
 	end
 
 	class KalturaResponseProfileOrderBy

@@ -695,7 +695,11 @@ module Kaltura
 		attr_accessor :media_key
 		attr_accessor :caption_url
 		attr_accessor :caption_token
+		attr_accessor :input_delay
 
+		def input_delay=(val)
+			@input_delay = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
@@ -710,6 +714,9 @@ module Kaltura
 			end
 			if xml_element.elements['captionToken'] != nil
 				self.caption_token = xml_element.elements['captionToken'].text
+			end
+			if xml_element.elements['inputDelay'] != nil
+				self.input_delay = xml_element.elements['inputDelay'].text
 			end
 		end
 

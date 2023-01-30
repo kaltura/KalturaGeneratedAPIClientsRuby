@@ -8,7 +8,7 @@
 # to do with audio, video, and animation what Wiki platforms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2022  Kaltura Inc.
+# Copyright (C) 2006-2023  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -61,6 +61,7 @@ module Kaltura
 		attr_accessor :updated_at
 		attr_accessor :partner_id
 		attr_accessor :enable_meeting_upload
+		attr_accessor :enable_meeting_chat
 
 		def id=(val)
 			@id = val.to_i
@@ -85,6 +86,9 @@ module Kaltura
 		end
 		def enable_meeting_upload=(val)
 			@enable_meeting_upload = val.to_i
+		end
+		def enable_meeting_chat=(val)
+			@enable_meeting_chat = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -124,6 +128,9 @@ module Kaltura
 			end
 			if xml_element.elements['enableMeetingUpload'] != nil
 				self.enable_meeting_upload = xml_element.elements['enableMeetingUpload'].text
+			end
+			if xml_element.elements['enableMeetingChat'] != nil
+				self.enable_meeting_chat = xml_element.elements['enableMeetingChat'].text
 			end
 		end
 

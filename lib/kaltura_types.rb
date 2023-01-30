@@ -8501,6 +8501,7 @@ module Kaltura
 		attr_accessor :url
 		# Force Import Job
 		attr_accessor :force_async_download
+		attr_accessor :url_headers
 
 		def force_async_download=(val)
 			@force_async_download = to_b(val)
@@ -8513,6 +8514,9 @@ module Kaltura
 			end
 			if xml_element.elements['forceAsyncDownload'] != nil
 				self.force_async_download = xml_element.elements['forceAsyncDownload'].text
+			end
+			if xml_element.elements['urlHeaders'] != nil
+				self.url_headers = KalturaClientBase.object_from_xml(xml_element.elements['urlHeaders'], 'KalturaString')
 			end
 		end
 

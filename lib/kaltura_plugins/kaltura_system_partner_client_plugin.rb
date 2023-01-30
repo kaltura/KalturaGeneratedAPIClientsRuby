@@ -252,6 +252,7 @@ module Kaltura
 	class KalturaSystemPartnerFilter < KalturaPartnerFilter
 		attr_accessor :partner_parent_id_equal
 		attr_accessor :partner_parent_id_in
+		attr_accessor :admin_email_equal
 
 		def partner_parent_id_equal=(val)
 			@partner_parent_id_equal = val.to_i
@@ -264,6 +265,9 @@ module Kaltura
 			end
 			if xml_element.elements['partnerParentIdIn'] != nil
 				self.partner_parent_id_in = xml_element.elements['partnerParentIdIn'].text
+			end
+			if xml_element.elements['adminEmailEqual'] != nil
+				self.admin_email_equal = xml_element.elements['adminEmailEqual'].text
 			end
 		end
 

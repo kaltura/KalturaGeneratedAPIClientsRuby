@@ -71,6 +71,7 @@ module Kaltura
 	class KalturaVendorCatalogItemOutputFormat
 		SRT = 1
 		DFXP = 2
+		VTT = 3
 	end
 
 	class KalturaVendorCatalogItemStatus
@@ -88,6 +89,7 @@ module Kaltura
 		INTELLIGENT_TAGGING = 6
 		DUBBING = 7
 		LIVE_CAPTION = 8
+		EXTENDED_AUDIO_DESCRIPTION = 9
 	end
 
 	class KalturaVendorServiceTurnAroundTime
@@ -128,6 +130,7 @@ module Kaltura
 		YUE = "Cantonese"
 		CA = "Catalan"
 		ZH = "Chinese"
+		CS = "Czech"
 		DA = "Danish"
 		NL = "Dutch"
 		EN = "English"
@@ -1111,6 +1114,36 @@ module Kaltura
 
 	end
 
+	class KalturaVendorExtendedAudioDescriptionCatalogItem < KalturaVendorCatalogItem
+		attr_accessor :flavor_params_id
+		attr_accessor :clear_audio_flavor_params_id
+		attr_accessor :output_format
+
+		def flavor_params_id=(val)
+			@flavor_params_id = val.to_i
+		end
+		def clear_audio_flavor_params_id=(val)
+			@clear_audio_flavor_params_id = val.to_i
+		end
+		def output_format=(val)
+			@output_format = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['flavorParamsId'] != nil
+				self.flavor_params_id = xml_element.elements['flavorParamsId'].text
+			end
+			if xml_element.elements['clearAudioFlavorParamsId'] != nil
+				self.clear_audio_flavor_params_id = xml_element.elements['clearAudioFlavorParamsId'].text
+			end
+			if xml_element.elements['outputFormat'] != nil
+				self.output_format = xml_element.elements['outputFormat'].text
+			end
+		end
+
+	end
+
 	class KalturaVendorIntelligentTaggingCatalogItem < KalturaVendorCatalogItem
 
 
@@ -1725,6 +1758,15 @@ module Kaltura
 	end
 
 	class KalturaVendorDubbingCatalogItemFilter < KalturaVendorDubbingCatalogItemBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaVendorExtendedAudioDescriptionCatalogItemFilter < KalturaVendorCaptionsCatalogItemBaseFilter
 
 
 		def from_xml(xml_element)

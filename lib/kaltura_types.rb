@@ -7438,6 +7438,7 @@ module Kaltura
 		attr_accessor :tags_name_multi_like_and
 		attr_accessor :tags_admin_tags_multi_like_and
 		attr_accessor :tags_admin_tags_name_multi_like_and
+		attr_accessor :display_in_search_equal
 
 		def partner_id_equal=(val)
 			@partner_id_equal = val.to_i
@@ -7510,6 +7511,9 @@ module Kaltura
 		end
 		def partner_sort_value_less_than_or_equal=(val)
 			@partner_sort_value_less_than_or_equal = val.to_i
+		end
+		def display_in_search_equal=(val)
+			@display_in_search_equal = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -7759,6 +7763,9 @@ module Kaltura
 			end
 			if xml_element.elements['tagsAdminTagsNameMultiLikeAnd'] != nil
 				self.tags_admin_tags_name_multi_like_and = xml_element.elements['tagsAdminTagsNameMultiLikeAnd'].text
+			end
+			if xml_element.elements['displayInSearchEqual'] != nil
+				self.display_in_search_equal = xml_element.elements['displayInSearchEqual'].text
 			end
 		end
 

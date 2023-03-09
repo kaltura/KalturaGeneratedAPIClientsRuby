@@ -601,12 +601,36 @@ module Kaltura
 			return client.do_queue()
 		end
 
+		# Move the entry to the recycle bin
+		# @return [KalturaBaseEntry]
+		def recycle(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('baseentry', 'recycle', 'KalturaBaseEntry', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
 		# Reject the entry and mark the pending flags (if any) as moderated (this will make the entry non-playable).
 		# @return []
 		def reject(entry_id)
 			kparams = {}
 			client.add_param(kparams, 'entryId', entry_id)
 			client.queue_service_action_call('baseentry', 'reject', '', kparams)
+			if (client.is_multirequest)
+				return nil
+			end
+			return client.do_queue()
+		end
+
+		# Restore the entry from the recycle bin
+		# @return [KalturaBaseEntry]
+		def restore_recycled(entry_id)
+			kparams = {}
+			client.add_param(kparams, 'entryId', entry_id)
+			client.queue_service_action_call('baseentry', 'restoreRecycled', 'KalturaBaseEntry', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -6382,8 +6406,8 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:23-02-27'
-			self.api_version = '19.3.0'
+			self.client_tag = 'ruby:23-03-09'
+			self.api_version = '19.4.0'
 		end
 		
 		def client_tag=(value)

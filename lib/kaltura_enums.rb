@@ -182,6 +182,7 @@ module Kaltura
 	end
 
 	class KalturaEntryDisplayInSearchType
+		RECYCLED = -2
 		SYSTEM = -1
 		NONE = 0
 		PARTNER_ONLY = 1
@@ -1649,6 +1650,7 @@ module Kaltura
 		WEBCAST_APP = "5"
 		PERSONAL_CAPTURE = "6"
 		KALTURA_MEETING = "7"
+		EP = "8"
 	end
 
 	class KalturaEntryIdentifierField

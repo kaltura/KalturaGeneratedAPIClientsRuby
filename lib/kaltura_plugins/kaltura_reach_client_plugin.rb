@@ -5,10 +5,10 @@
 #                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 #
 # This file is part of the Kaltura Collaborative Media Suite which allows users
-# to do with audio, video, and animation what Wiki platforms allow them to do with
+# to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2023  Kaltura Inc.
+# Copyright (C) 2006-2021  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -28,7 +28,6 @@
 require 'kaltura_client.rb'
 require File.dirname(__FILE__) + '/kaltura_event_notification_client_plugin.rb'
 require File.dirname(__FILE__) + '/kaltura_bulk_upload_client_plugin.rb'
-require File.dirname(__FILE__) + '/kaltura_caption_client_plugin.rb'
 
 module Kaltura
 
@@ -46,7 +45,6 @@ module Kaltura
 		ERROR = 6
 		ABORTED = 7
 		PENDING_ENTRY_READY = 8
-		SCHEDULED = 9
 	end
 
 	class KalturaReachProfileContentDeletionPolicy
@@ -71,7 +69,6 @@ module Kaltura
 	class KalturaVendorCatalogItemOutputFormat
 		SRT = 1
 		DFXP = 2
-		VTT = 3
 	end
 
 	class KalturaVendorCatalogItemStatus
@@ -86,10 +83,6 @@ module Kaltura
 		ALIGNMENT = 3
 		AUDIO_DESCRIPTION = 4
 		CHAPTERING = 5
-		INTELLIGENT_TAGGING = 6
-		DUBBING = 7
-		LIVE_CAPTION = 8
-		EXTENDED_AUDIO_DESCRIPTION = 9
 	end
 
 	class KalturaVendorServiceTurnAroundTime
@@ -123,15 +116,12 @@ module Kaltura
 	class KalturaVendorTaskProcessingRegion
 		US = 1
 		EU = 2
-		CA = 3
 	end
 
 	class KalturaCatalogItemLanguage
 		AR = "Arabic"
 		YUE = "Cantonese"
-		CA = "Catalan"
 		ZH = "Chinese"
-		CS = "Czech"
 		DA = "Danish"
 		NL = "Dutch"
 		EN = "English"
@@ -176,7 +166,6 @@ module Kaltura
 
 	class KalturaEntryVendorTaskOrderBy
 		CREATED_AT_ASC = "+createdAt"
-		EXPECTED_FINISH_TIME_ASC = "+expectedFinishTime"
 		FINISH_TIME_ASC = "+finishTime"
 		ID_ASC = "+id"
 		PRICE_ASC = "+price"
@@ -184,7 +173,6 @@ module Kaltura
 		STATUS_ASC = "+status"
 		UPDATED_AT_ASC = "+updatedAt"
 		CREATED_AT_DESC = "-createdAt"
-		EXPECTED_FINISH_TIME_DESC = "-expectedFinishTime"
 		FINISH_TIME_DESC = "-finishTime"
 		ID_DESC = "-id"
 		PRICE_DESC = "-price"
@@ -200,9 +188,6 @@ module Kaltura
 		CREATED_AT_DESC = "-createdAt"
 		ID_DESC = "-id"
 		UPDATED_AT_DESC = "-updatedAt"
-	end
-
-	class KalturaReachVendorEngineType
 	end
 
 	class KalturaVendorCaptionsCatalogItemOrderBy
@@ -331,8 +316,6 @@ module Kaltura
 		attr_accessor :service_type
 		attr_accessor :service_feature
 		attr_accessor :turn_around_time
-		# The vendor's task internal Id
-		attr_accessor :external_task_id
 
 		def id=(val)
 			@id = val.to_i
@@ -474,9 +457,6 @@ module Kaltura
 			end
 			if xml_element.elements['turnAroundTime'] != nil
 				self.turn_around_time = xml_element.elements['turnAroundTime'].text
-			end
-			if xml_element.elements['externalTaskId'] != nil
-				self.external_task_id = xml_element.elements['externalTaskId'].text
 			end
 		end
 
@@ -687,9 +667,6 @@ module Kaltura
 		attr_accessor :service_feature
 		attr_accessor :turn_around_time
 		attr_accessor :pricing
-		# Property showing the catalog item's engine type, in case a vendor can offer the same service via different engines.
-		attr_accessor :engine_type
-		attr_accessor :source_language
 		attr_accessor :allow_resubmission
 
 		def id=(val)
@@ -754,12 +731,6 @@ module Kaltura
 			end
 			if xml_element.elements['pricing'] != nil
 				self.pricing = KalturaClientBase.object_from_xml(xml_element.elements['pricing'], 'KalturaVendorCatalogItemPricing')
-			end
-			if xml_element.elements['engineType'] != nil
-				self.engine_type = xml_element.elements['engineType'].text
-			end
-			if xml_element.elements['sourceLanguage'] != nil
-				self.source_language = xml_element.elements['sourceLanguage'].text
 			end
 			if xml_element.elements['allowResubmission'] != nil
 				self.allow_resubmission = xml_element.elements['allowResubmission'].text
@@ -880,20 +851,6 @@ module Kaltura
 
 	end
 
-	class KalturaIntelligentTaggingVendorTaskData < KalturaVendorTaskData
-		# Optional - The id of the caption asset object
-		attr_accessor :asset_id
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['assetId'] != nil
-				self.asset_id = xml_element.elements['assetId'].text
-			end
-		end
-
-	end
-
 	class KalturaReachProfileListResponse < KalturaListResponse
 		attr_accessor :objects
 
@@ -902,36 +859,6 @@ module Kaltura
 			super
 			if xml_element.elements['objects'] != nil
 				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaReachProfile')
-			end
-		end
-
-	end
-
-	class KalturaScheduledVendorTaskData < KalturaVendorTaskData
-		attr_accessor :start_date
-		attr_accessor :end_date
-		attr_accessor :scheduled_event_id
-
-		def start_date=(val)
-			@start_date = val.to_i
-		end
-		def end_date=(val)
-			@end_date = val.to_i
-		end
-		def scheduled_event_id=(val)
-			@scheduled_event_id = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['startDate'] != nil
-				self.start_date = xml_element.elements['startDate'].text
-			end
-			if xml_element.elements['endDate'] != nil
-				self.end_date = xml_element.elements['endDate'].text
-			end
-			if xml_element.elements['scheduledEventId'] != nil
-				self.scheduled_event_id = xml_element.elements['scheduledEventId'].text
 			end
 		end
 
@@ -961,6 +888,7 @@ module Kaltura
 	end
 
 	class KalturaVendorAlignmentCatalogItem < KalturaVendorCatalogItem
+		attr_accessor :source_language
 		attr_accessor :output_format
 
 		def output_format=(val)
@@ -969,6 +897,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
+			if xml_element.elements['sourceLanguage'] != nil
+				self.source_language = xml_element.elements['sourceLanguage'].text
+			end
 			if xml_element.elements['outputFormat'] != nil
 				self.output_format = xml_element.elements['outputFormat'].text
 			end
@@ -977,6 +908,7 @@ module Kaltura
 	end
 
 	class KalturaVendorAudioDescriptionCatalogItem < KalturaVendorCatalogItem
+		attr_accessor :source_language
 		attr_accessor :flavor_params_id
 		attr_accessor :clear_audio_flavor_params_id
 
@@ -989,6 +921,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
+			if xml_element.elements['sourceLanguage'] != nil
+				self.source_language = xml_element.elements['sourceLanguage'].text
+			end
 			if xml_element.elements['flavorParamsId'] != nil
 				self.flavor_params_id = xml_element.elements['flavorParamsId'].text
 			end
@@ -1000,6 +935,7 @@ module Kaltura
 	end
 
 	class KalturaVendorCaptionsCatalogItem < KalturaVendorCatalogItem
+		attr_accessor :source_language
 		attr_accessor :output_format
 		attr_accessor :enable_speaker_id
 		attr_accessor :fixed_price_addons
@@ -1016,6 +952,9 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
+			if xml_element.elements['sourceLanguage'] != nil
+				self.source_language = xml_element.elements['sourceLanguage'].text
+			end
 			if xml_element.elements['outputFormat'] != nil
 				self.output_format = xml_element.elements['outputFormat'].text
 			end
@@ -1043,10 +982,14 @@ module Kaltura
 	end
 
 	class KalturaVendorChapteringCatalogItem < KalturaVendorCatalogItem
+		attr_accessor :source_language
 
 
 		def from_xml(xml_element)
 			super
+			if xml_element.elements['sourceLanguage'] != nil
+				self.source_language = xml_element.elements['sourceLanguage'].text
+			end
 		end
 
 	end
@@ -1088,72 +1031,6 @@ module Kaltura
 
 	end
 
-	class KalturaVendorDubbingCatalogItem < KalturaVendorCatalogItem
-		attr_accessor :flavor_params_id
-		attr_accessor :clear_audio_flavor_params_id
-		attr_accessor :target_language
-
-		def flavor_params_id=(val)
-			@flavor_params_id = val.to_i
-		end
-		def clear_audio_flavor_params_id=(val)
-			@clear_audio_flavor_params_id = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['flavorParamsId'] != nil
-				self.flavor_params_id = xml_element.elements['flavorParamsId'].text
-			end
-			if xml_element.elements['clearAudioFlavorParamsId'] != nil
-				self.clear_audio_flavor_params_id = xml_element.elements['clearAudioFlavorParamsId'].text
-			end
-			if xml_element.elements['targetLanguage'] != nil
-				self.target_language = xml_element.elements['targetLanguage'].text
-			end
-		end
-
-	end
-
-	class KalturaVendorExtendedAudioDescriptionCatalogItem < KalturaVendorCatalogItem
-		attr_accessor :flavor_params_id
-		attr_accessor :clear_audio_flavor_params_id
-		attr_accessor :output_format
-
-		def flavor_params_id=(val)
-			@flavor_params_id = val.to_i
-		end
-		def clear_audio_flavor_params_id=(val)
-			@clear_audio_flavor_params_id = val.to_i
-		end
-		def output_format=(val)
-			@output_format = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['flavorParamsId'] != nil
-				self.flavor_params_id = xml_element.elements['flavorParamsId'].text
-			end
-			if xml_element.elements['clearAudioFlavorParamsId'] != nil
-				self.clear_audio_flavor_params_id = xml_element.elements['clearAudioFlavorParamsId'].text
-			end
-			if xml_element.elements['outputFormat'] != nil
-				self.output_format = xml_element.elements['outputFormat'].text
-			end
-		end
-
-	end
-
-	class KalturaVendorIntelligentTaggingCatalogItem < KalturaVendorCatalogItem
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
 	class KalturaVendorTaskDataCaptionAsset < KalturaVendorTaskData
 		# Optional - The id of the caption asset object
 		attr_accessor :caption_asset_id
@@ -1190,7 +1067,6 @@ module Kaltura
 	class KalturaEntryVendorTaskBaseFilter < KalturaRelatedFilter
 		attr_accessor :id_equal
 		attr_accessor :id_in
-		attr_accessor :id_not_in
 		attr_accessor :vendor_partner_id_equal
 		attr_accessor :vendor_partner_id_in
 		attr_accessor :created_at_greater_than_or_equal
@@ -1210,8 +1086,6 @@ module Kaltura
 		attr_accessor :catalog_item_id_in
 		attr_accessor :user_id_equal
 		attr_accessor :context_equal
-		attr_accessor :expected_finish_time_greater_than_or_equal
-		attr_accessor :expected_finish_time_less_than_or_equal
 
 		def id_equal=(val)
 			@id_equal = val.to_i
@@ -1252,12 +1126,6 @@ module Kaltura
 		def catalog_item_id_equal=(val)
 			@catalog_item_id_equal = val.to_i
 		end
-		def expected_finish_time_greater_than_or_equal=(val)
-			@expected_finish_time_greater_than_or_equal = val.to_i
-		end
-		def expected_finish_time_less_than_or_equal=(val)
-			@expected_finish_time_less_than_or_equal = val.to_i
-		end
 
 		def from_xml(xml_element)
 			super
@@ -1266,9 +1134,6 @@ module Kaltura
 			end
 			if xml_element.elements['idIn'] != nil
 				self.id_in = xml_element.elements['idIn'].text
-			end
-			if xml_element.elements['idNotIn'] != nil
-				self.id_not_in = xml_element.elements['idNotIn'].text
 			end
 			if xml_element.elements['vendorPartnerIdEqual'] != nil
 				self.vendor_partner_id_equal = xml_element.elements['vendorPartnerIdEqual'].text
@@ -1327,24 +1192,32 @@ module Kaltura
 			if xml_element.elements['contextEqual'] != nil
 				self.context_equal = xml_element.elements['contextEqual'].text
 			end
-			if xml_element.elements['expectedFinishTimeGreaterThanOrEqual'] != nil
-				self.expected_finish_time_greater_than_or_equal = xml_element.elements['expectedFinishTimeGreaterThanOrEqual'].text
-			end
-			if xml_element.elements['expectedFinishTimeLessThanOrEqual'] != nil
-				self.expected_finish_time_less_than_or_equal = xml_element.elements['expectedFinishTimeLessThanOrEqual'].text
-			end
 		end
 
 	end
 
 	class KalturaEntryVendorTaskFilter < KalturaEntryVendorTaskBaseFilter
 		attr_accessor :free_text
+		attr_accessor :expected_finish_time_greater_than_or_equal
+		attr_accessor :expected_finish_time_less_than_or_equal
 
+		def expected_finish_time_greater_than_or_equal=(val)
+			@expected_finish_time_greater_than_or_equal = val.to_i
+		end
+		def expected_finish_time_less_than_or_equal=(val)
+			@expected_finish_time_less_than_or_equal = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
 			if xml_element.elements['freeText'] != nil
 				self.free_text = xml_element.elements['freeText'].text
+			end
+			if xml_element.elements['expectedFinishTimeGreaterThanOrEqual'] != nil
+				self.expected_finish_time_greater_than_or_equal = xml_element.elements['expectedFinishTimeGreaterThanOrEqual'].text
+			end
+			if xml_element.elements['expectedFinishTimeLessThanOrEqual'] != nil
+				self.expected_finish_time_less_than_or_equal = xml_element.elements['expectedFinishTimeLessThanOrEqual'].text
 			end
 		end
 
@@ -1596,36 +1469,6 @@ module Kaltura
 
 	end
 
-	class KalturaVendorLiveCaptionCatalogItem < KalturaVendorCaptionsCatalogItem
-		attr_accessor :minimal_refund_time
-		attr_accessor :minimal_order_time
-		attr_accessor :duration_limit
-
-		def minimal_refund_time=(val)
-			@minimal_refund_time = val.to_i
-		end
-		def minimal_order_time=(val)
-			@minimal_order_time = val.to_i
-		end
-		def duration_limit=(val)
-			@duration_limit = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['minimalRefundTime'] != nil
-				self.minimal_refund_time = xml_element.elements['minimalRefundTime'].text
-			end
-			if xml_element.elements['minimalOrderTime'] != nil
-				self.minimal_order_time = xml_element.elements['minimalOrderTime'].text
-			end
-			if xml_element.elements['durationLimit'] != nil
-				self.duration_limit = xml_element.elements['durationLimit'].text
-			end
-		end
-
-	end
-
 	class KalturaVendorTranslationCatalogItem < KalturaVendorCaptionsCatalogItem
 		attr_accessor :target_language
 
@@ -1705,23 +1548,6 @@ module Kaltura
 
 	end
 
-	class KalturaVendorDubbingCatalogItemBaseFilter < KalturaVendorCatalogItemFilter
-		attr_accessor :target_language_equal
-		attr_accessor :target_language_in
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['targetLanguageEqual'] != nil
-				self.target_language_equal = xml_element.elements['targetLanguageEqual'].text
-			end
-			if xml_element.elements['targetLanguageIn'] != nil
-				self.target_language_in = xml_element.elements['targetLanguageIn'].text
-			end
-		end
-
-	end
-
 	class KalturaVendorAlignmentCatalogItemFilter < KalturaVendorCaptionsCatalogItemBaseFilter
 
 
@@ -1750,33 +1576,6 @@ module Kaltura
 	end
 
 	class KalturaVendorChapteringCatalogItemFilter < KalturaVendorCaptionsCatalogItemBaseFilter
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaVendorDubbingCatalogItemFilter < KalturaVendorDubbingCatalogItemBaseFilter
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaVendorExtendedAudioDescriptionCatalogItemFilter < KalturaVendorCaptionsCatalogItemBaseFilter
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaVendorLiveCaptionCatalogItemFilter < KalturaVendorCaptionsCatalogItemBaseFilter
 
 
 		def from_xml(xml_element)
@@ -1982,7 +1781,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# sync vendor profile credit
+		# sync vednor profile credit
 		# @return [KalturaReachProfile]
 		def sync_credit(reach_profile_id)
 			kparams = {}

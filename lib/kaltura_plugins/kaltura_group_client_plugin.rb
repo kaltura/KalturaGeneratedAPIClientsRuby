@@ -5,10 +5,10 @@
 #                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 #
 # This file is part of the Kaltura Collaborative Media Suite which allows users
-# to do with audio, video, and animation what Wiki platforms allow them to do with
+# to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2023  Kaltura Inc.
+# Copyright (C) 2006-2021  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -36,22 +36,15 @@ module Kaltura
 	end
 
 	class KalturaESearchGroupFieldName
-		COMPANY = "company"
-		COUNTRY = "country"
 		CREATED_AT = "created_at"
 		EMAIL = "email"
-		EXTERNAL_ID = "external_id"
 		FIRST_NAME = "first_name"
 		GROUP_IDS = "group_ids"
-		IS_ADMIN = "is_admin"
-		IS_HASHED = "is_hashed"
 		LAST_NAME = "last_name"
-		LOGIN_ENABLED = "login_enabled"
 		PERMISSION_NAMES = "permission_names"
 		ROLE_IDS = "role_ids"
 		SCREEN_NAME = "screen_name"
 		TAGS = "tags"
-		TITLE = "title"
 		UPDATED_AT = "updated_at"
 		USER_ID = "user_id"
 	end

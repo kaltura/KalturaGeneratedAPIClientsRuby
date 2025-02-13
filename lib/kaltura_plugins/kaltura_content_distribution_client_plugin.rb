@@ -5,10 +5,10 @@
 #                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 #
 # This file is part of the Kaltura Collaborative Media Suite which allows users
-# to do with audio, video, and animation what Wiki platforms allow them to do with
+# to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2023  Kaltura Inc.
+# Copyright (C) 2006-2021  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -147,6 +147,7 @@ module Kaltura
 	end
 
 	class KalturaDistributionProviderType
+		ATT_UVERSE = "attUverseDistribution.ATT_UVERSE"
 		AVN = "avnDistribution.AVN"
 		COMCAST_MRSS = "comcastMrssDistribution.COMCAST_MRSS"
 		CROSS_KALTURA = "crossKalturaDistribution.CROSS_KALTURA"
@@ -161,9 +162,17 @@ module Kaltura
 		IDETIC = "ideticDistribution.IDETIC"
 		METRO_PCS = "metroPcsDistribution.METRO_PCS"
 		MSN = "msnDistribution.MSN"
+		NDN = "ndnDistribution.NDN"
 		PODCAST = "podcastDistribution.PODCAST"
 		QUICKPLAY = "quickPlayDistribution.QUICKPLAY"
+		SYNACOR_HBO = "synacorHboDistribution.SYNACOR_HBO"
+		TIME_WARNER = "timeWarnerDistribution.TIME_WARNER"
+		TVCOM = "tvComDistribution.TVCOM"
+		TVINCI = "tvinciDistribution.TVINCI"
 		UNICORN = "unicornDistribution.UNICORN"
+		UVERSE_CLICK_TO_ORDER = "uverseClickToOrderDistribution.UVERSE_CLICK_TO_ORDER"
+		UVERSE = "uverseDistribution.UVERSE"
+		VERIZON_VCAST = "verizonVcastDistribution.VERIZON_VCAST"
 		YAHOO = "yahooDistribution.YAHOO"
 		YOUTUBE = "youTubeDistribution.YOUTUBE"
 		YOUTUBE_API = "youtubeApiDistribution.YOUTUBE_API"
@@ -383,7 +392,6 @@ module Kaltura
 		attr_accessor :recommended_dc_for_execute
 		# The event that trigger the automatic distribute
 		attr_accessor :distribute_trigger
-		attr_accessor :support_image_entry
 
 		def id=(val)
 			@id = val.to_i
@@ -429,9 +437,6 @@ module Kaltura
 		end
 		def distribute_trigger=(val)
 			@distribute_trigger = val.to_i
-		end
-		def support_image_entry=(val)
-			@support_image_entry = to_b(val)
 		end
 
 		def from_xml(xml_element)
@@ -510,9 +515,6 @@ module Kaltura
 			end
 			if xml_element.elements['distributeTrigger'] != nil
 				self.distribute_trigger = xml_element.elements['distributeTrigger'].text
-			end
-			if xml_element.elements['supportImageEntry'] != nil
-				self.support_image_entry = xml_element.elements['supportImageEntry'].text
 			end
 		end
 

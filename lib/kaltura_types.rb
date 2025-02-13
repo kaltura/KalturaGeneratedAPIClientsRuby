@@ -5,10 +5,10 @@
 #                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 #
 # This file is part of the Kaltura Collaborative Media Suite which allows users
-# to do with audio, video, and animation what Wiki platforms allow them to do with
+# to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2023  Kaltura Inc.
+# Copyright (C) 2006-2021  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -394,21 +394,76 @@ module Kaltura
 
 	end
 
-	class KalturaReportFilter < KalturaObjectBase
-		# The dimension whose values should be filtered
-		attr_accessor :dimension
-		# The (comma separated) values to include in the filter
-		attr_accessor :values
+	class KalturaSearchItem < KalturaObjectBase
 
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['dimension'] != nil
-				self.dimension = xml_element.elements['dimension'].text
+		end
+
+	end
+
+	class KalturaFilter < KalturaObjectBase
+		attr_accessor :order_by
+		attr_accessor :advanced_search
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['orderBy'] != nil
+				self.order_by = xml_element.elements['orderBy'].text
 			end
-			if xml_element.elements['values'] != nil
-				self.values = xml_element.elements['values'].text
+			if xml_element.elements['advancedSearch'] != nil
+				self.advanced_search = KalturaClientBase.object_from_xml(xml_element.elements['advancedSearch'], 'KalturaSearchItem')
 			end
+		end
+
+	end
+
+	class KalturaReportBaseFilter < KalturaFilter
+		attr_accessor :id_equal
+		attr_accessor :id_in
+		attr_accessor :partner_id_equal
+		attr_accessor :partner_id_in
+		attr_accessor :system_name_equal
+		attr_accessor :system_name_in
+
+		def id_equal=(val)
+			@id_equal = val.to_i
+		end
+		def partner_id_equal=(val)
+			@partner_id_equal = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['idEqual'] != nil
+				self.id_equal = xml_element.elements['idEqual'].text
+			end
+			if xml_element.elements['idIn'] != nil
+				self.id_in = xml_element.elements['idIn'].text
+			end
+			if xml_element.elements['partnerIdEqual'] != nil
+				self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
+			end
+			if xml_element.elements['partnerIdIn'] != nil
+				self.partner_id_in = xml_element.elements['partnerIdIn'].text
+			end
+			if xml_element.elements['systemNameEqual'] != nil
+				self.system_name_equal = xml_element.elements['systemNameEqual'].text
+			end
+			if xml_element.elements['systemNameIn'] != nil
+				self.system_name_in = xml_element.elements['systemNameIn'].text
+			end
+		end
+
+	end
+
+	class KalturaReportFilter < KalturaReportBaseFilter
+
+
+		def from_xml(xml_element)
+			super
 		end
 
 	end
@@ -850,26 +905,6 @@ module Kaltura
 
 	end
 
-	# A Multi Lingual String
-	class KalturaMultiLingualString < KalturaObjectBase
-		# The language of the value
-		attr_accessor :language
-		# Value
-		attr_accessor :value
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['language'] != nil
-				self.language = xml_element.elements['language'].text
-			end
-			if xml_element.elements['value'] != nil
-				self.value = xml_element.elements['value'].text
-			end
-		end
-
-	end
-
 	# Base class to all operation attributes types
 	class KalturaOperationAttributes < KalturaObjectBase
 
@@ -885,12 +920,8 @@ module Kaltura
 		attr_accessor :id
 		# Entry name (Min 1 chars)
 		attr_accessor :name
-		# Entry name (Min 1 chars)
-		attr_accessor :multi_lingual_name
 		# Entry description
 		attr_accessor :description
-		# Entry description
-		attr_accessor :multi_lingual_description
 		attr_accessor :partner_id
 		# The ID of the user who is the owner of this entry
 		attr_accessor :user_id
@@ -898,8 +929,6 @@ module Kaltura
 		attr_accessor :creator_id
 		# Entry tags
 		attr_accessor :tags
-		# Entry tags
-		attr_accessor :multi_lingual_tags
 		# Entry admin tags can be updated only by administrators
 		attr_accessor :admin_tags
 		# Comma separated list of full names of categories to which this entry belongs. Only categories that don't have entitlement (privacy context) are listed, to retrieve the full list of categories, use the categoryEntry.list action.
@@ -978,8 +1007,6 @@ module Kaltura
 		attr_accessor :application
 		# Entry application version
 		attr_accessor :application_version
-		# Block auto transcript on Entry
-		attr_accessor :block_auto_transcript
 
 		def partner_id=(val)
 			@partner_id = val.to_i
@@ -1032,9 +1059,6 @@ module Kaltura
 		def display_in_search=(val)
 			@display_in_search = val.to_i
 		end
-		def block_auto_transcript=(val)
-			@block_auto_transcript = to_b(val)
-		end
 
 		def from_xml(xml_element)
 			super
@@ -1044,14 +1068,8 @@ module Kaltura
 			if xml_element.elements['name'] != nil
 				self.name = xml_element.elements['name'].text
 			end
-			if xml_element.elements['multiLingual_name'] != nil
-				self.multi_lingual_name = KalturaClientBase.object_from_xml(xml_element.elements['multiLingual_name'], 'KalturaMultiLingualString')
-			end
 			if xml_element.elements['description'] != nil
 				self.description = xml_element.elements['description'].text
-			end
-			if xml_element.elements['multiLingual_description'] != nil
-				self.multi_lingual_description = KalturaClientBase.object_from_xml(xml_element.elements['multiLingual_description'], 'KalturaMultiLingualString')
 			end
 			if xml_element.elements['partnerId'] != nil
 				self.partner_id = xml_element.elements['partnerId'].text
@@ -1064,9 +1082,6 @@ module Kaltura
 			end
 			if xml_element.elements['tags'] != nil
 				self.tags = xml_element.elements['tags'].text
-			end
-			if xml_element.elements['multiLingual_tags'] != nil
-				self.multi_lingual_tags = KalturaClientBase.object_from_xml(xml_element.elements['multiLingual_tags'], 'KalturaMultiLingualString')
 			end
 			if xml_element.elements['adminTags'] != nil
 				self.admin_tags = xml_element.elements['adminTags'].text
@@ -1187,9 +1202,6 @@ module Kaltura
 			end
 			if xml_element.elements['applicationVersion'] != nil
 				self.application_version = xml_element.elements['applicationVersion'].text
-			end
-			if xml_element.elements['blockAutoTranscript'] != nil
-				self.block_auto_transcript = xml_element.elements['blockAutoTranscript'].text
 			end
 		end
 
@@ -1922,19 +1934,6 @@ module Kaltura
 
 	end
 
-	class KalturaRegexItem < KalturaObjectBase
-		attr_accessor :regex
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['regex'] != nil
-				self.regex = xml_element.elements['regex'].text
-			end
-		end
-
-	end
-
 	class KalturaPartner < KalturaObjectBase
 		attr_accessor :id
 		attr_accessor :name
@@ -2010,19 +2009,6 @@ module Kaltura
 		attr_accessor :usage_limit_warning
 		attr_accessor :last_free_trial_notification_day
 		attr_accessor :monitor_usage
-		attr_accessor :password_structure_validations
-		attr_accessor :password_structure_validations_description
-		attr_accessor :pass_replace_freq
-		attr_accessor :max_login_attempts
-		attr_accessor :login_block_period
-		attr_accessor :num_prev_pass_to_keep
-		attr_accessor :allow_default_password_restrictions
-		attr_accessor :two_factor_authentication_mode
-		attr_accessor :is_self_serve
-		attr_accessor :allowed_domains
-		attr_accessor :excluded_admin_role_name
-		attr_accessor :event_platform_allowed_templates
-		attr_accessor :vertical_classification_id
 
 		def id=(val)
 			@id = val.to_i
@@ -2119,30 +2105,6 @@ module Kaltura
 		end
 		def monitor_usage=(val)
 			@monitor_usage = val.to_i
-		end
-		def pass_replace_freq=(val)
-			@pass_replace_freq = val.to_i
-		end
-		def max_login_attempts=(val)
-			@max_login_attempts = val.to_i
-		end
-		def login_block_period=(val)
-			@login_block_period = val.to_i
-		end
-		def num_prev_pass_to_keep=(val)
-			@num_prev_pass_to_keep = val.to_i
-		end
-		def allow_default_password_restrictions=(val)
-			@allow_default_password_restrictions = to_b(val)
-		end
-		def two_factor_authentication_mode=(val)
-			@two_factor_authentication_mode = val.to_i
-		end
-		def is_self_serve=(val)
-			@is_self_serve = to_b(val)
-		end
-		def vertical_classification_id=(val)
-			@vertical_classification_id = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -2350,45 +2312,6 @@ module Kaltura
 			end
 			if xml_element.elements['monitorUsage'] != nil
 				self.monitor_usage = xml_element.elements['monitorUsage'].text
-			end
-			if xml_element.elements['passwordStructureValidations'] != nil
-				self.password_structure_validations = KalturaClientBase.object_from_xml(xml_element.elements['passwordStructureValidations'], 'KalturaRegexItem')
-			end
-			if xml_element.elements['passwordStructureValidationsDescription'] != nil
-				self.password_structure_validations_description = xml_element.elements['passwordStructureValidationsDescription'].text
-			end
-			if xml_element.elements['passReplaceFreq'] != nil
-				self.pass_replace_freq = xml_element.elements['passReplaceFreq'].text
-			end
-			if xml_element.elements['maxLoginAttempts'] != nil
-				self.max_login_attempts = xml_element.elements['maxLoginAttempts'].text
-			end
-			if xml_element.elements['loginBlockPeriod'] != nil
-				self.login_block_period = xml_element.elements['loginBlockPeriod'].text
-			end
-			if xml_element.elements['numPrevPassToKeep'] != nil
-				self.num_prev_pass_to_keep = xml_element.elements['numPrevPassToKeep'].text
-			end
-			if xml_element.elements['allowDefaultPasswordRestrictions'] != nil
-				self.allow_default_password_restrictions = xml_element.elements['allowDefaultPasswordRestrictions'].text
-			end
-			if xml_element.elements['twoFactorAuthenticationMode'] != nil
-				self.two_factor_authentication_mode = xml_element.elements['twoFactorAuthenticationMode'].text
-			end
-			if xml_element.elements['isSelfServe'] != nil
-				self.is_self_serve = xml_element.elements['isSelfServe'].text
-			end
-			if xml_element.elements['allowedDomains'] != nil
-				self.allowed_domains = xml_element.elements['allowedDomains'].text
-			end
-			if xml_element.elements['excludedAdminRoleName'] != nil
-				self.excluded_admin_role_name = xml_element.elements['excludedAdminRoleName'].text
-			end
-			if xml_element.elements['eventPlatformAllowedTemplates'] != nil
-				self.event_platform_allowed_templates = xml_element.elements['eventPlatformAllowedTemplates'].text
-			end
-			if xml_element.elements['verticalClassificationId'] != nil
-				self.vertical_classification_id = xml_element.elements['verticalClassificationId'].text
 			end
 		end
 
@@ -2646,6 +2569,69 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
+		end
+
+	end
+
+	class KalturaPluginData < KalturaObjectBase
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
+	class KalturaDrmPlaybackPluginData < KalturaPluginData
+		attr_accessor :scheme
+		attr_accessor :license_url
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['scheme'] != nil
+				self.scheme = xml_element.elements['scheme'].text
+			end
+			if xml_element.elements['licenseURL'] != nil
+				self.license_url = xml_element.elements['licenseURL'].text
+			end
+		end
+
+	end
+
+	class KalturaPlaybackSource < KalturaObjectBase
+		attr_accessor :delivery_profile_id
+		# source format according to delivery profile streamer type (applehttp, mpegdash etc.)
+		attr_accessor :format
+		# comma separated string according to deliveryProfile media protocols ('http,https' etc.)
+		attr_accessor :protocols
+		# comma separated string of flavor ids
+		attr_accessor :flavor_ids
+		attr_accessor :url
+		# drm data object containing relevant license url ,scheme name and certificate
+		attr_accessor :drm
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['deliveryProfileId'] != nil
+				self.delivery_profile_id = xml_element.elements['deliveryProfileId'].text
+			end
+			if xml_element.elements['format'] != nil
+				self.format = xml_element.elements['format'].text
+			end
+			if xml_element.elements['protocols'] != nil
+				self.protocols = xml_element.elements['protocols'].text
+			end
+			if xml_element.elements['flavorIds'] != nil
+				self.flavor_ids = xml_element.elements['flavorIds'].text
+			end
+			if xml_element.elements['url'] != nil
+				self.url = xml_element.elements['url'].text
+			end
+			if xml_element.elements['drm'] != nil
+				self.drm = KalturaClientBase.object_from_xml(xml_element.elements['drm'], 'KalturaDrmPlaybackPluginData')
+			end
 		end
 
 	end
@@ -3842,32 +3828,6 @@ module Kaltura
 
 	end
 
-	class KalturaSearchItem < KalturaObjectBase
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaFilter < KalturaObjectBase
-		attr_accessor :order_by
-		attr_accessor :advanced_search
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['orderBy'] != nil
-				self.order_by = xml_element.elements['orderBy'].text
-			end
-			if xml_element.elements['advancedSearch'] != nil
-				self.advanced_search = KalturaClientBase.object_from_xml(xml_element.elements['advancedSearch'], 'KalturaSearchItem')
-			end
-		end
-
-	end
-
 	class KalturaRelatedFilter < KalturaFilter
 
 
@@ -4261,57 +4221,11 @@ module Kaltura
 
 	end
 
-	class KalturaPluginData < KalturaObjectBase
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaDrmPlaybackPluginData < KalturaPluginData
-		attr_accessor :scheme
-		attr_accessor :license_url
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['scheme'] != nil
-				self.scheme = xml_element.elements['scheme'].text
-			end
-			if xml_element.elements['licenseURL'] != nil
-				self.license_url = xml_element.elements['licenseURL'].text
-			end
-		end
-
-	end
-
-	class KalturaDynamicEmailContents < KalturaObjectBase
-		# The subject of the customized email
-		attr_accessor :email_subject
-		# The body of the customized email
-		attr_accessor :email_body
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['emailSubject'] != nil
-				self.email_subject = xml_element.elements['emailSubject'].text
-			end
-			if xml_element.elements['emailBody'] != nil
-				self.email_body = xml_element.elements['emailBody'].text
-			end
-		end
-
-	end
-
 	class KalturaUser < KalturaBaseUser
 		attr_accessor :type
 		attr_accessor :date_of_birth
 		attr_accessor :gender
 		attr_accessor :is_admin
-		attr_accessor :is_guest
 		attr_accessor :role_ids
 		attr_accessor :role_names
 		attr_accessor :is_account_owner
@@ -4324,10 +4238,6 @@ module Kaltura
 		attr_accessor :title
 		attr_accessor :company
 		attr_accessor :ks_privileges
-		attr_accessor :encrypted_seed
-		attr_accessor :is_sso_excluded
-		# This field should be sent instead of the id field whenever you want to work with hashed user ids
-		attr_accessor :external_id
 
 		def type=(val)
 			@type = val.to_i
@@ -4341,17 +4251,11 @@ module Kaltura
 		def is_admin=(val)
 			@is_admin = to_b(val)
 		end
-		def is_guest=(val)
-			@is_guest = to_b(val)
-		end
 		def is_account_owner=(val)
 			@is_account_owner = to_b(val)
 		end
 		def login_enabled=(val)
 			@login_enabled = to_b(val)
-		end
-		def is_sso_excluded=(val)
-			@is_sso_excluded = to_b(val)
 		end
 
 		def from_xml(xml_element)
@@ -4367,9 +4271,6 @@ module Kaltura
 			end
 			if xml_element.elements['isAdmin'] != nil
 				self.is_admin = xml_element.elements['isAdmin'].text
-			end
-			if xml_element.elements['isGuest'] != nil
-				self.is_guest = xml_element.elements['isGuest'].text
 			end
 			if xml_element.elements['roleIds'] != nil
 				self.role_ids = xml_element.elements['roleIds'].text
@@ -4406,15 +4307,6 @@ module Kaltura
 			end
 			if xml_element.elements['ksPrivileges'] != nil
 				self.ks_privileges = xml_element.elements['ksPrivileges'].text
-			end
-			if xml_element.elements['encryptedSeed'] != nil
-				self.encrypted_seed = xml_element.elements['encryptedSeed'].text
-			end
-			if xml_element.elements['isSsoExcluded'] != nil
-				self.is_sso_excluded = xml_element.elements['isSsoExcluded'].text
-			end
-			if xml_element.elements['externalId'] != nil
-				self.external_id = xml_element.elements['externalId'].text
 			end
 		end
 
@@ -4614,25 +4506,12 @@ module Kaltura
 		# The format of the outputted date string. There are also several predefined date constants that may be used instead, so for example DATE_RSS contains the format string 'D, d M Y H:i:s'.
 		# 	 https://www.php.net/manual/en/function.date.php
 		attr_accessor :format
-		# Setting this property will cause additional columns to be added to the final report. The columns will be related to the specific object type passed (currently only MEDIA_CLIP is supported).
-		# 	 Please note that this property will NOT change the result filter in any way (i.e passing MEDIA_CLIP here will not force the report to return only media items).
-		attr_accessor :type_equal
-		attr_accessor :default_header
 
-		def default_header=(val)
-			@default_header = val.to_i
-		end
 
 		def from_xml(xml_element)
 			super
 			if xml_element.elements['format'] != nil
 				self.format = xml_element.elements['format'].text
-			end
-			if xml_element.elements['typeEqual'] != nil
-				self.type_equal = xml_element.elements['typeEqual'].text
-			end
-			if xml_element.elements['defaultHeader'] != nil
-				self.default_header = xml_element.elements['defaultHeader'].text
 			end
 		end
 
@@ -5881,543 +5760,6 @@ module Kaltura
 
 	end
 
-	class KalturaBatchJobListResponse < KalturaListResponse
-		attr_accessor :objects
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['objects'] != nil
-				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaBatchJob')
-			end
-		end
-
-	end
-
-	class KalturaMediaInfo < KalturaObjectBase
-		# The id of the media info
-		attr_accessor :id
-		# The id of the related flavor asset
-		attr_accessor :flavor_asset_id
-		# The file size
-		attr_accessor :file_size
-		# The container format
-		attr_accessor :container_format
-		# The container id
-		attr_accessor :container_id
-		# The container profile
-		attr_accessor :container_profile
-		# The container duration
-		attr_accessor :container_duration
-		# The container bit rate
-		attr_accessor :container_bit_rate
-		# The video format
-		attr_accessor :video_format
-		# The video codec id
-		attr_accessor :video_codec_id
-		# The video duration
-		attr_accessor :video_duration
-		# The video bit rate
-		attr_accessor :video_bit_rate
-		# The video bit rate mode
-		attr_accessor :video_bit_rate_mode
-		# The video width
-		attr_accessor :video_width
-		# The video height
-		attr_accessor :video_height
-		# The video frame rate
-		attr_accessor :video_frame_rate
-		# The video display aspect ratio (dar)
-		attr_accessor :video_dar
-		attr_accessor :video_rotation
-		# The audio format
-		attr_accessor :audio_format
-		# The audio codec id
-		attr_accessor :audio_codec_id
-		# The audio duration
-		attr_accessor :audio_duration
-		# The audio bit rate
-		attr_accessor :audio_bit_rate
-		# The audio bit rate mode
-		attr_accessor :audio_bit_rate_mode
-		# The number of audio channels
-		attr_accessor :audio_channels
-		# The audio sampling rate
-		attr_accessor :audio_sampling_rate
-		# The audio resolution
-		attr_accessor :audio_resolution
-		# The writing library
-		attr_accessor :writing_lib
-		# The data as returned by the mediainfo command line
-		attr_accessor :raw_data
-		attr_accessor :multi_stream_info
-		attr_accessor :scan_type
-		attr_accessor :multi_stream
-		attr_accessor :is_fast_start
-		attr_accessor :content_streams
-		attr_accessor :complexity_value
-		attr_accessor :max_gop
-		attr_accessor :matrix_coefficients
-		attr_accessor :color_transfer
-		attr_accessor :color_primaries
-		attr_accessor :pixel_format
-		attr_accessor :color_space
-		attr_accessor :chroma_subsampling
-		attr_accessor :bits_depth
-
-		def id=(val)
-			@id = val.to_i
-		end
-		def file_size=(val)
-			@file_size = val.to_i
-		end
-		def container_duration=(val)
-			@container_duration = val.to_i
-		end
-		def container_bit_rate=(val)
-			@container_bit_rate = val.to_i
-		end
-		def video_duration=(val)
-			@video_duration = val.to_i
-		end
-		def video_bit_rate=(val)
-			@video_bit_rate = val.to_i
-		end
-		def video_bit_rate_mode=(val)
-			@video_bit_rate_mode = val.to_i
-		end
-		def video_width=(val)
-			@video_width = val.to_i
-		end
-		def video_height=(val)
-			@video_height = val.to_i
-		end
-		def video_frame_rate=(val)
-			@video_frame_rate = val.to_f
-		end
-		def video_dar=(val)
-			@video_dar = val.to_f
-		end
-		def video_rotation=(val)
-			@video_rotation = val.to_i
-		end
-		def audio_duration=(val)
-			@audio_duration = val.to_i
-		end
-		def audio_bit_rate=(val)
-			@audio_bit_rate = val.to_i
-		end
-		def audio_bit_rate_mode=(val)
-			@audio_bit_rate_mode = val.to_i
-		end
-		def audio_channels=(val)
-			@audio_channels = val.to_i
-		end
-		def audio_sampling_rate=(val)
-			@audio_sampling_rate = val.to_i
-		end
-		def audio_resolution=(val)
-			@audio_resolution = val.to_i
-		end
-		def scan_type=(val)
-			@scan_type = val.to_i
-		end
-		def is_fast_start=(val)
-			@is_fast_start = val.to_i
-		end
-		def complexity_value=(val)
-			@complexity_value = val.to_i
-		end
-		def max_gop=(val)
-			@max_gop = val.to_f
-		end
-		def bits_depth=(val)
-			@bits_depth = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['id'] != nil
-				self.id = xml_element.elements['id'].text
-			end
-			if xml_element.elements['flavorAssetId'] != nil
-				self.flavor_asset_id = xml_element.elements['flavorAssetId'].text
-			end
-			if xml_element.elements['fileSize'] != nil
-				self.file_size = xml_element.elements['fileSize'].text
-			end
-			if xml_element.elements['containerFormat'] != nil
-				self.container_format = xml_element.elements['containerFormat'].text
-			end
-			if xml_element.elements['containerId'] != nil
-				self.container_id = xml_element.elements['containerId'].text
-			end
-			if xml_element.elements['containerProfile'] != nil
-				self.container_profile = xml_element.elements['containerProfile'].text
-			end
-			if xml_element.elements['containerDuration'] != nil
-				self.container_duration = xml_element.elements['containerDuration'].text
-			end
-			if xml_element.elements['containerBitRate'] != nil
-				self.container_bit_rate = xml_element.elements['containerBitRate'].text
-			end
-			if xml_element.elements['videoFormat'] != nil
-				self.video_format = xml_element.elements['videoFormat'].text
-			end
-			if xml_element.elements['videoCodecId'] != nil
-				self.video_codec_id = xml_element.elements['videoCodecId'].text
-			end
-			if xml_element.elements['videoDuration'] != nil
-				self.video_duration = xml_element.elements['videoDuration'].text
-			end
-			if xml_element.elements['videoBitRate'] != nil
-				self.video_bit_rate = xml_element.elements['videoBitRate'].text
-			end
-			if xml_element.elements['videoBitRateMode'] != nil
-				self.video_bit_rate_mode = xml_element.elements['videoBitRateMode'].text
-			end
-			if xml_element.elements['videoWidth'] != nil
-				self.video_width = xml_element.elements['videoWidth'].text
-			end
-			if xml_element.elements['videoHeight'] != nil
-				self.video_height = xml_element.elements['videoHeight'].text
-			end
-			if xml_element.elements['videoFrameRate'] != nil
-				self.video_frame_rate = xml_element.elements['videoFrameRate'].text
-			end
-			if xml_element.elements['videoDar'] != nil
-				self.video_dar = xml_element.elements['videoDar'].text
-			end
-			if xml_element.elements['videoRotation'] != nil
-				self.video_rotation = xml_element.elements['videoRotation'].text
-			end
-			if xml_element.elements['audioFormat'] != nil
-				self.audio_format = xml_element.elements['audioFormat'].text
-			end
-			if xml_element.elements['audioCodecId'] != nil
-				self.audio_codec_id = xml_element.elements['audioCodecId'].text
-			end
-			if xml_element.elements['audioDuration'] != nil
-				self.audio_duration = xml_element.elements['audioDuration'].text
-			end
-			if xml_element.elements['audioBitRate'] != nil
-				self.audio_bit_rate = xml_element.elements['audioBitRate'].text
-			end
-			if xml_element.elements['audioBitRateMode'] != nil
-				self.audio_bit_rate_mode = xml_element.elements['audioBitRateMode'].text
-			end
-			if xml_element.elements['audioChannels'] != nil
-				self.audio_channels = xml_element.elements['audioChannels'].text
-			end
-			if xml_element.elements['audioSamplingRate'] != nil
-				self.audio_sampling_rate = xml_element.elements['audioSamplingRate'].text
-			end
-			if xml_element.elements['audioResolution'] != nil
-				self.audio_resolution = xml_element.elements['audioResolution'].text
-			end
-			if xml_element.elements['writingLib'] != nil
-				self.writing_lib = xml_element.elements['writingLib'].text
-			end
-			if xml_element.elements['rawData'] != nil
-				self.raw_data = xml_element.elements['rawData'].text
-			end
-			if xml_element.elements['multiStreamInfo'] != nil
-				self.multi_stream_info = xml_element.elements['multiStreamInfo'].text
-			end
-			if xml_element.elements['scanType'] != nil
-				self.scan_type = xml_element.elements['scanType'].text
-			end
-			if xml_element.elements['multiStream'] != nil
-				self.multi_stream = xml_element.elements['multiStream'].text
-			end
-			if xml_element.elements['isFastStart'] != nil
-				self.is_fast_start = xml_element.elements['isFastStart'].text
-			end
-			if xml_element.elements['contentStreams'] != nil
-				self.content_streams = xml_element.elements['contentStreams'].text
-			end
-			if xml_element.elements['complexityValue'] != nil
-				self.complexity_value = xml_element.elements['complexityValue'].text
-			end
-			if xml_element.elements['maxGOP'] != nil
-				self.max_gop = xml_element.elements['maxGOP'].text
-			end
-			if xml_element.elements['matrixCoefficients'] != nil
-				self.matrix_coefficients = xml_element.elements['matrixCoefficients'].text
-			end
-			if xml_element.elements['colorTransfer'] != nil
-				self.color_transfer = xml_element.elements['colorTransfer'].text
-			end
-			if xml_element.elements['colorPrimaries'] != nil
-				self.color_primaries = xml_element.elements['colorPrimaries'].text
-			end
-			if xml_element.elements['pixelFormat'] != nil
-				self.pixel_format = xml_element.elements['pixelFormat'].text
-			end
-			if xml_element.elements['colorSpace'] != nil
-				self.color_space = xml_element.elements['colorSpace'].text
-			end
-			if xml_element.elements['chromaSubsampling'] != nil
-				self.chroma_subsampling = xml_element.elements['chromaSubsampling'].text
-			end
-			if xml_element.elements['bitsDepth'] != nil
-				self.bits_depth = xml_element.elements['bitsDepth'].text
-			end
-		end
-
-	end
-
-	class KalturaMediaInfoListResponse < KalturaListResponse
-		attr_accessor :objects
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['objects'] != nil
-				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaMediaInfo')
-			end
-		end
-
-	end
-
-	class KalturaFlavorParamsOutputListResponse < KalturaListResponse
-		attr_accessor :objects
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['objects'] != nil
-				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaFlavorParamsOutput')
-			end
-		end
-
-	end
-
-	class KalturaThumbAsset < KalturaAsset
-		# The Flavor Params used to create this Flavor Asset
-		attr_accessor :thumb_params_id
-		# The width of the Flavor Asset
-		attr_accessor :width
-		# The height of the Flavor Asset
-		attr_accessor :height
-		# The status of the asset
-		attr_accessor :status
-
-		def thumb_params_id=(val)
-			@thumb_params_id = val.to_i
-		end
-		def width=(val)
-			@width = val.to_i
-		end
-		def height=(val)
-			@height = val.to_i
-		end
-		def status=(val)
-			@status = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['thumbParamsId'] != nil
-				self.thumb_params_id = xml_element.elements['thumbParamsId'].text
-			end
-			if xml_element.elements['width'] != nil
-				self.width = xml_element.elements['width'].text
-			end
-			if xml_element.elements['height'] != nil
-				self.height = xml_element.elements['height'].text
-			end
-			if xml_element.elements['status'] != nil
-				self.status = xml_element.elements['status'].text
-			end
-		end
-
-	end
-
-	class KalturaThumbParams < KalturaAssetParams
-		attr_accessor :crop_type
-		attr_accessor :quality
-		attr_accessor :crop_x
-		attr_accessor :crop_y
-		attr_accessor :crop_width
-		attr_accessor :crop_height
-		attr_accessor :video_offset
-		attr_accessor :width
-		attr_accessor :height
-		attr_accessor :scale_width
-		attr_accessor :scale_height
-		# Hexadecimal value
-		attr_accessor :background_color
-		# Id of the flavor params or the thumbnail params to be used as source for the thumbnail creation
-		attr_accessor :source_params_id
-		# The container format of the Flavor Params
-		attr_accessor :format
-		# The image density (dpi) for example: 72 or 96
-		attr_accessor :density
-		# Strip profiles and comments
-		attr_accessor :strip_profiles
-		# Create thumbnail from the videoLengthpercentage second
-		attr_accessor :video_offset_in_percentage
-		# interval in seconds for creating thumbnail
-		attr_accessor :interval
-
-		def crop_type=(val)
-			@crop_type = val.to_i
-		end
-		def quality=(val)
-			@quality = val.to_i
-		end
-		def crop_x=(val)
-			@crop_x = val.to_i
-		end
-		def crop_y=(val)
-			@crop_y = val.to_i
-		end
-		def crop_width=(val)
-			@crop_width = val.to_i
-		end
-		def crop_height=(val)
-			@crop_height = val.to_i
-		end
-		def video_offset=(val)
-			@video_offset = val.to_f
-		end
-		def width=(val)
-			@width = val.to_i
-		end
-		def height=(val)
-			@height = val.to_i
-		end
-		def scale_width=(val)
-			@scale_width = val.to_f
-		end
-		def scale_height=(val)
-			@scale_height = val.to_f
-		end
-		def source_params_id=(val)
-			@source_params_id = val.to_i
-		end
-		def density=(val)
-			@density = val.to_i
-		end
-		def strip_profiles=(val)
-			@strip_profiles = to_b(val)
-		end
-		def video_offset_in_percentage=(val)
-			@video_offset_in_percentage = val.to_i
-		end
-		def interval=(val)
-			@interval = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['cropType'] != nil
-				self.crop_type = xml_element.elements['cropType'].text
-			end
-			if xml_element.elements['quality'] != nil
-				self.quality = xml_element.elements['quality'].text
-			end
-			if xml_element.elements['cropX'] != nil
-				self.crop_x = xml_element.elements['cropX'].text
-			end
-			if xml_element.elements['cropY'] != nil
-				self.crop_y = xml_element.elements['cropY'].text
-			end
-			if xml_element.elements['cropWidth'] != nil
-				self.crop_width = xml_element.elements['cropWidth'].text
-			end
-			if xml_element.elements['cropHeight'] != nil
-				self.crop_height = xml_element.elements['cropHeight'].text
-			end
-			if xml_element.elements['videoOffset'] != nil
-				self.video_offset = xml_element.elements['videoOffset'].text
-			end
-			if xml_element.elements['width'] != nil
-				self.width = xml_element.elements['width'].text
-			end
-			if xml_element.elements['height'] != nil
-				self.height = xml_element.elements['height'].text
-			end
-			if xml_element.elements['scaleWidth'] != nil
-				self.scale_width = xml_element.elements['scaleWidth'].text
-			end
-			if xml_element.elements['scaleHeight'] != nil
-				self.scale_height = xml_element.elements['scaleHeight'].text
-			end
-			if xml_element.elements['backgroundColor'] != nil
-				self.background_color = xml_element.elements['backgroundColor'].text
-			end
-			if xml_element.elements['sourceParamsId'] != nil
-				self.source_params_id = xml_element.elements['sourceParamsId'].text
-			end
-			if xml_element.elements['format'] != nil
-				self.format = xml_element.elements['format'].text
-			end
-			if xml_element.elements['density'] != nil
-				self.density = xml_element.elements['density'].text
-			end
-			if xml_element.elements['stripProfiles'] != nil
-				self.strip_profiles = xml_element.elements['stripProfiles'].text
-			end
-			if xml_element.elements['videoOffsetInPercentage'] != nil
-				self.video_offset_in_percentage = xml_element.elements['videoOffsetInPercentage'].text
-			end
-			if xml_element.elements['interval'] != nil
-				self.interval = xml_element.elements['interval'].text
-			end
-		end
-
-	end
-
-	class KalturaThumbParamsOutput < KalturaThumbParams
-		attr_accessor :thumb_params_id
-		attr_accessor :thumb_params_version
-		attr_accessor :thumb_asset_id
-		attr_accessor :thumb_asset_version
-		attr_accessor :rotate
-
-		def thumb_params_id=(val)
-			@thumb_params_id = val.to_i
-		end
-		def rotate=(val)
-			@rotate = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['thumbParamsId'] != nil
-				self.thumb_params_id = xml_element.elements['thumbParamsId'].text
-			end
-			if xml_element.elements['thumbParamsVersion'] != nil
-				self.thumb_params_version = xml_element.elements['thumbParamsVersion'].text
-			end
-			if xml_element.elements['thumbAssetId'] != nil
-				self.thumb_asset_id = xml_element.elements['thumbAssetId'].text
-			end
-			if xml_element.elements['thumbAssetVersion'] != nil
-				self.thumb_asset_version = xml_element.elements['thumbAssetVersion'].text
-			end
-			if xml_element.elements['rotate'] != nil
-				self.rotate = xml_element.elements['rotate'].text
-			end
-		end
-
-	end
-
-	class KalturaThumbParamsOutputListResponse < KalturaListResponse
-		attr_accessor :objects
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['objects'] != nil
-				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaThumbParamsOutput')
-			end
-		end
-
-	end
-
 	# A representation of a live stream configuration
 	class KalturaLiveStreamConfiguration < KalturaObjectBase
 		attr_accessor :protocol
@@ -7151,10 +6493,6 @@ module Kaltura
 		attr_accessor :secondary_secured_broadcasting_url
 		attr_accessor :primary_rtsp_broadcasting_url
 		attr_accessor :secondary_rtsp_broadcasting_url
-		attr_accessor :primary_srt_broadcasting_url
-		attr_accessor :primary_srt_stream_id
-		attr_accessor :secondary_srt_broadcasting_url
-		attr_accessor :secondary_srt_stream_id
 		attr_accessor :stream_name
 		# The stream url
 		attr_accessor :stream_url
@@ -7170,7 +6508,6 @@ module Kaltura
 		attr_accessor :stream_password
 		# The broadcast username
 		attr_accessor :stream_username
-		attr_accessor :srt_pass
 		# The Streams primary server node id
 		attr_accessor :primary_server_node_id
 		attr_accessor :sip_token
@@ -7212,18 +6549,6 @@ module Kaltura
 			if xml_element.elements['secondaryRtspBroadcastingUrl'] != nil
 				self.secondary_rtsp_broadcasting_url = xml_element.elements['secondaryRtspBroadcastingUrl'].text
 			end
-			if xml_element.elements['primarySrtBroadcastingUrl'] != nil
-				self.primary_srt_broadcasting_url = xml_element.elements['primarySrtBroadcastingUrl'].text
-			end
-			if xml_element.elements['primarySrtStreamId'] != nil
-				self.primary_srt_stream_id = xml_element.elements['primarySrtStreamId'].text
-			end
-			if xml_element.elements['secondarySrtBroadcastingUrl'] != nil
-				self.secondary_srt_broadcasting_url = xml_element.elements['secondarySrtBroadcastingUrl'].text
-			end
-			if xml_element.elements['secondarySrtStreamId'] != nil
-				self.secondary_srt_stream_id = xml_element.elements['secondarySrtStreamId'].text
-			end
 			if xml_element.elements['streamName'] != nil
 				self.stream_name = xml_element.elements['streamName'].text
 			end
@@ -7247,9 +6572,6 @@ module Kaltura
 			end
 			if xml_element.elements['streamUsername'] != nil
 				self.stream_username = xml_element.elements['streamUsername'].text
-			end
-			if xml_element.elements['srtPass'] != nil
-				self.srt_pass = xml_element.elements['srtPass'].text
 			end
 			if xml_element.elements['primaryServerNodeId'] != nil
 				self.primary_server_node_id = xml_element.elements['primaryServerNodeId'].text
@@ -7438,7 +6760,6 @@ module Kaltura
 		attr_accessor :tags_name_multi_like_and
 		attr_accessor :tags_admin_tags_multi_like_and
 		attr_accessor :tags_admin_tags_name_multi_like_and
-		attr_accessor :display_in_search_equal
 
 		def partner_id_equal=(val)
 			@partner_id_equal = val.to_i
@@ -7511,9 +6832,6 @@ module Kaltura
 		end
 		def partner_sort_value_less_than_or_equal=(val)
 			@partner_sort_value_less_than_or_equal = val.to_i
-		end
-		def display_in_search_equal=(val)
-			@display_in_search_equal = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -7764,9 +7082,6 @@ module Kaltura
 			if xml_element.elements['tagsAdminTagsNameMultiLikeAnd'] != nil
 				self.tags_admin_tags_name_multi_like_and = xml_element.elements['tagsAdminTagsNameMultiLikeAnd'].text
 			end
-			if xml_element.elements['displayInSearchEqual'] != nil
-				self.display_in_search_equal = xml_element.elements['displayInSearchEqual'].text
-			end
 		end
 
 	end
@@ -7781,13 +7096,9 @@ module Kaltura
 		attr_accessor :category_ancestor_id_in
 		# The id of the original entry
 		attr_accessor :redirect_from_entry_id
-		attr_accessor :conversion_profile_id_equal
 
 		def is_root=(val)
 			@is_root = val.to_i
-		end
-		def conversion_profile_id_equal=(val)
-			@conversion_profile_id_equal = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -7812,9 +7123,6 @@ module Kaltura
 			end
 			if xml_element.elements['redirectFromEntryId'] != nil
 				self.redirect_from_entry_id = xml_element.elements['redirectFromEntryId'].text
-			end
-			if xml_element.elements['conversionProfileIdEqual'] != nil
-				self.conversion_profile_id_equal = xml_element.elements['conversionProfileIdEqual'].text
 			end
 		end
 
@@ -7973,6 +7281,279 @@ module Kaltura
 			end
 			if xml_element.elements['name'] != nil
 				self.name = xml_element.elements['name'].text
+			end
+		end
+
+	end
+
+	class KalturaMediaInfo < KalturaObjectBase
+		# The id of the media info
+		attr_accessor :id
+		# The id of the related flavor asset
+		attr_accessor :flavor_asset_id
+		# The file size
+		attr_accessor :file_size
+		# The container format
+		attr_accessor :container_format
+		# The container id
+		attr_accessor :container_id
+		# The container profile
+		attr_accessor :container_profile
+		# The container duration
+		attr_accessor :container_duration
+		# The container bit rate
+		attr_accessor :container_bit_rate
+		# The video format
+		attr_accessor :video_format
+		# The video codec id
+		attr_accessor :video_codec_id
+		# The video duration
+		attr_accessor :video_duration
+		# The video bit rate
+		attr_accessor :video_bit_rate
+		# The video bit rate mode
+		attr_accessor :video_bit_rate_mode
+		# The video width
+		attr_accessor :video_width
+		# The video height
+		attr_accessor :video_height
+		# The video frame rate
+		attr_accessor :video_frame_rate
+		# The video display aspect ratio (dar)
+		attr_accessor :video_dar
+		attr_accessor :video_rotation
+		# The audio format
+		attr_accessor :audio_format
+		# The audio codec id
+		attr_accessor :audio_codec_id
+		# The audio duration
+		attr_accessor :audio_duration
+		# The audio bit rate
+		attr_accessor :audio_bit_rate
+		# The audio bit rate mode
+		attr_accessor :audio_bit_rate_mode
+		# The number of audio channels
+		attr_accessor :audio_channels
+		# The audio sampling rate
+		attr_accessor :audio_sampling_rate
+		# The audio resolution
+		attr_accessor :audio_resolution
+		# The writing library
+		attr_accessor :writing_lib
+		# The data as returned by the mediainfo command line
+		attr_accessor :raw_data
+		attr_accessor :multi_stream_info
+		attr_accessor :scan_type
+		attr_accessor :multi_stream
+		attr_accessor :is_fast_start
+		attr_accessor :content_streams
+		attr_accessor :complexity_value
+		attr_accessor :max_gop
+		attr_accessor :matrix_coefficients
+		attr_accessor :color_transfer
+		attr_accessor :color_primaries
+		attr_accessor :pixel_format
+		attr_accessor :color_space
+		attr_accessor :chroma_subsampling
+		attr_accessor :bits_depth
+
+		def id=(val)
+			@id = val.to_i
+		end
+		def file_size=(val)
+			@file_size = val.to_i
+		end
+		def container_duration=(val)
+			@container_duration = val.to_i
+		end
+		def container_bit_rate=(val)
+			@container_bit_rate = val.to_i
+		end
+		def video_duration=(val)
+			@video_duration = val.to_i
+		end
+		def video_bit_rate=(val)
+			@video_bit_rate = val.to_i
+		end
+		def video_bit_rate_mode=(val)
+			@video_bit_rate_mode = val.to_i
+		end
+		def video_width=(val)
+			@video_width = val.to_i
+		end
+		def video_height=(val)
+			@video_height = val.to_i
+		end
+		def video_frame_rate=(val)
+			@video_frame_rate = val.to_f
+		end
+		def video_dar=(val)
+			@video_dar = val.to_f
+		end
+		def video_rotation=(val)
+			@video_rotation = val.to_i
+		end
+		def audio_duration=(val)
+			@audio_duration = val.to_i
+		end
+		def audio_bit_rate=(val)
+			@audio_bit_rate = val.to_i
+		end
+		def audio_bit_rate_mode=(val)
+			@audio_bit_rate_mode = val.to_i
+		end
+		def audio_channels=(val)
+			@audio_channels = val.to_i
+		end
+		def audio_sampling_rate=(val)
+			@audio_sampling_rate = val.to_i
+		end
+		def audio_resolution=(val)
+			@audio_resolution = val.to_i
+		end
+		def scan_type=(val)
+			@scan_type = val.to_i
+		end
+		def is_fast_start=(val)
+			@is_fast_start = val.to_i
+		end
+		def complexity_value=(val)
+			@complexity_value = val.to_i
+		end
+		def max_gop=(val)
+			@max_gop = val.to_f
+		end
+		def bits_depth=(val)
+			@bits_depth = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['id'] != nil
+				self.id = xml_element.elements['id'].text
+			end
+			if xml_element.elements['flavorAssetId'] != nil
+				self.flavor_asset_id = xml_element.elements['flavorAssetId'].text
+			end
+			if xml_element.elements['fileSize'] != nil
+				self.file_size = xml_element.elements['fileSize'].text
+			end
+			if xml_element.elements['containerFormat'] != nil
+				self.container_format = xml_element.elements['containerFormat'].text
+			end
+			if xml_element.elements['containerId'] != nil
+				self.container_id = xml_element.elements['containerId'].text
+			end
+			if xml_element.elements['containerProfile'] != nil
+				self.container_profile = xml_element.elements['containerProfile'].text
+			end
+			if xml_element.elements['containerDuration'] != nil
+				self.container_duration = xml_element.elements['containerDuration'].text
+			end
+			if xml_element.elements['containerBitRate'] != nil
+				self.container_bit_rate = xml_element.elements['containerBitRate'].text
+			end
+			if xml_element.elements['videoFormat'] != nil
+				self.video_format = xml_element.elements['videoFormat'].text
+			end
+			if xml_element.elements['videoCodecId'] != nil
+				self.video_codec_id = xml_element.elements['videoCodecId'].text
+			end
+			if xml_element.elements['videoDuration'] != nil
+				self.video_duration = xml_element.elements['videoDuration'].text
+			end
+			if xml_element.elements['videoBitRate'] != nil
+				self.video_bit_rate = xml_element.elements['videoBitRate'].text
+			end
+			if xml_element.elements['videoBitRateMode'] != nil
+				self.video_bit_rate_mode = xml_element.elements['videoBitRateMode'].text
+			end
+			if xml_element.elements['videoWidth'] != nil
+				self.video_width = xml_element.elements['videoWidth'].text
+			end
+			if xml_element.elements['videoHeight'] != nil
+				self.video_height = xml_element.elements['videoHeight'].text
+			end
+			if xml_element.elements['videoFrameRate'] != nil
+				self.video_frame_rate = xml_element.elements['videoFrameRate'].text
+			end
+			if xml_element.elements['videoDar'] != nil
+				self.video_dar = xml_element.elements['videoDar'].text
+			end
+			if xml_element.elements['videoRotation'] != nil
+				self.video_rotation = xml_element.elements['videoRotation'].text
+			end
+			if xml_element.elements['audioFormat'] != nil
+				self.audio_format = xml_element.elements['audioFormat'].text
+			end
+			if xml_element.elements['audioCodecId'] != nil
+				self.audio_codec_id = xml_element.elements['audioCodecId'].text
+			end
+			if xml_element.elements['audioDuration'] != nil
+				self.audio_duration = xml_element.elements['audioDuration'].text
+			end
+			if xml_element.elements['audioBitRate'] != nil
+				self.audio_bit_rate = xml_element.elements['audioBitRate'].text
+			end
+			if xml_element.elements['audioBitRateMode'] != nil
+				self.audio_bit_rate_mode = xml_element.elements['audioBitRateMode'].text
+			end
+			if xml_element.elements['audioChannels'] != nil
+				self.audio_channels = xml_element.elements['audioChannels'].text
+			end
+			if xml_element.elements['audioSamplingRate'] != nil
+				self.audio_sampling_rate = xml_element.elements['audioSamplingRate'].text
+			end
+			if xml_element.elements['audioResolution'] != nil
+				self.audio_resolution = xml_element.elements['audioResolution'].text
+			end
+			if xml_element.elements['writingLib'] != nil
+				self.writing_lib = xml_element.elements['writingLib'].text
+			end
+			if xml_element.elements['rawData'] != nil
+				self.raw_data = xml_element.elements['rawData'].text
+			end
+			if xml_element.elements['multiStreamInfo'] != nil
+				self.multi_stream_info = xml_element.elements['multiStreamInfo'].text
+			end
+			if xml_element.elements['scanType'] != nil
+				self.scan_type = xml_element.elements['scanType'].text
+			end
+			if xml_element.elements['multiStream'] != nil
+				self.multi_stream = xml_element.elements['multiStream'].text
+			end
+			if xml_element.elements['isFastStart'] != nil
+				self.is_fast_start = xml_element.elements['isFastStart'].text
+			end
+			if xml_element.elements['contentStreams'] != nil
+				self.content_streams = xml_element.elements['contentStreams'].text
+			end
+			if xml_element.elements['complexityValue'] != nil
+				self.complexity_value = xml_element.elements['complexityValue'].text
+			end
+			if xml_element.elements['maxGOP'] != nil
+				self.max_gop = xml_element.elements['maxGOP'].text
+			end
+			if xml_element.elements['matrixCoefficients'] != nil
+				self.matrix_coefficients = xml_element.elements['matrixCoefficients'].text
+			end
+			if xml_element.elements['colorTransfer'] != nil
+				self.color_transfer = xml_element.elements['colorTransfer'].text
+			end
+			if xml_element.elements['colorPrimaries'] != nil
+				self.color_primaries = xml_element.elements['colorPrimaries'].text
+			end
+			if xml_element.elements['pixelFormat'] != nil
+				self.pixel_format = xml_element.elements['pixelFormat'].text
+			end
+			if xml_element.elements['colorSpace'] != nil
+				self.color_space = xml_element.elements['colorSpace'].text
+			end
+			if xml_element.elements['chromaSubsampling'] != nil
+				self.chroma_subsampling = xml_element.elements['chromaSubsampling'].text
+			end
+			if xml_element.elements['bitsDepth'] != nil
+				self.bits_depth = xml_element.elements['bitsDepth'].text
 			end
 		end
 
@@ -8344,38 +7925,17 @@ module Kaltura
 
 	end
 
-	class KalturaPlaybackSource < KalturaObjectBase
-		attr_accessor :delivery_profile_id
-		# source format according to delivery profile streamer type (applehttp, mpegdash etc.)
-		attr_accessor :format
-		# comma separated string according to deliveryProfile media protocols ('http,https' etc.)
-		attr_accessor :protocols
-		# comma separated string of flavor ids
-		attr_accessor :flavor_ids
-		attr_accessor :url
-		# drm data object containing relevant license url ,scheme name and certificate
-		attr_accessor :drm
+	class KalturaTypedArray < KalturaObjectBase
+		attr_accessor :count
 
+		def count=(val)
+			@count = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['deliveryProfileId'] != nil
-				self.delivery_profile_id = xml_element.elements['deliveryProfileId'].text
-			end
-			if xml_element.elements['format'] != nil
-				self.format = xml_element.elements['format'].text
-			end
-			if xml_element.elements['protocols'] != nil
-				self.protocols = xml_element.elements['protocols'].text
-			end
-			if xml_element.elements['flavorIds'] != nil
-				self.flavor_ids = xml_element.elements['flavorIds'].text
-			end
-			if xml_element.elements['url'] != nil
-				self.url = xml_element.elements['url'].text
-			end
-			if xml_element.elements['drm'] != nil
-				self.drm = KalturaClientBase.object_from_xml(xml_element.elements['drm'], 'KalturaDrmPlaybackPluginData')
+			if xml_element.elements['count'] != nil
+				self.count = xml_element.elements['count'].text
 			end
 		end
 
@@ -8410,7 +7970,7 @@ module Kaltura
 				self.messages = KalturaClientBase.object_from_xml(xml_element.elements['messages'], 'KalturaAccessControlMessage')
 			end
 			if xml_element.elements['bumperData'] != nil
-				self.bumper_data = KalturaClientBase.object_from_xml(xml_element.elements['bumperData'], 'KalturaObject')
+				self.bumper_data = KalturaClientBase.object_from_xml(xml_element.elements['bumperData'], 'KalturaTypedArray')
 			end
 		end
 
@@ -8508,7 +8068,6 @@ module Kaltura
 		attr_accessor :url
 		# Force Import Job
 		attr_accessor :force_async_download
-		attr_accessor :url_headers
 
 		def force_async_download=(val)
 			@force_async_download = to_b(val)
@@ -8521,9 +8080,6 @@ module Kaltura
 			end
 			if xml_element.elements['forceAsyncDownload'] != nil
 				self.force_async_download = xml_element.elements['forceAsyncDownload'].text
-			end
-			if xml_element.elements['urlHeaders'] != nil
-				self.url_headers = KalturaClientBase.object_from_xml(xml_element.elements['urlHeaders'], 'KalturaString')
 			end
 		end
 
@@ -8753,12 +8309,6 @@ module Kaltura
 		attr_accessor :domain_in
 		# filter by canonical url
 		attr_accessor :canonical_url_in
-		# filter by virtual event id
-		attr_accessor :virtual_event_id_in
-		# filter by origin
-		attr_accessor :origin_in
-		# filter by ui conf id
-		attr_accessor :ui_conf_id_in
 
 		def search_in_tags=(val)
 			@search_in_tags = to_b(val)
@@ -8895,15 +8445,6 @@ module Kaltura
 			if xml_element.elements['canonicalUrlIn'] != nil
 				self.canonical_url_in = xml_element.elements['canonicalUrlIn'].text
 			end
-			if xml_element.elements['virtualEventIdIn'] != nil
-				self.virtual_event_id_in = xml_element.elements['virtualEventIdIn'].text
-			end
-			if xml_element.elements['originIn'] != nil
-				self.origin_in = xml_element.elements['originIn'].text
-			end
-			if xml_element.elements['uiConfIdIn'] != nil
-				self.ui_conf_id_in = xml_element.elements['uiConfIdIn'].text
-			end
 		end
 
 	end
@@ -8974,7 +8515,6 @@ module Kaltura
 		attr_accessor :time_zone_offset
 		attr_accessor :report_items
 		attr_accessor :reports_items_group
-		attr_accessor :base_url
 
 		def time_zone_offset=(val)
 			@time_zone_offset = val.to_i
@@ -8993,9 +8533,6 @@ module Kaltura
 			end
 			if xml_element.elements['reportsItemsGroup'] != nil
 				self.reports_items_group = xml_element.elements['reportsItemsGroup'].text
-			end
-			if xml_element.elements['baseUrl'] != nil
-				self.base_url = xml_element.elements['baseUrl'].text
 			end
 		end
 
@@ -9103,8 +8640,6 @@ module Kaltura
 		attr_accessor :partner_id
 		# Kaltura API session
 		attr_accessor :ks
-		# language
-		attr_accessor :language
 		# Response profile - this attribute will be automatically unset after every API call.
 		attr_accessor :response_profile
 
@@ -9119,9 +8654,6 @@ module Kaltura
 			end
 			if xml_element.elements['ks'] != nil
 				self.ks = xml_element.elements['ks'].text
-			end
-			if xml_element.elements['language'] != nil
-				self.language = xml_element.elements['language'].text
 			end
 			if xml_element.elements['responseProfile'] != nil
 				self.response_profile = KalturaClientBase.object_from_xml(xml_element.elements['responseProfile'], 'KalturaBaseResponseProfile')
@@ -9851,7 +9383,6 @@ module Kaltura
 		attr_accessor :private_key
 		attr_accessor :public_key
 		attr_accessor :pass_phrase
-		attr_accessor :port
 		attr_accessor :should_export_thumbs
 		attr_accessor :packager_url
 		attr_accessor :export_periodically
@@ -9903,9 +9434,6 @@ module Kaltura
 		end
 		def create_file_link=(val)
 			@create_file_link = to_b(val)
-		end
-		def port=(val)
-			@port = val.to_i
 		end
 		def should_export_thumbs=(val)
 			@should_export_thumbs = to_b(val)
@@ -10015,9 +9543,6 @@ module Kaltura
 			if xml_element.elements['passPhrase'] != nil
 				self.pass_phrase = xml_element.elements['passPhrase'].text
 			end
-			if xml_element.elements['port'] != nil
-				self.port = xml_element.elements['port'].text
-			end
 			if xml_element.elements['shouldExportThumbs'] != nil
 				self.should_export_thumbs = xml_element.elements['shouldExportThumbs'].text
 			end
@@ -10068,6 +9593,218 @@ module Kaltura
 			end
 			if xml_element.elements['requireTranscodingCount'] != nil
 				self.require_transcoding_count = xml_element.elements['requireTranscodingCount'].text
+			end
+		end
+
+	end
+
+	class KalturaThumbAsset < KalturaAsset
+		# The Flavor Params used to create this Flavor Asset
+		attr_accessor :thumb_params_id
+		# The width of the Flavor Asset
+		attr_accessor :width
+		# The height of the Flavor Asset
+		attr_accessor :height
+		# The status of the asset
+		attr_accessor :status
+
+		def thumb_params_id=(val)
+			@thumb_params_id = val.to_i
+		end
+		def width=(val)
+			@width = val.to_i
+		end
+		def height=(val)
+			@height = val.to_i
+		end
+		def status=(val)
+			@status = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['thumbParamsId'] != nil
+				self.thumb_params_id = xml_element.elements['thumbParamsId'].text
+			end
+			if xml_element.elements['width'] != nil
+				self.width = xml_element.elements['width'].text
+			end
+			if xml_element.elements['height'] != nil
+				self.height = xml_element.elements['height'].text
+			end
+			if xml_element.elements['status'] != nil
+				self.status = xml_element.elements['status'].text
+			end
+		end
+
+	end
+
+	class KalturaThumbParams < KalturaAssetParams
+		attr_accessor :crop_type
+		attr_accessor :quality
+		attr_accessor :crop_x
+		attr_accessor :crop_y
+		attr_accessor :crop_width
+		attr_accessor :crop_height
+		attr_accessor :video_offset
+		attr_accessor :width
+		attr_accessor :height
+		attr_accessor :scale_width
+		attr_accessor :scale_height
+		# Hexadecimal value
+		attr_accessor :background_color
+		# Id of the flavor params or the thumbnail params to be used as source for the thumbnail creation
+		attr_accessor :source_params_id
+		# The container format of the Flavor Params
+		attr_accessor :format
+		# The image density (dpi) for example: 72 or 96
+		attr_accessor :density
+		# Strip profiles and comments
+		attr_accessor :strip_profiles
+		# Create thumbnail from the videoLengthpercentage second
+		attr_accessor :video_offset_in_percentage
+		# interval in seconds for creating thumbnail
+		attr_accessor :interval
+
+		def crop_type=(val)
+			@crop_type = val.to_i
+		end
+		def quality=(val)
+			@quality = val.to_i
+		end
+		def crop_x=(val)
+			@crop_x = val.to_i
+		end
+		def crop_y=(val)
+			@crop_y = val.to_i
+		end
+		def crop_width=(val)
+			@crop_width = val.to_i
+		end
+		def crop_height=(val)
+			@crop_height = val.to_i
+		end
+		def video_offset=(val)
+			@video_offset = val.to_f
+		end
+		def width=(val)
+			@width = val.to_i
+		end
+		def height=(val)
+			@height = val.to_i
+		end
+		def scale_width=(val)
+			@scale_width = val.to_f
+		end
+		def scale_height=(val)
+			@scale_height = val.to_f
+		end
+		def source_params_id=(val)
+			@source_params_id = val.to_i
+		end
+		def density=(val)
+			@density = val.to_i
+		end
+		def strip_profiles=(val)
+			@strip_profiles = to_b(val)
+		end
+		def video_offset_in_percentage=(val)
+			@video_offset_in_percentage = val.to_i
+		end
+		def interval=(val)
+			@interval = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['cropType'] != nil
+				self.crop_type = xml_element.elements['cropType'].text
+			end
+			if xml_element.elements['quality'] != nil
+				self.quality = xml_element.elements['quality'].text
+			end
+			if xml_element.elements['cropX'] != nil
+				self.crop_x = xml_element.elements['cropX'].text
+			end
+			if xml_element.elements['cropY'] != nil
+				self.crop_y = xml_element.elements['cropY'].text
+			end
+			if xml_element.elements['cropWidth'] != nil
+				self.crop_width = xml_element.elements['cropWidth'].text
+			end
+			if xml_element.elements['cropHeight'] != nil
+				self.crop_height = xml_element.elements['cropHeight'].text
+			end
+			if xml_element.elements['videoOffset'] != nil
+				self.video_offset = xml_element.elements['videoOffset'].text
+			end
+			if xml_element.elements['width'] != nil
+				self.width = xml_element.elements['width'].text
+			end
+			if xml_element.elements['height'] != nil
+				self.height = xml_element.elements['height'].text
+			end
+			if xml_element.elements['scaleWidth'] != nil
+				self.scale_width = xml_element.elements['scaleWidth'].text
+			end
+			if xml_element.elements['scaleHeight'] != nil
+				self.scale_height = xml_element.elements['scaleHeight'].text
+			end
+			if xml_element.elements['backgroundColor'] != nil
+				self.background_color = xml_element.elements['backgroundColor'].text
+			end
+			if xml_element.elements['sourceParamsId'] != nil
+				self.source_params_id = xml_element.elements['sourceParamsId'].text
+			end
+			if xml_element.elements['format'] != nil
+				self.format = xml_element.elements['format'].text
+			end
+			if xml_element.elements['density'] != nil
+				self.density = xml_element.elements['density'].text
+			end
+			if xml_element.elements['stripProfiles'] != nil
+				self.strip_profiles = xml_element.elements['stripProfiles'].text
+			end
+			if xml_element.elements['videoOffsetInPercentage'] != nil
+				self.video_offset_in_percentage = xml_element.elements['videoOffsetInPercentage'].text
+			end
+			if xml_element.elements['interval'] != nil
+				self.interval = xml_element.elements['interval'].text
+			end
+		end
+
+	end
+
+	class KalturaThumbParamsOutput < KalturaThumbParams
+		attr_accessor :thumb_params_id
+		attr_accessor :thumb_params_version
+		attr_accessor :thumb_asset_id
+		attr_accessor :thumb_asset_version
+		attr_accessor :rotate
+
+		def thumb_params_id=(val)
+			@thumb_params_id = val.to_i
+		end
+		def rotate=(val)
+			@rotate = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['thumbParamsId'] != nil
+				self.thumb_params_id = xml_element.elements['thumbParamsId'].text
+			end
+			if xml_element.elements['thumbParamsVersion'] != nil
+				self.thumb_params_version = xml_element.elements['thumbParamsVersion'].text
+			end
+			if xml_element.elements['thumbAssetId'] != nil
+				self.thumb_asset_id = xml_element.elements['thumbAssetId'].text
+			end
+			if xml_element.elements['thumbAssetVersion'] != nil
+				self.thumb_asset_version = xml_element.elements['thumbAssetVersion'].text
+			end
+			if xml_element.elements['rotate'] != nil
+				self.rotate = xml_element.elements['rotate'].text
 			end
 		end
 
@@ -10292,14 +10029,10 @@ module Kaltura
 		attr_accessor :created_at
 		# Last update date as Unix timestamp (In seconds)
 		attr_accessor :updated_at
-		# Upload url - to explicitly determine to which domain to address the uploadToken->upload call
+		# Upload url - to explicitly determine to which domain to adress the uploadToken->upload call
 		attr_accessor :upload_url
-		# autoFinalize - Should the upload be finalized once the file size on disk matches the file size reported when adding the upload token.
+		# autoFinalize - Should the upload be finalized once the file size on disk matches the file size reproted when adding the upload token.
 		attr_accessor :auto_finalize
-		# The type of the object this token is attached to.
-		attr_accessor :attached_object_type
-		# The id of the object this token is attached to.
-		attr_accessor :attached_object_id
 
 		def partner_id=(val)
 			@partner_id = val.to_i
@@ -10357,12 +10090,6 @@ module Kaltura
 			end
 			if xml_element.elements['autoFinalize'] != nil
 				self.auto_finalize = xml_element.elements['autoFinalize'].text
-			end
-			if xml_element.elements['attachedObjectType'] != nil
-				self.attached_object_type = xml_element.elements['attachedObjectType'].text
-			end
-			if xml_element.elements['attachedObjectId'] != nil
-				self.attached_object_id = xml_element.elements['attachedObjectId'].text
 			end
 		end
 
@@ -10977,14 +10704,9 @@ module Kaltura
 		attr_accessor :replacement
 		# serverNodeId to generate replacment host from
 		attr_accessor :replacmen_server_node_id
-		# Set this value if you want to check if the server is accessible before redirecting traffic to it (this value is in milliseconds)
-		attr_accessor :check_alive_timeout_ms
 
 		def replacmen_server_node_id=(val)
 			@replacmen_server_node_id = val.to_i
-		end
-		def check_alive_timeout_ms=(val)
-			@check_alive_timeout_ms = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -10997,9 +10719,6 @@ module Kaltura
 			end
 			if xml_element.elements['replacmenServerNodeId'] != nil
 				self.replacmen_server_node_id = xml_element.elements['replacmenServerNodeId'].text
-			end
-			if xml_element.elements['checkAliveTimeoutMs'] != nil
-				self.check_alive_timeout_ms = xml_element.elements['checkAliveTimeoutMs'].text
 			end
 		end
 
@@ -11355,6 +11074,19 @@ module Kaltura
 			super
 			if xml_element.elements['objects'] != nil
 				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaBaseSyndicationFeed')
+			end
+		end
+
+	end
+
+	class KalturaBatchJobListResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaBatchJob')
 			end
 		end
 
@@ -11898,7 +11630,6 @@ module Kaltura
 		attr_accessor :first_name
 		attr_accessor :last_name
 		attr_accessor :group
-		attr_accessor :external_id
 
 		def date_of_birth=(val)
 			@date_of_birth = val.to_i
@@ -11950,9 +11681,6 @@ module Kaltura
 			end
 			if xml_element.elements['group'] != nil
 				self.group = xml_element.elements['group'].text
-			end
-			if xml_element.elements['externalId'] != nil
-				self.external_id = xml_element.elements['externalId'].text
 			end
 		end
 
@@ -13012,19 +12740,12 @@ module Kaltura
 	class KalturaDeliveryProfileLivePackager < KalturaDeliveryProfile
 		# Domain used to sign the live url
 		attr_accessor :live_packager_signing_domain
-		attr_accessor :should_redirect
 
-		def should_redirect=(val)
-			@should_redirect = to_b(val)
-		end
 
 		def from_xml(xml_element)
 			super
 			if xml_element.elements['livePackagerSigningDomain'] != nil
 				self.live_packager_signing_domain = xml_element.elements['livePackagerSigningDomain'].text
-			end
-			if xml_element.elements['shouldRedirect'] != nil
-				self.should_redirect = xml_element.elements['shouldRedirect'].text
 			end
 		end
 
@@ -13052,17 +12773,17 @@ module Kaltura
 
 	end
 
-	class KalturaDeliveryProfileVod < KalturaDeliveryProfile
-		attr_accessor :simulive_support
+	class KalturaDeliveryProfileVodPackagerPlayServer < KalturaDeliveryProfile
+		attr_accessor :ad_stitching_enabled
 
-		def simulive_support=(val)
-			@simulive_support = to_b(val)
+		def ad_stitching_enabled=(val)
+			@ad_stitching_enabled = to_b(val)
 		end
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['simuliveSupport'] != nil
-				self.simulive_support = xml_element.elements['simuliveSupport'].text
+			if xml_element.elements['adStitchingEnabled'] != nil
+				self.ad_stitching_enabled = xml_element.elements['adStitchingEnabled'].text
 			end
 		end
 
@@ -13344,8 +13065,6 @@ module Kaltura
 	end
 
 	class KalturaUserBaseFilter < KalturaBaseUserFilter
-		attr_accessor :id_equal
-		attr_accessor :id_in
 		attr_accessor :type_equal
 		attr_accessor :type_in
 		attr_accessor :is_admin_equal
@@ -13361,12 +13080,6 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['idEqual'] != nil
-				self.id_equal = xml_element.elements['idEqual'].text
-			end
-			if xml_element.elements['idIn'] != nil
-				self.id_in = xml_element.elements['idIn'].text
-			end
 			if xml_element.elements['typeEqual'] != nil
 				self.type_equal = xml_element.elements['typeEqual'].text
 			end
@@ -13388,6 +13101,8 @@ module Kaltura
 
 	class KalturaUserFilter < KalturaUserBaseFilter
 		attr_accessor :id_or_screen_name_starts_with
+		attr_accessor :id_equal
+		attr_accessor :id_in
 		attr_accessor :login_enabled_equal
 		attr_accessor :role_id_equal
 		attr_accessor :role_ids_equal
@@ -13406,6 +13121,12 @@ module Kaltura
 			super
 			if xml_element.elements['idOrScreenNameStartsWith'] != nil
 				self.id_or_screen_name_starts_with = xml_element.elements['idOrScreenNameStartsWith'].text
+			end
+			if xml_element.elements['idEqual'] != nil
+				self.id_equal = xml_element.elements['idEqual'].text
+			end
+			if xml_element.elements['idIn'] != nil
+				self.id_in = xml_element.elements['idIn'].text
 			end
 			if xml_element.elements['loginEnabledEqual'] != nil
 				self.login_enabled_equal = xml_element.elements['loginEnabledEqual'].text
@@ -13656,15 +13377,6 @@ module Kaltura
 
 	end
 
-	class KalturaEntryScheduledCondition < KalturaCondition
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
 	class KalturaEntryServerNodeBaseFilter < KalturaFilter
 		attr_accessor :entry_id_equal
 		attr_accessor :entry_id_in
@@ -13855,6 +13567,19 @@ module Kaltura
 			super
 			if xml_element.elements['objects'] != nil
 				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaFlavorParams')
+			end
+		end
+
+	end
+
+	class KalturaFlavorParamsOutputListResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaFlavorParamsOutput')
 			end
 		end
 
@@ -14118,22 +13843,6 @@ module Kaltura
 
 	end
 
-	class KalturaKeyValueExtended < KalturaKeyValue
-		attr_accessor :predefined_format
-
-		def predefined_format=(val)
-			@predefined_format = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['predefinedFormat'] != nil
-				self.predefined_format = xml_element.elements['predefinedFormat'].text
-			end
-		end
-
-	end
-
 	class KalturaLimitFlavorsRestriction < KalturaBaseRestriction
 		# Limit flavors restriction type (Allow or deny)
 		attr_accessor :limit_flavors_restriction_type
@@ -14205,16 +13914,12 @@ module Kaltura
 		attr_accessor :recording_info
 		attr_accessor :is_playable_user
 		attr_accessor :view_mode
-		attr_accessor :features_updated_at
 
 		def is_playable_user=(val)
 			@is_playable_user = to_b(val)
 		end
 		def view_mode=(val)
 			@view_mode = val.to_i
-		end
-		def features_updated_at=(val)
-			@features_updated_at = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -14230,9 +13935,6 @@ module Kaltura
 			end
 			if xml_element.elements['viewMode'] != nil
 				self.view_mode = xml_element.elements['viewMode'].text
-			end
-			if xml_element.elements['featuresUpdatedAt'] != nil
-				self.features_updated_at = xml_element.elements['featuresUpdatedAt'].text
 			end
 		end
 
@@ -14393,7 +14095,6 @@ module Kaltura
 		attr_accessor :from_email
 		attr_accessor :body_params
 		attr_accessor :subject_params
-		attr_accessor :dynamic_email_contents
 		attr_accessor :template_path
 		attr_accessor :language
 		attr_accessor :campaign_id
@@ -14452,9 +14153,6 @@ module Kaltura
 			if xml_element.elements['subjectParams'] != nil
 				self.subject_params = xml_element.elements['subjectParams'].text
 			end
-			if xml_element.elements['dynamicEmailContents'] != nil
-				self.dynamic_email_contents = KalturaClientBase.object_from_xml(xml_element.elements['dynamicEmailContents'], 'KalturaDynamicEmailContents')
-			end
 			if xml_element.elements['templatePath'] != nil
 				self.template_path = xml_element.elements['templatePath'].text
 			end
@@ -14502,6 +14200,19 @@ module Kaltura
 			super
 			if xml_element.elements['flavorAssetIdEqual'] != nil
 				self.flavor_asset_id_equal = xml_element.elements['flavorAssetIdEqual'].text
+			end
+		end
+
+	end
+
+	class KalturaMediaInfoListResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaMediaInfo')
 			end
 		end
 
@@ -14977,52 +14688,12 @@ module Kaltura
 
 	end
 
-	class KalturaReportBaseFilter < KalturaFilter
-		attr_accessor :id_equal
-		attr_accessor :id_in
-		attr_accessor :partner_id_equal
-		attr_accessor :partner_id_in
-		attr_accessor :system_name_equal
-		attr_accessor :system_name_in
-
-		def id_equal=(val)
-			@id_equal = val.to_i
-		end
-		def partner_id_equal=(val)
-			@partner_id_equal = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['idEqual'] != nil
-				self.id_equal = xml_element.elements['idEqual'].text
-			end
-			if xml_element.elements['idIn'] != nil
-				self.id_in = xml_element.elements['idIn'].text
-			end
-			if xml_element.elements['partnerIdEqual'] != nil
-				self.partner_id_equal = xml_element.elements['partnerIdEqual'].text
-			end
-			if xml_element.elements['partnerIdIn'] != nil
-				self.partner_id_in = xml_element.elements['partnerIdIn'].text
-			end
-			if xml_element.elements['systemNameEqual'] != nil
-				self.system_name_equal = xml_element.elements['systemNameEqual'].text
-			end
-			if xml_element.elements['systemNameIn'] != nil
-				self.system_name_in = xml_element.elements['systemNameIn'].text
-			end
-		end
-
-	end
-
 	class KalturaReportExportJobData < KalturaJobData
 		attr_accessor :recipient_email
 		attr_accessor :report_items
 		attr_accessor :file_paths
 		attr_accessor :reports_group
 		attr_accessor :files
-		attr_accessor :base_url
 
 
 		def from_xml(xml_element)
@@ -15041,9 +14712,6 @@ module Kaltura
 			end
 			if xml_element.elements['files'] != nil
 				self.files = KalturaClientBase.object_from_xml(xml_element.elements['files'], 'KalturaReportExportFile')
-			end
-			if xml_element.elements['baseUrl'] != nil
-				self.base_url = xml_element.elements['baseUrl'].text
 			end
 		end
 
@@ -15666,6 +15334,19 @@ module Kaltura
 
 	end
 
+	class KalturaThumbParamsOutputListResponse < KalturaListResponse
+		attr_accessor :objects
+
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['objects'] != nil
+				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaThumbParamsOutput')
+			end
+		end
+
+	end
+
 	class KalturaThumbnailServeOptions < KalturaAssetServeOptions
 
 
@@ -15866,15 +15547,6 @@ module Kaltura
 			if xml_element.elements['objects'] != nil
 				self.objects = KalturaClientBase.object_from_xml(xml_element.elements['objects'], 'KalturaUploadToken')
 			end
-		end
-
-	end
-
-	class KalturaUrlAuthenticationParamsCondition < KalturaCondition
-
-
-		def from_xml(xml_element)
-			super
 		end
 
 	end
@@ -17239,13 +16911,9 @@ module Kaltura
 		attr_accessor :engine_message
 		attr_accessor :dest_file_sync_shared_path
 		attr_accessor :user_cpu
-		attr_accessor :estimated_effort
 
 		def user_cpu=(val)
 			@user_cpu = val.to_i
-		end
-		def estimated_effort=(val)
-			@estimated_effort = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -17282,9 +16950,6 @@ module Kaltura
 			end
 			if xml_element.elements['userCpu'] != nil
 				self.user_cpu = xml_element.elements['userCpu'].text
-			end
-			if xml_element.elements['estimatedEffort'] != nil
-				self.estimated_effort = xml_element.elements['estimatedEffort'].text
 			end
 		end
 
@@ -17391,17 +17056,17 @@ module Kaltura
 
 	end
 
-	class KalturaDeliveryProfileVodPackagerPlayServer < KalturaDeliveryProfileVod
-		attr_accessor :ad_stitching_enabled
+	class KalturaDeliveryProfileVodPackagerHls < KalturaDeliveryProfileVodPackagerPlayServer
+		attr_accessor :allow_fairplay_offline
 
-		def ad_stitching_enabled=(val)
-			@ad_stitching_enabled = to_b(val)
+		def allow_fairplay_offline=(val)
+			@allow_fairplay_offline = to_b(val)
 		end
 
 		def from_xml(xml_element)
 			super
-			if xml_element.elements['adStitchingEnabled'] != nil
-				self.ad_stitching_enabled = xml_element.elements['adStitchingEnabled'].text
+			if xml_element.elements['allowFairplayOffline'] != nil
+				self.allow_fairplay_offline = xml_element.elements['allowFairplayOffline'].text
 			end
 		end
 
@@ -17946,37 +17611,6 @@ module Kaltura
 
 	end
 
-	class KalturaMappedObjectsCsvJobData < KalturaExportCsvJobData
-		# The metadata profile we should look the xpath in
-		attr_accessor :metadata_profile_id
-		# The xpath to look in the metadataProfileId  and the wanted csv field name
-		attr_accessor :additional_fields
-		# Array of header names and their mapped user fields
-		attr_accessor :mapped_fields
-		attr_accessor :options
-
-		def metadata_profile_id=(val)
-			@metadata_profile_id = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['metadataProfileId'] != nil
-				self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
-			end
-			if xml_element.elements['additionalFields'] != nil
-				self.additional_fields = KalturaClientBase.object_from_xml(xml_element.elements['additionalFields'], 'KalturaCsvAdditionalFieldInfo')
-			end
-			if xml_element.elements['mappedFields'] != nil
-				self.mapped_fields = KalturaClientBase.object_from_xml(xml_element.elements['mappedFields'], 'KalturaKeyValue')
-			end
-			if xml_element.elements['options'] != nil
-				self.options = KalturaClientBase.object_from_xml(xml_element.elements['options'], 'KalturaExportToCsvOptions')
-			end
-		end
-
-	end
-
 	class KalturaMediaFlavorParams < KalturaFlavorParams
 
 
@@ -18514,16 +18148,12 @@ module Kaltura
 		attr_accessor :create_link
 		attr_accessor :asset_id
 		attr_accessor :external_url
-		attr_accessor :port
 
 		def force=(val)
 			@force = to_b(val)
 		end
 		def create_link=(val)
 			@create_link = to_b(val)
-		end
-		def port=(val)
-			@port = val.to_i
 		end
 
 		def from_xml(xml_element)
@@ -18539,9 +18169,6 @@ module Kaltura
 			end
 			if xml_element.elements['externalUrl'] != nil
 				self.external_url = xml_element.elements['externalUrl'].text
-			end
-			if xml_element.elements['port'] != nil
-				self.port = xml_element.elements['port'].text
 			end
 		end
 
@@ -18796,6 +18423,38 @@ module Kaltura
 
 	end
 
+	class KalturaUsersCsvJobData < KalturaExportCsvJobData
+		# The filter should return the list of users that need to be specified in the csv.
+		attr_accessor :filter
+		# The metadata profile we should look the xpath in
+		attr_accessor :metadata_profile_id
+		# The xpath to look in the metadataProfileId  and the wanted csv field name
+		attr_accessor :additional_fields
+		# Array of header names and their mapped user fields
+		attr_accessor :mapped_fields
+
+		def metadata_profile_id=(val)
+			@metadata_profile_id = val.to_i
+		end
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['filter'] != nil
+				self.filter = KalturaClientBase.object_from_xml(xml_element.elements['filter'], 'KalturaUserFilter')
+			end
+			if xml_element.elements['metadataProfileId'] != nil
+				self.metadata_profile_id = xml_element.elements['metadataProfileId'].text
+			end
+			if xml_element.elements['additionalFields'] != nil
+				self.additional_fields = KalturaClientBase.object_from_xml(xml_element.elements['additionalFields'], 'KalturaCsvAdditionalFieldInfo')
+			end
+			if xml_element.elements['mappedFields'] != nil
+				self.mapped_fields = KalturaClientBase.object_from_xml(xml_element.elements['mappedFields'], 'KalturaKeyValue')
+			end
+		end
+
+	end
+
 	class KalturaWidgetFilter < KalturaWidgetBaseFilter
 
 
@@ -18815,15 +18474,6 @@ module Kaltura
 	end
 
 	class KalturaAccessControlProfileFilter < KalturaAccessControlProfileBaseFilter
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaActionNameCondition < KalturaRegexCondition
 
 
 		def from_xml(xml_element)
@@ -18947,6 +18597,15 @@ module Kaltura
 
 	end
 
+	class KalturaCategoryEntryFilter < KalturaCategoryEntryBaseFilter
+
+
+		def from_xml(xml_element)
+			super
+		end
+
+	end
+
 	class KalturaCategoryFilter < KalturaCategoryBaseFilter
 		attr_accessor :free_text
 		attr_accessor :members_in
@@ -18985,29 +18644,6 @@ module Kaltura
 			if xml_element.elements['idOrInheritedParentIdIn'] != nil
 				self.id_or_inherited_parent_id_in = xml_element.elements['idOrInheritedParentIdIn'].text
 			end
-		end
-
-	end
-
-	class KalturaCategoriesCsvJobData < KalturaMappedObjectsCsvJobData
-		# The filter should return the list of categories that need to be specified in the csv.
-		attr_accessor :filter
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['filter'] != nil
-				self.filter = KalturaClientBase.object_from_xml(xml_element.elements['filter'], 'KalturaCategoryFilter')
-			end
-		end
-
-	end
-
-	class KalturaCategoryEntryFilter < KalturaCategoryEntryBaseFilter
-
-
-		def from_xml(xml_element)
-			super
 		end
 
 	end
@@ -19190,22 +18826,6 @@ module Kaltura
 
 	end
 
-	class KalturaDeliveryProfileVodPackagerHls < KalturaDeliveryProfileVodPackagerPlayServer
-		attr_accessor :allow_fairplay_offline
-
-		def allow_fairplay_offline=(val)
-			@allow_fairplay_offline = to_b(val)
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['allowFairplayOffline'] != nil
-				self.allow_fairplay_offline = xml_element.elements['allowFairplayOffline'].text
-			end
-		end
-
-	end
-
 	class KalturaDeliveryServerNodeBaseFilter < KalturaServerNodeFilter
 
 
@@ -19242,20 +18862,6 @@ module Kaltura
 			super
 			if xml_element.elements['attribute'] != nil
 				self.attribute = xml_element.elements['attribute'].text
-			end
-		end
-
-	end
-
-	class KalturaEntriesCsvJobData < KalturaMappedObjectsCsvJobData
-		# The filter should return the list of entries that need to be specified in the csv.
-		attr_accessor :filter
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['filter'] != nil
-				self.filter = KalturaClientBase.object_from_xml(xml_element.elements['filter'], 'KalturaBaseEntryFilter')
 			end
 		end
 
@@ -19845,20 +19451,6 @@ module Kaltura
 
 		def from_xml(xml_element)
 			super
-		end
-
-	end
-
-	class KalturaUsersCsvJobData < KalturaMappedObjectsCsvJobData
-		# The filter should return the list of users that need to be specified in the csv.
-		attr_accessor :filter
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['filter'] != nil
-				self.filter = KalturaClientBase.object_from_xml(xml_element.elements['filter'], 'KalturaUserFilter')
-			end
 		end
 
 	end

@@ -5,10 +5,10 @@
 #                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 #
 # This file is part of the Kaltura Collaborative Media Suite which allows users
-# to do with audio, video, and animation what Wiki platforms allow them to do with
+# to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2023  Kaltura Inc.
+# Copyright (C) 2006-2021  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -182,7 +182,6 @@ module Kaltura
 	end
 
 	class KalturaEntryDisplayInSearchType
-		RECYCLED = -2
 		SYSTEM = -1
 		NONE = 0
 		PARTNER_ONLY = 1
@@ -416,7 +415,6 @@ module Kaltura
 		ACTIVE = 1
 		BLOCKED = 2
 		FULL_BLOCK = 3
-		READ_ONLY = 4
 	end
 
 	class KalturaPartnerType
@@ -717,16 +715,9 @@ module Kaltura
 		RESIZE_WITH_FORCE = 5
 	end
 
-	class KalturaTwoFactorAuthenticationMode
-		ALL = 0
-		ADMIN_USERS_ONLY = 1
-		NON_ADMIN_USERS_ONLY = 2
-	end
-
 	class KalturaUiConfCreationMode
 		WIZARD = 2
 		ADVANCED = 3
-		SYSTEM = 4
 	end
 
 	class KalturaUiConfObjType
@@ -814,12 +805,6 @@ module Kaltura
 	class KalturaWidgetSecurityType
 		NONE = 1
 		TIMEHASH = 2
-	end
-
-	class KalturaZoomGroupParticipationType
-		NO_CLASSIFICATION = 0
-		OPT_IN = 1
-		OPT_OUT = 2
 	end
 
 	class KalturaAccessControlOrderBy
@@ -1077,8 +1062,8 @@ module Kaltura
 	end
 
 	class KalturaBatchJobType
-		CONVERT = "0"
 		CONVERT_CAPTION_ASSET = "caption.convertcaptionasset"
+		CONVERT = "0"
 		PARSE_MULTI_LANGUAGE_CAPTION_ASSET = "caption.parsemultilanguagecaptionasset"
 		PARSE_CAPTION_ASSET = "captionSearch.parseCaptionAsset"
 		DISTRIBUTION_DELETE = "contentDistribution.DistributionDelete"
@@ -1273,9 +1258,6 @@ module Kaltura
 		ASSET_TYPE = "16"
 		BOOLEAN = "17"
 		HTTP_HEADER = "18"
-		ENTRY_SCHEDULED = "19"
-		ACTION_NAME = "20"
-		URL_AUTH_PARAMS = "21"
 	end
 
 	class KalturaConfMapsSourceLocation
@@ -1650,7 +1632,6 @@ module Kaltura
 		WEBCAST_APP = "5"
 		PERSONAL_CAPTURE = "6"
 		KALTURA_MEETING = "7"
-		EP = "8"
 	end
 
 	class KalturaEntryIdentifierField
@@ -3506,7 +3487,6 @@ module Kaltura
 		MONTHS = "months"
 		TEN_MINUTES = "ten_minutes"
 		TEN_SECONDS = "ten_seconds"
-		YEARS = "years"
 	end
 
 	class KalturaReportOrderBy
@@ -3574,14 +3554,6 @@ module Kaltura
 		INTERACTIVE_VIDEO_NODE_SWITCH_HOTSPOT_CLICKED_PERCENTILES = "57"
 		TOP_CUSTOM_VAR2 = "58"
 		TOP_CUSTOM_VAR3 = "59"
-		SELF_SERVE_USAGE = "60"
-		FLAVOR_PARAMS_TRANSCODING_USAGE = "61"
-		PLAYER_HIGHLIGHTS = "62"
-		PARTNER_USAGE_HIGHLIGHTS = "63"
-		CDN_BANDWIDTH_USAGE = "64"
-		REACH_CATALOG_USAGE = "65"
-		REACH_PROFILE_USAGE = "66"
-		SELF_SERVE_BANDWIDTH = "67"
 		PARTNER_USAGE = "201"
 		MAP_OVERLAY_COUNTRY_REALTIME = "10001"
 		MAP_OVERLAY_REGION_REALTIME = "10002"
@@ -3620,7 +3592,6 @@ module Kaltura
 		PLAYBACK_RATE_VPAAS = "20020"
 		PARTNER_USAGE_VPAAS = "20021"
 		TOP_PLAYBACK_CONTEXT_VPAAS = "20022"
-		SELF_SERVE_USAGE_VPAAS = "20023"
 		QOE_OVERVIEW = "30001"
 		QOE_EXPERIENCE = "30002"
 		QOE_EXPERIENCE_PLATFORMS = "30003"
@@ -3696,20 +3667,11 @@ module Kaltura
 		TOP_USERS_WEBCAST = "40009"
 		ENGAGEMENT_BREAKDOWN_WEBCAST = "40010"
 		ENGAGMENT_TIMELINE_WEBCAST = "40011"
-		ENGAGEMENT_TOOLS_WEBCAST = "40012"
-		REACTIONS_BREAKDOWN_WEBCAST = "40013"
-		VE_HIGHLIGHTS = "50000"
-		VE_REGISTERED_PLATFORMS = "50001"
-		VE_REGISTERED_INDUSTRY = "50002"
-		VE_REGISTERED_ROLES = "50003"
-		VE_REGISTERED_COUNTRIES = "50004"
-		VE_REGISTERED_WORLD_REGIONS = "50005"
 	end
 
 	class KalturaResetPassLinkType
 		KMC = "1"
 		KMS = "2"
-		KME = "3"
 	end
 
 	class KalturaResponseProfileOrderBy
@@ -3863,12 +3825,8 @@ module Kaltura
 
 	class KalturaUiConfOrderBy
 		CREATED_AT_ASC = "+createdAt"
-		ID_ASC = "+id"
-		NAME_ASC = "+name"
 		UPDATED_AT_ASC = "+updatedAt"
 		CREATED_AT_DESC = "-createdAt"
-		ID_DESC = "-id"
-		NAME_DESC = "-name"
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
@@ -3878,8 +3836,6 @@ module Kaltura
 	end
 
 	class KalturaUserEntryExtendedStatus
-		SYNC_STATUS_ERROR = "quiz.SYNC_STATUS_ERROR"
-		SYNC_STATUS_SUCCESS = "quiz.SYNC_STATUS_SUCCESS"
 		PLAYBACK_COMPLETE = "viewHistory.PLAYBACK_COMPLETE"
 		PLAYBACK_STARTED = "viewHistory.PLAYBACK_STARTED"
 		VIEWED = "viewHistory.VIEWED"
@@ -3934,7 +3890,6 @@ module Kaltura
 		APCN = "apcn"
 		APCO = "apco"
 		APCS = "apcs"
-		AV1 = "av1"
 		COPY = "copy"
 		DNXHD = "dnxhd"
 		DV = "dv"

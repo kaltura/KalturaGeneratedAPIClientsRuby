@@ -5,10 +5,10 @@
 #                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 #
 # This file is part of the Kaltura Collaborative Media Suite which allows users
-# to do with audio, video, and animation what Wiki platforms allow them to do with
+# to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2023  Kaltura Inc.
+# Copyright (C) 2006-2021  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -52,12 +52,6 @@ module Kaltura
 	class KalturaCaptionParamsOrderBy
 	end
 
-	class KalturaCaptionSource
-		UNKNOWN = "0"
-		ZOOM = "1"
-		WEBEX = "2"
-	end
-
 	class KalturaCaptionType
 		SRT = "1"
 		DFXP = "2"
@@ -79,8 +73,6 @@ module Kaltura
 		attr_accessor :label
 		# The caption format
 		attr_accessor :format
-		# The source of the asset
-		attr_accessor :source
 		# The status of the asset
 		attr_accessor :status
 		# The parent id of the asset
@@ -127,9 +119,6 @@ module Kaltura
 			end
 			if xml_element.elements['format'] != nil
 				self.format = xml_element.elements['format'].text
-			end
-			if xml_element.elements['source'] != nil
-				self.source = xml_element.elements['source'].text
 			end
 			if xml_element.elements['status'] != nil
 				self.status = xml_element.elements['status'].text
@@ -513,15 +502,6 @@ module Kaltura
 			kparams = {}
 			client.add_param(kparams, 'captionAssetId', caption_asset_id)
 			client.queue_service_action_call('caption_captionasset', 'serve', 'file', kparams)
-			return client.get_serve_url()
-		end
-
-		# Serves caption file as Json by its ID
-		# @return [file]
-		def serve_as_json(caption_asset_id)
-			kparams = {}
-			client.add_param(kparams, 'captionAssetId', caption_asset_id)
-			client.queue_service_action_call('caption_captionasset', 'serveAsJson', 'file', kparams)
 			return client.get_serve_url()
 		end
 

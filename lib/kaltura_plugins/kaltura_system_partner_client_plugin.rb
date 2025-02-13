@@ -5,10 +5,10 @@
 #                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 #
 # This file is part of the Kaltura Collaborative Media Suite which allows users
-# to do with audio, video, and animation what Wiki platforms allow them to do with
+# to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2023  Kaltura Inc.
+# Copyright (C) 2006-2021  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -252,7 +252,6 @@ module Kaltura
 	class KalturaSystemPartnerFilter < KalturaPartnerFilter
 		attr_accessor :partner_parent_id_equal
 		attr_accessor :partner_parent_id_in
-		attr_accessor :admin_email_equal
 
 		def partner_parent_id_equal=(val)
 			@partner_parent_id_equal = val.to_i
@@ -265,9 +264,6 @@ module Kaltura
 			end
 			if xml_element.elements['partnerParentIdIn'] != nil
 				self.partner_parent_id_in = xml_element.elements['partnerParentIdIn'].text
-			end
-			if xml_element.elements['adminEmailEqual'] != nil
-				self.admin_email_equal = xml_element.elements['adminEmailEqual'].text
 			end
 		end
 

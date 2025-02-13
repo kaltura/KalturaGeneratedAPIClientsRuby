@@ -5,10 +5,10 @@
 #                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 #
 # This file is part of the Kaltura Collaborative Media Suite which allows users
-# to do with audio, video, and animation what Wiki platforms allow them to do with
+# to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2023  Kaltura Inc.
+# Copyright (C) 2006-2021  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -26,11 +26,23 @@
 # @ignore
 # ===================================================================================================
 require 'kaltura_client.rb'
+require File.dirname(__FILE__) + '/kaltura_integration_client_plugin.rb'
 
 module Kaltura
 
+	class KalturaExampleIntegrationJobProviderData < KalturaIntegrationJobProviderData
+		# Just an example
+		attr_accessor :example_url
 
-	class KalturaClient < KalturaClientBase
+
+		def from_xml(xml_element)
+			super
+			if xml_element.elements['exampleUrl'] != nil
+				self.example_url = xml_element.elements['exampleUrl'].text
+			end
+		end
+
 	end
+
 
 end

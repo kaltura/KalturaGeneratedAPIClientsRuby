@@ -5,10 +5,10 @@
 #                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 #
 # This file is part of the Kaltura Collaborative Media Suite which allows users
-# to do with audio, video, and animation what Wiki platforms allow them to do with
+# to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2023  Kaltura Inc.
+# Copyright (C) 2006-2021  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -35,8 +35,6 @@ module Kaltura
 		# Last playback time reached by user
 		attr_accessor :last_time_reached
 		attr_accessor :last_update_time
-		# Property to save last entry ID played in a playlist.
-		attr_accessor :playlist_last_entry_id
 
 		def last_time_reached=(val)
 			@last_time_reached = val.to_i
@@ -55,9 +53,6 @@ module Kaltura
 			end
 			if xml_element.elements['lastUpdateTime'] != nil
 				self.last_update_time = xml_element.elements['lastUpdateTime'].text
-			end
-			if xml_element.elements['playlistLastEntryId'] != nil
-				self.playlist_last_entry_id = xml_element.elements['playlistLastEntryId'].text
 			end
 		end
 

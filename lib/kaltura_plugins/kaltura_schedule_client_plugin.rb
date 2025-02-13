@@ -5,10 +5,10 @@
 #                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 #
 # This file is part of the Kaltura Collaborative Media Suite which allows users
-# to do with audio, video, and animation what Wiki platforms allow them to do with
+# to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2023  Kaltura Inc.
+# Copyright (C) 2006-2021  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -58,8 +58,6 @@ module Kaltura
 		LIVE_STREAM = 2
 		BLACKOUT = 3
 		MEETING = 4
-		LIVE_REDIRECT = 5
-		VOD = 6
 	end
 
 	class KalturaScheduleResourceStatus
@@ -183,58 +181,6 @@ module Kaltura
 		UPDATED_AT_DESC = "-updatedAt"
 	end
 
-	class KalturaLinkedScheduleEvent < KalturaObjectBase
-		# The time between the end of the event which it's id is in $eventId and the start of the event holding this object
-		attr_accessor :offset
-		# The id of the event influencing the start of the event holding this object
-		attr_accessor :event_id
-
-		def offset=(val)
-			@offset = val.to_i
-		end
-		def event_id=(val)
-			@event_id = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['offset'] != nil
-				self.offset = xml_element.elements['offset'].text
-			end
-			if xml_element.elements['eventId'] != nil
-				self.event_id = xml_element.elements['eventId'].text
-			end
-		end
-
-	end
-
-	class KalturaLiveFeature < KalturaObjectBase
-		attr_accessor :system_name
-		attr_accessor :pre_start_time
-		attr_accessor :post_end_time
-
-		def pre_start_time=(val)
-			@pre_start_time = val.to_i
-		end
-		def post_end_time=(val)
-			@post_end_time = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['systemName'] != nil
-				self.system_name = xml_element.elements['systemName'].text
-			end
-			if xml_element.elements['preStartTime'] != nil
-				self.pre_start_time = xml_element.elements['preStartTime'].text
-			end
-			if xml_element.elements['postEndTime'] != nil
-				self.post_end_time = xml_element.elements['postEndTime'].text
-			end
-		end
-
-	end
-
 	class KalturaScheduleEventRecurrence < KalturaObjectBase
 		attr_accessor :name
 		attr_accessor :frequency
@@ -356,10 +302,6 @@ module Kaltura
 		attr_accessor :start_date
 		attr_accessor :end_date
 		attr_accessor :reference_id
-		# Contains the Id of the event that influences the timing of this event and the offset of time.
-		attr_accessor :linked_to
-		# An array of Schedule Event Ids that their start time depends on the end of the current.
-		attr_accessor :linked_by
 		attr_accessor :classification_type
 		# Specifies the global position for the activity
 		attr_accessor :geo_latitude
@@ -461,12 +403,6 @@ module Kaltura
 			end
 			if xml_element.elements['referenceId'] != nil
 				self.reference_id = xml_element.elements['referenceId'].text
-			end
-			if xml_element.elements['linkedTo'] != nil
-				self.linked_to = KalturaClientBase.object_from_xml(xml_element.elements['linkedTo'], 'KalturaLinkedScheduleEvent')
-			end
-			if xml_element.elements['linkedBy'] != nil
-				self.linked_by = xml_element.elements['linkedBy'].text
 			end
 			if xml_element.elements['classificationType'] != nil
 				self.classification_type = xml_element.elements['classificationType'].text
@@ -690,38 +626,6 @@ module Kaltura
 
 	end
 
-	class KalturaLiveCaptionFeature < KalturaLiveFeature
-		attr_accessor :media_url
-		attr_accessor :media_key
-		attr_accessor :caption_url
-		attr_accessor :caption_token
-		attr_accessor :input_delay
-
-		def input_delay=(val)
-			@input_delay = val.to_i
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['mediaUrl'] != nil
-				self.media_url = xml_element.elements['mediaUrl'].text
-			end
-			if xml_element.elements['mediaKey'] != nil
-				self.media_key = xml_element.elements['mediaKey'].text
-			end
-			if xml_element.elements['captionUrl'] != nil
-				self.caption_url = xml_element.elements['captionUrl'].text
-			end
-			if xml_element.elements['captionToken'] != nil
-				self.caption_token = xml_element.elements['captionToken'].text
-			end
-			if xml_element.elements['inputDelay'] != nil
-				self.input_delay = xml_element.elements['inputDelay'].text
-			end
-		end
-
-	end
-
 	class KalturaLiveEntryScheduleResource < KalturaScheduleResource
 		attr_accessor :entry_id
 
@@ -730,27 +634,6 @@ module Kaltura
 			super
 			if xml_element.elements['entryId'] != nil
 				self.entry_id = xml_element.elements['entryId'].text
-			end
-		end
-
-	end
-
-	class KalturaLiveRestreamFeature < KalturaLiveFeature
-		attr_accessor :primary_url
-		attr_accessor :secondary_url
-		attr_accessor :stream_key
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['primaryUrl'] != nil
-				self.primary_url = xml_element.elements['primaryUrl'].text
-			end
-			if xml_element.elements['secondaryUrl'] != nil
-				self.secondary_url = xml_element.elements['secondaryUrl'].text
-			end
-			if xml_element.elements['streamKey'] != nil
-				self.stream_key = xml_element.elements['streamKey'].text
 			end
 		end
 
@@ -804,11 +687,40 @@ module Kaltura
 
 	end
 
-	class KalturaBaseLiveScheduleEvent < KalturaEntryScheduleEvent
+	class KalturaLiveStreamScheduleEvent < KalturaEntryScheduleEvent
+		# Defines the expected audience.
+		attr_accessor :projected_audience
+		# The entry ID of the source entry (for simulive)
+		attr_accessor :source_entry_id
+		# The time relative time before the startTime considered as preStart time
+		attr_accessor :pre_start_time
+		# The time relative time before the endTime considered as postEnd time
+		attr_accessor :post_end_time
 
+		def projected_audience=(val)
+			@projected_audience = val.to_i
+		end
+		def pre_start_time=(val)
+			@pre_start_time = val.to_i
+		end
+		def post_end_time=(val)
+			@post_end_time = val.to_i
+		end
 
 		def from_xml(xml_element)
 			super
+			if xml_element.elements['projectedAudience'] != nil
+				self.projected_audience = xml_element.elements['projectedAudience'].text
+			end
+			if xml_element.elements['sourceEntryId'] != nil
+				self.source_entry_id = xml_element.elements['sourceEntryId'].text
+			end
+			if xml_element.elements['preStartTime'] != nil
+				self.pre_start_time = xml_element.elements['preStartTime'].text
+			end
+			if xml_element.elements['postEndTime'] != nil
+				self.post_end_time = xml_element.elements['postEndTime'].text
+			end
 		end
 
 	end
@@ -1166,90 +1078,6 @@ module Kaltura
 
 	end
 
-	class KalturaVodScheduleEvent < KalturaEntryScheduleEvent
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaLiveRedirectScheduleEvent < KalturaBaseLiveScheduleEvent
-		# The vod entry to redirect
-		attr_accessor :redirect_entry_id
-
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['redirectEntryId'] != nil
-				self.redirect_entry_id = xml_element.elements['redirectEntryId'].text
-			end
-		end
-
-	end
-
-	class KalturaLiveStreamScheduleEvent < KalturaBaseLiveScheduleEvent
-		# The entry ID of the source entry (for simulive)
-		attr_accessor :source_entry_id
-		# Defines the expected audience.
-		attr_accessor :projected_audience
-		# The time relative time before the startTime considered as preStart time
-		attr_accessor :pre_start_time
-		# The time relative time before the endTime considered as postEnd time
-		attr_accessor :post_end_time
-		# The entry id of the pre start entry
-		attr_accessor :pre_start_entry_id
-		# The entry id of the post end entry
-		attr_accessor :post_end_entry_id
-		# Detect whether "real" live can interrupt to the "main" content
-		attr_accessor :is_content_interruptible
-		# list of live features that apply to the event
-		attr_accessor :live_features
-
-		def projected_audience=(val)
-			@projected_audience = val.to_i
-		end
-		def pre_start_time=(val)
-			@pre_start_time = val.to_i
-		end
-		def post_end_time=(val)
-			@post_end_time = val.to_i
-		end
-		def is_content_interruptible=(val)
-			@is_content_interruptible = to_b(val)
-		end
-
-		def from_xml(xml_element)
-			super
-			if xml_element.elements['sourceEntryId'] != nil
-				self.source_entry_id = xml_element.elements['sourceEntryId'].text
-			end
-			if xml_element.elements['projectedAudience'] != nil
-				self.projected_audience = xml_element.elements['projectedAudience'].text
-			end
-			if xml_element.elements['preStartTime'] != nil
-				self.pre_start_time = xml_element.elements['preStartTime'].text
-			end
-			if xml_element.elements['postEndTime'] != nil
-				self.post_end_time = xml_element.elements['postEndTime'].text
-			end
-			if xml_element.elements['preStartEntryId'] != nil
-				self.pre_start_entry_id = xml_element.elements['preStartEntryId'].text
-			end
-			if xml_element.elements['postEndEntryId'] != nil
-				self.post_end_entry_id = xml_element.elements['postEndEntryId'].text
-			end
-			if xml_element.elements['isContentInterruptible'] != nil
-				self.is_content_interruptible = xml_element.elements['isContentInterruptible'].text
-			end
-			if xml_element.elements['liveFeatures'] != nil
-				self.live_features = KalturaClientBase.object_from_xml(xml_element.elements['liveFeatures'], 'KalturaLiveFeature')
-			end
-		end
-
-	end
-
 	class KalturaScheduleEventFilter < KalturaScheduleEventBaseFilter
 		attr_accessor :resource_ids_like
 		attr_accessor :resource_ids_multi_like_or
@@ -1449,15 +1277,6 @@ module Kaltura
 
 	end
 
-	class KalturaLiveRedirectScheduleEventFilter < KalturaEntryScheduleEventFilter
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
 	class KalturaLiveStreamScheduleEventBaseFilter < KalturaEntryScheduleEventFilter
 
 
@@ -1477,15 +1296,6 @@ module Kaltura
 	end
 
 	class KalturaRecordScheduleEventBaseFilter < KalturaEntryScheduleEventFilter
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaVodScheduleEventBaseFilter < KalturaEntryScheduleEventFilter
 
 
 		def from_xml(xml_element)
@@ -1522,15 +1332,6 @@ module Kaltura
 	end
 
 	class KalturaRecordScheduleEventFilter < KalturaRecordScheduleEventBaseFilter
-
-
-		def from_xml(xml_element)
-			super
-		end
-
-	end
-
-	class KalturaVodScheduleEventFilter < KalturaVodScheduleEventBaseFilter
 
 
 		def from_xml(xml_element)
@@ -1643,20 +1444,6 @@ module Kaltura
 			client.add_param(kparams, 'scheduleEventId', schedule_event_id)
 			client.add_param(kparams, 'scheduleEvent', schedule_event)
 			client.queue_service_action_call('schedule_scheduleevent', 'update', 'KalturaScheduleEvent', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Add feature to live event
-		# @return [KalturaLiveStreamScheduleEvent]
-		def update_live_feature(scheduled_event_id, feature_name, live_feature)
-			kparams = {}
-			client.add_param(kparams, 'scheduledEventId', scheduled_event_id)
-			client.add_param(kparams, 'featureName', feature_name)
-			client.add_param(kparams, 'liveFeature', live_feature)
-			client.queue_service_action_call('schedule_scheduleevent', 'updateLiveFeature', 'KalturaLiveStreamScheduleEvent', kparams)
 			if (client.is_multirequest)
 				return nil
 			end

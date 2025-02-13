@@ -5,10 +5,10 @@
 #                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 #
 # This file is part of the Kaltura Collaborative Media Suite which allows users
-# to do with audio, video, and animation what Wiki platforms allow them to do with
+# to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2023  Kaltura Inc.
+# Copyright (C) 2006-2021  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -74,7 +74,6 @@ module Kaltura
 		ERROR_GET_DB_FILE_LIST = "4"
 		DROP_FOLDER_APP_ERROR = "5"
 		CONTENT_MATCH_POLICY_UNDEFINED = "6"
-		MISSING_CONFIG = "7"
 	end
 
 	class KalturaDropFolderFileErrorCode
@@ -137,7 +136,9 @@ module Kaltura
 	end
 
 	class KalturaDropFolderType
+		AP_FEED = "ApFeedDropFolder.AP_FEED"
 		FEED = "FeedDropFolder.FEED"
+		S3DROPFOLDER = "S3DropFolder.S3DROPFOLDER"
 		WEBEX = "WebexDropFolder.WEBEX"
 		LOCAL = "1"
 		FTP = "2"
@@ -224,10 +225,9 @@ module Kaltura
 		attr_accessor :conversion_profile_id
 		attr_accessor :dc
 		attr_accessor :path
-		# The amount of time, in seconds, that should pass so that a file with no change in size will be treated as "finished uploading to folder"
+		# The ammount of time, in seconds, that should pass so that a file with no change in size we'll be treated as "finished uploading to folder"
 		attr_accessor :file_size_check_interval
 		attr_accessor :file_delete_policy
-		attr_accessor :file_delete_regex
 		attr_accessor :auto_file_delete_days
 		attr_accessor :file_handler_type
 		attr_accessor :file_name_patterns
@@ -329,9 +329,6 @@ module Kaltura
 			end
 			if xml_element.elements['fileDeletePolicy'] != nil
 				self.file_delete_policy = xml_element.elements['fileDeletePolicy'].text
-			end
-			if xml_element.elements['fileDeleteRegex'] != nil
-				self.file_delete_regex = xml_element.elements['fileDeleteRegex'].text
 			end
 			if xml_element.elements['autoFileDeleteDays'] != nil
 				self.auto_file_delete_days = xml_element.elements['autoFileDeleteDays'].text

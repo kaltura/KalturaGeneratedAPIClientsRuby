@@ -5,10 +5,10 @@
 #                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 #
 # This file is part of the Kaltura Collaborative Media Suite which allows users
-# to do with audio, video, and animation what Wiki platforms allow them to do with
+# to do with audio, video, and animation what Wiki platfroms allow them to do with
 # text.
 #
-# Copyright (C) 2006-2023  Kaltura Inc.
+# Copyright (C) 2006-2021  Kaltura Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -458,22 +458,6 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# add batch job that sends an email with a link to download an updated CSV that contains list of entries
-		# @return [string]
-		def export_to_csv(filter=KalturaNotImplemented, metadata_profile_id=KalturaNotImplemented, additional_fields=KalturaNotImplemented, mapped_fields=KalturaNotImplemented, options=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'metadataProfileId', metadata_profile_id)
-			client.add_param(kparams, 'additionalFields', additional_fields)
-			client.add_param(kparams, 'mappedFields', mapped_fields)
-			client.add_param(kparams, 'options', options)
-			client.queue_service_action_call('baseentry', 'exportToCsv', 'string', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Flag inappropriate entry for moderation.
 		# @return []
 		def flag(moderation_flag)
@@ -601,18 +585,6 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Move the entry to the recycle bin
-		# @return [KalturaBaseEntry]
-		def recycle(entry_id)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('baseentry', 'recycle', 'KalturaBaseEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Reject the entry and mark the pending flags (if any) as moderated (this will make the entry non-playable).
 		# @return []
 		def reject(entry_id)
@@ -623,27 +595,6 @@ module Kaltura
 				return nil
 			end
 			return client.do_queue()
-		end
-
-		# Restore the entry from the recycle bin
-		# @return [KalturaBaseEntry]
-		def restore_recycled(entry_id)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('baseentry', 'restoreRecycled', 'KalturaBaseEntry', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# This action serves HLS encrypted key if access control is validated
-		# @return [file]
-		def serve_playback_key(entry_id)
-			kparams = {}
-			client.add_param(kparams, 'entryId', entry_id)
-			client.queue_service_action_call('baseentry', 'servePlaybackKey', 'file', kparams)
-			return client.get_serve_url()
 		end
 
 		# Update base entry. Only the properties that were set will be updated.
@@ -966,20 +917,6 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Clone Category
-		# @return [KalturaCategory]
-		def clone(category_id, from_partner_id, parent_category_id=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'categoryId', category_id)
-			client.add_param(kparams, 'fromPartnerId', from_partner_id)
-			client.add_param(kparams, 'parentCategoryId', parent_category_id)
-			client.queue_service_action_call('category', 'clone', 'KalturaCategory', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Delete a Category
 		# @return []
 		def delete(id, move_entries_to_parent_category=1)
@@ -987,22 +924,6 @@ module Kaltura
 			client.add_param(kparams, 'id', id)
 			client.add_param(kparams, 'moveEntriesToParentCategory', move_entries_to_parent_category)
 			client.queue_service_action_call('category', 'delete', '', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Creates a batch job that sends an email with a link to download a CSV containing a list of categories
-		# @return [string]
-		def export_to_csv(filter=KalturaNotImplemented, metadata_profile_id=KalturaNotImplemented, additional_fields=KalturaNotImplemented, mapped_fields=KalturaNotImplemented, options=KalturaNotImplemented)
-			kparams = {}
-			client.add_param(kparams, 'filter', filter)
-			client.add_param(kparams, 'metadataProfileId', metadata_profile_id)
-			client.add_param(kparams, 'additionalFields', additional_fields)
-			client.add_param(kparams, 'mappedFields', mapped_fields)
-			client.add_param(kparams, 'options', options)
-			client.queue_service_action_call('category', 'exportToCsv', 'string', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -1047,7 +968,7 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Move categories that belong to the same parent category to a target category - enabled only for ks with disable entitlement
+		# Move categories that belong to the same parent category to a target categroy - enabled only for ks with disable entitlement
 		# @return [bool]
 		def move(category_ids, target_category_parent_id)
 			kparams = {}
@@ -3644,21 +3565,6 @@ module Kaltura
 			return client.do_queue()
 		end
 
-		# Create a new Partner object
-		# @return [bool]
-		def registration_validation(partner, cms_password='', template_partner_id=KalturaNotImplemented, silent=false)
-			kparams = {}
-			client.add_param(kparams, 'partner', partner)
-			client.add_param(kparams, 'cmsPassword', cms_password)
-			client.add_param(kparams, 'templatePartnerId', template_partner_id)
-			client.add_param(kparams, 'silent', silent)
-			client.queue_service_action_call('partner', 'registrationValidation', 'bool', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
 		# Update details and settings of an existing partner
 		# @return [KalturaPartner]
 		def update(partner, allow_empty=false)
@@ -4019,23 +3925,20 @@ module Kaltura
 		end
 
 		# @return [file]
-		def get_csv(id, params=KalturaNotImplemented, excluded_fields=KalturaNotImplemented)
+		def get_csv(id, params=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
 			client.add_param(kparams, 'params', params)
-			client.add_param(kparams, 'excludedFields', excluded_fields)
 			client.queue_service_action_call('report', 'getCsv', 'file', kparams)
 			return client.get_serve_url()
 		end
 
 		# Returns report CSV file executed by string params with the following convention: param1=value1;param2=value2
-		# 	 excludedFields can be supplied comma separated
 		# @return [file]
-		def get_csv_from_string_params(id, params=KalturaNotImplemented, excluded_fields=KalturaNotImplemented)
+		def get_csv_from_string_params(id, params=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'id', id)
 			client.add_param(kparams, 'params', params)
-			client.add_param(kparams, 'excludedFields', excluded_fields)
 			client.queue_service_action_call('report', 'getCsvFromStringParams', 'file', kparams)
 			return client.get_serve_url()
 		end
@@ -4544,7 +4447,7 @@ module Kaltura
 		end
 
 		# Will write to the event log a single line representing the event
-		# 	 client version - will help interpret the line structure. Different client versions might have slightly different data/data formats in the line
+		# 	 client version - will help interprete the line structure. different client versions might have slightly different data/data formats in the line
 		# event_id - number is the row number in yuval's excel
 		# datetime - same format as MySql's datetime - can change and should reflect the time zone
 		# session id - can be some big random number or guid
@@ -4577,7 +4480,7 @@ module Kaltura
 		end
 
 		# Will collect the kmcEvent sent form the KMC client
-		# 	 // this will actually be an empty function because all events will be sent using GET and will anyway be logged in the Apache log
+		# 	 // this will actually be an empty function because all events will be sent using GET and will anyway be logged in the apache log
 		# @return []
 		def kmc_collect(kmc_event)
 			kparams = {}
@@ -5023,7 +4926,7 @@ module Kaltura
 			return client.get_serve_url()
 		end
 
-		# Serves thumbnail by entry id and thumbnail params id
+		# Serves thumbnail by entry id and thumnail params id
 		# @return [file]
 		def serve_by_entry_id(entry_id, thumb_param_id=KalturaNotImplemented)
 			kparams = {}
@@ -5660,13 +5563,12 @@ module Kaltura
 
 		# Creates a batch job that sends an email with a link to download a CSV containing a list of users
 		# @return [string]
-		def export_to_csv(filter=KalturaNotImplemented, metadata_profile_id=KalturaNotImplemented, additional_fields=KalturaNotImplemented, mapped_fields=KalturaNotImplemented, options=KalturaNotImplemented)
+		def export_to_csv(filter=KalturaNotImplemented, metadata_profile_id=KalturaNotImplemented, additional_fields=KalturaNotImplemented, mapped_fields=KalturaNotImplemented)
 			kparams = {}
 			client.add_param(kparams, 'filter', filter)
 			client.add_param(kparams, 'metadataProfileId', metadata_profile_id)
 			client.add_param(kparams, 'additionalFields', additional_fields)
 			client.add_param(kparams, 'mappedFields', mapped_fields)
-			client.add_param(kparams, 'options', options)
 			client.queue_service_action_call('user', 'exportToCsv', 'string', kparams)
 			if (client.is_multirequest)
 				return nil
@@ -5778,19 +5680,6 @@ module Kaltura
 			client.add_param(kparams, 'privileges', privileges)
 			client.add_param(kparams, 'otp', otp)
 			client.queue_service_action_call('user', 'loginByLoginId', 'string', kparams)
-			if (client.is_multirequest)
-				return nil
-			end
-			return client.do_queue()
-		end
-
-		# Resets user login password
-		# @return [KalturaUser]
-		def login_data_reset_password(login_data_id, new_password)
-			kparams = {}
-			client.add_param(kparams, 'loginDataId', login_data_id)
-			client.add_param(kparams, 'newPassword', new_password)
-			client.queue_service_action_call('user', 'loginDataResetPassword', 'KalturaUser', kparams)
 			if (client.is_multirequest)
 				return nil
 			end
@@ -6406,8 +6295,8 @@ module Kaltura
 		
 		def initialize(client)
 			super(client)
-			self.client_tag = 'ruby:23-03-23'
-			self.api_version = '19.4.0'
+			self.client_tag = 'ruby:21-03-08'
+			self.api_version = '16.19.0'
 		end
 		
 		def client_tag=(value)
@@ -6512,27 +6401,6 @@ module Kaltura
 		
 		def get_session_id()
 			return self.session_id
-		end
-		
-	
-		def language=(value)
-			@request_configuration['language'] = value
-		end
-		
-		def set_language(value)
-			self.language = value
-		end
-		
-		def language()
-			if(@request_configuration.has_key?('language'))
-				return @request_configuration['language']
-			end
-			
-			return KalturaNotImplemented
-		end
-		
-		def get_language()
-			return self.language
 		end
 		
 	
